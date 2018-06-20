@@ -54,7 +54,10 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Description
         {
-            get { return FormMain.Instance.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail); }
+            get
+            {
+                return FormMain.Instance.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail);
+            }
         }
 
         //undone:api_bonus_flag

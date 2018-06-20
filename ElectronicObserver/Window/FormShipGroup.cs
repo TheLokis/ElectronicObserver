@@ -558,7 +558,7 @@ namespace ElectronicObserver.Window
 			//status bar
 			if (KCDatabase.Instance.Ships.Count > 0)
 			{
-				Status_ShipCount.Text = string.Format("소속: {0}隻", group.Members.Count);
+				Status_ShipCount.Text = string.Format("소속: {0}척", group.Members.Count);
 				Status_LevelTotal.Text = string.Format("합계Lv: {0}", group.MembersInstance.Where(s => s != null).Sum(s => s.Level));
 				Status_LevelAverage.Text = string.Format("평균Lv: {0:F2}", group.Members.Count > 0 ? group.MembersInstance.Where(s => s != null).Average(s => s.Level) : 0);
 			}

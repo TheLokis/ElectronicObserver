@@ -157,7 +157,8 @@ namespace ElectronicObserver.Window
 			StripMenu_Tool_ResourceChart.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart];
 			StripMenu_Tool_AlbumMasterShip.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip];
 			StripMenu_Tool_AlbumMasterEquipment.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
-			StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
+            StripMenu_Tool_MasterExpedition.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
+            StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
 			StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
 			StripMenu_Tool_BaseAirCorpsSimulation.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
 			StripMenu_Tool_ExpChecker.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker];
@@ -1019,8 +1020,25 @@ namespace ElectronicObserver.Window
 
 		}
 
+        private void StripMenu_Tool_MasterExpeditionClick(object sender, EventArgs e)
+        {
 
-		private async void StripMenu_Debug_DeleteOldAPI_Click(object sender, EventArgs e)
+
+            if (KCDatabase.Instance.Mission.Count == 0)
+            {
+                MessageBox.Show("원정 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                var dialogAlbumMasterExpedition = new DialogAlbumMasterExpedition();
+                FormMain_RefreshTopMost();
+                dialogAlbumMasterExpedition.Show(this);
+            }
+        }
+
+
+        private async void StripMenu_Debug_DeleteOldAPI_Click(object sender, EventArgs e)
 		{
 
 			if (MessageBox.Show("이전 API 데이터를 삭제합니다.\r\n실행하시겠습니까?", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -1228,12 +1246,12 @@ namespace ElectronicObserver.Window
 		private void StripMenu_Help_Help_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("외부 브라우저에서 온라인 메뉴얼을 엽니다. 현재는 원어페이지로 연결됩니다.\r\n계속 하시겠습니까?", "도움말",
+			if (MessageBox.Show("외부 브라우저에서 온라인 메뉴얼을 엽니다.\r\n계속 하시겠습니까?", "도움말",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 
-				System.Diagnostics.Process.Start("https://github.com/andanteyk/ElectronicObserver/wiki");
+				System.Diagnostics.Process.Start("https://github.com/TheLokis/ElectronicObserver/wiki");
 			}
 
 		}
@@ -1460,16 +1478,38 @@ namespace ElectronicObserver.Window
 			_prevPlayTimeRecorded = now;
 		}
 
+        private void StripMenu_Tool_akashi_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://akashi-list.me/");
+        }
 
+        private void StripMenu_Tool_jwiki_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://wikiwiki.jp/kancolle/");
+        }
 
+        private void StripMenu_Tool_wikia_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://ja.kancolle.wikia.com/wiki/%E3%83%9C%E3%83%BC%E3%83%89:%E3%80%90%E6%A4%9C%E8%A8%BC%E3%80%91");
+        }
 
-		#region フォーム表示
+        private void StripMenu_Tool_namu_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://namu.wiki/w/%ED%95%A8%EB%8C%80%20%EC%BB%AC%EB%A0%89%EC%85%98");
+        }
 
-		/// <summary>
-		/// 子フォームを表示します。既に表示されている場合はフォームをある点に移動します。（失踪対策）
-		/// </summary>
-		/// <param name="form"></param>
-		private void ShowForm(DockContent form)
+        private void StripMenu_Tool_poidb_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://db.kcwiki.moe/drop/");
+        }
+
+        #region フォーム表示
+
+        /// <summary>
+        /// 子フォームを表示します。既に表示されている場合はフォームをある点に移動します。（失踪対策）
+        /// </summary>
+        /// <param name="form"></param>
+        private void ShowForm(DockContent form)
 		{
 			if (form.IsFloat && form.Visible)
 			{
@@ -1573,8 +1613,12 @@ namespace ElectronicObserver.Window
 
 
 
-		#endregion
 
-	
-	}
+        #endregion
+
+        private void StripMenu_Help_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

@@ -354,6 +354,12 @@
     <Compile Include="Window\Control\WindowCaptureButton.Designer.cs">
       <DependentUpon>WindowCaptureButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\Dialog\DialogAlbumMasterExpedition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Dialog\DialogAlbumMasterExpedition.Designer.cs">
+      <DependentUpon>DialogAlbumMasterExpedition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Dialog\DialogAlbumMasterEquipment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -673,6 +679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Control\WindowCaptureButton.resx">
       <DependentUpon>WindowCaptureButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Dialog\DialogAlbumMasterExpedition.resx">
+      <DependentUpon>DialogAlbumMasterExpedition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\DialogAlbumMasterEquipment.resx">
       <DependentUpon>DialogAlbumMasterEquipment.cs</DependentUpon>

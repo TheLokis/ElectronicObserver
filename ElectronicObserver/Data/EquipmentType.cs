@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Window;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,15 +23,15 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 名前
 		/// </summary>
-		public string Name => RawData.api_name;
+		public string Name { get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.EquipmentType); } }
 
-		//show_flg
+    //show_flg
 
 
-		/// <summary>
-		/// 装備種別ID
-		/// </summary>
-		public EquipmentTypes Type => (EquipmentTypes)TypeID;
+    /// <summary>
+    /// 装備種別ID
+    /// </summary>
+    public EquipmentTypes Type => (EquipmentTypes)TypeID;
 
 
 		public override string ToString() => $"[{TypeID}] {Name}";

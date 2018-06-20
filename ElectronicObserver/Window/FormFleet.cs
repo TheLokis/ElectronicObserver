@@ -37,12 +37,13 @@ namespace ElectronicObserver.Window
 			public ImageLabel SearchingAbility;
 			public ImageLabel AntiAirPower;
 			public ToolTip ToolTipInfo;
+            public FormFleet Parent;
 
 			public int BranchWeight { get; private set; } = 1;
 
 			public TableFleetControl(FormFleet parent)
 			{
-
+                this.Parent = parent;
 				#region Initialize
 
 				Name = new Label
@@ -113,6 +114,7 @@ namespace ElectronicObserver.Window
 			public TableFleetControl(FormFleet parent, TableLayoutPanel table)
 				: this(parent)
 			{
+                this.Parent = parent;
 				AddToTable(table);
 			}
 
@@ -153,9 +155,11 @@ namespace ElectronicObserver.Window
 
 				if (fleet == null) return;
 
+                //Utility.Logger.Add(1, fleet.FleetID + "함대의 편성이 바뀌었습니다.");
+                //Parent.Select();
 
 
-				Name.Text = fleet.Name;
+                Name.Text = fleet.Name;
 				{
 					var members = fleet.MembersInstance.Where(s => s != null);
 
@@ -174,13 +178,13 @@ namespace ElectronicObserver.Window
 					{
 						case 0:
 						default:
-							supporttype = "発動不能"; break;
+							supporttype = "발동불가"; break;
 						case 1:
-							supporttype = "航空支援";break;
+							supporttype = "항공지원";break;
 						case 2:
-							supporttype = "支援射撃"; break;
+							supporttype = "포격지원"; break;
 						case 3:
-							supporttype = "支援長距離雷撃"; break;
+							supporttype = "장거리지원뇌격"; break;
 					}
 
 					double expeditionBonus = Calculator.GetExpeditionBonus(fleet);
@@ -192,15 +196,15 @@ namespace ElectronicObserver.Window
 
 
 					ToolTipInfo.SetToolTip(Name, string.Format(
-						"Lv合計: {0} / 平均: {1:0.00}\r\n" +
-						"{2}艦隊\r\n" +
-						"支援攻撃: {3}\r\n" +
-						"合計対空 {4} / 対潜 {5} / 索敵 {6}\r\n" +
-						"ドラム缶搭載: {7}個 ({8}艦)\r\n" +
-						"大発動艇搭載: {9}個 ({10}艦, +{11:p1})\r\n" +
-						"輸送量(TP): S {12} / A {13}\r\n" +
-						"総積載: 燃 {14} / 弾 {15}\r\n" +
-						"(1戦当たり 燃 {16} / 弾 {17})",
+						"Lv합계: {0} / 평균: {1:0.00}\r\n" +
+						"{2}함대\r\n" +
+						"지원공격: {3}\r\n" +
+						"총 대공 {4} / 대잠 {5} / 색적 {6}\r\n" +
+						"드럼통: {7}개 ({8}척)\r\n" +
+						"대발동정: {9}개 ({10}척, +{11:p1})\r\n" +
+						"수송량(TP): S {12} / A {13}\r\n" +
+						"소비자원: 연료 {14} / 탄약 {15}\r\n" +
+						"(1전투당 연료 {16} / 탄약 {17})",
 						levelSum,
 						(double)levelSum / Math.Max(fleet.Members.Count(id => id != -1), 1),
 						Constants.GetSpeed(speed),
@@ -233,12 +237,12 @@ namespace ElectronicObserver.Window
 					bool includeLevel = Utility.Configuration.Config.FormFleet.AirSuperiorityMethod == 1;
 					AirSuperiority.Text = fleet.GetAirSuperiorityString();
 					ToolTipInfo.SetToolTip(AirSuperiority,
-						string.Format("確保: {0}\r\n優勢: {1}\r\n均衡: {2}\r\n劣勢: {3}\r\n({4}: {5})\r\n",
+						string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n({4}: {5})\r\n",
 						(int)(airSuperiority / 3.0),
 						(int)(airSuperiority / 1.5),
 						Math.Max((int)(airSuperiority * 1.5 - 1), 0),
 						Math.Max((int)(airSuperiority * 3.0 - 1), 0),
-						includeLevel ? "熟練度なし" : "熟練度あり",
+						includeLevel ? "숙련도없음" : "숙련도있음",
 						includeLevel ? Calculator.GetAirSuperiorityIgnoreLevel(fleet) : Calculator.GetAirSuperiority(fleet)));
 				}
 
@@ -250,18 +254,18 @@ namespace ElectronicObserver.Window
 					double probStart = fleet.GetContactProbability();
 					var probSelect = fleet.GetContactSelectionProbability();
 
-					sb.AppendFormat("新判定式(33) 分岐点係数: {0}\r\n　(クリックで切り替え)\r\n\r\n触接開始率: \r\n　確保 {1:p1} / 優勢 {2:p1}\r\n",
+					sb.AppendFormat("신판정식(33) 분기점계수: {0}\r\n　(클릭으로전환)\r\n\r\n촉접률: \r\n　확보 {1:p1} / 우세 {2:p1}\r\n",
 						BranchWeight,
 						probStart,
 						probStart * 0.6);
 
 					if (probSelect.Count > 0)
 					{
-						sb.AppendLine("触接選択率: ");
+						sb.AppendLine("촉접선택율: ");
 
 						foreach (var p in probSelect.OrderBy(p => p.Key))
 						{
-							sb.AppendFormat("　命中{0} : {1:p1}\r\n", p.Key, p.Value);
+							sb.AppendFormat("　명중{0} : {1:p1}\r\n", p.Key, p.Value);
 						}
 					}
 
@@ -275,7 +279,7 @@ namespace ElectronicObserver.Window
 
 					AntiAirPower.Text = lineahead.ToString("0.0");
 
-					sb.AppendFormat("艦隊防空\r\n単縦陣: {0:0.0} / 複縦陣: {1:0.0} / 輪形陣: {2:0.0}\r\n",
+					sb.AppendFormat("함대방공\r\n단종진: {0:0.0} / 복종진: {1:0.0} / 윤형진: {2:0.0}\r\n",
 						lineahead,
 						Calculator.GetAdjustedFleetAAValue(fleet, 2),
 						Calculator.GetAdjustedFleetAAValue(fleet, 3));
@@ -461,17 +465,19 @@ namespace ElectronicObserver.Window
 				KCDatabase db = KCDatabase.Instance;
 				ShipData ship = db.Ships[shipMasterID];
 
-				if (ship != null)
-				{
 
-					bool isEscaped = KCDatabase.Instance.Fleet[Parent.FleetID].EscapedShipList.Contains(shipMasterID);
+                if (ship != null)
+				{
+                    //Utility.Logger.Add(1, ship.Fleet + "함대의 편성이 바뀌었습니다. // 2");
+
+                    bool isEscaped = KCDatabase.Instance.Fleet[Parent.FleetID].EscapedShipList.Contains(shipMasterID);
 
 
 					Name.Text = ship.MasterShip.NameWithClass;
 					Name.Tag = ship.ShipID;
 					ToolTipInfo.SetToolTip(Name,
 						string.Format(
-							"{0} {1}\r\n火力: {2}/{3}\r\n雷装: {4}/{5}\r\n対空: {6}/{7}\r\n装甲: {8}/{9}\r\n対潜: {10}/{11}\r\n回避: {12}/{13}\r\n索敵: {14}/{15}\r\n運: {16}\r\n射程: {17} / 速力: {18}\r\n(右クリックで図鑑)\n",
+							"{0} {1}\r\n화력: {2}/{3}\r\n뇌장: {4}/{5}\r\n대공: {6}/{7}\r\n장갑: {8}/{9}\r\n대잠: {10}/{11}\r\n회피: {12}/{13}\r\n색적: {14}/{15}\r\n운: {16}\r\n사정: {17} / 속력: {18}\r\n(우클릭으로 도감에)\n",
 							ship.MasterShip.ShipTypeName, ship.NameWithLevel,
 							ship.FirepowerBase, ship.FirepowerTotal,
 							ship.TorpedoBase, ship.TorpedoTotal,
@@ -495,22 +501,22 @@ namespace ElectronicObserver.Window
 						tip.AppendFormat("Total: {0} exp.\r\n", ship.ExpTotal);
 
 						if (!Utility.Configuration.Config.FormFleet.ShowNextExp)
-							tip.AppendFormat("次のレベルまで: {0} exp.\r\n", ship.ExpNext);
+							tip.AppendFormat("다음 레벨까지: {0} exp.\r\n", ship.ExpNext);
 
 						if (ship.MasterShip.RemodelAfterShipID != 0 && ship.Level < ship.MasterShip.RemodelAfterLevel)
 						{
-							tip.AppendFormat("改装まで: Lv. {0} / {1} exp.\r\n", ship.MasterShip.RemodelAfterLevel - ship.Level, ship.ExpNextRemodel);
+							tip.AppendFormat("개장까지: Lv. {0} / {1} exp.\r\n", ship.MasterShip.RemodelAfterLevel - ship.Level, ship.ExpNextRemodel);
 						}
 						else if (ship.Level <= 99)
 						{
-							tip.AppendFormat("Lv99まで: {0} exp.\r\n", Math.Max(ExpTable.GetExpToLevelShip(ship.ExpTotal, 99), 0));
+							tip.AppendFormat("Lv99까지: {0} exp.\r\n", Math.Max(ExpTable.GetExpToLevelShip(ship.ExpTotal, 99), 0));
 						}
 						else
 						{
-							tip.AppendFormat("Lv{0}まで: {1} exp.\r\n", ExpTable.ShipMaximumLevel, Math.Max(ExpTable.GetExpToLevelShip(ship.ExpTotal, ExpTable.ShipMaximumLevel), 0));
+							tip.AppendFormat("Lv{0}까지: {1} exp.\r\n", ExpTable.ShipMaximumLevel, Math.Max(ExpTable.GetExpToLevelShip(ship.ExpTotal, ExpTable.ShipMaximumLevel), 0));
 						}
 
-						tip.AppendLine("(右クリックで必要Exp計算)");
+						tip.AppendLine("(우클릭으로 경험치계산기에)");
 
 						ToolTipInfo.SetToolTip(Level, tip.ToString());
 					}
@@ -550,25 +556,25 @@ namespace ElectronicObserver.Window
 						sb.AppendFormat("HP: {0:0.0}% [{1}]\n", hprate * 100, Constants.GetDamageState(hprate));
 						if (isEscaped)
 						{
-							sb.AppendLine("退避中");
+							sb.AppendLine("대피중");
 						}
 						else if (hprate > 0.50)
 						{
-							sb.AppendFormat("中破まで: {0} / 大破まで: {1}\n", ship.HPCurrent - ship.HPMax / 2, ship.HPCurrent - ship.HPMax / 4);
+							sb.AppendFormat("중파까지: {0} / 대파까지: {1}\n", ship.HPCurrent - ship.HPMax / 2, ship.HPCurrent - ship.HPMax / 4);
 						}
 						else if (hprate > 0.25)
 						{
-							sb.AppendFormat("大破まで: {0}\n", ship.HPCurrent - ship.HPMax / 4);
+							sb.AppendFormat("대파까지: {0}\n", ship.HPCurrent - ship.HPMax / 4);
 						}
 						else
 						{
-							sb.AppendLine("大破しています！");
+							sb.AppendLine("대파했습니다!");
 						}
 
 						if (ship.RepairTime > 0)
 						{
 							var span = DateTimeHelper.FromAPITimeSpan(ship.RepairTime);
-							sb.AppendFormat("入渠時間: {0} @ {1}",
+							sb.AppendFormat("수리시간: {0} @ {1}",
 								DateTimeHelper.ToTimeRemainString(span),
 								DateTimeHelper.ToTimeRemainString(Calculator.CalculateDockingUnitTime(ship)));
 						}
@@ -585,11 +591,11 @@ namespace ElectronicObserver.Window
 					if (ship.Condition < 49)
 					{
 						TimeSpan ts = new TimeSpan(0, (int)Math.Ceiling((49 - ship.Condition) / 3.0) * 3, 0);
-						ToolTipInfo.SetToolTip(Condition, string.Format("完全回復まで 約 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
+						ToolTipInfo.SetToolTip(Condition, string.Format("완전회복까지 약 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
 					}
 					else
 					{
-						ToolTipInfo.SetToolTip(Condition, string.Format("あと {0} 回遠征可能", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
+						ToolTipInfo.SetToolTip(Condition, string.Format("앞으로 {0} 회 원정가능", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
 					}
 
 					ShipResource.SetResources(ship.Fuel, ship.FuelMax, ship.Ammo, ship.AmmoMax);
@@ -651,35 +657,35 @@ namespace ElectronicObserver.Window
 				{
 					var exslot = ship.ExpansionSlotInstance;
 					if (exslot != null)
-						sb.AppendFormat("補強: {0}\r\n", exslot.NameWithLevel);
+						sb.AppendFormat("보강: {0}\r\n", exslot.NameWithLevel);
 				}
 
 				int[] slotmaster = ship.AllSlotMaster.ToArray();
 
-				sb.AppendFormat("\r\n昼戦: {0}", Constants.GetDayAttackKind(Calculator.GetDayAttackKind(slotmaster, ship.ShipID, -1)));
+				sb.AppendFormat("\r\n주간전: {0}", Constants.GetDayAttackKind(Calculator.GetDayAttackKind(slotmaster, ship.ShipID, -1)));
 				{
 					int shelling = ship.ShellingPower;
 					int aircraft = ship.AircraftPower;
 					if (shelling > 0)
 					{
 						if (aircraft > 0)
-							sb.AppendFormat(" - 砲撃: {0} / 空撃: {1}", shelling, aircraft);
+							sb.AppendFormat(" - 포격: {0} / 공습: {1}", shelling, aircraft);
 						else
-							sb.AppendFormat(" - 威力: {0}", shelling);
+							sb.AppendFormat(" - 위력: {0}", shelling);
 					}
 					else if (aircraft > 0)
-						sb.AppendFormat(" - 威力: {0}", aircraft);
+						sb.AppendFormat(" - 위력: {0}", aircraft);
 				}
 				sb.AppendLine();
 
 				if (ship.CanAttackAtNight)
 				{
-					sb.AppendFormat("夜戦: {0}", Constants.GetNightAttackKind(Calculator.GetNightAttackKind(slotmaster, ship.ShipID, -1)));
+					sb.AppendFormat("야전: {0}", Constants.GetNightAttackKind(Calculator.GetNightAttackKind(slotmaster, ship.ShipID, -1)));
 					{
 						int night = ship.NightBattlePower;
 						if (night > 0)
 						{
-							sb.AppendFormat(" - 威力: {0}", night);
+							sb.AppendFormat(" - 위력: {0}", night);
 						}
 					}
 					sb.AppendLine();
@@ -691,17 +697,17 @@ namespace ElectronicObserver.Window
 
 					if (torpedo > 0)
 					{
-						sb.AppendFormat("雷撃: {0}", torpedo);
+						sb.AppendFormat("뇌격: {0}", torpedo);
 					}
 					if (asw > 0)
 					{
 						if (torpedo > 0)
 							sb.Append(" / ");
 
-						sb.AppendFormat("対潜: {0}", asw);
+						sb.AppendFormat("대잠: {0}", asw);
 
 						if (ship.CanOpeningASW)
-							sb.Append(" (先制可能)");
+							sb.Append(" (선제대잠가능)");
 					}
 					if (torpedo > 0 || asw > 0)
 						sb.AppendLine();
@@ -711,10 +717,10 @@ namespace ElectronicObserver.Window
 					int aacutin = Calculator.GetAACutinKind(ship.ShipID, slotmaster);
 					if (aacutin != 0)
 					{
-						sb.AppendFormat("対空: {0}\r\n", Constants.GetAACutinKind(aacutin));
+						sb.AppendFormat("대공: {0}\r\n", Constants.GetAACutinKind(aacutin));
 					}
 					double adjustedaa = Calculator.GetAdjustedAAValue(ship);
-					sb.AppendFormat("加重対空: {0} (割合撃墜: {1:p2})\r\n",
+					sb.AppendFormat("가중대공: {0} (비율격추: {1:p2})\r\n",
 						adjustedaa,
 						Calculator.GetProportionalAirDefense(adjustedaa)
 						);
@@ -749,12 +755,12 @@ namespace ElectronicObserver.Window
 						}
 
 						if (airbattle > 0)
-							sb.AppendFormat("制空戦力: {0} / 航空威力: {1}\r\n", airsup_str, airbattle);
+							sb.AppendFormat("제공전력: {0} / 항공위력: {1}\r\n", airsup_str, airbattle);
 						else
-							sb.AppendFormat("制空戦力: {0}\r\n", airsup_str);
+							sb.AppendFormat("제공전력: {0}\r\n", airsup_str);
 					}
 					else if (airbattle > 0)
-						sb.AppendFormat("航空威力: {0}\r\n", airbattle);
+						sb.AppendFormat("항공위력: {0}\r\n", airbattle);
 				}
 
 				return sb.ToString();
@@ -946,9 +952,12 @@ namespace ElectronicObserver.Window
 			if (db.Ships.Count == 0) return;
 
 			FleetData fleet = db.Fleet.Fleets[FleetID];
+            
 			if (fleet == null) return;
 
-			TableFleet.SuspendLayout();
+            //Utility.Logger.Add(1, fleet.FleetID + "함대의 편성이 바뀌었습니다. // 1");
+
+            TableFleet.SuspendLayout();
 			ControlFleet.Update(fleet);
 			TableFleet.Visible = true;
 			TableFleet.ResumeLayout();
@@ -1040,7 +1049,7 @@ namespace ElectronicObserver.Window
 			FleetData fleet = db.Fleet[FleetID];
 			if (fleet == null) return;
 
-			sb.AppendFormat("{0}\t制空戦力{1} / 索敵能力 {2} / 輸送能力 {3}\r\n", fleet.Name, fleet.GetAirSuperiority(), fleet.GetSearchingAbilityString(ControlFleet.BranchWeight), Calculator.GetTPDamage(fleet));
+			sb.AppendFormat("{0}\t제공전력{1} / 색적능력 {2} / 수송능력 {3}\r\n", fleet.Name, fleet.GetAirSuperiority(), fleet.GetSearchingAbilityString(ControlFleet.BranchWeight), Calculator.GetTPDamage(fleet));
 			for (int i = 0; i < fleet.Members.Count; i++)
 			{
 				if (fleet[i] == -1)
@@ -1297,6 +1306,7 @@ namespace ElectronicObserver.Window
 				bool showAircraftLevelByNumber = c.FormFleet.ShowAircraftLevelByNumber;
 				int fixedShipNameWidth = c.FormFleet.FixedShipNameWidth;
 				bool isLayoutFixed = c.UI.IsLayoutFixed;
+               // bool IsDarkSkinUse = c.UI.IsDarkSkinUse;
 
 				for (int i = 0; i < ControlMember.Length; i++)
 				{

@@ -244,14 +244,44 @@ namespace ElectronicObserver.Utility
 				public bool IsLayoutFixed;
 
 
-				public ConfigUI()
+                public ConfigUI()
 				{
 					MainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
 					SubFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
 					BarColorMorphing = false;
 					IsLayoutFixed = true;
-				}
-			}
+                }
+                /*
+                public enum SkinType
+                {
+                    BackColor = 0,
+                    ForeColor = 1,
+                }
+
+                public Color SkinColor(SkinType Type, Color DefaultColor)
+                {
+                    if(IsDarkSkinUse)
+                    {
+                        switch(Type)
+                        {
+                            case SkinType.BackColor:
+                                {
+                                    return SystemColors.ControlDarkDark;
+                                }
+                            case SkinType.ForeColor:
+                                {
+                                    return SystemColors.ControlLightLight;
+                                }
+                            default:
+                                {
+                                    return SystemColors.Window;
+                                }
+                        }
+                    }
+
+                    return DefaultColor;
+                }*/
+            }
 			/// <summary>UI</summary>
 			[DataMember]
 			public ConfigUI UI { get; private set; }
@@ -341,7 +371,7 @@ namespace ElectronicObserver.Utility
 					LogLevel = 2;
 					SaveLogFlag = true;
 					SaveErrorReport = true;
-					FileEncodingID = 4;
+					FileEncodingID = 1;
 					ShowSpoiler = true;
 					PlayTime = 0;
 					PlayTimeIgnoreInterval = 10 * 60;

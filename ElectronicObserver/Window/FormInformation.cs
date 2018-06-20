@@ -457,7 +457,7 @@ namespace ElectronicObserver.Window
 			StringBuilder sb = new StringBuilder();
 
 			sb.AppendLine("[보급완료]");
-			sb.AppendFormat("보크사이트: {0} ( {1}機 )\r\n", (int)data.api_use_bou, (int)data.api_use_bou / 5);
+			sb.AppendFormat("보크사이트: {0} ( {1}기 )\r\n", (int)data.api_use_bou, (int)data.api_use_bou / 5);
 
 			return sb.ToString();
 		}
@@ -490,7 +490,7 @@ namespace ElectronicObserver.Window
 
 
 			sb.AppendLine("[함대귀환]");
-			sb.AppendFormat("연료: {0:+0;-0} ( 自然 {1:+0;-0} - 보급 {2} - 입거 {3} )\r\n탄약: {4:+0;-0} ( 自然 {5:+0;-0} - 보급 {6} )\r\n강재: {7:+0;-0} ( 自然 {8:+0;-0} - 입거 {9} )\r\n보키: {10:+0;-0} ( 自然 {11:+0;-0} - 보급 {12} ( {13} 기 ) )",
+			sb.AppendFormat("연료: {0:+0;-0} ( 자연회복 {1:+0;-0} - 보급 {2} - 입거 {3} )\r\n탄약: {4:+0;-0} ( 자연회복 {5:+0;-0} - 보급 {6} )\r\n강재: {7:+0;-0} ( 자연회복 {8:+0;-0} - 입거 {9} )\r\n보키: {10:+0;-0} ( 자연회복 {11:+0;-0} - 보급 {12} ( {13} 기 ) )",
 				fuel_diff - fuel_supply - fuel_repair, fuel_diff, fuel_supply, fuel_repair,
 				ammo_diff - ammo, ammo_diff, ammo,
 				steel_diff - steel, steel_diff, steel,

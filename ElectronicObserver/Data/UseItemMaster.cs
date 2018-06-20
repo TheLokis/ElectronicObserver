@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Window;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -33,7 +34,11 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// アイテム名
 		/// </summary>
-		public string Name => RawData.api_name;
+		public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Items); } 
+        }
+
 
 		/// <summary>
 		/// 説明

@@ -27,7 +27,7 @@ namespace ElectronicObserver.Window.Dialog
 			var row = new DataGridViewRow();
 
 			row.CreateCells(ColumnView);
-			row.SetValues("(全て)", null, null, "-");
+			row.SetValues("(전부)", null, null, "-");
 			row.Cells[ColumnView_Width.Index].ReadOnly = true;
 			rows.AddLast(row);
 

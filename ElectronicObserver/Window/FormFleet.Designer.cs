@@ -87,21 +87,21 @@
 			// 
 			this.ContextMenuFleet_CopyFleet.Name = "ContextMenuFleet_CopyFleet";
 			this.ContextMenuFleet_CopyFleet.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_CopyFleet.Text = "編成テキストをコピー(&C)";
+			this.ContextMenuFleet_CopyFleet.Text = "편성을 텍스트로 복사(&C)";
 			this.ContextMenuFleet_CopyFleet.Click += new System.EventHandler(this.ContextMenuFleet_CopyFleet_Click);
 			// 
 			// ContextMenuFleet_CopyFleetDeckBuilder
 			// 
 			this.ContextMenuFleet_CopyFleetDeckBuilder.Name = "ContextMenuFleet_CopyFleetDeckBuilder";
 			this.ContextMenuFleet_CopyFleetDeckBuilder.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_CopyFleetDeckBuilder.Text = "編成をコピー(デッキビルダー)(&D)";
+			this.ContextMenuFleet_CopyFleetDeckBuilder.Text = "편성복사(편성 시뮬레이터로)(&D)";
 			this.ContextMenuFleet_CopyFleetDeckBuilder.Click += new System.EventHandler(this.ContextMenuFleet_CopyFleetDeckBuilder_Click);
 			// 
 			// ContextMenuFleet_CopyKanmusuList
 			// 
 			this.ContextMenuFleet_CopyKanmusuList.Name = "ContextMenuFleet_CopyKanmusuList";
 			this.ContextMenuFleet_CopyKanmusuList.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_CopyKanmusuList.Text = "艦隊晒しページへコピー(&R)";
+			this.ContextMenuFleet_CopyKanmusuList.Text = "함대 노출 페이지에 복사(&R)";
 			this.ContextMenuFleet_CopyKanmusuList.Click += new System.EventHandler(this.ContextMenuFleet_CopyKanmusuList_Click);
 			// 
 			// toolStripSeparator1

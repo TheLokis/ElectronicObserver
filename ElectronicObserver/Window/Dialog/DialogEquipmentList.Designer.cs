@@ -61,7 +61,7 @@
 			this.EquipmentView.AllowUserToDeleteRows = false;
 			this.EquipmentView.AllowUserToResizeRows = false;
 			this.EquipmentView.BackgroundColor = System.Drawing.SystemColors.Control;
-			this.EquipmentView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.EquipmentView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.EquipmentView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
 			this.EquipmentView_ID,
 			this.EquipmentView_Icon,
@@ -184,7 +184,7 @@
 			this.DetailView.AllowUserToDeleteRows = false;
 			this.DetailView.AllowUserToResizeRows = false;
 			this.DetailView.BackgroundColor = System.Drawing.SystemColors.Control;
-			this.DetailView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DetailView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.DetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
 			this.DetailView_Level,
 			this.DetailView_AircraftLevel,

@@ -75,10 +75,10 @@
 			this.QuestView.AllowUserToDeleteRows = false;
 			this.QuestView.AllowUserToResizeRows = false;
 			this.QuestView.BackgroundColor = System.Drawing.SystemColors.Control;
-			this.QuestView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.QuestView.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
 			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -162,7 +162,7 @@
 			// 
 			this.QuestView_Progress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.QuestView_Progress.ContextMenuStrip = this.MenuProgress;
-			this.QuestView_Progress.HeaderText = "進捗";
+			this.QuestView_Progress.HeaderText = "진행도";
 			this.QuestView_Progress.Name = "QuestView_Progress";
 			this.QuestView_Progress.ReadOnly = true;
 			this.QuestView_Progress.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -322,7 +322,7 @@
 			this.MenuMain_ShowOnce.CheckOnClick = true;
 			this.MenuMain_ShowOnce.Name = "MenuMain_ShowOnce";
 			this.MenuMain_ShowOnce.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowOnce.Text = "일회성임무 표시(&O)";
+			this.MenuMain_ShowOnce.Text = "단발임무 표시(&O)";
 			this.MenuMain_ShowOnce.Click += new System.EventHandler(this.MenuMain_ShowOnce_Click);
 			// 
 			// toolStripSeparator2

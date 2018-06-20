@@ -427,7 +427,7 @@ namespace ElectronicObserver.Window
 			if (pd != null && pd.IsAvailable)
 			{
 
-				Searching.Text = "基地航空隊";
+				Searching.Text = "기지항공대";
 				Searching.ImageAlign = ContentAlignment.MiddleLeft;
 				Searching.ImageIndex = (int)ResourceManager.EquipmentContent.LandAttacker;
 
@@ -437,19 +437,19 @@ namespace ElectronicObserver.Window
 				foreach (var phase in pd.AirAttackUnits)
 				{
 
-					sb.AppendFormat("{0} 回目 - #{1} :\r\n",
+					sb.AppendFormat("{0} 회 - #{1} :\r\n",
 						index, phase.AirUnitID);
 
 					if (phase.IsStage1Available)
 					{
-						sb.AppendFormat("　St1: 自軍 -{0}/{1} | 敵軍 -{2}/{3} | {4}\r\n",
+						sb.AppendFormat("　St1: 아군 -{0}/{1} | 적군 -{2}/{3} | {4}\r\n",
 							phase.AircraftLostStage1Friend, phase.AircraftTotalStage1Friend,
 							phase.AircraftLostStage1Enemy, phase.AircraftTotalStage1Enemy,
 							Constants.GetAirSuperiority(phase.AirSuperiority));
 					}
 					if (phase.IsStage2Available)
 					{
-						sb.AppendFormat("　St2: 自軍 -{0}/{1} | 敵軍 -{2}/{3}\r\n",
+						sb.AppendFormat("　St2: 아군 -{0}/{1} | 적군 -{2}/{3}\r\n",
 							phase.AircraftLostStage2Friend, phase.AircraftTotalStage2Friend,
 							phase.AircraftLostStage2Enemy, phase.AircraftTotalStage2Enemy);
 					}
@@ -473,7 +473,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		private void ClearBaseAirAttack()
 		{
-			Searching.Text = "索敵";
+			Searching.Text = "색적";
 			Searching.ImageAlign = ContentAlignment.MiddleCenter;
 			Searching.ImageIndex = -1;
 			ToolTipInfo.SetToolTip(Searching, null);
@@ -555,9 +555,9 @@ namespace ElectronicObserver.Window
 		private void SetAerialWarfare(PhaseAirBattleBase phaseJet, PhaseAirBattleBase phase1, PhaseAirBattleBase phase2)
 		{
 			var phases = new[] {
-				new AerialWarfareFormatter( phaseJet, "噴式戦: " ),
-				new AerialWarfareFormatter( phase1, "第1次: "),
-				new AerialWarfareFormatter( phase2, "第2次: "),
+				new AerialWarfareFormatter( phaseJet, "분식전: " ),
+				new AerialWarfareFormatter( phase1, "제1차: "),
+				new AerialWarfareFormatter( phase2, "제2차: "),
 			};
 
 			if (!phases[0].Enabled && !phases[2].Enabled)
@@ -590,7 +590,7 @@ namespace ElectronicObserver.Window
 
 			void ClearAACutinLabel()
 			{
-				AACutin.Text = "対空砲火";
+				AACutin.Text = "대공포화";
 				AACutin.ImageAlign = ContentAlignment.MiddleCenter;
 				AACutin.ImageIndex = -1;
 				ToolTipInfo.SetToolTip(AACutin, null);
@@ -620,7 +620,7 @@ namespace ElectronicObserver.Window
 						label.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
 
 						ToolTipInfo.SetToolTip(label, ToolTipInfo.GetToolTip(label) +
-							"触接中\r\n" + string.Join("\r\n", phases1.Select(p => $"{p.PhaseName}{(KCDatabase.Instance.MasterEquipments[p.GetTouchAircraft(isFriend)]?.Name ?? "(なし)")}")));
+							"촉접중\r\n" + string.Join("\r\n", phases1.Select(p => $"{p.PhaseName}{(KCDatabase.Instance.MasterEquipments[p.GetTouchAircraft(isFriend)]?.Name ?? "(없음)")}")));
 					}
 					else
 					{
@@ -656,8 +656,8 @@ namespace ElectronicObserver.Window
 					AACutin.ImageAlign = ContentAlignment.MiddleLeft;
 					AACutin.ImageIndex = (int)ResourceManager.EquipmentContent.HighAngleGun;
 
-					ToolTipInfo.SetToolTip(AACutin, "対空カットイン\r\n" +
-						string.Join("\r\n", phases2.Select(p => p.PhaseName + (p.Air.IsAACutinAvailable ? $"{p.Air.AACutInShip.NameWithLevel}\r\nカットイン種別: {p.Air.AACutInKind} ({Constants.GetAACutinKind(p.Air.AACutInKind)})" : "(発動せず)"))));
+					ToolTipInfo.SetToolTip(AACutin, "대공컷인\r\n" +
+						string.Join("\r\n", phases2.Select(p => p.PhaseName + (p.Air.IsAACutinAvailable ? $"{p.Air.AACutInShip.NameWithLevel}\r\n컷인종류: {p.Air.AACutInKind} ({Constants.GetAACutinKind(p.Air.AACutInKind)})" : "(발동안함)"))));
 				}
 				else
 				{
@@ -745,7 +745,7 @@ namespace ElectronicObserver.Window
 
 					if (isBaseAirRaid)
 					{
-						name = string.Format("第{0}基地", i + 1);
+						name = string.Format("제{0}기지", i + 1);
 						isEscaped = false;
 						isLandBase = true;
 						bar.Text = "LB";        //note: Land Base (Landing Boat もあるらしいが考えつかなかったので)
@@ -761,7 +761,7 @@ namespace ElectronicObserver.Window
 					}
 
 					ToolTipInfo.SetToolTip(bar, string.Format
-						("{0}\r\nHP: ({1} → {2})/{3} ({4}) [{5}]\r\n与ダメージ: {6}\r\n\r\n{7}",
+						("{0}\r\nHP: ({1} → {2})/{3} ({4}) [{5}]\r\n데미지: {6}\r\n\r\n{7}",
 						name,
 						Math.Max(bar.PrevValue, 0),
 						Math.Max(bar.Value, 0),
@@ -835,7 +835,7 @@ namespace ElectronicObserver.Window
 						bar.Text = Constants.GetShipClassClassification(ship.MasterShip.ShipType);
 
 						ToolTipInfo.SetToolTip(bar, string.Format(
-							"{0} Lv. {1}\r\nHP: ({2} → {3})/{4} ({5}) [{6}]\r\n与ダメージ: {7}\r\n\r\n{8}",
+							"{0} Lv. {1}\r\nHP: ({2} → {3})/{4} ({5}) [{6}]\r\n데미지: {7}\r\n\r\n{8}",
 							ship.MasterShip.NameWithClass,
 							ship.Level,
 							Math.Max(bar.PrevValue, 0),
@@ -1169,7 +1169,7 @@ namespace ElectronicObserver.Window
 					AirStage2Enemy.ForeColor = SystemColors.ControlText;
 					AirStage2Enemy.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage2Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
-					ToolTipInfo.SetToolTip(AirStage2Enemy, "照明弾投射: " + pd.FlareEnemyInstance.NameWithClass);
+					ToolTipInfo.SetToolTip(AirStage2Enemy, "조명탄사용: " + pd.FlareEnemyInstance.NameWithClass);
 				}
 				else
 				{

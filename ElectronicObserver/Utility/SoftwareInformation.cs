@@ -19,7 +19,7 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public static string SoftwareNameJapanese => "七四式電子観測儀";
 
-        public static string SoftwareNameKorean => "74식 전자관측의 KRTL_Beta";
+        public static string SoftwareNameKorean => "74식 전자관측의 KRTL";
 
         /// <summary>
         /// ソフトウェア名(英語)
@@ -36,20 +36,20 @@ namespace ElectronicObserver.Utility
 		/// <summary>
 		/// バージョン(英語)
 		/// </summary>
-		public static string VersionEnglish => "3.1.2";
+		public static string VersionEnglish => "3.1.2.001";
 
-        public static string VersionKorean => "3.1.2";
+        public static string VersionKorean => "3.1.2.001";
 
         /// <summary>
         /// 更新日時
         /// </summary>
-        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/05/19 20:00:00");
+        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/06/24 20:00:00");
 
 
 
 
 		private static System.Net.WebClient client;
-		private static readonly Uri uri = new Uri("https://www.dropbox.com/s/vk073iw1wvktq4d/version.txt?dl=1");
+		private static readonly Uri uri = new Uri("https://thelokis.github.io/EOTranslation/Translations/softwareversion.txt");
 
 		public static void CheckUpdate()
 		{

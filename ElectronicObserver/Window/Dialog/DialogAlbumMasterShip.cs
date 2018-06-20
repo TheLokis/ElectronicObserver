@@ -146,8 +146,9 @@ namespace ElectronicObserver.Window.Dialog
 
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(ShipView);
-				row.SetValues(ship.ShipID, row.SetValues(ship.ShipID, FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.TranslationType.ShipTypes), ship.NameWithClass));
-				row.Cells[ShipView_ShipType.Index].Tag = ship.ShipType;
+                row.SetValues(ship.ShipID, FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.TranslationType.ShipTypes), ship.NameWithClass);
+                //row.SetValues(ship.ShipID, row.SetValues(ship.ShipID, ship.ShipTypeName, ship.NameWithClass));
+                row.Cells[ShipView_ShipType.Index].Tag = ship.ShipType;
 				row.Cells[ShipView_Name.Index].Tag = ship.IsAbyssalShip ? null : ship.NameReading;
 				rows.Add(row);
 
@@ -292,7 +293,7 @@ namespace ElectronicObserver.Window.Dialog
 			AlbumNo.Text = ship.AlbumNo.ToString();
 
 			ResourceName.Text = $"{ship.ResourceName} {ship.ResourceGraphicVersion}/{ship.ResourceVoiceVersion}/{ship.ResourcePortVoiceVersion}";
-			ToolTipInfo.SetToolTip(ResourceName, string.Format("자원 이름: {0}\r\n그래픽 ver. {1}\r\n음성 ver. {2}\r\n모항 음성 ver. {3}\r\n({4})",
+			ToolTipInfo.SetToolTip(ResourceName, string.Format("리소스파일 이름: {0}\r\n그래픽 ver. {1}\r\n음성 ver. {2}\r\n모항 음성 ver. {3}\r\n({4})",
 				ship.ResourceName, ship.ResourceGraphicVersion, ship.ResourceVoiceVersion, ship.ResourcePortVoiceVersion, Constants.GetVoiceFlag(ship.VoiceFlag)));
 
 			
@@ -1318,7 +1319,7 @@ namespace ElectronicObserver.Window.Dialog
 				sb.AppendFormat("회피: {0} / {1}\r\n", GetParameterMinBound(ship.Evasion), GetParameterMax(ship.Evasion));
 				sb.AppendFormat("색적: {0} / {1}\r\n", GetParameterMinBound(ship.LOS), GetParameterMax(ship.LOS));
 				sb.AppendFormat("운: {0} / {1}\r\n", ship.LuckMin, ship.LuckMax);
-				sb.AppendFormat("속력: {0} / 射程: {1}\r\n", Constants.GetSpeed(ship.Speed), Constants.GetRange(ship.Range));
+				sb.AppendFormat("속력: {0} / 사정: {1}\r\n", Constants.GetSpeed(ship.Speed), Constants.GetRange(ship.Range));
 				sb.AppendFormat("소비연탄: 연료 {0} / 탄약 {1}\r\n", ship.Fuel, ship.Ammo);
 				sb.AppendFormat("레어도: {0}\r\n", Constants.GetShipRarity(ship.Rarity));
 			}
@@ -1335,7 +1336,7 @@ namespace ElectronicObserver.Window.Dialog
 				sb.AppendFormat("회피: {0} / {1}\r\n", GetParameterMax(ship.Evasion), (ship.Evasion != null && !ship.Evasion.IsMaximumDefault ? ship.Evasion.Maximum : 0) + availableEquipments.Sum(eq => eq.Evasion));
 				sb.AppendFormat("색적: {0} / {1}\r\n", GetParameterMax(ship.LOS), (ship.LOS != null && !ship.LOS.IsMaximumDefault ? ship.LOS.Maximum : 0) + availableEquipments.Sum(eq => eq.LOS));
 				sb.AppendFormat("운: {0} / {1}\r\n", ship.LuckMin > 0 ? ship.LuckMin.ToString() : "???", luckSum > 0 ? luckSum.ToString() : "???");
-				sb.AppendFormat("속력: {0} / 射程: {1}\r\n", Constants.GetSpeed(ship.Speed),
+				sb.AppendFormat("속력: {0} / 사정: {1}\r\n", Constants.GetSpeed(ship.Speed),
 					Constants.GetRange(Math.Max(ship.Range, availableEquipments.Any() ? availableEquipments.Max(eq => eq.Range) : 0)));
 				if (ship.Fuel > 0 || ship.Ammo > 0)
 					sb.AppendFormat("소비연탄: 연료 {0} / 탄약 {1}\r\n", ship.Fuel, ship.Ammo);
@@ -1599,5 +1600,9 @@ namespace ElectronicObserver.Window.Dialog
 			}
 		}
 
-	}
+        private void ShipView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+    }
 }

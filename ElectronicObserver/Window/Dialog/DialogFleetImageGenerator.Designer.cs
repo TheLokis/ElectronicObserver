@@ -479,7 +479,7 @@
 			this.OpenImageAfterOutput.Size = new System.Drawing.Size(89, 19);
 			this.OpenImageAfterOutput.TabIndex = 2;
 			this.OpenImageAfterOutput.Text = "저장 후 열기";
-			this.ToolTipInfo.SetToolTip(this.OpenImageAfterOutput, "出力先が「ファイル」の場合、出力後にその画像をビューアで開くかを指定します。\r\nその画像に紐づけられている既定のビューアが起動します。");
+			this.ToolTipInfo.SetToolTip(this.OpenImageAfterOutput, "대상이 파일인경우 출력 후 이미지를 뷰어에서 엽니다.\r\n시스템 기본 뷰어에서 파일을 엽니다.");
 			this.OpenImageAfterOutput.UseVisualStyleBackColor = true;
 			// 
 			// groupBox5

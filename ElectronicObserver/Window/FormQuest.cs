@@ -28,7 +28,7 @@ namespace ElectronicObserver.Window
 		{
 			InitializeComponent();
 
-			ControlHelper.SetDoubleBuffered(QuestView);
+            ControlHelper.SetDoubleBuffered(QuestView);
 
 			ConfigurationChanged();
 
@@ -287,7 +287,7 @@ namespace ElectronicObserver.Window
 
 					if (q.State == 3)
 					{
-						value = "達成！";
+						value = "달성!";
 						tag = 1.0;
 
 					}
@@ -312,11 +312,11 @@ namespace ElectronicObserver.Window
 									tag = 0.0;
 									break;
 								case 1:
-									value = "50%以上";
+									value = "50%이상";
 									tag = 0.5;
 									break;
 								case 2:
-									value = "80%以上";
+									value = "80%이상";
 									tag = 0.8;
 									break;
 								default:
@@ -339,14 +339,14 @@ namespace ElectronicObserver.Window
 			{
 				int index = QuestView.Rows.Add();
 				QuestView.Rows[index].Cells[QuestView_State.Index].Value = null;
-				QuestView.Rows[index].Cells[QuestView_Name.Index].Value = string.Format("(未取得の任務 x {0})", (KCDatabase.Instance.Quest.Count - KCDatabase.Instance.Quest.Quests.Count));
+				QuestView.Rows[index].Cells[QuestView_Name.Index].Value = string.Format("(받지않은임무 x {0})", (KCDatabase.Instance.Quest.Count - KCDatabase.Instance.Quest.Quests.Count));
 			}
 
 			if (KCDatabase.Instance.Quest.Quests.Count == 0)
 			{
 				int index = QuestView.Rows.Add();
 				QuestView.Rows[index].Cells[QuestView_State.Index].Value = null;
-				QuestView.Rows[index].Cells[QuestView_Name.Index].Value = "(任務完遂！)";
+				QuestView.Rows[index].Cells[QuestView_Name.Index].Value = "(임무완수!)";
 			}
 
 			//更新時にソートする
@@ -536,7 +536,7 @@ namespace ElectronicObserver.Window
 			{
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(QuestView);
-				row.SetValues(null, null, null, "(未取得)", null);
+				row.SetValues(null, null, null, "(미취득)", null);
 				QuestView.Rows.Add(row);
 			}
 
@@ -706,12 +706,12 @@ namespace ElectronicObserver.Window
 			if (quest != null)
 			{
 				MenuMain_GoogleQuest.Enabled = true;
-				MenuMain_GoogleQuest.Text = string.Format("『{0}』でGoogle検索(&G)", quest.Name);
+				MenuMain_GoogleQuest.Text = string.Format("『{0}』으로 구글 검색(&G)", quest.Name);
 			}
 			else
 			{
 				MenuMain_GoogleQuest.Enabled = false;
-				MenuMain_GoogleQuest.Text = "任務名でGoogle検索(&G)";
+				MenuMain_GoogleQuest.Text = "임무명으로 구글검색(&G)";
 			}
 		}
 

@@ -21,6 +21,8 @@ namespace ElectronicObserver.Utility
         private XDocument operationsXml;
         private XDocument questsXml;
         private XDocument expeditionsXml;
+        private XDocument expeditionsdataXml;
+        private XDocument ItemsXml;
         private XDocument versionManifest;
         private string shipsVersion;
         private string shipTypesVersion;
@@ -29,6 +31,8 @@ namespace ElectronicObserver.Utility
         private string operationsVersion;
         private string questsVersion;
         private string expeditionsVersion;
+        private string ItemsVersion;
+        private string expeditionsdataVersion;
 
         private static string hubsite = "https://thelokis.github.io/EOTranslation/Translations/";
 
@@ -45,6 +49,8 @@ namespace ElectronicObserver.Utility
                     if (File.Exists("Translations\\Operations.xml")) this.operationsXml = XDocument.Load("Translations\\Operations.xml");
                     if (File.Exists("Translations\\Quests.xml")) this.questsXml = XDocument.Load("Translations\\Quests.xml");
                     if (File.Exists("Translations\\Expeditions.xml")) this.expeditionsXml = XDocument.Load("Translations\\Expeditions.xml");
+                    if (File.Exists("Translations\\Items.xml")) this.questsXml = XDocument.Load("Translations\\Items.xml");
+                    if (File.Exists("Translations\\ExpeditionData.xml")) this.expeditionsXml = XDocument.Load("Translations\\ExpeditionData.xml");
                 }
             }
             catch (Exception ex)
@@ -53,6 +59,8 @@ namespace ElectronicObserver.Utility
             }
             GetVersions();
             CheckForUpdates();
+
+            
         }
 
         private void GetVersions()
@@ -119,6 +127,24 @@ namespace ElectronicObserver.Utility
             {
                 this.expeditionsVersion = "0.0.0";
             }
+
+            try
+            {
+                this.ItemsVersion = this.ItemsXml.Root.Attribute("Version").Value;
+            }
+            catch (NullReferenceException)
+            {
+                this.ItemsVersion = "0.0.0";
+            }
+
+            try
+            {
+                this.expeditionsdataVersion = this.expeditionsdataXml.Root.Attribute("Version").Value;
+            }
+            catch (NullReferenceException)
+            {
+                this.expeditionsdataVersion = "0.0.0";
+            }
         }
 
         private void CheckForUpdates()
@@ -142,6 +168,8 @@ namespace ElectronicObserver.Utility
                 string newOperationVer = versionManifest.Root.Element("Operations").Attribute("version").Value;
                 string newQuestVer = versionManifest.Root.Element("Quests").Attribute("version").Value;
                 string newExpedVer = versionManifest.Root.Element("Expeditions").Attribute("version").Value;
+                string newItemVer = versionManifest.Root.Element("Items").Attribute("version").Value;
+                string newExpeddataVer = versionManifest.Root.Element("ExpeditionData").Attribute("version").Value;
 
                 if (newShipVer != shipsVersion)
                 {
@@ -228,6 +256,34 @@ namespace ElectronicObserver.Utility
                     Logger.Add(2, "원정 번역이 업데이트 되었습니다. 신규 버전 : " + newExpedVer + ".");
                 }
 
+                if (newExpeddataVer != expeditionsdataVersion)
+                {
+                    expeditionsdataXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "ExpeditionData.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.expeditionsdataXml = XDocument.Load(responseStream);
+                        expeditionsdataXml.Save("Translations\\ExpeditionData.xml");
+                    }
+                    Logger.Add(2, "원정 데이터가 업데이트 되었습니다. 신규 버전 : " + newExpeddataVer + ".");
+                }
+
+
+                if (newItemVer != ItemsVersion)
+                {
+                    ItemsXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Items.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.ItemsXml = XDocument.Load(responseStream);
+                        ItemsXml.Save("Translations\\Items.xml");
+                    }
+                    Logger.Add(2, "아이템 번역이 업데이트 되었습니다. 신규 버전 : " + newItemVer + ".");
+                }
+
+
                 GetVersions();
             }
         }
@@ -272,11 +328,26 @@ namespace ElectronicObserver.Utility
                     if (this.expeditionsXml != null)
                         return this.expeditionsXml.Descendants("Expedition");
                     break;
+                case TranslationType.ExpeditionData:
+                    if (this.expeditionsdataXml != null)
+                        return this.expeditionsdataXml.Descendants("Expedition");
+                    break;
+                case TranslationType.Items:
+                    if (this.ItemsXml != null)
+                        return this.ItemsXml.Descendants("Item");
+                    break;
                 default:
                     return null;
             }
             return null;
         }
+
+        public IEnumerable<XElement> GetExpeditionData()
+        {
+            return this.expeditionsdataXml.Descendants("Expedition");
+        }
+
+
 
         public string GetTranslation(string jpString, TranslationType type, int id = -1)
         {
@@ -284,7 +355,10 @@ namespace ElectronicObserver.Utility
             {
                 IEnumerable<XElement> translationList = this.GetTranslationList(type);
 
-                if (translationList == null) return jpString;
+                if (translationList == null)
+                {
+                    return jpString;
+                }
 
                 string jpChildElement = "JP-Name";
                 string trChildElement = "TR-Name";
@@ -296,9 +370,18 @@ namespace ElectronicObserver.Utility
                 }
 
                 string translated = jpString;
-                if (this.GetTranslation(jpString, translationList, jpChildElement, trChildElement, id, ref translated))
+                if (this.GetTranslation(jpString, translationList, jpChildElement, trChildElement, id, ref translated, type))
                 {
                     return translated;
+                }
+                else
+                {/*
+                    if(type == TranslationType.QuestTitle)
+                        ErrorReporter.SendErrorReport2(new Exception(), jpString);
+                    else if(type == TranslationType.QuestDetail)
+                        ErrorReporter.SendErrorReport2(new Exception(), jpString);
+                        */
+                    //Utility.Logger.Add(3, id + ":::" + jpChildElement + "/" + jpString + ":" + jpString.Equals(jpString));
                 }
             }
             catch (Exception e)
@@ -309,13 +392,17 @@ namespace ElectronicObserver.Utility
             return jpString;
         }
 
-        public bool GetTranslation(string jpString, IEnumerable<XElement> translationList, string jpChildElement, string trChildElement, int id, ref string translate)
+        public bool GetTranslation(string jpString, IEnumerable<XElement> translationList, string jpChildElement, string trChildElement, int id, ref string translate, TranslationType type)
         {
             IEnumerable<XElement> foundTranslation = translationList.Where(el =>
             {
                 try
                 {
+
+
+
                     if (el.Element(jpChildElement).Value.Equals(jpString)) return true;
+
                     if (el.Attribute("mode") != null)
                     {
                         if (el.Attribute("mode").Value.Equals("suffix"))
@@ -347,7 +434,7 @@ namespace ElectronicObserver.Utility
                         try
                         {
                             string t = jpString.Substring(0, jpString.Length - el.Element(jpChildElement).Value.Length);
-                            if (this.GetTranslation(t, translationList, jpChildElement, trChildElement, -1, ref t))
+                            if (this.GetTranslation(t, translationList, jpChildElement, trChildElement, -1, ref t, type))
                             {
                                 if ((el.Attribute("suffixType") != null) && el.Attribute("suffixType").Value.Equals("pre")) translate = el.Element(trChildElement).Value + t;
                                 else translate = t + el.Element(trChildElement).Value;
@@ -376,6 +463,7 @@ namespace ElectronicObserver.Utility
                             if (id >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == id)
                             {
                                 translate = el.Element(trChildElement).Value;
+
                                 return true;
                             }
                         }
@@ -398,6 +486,7 @@ namespace ElectronicObserver.Utility
             }
             return false;
         }
+
     }
 
     public enum TranslationType
@@ -415,6 +504,8 @@ namespace ElectronicObserver.Utility
         QuestTitle,
         Expeditions,
         ExpeditionDetail,
-        ExpeditionTitle
+        ExpeditionTitle,
+        ExpeditionData,
+        Items
     }
 }

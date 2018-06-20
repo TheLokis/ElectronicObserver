@@ -415,55 +415,55 @@ namespace ElectronicObserver.Window
 				sb.Append("Lv. ").Append(level.ToString());
 			sb.Append(" (ID: ").Append(shipID).AppendLine(")");
 
-			sb.Append("耐久: ").Append(hp).AppendLine();
+			sb.Append("내구: ").Append(hp).AppendLine();
 
-			sb.Append("火力: ").Append(firepower_c);
+			sb.Append("화력: ").Append(firepower_c);
 			if (firepower_c != firepower)
 				sb.Append("/").Append(firepower);
 			sb.AppendLine();
 
-			sb.Append("雷装: ").Append(torpedo_c);
+			sb.Append("뇌장: ").Append(torpedo_c);
 			if (torpedo_c != torpedo)
 				sb.Append("/").Append(torpedo);
 			sb.AppendLine();
 
-			sb.Append("対空: ").Append(aa_c);
+			sb.Append("대공: ").Append(aa_c);
 			if (aa_c != aa)
 				sb.Append("/").Append(aa);
 			sb.AppendLine();
 
-			sb.Append("装甲: ").Append(armor_c);
+			sb.Append("장갑: ").Append(armor_c);
 			if (armor_c != armor)
 				sb.Append("/").Append(armor);
 			sb.AppendLine();
 
-			sb.Append("対潜: ");
+			sb.Append("대잠: ");
 			if (asw_c < 0) sb.Append("???");
 			else sb.Append(asw_c);
 			if (asw_c != asw)
 				sb.Append("/").Append(asw);
 			sb.AppendLine();
 
-			sb.Append("回避: ");
+			sb.Append("회피: ");
 			if (evasion_c < 0) sb.Append("???");
 			else sb.Append(evasion_c);
 			if (evasion_c != evasion)
 				sb.Append("/").Append(evasion);
 			sb.AppendLine();
 
-			sb.Append("索敵: ");
+			sb.Append("색적: ");
 			if (los_c < 0) sb.Append("???");
 			else sb.Append(los_c);
 			if (los_c != los)
 				sb.Append("/").Append(los);
 			sb.AppendLine();
 
-			sb.Append("運: ").Append(luck_c);
+			sb.Append("운: ").Append(luck_c);
 			if (luck_c != luck)
 				sb.Append("/").Append(luck);
 			sb.AppendLine();
 
-			sb.AppendFormat("射程: {0} / 速力: {1}\r\n(右クリックで図鑑)\r\n",
+			sb.AppendFormat("사정: {0} / 속력: {1}\r\n(우클릭으로 도감에)\r\n",
 				Constants.GetRange(range),
 				Constants.GetSpeed(ship.Speed));
 
@@ -485,7 +485,7 @@ namespace ElectronicObserver.Window
 					sb.AppendFormat("[{0}] {1}\r\n", ship.Aircraft[i], eq.Name);
 			}
 
-			sb.AppendFormat("\r\n昼戦: {0}\r\n夜戦: {1}\r\n",
+			sb.AppendFormat("\r\n주간전: {0}\r\n야간전: {1}\r\n",
 				Constants.GetDayAttackKind(Calculator.GetDayAttackKind(slot, ship.ShipID, -1)),
 				Constants.GetNightAttackKind(Calculator.GetNightAttackKind(slot, ship.ShipID, -1)));
 
@@ -493,14 +493,14 @@ namespace ElectronicObserver.Window
 				int aacutin = Calculator.GetAACutinKind(shipID, slot);
 				if (aacutin != 0)
 				{
-					sb.AppendFormat("対空: {0}\r\n", Constants.GetAACutinKind(aacutin));
+					sb.AppendFormat("대공: {0}\r\n", Constants.GetAACutinKind(aacutin));
 				}
 			}
 			{
 				int airsup = Calculator.GetAirSuperiority(slot, ship.Aircraft.ToArray());
 				if (airsup > 0)
 				{
-					sb.AppendFormat("制空戦力: {0}\r\n", airsup);
+					sb.AppendFormat("제공전력: {0}\r\n", airsup);
 				}
 			}
 
@@ -511,7 +511,7 @@ namespace ElectronicObserver.Window
 		{
 			if (air > 0)
 			{
-				return string.Format("確保: {0}\r\n優勢: {1}\r\n均衡: {2}\r\n劣勢: {3}\r\n",
+				return string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
 							(int)(air * 3.0),
 							(int)Math.Ceiling(air * 1.5),
 							(int)(air / 1.5 + 1),
@@ -671,7 +671,7 @@ namespace ElectronicObserver.Window
 			else if (apiname == "api_req_member/get_practice_enemyinfo")
 			{
 
-				TextMapArea.Text = "演習";
+				TextMapArea.Text = "연습";
 				TextDestination.Text = string.Format("{0} {1}", data.api_nickname, Constants.GetAdmiralRank((int)data.api_rank));
 				TextDestination.ImageAlign = ContentAlignment.MiddleCenter;
 				TextDestination.ImageIndex = -1;
@@ -702,7 +702,7 @@ namespace ElectronicObserver.Window
 				_enemyFleetCandidateIndex = -1;
 
 
-				TextMapArea.Text = string.Format("出撃海域 : {0}-{1}{2}", compass.MapAreaID, compass.MapInfoID,
+				TextMapArea.Text = string.Format("출격해역 : {0}-{1}{2}", compass.MapAreaID, compass.MapInfoID,
 					compass.MapInfo.EventDifficulty > 0 ? " [" + Constants.GetDifficulty(compass.MapInfo.EventDifficulty) + "]" : "");
 				{
 					var mapinfo = compass.MapInfo;
@@ -714,7 +714,7 @@ namespace ElectronicObserver.Window
 					}
 					else if (mapinfo.RequiredDefeatedCount != -1)
 					{
-						ToolTipInfo.SetToolTip(TextMapArea, string.Format("撃破: {0} / {1} 回", mapinfo.CurrentDefeatedCount, mapinfo.RequiredDefeatedCount));
+						ToolTipInfo.SetToolTip(TextMapArea, string.Format("격파: {0} / {1} 회", mapinfo.CurrentDefeatedCount, mapinfo.RequiredDefeatedCount));
 
 					}
 					else if (mapinfo.MapHPMax > 0)
@@ -734,7 +734,7 @@ namespace ElectronicObserver.Window
 				}
 
 
-				TextDestination.Text = string.Format("次のセル : {0}{1}", compass.Destination, (compass.IsEndPoint ? " (終点)" : ""));
+				TextDestination.Text = string.Format("다음노드 : {0}{1}", compass.Destination, (compass.IsEndPoint ? " (마지막)" : ""));
 				if (compass.LaunchedRecon != 0)
 				{
 					TextDestination.ImageAlign = ContentAlignment.MiddleRight;
@@ -744,16 +744,16 @@ namespace ElectronicObserver.Window
 					switch (compass.CommentID)
 					{
 						case 1:
-							tiptext = "敵艦隊発見！";
+							tiptext = "적함대발견！";
 							break;
 						case 2:
-							tiptext = "攻撃目標発見！";
+							tiptext = "공격목표발견！";
 							break;
 						case 3:
-							tiptext = "針路哨戒！";
+							tiptext = "진로초계！";
 							break;
 						default:
-							tiptext = "索敵機発艦！";
+							tiptext = "색적기발함！";
 							break;
 					}
 					ToolTipInfo.SetToolTip(TextDestination, tiptext);
@@ -781,7 +781,7 @@ namespace ElectronicObserver.Window
 					{
 
 						case 0:     //初期位置
-							TextEventDetail.Text = "どうしてこうなった";
+							TextEventDetail.Text = "어째서 이렇게 됬냐";
 							break;
 
 						case 2:     //資源
@@ -848,7 +848,7 @@ namespace ElectronicObserver.Window
 									eventkind = "敵影を見ず";
 									break;
 								case 2:
-									eventkind = "能動分岐";
+									eventkind = "능동분기";
 									break;
 								case 3:
 									eventkind = "穏やかな海";
@@ -933,19 +933,19 @@ namespace ElectronicObserver.Window
 							switch (compass.EventKind)
 							{
 								case 0:     //航空偵察
-									eventkind = "航空偵察";
+									eventkind = "항공정찰";
 
 									switch (compass.AirReconnaissanceResult)
 									{
 										case 0:
 										default:
-											TextEventDetail.Text = "失敗";
+											TextEventDetail.Text = "실패";
 											break;
 										case 1:
-											TextEventDetail.Text = "成功";
+											TextEventDetail.Text = "성공";
 											break;
 										case 2:
-											TextEventDetail.Text = "大成功";
+											TextEventDetail.Text = "대성공";
 											break;
 									}
 
@@ -997,7 +997,7 @@ namespace ElectronicObserver.Window
 				{
 					TextEventKind.ImageAlign = ContentAlignment.MiddleRight;
 					TextEventKind.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedBomber;
-					ToolTipInfo.SetToolTip(TextEventKind, "空襲 - " + Constants.GetAirRaidDamage(compass.AirRaidDamageKind));
+					ToolTipInfo.SetToolTip(TextEventKind, "공습 - " + Constants.GetAirRaidDamage(compass.AirRaidDamageKind));
 				}
 				else
 				{
@@ -1037,7 +1037,7 @@ namespace ElectronicObserver.Window
 					if (itemMaster != null)
 						itemName = itemMaster.Name;
 					else
-						itemName = "謎のアイテム";
+						itemName = "알수없는아이템";
 				}
 
 				strs.AddLast(itemName + " x " + item.Amount);
@@ -1045,7 +1045,7 @@ namespace ElectronicObserver.Window
 
 			if (!strs.Any())
 			{
-				return "(なし)";
+				return "(없음)";
 
 			}
 			else
@@ -1082,8 +1082,8 @@ namespace ElectronicObserver.Window
 
 			if (_enemyFleetCandidate.Count == 0)
 			{
-				TextEventDetail.Text = "(敵艦隊候補なし)";
-				TextEnemyFleetName.Text = "(敵艦隊名不明)";
+				TextEventDetail.Text = "(적함대없음)";
+				TextEnemyFleetName.Text = "(적함대명불명)";
 
 
 				TableEnemyCandidate.Visible = false;
@@ -1138,7 +1138,7 @@ namespace ElectronicObserver.Window
 					TextEnemyFleetName.Text = efrecord.FleetName;
 					TextEventDetail.Text = "Exp: " + efrecord.ExpShip;
 				}
-				ToolTipInfo.SetToolTip(TextEventDetail, "敵艦隊ID: " + efcurrent.FleetID.ToString("x16"));
+				ToolTipInfo.SetToolTip(TextEventDetail, "적함대ID: " + efcurrent.FleetID.ToString("x16"));
 			}
 
 			TextFormation.Text = Constants.GetFormationShort((int)bd.Searching.FormationEnemy);
@@ -1211,11 +1211,11 @@ namespace ElectronicObserver.Window
 				if (_enemyFleetCandidate.Count > _candidatesDisplayCount)
 				{
 					TextEventDetail.Text += " ▼";
-					ToolTipInfo.SetToolTip(TextEventDetail, string.Format("候補: {0} / {1}\r\n(左右クリックでページめくり)\r\n", _enemyFleetCandidateIndex + 1, _enemyFleetCandidate.Count));
+					ToolTipInfo.SetToolTip(TextEventDetail, string.Format("편성수: {0} / {1}\r\n(좌우 클릭으로 페이지 넘김)\r\n", _enemyFleetCandidateIndex + 1, _enemyFleetCandidate.Count));
 				}
 				else
 				{
-					ToolTipInfo.SetToolTip(TextEventDetail, string.Format("候補: {0}\r\n", _enemyFleetCandidate.Count));
+					ToolTipInfo.SetToolTip(TextEventDetail, string.Format("편성수: {0}\r\n", _enemyFleetCandidate.Count));
 				}
 
 				TableEnemyCandidate.SuspendLayout();

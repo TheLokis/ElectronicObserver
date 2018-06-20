@@ -196,7 +196,7 @@
 			this.ToolMenu_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.ToolMenu_Refresh.Name = "ToolMenu_Refresh";
 			this.ToolMenu_Refresh.Size = new System.Drawing.Size(23, 22);
-			this.ToolMenu_Refresh.Text = "업데이트";
+			this.ToolMenu_Refresh.Text = "새로고침";
 			this.ToolMenu_Refresh.Click += new System.EventHandler(this.ToolMenu_Refresh_Click);
 			// 
 			// ToolMenu_NavigateToLogInPage

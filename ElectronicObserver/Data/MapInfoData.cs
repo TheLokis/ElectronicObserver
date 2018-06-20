@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Window;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,10 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 海域名
 		/// </summary>
-		public string Name => RawData.api_name;
+		public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.OperationMaps); }
+        }
 
 		/// <summary>
 		/// 難易度

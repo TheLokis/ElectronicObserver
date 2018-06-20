@@ -1,4 +1,5 @@
 ﻿using Codeplex.Data;
+using ElectronicObserver.Window;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,15 +28,21 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int SortID => (int)RawData.api_sortno;
 
-		/// <summary>
-		/// 艦種名
-		/// </summary>
-		public string Name => RawData.api_name;
+        /// <summary>
+        /// 艦種名
+        /// </summary>
+        //public string Name => RawData.api_name;
+        public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ShipTypes); }
+        }
 
-		/// <summary>
-		/// 入渠時間係数
-		/// </summary>
-		public int RepairTime => (int)RawData.api_scnt;
+
+
+        /// <summary>
+        /// 入渠時間係数
+        /// </summary>
+        public int RepairTime => (int)RawData.api_scnt;
 
 
 		//TODO: api_kcnt
