@@ -26,13 +26,13 @@ namespace ElectronicObserver.Window.Dialog
 			LoopHeadPosition.Value = (decimal)handle.LoopHeadPosition;
 			Volume.Value = handle.Volume;
 
-			Text = "BGMの設定 - " + SyncBGMPlayer.SoundHandleIDToString(handle.HandleID);
+			Text = "BGM 설정 - " + SyncBGMPlayer.SoundHandleIDToString(handle.HandleID);
 			ResultHandle = handle.Clone();
 		}
 
 		private void DialogConfigurationBGMPlayer_Load(object sender, EventArgs e)
 		{
-			OpenMusicDialog.Filter = "音楽ファイル|" + string.Join(";", MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|ファイル|*";
+			OpenMusicDialog.Filter = "음악 파일|" + string.Join(";", MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
 		}
 
 		private void ButtonAccept_Click(object sender, EventArgs e)

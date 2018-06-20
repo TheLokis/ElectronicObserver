@@ -16,7 +16,7 @@ namespace ElectronicObserver.Data.Battle
 		public override void LoadFromResponse(string apiname, dynamic data)
 		{
 			base.LoadFromResponse(apiname, (object)data);
-
+            /*
 			JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "噴式基地航空隊攻撃");
 			JetAirBattle = new PhaseJetAirBattle(this, "噴式航空戦");
 			BaseAirAttack = new PhaseBaseAirAttack(this, "基地航空隊攻撃");
@@ -28,8 +28,20 @@ namespace ElectronicObserver.Data.Battle
 			Torpedo = new PhaseTorpedo(this, "雷撃戦", 2);
 			Shelling2 = new PhaseShelling(this, "第二次砲撃戦", 3, "2");
 			Shelling3 = new PhaseShelling(this, "第三次砲撃戦", 4, "3");
+            */
+            JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
+            JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
+            BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
+            AirBattle = new PhaseAirBattle(this, "1차 항공전");
+            Support = new PhaseSupport(this, "지원 공격");
+            OpeningASW = new PhaseOpeningASW(this, "선제대잠");
+            OpeningTorpedo = new PhaseTorpedo(this, "선제뇌격", 0);
+            Shelling1 = new PhaseShelling(this, "제1차포격전", 1, "1");
+            Torpedo = new PhaseTorpedo(this, "뇌격전", 2);
+            Shelling2 = new PhaseShelling(this, "제2차포격전", 3, "2");
+            Shelling3 = new PhaseShelling(this, "제3차포격전", 4, "3");
 
-			foreach (var phase in GetPhases())
+            foreach (var phase in GetPhases())
 				phase.EmulateBattle(_resultHPs, _attackDamages);
 
 		}
@@ -37,7 +49,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_combined_battle/ec_battle";
 
-		public override string BattleName => "通常艦隊 対連合艦隊 昼戦";
+		public override string BattleName => "통상함대 대 연합함대 주간전";
 
 
 

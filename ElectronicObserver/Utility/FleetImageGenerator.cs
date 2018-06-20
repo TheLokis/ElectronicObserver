@@ -66,8 +66,8 @@ namespace ElectronicObserver.Utility
 			var linePen = new Pen(subTextColor);
 
 
-			string fleetAirSuperiorityTitle = "制空戦力";
-			string fleetSearchingAbilityTitle = "索敵能力";
+			string fleetAirSuperiorityTitle = "제공 전력";
+			string fleetSearchingAbilityTitle = "색적 능력";
 
 			// for measure space of strings
 			Bitmap preimage = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -77,20 +77,20 @@ namespace ElectronicObserver.Utility
 			Size titleSize = string.IsNullOrWhiteSpace(args.Title) ? Size.Empty : MeasureString(preg, args.Title, args.TitleFont, MaxValueSize, formatMiddleCenter);
 			Size commentSize = string.IsNullOrWhiteSpace(args.Comment) ? Size.Empty : MeasureString(preg, args.Comment, args.MediumFont, MaxValueSize, formatMiddleLeft);
 
-			Size fleetNameSize = MeasureString(preg, "大正義日独伊三国褐色同盟", args.LargeFont, MaxValueSize, formatMiddleLeft);       // kanji 12 char
+			Size fleetNameSize = MeasureString(preg, "대정의추축국동맹", args.LargeFont, MaxValueSize, formatMiddleLeft);       // kanji 12 char
 			Size fleetAirSuperiorityTitleSize = MeasureString(preg, fleetAirSuperiorityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size fleetAirSuperiorityValueEstimatedSize = MeasureString(preg, "8888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size fleetSearchingAbilityTitleSize = MeasureString(preg, fleetSearchingAbilityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size fleetSearchingAbilityValueEstimatedSize = MeasureString(preg, "-888.88", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 
 			Size shipIndexSize = MeasureString(preg, "#4:", args.MediumDigitFont, MaxValueSize, formatMiddleLeft);
-			Size shipNameSize = MeasureString(preg, "千代田航改二", args.LargeFont, MaxValueSize, formatMiddleLeft);      // kanji 6 char
-			Size equipmentNameSize = MeasureString(preg, "三式戦 飛燕一型丁", args.MediumFont, MaxValueSize, formatMiddleLeft);     // kanji 9 char
+			Size shipNameSize = MeasureString(preg, "치토세항개2", args.LargeFont, MaxValueSize, formatMiddleLeft);      // kanji 6 char
+			Size equipmentNameSize = MeasureString(preg, "3식전 히엔 1형 정", args.MediumFont, MaxValueSize, formatMiddleLeft);     // kanji 9 char
 			Size mediumDigit3Size = MeasureString(preg, "888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size smallDigit3Size = MeasureString(preg, "888", args.SmallDigitFont, MaxValueSize, formatMiddleRight);
 			Size levelSize = MeasureString(preg, "Lv.", args.SmallDigitFont, MaxValueSize, formatMiddleLeft);
-			Size parameterNameSize = MeasureString(preg, "耐久", args.SmallFont, MaxValueSize, formatMiddleCenter);
-			Size parameterValueSize = Max(MeasureString(preg, "高速+", args.MediumFont, MaxValueSize, formatMiddleRight), mediumDigit3Size);
+			Size parameterNameSize = MeasureString(preg, "내구", args.SmallFont, MaxValueSize, formatMiddleCenter);
+			Size parameterValueSize = Max(MeasureString(preg, "고속+", args.MediumFont, MaxValueSize, formatMiddleRight), mediumDigit3Size);
 			Size equipmentLevelSize = MeasureString(preg, "+10", args.SmallDigitFont, MaxValueSize, formatMiddleRight);
 
 			Size parameterAreaInnerMargin = new Size(16, 0);
@@ -332,7 +332,7 @@ namespace ElectronicObserver.Utility
 							}
 							else
 							{
-								equipmentName = "(なし)";
+								equipmentName = "(없음)";
 							}
 							equipmentNameBrush.ResetTransform();
 							if (eq != null && eq.AircraftLevel > 0)
@@ -475,8 +475,8 @@ namespace ElectronicObserver.Utility
 			};
 
 
-			string fleetAirSuperiorityTitle = "制空戦力";
-			string fleetSearchingAbilityTitle = "索敵能力";
+			string fleetAirSuperiorityTitle = "제공 전력";
+			string fleetSearchingAbilityTitle = "색적 능력";
 
 			// for measure space of strings
 			Bitmap preimage = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -494,14 +494,14 @@ namespace ElectronicObserver.Utility
 			Size titleSize = string.IsNullOrWhiteSpace(args.Title) ? Size.Empty : MeasureString(preg, args.Title, args.TitleFont, MaxValueSize, formatMiddleCenter);
 			Size commentSize = string.IsNullOrWhiteSpace(args.Comment) ? Size.Empty : MeasureString(preg, args.Comment, args.MediumFont, MaxValueSize, formatMiddleLeft);
 
-			Size fleetNameSize = MeasureString(preg, "大正義日独伊三国褐色同盟", args.LargeFont, MaxValueSize, formatMiddleLeft);       // kanji 12 char
+			Size fleetNameSize = MeasureString(preg, "대정의추축국동맹", args.LargeFont, MaxValueSize, formatMiddleLeft);       // kanji 12 char
 			Size fleetAirSuperiorityTitleSize = MeasureString(preg, fleetAirSuperiorityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size fleetAirSuperiorityValueEstimatedSize = MeasureString(preg, "8888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size fleetSearchingAbilityTitleSize = MeasureString(preg, fleetSearchingAbilityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size fleetSearchingAbilityValueEstimatedSize = MeasureString(preg, "-888.88", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 
 			Size shipIndexSize = MeasureString(preg, "#4:", args.MediumDigitFont, MaxValueSize, formatMiddleLeft);
-			Size equipmentNameSize = MeasureString(preg, "61cm五連装(酸素)魚雷", args.MediumFont, MaxValueSize, formatMiddleLeft);     // kanji 9 char
+			Size equipmentNameSize = MeasureString(preg, "61cm 5연산(산소)어뢰", args.MediumFont, MaxValueSize, formatMiddleLeft);     // kanji 9 char
 			Size mediumDigit3Size = MeasureString(preg, "888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size smallDigit3Size = MeasureString(preg, "888", args.SmallDigitFont, MaxValueSize, formatMiddleRight);
 			Size levelSize = MeasureString(preg, "Lv.", args.SmallDigitFont, MaxValueSize, formatMiddleLeft);
@@ -841,7 +841,7 @@ namespace ElectronicObserver.Utility
 							}
 							else
 							{
-								equipmentName = "(なし)";
+								equipmentName = "(없음)";
 							}
 							equipmentNameBrush.ResetTransform();
 							if (eq != null && eq.Level > 0)
@@ -948,8 +948,8 @@ namespace ElectronicObserver.Utility
 				DashStyle = DashStyle.Dash
 			};
 
-			string fleetAirSuperiorityTitle = "制空戦力";
-			string fleetSearchingAbilityTitle = "索敵能力";
+			string fleetAirSuperiorityTitle = "제공 전력";
+			string fleetSearchingAbilityTitle = "색적 능력";
 
 			// for measure space of strings
 			Bitmap preimage = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -966,14 +966,14 @@ namespace ElectronicObserver.Utility
 			Size titleSize = string.IsNullOrWhiteSpace(args.Title) ? Size.Empty : MeasureString(preg, args.Title, args.TitleFont, MaxValueSize, formatMiddleCenter);
 			Size commentSize = string.IsNullOrWhiteSpace(args.Comment) ? Size.Empty : MeasureString(preg, args.Comment, args.MediumFont, MaxValueSize, formatMiddleLeft);
 
-			Size fleetNameSize = MeasureString(preg, "大正義日独伊三国褐色同盟", args.LargeFont, MaxValueSize, formatMiddleLeft);       // kanji 12 char
+			Size fleetNameSize = MeasureString(preg, "대정의추축국동맹", args.LargeFont, MaxValueSize, formatMiddleLeft);       // kanji 12 char
 			Size fleetAirSuperiorityTitleSize = MeasureString(preg, fleetAirSuperiorityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size fleetAirSuperiorityValueEstimatedSize = MeasureString(preg, "8888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size fleetSearchingAbilityTitleSize = MeasureString(preg, fleetSearchingAbilityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size fleetSearchingAbilityValueEstimatedSize = MeasureString(preg, "-888.88", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 
 			Size shipIndexSize = MeasureString(preg, "#4:", args.MediumDigitFont, MaxValueSize, formatMiddleLeft);
-			Size equipmentNameSize = MeasureString(preg, "61cm五連装(酸素)魚雷", args.SmallFont, MaxValueSize, formatMiddleLeft);      // kanji 9 char
+			Size equipmentNameSize = MeasureString(preg, "61cm 5연산(산소)어뢰", args.SmallFont, MaxValueSize, formatMiddleLeft);      // kanji 9 char
 			Size mediumDigit3Size = MeasureString(preg, "888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size smallDigit2Size = MeasureString(preg, "88", args.SmallDigitFont, MaxValueSize, formatMiddleRight);
 			Size smallDigit3Size = MeasureString(preg, "888", args.SmallDigitFont, MaxValueSize, formatMiddleRight);
@@ -1238,7 +1238,7 @@ namespace ElectronicObserver.Utility
 							}
 							else
 							{
-								equipmentName = "(なし)";
+								equipmentName = "(없음)";
 							}
 							equipmentNameBrush.ResetTransform();
 							if (eq != null && eq.Level > 0)
@@ -1340,8 +1340,8 @@ namespace ElectronicObserver.Utility
 			var linePen = new Pen(subTextColor);
 
 
-			string baseAirSuperiorityTitle = "制空戦力";
-			string baseDistanceTitle = "戦闘行動半径";
+			string baseAirSuperiorityTitle = "제공전력";
+			string baseDistanceTitle = "행동반경";
 
 			// for measure space of strings
 			Bitmap preimage = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -1349,14 +1349,14 @@ namespace ElectronicObserver.Utility
 
 			// Size Calculation
 
-			Size baseNameSize = MeasureString(preg, "大正義日独伊三国褐色同盟", args.LargeFont, MaxValueSize, formatMiddleLeft);        // kanji 12 char
+			Size baseNameSize = MeasureString(preg, "대정의추축국동맹", args.LargeFont, MaxValueSize, formatMiddleLeft);        // kanji 12 char
 			Size baseAirSuperiorityTitleSize = MeasureString(preg, baseAirSuperiorityTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size baseAirSuperiorityValueEstimatedSize = MeasureString(preg, "8888", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
 			Size baseDistanceTitleSize = MeasureString(preg, baseDistanceTitle, args.SmallFont, MaxValueSize, formatMiddleLeft);
 			Size baseDistanceValueEstimatedSize = MeasureString(preg, "88", args.MediumDigitFont, MaxValueSize, formatMiddleRight);
-			Size baseActionKindSize = MeasureString(preg, "【出撃】", args.MediumFont, MaxValueSize, formatMiddleLeft);
+			Size baseActionKindSize = MeasureString(preg, "【출격】", args.MediumFont, MaxValueSize, formatMiddleLeft);
 
-			Size equipmentNameSize = MeasureString(preg, "三式戦 飛燕一型丁", args.MediumFont, MaxValueSize, formatMiddleLeft);     // kanji 9 char
+			Size equipmentNameSize = MeasureString(preg, "3식전 히엔 1형 정", args.MediumFont, MaxValueSize, formatMiddleLeft);     // kanji 9 char
 			Size equipmentLevelSize = MeasureString(preg, "+10", args.SmallDigitFont, MaxValueSize, formatMiddleRight);
 
 			Size baseParameterAreaInnerMargin = new Size(16, 0);
@@ -1509,11 +1509,11 @@ namespace ElectronicObserver.Utility
 						}
 						else if (squadron.State == 2)
 						{
-							equipmentName = "(配置転換中)";
+							equipmentName = "(배치전환중)";
 						}
 						else
 						{
-							equipmentName = "(なし)";
+							equipmentName = "(없음)";
 						}
 						// fixme: unchecked;
 						equipmentNameBrush.ResetTransform();
@@ -1709,18 +1709,18 @@ namespace ElectronicObserver.Utility
 		}
 
 		protected static readonly ShipParameterData[] ParameterDataList = new[] {
-			new ShipParameterData( ResourceManager.IconContent.ParameterHP, "耐久", ship => ship.HPMax.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterFirepower, "火力", ship => ship.FirepowerTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterArmor, "装甲", ship => ship.ArmorTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterTorpedo, "雷装", ship => ship.TorpedoTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterEvasion, "回避", ship => ship.EvasionTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterAA, "対空", ship => ship.AATotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterAircraft, "搭載", ship => ship.MasterShip.AircraftTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterASW, "対潜", ship => ship.ASWTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterSpeed, "速力", ship => Constants.GetSpeed( ship.Speed ), true ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterLOS, "索敵", ship => ship.LOSTotal.ToString() ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterRange, "射程", ship => Constants.GetRange( ship.Range ), true ),
-			new ShipParameterData( ResourceManager.IconContent.ParameterLuck, "運", ship => ship.LuckTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterHP, "내구", ship => ship.HPMax.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterFirepower, "화력", ship => ship.FirepowerTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterArmor, "장갑", ship => ship.ArmorTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterTorpedo, "뇌장", ship => ship.TorpedoTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterEvasion, "회피", ship => ship.EvasionTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterAA, "대공", ship => ship.AATotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterAircraft, "탑재", ship => ship.MasterShip.AircraftTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterASW, "대잠", ship => ship.ASWTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterSpeed, "속력", ship => Constants.GetSpeed( ship.Speed ), true ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterLOS, "색적", ship => ship.LOSTotal.ToString() ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterRange, "사정", ship => Constants.GetRange( ship.Range ), true ),
+			new ShipParameterData( ResourceManager.IconContent.ParameterLuck, "운", ship => ship.LuckTotal.ToString() ),
 		};
 
 

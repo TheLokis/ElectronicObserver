@@ -16,7 +16,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>218,409,321,39911,347,9,21,1,14,61,14682,164,10,12,2,3104,37066,5,47448,417,211,167,11,45621,1265,110,952,11306,8423,68,41,185,46,1271,30331,208,24435,10744,391,10442,354,48649,40170,40011,29571,46306,64231,12939,29803,47487,37560,7793,14602,30581,44612,15,1415,55958,30409,225,95,5722,63886,63542,16019,16148,43647,66538,60621,56964,56835,56852,64582,64682,68518,65805,66127,68712,68714,68718,68723,68740,6,639,29631,212,15576,22088,363,9705,16732,11072,42,8,48,22846,51924,51737,52010,461,22242,68508,68573,68506,68741,4,234,52,65758,65659,76,41080,39930,265,139,19305,82,43214,319,41596,51741,52291,279,68742,14200,16191,922,16349,8645,214,90,30822,418,410,106,23714,31,349,541,19701,342,309,289,402,55646,55742,20570,25274,2892,273,6354,65728,68743,138,284,235,387,123,880,29823,47592,55615,102,209,4846,68494,68578,1164,47434,55729,1991,3547,4124,8374,8861,9458,19616,12824,9025,9497,8997,10141,14634,8734,16006,14400,15973,15682,15881,10276,9640,11679,9393,16412,18407,32603,20566,27388,32169,16678,26940,18112,40496,38625,35438,27702,40644,59828,38626,32478,38622,38593,36568,33509,67559,42751,33674,39979,35424,34056,34980,35412,38614,34603,68517,68734,518,602,642,2701,626,928,3151,9416,8763,9456,11474,8214,5015,48606,4823,5773,27117,27001,55692,35223,35289,64348,4656,65265,9053,10218,14631,34020,23991,47478,63867</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>全所属艦</Name>
+			<Name>모든함선</Name>
 			<ScrollLockColumnCount>4</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -494,7 +494,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>409,6,9,14,15576,22088,417,211,11,1265,110,11072,952,42,8,68,41,185,46,1271,48,30331,208,24435,10744,391,10442,22846,354,48649,40170,40011,29571,46306,12939,29803,47487,37560,14602,30581,44612,30409,63886,16019,43647,66538,60621,56964,64582,68508,68573,68518,68506</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>遠征艦隊</Name>
+			<Name>원정함대</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -960,7 +960,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>9053,273,2892,138,402,234,29631,518,47592,602,5015,928,9416,11474,1164,3151,8214,212,9456,626,8763</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>入渠待ち</Name>
+			<Name>수리대기</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -1440,7 +1440,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>234,518,1164,9053,11474,29631</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>未補給</Name>
+			<Name>보급안됨</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage" />
 			<ViewColumnsSerializer>
@@ -1921,7 +1921,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>10218,6354,65728,48649,52010,40170,40011,29571,46306,12939,47487,37560,7793,461,14602,30581,44612,34020,65659,22242,15,1415,55958,30409,225,95,5722,63886,63867,63542,16019,67559,16148,65265,43647,66538,60621,56964,56835,56852,68494,64582,541,68508,64682,68573,68518,68517,68578,65805,68506,66127,68734</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>未改修艦</Name>
+			<Name>미개수함</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -2375,7 +2375,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>68712,68714,68718,68723,68740,68741,68742,68743</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>非ロック艦</Name>
+			<Name>잠금안된함선</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -2839,7 +2839,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>218,409,321,39911,347,9,21,1,14,61,14682,164,10,12,2,3104,37066,5,47448,417,211,167,11,45621,1265,110,952,11306,8423,68,41,185,46,1271,30331,208,24435,10744,391,10442,354,48649,40170,40011,29571,46306,64231,12939,29803,47487,37560,7793,14602,30581,44612,15,1415,55958,30409,225,95,5722,16019,16148,43647,60621,56964,56835,56852,6,639,29631,212,15576,22088,363,9705,16732,11072,42,8,48,22846,51924,51737,52010,461,22242,4,234,52,76,41080,39930,265,139,19305,82,43214,319,41596,51741,52291,279,14200,16191,922,16349,8645,214,90,30822,418,410,106,23714,31,349,19701,342,309,289,402,55646,55742,20570,25274,2892,273,6354,65728,138,284,235,387,123,880,29823,47592,55615,102,209,4846,1164,47434,1991,3547,4124,8374,8861,9458,19616,8997,14634,14400,27388,59828,67559,518,602,642,2701,626,928,3151,9416,8763,9456,11474,8214,5015,55692,4656,65265,9053,14631,34020,47478,63867</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>主力艦隊</Name>
+			<Name>주력함대</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -3323,7 +3323,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>123,4846,102,880,209,10218,29823,47592,55615,90,30822,68494,68578,106,31,418,410,349,23714,541,9053</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>機動部隊</Name>
+			<Name>기동부대</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -3787,7 +3787,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>518,602,642,1164,2701,47434,55729,626,928,1991,3151,3547,9416,8763,9456,11474,8214,5015,4124,48606,8374,8861,9458,19616,12824,9025,9497,8997,10141,14634,8734,16006,14400,15973,15682,15881,10276,9640,11679,9393,16412,18407,32603,20566,27388,32169,16678,26940,18112,40496,38625,35438,27702,40644,59828,38626,32478,38622,38593,36568,33509,67559,42751,33674,39979,35424,34056,34980,35412,38614,34603,68517,68734,68736</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>潜水艦隊</Name>
+			<Name>잠수함대</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -4241,7 +4241,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>518,9456,8763,234,29631,9053</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>第一艦隊</Name>
+			<Name>제1함대</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializableKeyValuePair>
@@ -4761,7 +4761,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>9053,63867,68494,68578</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>ホロ艦載機</Name>
+			<Name>홀로함재기</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage" />
 			<ViewColumnsSerializer>
@@ -5222,7 +5222,7 @@
 			<MembersSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage">
 				<d4p1:SerializedList>518,47434,48606,63886</d4p1:SerializedList>
 			</MembersSerializer>
-			<Name>日独伊三国褐色同盟</Name>
+			<Name>추축국동맹</Name>
 			<ScrollLockColumnCount>0</ScrollLockColumnCount>
 			<SortOrderSerializer xmlns:d4p1="http://schemas.datacontract.org/2004/07/ElectronicObserver.Utility.Storage" />
 			<ViewColumnsSerializer>

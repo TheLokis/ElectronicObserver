@@ -30,7 +30,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 			var fleet = KCDatabase.Instance.Fleet[_fleetID];
 
 
-			Utility.Logger.Add(2, string.Format("#{0}「{1}」が遠征「{2}: {3}」から帰投しました。", fleet.FleetID, fleet.Name, fleet.ExpeditionDestination, data.api_quest_name));
+			Utility.Logger.Add(2, string.Format("#{0}「{1}」가 원정「{2}: {3}」에서 귀환했습니다.", fleet.FleetID, fleet.Name, fleet.ExpeditionDestination, Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.TranslationType.ExpeditionTitle)));
 
 
 			// 獲得資源表示
@@ -69,19 +69,19 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 							switch (kind)
 							{
 								case 1:
-									sb.AddLast("高速修復材x" + count);
+									sb.AddLast("고속수복재x" + count);
 									break;
 								case 2:
-									sb.AddLast("高速建造材x" + count);
+									sb.AddLast("고속건조재x" + count);
 									break;
 								case 3:
-									sb.AddLast("開発資材x" + count);
+									sb.AddLast("개발자재x" + count);
 									break;
 								case 4:
 									sb.AddLast(KCDatabase.Instance.MasterUseItems[id].Name + "x" + count);
 									break;
 								case 5:
-									sb.AddLast("家具コインx" + count);
+									sb.AddLast("가구코인x" + count);
 									break;
 							}
 
@@ -94,17 +94,17 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 					int admiralExp = (int)data.api_get_exp;
 					if (admiralExp > 0)
 					{
-						sb.AddLast("提督Exp+" + admiralExp);
+						sb.AddLast("제독 경험치+" + admiralExp);
 					}
 
 					int shipExp = ((int[])data.api_get_ship_exp).Min();
 					if (shipExp > 0)
 					{
-						sb.AddLast("艦娘Exp+" + shipExp);
+						sb.AddLast("함선 경험치+" + shipExp);
 					}
 				}
 
-				Utility.Logger.Add(2, "遠征結果 - " + Constants.GetExpeditionResult((int)data.api_clear_result) + ": " + (sb.Count == 0 ? "獲得資源なし" : string.Join(", ", sb)));
+				Utility.Logger.Add(2, "원정 결과 - " + Constants.GetExpeditionResult((int)data.api_clear_result) + ": " + (sb.Count == 0 ? "획득자원없음" : string.Join(", ", sb)));
 			}
 
 
@@ -127,7 +127,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 						var ship = fleet.MembersInstance[i];
 						int increment = Math.Max(lvup[i].Length - 2, 1);
 
-						Utility.Logger.Add(2, string.Format("{0} が Lv. {1} になりました。", ship.Name, ship.Level + increment));
+						Utility.Logger.Add(2, string.Format("{0} 가 레벨 {1} 이 되었습니다.", ship.Name, ship.Level + increment));
 					}
 				}
 			}

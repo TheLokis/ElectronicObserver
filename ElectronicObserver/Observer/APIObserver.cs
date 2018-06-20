@@ -117,6 +117,7 @@ namespace ElectronicObserver.Observer
 				new kcsapi.api_req_sortie.night_to_day(),
 				new kcsapi.api_req_combined_battle.ec_night_to_day(),
 				new kcsapi.api_req_sortie.goback_port(),
+				new kcsapi.api_req_member.itemuse(),
 
 				new kcsapi.api_req_quest.clearitemget(),
 				new kcsapi.api_req_nyukyo.start(),
@@ -176,13 +177,13 @@ namespace ElectronicObserver.Observer
 
 				ProxyStarted();
 
-				Utility.Logger.Add(2, string.Format("APIObserver: ポート {0} 番で受信を開始しました。", portID));
+				Utility.Logger.Add(2, string.Format("APIObserver: 포트 {0} 에서 수신을 시작했습니다.", portID));
 
 			}
 			catch (Exception ex)
 			{
 
-				Utility.Logger.Add(3, "APIObserver: 受信開始に失敗しました。" + ex.Message);
+				Utility.Logger.Add(3, "APIObserver: 수신 시작에 실패했습니다." + ex.Message);
 				ProxyPort = 0;
 			}
 
@@ -199,7 +200,7 @@ namespace ElectronicObserver.Observer
 
 			HttpProxy.Shutdown();
 
-			Utility.Logger.Add(2, "APIObserver: 受信を停止しました。");
+			Utility.Logger.Add(2, "APIObserver: 수신을 중지했습니다.");
 		}
 
 
@@ -325,13 +326,13 @@ namespace ElectronicObserver.Observer
 									}
 								}
 
-								Utility.Logger.Add(1, string.Format("通信からファイル {0} を保存しました。", tpath.Remove(0, saveDataPath.Length + 1)));
+								Utility.Logger.Add(1, string.Format("통신 내용 파일 {0} 을 저장했습니다.", tpath.Remove(0, saveDataPath.Length + 1)));
 
 							}
 							catch (IOException ex)
 							{   //ファイルがロックされている; 頻繁に出るのでエラーレポートを残さない
 
-								Utility.Logger.Add(3, "通信内容の保存に失敗しました。 " + ex.Message);
+								Utility.Logger.Add(3, "통신 내용의 저장에 실패했습니다. " + ex.Message);
 							}
 						}));
 
@@ -341,7 +342,7 @@ namespace ElectronicObserver.Observer
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "通信内容の保存に失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "통신 내용의 저장에 실패했습니다.");
 				}
 
 			}
@@ -378,7 +379,7 @@ namespace ElectronicObserver.Observer
 			try
 			{
 
-				Utility.Logger.Add(1, "Request を受信しました : " + shortpath);
+				Utility.Logger.Add(1, "Request를 받았습니다 : " + shortpath);
 
 				SystemEvents.UpdateTimerEnabled = false;
 
@@ -399,7 +400,7 @@ namespace ElectronicObserver.Observer
 			catch (Exception ex)
 			{
 
-				ErrorReporter.SendErrorReport(ex, "Request の受信中にエラーが発生しました。", shortpath, data);
+				ErrorReporter.SendErrorReport(ex, "Request 수신중 오류가 발생했습니다.", shortpath, data);
 
 			}
 			finally
@@ -420,7 +421,7 @@ namespace ElectronicObserver.Observer
 			try
 			{
 
-				Utility.Logger.Add(1, "Responseを受信しました : " + shortpath);
+				Utility.Logger.Add(1, "Response를 받았습니다. : " + shortpath);
 
 				SystemEvents.UpdateTimerEnabled = false;
 
@@ -431,7 +432,7 @@ namespace ElectronicObserver.Observer
 				if (result != 1)
 				{
 
-					throw new InvalidOperationException("猫を検出しました。(エラーコード: " + result + ")");
+					throw new InvalidOperationException("에러코를 발견했습니다. (에러코드: " + result + ")");
 				}
 
 
@@ -455,7 +456,7 @@ namespace ElectronicObserver.Observer
 			catch (Exception ex)
 			{
 
-				ErrorReporter.SendErrorReport(ex, "Responseの受信中にエラーが発生しました。", shortpath, data);
+				ErrorReporter.SendErrorReport(ex, "Response 수신중 오류가 발생했습니다.", shortpath, data);
 
 			}
 			finally
@@ -486,7 +487,7 @@ namespace ElectronicObserver.Observer
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "Requestの保存に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "Request의 저장에 실패했습니다.");
 
 			}
 		}
@@ -509,7 +510,7 @@ namespace ElectronicObserver.Observer
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "Responseの保存に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "Response의 저장에 실패했습니다.");
 
 			}
 

@@ -37,8 +37,8 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			Initial = new PhaseInitial(this, "戦力");
-			Searching = new PhaseSearching(this, "索敵");
+			Initial = new PhaseInitial(this, "전력");
+			Searching = new PhaseSearching(this, "색적");
 
 			_resultHPs = new int[24];
 			Array.Copy(Initial.FriendInitialHPs, 0, _resultHPs, 0, Initial.FriendInitialHPs.Length);

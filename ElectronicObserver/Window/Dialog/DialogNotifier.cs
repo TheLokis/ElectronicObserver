@@ -196,7 +196,7 @@ namespace ElectronicObserver.Window.Dialog
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "通知システム: ダイアログボックスでの画像の描画に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "알림 시스템: 대화 상자에서 이미지 출력에 실패했습니다.");
 			}
 		}
 

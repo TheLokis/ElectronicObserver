@@ -102,20 +102,20 @@
 			// EquipmentView_Name
 			// 
 			this.EquipmentView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.EquipmentView_Name.HeaderText = "装備名";
+			this.EquipmentView_Name.HeaderText = "장비명";
 			this.EquipmentView_Name.Name = "EquipmentView_Name";
 			this.EquipmentView_Name.ReadOnly = true;
 			// 
 			// EquipmentView_CountAll
 			// 
-			this.EquipmentView_CountAll.HeaderText = "全個数";
+			this.EquipmentView_CountAll.HeaderText = "전체수";
 			this.EquipmentView_CountAll.Name = "EquipmentView_CountAll";
 			this.EquipmentView_CountAll.ReadOnly = true;
 			this.EquipmentView_CountAll.Width = 40;
 			// 
 			// EquipmentView_CountRemain
 			// 
-			this.EquipmentView_CountRemain.HeaderText = "余個数";
+			this.EquipmentView_CountRemain.HeaderText = "남은개수";
 			this.EquipmentView_CountRemain.Name = "EquipmentView_CountRemain";
 			this.EquipmentView_CountRemain.ReadOnly = true;
 			this.EquipmentView_CountRemain.Width = 40;
@@ -138,14 +138,14 @@
 			this.TopMenu_File_Update});
 			this.TopMenu_File.Name = "TopMenu_File";
 			this.TopMenu_File.Size = new System.Drawing.Size(70, 20);
-			this.TopMenu_File.Text = "ファイル(&F)";
+			this.TopMenu_File.Text = "파일(&F)";
 			// 
 			// TopMenu_File_CSVOutput
 			// 
 			this.TopMenu_File_CSVOutput.Name = "TopMenu_File_CSVOutput";
 			this.TopMenu_File_CSVOutput.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
 			this.TopMenu_File_CSVOutput.Size = new System.Drawing.Size(198, 22);
-			this.TopMenu_File_CSVOutput.Text = "CSV出力(&C)...";
+			this.TopMenu_File_CSVOutput.Text = "CSV출력(&C)...";
 			this.TopMenu_File_CSVOutput.Click += new System.EventHandler(this.Menu_File_CSVOutput_Click);
 			// 
 			// TopMenu_File_Update
@@ -153,13 +153,13 @@
 			this.TopMenu_File_Update.Name = "TopMenu_File_Update";
 			this.TopMenu_File_Update.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
 			this.TopMenu_File_Update.Size = new System.Drawing.Size(198, 22);
-			this.TopMenu_File_Update.Text = "更新(&U)";
+			this.TopMenu_File_Update.Text = "업데이트(&U)";
 			this.TopMenu_File_Update.Click += new System.EventHandler(this.TopMenu_File_Update_Click);
 			// 
 			// SaveCSVDialog
 			// 
 			this.SaveCSVDialog.Filter = "CSV|*.csv|File|*";
-			this.SaveCSVDialog.Title = "CSVに出力";
+			this.SaveCSVDialog.Title = "CSV에 출력";
 			// 
 			// splitContainer1
 			// 
@@ -207,28 +207,28 @@
 			// 
 			// DetailView_Level
 			// 
-			this.DetailView_Level.HeaderText = "改修";
+			this.DetailView_Level.HeaderText = "개수";
 			this.DetailView_Level.Name = "DetailView_Level";
 			this.DetailView_Level.ReadOnly = true;
 			this.DetailView_Level.Width = 40;
 			// 
 			// DetailView_AircraftLevel
 			// 
-			this.DetailView_AircraftLevel.HeaderText = "練度";
+			this.DetailView_AircraftLevel.HeaderText = "숙련";
 			this.DetailView_AircraftLevel.Name = "DetailView_AircraftLevel";
 			this.DetailView_AircraftLevel.ReadOnly = true;
 			this.DetailView_AircraftLevel.Width = 40;
 			// 
 			// DetailView_CountAll
 			// 
-			this.DetailView_CountAll.HeaderText = "全個数";
+			this.DetailView_CountAll.HeaderText = "총개수";
 			this.DetailView_CountAll.Name = "DetailView_CountAll";
 			this.DetailView_CountAll.ReadOnly = true;
 			this.DetailView_CountAll.Width = 40;
 			// 
 			// DetailView_CountRemain
 			// 
-			this.DetailView_CountRemain.HeaderText = "余個数";
+			this.DetailView_CountRemain.HeaderText = "남은개수";
 			this.DetailView_CountRemain.Name = "DetailView_CountRemain";
 			this.DetailView_CountRemain.ReadOnly = true;
 			this.DetailView_CountRemain.Width = 40;
@@ -236,7 +236,7 @@
 			// DetailView_EquippedShip
 			// 
 			this.DetailView_EquippedShip.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.DetailView_EquippedShip.HeaderText = "装備艦";
+			this.DetailView_EquippedShip.HeaderText = "장비함";
 			this.DetailView_EquippedShip.Name = "DetailView_EquippedShip";
 			this.DetailView_EquippedShip.ReadOnly = true;
 			this.DetailView_EquippedShip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -252,7 +252,7 @@
 			this.MainMenuStrip = this.TopMenu;
 			this.Name = "DialogEquipmentList";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "装備一覧";
+			this.Text = "장비목록";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogEquipmentList_FormClosed);
 			this.Load += new System.EventHandler(this.DialogEquipmentList_Load);
 			((System.ComponentModel.ISupportInitialize)(this.EquipmentView)).EndInit();

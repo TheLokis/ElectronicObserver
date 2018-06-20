@@ -83,9 +83,9 @@ namespace ElectronicObserver.Resource.Record
 			if (logging)
 			{
 				if (succeeded)
-					Utility.Logger.Add(2, "レコードをロードしました。");
+					Utility.Logger.Add(2, "기록을 로드했습니다.");
 				else
-					Utility.Logger.Add(3, "レコードのロードに失敗しました。");
+					Utility.Logger.Add(3, "기록 로드에 실패했습니다.");
 			}
 
 			return succeeded;
@@ -106,9 +106,9 @@ namespace ElectronicObserver.Resource.Record
 			if (logging)
 			{
 				if (succeeded)
-					Utility.Logger.Add(2, "レコードをセーブしました。");
+					Utility.Logger.Add(2, "기록을 저장했습니다.");
 				else
-					Utility.Logger.Add(2, "レコードのセーブに失敗しました。");
+					Utility.Logger.Add(2, "기록 저장에 실패했습니다.");
 			}
 
 			return succeeded;
@@ -140,9 +140,9 @@ namespace ElectronicObserver.Resource.Record
 			if (logging)
 			{
 				if (succeeded)
-					Utility.Logger.Add(2, "レコードをセーブしました。");
+					Utility.Logger.Add(2, "기록을 저장했습니다.");
 				else
-					Utility.Logger.Add(2, "レコードのセーブに失敗しました。");
+					Utility.Logger.Add(2, "기록 저장에 실패했습니다.");
 			}
 
 			return succeeded;
@@ -181,11 +181,11 @@ namespace ElectronicObserver.Resource.Record
 
 					if (SavePartial(false))
 					{
-						Utility.Logger.Add(1, "レコードのオートセーブを行いました。");
+						Utility.Logger.Add(1, "기록 자동 저장 하였습니다.");
 					}
 					else
 					{
-						Utility.Logger.Add(3, "レコードのオートセーブに失敗しました。");
+						Utility.Logger.Add(3, "기록 자동 저장 실패하였습니다.");
 					}
 				}
 			}

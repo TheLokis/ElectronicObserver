@@ -246,10 +246,10 @@ namespace ElectronicObserver.Window
 				else
 				{
 
-					name = "艦娘";
+					name = "함명";
 				}
 
-				Utility.Logger.Add(2, string.Format("工廠ドック #{0}で {1}の建造を開始しました。({2}/{3}/{4}/{5}-{6} 秘書艦: {7})",
+				Utility.Logger.Add(2, string.Format("공창독 #{0}에 {1}의 건조를 시작했습니다. ({2}/{3}/{4}/{5}-{6} 비서함: {7})",
 					_buildingID,
 					name,
 					arsenal.Fuel,

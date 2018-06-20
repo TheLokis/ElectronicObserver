@@ -18,8 +18,8 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			NightInitial = new PhaseNightInitial(this, "夜戦開始", false);
-			NightBattle = new PhaseNightBattle(this, "夜戦", 0);
+			NightInitial = new PhaseNightInitial(this, "야전개시", false);
+			NightBattle = new PhaseNightBattle(this, "야전", 0);
 
 			NightBattle.EmulateBattle(_resultHPs, _attackDamages);
 
@@ -28,7 +28,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_practice/midnight_battle";
 
-		public override string BattleName => "演習 夜戦";
+		public override string BattleName => "연습 야간전";
 
 		public override bool IsPractice => true;
 

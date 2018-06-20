@@ -32,7 +32,7 @@ namespace ElectronicObserver.Notifier
 
 		private void Initialize()
 		{
-			DialogData.Title = "入渠完了";
+			DialogData.Title = "수리완료";
 			processedFlags = new Dictionary<int, bool>();
 		}
 
@@ -69,7 +69,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int dockID, int shipID)
 		{
 
-			DialogData.Message = string.Format("入渠ドック #{0} で「{1}」の修復が完了しました。",
+			DialogData.Message = string.Format("입거독 #{0}「{1}」의 수리가 완료되었습니다.",
 				dockID, KCDatabase.Instance.Ships[shipID].NameWithLevel);
 
 			base.Notify();

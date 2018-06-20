@@ -220,7 +220,7 @@ namespace ElectronicObserver.Window.Support
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ウィンドウ状態の復元に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "윈도우 상태의 복원에 실패했습니다.");
 
 			}
 
@@ -245,7 +245,7 @@ namespace ElectronicObserver.Window.Support
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ウィンドウ状態の復元に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "윈도우 상태의 복원에 실패했습니다.");
 			}
 
 		}
@@ -287,7 +287,7 @@ namespace ElectronicObserver.Window.Support
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ウィンドウ状態の保存に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "윈도우 상태의 저장에 실패했습니다.");
 			}
 		}
 
@@ -308,7 +308,7 @@ namespace ElectronicObserver.Window.Support
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ウィンドウ状態の保存に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "윈도우 상태의 저장에 실패했습니다.");
 			}
 		}
 

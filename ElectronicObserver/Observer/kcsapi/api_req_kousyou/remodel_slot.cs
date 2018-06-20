@@ -39,13 +39,13 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 					eq.LoadFromResponse(APIName, data.api_after_slot);
 
 					if (Utility.Configuration.Config.Log.ShowSpoiler)
-						Utility.Logger.Add(2, string.Format("{0} への改修に成功しました。", eq.NameWithLevel));
+						Utility.Logger.Add(2, string.Format("{0} 의 개수에 성공했습니다.", eq.NameWithLevel));
 				}
 
 			}
 			else if (Utility.Configuration.Config.Log.ShowSpoiler)
 			{
-				Utility.Logger.Add(2, string.Format("{0} の改修に失敗しました。", db.Equipments[_equipmentID].NameWithLevel));
+				Utility.Logger.Add(2, string.Format("{0} 의 개수에 실패했습니다.", db.Equipments[_equipmentID].NameWithLevel));
 			}
 
 

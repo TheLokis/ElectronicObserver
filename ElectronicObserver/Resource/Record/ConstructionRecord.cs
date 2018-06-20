@@ -125,7 +125,7 @@ namespace ElectronicObserver.Resource.Record
 
 				string[] elem = line.Split(",".ToCharArray());
 				if (elem.Length < 13)
-					throw new ArgumentException("要素数が少なすぎます。");
+					throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ShipID = int.Parse(elem[0]);
 				ShipName = elem[1];

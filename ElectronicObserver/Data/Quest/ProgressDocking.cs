@@ -22,7 +22,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return "入渠" + ProgressMax;
+			return "입거" + ProgressMax;
 		}
 	}
 }

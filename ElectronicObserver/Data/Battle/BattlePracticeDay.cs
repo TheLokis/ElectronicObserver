@@ -18,14 +18,14 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			JetAirBattle = new PhaseJetAirBattle(this, "噴式航空戦");
-			AirBattle = new PhaseAirBattle(this, "航空戦");
-			OpeningASW = new PhaseOpeningASW(this, "先制対潜");
-			OpeningTorpedo = new PhaseTorpedo(this, "先制雷撃", 0);
-			Shelling1 = new PhaseShelling(this, "第一次砲撃戦", 1, "1");
-			Shelling2 = new PhaseShelling(this, "第二次砲撃戦", 2, "2");
-			Shelling3 = new PhaseShelling(this, "第三次砲撃戦", 3, "3");
-			Torpedo = new PhaseTorpedo(this, "雷撃戦", 4);
+			JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
+			AirBattle = new PhaseAirBattle(this, "항공전");
+			OpeningASW = new PhaseOpeningASW(this, "선제대잠");
+			OpeningTorpedo = new PhaseTorpedo(this, "선제뇌격", 0);
+			Shelling1 = new PhaseShelling(this, "제1차포격전", 1, "1");
+			Shelling2 = new PhaseShelling(this, "제2차포격전", 2, "2");
+			Shelling3 = new PhaseShelling(this, "제3차폭겨전", 3, "3");
+			Torpedo = new PhaseTorpedo(this, "뇌격전", 4);
 
 
 			foreach (var phase in GetPhases())
@@ -36,7 +36,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_practice/battle";
 
-		public override string BattleName => "演習 昼戦";
+		public override string BattleName => "연습 주간전";
 
 		public override bool IsPractice => true;
 

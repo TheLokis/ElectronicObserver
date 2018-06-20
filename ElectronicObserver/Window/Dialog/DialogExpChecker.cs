@@ -15,9 +15,9 @@ namespace ElectronicObserver.Window.Dialog
 {
 	public partial class DialogExpChecker : Form
 	{
-
+		private static readonly string DefaultTitle = "경험치 계산기";
 		private DataGridViewCellStyle CellStyleModernized;
-		
+
 
 		private int DefaultShipID = -1;
 
@@ -64,6 +64,7 @@ namespace ElectronicObserver.Window.Dialog
 		public DialogExpChecker(int shipID) : this()
 		{
 			DefaultShipID = shipID;
+			Text = DefaultTitle;
 		}
 
 		private void DialogExpChecker_Load(object sender, EventArgs e)
@@ -72,16 +73,16 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (!ships.Any())
 			{
-				MessageBox.Show("艦船が存在しません。\r\n母港まで移動してください。", "対象艦船なし", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("함선 데이터가 존재하지 않습니다.\r\n모항화면으로 한번 이동해주세요.", "함선 데이터 없음", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Close();
 				return;
 			}
 
 			SearchInFleet_CheckedChanged(this, new EventArgs());
-
+			ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
 
 			if (DefaultShipID != -1)
-				TextShip.SelectedItem = TextShip.Items.OfType<ComboShipData>().FirstOrDefault(f => f.Ship.ShipID == DefaultShipID);
+				TextShip.SelectedItem = TextShip.Items.OfType<ComboShipData>().FirstOrDefault(f => f.Ship.MasterID == DefaultShipID);
 
 
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker]);
@@ -89,6 +90,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogExpChecker_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			Utility.Configuration.Config.Control.ExpCheckerExpUnit = (int)ExpUnit.Value;
 			ResourceManager.DestroyIcon(Icon);
 		}
 
@@ -173,11 +175,30 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			else
 			{
-				ASWEquipmentPairs.Add(openingASWborder - 36, "[四式水中聴音機x3]");
-				ASWEquipmentPairs.Add(openingASWborder - 32, "[四式水中聴音機x2, 三式爆雷投射機]");
-				ASWEquipmentPairs.Add(openingASWborder - 28, "[三式水中探信儀x2, 三式爆雷投射機]");
-				ASWEquipmentPairs.Add(openingASWborder - 27, "[四式水中聴音機, 三式爆雷投射機, 二式爆雷]");
-				ASWEquipmentPairs.Add(openingASWborder - 12, "[四式水中聴音機]");
+				if (selectedShip.SlotSize >= 4)
+				{
+					ASWEquipmentPairs.Add(openingASWborder - 51, "[4식수중청음기x3, 시제15cm9연장대잠분진포]");
+					ASWEquipmentPairs.Add(openingASWborder - 48, "[4식수중청음기x4]");
+					ASWEquipmentPairs.Add(openingASWborder - 44, "[4식수중청음기x3, 삼식폭뢰투사기]");
+				}
+				if (selectedShip.SlotSize >= 3)
+				{
+					ASWEquipmentPairs.Add(openingASWborder - 39, "[4식수중청음기x2, 시제15cm9연장대잠분진포]");
+					ASWEquipmentPairs.Add(openingASWborder - 36, "[4식수중청음기x3]");
+					ASWEquipmentPairs.Add(openingASWborder - 32, "[4식수중청음기x2, 삼식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 28, "[3식수중청음기x2, 삼식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 27, "[4식수중청음기, 삼식폭뢰투사기, 2식폭뢰]");
+				}
+				if (selectedShip.SlotSize >= 2)
+				{
+					if (ASWEquipmentPairs.ContainsKey(openingASWborder - 27))
+						ASWEquipmentPairs[openingASWborder - 27] += ", [4식수중청음기, 시제15cm9연장대잠분진포]";
+					else
+						ASWEquipmentPairs.Add(openingASWborder - 27, "[4식수중청음기, 시제15cm9연장대잠분진포]");
+					ASWEquipmentPairs.Add(openingASWborder - 20, "[4식수중청음기, 삼식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 18, "[3식수중청음기, 삼식폭뢰투사기]");
+				}
+				ASWEquipmentPairs.Add(openingASWborder - 12, "[4식수중청음기]");
 			}
 
 
@@ -188,7 +209,7 @@ namespace ElectronicObserver.Window.Dialog
 			int aswmod = (int)ASWModernization.Value;
 			int currentlv = selectedShip.Level;
 			int minlv = ShowAllLevel.Checked ? 1 : (currentlv + 1);
-			int unitexp = Math.Max((int)numericUpDown1.Value, 1);
+			int unitexp = Math.Max((int)ExpUnit.Value, 1);
 			var remodelLevelTable = GetRemodelLevelTable(selectedShip.MasterShip);
 
 			var rows = new DataGridViewRow[ExpTable.ShipMaximumLevel - (minlv - 1)];
@@ -223,7 +244,8 @@ namespace ElectronicObserver.Window.Dialog
 			LevelView.ResumeLayout();
 
 
-			GroupExp.Text = $"{selectedShip.NameWithLevel}: Exp. {selectedShip.ExpTotal}, 対潜 {selectedShip.ASWBase} (現在改修+{selectedShip.ASWModernized})";
+			Text = DefaultTitle + " - " + selectedShip.NameWithLevel;
+			GroupExp.Text = $"{selectedShip.NameWithLevel}: Exp. {selectedShip.ExpTotal}, 대잠 {selectedShip.ASWBase} (현재개수+{selectedShip.ASWModernized})";
 		}
 
 
@@ -276,7 +298,7 @@ namespace ElectronicObserver.Window.Dialog
 			UpdateLevelView();
 		}
 
-		private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+		private void ExpUnit_ValueChanged(object sender, EventArgs e)
 		{
 			UpdateLevelView();
 		}
@@ -304,6 +326,6 @@ namespace ElectronicObserver.Window.Dialog
 			return list.ToArray();
 		}
 
-		
+
 	}
 }

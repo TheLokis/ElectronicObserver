@@ -46,7 +46,7 @@ namespace ElectronicObserver.Data.Quest
 				sb.Append(string.Join("・", TargetShipType.OrderBy(s => s).Select(s => KCDatabase.Instance.ShipTypes[s].Name)));
 			}
 
-			sb.Append("撃沈");
+			sb.Append("격침");
 			sb.Append(ProgressMax);
 
 			return sb.ToString();

@@ -52,7 +52,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(38, 15);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "パス：";
+			this.label1.Text = "경로：";
 			// 
 			// FilePath
 			// 
@@ -84,7 +84,7 @@
 			this.IsLoop.Name = "IsLoop";
 			this.IsLoop.Size = new System.Drawing.Size(55, 19);
 			this.IsLoop.TabIndex = 3;
-			this.IsLoop.Text = "ループ";
+			this.IsLoop.Text = "반복";
 			this.IsLoop.UseVisualStyleBackColor = true;
 			// 
 			// LoopHeadPosition
@@ -108,7 +108,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(43, 15);
 			this.label2.TabIndex = 5;
-			this.label2.Text = "先頭：";
+			this.label2.Text = "시작：";
 			// 
 			// label3
 			// 
@@ -117,7 +117,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(19, 15);
 			this.label3.TabIndex = 6;
-			this.label3.Text = "秒";
+			this.label3.Text = "초";
 			// 
 			// Volume
 			// 
@@ -134,7 +134,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(43, 15);
 			this.label4.TabIndex = 8;
-			this.label4.Text = "音量：";
+			this.label4.Text = "볼륨：";
 			// 
 			// ButtonCancel
 			// 
@@ -144,7 +144,7 @@
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 9;
-			this.ButtonCancel.Text = "キャンセル";
+			this.ButtonCancel.Text = "취소";
 			this.ButtonCancel.UseVisualStyleBackColor = true;
 			this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
@@ -161,7 +161,7 @@
 			// 
 			// OpenMusicDialog
 			// 
-			this.OpenMusicDialog.Title = "音楽ファイルを開く";
+			this.OpenMusicDialog.Title = "사운드파일열기";
 			// 
 			// FilePathToDirectory
 			// 
@@ -196,7 +196,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "DialogConfigurationBGMPlayer";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "BGMの設定";
+			this.Text = "BGM 설정";
 			this.Load += new System.EventHandler(this.DialogConfigurationBGMPlayer_Load);
 			((System.ComponentModel.ISupportInitialize)(this.LoopHeadPosition)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Volume)).EndInit();

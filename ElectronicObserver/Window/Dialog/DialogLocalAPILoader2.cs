@@ -47,7 +47,7 @@ namespace ElectronicObserver.Window.Dialog
 			if (Directory.Exists(CurrentPath))
 				LoadFiles(CurrentPath);
 			else
-				MessageBox.Show("フォルダが指定されていないか存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("폴더가 지정되지 않았거나 존재하지 않습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void ViewMenu_Execute_Click(object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace ElectronicObserver.Window.Dialog
 			if (!APICaller.IsBusy)
 				APICaller.RunWorkerAsync(APIView.SelectedRows.Cast<DataGridViewRow>().Select(row => row.Cells[APIView_FileName.Index].Value as string).OrderBy(s => s));
 			else
-				if (MessageBox.Show("既に実行中です。\n中断しますか?", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+				if (MessageBox.Show("이미 실행 중입니다.\n중단 하시겠습니까?", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
 					== System.Windows.Forms.DialogResult.Yes)
 			{
 				APICaller.CancelAsync();
@@ -101,7 +101,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			else
 			{
-				MessageBox.Show("単一行を選択してください。", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("행 1개만 선택해주세요.", "정보", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 			}
 
@@ -179,7 +179,7 @@ namespace ElectronicObserver.Window.Dialog
 				}
 				catch (Exception ex)
 				{
-					Utility.Logger.Add(3, string.Format("APIファイル {0} の読み込みに失敗しました。{1}", filename, ex.Message));
+					Utility.Logger.Add(3, string.Format("API파일 {0} 로드에 실패했습니다. {1}", filename, ex.Message));
 					return;
 				}
 
@@ -361,7 +361,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			catch (Exception ex)
 			{
-				Utility.Logger.Add(1, $"API ファイルの起動に失敗しました。 {ex.GetType().Name}: {ex.Message}");
+				Utility.Logger.Add(1, $"API 파일의 시작에 실패했습니다. {ex.GetType().Name}: {ex.Message}");
 			}
 		}
 	}

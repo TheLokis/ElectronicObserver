@@ -73,7 +73,7 @@
 			this.MenuMain_ShowShipName.CheckOnClick = true;
 			this.MenuMain_ShowShipName.Name = "MenuMain_ShowShipName";
 			this.MenuMain_ShowShipName.Size = new System.Drawing.Size(154, 22);
-			this.MenuMain_ShowShipName.Text = "艦名を表示(&V)";
+			this.MenuMain_ShowShipName.Text = "함명 보기(&V)";
 			this.MenuMain_ShowShipName.CheckedChanged += new System.EventHandler(this.MenuMain_ShowShipName_CheckedChanged);
 			// 
 			// FormArsenal
@@ -88,7 +88,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormArsenal";
-			this.Text = "工廠";
+			this.Text = "공창";
 			this.Load += new System.EventHandler(this.FormArsenal_Load);
 			this.MenuMain.ResumeLayout(false);
 			this.ResumeLayout(false);

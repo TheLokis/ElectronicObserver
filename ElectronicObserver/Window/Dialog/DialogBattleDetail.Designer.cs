@@ -38,7 +38,7 @@
 			this.TextBattleDetail.Name = "TextBattleDetail";
 			this.TextBattleDetail.Size = new System.Drawing.Size(55, 15);
 			this.TextBattleDetail.TabIndex = 0;
-			this.TextBattleDetail.Text = "戦闘詳細";
+			this.TextBattleDetail.Text = "전투상세";
 			// 
 			// DialogBattleDetail
 			// 
@@ -51,7 +51,7 @@
 			this.MinimizeBox = false;
 			this.Name = "DialogBattleDetail";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "戦闘詳細";
+			this.Text = "전투상세";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogBattleDetail_FormClosed);
 			this.Load += new System.EventHandler(this.DialogBattleDetail_Load);
 			this.Shown += new System.EventHandler(this.DialogBattleDetail_Shown);

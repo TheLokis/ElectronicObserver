@@ -63,7 +63,7 @@
 			this.AutoSortFlag.Name = "AutoSortFlag";
 			this.AutoSortFlag.Size = new System.Drawing.Size(96, 19);
 			this.AutoSortFlag.TabIndex = 0;
-			this.AutoSortFlag.Text = "自動ソートする";
+			this.AutoSortFlag.Text = "자동 정렬";
 			this.AutoSortFlag.UseVisualStyleBackColor = true;
 			// 
 			// EnabledView
@@ -96,14 +96,14 @@
 			// EnabledView_Name
 			// 
 			this.EnabledView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.EnabledView_Name.HeaderText = "列名";
+			this.EnabledView_Name.HeaderText = "열이름";
 			this.EnabledView_Name.Name = "EnabledView_Name";
 			this.EnabledView_Name.ReadOnly = true;
 			this.EnabledView_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// EnabledView_SortDirection
 			// 
-			this.EnabledView_SortDirection.HeaderText = "順";
+			this.EnabledView_SortDirection.HeaderText = "순";
 			this.EnabledView_SortDirection.Name = "EnabledView_SortDirection";
 			this.EnabledView_SortDirection.Width = 40;
 			// 
@@ -230,7 +230,7 @@
 			this.ButtonRightAll.Name = "ButtonRightAll";
 			this.ButtonRightAll.Size = new System.Drawing.Size(74, 23);
 			this.ButtonRightAll.TabIndex = 6;
-			this.ButtonRightAll.Text = "全て >>";
+			this.ButtonRightAll.Text = "전부 >>";
 			this.ButtonRightAll.UseVisualStyleBackColor = true;
 			this.ButtonRightAll.Click += new System.EventHandler(this.ButtonRightAll_Click);
 			// 
@@ -241,7 +241,7 @@
 			this.ButtonLeftAll.Name = "ButtonLeftAll";
 			this.ButtonLeftAll.Size = new System.Drawing.Size(74, 23);
 			this.ButtonLeftAll.TabIndex = 5;
-			this.ButtonLeftAll.Text = "<< 全て";
+			this.ButtonLeftAll.Text = "<< 전부";
 			this.ButtonLeftAll.UseVisualStyleBackColor = true;
 			this.ButtonLeftAll.Click += new System.EventHandler(this.ButtonLeftAll_Click);
 			// 
@@ -271,7 +271,7 @@
 			// DisabledView_Name
 			// 
 			this.DisabledView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.DisabledView_Name.HeaderText = "列名";
+			this.DisabledView_Name.HeaderText = "열이름";
 			this.DisabledView_Name.Name = "DisabledView_Name";
 			this.DisabledView_Name.ReadOnly = true;
 			// 
@@ -293,7 +293,7 @@
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 4;
-			this.ButtonCancel.Text = "キャンセル";
+			this.ButtonCancel.Text = "취소";
 			this.ButtonCancel.UseVisualStyleBackColor = true;
 			this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
@@ -310,7 +310,7 @@
 			this.MinimizeBox = false;
 			this.Name = "DialogShipGroupSortOrder";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "自動ソート順";
+			this.Text = "자동정렬순서";
 			this.Load += new System.EventHandler(this.DialogShipGroupSortOrder_Load);
 			((System.ComponentModel.ISupportInitialize)(this.EnabledView)).EndInit();
 			this.tableLayoutPanel1.ResumeLayout(false);

@@ -45,7 +45,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_hokyu
 			material[3] -= db.Material.Bauxite;
 
 			{
-				var sb = new StringBuilder("補給を行いました。消費: ");
+				var sb = new StringBuilder("보급 했습니다. 소비자원: ");
 
 				for (int i = 0; i < 4; i++)
 				{

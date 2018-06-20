@@ -57,7 +57,7 @@
 			this.labelTitle.Name = "labelTitle";
 			this.labelTitle.Size = new System.Drawing.Size(42, 15);
 			this.labelTitle.TabIndex = 0;
-			this.labelTitle.Text = "タイトル";
+			this.labelTitle.Text = "타이틀";
 			// 
 			// labelClassName
 			// 
@@ -66,7 +66,7 @@
 			this.labelClassName.Name = "labelClassName";
 			this.labelClassName.Size = new System.Drawing.Size(44, 15);
 			this.labelClassName.TabIndex = 3;
-			this.labelClassName.Text = "クラス名";
+			this.labelClassName.Text = "클래스명";
 			// 
 			// labelFileName
 			// 
@@ -75,7 +75,7 @@
 			this.labelFileName.Name = "labelFileName";
 			this.labelFileName.Size = new System.Drawing.Size(41, 15);
 			this.labelFileName.TabIndex = 6;
-			this.labelFileName.Text = "EXE名";
+			this.labelFileName.Text = "EXE명";
 			// 
 			// titleTextBox
 			// 
@@ -164,7 +164,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(260, 119);
 			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "ウィンドウ検索設定";
+			this.groupBox1.Text = "윈도우 검색 설정";
 			// 
 			// windowCaptureButton
 			// 
@@ -184,7 +184,7 @@
 			this.infoLabel.Name = "infoLabel";
 			this.infoLabel.Size = new System.Drawing.Size(55, 15);
 			this.infoLabel.TabIndex = 1;
-			this.infoLabel.Text = "起動中...";
+			this.infoLabel.Text = "시작중...";
 			// 
 			// integrateButton
 			// 
@@ -192,7 +192,7 @@
 			this.integrateButton.Name = "integrateButton";
 			this.integrateButton.Size = new System.Drawing.Size(75, 23);
 			this.integrateButton.TabIndex = 0;
-			this.integrateButton.Text = "取り込む";
+			this.integrateButton.Text = "캡쳐";
 			this.integrateButton.UseVisualStyleBackColor = true;
 			this.integrateButton.Click += new System.EventHandler(this.integrateButton_Click);
 			// 
@@ -208,7 +208,7 @@
 			this.StripMenu_Detach.Enabled = false;
 			this.StripMenu_Detach.Name = "StripMenu_Detach";
 			this.StripMenu_Detach.Size = new System.Drawing.Size(160, 22);
-			this.StripMenu_Detach.Text = "ウィンドウ開放";
+			this.StripMenu_Detach.Text = "윈도우 개방";
 			this.StripMenu_Detach.Click += new System.EventHandler(this.StripMenu_Detach_Click);
 			// 
 			// FormIntegrate

@@ -60,7 +60,7 @@
 			// ParameterView_Key
 			// 
 			this.ParameterView_Key.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ParameterView_Key.HeaderText = "項目";
+			this.ParameterView_Key.HeaderText = "항목";
 			this.ParameterView_Key.Name = "ParameterView_Key";
 			this.ParameterView_Key.ReadOnly = true;
 			this.ParameterView_Key.Width = 56;
@@ -68,7 +68,7 @@
 			// ParameterView_Value
 			// 
 			this.ParameterView_Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.ParameterView_Value.HeaderText = "値";
+			this.ParameterView_Value.HeaderText = "값";
 			this.ParameterView_Value.Name = "ParameterView_Value";
 			// 
 			// ButtonOK
@@ -89,7 +89,7 @@
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 2;
-			this.ButtonCancel.Text = "キャンセル";
+			this.ButtonCancel.Text = "취소";
 			this.ButtonCancel.UseVisualStyleBackColor = true;
 			this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
@@ -101,7 +101,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(191, 30);
 			this.label1.TabIndex = 3;
-			this.label1.Text = "※意味が分かる方のみご利用ください。\r\n一部適用されない項目もあります。";
+			this.label1.Text = "※뜻을 아는 항목만 이용하세요.\r\n일부 적용되지 않는 항목도 있습니다.";
 			// 
 			// DialogAlbumShipParameter
 			// 
@@ -114,7 +114,7 @@
 			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.Name = "DialogAlbumShipParameter";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "艦船パラメータの編集";
+			this.Text = "함선 파라메터 편집";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumShipParameter_FormClosed);
 			this.Load += new System.EventHandler(this.DialogAlbumShipParameter_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ParameterView)).EndInit();

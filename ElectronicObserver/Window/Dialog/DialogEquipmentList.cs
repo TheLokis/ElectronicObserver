@@ -421,7 +421,7 @@ namespace ElectronicObserver.Window.Dialog
 
 					int diff = c.countRemainPrev - c.countRemain;
 
-					c.equippedShips.Add("配置転換中" + (diff > 1 ? (" x" + diff) : ""));
+					c.equippedShips.Add("배치전환중" + (diff > 1 ? (" x" + diff) : ""));
 
 					c.countRemainPrev = c.countRemain;
 				}
@@ -456,7 +456,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			DetailView.ResumeLayout();
 
-			Text = "装備一覧 - " + KCDatabase.Instance.MasterEquipments[equipmentID].Name;
+			Text = "장비목록 - " + KCDatabase.Instance.MasterEquipments[equipmentID].Name;
 		}
 
 
@@ -498,7 +498,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("固有ID,装備ID,装備名,改修Lv,艦載機Lv,ロック,装備艦ID,装備艦");
+						sw.WriteLine("고유ID,장비ID,장비명,개장Lv,함재기Lv,잠금,장비함ID,장비함");
 						string arg = string.Format("{{{0}}}", string.Join("},{", Enumerable.Range(0, 8)));
 
 						foreach (var eq in KCDatabase.Instance.Equipments.Values)
@@ -506,7 +506,7 @@ namespace ElectronicObserver.Window.Dialog
 
 							if (eq.Name == "なし") continue;
 
-							ShipData equippedShip = KCDatabase.Instance.Ships.Values.FirstOrDefault(s => s.Slot.Contains(eq.MasterID));
+							ShipData equippedShip = KCDatabase.Instance.Ships.Values.FirstOrDefault(s => s.AllSlot.Contains(eq.MasterID));
 
 
 							sw.WriteLine(arg,
@@ -528,8 +528,8 @@ namespace ElectronicObserver.Window.Dialog
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "装備一覧 CSVの出力に失敗しました。");
-					MessageBox.Show("装備一覧 CSVの出力に失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utility.ErrorReporter.SendErrorReport(ex, "장비 목록 CSV의 출력에 실패했습니다.");
+					MessageBox.Show("장비 목록 CSV의 출력에 실패했습니다.\r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				}
 

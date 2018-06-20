@@ -59,7 +59,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(289, 30);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "必ずオフラインの状態で操作してください。\r\nこの機能はデバッグ専用であるため、動作は保証できません。";
+			this.label1.Text = "반드시 오프라인 상태에서 작업하세요.\r\n디버그용 기능이라 어떻게 작동할진 보증할수 없습니다.";
 			// 
 			// APIList
 			// 
@@ -132,7 +132,7 @@
 			this.ButtonOpen.Name = "ButtonOpen";
 			this.ButtonOpen.Size = new System.Drawing.Size(75, 23);
 			this.ButtonOpen.TabIndex = 6;
-			this.ButtonOpen.Text = "開く";
+			this.ButtonOpen.Text = "열기";
 			this.ButtonOpen.UseVisualStyleBackColor = true;
 			this.ButtonOpen.Click += new System.EventHandler(this.ButtonOpen_Click);
 			// 
@@ -174,7 +174,7 @@
 			// 
 			this.FileOpener.Filter = "JSON|*.json;*.js|File|*";
 			this.FileOpener.RestoreDirectory = true;
-			this.FileOpener.Title = "ファイルを開く";
+			this.FileOpener.Title = "파일 열기";
 			// 
 			// DialogLocalAPILoader
 			// 
@@ -192,7 +192,7 @@
 			this.Name = "DialogLocalAPILoader";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "ファイルからAPIをロード";
+			this.Text = "파일에서 API를 로드";
 			this.Load += new System.EventHandler(this.DialogLocalAPILoader_Load);
 			((System.ComponentModel.ISupportInitialize)(this.PictureWarning)).EndInit();
 			this.panel1.ResumeLayout(false);

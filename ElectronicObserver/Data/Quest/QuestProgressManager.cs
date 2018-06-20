@@ -186,7 +186,7 @@ namespace ElectronicObserver.Data.Quest
 				_prevTime = DateTime.Now;
 
 				Save();
-				Utility.Logger.Add(1, "任務進捗のオートセーブを行いました。");
+				Utility.Logger.Add(1, "임무 진행도를 자동 저장 했습니다.");
 			}
 
 		}

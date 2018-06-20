@@ -42,7 +42,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return "演習" + (WinOnly ? "勝利" : "") + ProgressMax;
+			return "연습" + (WinOnly ? "승리" : "") + ProgressMax;
 		}
 	}
 }

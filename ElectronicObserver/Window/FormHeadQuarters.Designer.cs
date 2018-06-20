@@ -92,7 +92,7 @@
 			this.AdmiralName.Padding = new System.Windows.Forms.Padding(0, 3, 0, 2);
 			this.AdmiralName.Size = new System.Drawing.Size(53, 20);
 			this.AdmiralName.TabIndex = 0;
-			this.AdmiralName.Text = "(提督名)";
+			this.AdmiralName.Text = "(제독명)";
 			this.AdmiralName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.AdmiralName.UseMnemonic = false;
 			// 
@@ -104,7 +104,7 @@
 			this.AdmiralComment.Padding = new System.Windows.Forms.Padding(0, 3, 0, 2);
 			this.AdmiralComment.Size = new System.Drawing.Size(74, 20);
 			this.AdmiralComment.TabIndex = 1;
-			this.AdmiralComment.Text = "(提督コメント)";
+			this.AdmiralComment.Text = "(제독코멘트)";
 			this.AdmiralComment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.AdmiralComment.UseMnemonic = false;
 			// 
@@ -139,7 +139,7 @@
 			this.ShipCount.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.ShipCount.Size = new System.Drawing.Size(66, 20);
 			this.ShipCount.TabIndex = 0;
-			this.ShipCount.Text = "(艦船数)";
+			this.ShipCount.Text = "(함선수)";
 			// 
 			// EquipmentCount
 			// 
@@ -149,7 +149,7 @@
 			this.EquipmentCount.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.EquipmentCount.Size = new System.Drawing.Size(66, 20);
 			this.EquipmentCount.TabIndex = 1;
-			this.EquipmentCount.Text = "(装備数)";
+			this.EquipmentCount.Text = "(장비수)";
 			// 
 			// FlowPanelUseItem
 			// 
@@ -174,7 +174,7 @@
 			this.InstantRepair.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.InstantRepair.Size = new System.Drawing.Size(54, 20);
 			this.InstantRepair.TabIndex = 1;
-			this.InstantRepair.Text = "(修復)";
+			this.InstantRepair.Text = "(수복재)";
 			// 
 			// InstantConstruction
 			// 
@@ -184,7 +184,7 @@
 			this.InstantConstruction.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.InstantConstruction.Size = new System.Drawing.Size(54, 20);
 			this.InstantConstruction.TabIndex = 2;
-			this.InstantConstruction.Text = "(建造)";
+			this.InstantConstruction.Text = "(건조재)";
 			// 
 			// DevelopmentMaterial
 			// 
@@ -194,7 +194,7 @@
 			this.DevelopmentMaterial.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.DevelopmentMaterial.Size = new System.Drawing.Size(54, 20);
 			this.DevelopmentMaterial.TabIndex = 3;
-			this.DevelopmentMaterial.Text = "(開発)";
+			this.DevelopmentMaterial.Text = "(개발자재)";
 			// 
 			// ModdingMaterial
 			// 
@@ -204,7 +204,7 @@
 			this.ModdingMaterial.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.ModdingMaterial.Size = new System.Drawing.Size(54, 20);
 			this.ModdingMaterial.TabIndex = 5;
-			this.ModdingMaterial.Text = "(改修)";
+			this.ModdingMaterial.Text = "(개수자재)";
 			// 
 			// FurnitureCoin
 			// 
@@ -214,7 +214,7 @@
 			this.FurnitureCoin.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.FurnitureCoin.Size = new System.Drawing.Size(54, 20);
 			this.FurnitureCoin.TabIndex = 4;
-			this.FurnitureCoin.Text = "(家具)";
+			this.FurnitureCoin.Text = "(가구코인)";
 			// 
 			// DisplayUseItem
 			// 
@@ -248,7 +248,7 @@
 			this.Fuel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.Fuel.Size = new System.Drawing.Size(54, 20);
 			this.Fuel.TabIndex = 1;
-			this.Fuel.Text = "(燃料)";
+			this.Fuel.Text = "(연료)";
 			this.Fuel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseClick);
 			this.Fuel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseDoubleClick);
 			// 
@@ -260,7 +260,7 @@
 			this.Ammo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.Ammo.Size = new System.Drawing.Size(54, 20);
 			this.Ammo.TabIndex = 2;
-			this.Ammo.Text = "(弾薬)";
+			this.Ammo.Text = "(탄약)";
 			this.Ammo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseClick);
 			this.Ammo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseDoubleClick);
 			// 
@@ -272,7 +272,7 @@
 			this.Steel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.Steel.Size = new System.Drawing.Size(54, 20);
 			this.Steel.TabIndex = 3;
-			this.Steel.Text = "(鋼材)";
+			this.Steel.Text = "(강재)";
 			this.Steel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseClick);
 			this.Steel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseDoubleClick);
 			// 
@@ -284,7 +284,7 @@
 			this.Bauxite.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
 			this.Bauxite.Size = new System.Drawing.Size(54, 20);
 			this.Bauxite.TabIndex = 4;
-			this.Bauxite.Text = "(軽銀)";
+			this.Bauxite.Text = "(보크)";
 			this.Bauxite.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseClick);
 			this.Bauxite.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Resource_MouseDoubleClick);
 			// 
@@ -306,7 +306,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormHeadquarters";
-			this.Text = "司令部";
+			this.Text = "사령부";
 			this.Load += new System.EventHandler(this.FormHeadquarters_Load);
 			this.FlowPanelMaster.ResumeLayout(false);
 			this.FlowPanelMaster.PerformLayout();

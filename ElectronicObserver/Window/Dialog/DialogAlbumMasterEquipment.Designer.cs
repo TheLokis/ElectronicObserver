@@ -138,20 +138,20 @@
 			this.StripMenu_File_OutputCSVData});
 			this.StripMenu_File.Name = "StripMenu_File";
 			this.StripMenu_File.Size = new System.Drawing.Size(70, 20);
-			this.StripMenu_File.Text = "ファイル(&F)";
+			this.StripMenu_File.Text = "파일(&F)";
 			// 
 			// StripMenu_File_OutputCSVUser
 			// 
 			this.StripMenu_File_OutputCSVUser.Name = "StripMenu_File_OutputCSVUser";
 			this.StripMenu_File_OutputCSVUser.Size = new System.Drawing.Size(203, 22);
-			this.StripMenu_File_OutputCSVUser.Text = "CSV出力(閲覧用)(&U)...";
+			this.StripMenu_File_OutputCSVUser.Text = "CSV출력(보기용)(&U)...";
 			this.StripMenu_File_OutputCSVUser.Click += new System.EventHandler(this.StripMenu_File_OutputCSVUser_Click);
 			// 
 			// StripMenu_File_OutputCSVData
 			// 
 			this.StripMenu_File_OutputCSVData.Name = "StripMenu_File_OutputCSVData";
 			this.StripMenu_File_OutputCSVData.Size = new System.Drawing.Size(203, 22);
-			this.StripMenu_File_OutputCSVData.Text = "CSV出力(データ用)(&D)...";
+			this.StripMenu_File_OutputCSVData.Text = "CSV출력(데이터용)(&D)...";
 			this.StripMenu_File_OutputCSVData.Click += new System.EventHandler(this.StripMenu_File_OutputCSVData_Click);
 			// 
 			// StripMenu_Edit
@@ -163,7 +163,7 @@
 			this.StripMenu_Edit_GoogleEquipmentName});
 			this.StripMenu_Edit.Name = "StripMenu_Edit";
 			this.StripMenu_Edit.Size = new System.Drawing.Size(60, 20);
-			this.StripMenu_Edit.Text = "編集(&E)";
+			this.StripMenu_Edit.Text = "편집(&E)";
 			// 
 			// StripMenu_Edit_CopyEquipmentName
 			// 
@@ -171,7 +171,7 @@
 			this.StripMenu_Edit_CopyEquipmentName.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
 			| System.Windows.Forms.Keys.C)));
 			this.StripMenu_Edit_CopyEquipmentName.Size = new System.Drawing.Size(248, 22);
-			this.StripMenu_Edit_CopyEquipmentName.Text = "装備名をコピー(&N)";
+			this.StripMenu_Edit_CopyEquipmentName.Text = "장비 이름 복사(&N)";
 			this.StripMenu_Edit_CopyEquipmentName.Click += new System.EventHandler(this.StripMenu_Edit_CopyEquipmentName_Click);
 			// 
 			// StripMenu_Edit_CopyEquipmentData
@@ -179,7 +179,7 @@
 			this.StripMenu_Edit_CopyEquipmentData.Name = "StripMenu_Edit_CopyEquipmentData";
 			this.StripMenu_Edit_CopyEquipmentData.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
 			this.StripMenu_Edit_CopyEquipmentData.Size = new System.Drawing.Size(248, 22);
-			this.StripMenu_Edit_CopyEquipmentData.Text = "装備データをコピー(&D)";
+			this.StripMenu_Edit_CopyEquipmentData.Text = "장비 데이터 복사(&D)";
 			this.StripMenu_Edit_CopyEquipmentData.Click += new System.EventHandler(this.StripMenu_Edit_CopyEquipmentData_Click);
 			// 
 			// StripMenu_View
@@ -188,14 +188,14 @@
 			this.StripMenu_View_ShowAppearingArea});
 			this.StripMenu_View.Name = "StripMenu_View";
 			this.StripMenu_View.Size = new System.Drawing.Size(61, 20);
-			this.StripMenu_View.Text = "表示(&V)";
+			this.StripMenu_View.Text = "보기(&V)";
 			// 
 			// StripMenu_View_ShowAppearingArea
 			// 
 			this.StripMenu_View_ShowAppearingArea.Name = "StripMenu_View_ShowAppearingArea";
 			this.StripMenu_View_ShowAppearingArea.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
 			this.StripMenu_View_ShowAppearingArea.Size = new System.Drawing.Size(288, 22);
-			this.StripMenu_View_ShowAppearingArea.Text = "初期装備艦・開発レシピを検索(&S)";
+			this.StripMenu_View_ShowAppearingArea.Text = "초기 장비함・개발 레시피 검색(&S)";
 			this.StripMenu_View_ShowAppearingArea.Click += new System.EventHandler(this.StripMenu_View_ShowAppearingArea_Click);
 			// 
 			// splitContainer1
@@ -298,7 +298,7 @@
 			// EquipmentView_Type
 			// 
 			this.EquipmentView_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.EquipmentView_Type.HeaderText = "装備種";
+			this.EquipmentView_Type.HeaderText = "장비종";
 			this.EquipmentView_Type.Name = "EquipmentView_Type";
 			this.EquipmentView_Type.ReadOnly = true;
 			this.EquipmentView_Type.Width = 75;
@@ -306,7 +306,7 @@
 			// EquipmentView_Name
 			// 
 			this.EquipmentView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.EquipmentView_Name.HeaderText = "装備名";
+			this.EquipmentView_Name.HeaderText = "장비명";
 			this.EquipmentView_Name.Name = "EquipmentView_Name";
 			this.EquipmentView_Name.ReadOnly = true;
 			// 
@@ -371,7 +371,7 @@
 			this.TitleAircraftCost.Name = "TitleAircraftCost";
 			this.TitleAircraftCost.Size = new System.Drawing.Size(69, 16);
 			this.TitleAircraftCost.TabIndex = 17;
-			this.TitleAircraftCost.Text = "配備コスト";
+			this.TitleAircraftCost.Text = "배치비용";
 			this.TitleAircraftCost.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// AircraftDistance
@@ -392,7 +392,7 @@
 			this.TitleAircraftDistance.Name = "TitleAircraftDistance";
 			this.TitleAircraftDistance.Size = new System.Drawing.Size(92, 16);
 			this.TitleAircraftDistance.TabIndex = 27;
-			this.TitleAircraftDistance.Text = "戦闘行動半径";
+			this.TitleAircraftDistance.Text = "행동반경";
 			this.TitleAircraftDistance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// AlbumNo
@@ -411,7 +411,7 @@
 			this.imageLabel1.Name = "imageLabel1";
 			this.imageLabel1.Size = new System.Drawing.Size(73, 16);
 			this.imageLabel1.TabIndex = 22;
-			this.imageLabel1.Text = "初期装備艦：";
+			this.imageLabel1.Text = "초기장비함：";
 			// 
 			// imageLabel2
 			// 
@@ -420,7 +420,7 @@
 			this.imageLabel2.Name = "imageLabel2";
 			this.imageLabel2.Size = new System.Drawing.Size(54, 16);
 			this.imageLabel2.TabIndex = 24;
-			this.imageLabel2.Text = "図鑑番号:";
+			this.imageLabel2.Text = "도감번호:";
 			// 
 			// DefaultSlots
 			// 
@@ -450,7 +450,7 @@
 			this.Description.Name = "Description";
 			this.Description.Size = new System.Drawing.Size(525, 83);
 			this.Description.TabIndex = 20;
-			this.Description.Text = "[5inch連装砲]\r\nかの国において最も広く使われた駆逐艦主砲、その連装砲版です。\r\n大型艦の対空砲としても搭載されました。\r\n現在では深海駆逐艦の主力兵装とし" +
+			this.Description.Text = "[5inch연장포]\r\n각 지의 나라에서 가장 널리 사용되는 구축함 주포, 그 연장포 버전입니다.\r\n대형함의 대공포로도 탑재되었습니다.\r\n현재는 심해 구축함의 주력 병기로 보급되어 있습니다." +
 	"て普及しています。\r\n";
 			this.Description.TextAlign = System.Drawing.ContentAlignment.TopLeft;
 			// 
@@ -471,7 +471,7 @@
 			this.EquipmentType.Name = "EquipmentType";
 			this.EquipmentType.Size = new System.Drawing.Size(83, 16);
 			this.EquipmentType.TabIndex = 7;
-			this.EquipmentType.Text = "オートジャイロ";
+			this.EquipmentType.Text = "오토자이로";
 			// 
 			// EquipmentName
 			// 
@@ -480,7 +480,7 @@
 			this.EquipmentName.Name = "EquipmentName";
 			this.EquipmentName.Size = new System.Drawing.Size(167, 16);
 			this.EquipmentName.TabIndex = 8;
-			this.EquipmentName.Text = "試製FaT仕様九五式酸素魚雷改";
+			this.EquipmentName.Text = "시제FaT사양95식산소어뢰개";
 			this.EquipmentName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EquipmentName_MouseClick);
 			// 
 			// EquipmentID
@@ -591,7 +591,7 @@
 			this.TitleRange.Name = "TitleRange";
 			this.TitleRange.Size = new System.Drawing.Size(44, 16);
 			this.TitleRange.TabIndex = 16;
-			this.TitleRange.Text = "射程";
+			this.TitleRange.Text = "사정";
 			this.TitleRange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TitleSpeed
@@ -602,7 +602,7 @@
 			this.TitleSpeed.Name = "TitleSpeed";
 			this.TitleSpeed.Size = new System.Drawing.Size(44, 16);
 			this.TitleSpeed.TabIndex = 14;
-			this.TitleSpeed.Text = "速力";
+			this.TitleSpeed.Text = "속력";
 			this.TitleSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TableArsenal
@@ -677,7 +677,7 @@
 			this.imageLabel59.Name = "imageLabel59";
 			this.imageLabel59.Size = new System.Drawing.Size(25, 16);
 			this.imageLabel59.TabIndex = 15;
-			this.imageLabel59.Text = "廃棄";
+			this.imageLabel59.Text = "폐기";
 			this.imageLabel59.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// imageLabel45
@@ -750,7 +750,7 @@
 			this.TitleBomber.Name = "TitleBomber";
 			this.TitleBomber.Size = new System.Drawing.Size(44, 16);
 			this.TitleBomber.TabIndex = 14;
-			this.TitleBomber.Text = "爆装";
+			this.TitleBomber.Text = "폭장";
 			this.TitleBomber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// LOS
@@ -785,7 +785,7 @@
 			this.imageLabel14.Name = "imageLabel14";
 			this.imageLabel14.Size = new System.Drawing.Size(48, 16);
 			this.imageLabel14.TabIndex = 6;
-			this.imageLabel14.Text = "性能";
+			this.imageLabel14.Text = "성능";
 			this.imageLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// TitleLOS
@@ -795,7 +795,7 @@
 			this.TitleLOS.Name = "TitleLOS";
 			this.TitleLOS.Size = new System.Drawing.Size(44, 16);
 			this.TitleLOS.TabIndex = 12;
-			this.TitleLOS.Text = "索敵";
+			this.TitleLOS.Text = "색적";
 			this.TitleLOS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// Armor
@@ -849,7 +849,7 @@
 			this.TitleFirepower.Name = "TitleFirepower";
 			this.TitleFirepower.Size = new System.Drawing.Size(44, 16);
 			this.TitleFirepower.TabIndex = 6;
-			this.TitleFirepower.Text = "火力";
+			this.TitleFirepower.Text = "화력";
 			this.TitleFirepower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TitleTorpedo
@@ -859,7 +859,7 @@
 			this.TitleTorpedo.Name = "TitleTorpedo";
 			this.TitleTorpedo.Size = new System.Drawing.Size(44, 16);
 			this.TitleTorpedo.TabIndex = 7;
-			this.TitleTorpedo.Text = "雷装";
+			this.TitleTorpedo.Text = "뇌장";
 			this.TitleTorpedo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TitleAA
@@ -869,7 +869,7 @@
 			this.TitleAA.Name = "TitleAA";
 			this.TitleAA.Size = new System.Drawing.Size(44, 16);
 			this.TitleAA.TabIndex = 8;
-			this.TitleAA.Text = "対空";
+			this.TitleAA.Text = "대공";
 			this.TitleAA.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TitleArmor
@@ -879,7 +879,7 @@
 			this.TitleArmor.Name = "TitleArmor";
 			this.TitleArmor.Size = new System.Drawing.Size(44, 16);
 			this.TitleArmor.TabIndex = 9;
-			this.TitleArmor.Text = "装甲";
+			this.TitleArmor.Text = "장갑";
 			this.TitleArmor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TitleASW
@@ -889,7 +889,7 @@
 			this.TitleASW.Name = "TitleASW";
 			this.TitleASW.Size = new System.Drawing.Size(44, 16);
 			this.TitleASW.TabIndex = 10;
-			this.TitleASW.Text = "対潜";
+			this.TitleASW.Text = "대잠";
 			this.TitleASW.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// TitleEvasion
@@ -899,7 +899,7 @@
 			this.TitleEvasion.Name = "TitleEvasion";
 			this.TitleEvasion.Size = new System.Drawing.Size(44, 16);
 			this.TitleEvasion.TabIndex = 11;
-			this.TitleEvasion.Text = "回避";
+			this.TitleEvasion.Text = "회피";
 			this.TitleEvasion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// Evasion
@@ -920,7 +920,7 @@
 			this.TitleAccuracy.Name = "TitleAccuracy";
 			this.TitleAccuracy.Size = new System.Drawing.Size(44, 16);
 			this.TitleAccuracy.TabIndex = 13;
-			this.TitleAccuracy.Text = "命中";
+			this.TitleAccuracy.Text = "명중";
 			this.TitleAccuracy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// Accuracy
@@ -953,7 +953,7 @@
 			// SaveCSVDialog
 			// 
 			this.SaveCSVDialog.Filter = "CSV|*.csv|File|*";
-			this.SaveCSVDialog.Title = "CSVに出力";
+			this.SaveCSVDialog.Title = "CSV에 출력";
 			// 
 			// toolStripSeparator1
 			// 
@@ -965,7 +965,7 @@
 			this.StripMenu_Edit_GoogleEquipmentName.Name = "StripMenu_Edit_GoogleEquipmentName";
 			this.StripMenu_Edit_GoogleEquipmentName.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
 			this.StripMenu_Edit_GoogleEquipmentName.Size = new System.Drawing.Size(250, 22);
-			this.StripMenu_Edit_GoogleEquipmentName.Text = "装備名でGoogle検索(&G)";
+			this.StripMenu_Edit_GoogleEquipmentName.Text = "장비명으로 구글 검색(&G)";
 			this.StripMenu_Edit_GoogleEquipmentName.Click += new System.EventHandler(this.StripMenu_Edit_GoogleEquipmentName_Click);
 			// 
 			// DialogAlbumMasterEquipment
@@ -980,7 +980,7 @@
 			this.MinimumSize = new System.Drawing.Size(816, 518);
 			this.Name = "DialogAlbumMasterEquipment";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "装備図鑑";
+			this.Text = "장비도감";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumMasterEquipment_FormClosed);
 			this.Load += new System.EventHandler(this.DialogAlbumMasterEquipment_Load);
 			this.menuStrip1.ResumeLayout(false);

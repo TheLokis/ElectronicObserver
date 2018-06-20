@@ -122,7 +122,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(67, 15);
 			this.label6.TabIndex = 11;
-			this.label6.Text = "全滅確率：";
+			this.label6.Text = "전멸 확률：";
 			// 
 			// ShowAll
 			// 
@@ -131,8 +131,8 @@
 			this.ShowAll.Name = "ShowAll";
 			this.ShowAll.Size = new System.Drawing.Size(112, 19);
 			this.ShowAll.TabIndex = 10;
-			this.ShowAll.Text = "すべて選択可能に";
-			this.ToolTipInfo.SetToolTip(this.ShowAll, "有効な場合、すべての対空カットインを選択肢に表示します。\r\n無効な場合、現在の艦隊で発動可能なカットインのみを表示します。");
+			this.ShowAll.Text = "모든 대공컷인 표시";
+			this.ToolTipInfo.SetToolTip(this.ShowAll, "활성화하면 모든 대공컷인을 표시합니다. \r\n현재의 함대로 발동가능한 컷인만 표시합니다.");
 			this.ShowAll.UseVisualStyleBackColor = true;
 			this.ShowAll.CheckedChanged += new System.EventHandler(this.ShowAll_CheckedChanged);
 			// 
@@ -143,7 +143,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(67, 15);
 			this.label5.TabIndex = 8;
-			this.label5.Text = "艦隊防空：";
+			this.label5.Text = "함대방공：";
 			// 
 			// label4
 			// 
@@ -152,7 +152,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(85, 15);
 			this.label4.TabIndex = 7;
-			this.label4.Text = "対空カットイン：";
+			this.label4.Text = "대공 컷인：";
 			// 
 			// AACutinKind
 			// 
@@ -171,16 +171,16 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(43, 15);
 			this.label3.TabIndex = 5;
-			this.label3.Text = "陣形：";
+			this.label3.Text = "진형：";
 			// 
 			// Formation
 			// 
 			this.Formation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Formation.FormattingEnabled = true;
 			this.Formation.Items.AddRange(new object[] {
-			"単縦陣ほか",
-			"複縦陣",
-			"輪形陣"});
+			"단종진외",
+			"복종진",
+			"윤형진"});
 			this.Formation.Location = new System.Drawing.Point(61, 41);
 			this.Formation.Name = "Formation";
 			this.Formation.Size = new System.Drawing.Size(121, 23);
@@ -194,7 +194,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(88, 15);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "敵スロット機数：";
+			this.label2.Text = "적 함재기 수：";
 			// 
 			// EnemySlotCount
 			// 
@@ -227,18 +227,18 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(43, 15);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "艦隊：";
+			this.label1.Text = "함대：";
 			// 
 			// FleetID
 			// 
 			this.FleetID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FleetID.FormattingEnabled = true;
 			this.FleetID.Items.AddRange(new object[] {
-			"第1艦隊",
-			"第2艦隊",
-			"第3艦隊",
-			"第4艦隊",
-			"連合艦隊"});
+			"제1함대",
+			"제2함대",
+			"제3함대",
+			"제4함대",
+			"연합함대"});
 			this.FleetID.Location = new System.Drawing.Point(61, 12);
 			this.FleetID.Name = "FleetID";
 			this.FleetID.Size = new System.Drawing.Size(121, 23);
@@ -286,7 +286,7 @@
 			this.ResultView_ShipName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			this.ResultView_ShipName.DefaultCellStyle = dataGridViewCellStyle7;
-			this.ResultView_ShipName.HeaderText = "艦名";
+			this.ResultView_ShipName.HeaderText = "함명";
 			this.ResultView_ShipName.Name = "ResultView_ShipName";
 			this.ResultView_ShipName.ReadOnly = true;
 			this.ResultView_ShipName.Width = 56;
@@ -294,7 +294,7 @@
 			// ResultView_AntiAir
 			// 
 			this.ResultView_AntiAir.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_AntiAir.HeaderText = "対空";
+			this.ResultView_AntiAir.HeaderText = "대공";
 			this.ResultView_AntiAir.Name = "ResultView_AntiAir";
 			this.ResultView_AntiAir.ReadOnly = true;
 			this.ResultView_AntiAir.Width = 56;
@@ -302,7 +302,7 @@
 			// ResultView_AdjustedAntiAir
 			// 
 			this.ResultView_AdjustedAntiAir.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_AdjustedAntiAir.HeaderText = "加重対空";
+			this.ResultView_AdjustedAntiAir.HeaderText = "가중대공";
 			this.ResultView_AdjustedAntiAir.Name = "ResultView_AdjustedAntiAir";
 			this.ResultView_AdjustedAntiAir.ReadOnly = true;
 			this.ResultView_AdjustedAntiAir.Width = 80;
@@ -312,7 +312,7 @@
 			this.ResultView_ProportionalAirDefense.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			dataGridViewCellStyle8.Format = "p2";
 			this.ResultView_ProportionalAirDefense.DefaultCellStyle = dataGridViewCellStyle8;
-			this.ResultView_ProportionalAirDefense.HeaderText = "割合撃墜";
+			this.ResultView_ProportionalAirDefense.HeaderText = "비율격추";
 			this.ResultView_ProportionalAirDefense.Name = "ResultView_ProportionalAirDefense";
 			this.ResultView_ProportionalAirDefense.ReadOnly = true;
 			this.ResultView_ProportionalAirDefense.Width = 80;
@@ -320,7 +320,7 @@
 			// ResultView_FixedAirDefense
 			// 
 			this.ResultView_FixedAirDefense.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_FixedAirDefense.HeaderText = "固定撃墜";
+			this.ResultView_FixedAirDefense.HeaderText = "고정격추";
 			this.ResultView_FixedAirDefense.Name = "ResultView_FixedAirDefense";
 			this.ResultView_FixedAirDefense.ReadOnly = true;
 			this.ResultView_FixedAirDefense.Width = 80;
@@ -331,34 +331,34 @@
 			this.ResultView_ShootDownBoth.HeaderText = "両方成功";
 			this.ResultView_ShootDownBoth.Name = "ResultView_ShootDownBoth";
 			this.ResultView_ShootDownBoth.ReadOnly = true;
-			this.ResultView_ShootDownBoth.ToolTipText = "割合撃墜・固定撃墜の両方に成功した場合の撃墜数";
+			this.ResultView_ShootDownBoth.ToolTipText = "비율격추 및 고정격추에 모두 성공했을경우의 격추수";
 			this.ResultView_ShootDownBoth.Width = 80;
 			// 
 			// ResultView_ShootDownProportional
 			// 
 			this.ResultView_ShootDownProportional.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_ShootDownProportional.HeaderText = "割合のみ";
+			this.ResultView_ShootDownProportional.HeaderText = "비율격추수";
 			this.ResultView_ShootDownProportional.Name = "ResultView_ShootDownProportional";
 			this.ResultView_ShootDownProportional.ReadOnly = true;
-			this.ResultView_ShootDownProportional.ToolTipText = "割合撃墜に成功した場合の撃墜数";
+			this.ResultView_ShootDownProportional.ToolTipText = "비율 격추에 성공했을 경우 격추수";
 			this.ResultView_ShootDownProportional.Width = 77;
 			// 
 			// ResultView_ShootDownFixed
 			// 
 			this.ResultView_ShootDownFixed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_ShootDownFixed.HeaderText = "固定のみ";
+			this.ResultView_ShootDownFixed.HeaderText = "고정격추수";
 			this.ResultView_ShootDownFixed.Name = "ResultView_ShootDownFixed";
 			this.ResultView_ShootDownFixed.ReadOnly = true;
-			this.ResultView_ShootDownFixed.ToolTipText = "固定撃墜に成功した場合の撃墜数";
+			this.ResultView_ShootDownFixed.ToolTipText = "고정 격추에 성공했을 경우 격추수";
 			this.ResultView_ShootDownFixed.Width = 77;
 			// 
 			// ResultView_ShootDownFailed
 			// 
 			this.ResultView_ShootDownFailed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_ShootDownFailed.HeaderText = "両方失敗";
+			this.ResultView_ShootDownFailed.HeaderText = "방공 실패";
 			this.ResultView_ShootDownFailed.Name = "ResultView_ShootDownFailed";
 			this.ResultView_ShootDownFailed.ReadOnly = true;
-			this.ResultView_ShootDownFailed.ToolTipText = "固定撃墜・割合撃墜の両方に失敗した場合の撃墜数";
+			this.ResultView_ShootDownFailed.ToolTipText = "비율격추 및 고정격추에 모두 실패한 경우의 격추수";
 			this.ResultView_ShootDownFailed.Width = 80;
 			// 
 			// ToolTipInfo
@@ -376,7 +376,7 @@
 			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.Name = "DialogAntiAirDefense";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "対空砲火詳細";
+			this.Text = "대공포화상세";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAntiAirDefense_FormClosed);
 			this.Load += new System.EventHandler(this.DialogAntiAirDefense_Load);
 			this.splitContainer1.Panel1.ResumeLayout(false);

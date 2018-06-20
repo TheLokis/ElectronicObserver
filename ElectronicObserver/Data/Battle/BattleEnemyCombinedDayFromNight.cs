@@ -17,25 +17,25 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			NightInitial = new PhaseNightInitial(this, "夜戦開始", false);
-			FriendlySupport = new PhaseFriendlySupport(this, "友軍艦隊援護");
-			NightSupport = new PhaseSupport(this, "夜間支援攻撃", true);
-			NightBattle = new PhaseNightBattle(this, "第一次夜戦", 1);
-			NightBattle2 = new PhaseNightBattle(this, "第二次夜戦", 2);
+			NightInitial = new PhaseNightInitial(this, "야전개시", false);
+			FriendlySupport = new PhaseFriendlySupport(this, "우군함대원호");
+			NightSupport = new PhaseSupport(this, "야간지원공격", true);
+			NightBattle = new PhaseNightBattle(this, "제1차야전", 1);
+			NightBattle2 = new PhaseNightBattle(this, "제2차야전", 2);
 
 
 			if (NextToDay)
 			{
-				JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "噴式基地航空隊攻撃");
-				JetAirBattle = new PhaseJetAirBattle(this, "噴式航空戦");
-				BaseAirAttack = new PhaseBaseAirAttack(this, "基地航空隊攻撃");
-				Support = new PhaseSupport(this, "支援攻撃");
-				AirBattle = new PhaseAirBattle(this, "航空戦");
-				OpeningASW = new PhaseOpeningASW(this, "先制対潜");
-				OpeningTorpedo = new PhaseTorpedo(this, "先制雷撃", 0);
-				Shelling1 = new PhaseShelling(this, "第一次砲撃戦", 1, "1");
-				Shelling2 = new PhaseShelling(this, "第二次砲撃戦", 2, "2");
-				Torpedo = new PhaseTorpedo(this, "雷撃戦", 3);
+				JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
+				JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
+				BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
+				Support = new PhaseSupport(this, "지원공격");
+				AirBattle = new PhaseAirBattle(this, "항공전");
+				OpeningASW = new PhaseOpeningASW(this, "선제대잠");
+				OpeningTorpedo = new PhaseTorpedo(this, "선제뇌격", 0);
+				Shelling1 = new PhaseShelling(this, "제1차포격전", 1, "1");
+				Shelling2 = new PhaseShelling(this, "제2차포격전", 2, "2");
+				Torpedo = new PhaseTorpedo(this, "뇌격전", 3);
 			}
 
 			foreach (var phase in GetPhases())
@@ -44,7 +44,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_combined_battle/ec_night_to_day";
 
-		public override string BattleName => "対連合艦隊　夜昼戦";
+		public override string BattleName => "대연합함대 야주전";
 
 
 

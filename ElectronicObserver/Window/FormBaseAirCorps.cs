@@ -183,7 +183,7 @@ namespace ElectronicObserver.Window
 						// 未補給
 						Name.ImageAlign = ContentAlignment.MiddleRight;
 						Name.ImageIndex = (int)ResourceManager.IconContent.FleetNotReplenished;
-						sb.AppendLine("未補給");
+						sb.AppendLine("미보급");
 
 					}
 					else
@@ -520,9 +520,9 @@ namespace ElectronicObserver.Window
 				.Select(eq => string.Format("{0} ({1}～)", eq.EquipmentInstance.NameWithLevel, DateTimeHelper.TimeToCSVString(eq.RelocatedTime))));
 
 			if (message.Length == 0)
-				message = "現在配置転換中の装備はありません。";
+				message = "현재 배치전환중인 장비가 없습니다.";
 
-			MessageBox.Show(message, "配置転換中装備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(message, "배치전환중장비", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 

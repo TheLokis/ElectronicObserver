@@ -258,7 +258,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (ImageTags.Count == 0)
 				{
-					throw new InvalidOperationException("展開しましたが、画像が見つかりませんでした。");
+					throw new InvalidOperationException("파일에서 이미지를 찾을 수 없습니다.");
 				}
 
 				CurrentIndex = 0;
@@ -269,7 +269,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(string.Join("\r\n", pathlist) + "を開けませんでした。\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
+				MessageBox.Show(string.Join("\r\n", pathlist) + "를 열 수 없습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
 				Parsers.Clear();
 				ImageTags.Clear();
 				if (CurrentImage != null)
@@ -314,7 +314,7 @@ namespace ElectronicObserver.Window.Dialog
 				catch (Exception ex)
 				{
 
-					MessageBox.Show(SaveImageDialog.FileName + "\r\nへの保存に失敗しました。\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
+					MessageBox.Show(SaveImageDialog.FileName + "\r\n의 저장에 실패했습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
 
 				}
 			}
@@ -354,7 +354,7 @@ namespace ElectronicObserver.Window.Dialog
 				catch (Exception ex)
 				{
 
-					MessageBox.Show(SaveFolderDialog.SelectedPath + "\r\nへの保存に失敗しました。\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
+					MessageBox.Show(SaveFolderDialog.SelectedPath + "\r\n의 저장에 실패했습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
 				}
 
 			}
@@ -427,7 +427,7 @@ namespace ElectronicObserver.Window.Dialog
 				var ship = GetShipFromPath(parentParser.Key);
 
 				e.Graphics.DrawString(
-					string.Format("{0} / {1}\r\n{2} ({3}) CID: {4}\r\nZoom {5:p1}\r\n(←/→キーでページめくり)",
+					string.Format("{0} / {1}\r\n{2} ({3}) CID: {4}\r\nZoom {5:p1}\r\n(←/→키로 페이지 넘기기)",
 						CurrentIndex + 1, ImageTags.Count, Path.GetFileName(parentParser.Key), ship?.NameWithClass ?? "???", ImageTags[CurrentIndex].CharacterID, zoomRate),
 					Font, Brushes.DimGray, new PointF(0, 0));
 			}

@@ -141,7 +141,7 @@ namespace ElectronicObserver.Data
 					_escapedShipList.Clear();
 					if (IsInSortie)
 					{
-						Utility.Logger.Add(2, string.Format("#{0}「{1}」が帰投しました。", FleetID, Name));
+						Utility.Logger.Add(2, string.Format("#{0}「{1}」이 귀환했습니다.", FleetID, Name));
 					}
 					IsInSortie = false;
 
@@ -412,6 +412,101 @@ namespace ElectronicObserver.Data
 		public Dictionary<int, double> GetContactSelectionProbability()
 		{
 			return Calculator.GetContactSelectionProbability(this);
+		}
+
+
+		/// <summary>
+		/// 支援艦隊種別
+		/// 0=不発, 1=空撃, 2=砲撃, 3=雷撃
+		/// </summary>
+		public int SupportType
+		{
+			get
+			{
+				int destroyerCount = 0;
+				int aircraftCarrierCount = 0;
+				int aircraftAuxiliaryCount = 0;
+				int aircraftShellingCount = 0;
+				int shellingCount = 0;
+				int battleshipCount = 0;
+				int heavyCruiserCount = 0;
+				int otherCount = 0;
+
+				foreach (var s in MembersInstance.Where(ss => ss != null))
+				{
+					switch (s.MasterShip.ShipType)
+					{
+						case ShipTypes.Destroyer:
+							destroyerCount++;
+							break;
+
+						case ShipTypes.AircraftCarrier:
+						case ShipTypes.LightAircraftCarrier:
+						case ShipTypes.ArmoredAircraftCarrier:
+							aircraftCarrierCount++;
+							break;
+
+						case ShipTypes.SeaplaneTender:
+						case ShipTypes.AmphibiousAssaultShip:
+							aircraftAuxiliaryCount++;
+							break;
+
+						case ShipTypes.AviationBattleship:
+							aircraftShellingCount++;
+							battleshipCount++;
+							break;
+
+						case ShipTypes.AviationCruiser:
+							aircraftShellingCount++;
+							heavyCruiserCount++;
+							break;
+
+						case ShipTypes.Transport:
+							aircraftShellingCount++;
+							break;
+
+						case ShipTypes.Battleship:
+						case ShipTypes.Battlecruiser:
+							shellingCount++;
+							battleshipCount++;
+							break;
+
+						case ShipTypes.HeavyCruiser:
+							shellingCount++;
+							heavyCruiserCount++;
+							break;
+
+						default:
+							otherCount++;
+							break;
+					}
+
+				}
+
+
+				if (destroyerCount < 2)
+					return 0;       // 発生しない
+
+				if (shellingCount == 0)
+				{
+					if (aircraftCarrierCount >= 1 ||
+						aircraftAuxiliaryCount >= 2 ||
+						aircraftShellingCount >= 2)
+						return 1;   // 空撃
+				}
+				if (shellingCount == 1)
+				{
+					if (aircraftCarrierCount + aircraftAuxiliaryCount >= 2)
+						return 1;   // 空撃
+				}
+
+				if (battleshipCount >= 2 ||
+					(battleshipCount == 1 && heavyCruiserCount >= 3) ||
+					heavyCruiserCount >= 4)
+					return 2;       // 砲撃
+
+				return 3;           // 雷撃
+			}
 		}
 
 

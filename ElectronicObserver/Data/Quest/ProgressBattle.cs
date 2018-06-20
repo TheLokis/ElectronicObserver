@@ -71,24 +71,24 @@ namespace ElectronicObserver.Data.Quest
 				sb.Append(string.Join("・", TargetArea.OrderBy(s => s).Select(s => string.Format("{0}-{1}", s / 10, s % 10))));
 			}
 			if (IsBossOnly)
-				sb.Append("ボス");
+				sb.Append("보스");
 			switch (LowestRank)
 			{
 				case 1:
 				default:
-					sb.Append("戦闘");
+					sb.Append("전투");
 					break;
 				case 2:
 				case 3:
-					sb.Append(Constants.GetWinRank(LowestRank) + "以上");
+					sb.Append(Constants.GetWinRank(LowestRank) + "이상");
 					break;
 				case 4:
-					sb.Append("勝利");
+					sb.Append("승리");
 					break;
 				case 5:
 				case 6:
 				case 7:
-					sb.Append(Constants.GetWinRank(LowestRank) + "勝利");
+					sb.Append(Constants.GetWinRank(LowestRank) + "승리");
 					break;
 			}
 			sb.Append(ProgressMax);

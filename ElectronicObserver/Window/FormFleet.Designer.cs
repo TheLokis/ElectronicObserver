@@ -113,21 +113,21 @@
 			// 
 			this.ContextMenuFleet_AntiAirDetails.Name = "ContextMenuFleet_AntiAirDetails";
 			this.ContextMenuFleet_AntiAirDetails.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_AntiAirDetails.Text = "対空砲火の詳細表示(&A)";
+			this.ContextMenuFleet_AntiAirDetails.Text = "대공포화 상세보기(&A)";
 			this.ContextMenuFleet_AntiAirDetails.Click += new System.EventHandler(this.ContextMenuFleet_AntiAirDetails_Click);
 			// 
 			// ContextMenuFleet_Capture
 			// 
 			this.ContextMenuFleet_Capture.Name = "ContextMenuFleet_Capture";
 			this.ContextMenuFleet_Capture.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_Capture.Text = "この画面をキャプチャ(&S)";
+			this.ContextMenuFleet_Capture.Text = "화면 캡쳐(&S)";
 			this.ContextMenuFleet_Capture.Click += new System.EventHandler(this.ContextMenuFleet_Capture_Click);
 			// 
 			// ContextMenuFleet_OutputFleetImage
 			// 
 			this.ContextMenuFleet_OutputFleetImage.Name = "ContextMenuFleet_OutputFleetImage";
 			this.ContextMenuFleet_OutputFleetImage.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_OutputFleetImage.Text = "編成画像を出力(&I)";
+			this.ContextMenuFleet_OutputFleetImage.Text = "편성 이미지 출력(&I)";
 			this.ContextMenuFleet_OutputFleetImage.Click += new System.EventHandler(this.ContextMenuFleet_OutputFleetImage_Click);
 			// 
 			// ToolTipInfo

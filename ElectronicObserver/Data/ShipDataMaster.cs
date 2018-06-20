@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ElectronicObserver.Window;
 namespace ElectronicObserver.Data
 {
 
@@ -28,15 +28,19 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int AlbumNo => !RawData.api_sortno() ? 0 : (int)RawData.api_sortno;
 
-		/// <summary>
-		/// 名前
-		/// </summary>
-		public string Name => RawData.api_name;
+        /// <summary>
+        /// 名前 번역됨
+        /// </summary>
+        public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Ships); }
+        }
 
-		/// <summary>
-		/// 読み
-		/// </summary>
-		public string NameReading => RawData.api_yomi;
+
+        /// <summary>
+        /// 読み
+        /// </summary>
+        public string NameReading => RawData.api_yomi;
 
 		/// <summary>
 		/// 艦種
@@ -599,16 +603,18 @@ namespace ElectronicObserver.Data
 		}
 
 
-		/// <summary>
-		/// 艦種名
-		/// </summary>
-		public string ShipTypeName => KCDatabase.Instance.ShipTypes[(int)ShipType].Name;
+        /// <summary>
+        /// 艦種名
+        /// </summary>
+        public string ShipTypeName
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ShipType].Name, Utility.TranslationType.ShipTypes); }
+        }
 
-
-		/// <summary>
-		/// 潜水艦系か (潜水艦/潜水空母)
-		/// </summary>
-		public bool IsSubmarine => ShipType == ShipTypes.Submarine || ShipType == ShipTypes.SubmarineAircraftCarrier;
+        /// <summary>
+        /// 潜水艦系か (潜水艦/潜水空母)
+        /// </summary>
+        public bool IsSubmarine => ShipType == ShipTypes.Submarine || ShipType == ShipTypes.SubmarineAircraftCarrier;
 
 		/// <summary>
 		/// 空母系か (軽空母/正規空母/装甲空母)
@@ -645,13 +651,13 @@ namespace ElectronicObserver.Data
 				return SystemColors.ControlText;
 			}
 
-			bool isLateModel = Name.Contains("後期型");
-			bool isRemodeled = Name.Contains("改");
-			bool isDestroyed = Name.EndsWith("-壊");
-			bool isDemon = Name.EndsWith("鬼");
-			bool isPrincess = Name.EndsWith("姫");
-			bool isWaterDemon = Name.EndsWith("水鬼");
-			bool isWaterPrincess = Name.EndsWith("水姫");
+			bool isLateModel = Name.Contains("후기형");
+			bool isRemodeled = Name.Contains("개");
+			bool isDestroyed = Name.EndsWith("-괴");
+			bool isDemon = Name.EndsWith("귀");
+			bool isPrincess = Name.EndsWith("희");
+			bool isWaterDemon = Name.EndsWith("수귀");
+			bool isWaterPrincess = Name.EndsWith("수희");
 			bool isElite = NameReading == "elite";
 			bool isFlagship = NameReading == "flagship";
 

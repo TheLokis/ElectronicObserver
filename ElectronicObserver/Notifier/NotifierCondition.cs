@@ -33,7 +33,7 @@ namespace ElectronicObserver.Notifier
 
 		private void Initialize()
 		{
-			DialogData.Title = "疲労回復";
+			DialogData.Title = "피로회복";
 			_processedFlags = new Dictionary<int, bool>();
 
 			for (int i = 1; i <= 4; i++)
@@ -86,7 +86,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int fleetID)
 		{
 
-			DialogData.Message = string.Format("#{0} 「{1}」に所属する艦娘の疲労が回復しました。",
+			DialogData.Message = string.Format("#{0} 「{1}」의 피로도 회복이 완료되었습니다!",
 				fleetID, KCDatabase.Instance.Fleet[fleetID].Name);
 
 			base.Notify();

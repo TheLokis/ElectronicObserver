@@ -73,7 +73,7 @@ namespace ElectronicObserver.Window.Dialog
 			else
 			{
 				Connection_SaveDataPath.BackColor = Color.MistyRose;
-				ToolTipInfo.SetToolTip(Connection_SaveDataPath, "指定されたフォルダは存在しません。");
+				ToolTipInfo.SetToolTip(Connection_SaveDataPath, "지정된 폴더가 존재하지 않습니다.");
 			}
 		}
 
@@ -175,14 +175,14 @@ namespace ElectronicObserver.Window.Dialog
 			string serverAddress = APIObserver.Instance.ServerAddress;
 			if (serverAddress == null)
 			{
-				MessageBox.Show("艦これに接続してから操作してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("칸코레 실행후 작업하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				return;
 			}
 
 			using (var dialog = new SaveFileDialog())
 			{
 				dialog.Filter = "Proxy Script|*.pac|File|*";
-				dialog.Title = "自動プロキシ設定スクリプトを保存する";
+				dialog.Title = "자동 프록시 설정 스크립트를 저장";
 				dialog.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
 				dialog.FileName = System.IO.Directory.GetCurrentDirectory() + "\\proxy.pac";
 
@@ -206,16 +206,16 @@ namespace ElectronicObserver.Window.Dialog
 
 						Clipboard.SetData(DataFormats.StringFormat, "file:///" + dialog.FileName.Replace('\\', '/'));
 
-						MessageBox.Show("自動プロキシ設定スクリプトを保存し、設定用URLをクリップボードにコピーしました。\r\n所定の位置に貼り付けてください。",
-							"作成完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						MessageBox.Show("자동 프록시 설정 스크립트를 저장하고 URL구성을 클립보드에 복사했습니다. \r\n붙여넣기 하세요.",
+							"작성완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 					}
 					catch (Exception ex)
 					{
 
-						Utility.ErrorReporter.SendErrorReport(ex, "自動プロキシ設定スクリプトの保存に失敗しました。");
-						MessageBox.Show("自動プロキシ設定スクリプトの保存に失敗しました。\r\n" + ex.Message, "エラー",
+						Utility.ErrorReporter.SendErrorReport(ex, "자동 프록시 구성 스크립트를 저장하는데 실패했습니다.");
+						MessageBox.Show("자동 프록시 구성 스크립트를 저장하는데 실패했습니다.\r\n" + ex.Message, "에러",
 							MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 					}
@@ -485,7 +485,7 @@ namespace ElectronicObserver.Window.Dialog
 			catch (Exception ex)
 			{
 				FormBrowser_BrowserVersion.Text = DefaultBrowserVersion.ToString();
-				Utility.Logger.Add(3, "設定：レジストリからの読み込みに失敗しました。: BrowserVersion, " + ex.Message);
+				Utility.Logger.Add(3, "설정 : 레지스트리 로드에 실패했습니다. : BrowserVersion, " + ex.Message);
 			}
 
 			try
@@ -499,7 +499,7 @@ namespace ElectronicObserver.Window.Dialog
 			catch (Exception ex)
 			{
 				FormBrowser_GPURendering.Checked = DefaultGPURendering;
-				Utility.Logger.Add(3, "設定：レジストリからの読み込みに失敗しました。: GPURendering, " + ex.Message);
+				Utility.Logger.Add(3, "설정 : 레지스트리 로드에 실패했습니다. : GPURendering, " + ex.Message);
 			}
 
 			FormBrowser_FlashQuality.Text = config.FormBrowser.FlashQuality;
@@ -785,7 +785,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void FormBrowser_ApplyRegistry_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("レジストリに登録します。よろしいですか？\r\n＊完全に適用するには再起動が必要です。", "確認",
+			if (MessageBox.Show("레지스트리를 등록합니다.\r\n＊완전히 적용하려면 컴퓨터의 재시작이 필요합니다.", "확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -800,8 +800,8 @@ namespace ElectronicObserver.Window.Dialog
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "設定：レジストリへの書き込みに失敗しました。");
-					MessageBox.Show("レジストリへの書き込みに失敗しました。\r\n" + ex.Message, "エラー",
+					Utility.ErrorReporter.SendErrorReport(ex, "설정 : 레지스트리 쓰기에 실패했습니다.");
+					MessageBox.Show("레지스트리 쓰기에 실패했습니다. \r\n" + ex.Message, "에러",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				}
@@ -812,7 +812,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void FormBrowser_DeleteRegistry_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("レジストリを削除します。よろしいですか？\r\n＊完全に適用するには再起動が必要です。", "確認",
+			if (MessageBox.Show("레지스트리를 삭제합니다. \r\n＊완전히 적용하려면 컴퓨터의 재시작이 필요합니다.", "확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -827,8 +827,8 @@ namespace ElectronicObserver.Window.Dialog
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "設定：レジストリの削除に失敗しました。");
-					MessageBox.Show("レジストリの削除に失敗しました。\r\n" + ex.Message, "エラー",
+					Utility.ErrorReporter.SendErrorReport(ex, "설정 : 레지스트리 삭제에 실패했습니다.");
+					MessageBox.Show("레지스트리 삭제에 실패했습니다.\r\n" + ex.Message, "에러",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
@@ -888,7 +888,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void BGMPlayer_SetVolumeAll_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("すべてのBGMに対して音量 " + (int)BGMPlayer_VolumeAll.Value + " を適用します。\r\nよろしいですか？\r\n", "音量一括設定の確認",
+			if (MessageBox.Show("모든 BGM의 볼륨을 " + (int)BGMPlayer_VolumeAll.Value + " 로 적용합니다. \r\n괜찮으십니까?\r\n", "볼륨 일괄 설정 확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
 			{
 
@@ -915,7 +915,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void UpdatePlayTime()
 		{
 			double elapsed = (DateTime.Now - _shownTime).TotalSeconds;
-			Log_PlayTime.Text = "プレイ時間: " + ElectronicObserver.Utility.Mathematics.DateTimeHelper.ToTimeElapsedString(TimeSpan.FromSeconds(_playTimeCache + elapsed));
+			Log_PlayTime.Text = "재생 시간: " + ElectronicObserver.Utility.Mathematics.DateTimeHelper.ToTimeElapsedString(TimeSpan.FromSeconds(_playTimeCache + elapsed));
 		}
 
 		private void PlayTimeTimer_Tick(object sender, EventArgs e)

@@ -39,7 +39,7 @@ namespace ElectronicObserver.Notifier
 
 		private void Initialize()
 		{
-			DialogData.Title = "泊地修理発動";
+			DialogData.Title = "아카시수리발동";
 
 
 			APIObserver o = APIObserver.Instance;
@@ -98,7 +98,7 @@ namespace ElectronicObserver.Notifier
 		public override void Notify()
 		{
 
-			DialogData.Message = "泊地修理の開始から20分が経過しました。";
+			DialogData.Message = "아카시배치후 20분이 경과했습니다.";
 
 			base.Notify();
 		}

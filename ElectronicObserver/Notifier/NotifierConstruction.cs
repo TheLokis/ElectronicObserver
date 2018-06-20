@@ -32,7 +32,7 @@ namespace ElectronicObserver.Notifier
 
 		private void Initialize()
 		{
-			DialogData.Title = "建造完了";
+			DialogData.Title = "건조완료";
 			processedFlags = new Dictionary<int, bool>();
 		}
 
@@ -70,8 +70,8 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int arsenalID, int shipID)
 		{
 
-			DialogData.Message = string.Format("工廠ドック #{0} で「{1}」の建造が完了しました。",
-				arsenalID, Utility.Configuration.Config.FormArsenal.ShowShipName ? KCDatabase.Instance.MasterShips[shipID].NameWithClass : "艦娘");
+			DialogData.Message = string.Format("공창 도크 #{0} 에서「{1}」의 건조가 완료되었습니다.",
+				arsenalID, Utility.Configuration.Config.FormArsenal.ShowShipName ? KCDatabase.Instance.MasterShips[shipID].NameWithClass : "함딸");
 
 			base.Notify();
 		}

@@ -19,20 +19,19 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			NightInitial = new PhaseNightInitial(this, "夜戦開始", true);
-			FriendlySupport = new PhaseFriendlySupport(this, "友軍艦隊援護");
-			// 支援なし?
-			NightBattle = new PhaseNightBattle(this, "夜戦", 0);
+            NightInitial = new PhaseNightInitial(this, "야전개시", true);
+            FriendlySupport = new PhaseFriendlySupport(this, "우군함대공격");
+            // 支援なし?
+            NightBattle = new PhaseNightBattle(this, "야전", 0);
 
-
-			foreach (var phase in GetPhases())
+            foreach (var phase in GetPhases())
 				phase.EmulateBattle(_resultHPs, _attackDamages);
 		}
 
 
 		public override string APIName => "api_req_combined_battle/midnight_battle";
 
-		public override string BattleName => "連合艦隊 夜戦";
+		public override string BattleName => "연합함대 야전";
 
 
 		public override IEnumerable<PhaseBase> GetPhases()

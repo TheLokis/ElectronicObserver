@@ -75,14 +75,14 @@
 			this.TopMenu_File_CopyToClipboard});
 			this.TopMenu_File.Name = "TopMenu_File";
 			this.TopMenu_File.Size = new System.Drawing.Size(70, 20);
-			this.TopMenu_File.Text = "ファイル(&F)";
+			this.TopMenu_File.Text = "파일(&F)";
 			// 
 			// TopMenu_File_Open
 			// 
 			this.TopMenu_File_Open.Name = "TopMenu_File_Open";
 			this.TopMenu_File_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
 			this.TopMenu_File_Open.Size = new System.Drawing.Size(271, 22);
-			this.TopMenu_File_Open.Text = "開く(&O)";
+			this.TopMenu_File_Open.Text = "열기(&O)";
 			this.TopMenu_File_Open.Click += new System.EventHandler(this.TopMenu_File_Open_Click);
 			// 
 			// toolStripSeparator2
@@ -95,7 +95,7 @@
 			this.TopMenu_File_SaveImage.Name = "TopMenu_File_SaveImage";
 			this.TopMenu_File_SaveImage.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
 			this.TopMenu_File_SaveImage.Size = new System.Drawing.Size(271, 22);
-			this.TopMenu_File_SaveImage.Text = "現在の画像を保存(&S)";
+			this.TopMenu_File_SaveImage.Text = "현재 이미지 저장(&S)";
 			this.TopMenu_File_SaveImage.Click += new System.EventHandler(this.TopMenu_File_SaveImage_Click);
 			// 
 			// TopMenu_File_SaveAllImage
@@ -104,7 +104,7 @@
 			this.TopMenu_File_SaveAllImage.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
 			| System.Windows.Forms.Keys.S)));
 			this.TopMenu_File_SaveAllImage.Size = new System.Drawing.Size(271, 22);
-			this.TopMenu_File_SaveAllImage.Text = "すべての画像を保存(&A)";
+			this.TopMenu_File_SaveAllImage.Text = "모든 이미지 저장(&A)";
 			this.TopMenu_File_SaveAllImage.Click += new System.EventHandler(this.TopMenu_File_SaveAllImage_Click);
 			// 
 			// toolStripSeparator1
@@ -117,7 +117,7 @@
 			this.TopMenu_File_CopyToClipboard.Name = "TopMenu_File_CopyToClipboard";
 			this.TopMenu_File_CopyToClipboard.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
 			this.TopMenu_File_CopyToClipboard.Size = new System.Drawing.Size(271, 22);
-			this.TopMenu_File_CopyToClipboard.Text = "クリップボードにコピー(&C)";
+			this.TopMenu_File_CopyToClipboard.Text = "클립 보드에 복사(&C)";
 			this.TopMenu_File_CopyToClipboard.Click += new System.EventHandler(this.TopMenu_File_CopyToClipboard_Click);
 			// 
 			// TopMenu_View
@@ -127,7 +127,7 @@
 			this.TopMenu_View_Zoom});
 			this.TopMenu_View.Name = "TopMenu_View";
 			this.TopMenu_View.Size = new System.Drawing.Size(61, 20);
-			this.TopMenu_View.Text = "表示(&V)";
+			this.TopMenu_View.Text = "보기(&V)";
 			// 
 			// TopMenu_View_InterpolationMode
 			// 
@@ -136,7 +136,7 @@
 			this.TopMenu_View_InterpolationMode_Smooth});
 			this.TopMenu_View_InterpolationMode.Name = "TopMenu_View_InterpolationMode";
 			this.TopMenu_View_InterpolationMode.Size = new System.Drawing.Size(122, 22);
-			this.TopMenu_View_InterpolationMode.Text = "描画(&I)";
+			this.TopMenu_View_InterpolationMode.Text = "그리기(&I)";
 			// 
 			// TopMenu_View_InterpolationMode_Sharp
 			// 
@@ -144,14 +144,14 @@
 			this.TopMenu_View_InterpolationMode_Sharp.CheckState = System.Windows.Forms.CheckState.Indeterminate;
 			this.TopMenu_View_InterpolationMode_Sharp.Name = "TopMenu_View_InterpolationMode_Sharp";
 			this.TopMenu_View_InterpolationMode_Sharp.Size = new System.Drawing.Size(130, 22);
-			this.TopMenu_View_InterpolationMode_Sharp.Text = "くっきり(&N)";
+			this.TopMenu_View_InterpolationMode_Sharp.Text = "선명하게(&N)";
 			this.TopMenu_View_InterpolationMode_Sharp.Click += new System.EventHandler(this.TopMenu_View_InterpolationMode_Sharp_Click);
 			// 
 			// TopMenu_View_InterpolationMode_Smooth
 			// 
 			this.TopMenu_View_InterpolationMode_Smooth.Name = "TopMenu_View_InterpolationMode_Smooth";
 			this.TopMenu_View_InterpolationMode_Smooth.Size = new System.Drawing.Size(130, 22);
-			this.TopMenu_View_InterpolationMode_Smooth.Text = "なめらか(&B)";
+			this.TopMenu_View_InterpolationMode_Smooth.Text = "매끄럽게(&B)";
 			this.TopMenu_View_InterpolationMode_Smooth.Click += new System.EventHandler(this.TopMenu_View_InterpolationMode_Sharp_Click);
 			// 
 			// TopMenu_View_Zoom
@@ -164,7 +164,7 @@
 			this.TopMenu_View_Zoom_Fit});
 			this.TopMenu_View_Zoom.Name = "TopMenu_View_Zoom";
 			this.TopMenu_View_Zoom.Size = new System.Drawing.Size(122, 22);
-			this.TopMenu_View_Zoom.Text = "ズーム(&Z)";
+			this.TopMenu_View_Zoom.Text = "줌(&Z)";
 			// 
 			// TopMenu_View_Zoom_In
 			// 
@@ -172,7 +172,7 @@
 			this.TopMenu_View_Zoom_In.ShortcutKeyDisplayString = "Ctrl++";
 			this.TopMenu_View_Zoom_In.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
 			this.TopMenu_View_Zoom_In.Size = new System.Drawing.Size(169, 22);
-			this.TopMenu_View_Zoom_In.Text = "拡大(&E)";
+			this.TopMenu_View_Zoom_In.Text = "확대(&E)";
 			this.TopMenu_View_Zoom_In.Click += new System.EventHandler(this.TopMenu_View_Zoom_In_Click);
 			// 
 			// TopMenu_View_Zoom_Out
@@ -181,7 +181,7 @@
 			this.TopMenu_View_Zoom_Out.ShortcutKeyDisplayString = "Ctrl+-";
 			this.TopMenu_View_Zoom_Out.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
 			this.TopMenu_View_Zoom_Out.Size = new System.Drawing.Size(169, 22);
-			this.TopMenu_View_Zoom_Out.Text = "縮小(&S)";
+			this.TopMenu_View_Zoom_Out.Text = "축소(&S)";
 			this.TopMenu_View_Zoom_Out.Click += new System.EventHandler(this.TopMenu_View_Zoom_Out_Click);
 			// 
 			// TopMenu_View_Zoom_100
@@ -202,7 +202,7 @@
 			this.TopMenu_View_Zoom_Fit.CheckOnClick = true;
 			this.TopMenu_View_Zoom_Fit.Name = "TopMenu_View_Zoom_Fit";
 			this.TopMenu_View_Zoom_Fit.Size = new System.Drawing.Size(169, 22);
-			this.TopMenu_View_Zoom_Fit.Text = "ぴったり(&F)";
+			this.TopMenu_View_Zoom_Fit.Text = "딱맞게(&F)";
 			this.TopMenu_View_Zoom_Fit.Click += new System.EventHandler(this.TopMenu_View_Zoom_Fit_Click);
 			// 
 			// DrawingPanel
@@ -221,12 +221,12 @@
 			// 
 			this.OpenSwfDialog.Filter = "SWF|*.swf|File|*";
 			this.OpenSwfDialog.Multiselect = true;
-			this.OpenSwfDialog.Title = "SWF ファイルを開く";
+			this.OpenSwfDialog.Title = "SWF 파일 열기";
 			// 
 			// SaveImageDialog
 			// 
 			this.SaveImageDialog.Filter = "PNG|*.png|File|*";
-			this.SaveImageDialog.Title = "画像の保存";
+			this.SaveImageDialog.Title = "이미지 저장";
 			// 
 			// DialogShipGraphicViewer
 			// 
@@ -242,7 +242,7 @@
 			this.MinimizeBox = false;
 			this.Name = "DialogShipGraphicViewer";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "艦船画像ビューア";
+			this.Text = "함선 이미지 뷰어";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogShipGraphicViewer_FormClosed);
 			this.Load += new System.EventHandler(this.DialogShipGraphicViewer_Load);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.DialogShipGraphicViewer_DragDrop);

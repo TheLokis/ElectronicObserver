@@ -349,7 +349,7 @@ namespace ElectronicObserver.Resource.Record
 			public override void LoadLine(string line)
 			{
 				string[] elem = line.Split(",".ToCharArray());
-				if (elem.Length < 36) throw new ArgumentException("要素数が少なすぎます。");
+				if (elem.Length < 36) throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ShipID = int.Parse(elem[0]);
 
@@ -619,20 +619,20 @@ namespace ElectronicObserver.Resource.Record
 				{
 					ShipID = shipID
 				};
-				Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[shipID].NameWithClass + "のパラメータを記録しました。");
+				Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[shipID].NameWithClass + "의 파라미터를 기록했습니다.");
 			}
 
 
 			if (e.ASW.SetEstParameter(level, aswMin, aswMax))
-				Utility.Logger.Add(1, string.Format("ShipParameter: {0} の対潜値が予測範囲から外れました( [{1} ~ {2}] ~ {3} )。",
+				Utility.Logger.Add(1, string.Format("ShipParameter: {0} 의 대잠값이 예상 범위를 벗어났습니다. ( [{1} ~ {2}] ~ {3} )",
 					KCDatabase.Instance.MasterShips[e.ShipID].NameWithClass, e.ASW.MinimumEstMin, e.ASW.MinimumEstMax, e.ASW.Maximum));
 
 			if (e.Evasion.SetEstParameter(level, evasionMin, evasionMax))
-				Utility.Logger.Add(1, string.Format("ShipParameter: {0} の回避値が予測範囲から外れました( [{1} ~ {2}] ~ {3} )。",
+				Utility.Logger.Add(1, string.Format("ShipParameter: {0} 의 회피값이 예상 범위를 벗어났습니다. ( [{1} ~ {2}] ~ {3} )",
 					KCDatabase.Instance.MasterShips[e.ShipID].NameWithClass, e.Evasion.MinimumEstMin, e.Evasion.MinimumEstMax, e.Evasion.Maximum));
 
 			if (e.LOS.SetEstParameter(level, losMin, losMax))
-				Utility.Logger.Add(1, string.Format("ShipParameter: {0} の索敵値が予測範囲から外れました( [{1} ~ {2}] ~ {3} )。",
+				Utility.Logger.Add(1, string.Format("ShipParameter: {0} 의 색적값이 예상 범위를 벗어났습니다. ( [{1} ~ {2}] ~ {3} )",
 					KCDatabase.Instance.MasterShips[e.ShipID].NameWithClass, e.LOS.MinimumEstMin, e.LOS.MinimumEstMax, e.LOS.Maximum));
 
 
@@ -665,7 +665,7 @@ namespace ElectronicObserver.Resource.Record
 				{
 					ShipID = shipID
 				};
-				Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[shipID].NameWithClass + "の初期装備を記録しました。");
+				Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[shipID].NameWithClass + "의 초기 장비를 기록했습니다.");
 			}
 
 			e.DefaultSlot = slot;
@@ -848,16 +848,16 @@ namespace ElectronicObserver.Resource.Record
 					{
 						ShipID = shipID
 					};
-					Utility.Logger.Add(2, ship.NameWithClass + "のパラメータを記録しました。");
+					Utility.Logger.Add(2, ship.NameWithClass + "의 파라미터를 기록했습니다.");
 				}
 
 
 				if (e.ASW.SetEstParameter(1, (int)elem.api_tais, Parameter.MaximumDefault))
-					Utility.Logger.Add(1, string.Format("ShipParameter: {0} の対潜値が予測範囲から外れました( [{1} ~ {2}] ~ {3} )。",
+					Utility.Logger.Add(1, string.Format("ShipParameter: {0} 의 대잠값이 예상 범위를 벗어났습니다. ( [{1} ~ {2}] ~ {3} )",
 						ship.NameWithClass, e.ASW.MinimumEstMin, e.ASW.MinimumEstMax, e.ASW.Maximum));
 
 				if (e.Evasion.SetEstParameter(1, (int)elem.api_kaih, Parameter.MaximumDefault))
-					Utility.Logger.Add(1, string.Format("ShipParameter: {0} の回避値が予測範囲から外れました( [{1} ~ {2}] ~ {3} )。",
+					Utility.Logger.Add(1, string.Format("ShipParameter: {0} 의 회피값이 예상 범위를 벗어났습니다. ( [{1} ~ {2}] ~ {3} )",
 						ship.NameWithClass, e.Evasion.MinimumEstMin, e.Evasion.MinimumEstMax, e.Evasion.Maximum));
 
 
@@ -930,7 +930,7 @@ namespace ElectronicObserver.Resource.Record
 				if (param == null)
 				{
 					param = new ShipParameterElement { ShipID = id };
-					Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[id].NameWithClass + "のパラメータを記録しました。");
+					Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[id].NameWithClass + "의 파라미터를 기록했습니다.");
 				}
 
 				param.HPMin = param.HPMax = maxhp;

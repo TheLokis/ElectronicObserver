@@ -226,7 +226,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (GeneralFont == null)
 			{
-				MessageBox.Show("フォント名が正しくありません。", "フォント変換失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("폰트 이름이 올바르지 않습니다.", "폰트 변환 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				TextGeneralFont.Text = "";
 				return;
 			}
@@ -300,21 +300,21 @@ namespace ElectronicObserver.Window.Dialog
 			// validation
 			if (args.FleetIDs == null || args.FleetIDs.Length == 0)
 			{
-				MessageBox.Show("出力する艦隊が指定されていません。", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("출력 대상 함대가 지정되어있지않습니다.", "값 오류", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				args.DisposeResources();
 				return;
 			}
 
 			if (args.HorizontalFleetCount <= 0 || args.HorizontalShipCount <= 0)
 			{
-				MessageBox.Show("艦隊・艦船の横幅は 1 以上にしてください。", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("함대 및 함선의 폭은 1 이상으로 설정해주세요.", "값 오류", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				args.DisposeResources();
 				return;
 			}
 
 			if (args.Fonts.Any(f => f == null))
 			{
-				MessageBox.Show("未入力・不正なフォントが存在します。", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("미입력되거나 잘못된 포트가 존재합니다.", "값 오류", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				args.DisposeResources();
 				return;
 			}
@@ -323,21 +323,21 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				if (string.IsNullOrWhiteSpace(OutputPath.Text))
 				{
-					MessageBox.Show("出力先ファイル名が入力されていません。", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					MessageBox.Show("출력 파일 이름이 입력되어 있지 않습니다.", "값 오류", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 					args.DisposeResources();
 					return;
 				}
 
 				if (OutputPath.Text.ToCharArray().Intersect(Path.GetInvalidPathChars()).Any())
 				{
-					MessageBox.Show("出力先に使用できない文字が含まれています。", "入力値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					MessageBox.Show("사용할 수 없는 문자가 포함되어 있습니다.", "값 오류", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 					args.DisposeResources();
 					return;
 				}
 
 				if (!DisableOverwritePrompt.Checked && File.Exists(OutputPath.Text))
 				{
-					if (MessageBox.Show(Path.GetFileName(OutputPath.Text) + "\r\nは既に存在します。\r\n上書きしますか？", "上書き確認",
+					if (MessageBox.Show(Path.GetFileName(OutputPath.Text) + "\r\n은 이미 존재하는 파일입니다.\r\n덮어 쓰시겠습니까?", "덮어쓰기 확인",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 						== System.Windows.Forms.DialogResult.No)
 					{
@@ -434,14 +434,14 @@ namespace ElectronicObserver.Window.Dialog
 				CurrentArgument = args;
 				SaveConfiguration();
 
-				Utility.Logger.Add(2, "編成画像を出力しました。");
+				Utility.Logger.Add(2, "편성 이미지를 출력했습니다.");
 
 			}
 			catch (Exception ex)
 			{
 
-				ErrorReporter.SendErrorReport(ex, "編成画像の出力に失敗しました。");
-				MessageBox.Show("編成画像の出力に失敗しました。\r\n" + ex.GetType().Name + "\r\n" + ex.Message, "編成画像出力失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				ErrorReporter.SendErrorReport(ex, "편성 이미지 출력에 실패했습니다.");
+				MessageBox.Show("편성 이미지 출력에 실패했습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message, "편성 이미지 출력 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 			}
 			finally
@@ -506,7 +506,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 
 				visibility = true;
-				ButtonAlert.Text = "艦船画像保存設定が無効です(詳細表示...)";
+				ButtonAlert.Text = "함선 이미지 저장 설정이 잘못되었습니다.(상세보기...)";
 
 			}
 
@@ -514,7 +514,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 
 				visibility = true;
-				ButtonAlert.Text = "艦船画像が足りません(詳細表示...)";
+				ButtonAlert.Text = "함선 이미지가 충분하지 않습니다.(상세보기...)";
 
 			}
 
@@ -529,8 +529,8 @@ namespace ElectronicObserver.Window.Dialog
 			if (!Utility.Configuration.Config.Connection.SaveReceivedData || !Utility.Configuration.Config.Connection.SaveSWF)
 			{
 
-				if (MessageBox.Show("編成画像を出力するためには、艦船画像を保存する設定を有効にする必要があります。\r\n有効にしますか？",
-					"艦船画像保存設定が無効です", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+				if (MessageBox.Show("편성 이미지를 출력하기 위해서는 함선 이미지 저장 설정을 활성화해야합니다.\r\n활성화 하시겠습니까?",
+					"함선 이미지 저장 설정이 잘못되었습니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 					== System.Windows.Forms.DialogResult.Yes)
 				{
 
@@ -549,8 +549,8 @@ namespace ElectronicObserver.Window.Dialog
 			if (!FleetImageGenerator.HasShipSwfImage(ToFleetIDs()))
 			{
 
-				MessageBox.Show("現在の艦隊を出力するための艦船画像データが不足しています。\r\n\r\nキャッシュを削除したのち再読み込みを行い、\r\n艦これ本体側で出力したい艦隊の編成ページを開くと\r\n艦船画像データが保存されます。",
-					"艦船画像データ不足", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("현재의 함대의 함선 이미지 데이터가 부족합니다\r\n\r\n캐시를 삭제한 후 다시 로드하시기 바랍니다.\r\n칸코레 게임에서 출력 하고 싶은 함대의 편성화면을 열때\r\n함선 이미지 데이터가 저장됩니다.",
+					"함선 이미지 데이터 부족", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
 				UpdateButtonAlert();
 			}
@@ -568,7 +568,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonClearFont_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("フォントをデフォルト設定に戻します。\r\nよろしいですか？", "クリア確認",
+			if (MessageBox.Show("폰트를 기본 설정으로 되돌립니다.\r\n진행하시겠습니까?", "초기화 확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				 == System.Windows.Forms.DialogResult.Yes)
 			{
@@ -719,7 +719,7 @@ namespace ElectronicObserver.Window.Dialog
 			SyncronizeTitleAndFileName.Enabled =
 				!OutputToClipboard.Checked;
 
-			ToolTipInfo.SetToolTip(GroupOutputPath, OutputToClipboard.Checked ? "クリップボードに出力されます。\r\nファイルに出力したい場合は、詳細タブの「クリップボードに出力する」を外してください。" : null);
+			ToolTipInfo.SetToolTip(GroupOutputPath, OutputToClipboard.Checked ? "클립보드에 출력됩니다.\r\n파일로 출력하고자 하는 경우 고급 탭의 '클립보드에 출력하기' 체크를 해제하면 됩니다." : null);
 		}
 
 		private void Comment_KeyDown(object sender, KeyEventArgs e)

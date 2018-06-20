@@ -1,4 +1,5 @@
 ﻿using ElectronicObserver.Utility.Mathematics;
+using ElectronicObserver.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -394,7 +395,7 @@ namespace ElectronicObserver.Data.ShipGroup
 			{
 				var shiptype = KCDatabase.Instance.ShipTypes[(int)RightOperand];
 				if (shiptype != null)
-					return shiptype.Name;
+                    return FormMain.Instance.Translator.GetTranslation(shiptype.Name, Utility.TranslationType.ShipTypes);
 				else
 					return $"{(int)RightOperand} (未定義)";
 

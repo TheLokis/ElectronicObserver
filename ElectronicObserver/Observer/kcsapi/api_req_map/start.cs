@@ -39,7 +39,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_map
 			int maparea = int.Parse(data["api_maparea_id"]);
 			int mapinfo = int.Parse(data["api_mapinfo_no"]);
 
-			Utility.Logger.Add(2, string.Format("#{0}「{1}」が「{2}-{3} {4}」へ出撃しました。", deckID, KCDatabase.Instance.Fleet[deckID].Name, maparea, mapinfo, KCDatabase.Instance.MapInfo[maparea * 10 + mapinfo].Name));
+			Utility.Logger.Add(2, string.Format("#{0}「{1}」가「{2}-{3} {4}」에 출격했습니다.", deckID, KCDatabase.Instance.Fleet[deckID].Name, maparea, mapinfo, KCDatabase.Instance.MapInfo[maparea * 10 + mapinfo].Name));
 
 			base.OnRequestReceived(data);
 		}

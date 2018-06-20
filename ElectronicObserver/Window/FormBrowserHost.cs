@@ -123,9 +123,9 @@ namespace ElectronicObserver.Window
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, "ブラウザプロセスの起動に失敗しました。");
-				MessageBox.Show("ブラウザプロセスの起動に失敗しました。\r\n" + ex.Message,
-					"エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Utility.ErrorReporter.SendErrorReport(ex, "브라우저를 시작하지 못했습니다.");
+				MessageBox.Show("브라우저를 시작하지 못했습니다.\r\n" + ex.Message,
+					"에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -402,11 +402,11 @@ namespace ElectronicObserver.Window
 		{
 			if (Browser.Proxy == null)
 			{
-				Utility.Logger.Add(3, "ブラウザプロセスが予期せず終了しました。");
+				Utility.Logger.Add(3, "브라우저가 예기치 않게 종료되었습니다.");
 			}
 			else
 			{
-				Utility.ErrorReporter.SendErrorReport(e, "ブラウザプロセス間で通信エラーが発生しました。");
+				Utility.ErrorReporter.SendErrorReport(e, "브라우저에 통신 에러가 발생했습니다.");
 			}
 		}
 
@@ -454,7 +454,7 @@ namespace ElectronicObserver.Window
 			catch (Exception ex)
 			{       //ブラウザプロセスが既に終了していた場合など
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ブラウザの終了中にエラーが発生しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "브라우저 종료중 오류가 발생했습니다.");
 			}
 
 		}

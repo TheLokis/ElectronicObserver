@@ -240,10 +240,10 @@ namespace ElectronicObserver.Data.Quest
 		{
 			var list = new List<DSPair>
 			{
-				new DSPair(Math.Min((double)sortieCount / sortieMax, 1.0), string.Format("出撃 {0}/{1}", sortieCount, sortieMax)),
-				new DSPair(Math.Min((double)sWinCount / sWinMax, 1.0), string.Format("S勝利 {0}/{1}", sWinCount, sWinMax)),
-				new DSPair(Math.Min((double)bossCount / bossMax, 1.0), string.Format("ボス {0}/{1}", bossCount, bossMax)),
-				new DSPair(Math.Min((double)bossWinCount / bossWinMax, 1.0), string.Format("ボス勝利 {0}/{1}", bossWinCount, bossWinMax))
+				new DSPair(Math.Min((double)sortieCount / sortieMax, 1.0), string.Format("출격 {0}/{1}", sortieCount, sortieMax)),
+				new DSPair(Math.Min((double)sWinCount / sWinMax, 1.0), string.Format("S승리 {0}/{1}", sWinCount, sWinMax)),
+				new DSPair(Math.Min((double)bossCount / bossMax, 1.0), string.Format("보스 {0}/{1}", bossCount, bossMax)),
+				new DSPair(Math.Min((double)bossWinCount / bossWinMax, 1.0), string.Format("보스승리 {0}/{1}", bossWinCount, bossWinMax))
 			};
 
 			var slist = list.Where(elem => elem.Key < 1.0).OrderBy(elem => elem.Key).Select(elem => elem.Value);
@@ -252,7 +252,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return string.Format("出撃 {0}, S勝利 {1}, ボス {2}, ボス勝利 {3}", sortieMax, sWinMax, bossMax, bossWinMax);
+			return string.Format("출격 {0}, S승리 {1}, 보스 {2}, 보스승리 {3}", sortieMax, sWinMax, bossMax, bossWinMax);
 		}
 	}
 

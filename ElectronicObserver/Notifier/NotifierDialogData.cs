@@ -166,7 +166,7 @@ namespace ElectronicObserver.Notifier
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, string.Format("通知システム: 通知画像 {0} の読み込みに失敗しました。", path));
+				Utility.ErrorReporter.SendErrorReport(ex, string.Format("알림: 알림 이미지 {0} 의 로드에 실패했습니다.", path));
 				DisposeImage();
 
 			}

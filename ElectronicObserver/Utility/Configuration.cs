@@ -397,6 +397,12 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public bool ShowSallyAreaAlertDialog { get; set; }
 
+				/// <summary>
+				/// 必要経験値計算：出撃当たりの経験値
+				/// </summary>
+				public int ExpCheckerExpUnit { get; set; }
+
+
 				public ConfigControl()
 				{
 					ConditionBorder = 40;
@@ -406,6 +412,7 @@ namespace ElectronicObserver.Utility
 					LastIsMute = false;
 					PowerEngagementForm = 1;
 					ShowSallyAreaAlertDialog = true;
+					ExpCheckerExpUnit = 2268;
 				}
 			}
 			/// <summary>動作</summary>
@@ -1434,8 +1441,8 @@ namespace ElectronicObserver.Utility
 			}
 			else
 			{
-				MessageBox.Show(SoftwareInformation.SoftwareNameJapanese + " をご利用いただきありがとうございます。\r\n設定や使用方法については「ヘルプ」→「オンラインヘルプ」を参照してください。\r\nご使用の前に必ずご一読ください。",
-					"初回起動メッセージ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show(SoftwareInformation.SoftwareNameKorean + " 를 이용해주셔서 감사합니다.。\r\n설정 및 사용 방법에 대해서는 '도움말' -> '온라인 메뉴얼'을 참조해주십시오.",
+					"초기기동 메세지", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 				// そのままだと正常に動作しなくなった(らしい)ので、ブラウザバージョンの書き込み
@@ -1447,12 +1454,12 @@ namespace ElectronicObserver.Utility
 					using (var reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(DialogConfiguration.RegistryPathMaster + DialogConfiguration.RegistryPathGPURendering))
 						reg.SetValue(Window.FormBrowserHost.BrowserExeName, DialogConfiguration.DefaultGPURendering ? 1 : 0, Microsoft.Win32.RegistryValueKind.DWord);
 
-					Utility.Logger.Add(2, "ブラウザバージョンをレジストリに書き込みました。削除したい場合は「設定→サブウィンドウ→ブラウザ2→削除」を押してください。");
+					Utility.Logger.Add(2, "브라우저 버전을 레지스트리에 입력했습니다. 삭제하려면 설정 -> 하위창 -> 브라우저2 -> 삭제를 누르십시오.");
 
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "ブラウザバージョンをレジストリに書き込めませんでした。");
+					Utility.ErrorReporter.SendErrorReport(ex, "브라우저 버전을 레지스트리에 쓸 수 없습니다.");
 				}
 			}
 		}
@@ -1473,7 +1480,7 @@ namespace ElectronicObserver.Utility
 			if (dt <= DateTimeHelper.CSVStringToTime("2017/03/30 00:00:00"))
 			{
 
-				if (MessageBox.Show("艦これ本体の仕様変更に伴い、レコードデータを変換する必要があります。\r\n変換を実行しますか？\r\n(変換しない場合、動作に問題が発生する可能性があります。)", "バージョンアップに伴う確認(～2.5.5.1)",
+				if (MessageBox.Show("칸코레 API의 변화에 따라, 기록 데이터를 변환해야 합니다. \r\n변환을 실행하시겠습니까? \r\n(변환하지 않는 경우, 작동에 문제가 생길수 있습니다.)", "버전 업에 따른 확인 (~ 2.5.5.1)",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
 				{
 
@@ -1513,7 +1520,7 @@ namespace ElectronicObserver.Utility
 					}
 					catch (Exception ex)
 					{
-						ErrorReporter.SendErrorReport(ex, "CheckUpdate: ドロップレコードのID振りなおしに失敗しました。");
+						ErrorReporter.SendErrorReport(ex, "CheckUpdate: 드랍 레코드의 변환에 실패했습니다.");
 					}
 
 
@@ -1565,7 +1572,7 @@ namespace ElectronicObserver.Utility
 					}
 					catch (Exception ex)
 					{
-						ErrorReporter.SendErrorReport(ex, "パラメータレコードの再編に失敗しました。");
+						ErrorReporter.SendErrorReport(ex, "매개변수 레코드의 변환에 실패했습니다.");
 					}
 
 				}
@@ -1616,14 +1623,14 @@ namespace ElectronicObserver.Utility
 							}
 						}
 
-						Utility.Logger.Add(2, "<= ver. 2.6.2 開発レコード重複不具合対応: 正常に完了しました。 " + (beforeCount - afterCount) + " 件の重複を削除しました。");
+						Utility.Logger.Add(2, "<= ver. 2.6.2 개발 로그 중복 문제 대응: 성공" + (beforeCount - afterCount) + " 개 중복을 제거했습니다.");
 
 					}
 
 				}
 				catch (Exception ex)
 				{
-					ErrorReporter.SendErrorReport(ex, "<= ver. 2.6.2 開発レコード重複不具合対応: 失敗しました。");
+					ErrorReporter.SendErrorReport(ex, "<= ver. 2.6.2 개발 로그 중복 문제 대응: 중복 제거에 실패했습니다.");
 				}
 			}
 
@@ -1685,7 +1692,7 @@ namespace ElectronicObserver.Utility
 						}
 						else
 						{
-							Utility.Logger.Add(1, "~2.8.2 レコード変換処理：敵艦隊レコードは既に新しいフォーマットです。処理をスキップします。");
+							Utility.Logger.Add(1, "~2.8.2 로그 변환 처리：적 함대 기록이 이미 신규 형식입니다.");
 						}
 					}
 
@@ -1726,7 +1733,7 @@ namespace ElectronicObserver.Utility
 						}
 						else
 						{
-							Utility.Logger.Add(1, "~2.8.2 レコード変換処理：ドロップレコードは既に新しいフォーマットです。処理をスキップします。");
+							Utility.Logger.Add(1, "~2.8.2 로그 변환 처리：드랍 기록이 이미 신규 형식입니다.");
 						}
 					}
 
@@ -1736,14 +1743,14 @@ namespace ElectronicObserver.Utility
 						Directory.Delete(backupDirectoryPath);
 
 
-					Utility.Logger.Add(2, "~2.8.2 レコード変換処理：正常に完了しました。");
+					Utility.Logger.Add(2, "~2.8.2 로그 변환 처리 : 완료하였습니다.");
 
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "~2.8.2 レコード変換処理：失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "~2.8.2  로그 변환 처리 : 실패하였습니다.");
 
-					if (MessageBox.Show($"互換性維持のためのレコード変換処理中にエラーが発生しました。\r\n\r\n{ex.Message}\r\n\r\n再試行しますか？\r\n（「いいえ」を選択した場合、一部の記録データが消失する可能性があります。）",
+					if (MessageBox.Show($"호환성 유지를 위해 로그 변환하는 동안 오류가 발생했습니다. \r\n\r\n{ex.Message}\r\n\r\n다시 시도 하시겠습니까?？\r\n（아니오를 선택하면 일부 로그가 소실될 수 있습니다.）",
 						"~2.8.2 レコード変換処理：" + ex.GetType().Name, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 						== DialogResult.Yes)
 						continue;
@@ -1848,12 +1855,12 @@ namespace ElectronicObserver.Utility
 				drop.SaveAll(RecordManager.Instance.MasterPath);
 
 
-				Utility.Logger.Add(2, "<= ver. 3.0.7 難易度変更に伴うレコードファイルの修正: 正常に完了しました。");
+				Utility.Logger.Add(2, "<= ver. 3.0.7 난이도 변경에 따른 로그 파일 수정: 정상적으로 완료하였습니다.");
 
 			}
 			catch (Exception ex)
 			{
-				ErrorReporter.SendErrorReport(ex, "<= ver. 3.0.7 難易度変更に伴うレコードファイルの修正: 失敗しました。");
+				ErrorReporter.SendErrorReport(ex, "<= ver. 3.0.7 난이도 변경에 따른 로그 파일 수정: 실패했습니다.");
 			}
 
 		}
