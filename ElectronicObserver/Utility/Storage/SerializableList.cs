@@ -73,7 +73,7 @@ namespace ElectronicObserver.Utility.Storage
 			{
 
 				if (!suppressError)
-					Utility.ErrorReporter.SendErrorReport(ex, "SerializableList: StringToList に失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "SerializableList: StringToList 에 실패했습니다.");
 			}
 
 			return null;
@@ -93,7 +93,7 @@ namespace ElectronicObserver.Utility.Storage
 			{
 
 				if (!suppressError)
-					Utility.ErrorReporter.SendErrorReport(ex, "SerializableList: ListToString に失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "SerializableList: ListToString 에 실패했습니다.");
 			}
 
 			return "";

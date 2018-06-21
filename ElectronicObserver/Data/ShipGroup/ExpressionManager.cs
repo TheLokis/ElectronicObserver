@@ -89,7 +89,7 @@ namespace ElectronicObserver.Data.ShipGroup
 		{
 
 			if (predicate == null)
-				throw new InvalidOperationException("式がコンパイルされていません。");
+				throw new InvalidOperationException("식이 컴파일 되지 않았습니다.");
 
 			return list.AsQueryable().Where(predicate).AsEnumerable();
 		}
@@ -102,7 +102,7 @@ namespace ElectronicObserver.Data.ShipGroup
 		{
 
 			if (Expressions == null)
-				return "(なし)";
+				return "(없음)";
 
 			StringBuilder sb = new StringBuilder();
 			foreach (var ex in Expressions)
@@ -112,11 +112,11 @@ namespace ElectronicObserver.Data.ShipGroup
 				else if (sb.Length == 0)
 					sb.Append(ex.ToString());
 				else
-					sb.AppendFormat(" {0} {1}", ex.ExternalAnd ? "かつ" : "または", ex.ToString());
+					sb.AppendFormat(" {0} {1}", ex.ExternalAnd ? "하고" : "또는", ex.ToString());
 			}
 
 			if (sb.Length == 0)
-				sb.Append("(なし)");
+				sb.Append("(없음)");
 			return sb.ToString();
 		}
 

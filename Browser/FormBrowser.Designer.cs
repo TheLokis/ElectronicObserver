@@ -129,7 +129,7 @@
 			// 
 			this.ContextMenuTool_ShowToolMenu.Name = "ContextMenuTool_ShowToolMenu";
 			this.ContextMenuTool_ShowToolMenu.Size = new System.Drawing.Size(171, 22);
-			this.ContextMenuTool_ShowToolMenu.Text = "ツールメニューを表示";
+			this.ContextMenuTool_ShowToolMenu.Text = "툴 메뉴를 표시";
 			this.ContextMenuTool_ShowToolMenu.Click += new System.EventHandler(this.ContextMenuTool_ShowToolMenu_Click);
 			// 
 			// ToolMenu
@@ -156,7 +156,7 @@
 			this.ToolMenu_ScreenShot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.ToolMenu_ScreenShot.Name = "ToolMenu_ScreenShot";
 			this.ToolMenu_ScreenShot.Size = new System.Drawing.Size(23, 22);
-			this.ToolMenu_ScreenShot.Text = "スクリーンショット";
+			this.ToolMenu_ScreenShot.Text = "스크린 샷";
 			this.ToolMenu_ScreenShot.Click += new System.EventHandler(this.ToolMenu_ScreenShot_Click);
 			// 
 			// toolStripSeparator1
@@ -170,7 +170,7 @@
 			this.ToolMenu_Zoom.Name = "ToolMenu_Zoom";
 			this.ToolMenu_Zoom.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
 			this.ToolMenu_Zoom.Size = new System.Drawing.Size(15, 22);
-			this.ToolMenu_Zoom.Text = "ズーム";
+			this.ToolMenu_Zoom.Text = "줌";
 			this.ToolMenu_Zoom.DropDownOpening += new System.EventHandler(this.ToolMenu_Zoom_DropDownOpening);
 			// 
 			// toolStripSeparator2
@@ -183,7 +183,7 @@
 			this.ToolMenu_Mute.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.ToolMenu_Mute.Name = "ToolMenu_Mute";
 			this.ToolMenu_Mute.Size = new System.Drawing.Size(23, 22);
-			this.ToolMenu_Mute.Text = "ミュート";
+			this.ToolMenu_Mute.Text = "음소거";
 			this.ToolMenu_Mute.Click += new System.EventHandler(this.ToolMenu_Mute_Click);
 			// 
 			// toolStripSeparator13
@@ -196,7 +196,7 @@
 			this.ToolMenu_Refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.ToolMenu_Refresh.Name = "ToolMenu_Refresh";
 			this.ToolMenu_Refresh.Size = new System.Drawing.Size(23, 22);
-			this.ToolMenu_Refresh.Text = "更新";
+			this.ToolMenu_Refresh.Text = "업데이트";
 			this.ToolMenu_Refresh.Click += new System.EventHandler(this.ToolMenu_Refresh_Click);
 			// 
 			// ToolMenu_NavigateToLogInPage
@@ -204,7 +204,7 @@
 			this.ToolMenu_NavigateToLogInPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.ToolMenu_NavigateToLogInPage.Name = "ToolMenu_NavigateToLogInPage";
 			this.ToolMenu_NavigateToLogInPage.Size = new System.Drawing.Size(23, 22);
-			this.ToolMenu_NavigateToLogInPage.Text = "ログインページへ移動";
+			this.ToolMenu_NavigateToLogInPage.Text = "로그인 페이지로 이동";
 			this.ToolMenu_NavigateToLogInPage.Click += new System.EventHandler(this.ToolMenu_NavigateToLogInPage_Click);
 			// 
 			// toolStripSeparator8
@@ -235,7 +235,7 @@
 			this.ToolMenu_Other.Name = "ToolMenu_Other";
 			this.ToolMenu_Other.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
 			this.ToolMenu_Other.Size = new System.Drawing.Size(15, 22);
-			this.ToolMenu_Other.Text = "その他";
+			this.ToolMenu_Other.Text = "기타";
 			this.ToolMenu_Other.DropDownOpening += new System.EventHandler(this.ToolMenu_Other_DropDownOpening);
 			// 
 			// ToolMenu_Other_ScreenShot
@@ -243,7 +243,7 @@
 			this.ToolMenu_Other_ScreenShot.Name = "ToolMenu_Other_ScreenShot";
 			this.ToolMenu_Other_ScreenShot.ShortcutKeys = System.Windows.Forms.Keys.F2;
 			this.ToolMenu_Other_ScreenShot.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_ScreenShot.Text = "スクリーンショット(&S)";
+			this.ToolMenu_Other_ScreenShot.Text = "스크린 샷(&S)";
 			this.ToolMenu_Other_ScreenShot.Click += new System.EventHandler(this.ToolMenu_Other_ScreenShot_Click);
 			// 
 			// ToolMenu_Other_LastScreenShot
@@ -254,7 +254,7 @@
 			this.ToolMenu_Other_LastScreenShot_CopyToClipboard});
 			this.ToolMenu_Other_LastScreenShot.Name = "ToolMenu_Other_LastScreenShot";
 			this.ToolMenu_Other_LastScreenShot.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_LastScreenShot.Text = "直前のスクリーンショット(&P)";
+			this.ToolMenu_Other_LastScreenShot.Text = "마지막 스크린 샷(&P)";
 			this.ToolMenu_Other_LastScreenShot.DropDownOpening += new System.EventHandler(this.ToolMenu_Other_LastScreenShot_DropDownOpening);
 			// 
 			// toolStripSeparator15
@@ -266,7 +266,7 @@
 			// 
 			this.ToolMenu_Other_LastScreenShot_OpenScreenShotFolder.Name = "ToolMenu_Other_LastScreenShot_OpenScreenShotFolder";
 			this.ToolMenu_Other_LastScreenShot_OpenScreenShotFolder.Size = new System.Drawing.Size(187, 22);
-			this.ToolMenu_Other_LastScreenShot_OpenScreenShotFolder.Text = "保存フォルダを開く(&O)";
+			this.ToolMenu_Other_LastScreenShot_OpenScreenShotFolder.Text = "저장 폴더 열기(&O)";
 			this.ToolMenu_Other_LastScreenShot_OpenScreenShotFolder.Click += new System.EventHandler(this.ToolMenu_Other_LastScreenShot_OpenScreenShotFolder_Click);
 			// 
 			// toolStripSeparator4
@@ -297,14 +297,14 @@
 			this.ToolMenu_Other_Zoom_400});
 			this.ToolMenu_Other_Zoom.Name = "ToolMenu_Other_Zoom";
 			this.ToolMenu_Other_Zoom.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_Zoom.Text = "ズーム(&Z)";
+			this.ToolMenu_Other_Zoom.Text = "줌(&Z)";
 			// 
 			// ToolMenu_Other_Zoom_Current
 			// 
 			this.ToolMenu_Other_Zoom_Current.Enabled = false;
 			this.ToolMenu_Other_Zoom_Current.Name = "ToolMenu_Other_Zoom_Current";
 			this.ToolMenu_Other_Zoom_Current.Size = new System.Drawing.Size(110, 22);
-			this.ToolMenu_Other_Zoom_Current.Text = "現在%";
+			this.ToolMenu_Other_Zoom_Current.Text = "현재%";
 			// 
 			// toolStripSeparator9
 			// 
@@ -316,7 +316,7 @@
 			this.ToolMenu_Other_Zoom_Fit.CheckOnClick = true;
 			this.ToolMenu_Other_Zoom_Fit.Name = "ToolMenu_Other_Zoom_Fit";
 			this.ToolMenu_Other_Zoom_Fit.Size = new System.Drawing.Size(110, 22);
-			this.ToolMenu_Other_Zoom_Fit.Text = "ぴったり";
+			this.ToolMenu_Other_Zoom_Fit.Text = "딱맞춤";
 			this.ToolMenu_Other_Zoom_Fit.Click += new System.EventHandler(this.ToolMenu_Other_Zoom_Fit_Click);
 			// 
 			// toolStripSeparator14
@@ -425,14 +425,14 @@
 			// 
 			this.ToolMenu_Other_Volume.Name = "ToolMenu_Other_Volume";
 			this.ToolMenu_Other_Volume.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_Volume.Text = "音量(&V)";
+			this.ToolMenu_Other_Volume.Text = "볼륨(&V)";
 			// 
 			// ToolMenu_Other_Mute
 			// 
 			this.ToolMenu_Other_Mute.Name = "ToolMenu_Other_Mute";
 			this.ToolMenu_Other_Mute.ShortcutKeys = System.Windows.Forms.Keys.F7;
 			this.ToolMenu_Other_Mute.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_Mute.Text = "ミュート(&M)";
+			this.ToolMenu_Other_Mute.Text = "음소거(&M)";
 			this.ToolMenu_Other_Mute.Click += new System.EventHandler(this.ToolMenu_Other_Mute_Click);
 			// 
 			// toolStripSeparator7
@@ -445,21 +445,21 @@
 			this.ToolMenu_Other_Refresh.Name = "ToolMenu_Other_Refresh";
 			this.ToolMenu_Other_Refresh.ShortcutKeys = System.Windows.Forms.Keys.F5;
 			this.ToolMenu_Other_Refresh.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_Refresh.Text = "更新(&R)";
+			this.ToolMenu_Other_Refresh.Text = "새로고침(&R)";
 			this.ToolMenu_Other_Refresh.Click += new System.EventHandler(this.ToolMenu_Other_Refresh_Click);
 			// 
 			// ToolMenu_Other_NavigateToLogInPage
 			// 
 			this.ToolMenu_Other_NavigateToLogInPage.Name = "ToolMenu_Other_NavigateToLogInPage";
 			this.ToolMenu_Other_NavigateToLogInPage.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_NavigateToLogInPage.Text = "ログインページへ移動(&L)";
+			this.ToolMenu_Other_NavigateToLogInPage.Text = "로그인 페이지로 이동(&L)";
 			this.ToolMenu_Other_NavigateToLogInPage.Click += new System.EventHandler(this.ToolMenu_Other_NavigateToLogInPage_Click);
 			// 
 			// ToolMenu_Other_Navigate
 			// 
 			this.ToolMenu_Other_Navigate.Name = "ToolMenu_Other_Navigate";
 			this.ToolMenu_Other_Navigate.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_Navigate.Text = "移動(&N)...";
+			this.ToolMenu_Other_Navigate.Text = "이동(&N)...";
 			this.ToolMenu_Other_Navigate.Click += new System.EventHandler(this.ToolMenu_Other_Navigate_Click);
 			// 
 			// toolStripSeparator5
@@ -472,14 +472,14 @@
 			this.ToolMenu_Other_AppliesStyleSheet.CheckOnClick = true;
 			this.ToolMenu_Other_AppliesStyleSheet.Name = "ToolMenu_Other_AppliesStyleSheet";
 			this.ToolMenu_Other_AppliesStyleSheet.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_AppliesStyleSheet.Text = "スタイルシートを適用する";
+			this.ToolMenu_Other_AppliesStyleSheet.Text = "스타일 시트를 적용";
 			this.ToolMenu_Other_AppliesStyleSheet.Click += new System.EventHandler(this.ToolMenu_Other_AppliesStyleSheet_Click);
 			// 
 			// ToolMenu_Other_ClearCache
 			// 
 			this.ToolMenu_Other_ClearCache.Name = "ToolMenu_Other_ClearCache";
 			this.ToolMenu_Other_ClearCache.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_ClearCache.Text = "キャッシュのクリア(&C)";
+			this.ToolMenu_Other_ClearCache.Text = "캐시 삭제(&C)";
 			this.ToolMenu_Other_ClearCache.Click += new System.EventHandler(this.ToolMenu_Other_ClearCache_Click);
 			// 
 			// toolStripSeparator6
@@ -497,42 +497,42 @@
 			this.ToolMenu_Other_Alignment_Invisible});
 			this.ToolMenu_Other_Alignment.Name = "ToolMenu_Other_Alignment";
 			this.ToolMenu_Other_Alignment.Size = new System.Drawing.Size(199, 22);
-			this.ToolMenu_Other_Alignment.Text = "配置(&A)";
+			this.ToolMenu_Other_Alignment.Text = "배치(&A)";
 			this.ToolMenu_Other_Alignment.DropDownOpening += new System.EventHandler(this.ToolMenu_Other_Alignment_DropDownOpening);
 			// 
 			// ToolMenu_Other_Alignment_Top
 			// 
 			this.ToolMenu_Other_Alignment_Top.Name = "ToolMenu_Other_Alignment_Top";
 			this.ToolMenu_Other_Alignment_Top.Size = new System.Drawing.Size(125, 22);
-			this.ToolMenu_Other_Alignment_Top.Text = "上(&T)";
+			this.ToolMenu_Other_Alignment_Top.Text = "상단(&T)";
 			this.ToolMenu_Other_Alignment_Top.Click += new System.EventHandler(this.ToolMenu_Other_Alignment_Click);
 			// 
 			// ToolMenu_Other_Alignment_Bottom
 			// 
 			this.ToolMenu_Other_Alignment_Bottom.Name = "ToolMenu_Other_Alignment_Bottom";
 			this.ToolMenu_Other_Alignment_Bottom.Size = new System.Drawing.Size(125, 22);
-			this.ToolMenu_Other_Alignment_Bottom.Text = "下(&B)";
+			this.ToolMenu_Other_Alignment_Bottom.Text = "하단(&B)";
 			this.ToolMenu_Other_Alignment_Bottom.Click += new System.EventHandler(this.ToolMenu_Other_Alignment_Click);
 			// 
 			// ToolMenu_Other_Alignment_Left
 			// 
 			this.ToolMenu_Other_Alignment_Left.Name = "ToolMenu_Other_Alignment_Left";
 			this.ToolMenu_Other_Alignment_Left.Size = new System.Drawing.Size(125, 22);
-			this.ToolMenu_Other_Alignment_Left.Text = "左(&L)";
+			this.ToolMenu_Other_Alignment_Left.Text = "좌측(&L)";
 			this.ToolMenu_Other_Alignment_Left.Click += new System.EventHandler(this.ToolMenu_Other_Alignment_Click);
 			// 
 			// ToolMenu_Other_Alignment_Right
 			// 
 			this.ToolMenu_Other_Alignment_Right.Name = "ToolMenu_Other_Alignment_Right";
 			this.ToolMenu_Other_Alignment_Right.Size = new System.Drawing.Size(125, 22);
-			this.ToolMenu_Other_Alignment_Right.Text = "右(&R)";
+			this.ToolMenu_Other_Alignment_Right.Text = "우측(&R)";
 			this.ToolMenu_Other_Alignment_Right.Click += new System.EventHandler(this.ToolMenu_Other_Alignment_Click);
 			// 
 			// ToolMenu_Other_Alignment_Invisible
 			// 
 			this.ToolMenu_Other_Alignment_Invisible.Name = "ToolMenu_Other_Alignment_Invisible";
 			this.ToolMenu_Other_Alignment_Invisible.Size = new System.Drawing.Size(125, 22);
-			this.ToolMenu_Other_Alignment_Invisible.Text = "非表示(&I)";
+			this.ToolMenu_Other_Alignment_Invisible.Text = "미표시(&I)";
 			this.ToolMenu_Other_Alignment_Invisible.Click += new System.EventHandler(this.ToolMenu_Other_Alignment_Invisible_Click);
 			// 
 			// Icons
@@ -545,7 +545,7 @@
 			// 
 			this.ToolMenu_Other_LastScreenShot_CopyToClipboard.Name = "ToolMenu_Other_LastScreenShot_CopyToClipboard";
 			this.ToolMenu_Other_LastScreenShot_CopyToClipboard.Size = new System.Drawing.Size(187, 22);
-			this.ToolMenu_Other_LastScreenShot_CopyToClipboard.Text = "クリップボードにコピー(&C)";
+			this.ToolMenu_Other_LastScreenShot_CopyToClipboard.Text = "클립 보드에 복사(&C)";
 			this.ToolMenu_Other_LastScreenShot_CopyToClipboard.Click += new System.EventHandler(this.ToolMenu_Other_LastScreenShot_CopyToClipboard_Click);
 			// 
 			// FormBrowser
@@ -557,7 +557,7 @@
 			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.KeyPreview = true;
 			this.Name = "FormBrowser";
-			this.Text = "七四式電子観測儀 ブラウザ";
+			this.Text = "74식 전자관측의 브라우저";
 			this.Activated += new System.EventHandler(this.FormBrowser_Activated);
 			this.Load += new System.EventHandler(this.FormBrowser_Load);
 			this.SizeAdjuster.ResumeLayout(false);

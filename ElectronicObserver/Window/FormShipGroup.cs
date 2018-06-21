@@ -151,10 +151,10 @@ namespace ElectronicObserver.Window
 			if (groups.ShipGroups.Count == 0)
 			{
 
-				Utility.Logger.Add(3, "ShipGroup: グループが見つかりませんでした。デフォルトに戻すには、一旦終了後 " + ShipGroupManager.DefaultFilePath + " を削除してください。");
+				Utility.Logger.Add(3, "ShipGroup: 그룹을 찾을 수 없습니다. 기본값으로 돌리려면 종료후 " + ShipGroupManager.DefaultFilePath + " 를 삭제하십시오.");
 
 				var group = KCDatabase.Instance.ShipGroup.Add();
-				group.Name = "全所属艦";
+				group.Name = "모든함선";
 
 				for (int i = 0; i < ShipView.Columns.Count; i++)
 				{
@@ -558,9 +558,9 @@ namespace ElectronicObserver.Window
 			//status bar
 			if (KCDatabase.Instance.Ships.Count > 0)
 			{
-				Status_ShipCount.Text = string.Format("所属: {0}隻", group.Members.Count);
-				Status_LevelTotal.Text = string.Format("合計Lv: {0}", group.MembersInstance.Where(s => s != null).Sum(s => s.Level));
-				Status_LevelAverage.Text = string.Format("平均Lv: {0:F2}", group.Members.Count > 0 ? group.MembersInstance.Where(s => s != null).Average(s => s.Level) : 0);
+				Status_ShipCount.Text = string.Format("소속: {0}隻", group.Members.Count);
+				Status_LevelTotal.Text = string.Format("합계Lv: {0}", group.MembersInstance.Where(s => s != null).Sum(s => s.Level));
+				Status_LevelAverage.Text = string.Format("평균Lv: {0:F2}", group.Members.Count > 0 ? group.MembersInstance.Where(s => s != null).Average(s => s.Level) : 0);
 			}
 		}
 
@@ -582,7 +582,7 @@ namespace ElectronicObserver.Window
 
 			if (group == null)
 			{
-				Utility.Logger.Add(3, "エラー：存在しないグループを参照しようとしました。開発者に連絡してください");
+				Utility.Logger.Add(3, "에러：존재하지 않는 그룹을 참조하였습니다. 개발자에게 연락하십시오.");
 				return;
 			}
 
@@ -649,12 +649,12 @@ namespace ElectronicObserver.Window
 			if (index < 5)
 			{
 				return (index >= ship.SlotSize && ship.Slot[index] == -1) ? "" :
-					ship.SlotInstance[index]?.NameWithLevel ?? "(なし)";
+					ship.SlotInstance[index]?.NameWithLevel ?? "(없음)";
 			}
 			else
 			{
 				return ship.ExpansionSlot == 0 ? "" :
-					ship.ExpansionSlotInstance?.NameWithLevel ?? "(なし)";
+					ship.ExpansionSlotInstance?.NameWithLevel ?? "(없음)";
 			}
 
 		}
@@ -687,17 +687,17 @@ namespace ElectronicObserver.Window
 				if (ShipView.Rows.GetRowCount(DataGridViewElementStates.Selected) >= 2)
 				{
 					var levels = ShipView.SelectedRows.Cast<DataGridViewRow>().Select(r => (int)r.Cells[ShipView_Level.Index].Value);
-					Status_ShipCount.Text = string.Format("選択: {0} / {1}隻", ShipView.Rows.GetRowCount(DataGridViewElementStates.Selected), group.Members.Count);
-					Status_LevelTotal.Text = string.Format("合計Lv: {0}", levels.Sum());
-					Status_LevelAverage.Text = string.Format("平均Lv: {0:F2}", levels.Average());
+					Status_ShipCount.Text = string.Format("선택: {0} / {1}척", ShipView.Rows.GetRowCount(DataGridViewElementStates.Selected), group.Members.Count);
+					Status_LevelTotal.Text = string.Format("합계Lv: {0}", levels.Sum());
+					Status_LevelAverage.Text = string.Format("평균Lv: {0:F2}", levels.Average());
 
 
 				}
 				else
 				{
-					Status_ShipCount.Text = string.Format("所属: {0}隻", group.Members.Count);
-					Status_LevelTotal.Text = string.Format("合計Lv: {0}", group.MembersInstance.Where(s => s != null).Sum(s => s.Level));
-					Status_LevelAverage.Text = string.Format("平均Lv: {0:F2}", group.Members.Count > 0 ? group.MembersInstance.Where(s => s != null).Average(s => s.Level) : 0);
+					Status_ShipCount.Text = string.Format("소속: {0}척", group.Members.Count);
+					Status_LevelTotal.Text = string.Format("합계Lv: {0}", group.MembersInstance.Where(s => s != null).Sum(s => s.Level));
+					Status_LevelAverage.Text = string.Format("평균Lv: {0:F2}", group.Members.Count > 0 ? group.MembersInstance.Where(s => s != null).Average(s => s.Level) : 0);
 				}
 
 			}
@@ -715,8 +715,8 @@ namespace ElectronicObserver.Window
 
 			if (e.ColumnIndex == ShipView_ShipType.Index)
 			{
-				e.Value = KCDatabase.Instance.ShipTypes[(int)e.Value].Name;
-				e.FormattingApplied = true;
+                e.Value = FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)e.Value].Name, TranslationType.ShipTypes);
+                e.FormattingApplied = true;
 
 			}
 			else if (e.ColumnIndex == ShipView_Fleet.Index)
@@ -731,7 +731,7 @@ namespace ElectronicObserver.Window
 
 				if ((int)e.Value < 0)
 				{
-					e.Value = "入渠 #" + ((int)e.Value + 1000);
+					e.Value = "입거 #" + ((int)e.Value + 1000);
 				}
 				else
 				{
@@ -947,7 +947,7 @@ namespace ElectronicObserver.Window
 		private void MenuGroup_Add_Click(object sender, EventArgs e)
 		{
 
-			using (var dialog = new DialogTextInput("グループを追加", "グループ名を入力してください："))
+			using (var dialog = new DialogTextInput("그룹을 추가", "그룹 이름을 입력하십시오："))
 			{
 
 				if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -981,7 +981,7 @@ namespace ElectronicObserver.Window
 			if (senderLabel == null)
 				return;     //想定外
 
-			using (var dialog = new DialogTextInput("グループをコピー", "グループ名を入力してください："))
+			using (var dialog = new DialogTextInput("그룹을 복사", "그룹 이름을 입력하십시오："))
 			{
 
 				if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -1012,7 +1012,7 @@ namespace ElectronicObserver.Window
 
 			if (group != null)
 			{
-				if (MessageBox.Show(string.Format("グループ [{0}] を削除しますか？\r\nこの操作は元に戻せません。", group.Name), "確認",
+				if (MessageBox.Show(string.Format("그룹 [{0}] 을 삭제하시겠습니까?\r\n이 작업은 취소할 수 없습니다.", group.Name), "확인",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 					== System.Windows.Forms.DialogResult.Yes)
 				{
@@ -1030,7 +1030,7 @@ namespace ElectronicObserver.Window
 			}
 			else
 			{
-				MessageBox.Show("このグループは削除できません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("이 그룹은 삭제할 수 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 		}
 
@@ -1045,7 +1045,7 @@ namespace ElectronicObserver.Window
 			if (group != null)
 			{
 
-				using (var dialog = new DialogTextInput("グループ名の変更", "グループ名を入力してください："))
+				using (var dialog = new DialogTextInput("그룹 이름 변경", "그룹 이름을 입력하십시오："))
 				{
 
 					dialog.InputtedText = group.Name;
@@ -1061,7 +1061,7 @@ namespace ElectronicObserver.Window
 			}
 			else
 			{
-				MessageBox.Show("このグループの名前を変更することはできません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+				MessageBox.Show("이 그룹의 이름을 변경할 수 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
 
 		}
@@ -1150,7 +1150,7 @@ namespace ElectronicObserver.Window
 
 			if (group == null)
 			{
-				MessageBox.Show("このグループは変更できません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				MessageBox.Show("이 그룹은 변경할 수 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				return;
 			}
 
@@ -1176,7 +1176,7 @@ namespace ElectronicObserver.Window
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ShipGroup: 列の設定ダイアログでエラーが発生しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "ShipGroup: 열 설정 창에서 오류가 발생했습니다");
 			}
 		}
 
@@ -1218,7 +1218,7 @@ namespace ElectronicObserver.Window
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "ShipGroup: フィルタダイアログでエラーが発生しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "ShipGroup: 필터 창에서 오류가 발생했습니다.");
 				}
 
 			}
@@ -1283,7 +1283,7 @@ namespace ElectronicObserver.Window
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "ShipGroup: 自動ソート順設定ダイアログでエラーが発生しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "ShipGroup: 자동 정렬 순서 창에서 오류가 발생했습니다.");
 				}
 			}
 
@@ -1317,7 +1317,7 @@ namespace ElectronicObserver.Window
 		private void MenuMember_AddToGroup_Click(object sender, EventArgs e)
 		{
 
-			using (var dialog = new DialogTextSelect("グループの選択", "追加するグループを選択してください：",
+			using (var dialog = new DialogTextSelect("그룹 선택", "추가할 그룹을 선택하십시오.：",
 				KCDatabase.Instance.ShipGroup.ShipGroups.Values.ToArray()))
 			{
 
@@ -1345,7 +1345,7 @@ namespace ElectronicObserver.Window
 			if (ships.Count() == 0)
 				return;
 
-			using (var dialog = new DialogTextInput("グループの追加", "グループ名を入力してください："))
+			using (var dialog = new DialogTextInput("그룹 추가", "그룹 이름을 입력하십시오.："))
 			{
 
 				if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -1396,9 +1396,9 @@ namespace ElectronicObserver.Window
 
 
 
-		private static readonly string ShipCSVHeaderUser = "固有ID,艦種,艦名,Lv,Exp,next,改装まで,耐久現在,耐久最大,Cond,燃料,弾薬,装備1,装備2,装備3,装備4,装備5,補強装備,入渠,火力,火力改修,火力合計,雷装,雷装改修,雷装合計,対空,対空改修,対空合計,装甲,装甲改修,装甲合計,対潜,対潜合計,回避,回避合計,索敵,索敵合計,運,運改修,運合計,射程,速力,ロック,出撃先,航空威力,砲撃威力,空撃威力,対潜威力,雷撃威力,夜戦威力";
+        private static readonly string ShipCSVHeaderUser = "고유ID,함종,함명,Lv,Exp,next,개장까지,내구,최대내구,피로,연료,탄약,슬롯1,슬롯2,슬롯3,슬롯4,슬롯5,보강슬롯,입거,기본화력,화력개수,화력,기본뇌장,뇌장개수,뇌장,기본대공,대공개수,대공,기본장갑,장갑개수,장갑,기본대잠,대잠,기본회피,회피,기본색적,색적,기본운,운 개수,운,사정,속력,잠금,출격지,항공위력,포격위력,공습위력,대잠위력,뇌격위력,화뇌합";
 
-		private static readonly string ShipCSVHeaderData = "固有ID,艦種,艦名,艦船ID,Lv,Exp,next,改装まで,耐久現在,耐久最大,Cond,燃料,弾薬,装備1,装備2,装備3,装備4,装備5,補強装備,装備ID1,装備ID2,装備ID3,装備ID4,装備ID5,補強装備ID,艦載機1,艦載機2,艦載機3,艦載機4,艦載機5,入渠,入渠燃料,入渠鋼材,火力,火力改修,火力合計,雷装,雷装改修,雷装合計,対空,対空改修,対空合計,装甲,装甲改修,装甲合計,対潜,対潜合計,回避,回避合計,索敵,索敵合計,運,運改修,運合計,射程,速力,ロック,出撃先,航空威力,砲撃威力,空撃威力,対潜威力,雷撃威力,夜戦威力";
+        private static readonly string ShipCSVHeaderData = "고유ID,함종,함명,함선ID,Lv,Exp,next,개장까지,내구,최대내구,피로,연료,탄약,슬롯1,슬롯2,슬롯3,슬롯4,슬롯5,보강슬롯,장비ID1,장비ID2,장비ID3,장비ID4,장비ID5,보강슬롯ID,탑재1,탑재2,탑재3,탑재4,탑재5,입거,입거연료,입거강재,기본화력,화력개수,화력,기본뇌장,뇌장개수,뇌장,기본대공,대공개수,대공,기본장갑,장갑개수,장갑,기본대잠,대잠,기본회피,회피,기본색적,색적,기본운,운 개수,운,사정,속력,잠금,출격지,항공전력,포격위력,공습위력,대잠공격,뇌격위력,화뇌합";
 
 
 		private void MenuMember_CSVOutput_Click(object sender, EventArgs e)
@@ -1576,13 +1576,13 @@ namespace ElectronicObserver.Window
 
 						}
 
-						Utility.Logger.Add(2, "艦船グループ CSVを " + dialog.OutputPath + " に保存しました。");
+						Utility.Logger.Add(2, "함선 그룹 CSV를 " + dialog.OutputPath + " 에 저장했습니다.");
 
 					}
 					catch (Exception ex)
 					{
-						Utility.ErrorReporter.SendErrorReport(ex, "艦船グループ CSV の出力に失敗しました。");
-						MessageBox.Show("艦船グループ CSVの出力に失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Utility.ErrorReporter.SendErrorReport(ex, "함선 그룹 CSV 의 출력에 실패했습니다.");
+						MessageBox.Show("함선 그룹 CSV의 출력에 실패했습니다.\r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 
 				}

@@ -19,9 +19,9 @@ namespace ElectronicObserver.Window.Dialog
 
 		private DevelopmentRecord _record;
 
-		private const string NameAny = "(全て)";
-		private const string NameNotExist = "(失敗)";
-		private const string NameExist = "(成功)";
+		private const string NameAny = "(전부)";
+		private const string NameNotExist = "(실패)";
+		private const string NameExist = "(성공)";
 
 
 		private class SearchArgument
@@ -202,7 +202,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (Searcher.IsBusy)
 			{
-				if (MessageBox.Show("検索を中止しますか?", "検索中です", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
+				if (MessageBox.Show("검색을 취소 하시겠습니까?", "검색중입니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 					== System.Windows.Forms.DialogResult.Yes)
 				{
 					Searcher.CancelAsync();
@@ -237,7 +237,7 @@ namespace ElectronicObserver.Window.Dialog
 				RecordView_Header.Width = 50;
 				RecordView_Header.HeaderText = "";
 				RecordView_Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-				RecordView_Name.HeaderText = "装備";
+				RecordView_Name.HeaderText = "장비";
 				RecordView_Date.Width = 140;
 				RecordView_Date.Visible = true;
 				RecordView_Recipe.Width = 120;
@@ -251,20 +251,20 @@ namespace ElectronicObserver.Window.Dialog
 			else
 			{
 				RecordView_Header.Width = 150;
-				RecordView_Header.HeaderText = "回数";
+				RecordView_Header.HeaderText = "회수";
 				RecordView_Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
 				RecordView_Name.Width = 160;
-				RecordView_Name.HeaderText = ((EquipmentName.Text != NameAny && EquipmentName.Text != NameExist) || (int)EquipmentCategory.SelectedValue != -1) ? "レシピ" : "装備";
+				RecordView_Name.HeaderText = ((EquipmentName.Text != NameAny && EquipmentName.Text != NameExist) || (int)EquipmentCategory.SelectedValue != -1) ? "레시피" : "장비";
 				RecordView_Date.Visible = false;
 				RecordView_Recipe.Visible = false;
 				RecordView_FlagshipType.Visible = false;
 				RecordView_Flagship.Visible = false;
-				RecordView_Detail.HeaderText = (SecretaryName.Text != NameAny || (int)SecretaryCategory.SelectedValue != -1) ? "レシピ別回数" : "艦種別回数";
+				RecordView_Detail.HeaderText = (SecretaryName.Text != NameAny || (int)SecretaryCategory.SelectedValue != -1) ? "레시피별횟수" : "함종별횟수";
 				RecordView_Detail.Visible = true;
 			}
 			RecordView.ColumnHeadersVisible = true;
 
-			StatusInfo.Text = "検索中です...";
+			StatusInfo.Text = "검색중입니다...";
 			StatusInfo.Tag = DateTime.Now;
 
 			Searcher.RunWorkerAsync(args);
@@ -441,7 +441,7 @@ namespace ElectronicObserver.Window.Dialog
 						r.EquipmentName,
 						r.Date,
 						GetRecipeString(r),
-						shiptype?.Name ?? "(不明)",
+						shiptype?.Name ?? "(불명)",
 						r.FlagshipName,
 						null
 						);
@@ -484,7 +484,7 @@ namespace ElectronicObserver.Window.Dialog
 					if (prioritySecretary > 0)
 						key2 = currentRecipe;
 					else
-						key2 = shiptype?.Name ?? "(不明)";
+						key2 = shiptype?.Name ?? "(불명)";
 
 					if (!countsdetail.ContainsKey(key))
 					{
@@ -577,13 +577,13 @@ namespace ElectronicObserver.Window.Dialog
 				RecordView.Sort(RecordView.SortedColumn ?? RecordView_Header,
 					RecordView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
-				StatusInfo.Text = "検索が完了しました。(" + (int)(DateTime.Now - (DateTime)StatusInfo.Tag).TotalMilliseconds + " ms)";
+				StatusInfo.Text = "검색이 완료되었습니다.(" + (int)(DateTime.Now - (DateTime)StatusInfo.Tag).TotalMilliseconds + " ms)";
 
 			}
 			else
 			{
 
-				StatusInfo.Text = "検索がキャンセルされました。";
+				StatusInfo.Text = "검색이 취소되었습니다.";
 			}
 
 		}
@@ -703,13 +703,13 @@ namespace ElectronicObserver.Window.Dialog
 				int count = RecordView.SelectedRows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
 				int allcount = RecordView.Rows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
 
-				StatusInfo.Text = string.Format("選択項目の合計: {0} / {1} ({2:p1})",
+				StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
 					count, allcount, (double)count / allcount);
 			}
 			else
 			{
 				int allcount = RecordView.RowCount;
-				StatusInfo.Text = string.Format("選択項目の合計: {0} / {1} ({2:p1})",
+				StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
 					selectedCount, allcount, (double)selectedCount / allcount);
 			}
 		}

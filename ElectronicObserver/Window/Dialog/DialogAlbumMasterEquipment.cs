@@ -97,7 +97,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(EquipmentView);
-				row.SetValues(eq.EquipmentID, eq.IconType, eq.CategoryTypeInstance.Name, eq.Name);
+				row.SetValues(eq.EquipmentID, eq.IconType, FormMain.Instance.Translator.GetTranslation(eq.CategoryTypeInstance.Name, Utility.TranslationType.EquipmentType), eq.Name);
 				rows.Add(row);
 
 			}
@@ -230,25 +230,25 @@ namespace ElectronicObserver.Window.Dialog
 
 			TableEquipmentName.SuspendLayout();
 
-			EquipmentType.Text = eq.CategoryTypeInstance.Name;
+            EquipmentType.Text = FormMain.Instance.Translator.GetTranslation(db.EquipmentTypes[eq.EquipmentType[2]].Name, Utility.TranslationType.EquipmentType);
 
-			{
+            {
 				int eqicon = eq.IconType;
 				if (eqicon >= (int)ResourceManager.EquipmentContent.Locked)
 					eqicon = (int)ResourceManager.EquipmentContent.Unknown;
 				EquipmentType.ImageIndex = eqicon;
 
 				StringBuilder sb = new StringBuilder();
-				sb.AppendLine("装備可能艦種:");
+				sb.AppendLine("장착가능함종:");
 				foreach (var stype in KCDatabase.Instance.ShipTypes.Values)
 				{
 					if (stype.EquipmentType.Contains((int)eq.CategoryType))
-						sb.AppendLine(stype.Name);
-				}
+                        sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.TranslationType.ShipTypes));
+                }
 				ToolTipInfo.SetToolTip(EquipmentType, sb.ToString());
 			}
 			EquipmentName.Text = eq.Name;
-			ToolTipInfo.SetToolTip(EquipmentName, "(右クリックでコピー)");
+			ToolTipInfo.SetToolTip(EquipmentName, "(우클릭으로 복사)");
 
 			TableEquipmentName.ResumeLayout();
 
@@ -268,13 +268,13 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (eq.CategoryType == EquipmentTypes.Interceptor)
 			{
-				TitleAccuracy.Text = "対爆";
-				TitleEvasion.Text = "迎撃";
+				TitleAccuracy.Text = "대폭";
+				TitleEvasion.Text = "영격";
 			}
 			else
 			{
-				TitleAccuracy.Text = "命中";
-				TitleEvasion.Text = "回避";
+				TitleAccuracy.Text = "명중";
+				TitleEvasion.Text = "회피";
 			}
 
 			TableParameterMain.ResumeLayout();
@@ -283,7 +283,7 @@ namespace ElectronicObserver.Window.Dialog
 			//sub parameter
 			TableParameterSub.SuspendLayout();
 
-			Speed.Text = "なし"; //Constants.GetSpeed( eq.Speed );
+			Speed.Text = "없음"; //Constants.GetSpeed( eq.Speed );
 			Range.Text = Constants.GetRange(eq.Range);
 			Rarity.Text = Constants.GetEquipmentRarity(eq.Rarity);
 			Rarity.ImageIndex = (int)ResourceManager.IconContent.RarityRed + Constants.GetEquipmentRarityID(eq.Rarity);     //checkme
@@ -296,7 +296,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				TableAircraft.SuspendLayout();
 				AircraftCost.Text = eq.AircraftCost.ToString();
-				ToolTipInfo.SetToolTip(AircraftCost, "配備時のボーキ消費：" + ((eq.IsCombatAircraft ? 18 : 4) * eq.AircraftCost));
+				ToolTipInfo.SetToolTip(AircraftCost, "배치시 보키소비：" + ((eq.IsCombatAircraft ? 18 : 4) * eq.AircraftCost));
 				AircraftDistance.Text = eq.AircraftDistance.ToString();
 				TableAircraft.ResumeLayout();
 				TableAircraft.Visible = true;
@@ -366,7 +366,7 @@ namespace ElectronicObserver.Window.Dialog
 			BasePanelEquipment.Visible = true;
 
 
-			this.Text = "装備図鑑 - " + eq.Name;
+			this.Text = "장비도감 - " + eq.Name;
 
 		}
 
@@ -450,7 +450,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("装備ID,図鑑番号,装備種,装備名,大分類,図鑑カテゴリID,カテゴリID,アイコンID,航空機グラフィックID,火力,雷装,対空,装甲,対潜,回避,索敵,運,命中,爆装,射程,レア,廃棄燃料,廃棄弾薬,廃棄鋼材,廃棄ボーキ,図鑑文章,戦闘行動半径,配置コスト");
+						sw.WriteLine("장비ID,도감번호,장비종류,장비명,대분류,도감카테고리ID,카테고리ID,아이콘ID,항공기그래픽ID,화력,뇌장,대공,장갑,대잠,회피,색적,운,명중,폭장,사정,레어도,해체시연료,해체시탄약,해체시강재,해체시보키,도감글,행동반경,배치비용");
 
 						foreach (EquipmentDataMaster eq in KCDatabase.Instance.MasterEquipments.Values)
 						{
@@ -494,8 +494,8 @@ namespace ElectronicObserver.Window.Dialog
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "装備図鑑 CSVの出力に失敗しました。");
-					MessageBox.Show("装備図鑑 CSVの出力に失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utility.ErrorReporter.SendErrorReport(ex, "장비도감 CSV의 출력이 실패했습니다.");
+					MessageBox.Show("장비도감 CSV의 출력이 실패했습니다. \r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
 			}
@@ -516,7 +516,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("装備ID,図鑑番号,装備名,装備種1,装備種2,装備種3,装備種4,装備種5,火力,雷装,対空,装甲,対潜,回避,索敵,運,命中,爆装,射程,レア,廃棄燃料,廃棄弾薬,廃棄鋼材,廃棄ボーキ,図鑑文章,戦闘行動半径,配置コスト");
+						sw.WriteLine("장비ID,도감번호,장비명,장비종1,장비종2,장비종3,장비종4,장비종5,화력,뇌장,대공,장갑,대잠,회피,색적,운,명중,폭장,사정,레어도,해체시연료,해체시탄약,해체시강재,해체시보키,도감글,행동반경,배치비용");
 
 						foreach (EquipmentDataMaster eq in KCDatabase.Instance.MasterEquipments.Values)
 						{
@@ -559,9 +559,9 @@ namespace ElectronicObserver.Window.Dialog
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "装備図鑑 CSVの出力に失敗しました。");
-					MessageBox.Show("装備図鑑 CSVの出力に失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
+                    Utility.ErrorReporter.SendErrorReport(ex, "장비도감 CSV의 출력이 실패했습니다.");
+                    MessageBox.Show("장비도감 CSV의 출력이 실패했습니다. \r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
 			}
 
@@ -647,55 +647,55 @@ namespace ElectronicObserver.Window.Dialog
 			var sb = new StringBuilder();
 
 			sb.AppendFormat("{0} {1}\r\n", eq.CategoryTypeInstance.Name, eq.Name);
-			sb.AppendFormat("ID: {0} / 図鑑番号: {1} / カテゴリID: [{2}]\r\n", eq.EquipmentID, eq.AlbumNo, string.Join(", ", eq.EquipmentType));
+			sb.AppendFormat("ID: {0} / 도감번호: {1} / 카테고리ID: [{2}]\r\n", eq.EquipmentID, eq.AlbumNo, string.Join(", ", eq.EquipmentType));
 
 			sb.AppendLine();
 
 			if (eq.Firepower != 0)
-				sb.AppendFormat("火力: {0:+0;-0;0}\r\n", eq.Firepower);
+				sb.AppendFormat("화력: {0:+0;-0;0}\r\n", eq.Firepower);
 			if (eq.Torpedo != 0)
-				sb.AppendFormat("雷装: {0:+0;-0;0}\r\n", eq.Torpedo);
+				sb.AppendFormat("뇌장: {0:+0;-0;0}\r\n", eq.Torpedo);
 			if (eq.AA != 0)
-				sb.AppendFormat("対空: {0:+0;-0;0}\r\n", eq.AA);
+				sb.AppendFormat("대공: {0:+0;-0;0}\r\n", eq.AA);
 			if (eq.Armor != 0)
-				sb.AppendFormat("装甲: {0:+0;-0;0}\r\n", eq.Armor);
+				sb.AppendFormat("장갑: {0:+0;-0;0}\r\n", eq.Armor);
 			if (eq.ASW != 0)
-				sb.AppendFormat("対潜: {0:+0;-0;0}\r\n", eq.ASW);
+				sb.AppendFormat("대잠: {0:+0;-0;0}\r\n", eq.ASW);
 			if (eq.Evasion != 0)
-				sb.AppendFormat("{0}: {1:+0;-0;0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "迎撃" : "回避", eq.Evasion);
+				sb.AppendFormat("{0}: {1:+0;-0;0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "영격" : "회피", eq.Evasion);
 			if (eq.LOS != 0)
-				sb.AppendFormat("索敵: {0:+0;-0;0}\r\n", eq.LOS);
+				sb.AppendFormat("색적: {0:+0;-0;0}\r\n", eq.LOS);
 			if (eq.Accuracy != 0)
-				sb.AppendFormat("{0}: {1:+0;-0;0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "対爆" : "命中", eq.Accuracy);
+				sb.AppendFormat("{0}: {1:+0;-0;0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "대폭" : "명중", eq.Accuracy);
 			if (eq.Bomber != 0)
-				sb.AppendFormat("爆装: {0:+0;-0;0}\r\n", eq.Bomber);
+				sb.AppendFormat("폭장: {0:+0;-0;0}\r\n", eq.Bomber);
 			if (eq.Luck != 0)
-				sb.AppendFormat("運: {0:+0;-0;0}\r\n", eq.Luck);
+				sb.AppendFormat("운: {0:+0;-0;0}\r\n", eq.Luck);
 
 			if (eq.Range > 0)
-				sb.Append("射程: ").AppendLine(Constants.GetRange(eq.Range));
+				sb.Append("사정: ").AppendLine(Constants.GetRange(eq.Range));
 
 			if (eq.AircraftCost > 0)
-				sb.AppendFormat("配備コスト: {0}\r\n", eq.AircraftCost);
+				sb.AppendFormat("배치비용: {0}\r\n", eq.AircraftCost);
 			if (eq.AircraftDistance > 0)
-				sb.AppendFormat("戦闘行動半径: {0}\r\n", eq.AircraftDistance);
+				sb.AppendFormat("행동반경: {0}\r\n", eq.AircraftDistance);
 
 			sb.AppendLine();
 
-			sb.AppendFormat("レアリティ: {0}\r\n", Constants.GetEquipmentRarity(eq.Rarity));
-			sb.AppendFormat("廃棄資材: {0}\r\n", string.Join(" / ", eq.Material));
+			sb.AppendFormat("레어도: {0}\r\n", Constants.GetEquipmentRarity(eq.Rarity));
+			sb.AppendFormat("해체자재: {0}\r\n", string.Join(" / ", eq.Material));
 
 			sb.AppendLine();
 
-			sb.AppendFormat("図鑑説明: \r\n{0}\r\n",
-				!string.IsNullOrWhiteSpace(eq.Message) ? eq.Message : "(不明)");
+			sb.AppendFormat("도감설명: \r\n{0}\r\n",
+				!string.IsNullOrWhiteSpace(eq.Message) ? eq.Message : "(불명)");
 
 			sb.AppendLine();
 
-			sb.AppendLine("初期装備/開発:");
+			sb.AppendLine("초기장비/개발:");
 			string result = GetAppearingArea(eq.EquipmentID);
 			if (string.IsNullOrWhiteSpace(result))
-				result = "(不明)\r\n";
+				result = "(불명)\r\n";
 			sb.AppendLine(result);
 
 
@@ -729,7 +729,7 @@ namespace ElectronicObserver.Window.Dialog
 				.ThenBy(r => r.Bauxite)
 				)
 			{
-				sb.AppendFormat("開発 {0} / {1} / {2} / {3}\r\n",
+				sb.AppendFormat("개발 {0} / {1} / {2} / {3}\r\n",
 					record.Fuel, record.Ammo, record.Steel, record.Bauxite);
 			}
 
@@ -752,10 +752,10 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (string.IsNullOrWhiteSpace(result))
 			{
-				result = eq.Name + " の初期装備艦・開発レシピは不明です。";
+				result = eq.Name + " 의 초기장비함 ・ 개발 레시피를 알수없습니다.";
 			}
 
-			MessageBox.Show(result, "入手手段表示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(result, "입수방법보기", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 
@@ -777,7 +777,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, "艦船名の Google 検索に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "함선명의 구글 검색에 실패했습니다.");
 			}
 		}
 

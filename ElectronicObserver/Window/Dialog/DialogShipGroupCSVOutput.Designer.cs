@@ -58,7 +58,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(260, 84);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "オプション";
+			this.groupBox1.Text = "취소";
 			// 
 			// panel2
 			// 
@@ -80,7 +80,7 @@
 			this.RadioFormat_Data.Size = new System.Drawing.Size(65, 19);
 			this.RadioFormat_Data.TabIndex = 1;
 			this.RadioFormat_Data.TabStop = true;
-			this.RadioFormat_Data.Text = "データ用";
+			this.RadioFormat_Data.Text = "데이터용";
 			this.RadioFormat_Data.UseVisualStyleBackColor = true;
 			// 
 			// RadioFormat_User
@@ -91,7 +91,7 @@
 			this.RadioFormat_User.Size = new System.Drawing.Size(61, 19);
 			this.RadioFormat_User.TabIndex = 0;
 			this.RadioFormat_User.TabStop = true;
-			this.RadioFormat_User.Text = "閲覧用";
+			this.RadioFormat_User.Text = "보기용";
 			this.RadioFormat_User.UseVisualStyleBackColor = true;
 			// 
 			// panel1
@@ -114,7 +114,7 @@
 			this.RadioOutput_VisibleColumnOnly.Size = new System.Drawing.Size(143, 19);
 			this.RadioOutput_VisibleColumnOnly.TabIndex = 1;
 			this.RadioOutput_VisibleColumnOnly.TabStop = true;
-			this.RadioOutput_VisibleColumnOnly.Text = "表示している列のみ出力";
+			this.RadioOutput_VisibleColumnOnly.Text = "표시된 열만 출력";
 			this.RadioOutput_VisibleColumnOnly.UseVisualStyleBackColor = true;
 			// 
 			// RadioOutput_All
@@ -126,7 +126,7 @@
 			this.RadioOutput_All.Size = new System.Drawing.Size(70, 19);
 			this.RadioOutput_All.TabIndex = 0;
 			this.RadioOutput_All.TabStop = true;
-			this.RadioOutput_All.Text = "全て出力";
+			this.RadioOutput_All.Text = "전부출력";
 			this.RadioOutput_All.UseVisualStyleBackColor = true;
 			// 
 			// ButtonOK
@@ -148,7 +148,7 @@
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 2;
-			this.ButtonCancel.Text = "キャンセル";
+			this.ButtonCancel.Text = "취소";
 			this.ButtonCancel.UseVisualStyleBackColor = true;
 			this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
@@ -161,7 +161,7 @@
 			this.groupBox2.Size = new System.Drawing.Size(260, 58);
 			this.groupBox2.TabIndex = 3;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "出力先";
+			this.groupBox2.Text = "경로";
 			// 
 			// ButtonOutputPathSearch
 			// 
@@ -186,7 +186,7 @@
 			// DialogSaveCSV
 			// 
 			this.DialogSaveCSV.Filter = "CSV|*.csv|File|*";
-			this.DialogSaveCSV.Title = "CSVの保存";
+			this.DialogSaveCSV.Title = "CSV 저장";
 			// 
 			// DialogShipGroupCSVOutput
 			// 
@@ -205,7 +205,7 @@
 			this.Name = "DialogShipGroupCSVOutput";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "グループをCSVに出力";
+			this.Text = "그룹을 CSV로 출력";
 			this.Load += new System.EventHandler(this.DialogShipGroupCSVOutput_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

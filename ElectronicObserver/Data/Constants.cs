@@ -21,17 +21,17 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "陸上";
+					return "육상";
 				case 5:
-					return "低速";
+					return "저속";
 				case 10:
-					return "高速";
+					return "고속";
 				case 15:
-					return "高速+";
+					return "고속+";
 				case 20:
-					return "最速";
+					return "최속";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -43,17 +43,17 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "無";
+					return "없음";
 				case 1:
-					return "短";
+					return "단";
 				case 2:
-					return "中";
+					return "중";
 				case 3:
-					return "長";
+					return "장";
 				case 4:
-					return "超長";
+					return "최장";
 				case 5:
-					return "超長+";
+					return "최장+";
 				default:
 					return "不明";
 			}
@@ -97,19 +97,19 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "コモン";
+					return "커먼";
 				case 1:
-					return "レア";
+					return "레어";
 				case 2:
-					return "ホロ";
+					return "홀로";
 				case 3:
-					return "Sホロ";
+					return "S홀로";
 				case 4:
-					return "SSホロ";
+					return "SS홀로";
 				case 5:
-					return "SSホロ'";
+					return "SS홀로'";
 				case 6:
-					return "SSホロ+";
+					return "SS홀로+";
 				default:
 					return "不明";
 			}
@@ -153,21 +153,21 @@ namespace ElectronicObserver.Data
 				case 0:
 					return "-";
 				case 1:
-					return "放置";
+					return "방치";
 				case 2:
-					return "時報";
+					return "시보";
 				case 3:
-					return "放置+時報";
+					return "방치+시보";
 				case 4:
-					return "特殊放置";
+					return "특수방치";
 				case 5:
-					return "放置+特殊放置";
+					return "방치+특수방치";
 				case 6:
-					return "時報+特殊放置";
+					return "시보+특수방치";
 				case 7:
-					return "放置+時報+特殊放置";
+					return "방치+시보+특수방치";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -183,22 +183,22 @@ namespace ElectronicObserver.Data
 		public static string GetDamageState(double hprate, bool isPractice = false, bool isLandBase = false, bool isEscaped = false)
 		{
 
-			if (isEscaped)
-				return "退避";
-			else if (hprate <= 0.0)
-				return isPractice ? "離脱" : (!isLandBase ? "撃沈" : "破壊");
-			else if (hprate <= 0.25)
-				return !isLandBase ? "大破" : "損壊";
-			else if (hprate <= 0.5)
-				return !isLandBase ? "中破" : "損害";
-			else if (hprate <= 0.75)
-				return !isLandBase ? "小破" : "混乱";
-			else if (hprate < 1.0)
-				return "健在";
-			else
-				return "無傷";
+            if (isEscaped)
+                return "대피";
+            else if (hprate <= 0.0)
+                return isPractice ? "이탈" : (!isLandBase ? "굉침" : "파괴");
+            else if (hprate <= 0.25)
+                return !isLandBase ? "대파" : "손괴";
+            else if (hprate <= 0.5)
+                return !isLandBase ? "중파" : "손해";
+            else if (hprate <= 0.75)
+                return !isLandBase ? "소파" : "혼란";
+            else if (hprate < 1.0)
+                return "정상";
+            else
+                return "없음";
 
-		}
+        }
 
 
 		/// <summary>
@@ -209,17 +209,17 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "待機";
+					return "대기";
 				case 1:
-					return "出撃";
+					return "출격";
 				case 2:
-					return "防空";
+					return "방공";
 				case 3:
-					return "退避";
+					return "대피";
 				case 4:
-					return "休息";
+					return "휴식";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -288,94 +288,94 @@ namespace ElectronicObserver.Data
 		{
 			switch (id)
 			{
-				case 1: return "綾波型";
-				case 2: return "伊勢型";
-				case 3: return "加賀型";
-				case 4: return "球磨型";
-				case 5: return "暁型";
-				case 6: return "金剛型";
-				case 7: return "古鷹型";
-				case 8: return "高雄型";
-				case 9: return "最上型";
-				case 10: return "初春型";
-				case 11: return "祥鳳型";
-				case 12: return "吹雪型";
-				case 13: return "青葉型";
-				case 14: return "赤城型";
-				case 15: return "千歳型";
-				case 16: return "川内型";
-				case 17: return "蒼龍型";
-				case 18: return "朝潮型";
-				case 19: return "長門型";
-				case 20: return "長良型";
-				case 21: return "天龍型";
-				case 22: return "島風型";
-				case 23: return "白露型";
-				case 24: return "飛鷹型";
-				case 25: return "飛龍型";
-				case 26: return "扶桑型";
-				case 27: return "鳳翔型";
-				case 28: return "睦月型";
-				case 29: return "妙高型";
-				case 30: return "陽炎型";
-				case 31: return "利根型";
-				case 32: return "龍驤型";
-				case 33: return "翔鶴型";
-				case 34: return "夕張型";
-				case 35: return "海大VI型";
-				case 36: return "巡潜乙型改二";
-				case 37: return "大和型";
-				case 38: return "夕雲型";
-				case 39: return "巡潜乙型";
-				case 40: return "巡潜3型";
-				case 41: return "阿賀野型";
+				case 1: return "아야나미급";
+				case 2: return "이세급";
+				case 3: return "카가급";
+				case 4: return "쿠마급";
+				case 5: return "아카츠키급";
+				case 6: return "콩고급";
+				case 7: return "후루타카급";
+				case 8: return "타카오급";
+				case 9: return "모가미급";
+				case 10: return "하츠하루급";
+				case 11: return "쇼호급";
+				case 12: return "후부키급";
+				case 13: return "아오바급";
+				case 14: return "아카기급";
+				case 15: return "치토세급";
+				case 16: return "센다이급";
+				case 17: return "소류급";
+				case 18: return "아사시오급";
+				case 19: return "나가토급";
+				case 20: return "나가라급";
+				case 21: return "텐류급";
+				case 22: return "시마카제급";
+				case 23: return "시라츠유급";
+				case 24: return "히요급";
+				case 25: return "히류급";
+				case 26: return "후소급";
+				case 27: return "호쇼급";
+				case 28: return "무츠키급";
+				case 29: return "묘코급";
+				case 30: return "카게로급";
+				case 31: return "토네급";
+				case 32: return "류조급";
+				case 33: return "쇼카쿠급";
+				case 34: return "유바리급";
+				case 35: return "해대6형";
+				case 36: return "순잠을형개2";
+				case 37: return "야마토급";
+				case 38: return "유구모급";
+				case 39: return "순잠을형";
+				case 40: return "순잠3형";
+				case 41: return "아가노급";
 				case 42: return "「霧」";
-				case 43: return "大鳳型";
-				case 44: return "潜特型(伊400型潜水艦)";
-				case 45: return "特種船丙型";
-				case 46: return "三式潜航輸送艇";
-				case 47: return "Bismarck級";
-				case 48: return "Z1型";
-				case 49: return "工作艦";
-				case 50: return "大鯨型";
-				case 51: return "龍鳳型";
-				case 52: return "大淀型";
-				case 53: return "雲龍型";
-				case 54: return "秋月型";
-				case 55: return "Admiral Hipper級";
-				case 56: return "香取型";
-				case 57: return "UボートIXC型";
-				case 58: return "V.Veneto級";
-				case 59: return "秋津洲型";
-				case 60: return "改風早型";
-				case 61: return "Maestrale級";
-				case 62: return "瑞穂型";
-				case 63: return "Graf Zeppelin級";
-				case 64: return "Zara級";
-				case 65: return "Iowa級";
-				case 66: return "神風型";
-				case 67: return "Queen Elizabeth級";
-				case 68: return "Aquila級";
-				case 69: return "Lexington級";
-				case 70: return "C.Teste級";
-				case 71: return "巡潜甲型改二";
-				case 72: return "神威型";
-				case 73: return "Гангут級";
-				case 74: return "占守型";
-				case 75: return "春日丸級";
-				case 76: return "大鷹型";
-				case 77: return "択捉型";
-				case 78: return "Ark Royal級";
-				case 79: return "Richelieu級";
-				case 80: return "Guglielmo Marconi級";
-				case 81: return "Ташкент級";
-				case 82: return "J級";
-				case 83: return "Casablanca級";
-				case 84: return "Essex級";
-				case 85: return "日振型";
-				case 86: return "呂号潜水艦";
-				case 87: return "John C.Butler級";
-				default: return "不明";
+				case 43: return "다이호급";
+				case 44: return "센토쿠급(이400급잠수함)";
+				case 45: return "특종선병형";
+				case 46: return "삼식잠항수송정";
+				case 47: return "Bismarck급";
+				case 48: return "Z1급";
+				case 49: return "공작함";
+				case 50: return "타이게이급";
+				case 51: return "류호급";
+				case 52: return "오요도급";
+				case 53: return "운류급";
+				case 54: return "아키즈키급";
+				case 55: return "Admiral Hipper급";
+				case 56: return "카토리급";
+				case 57: return "유보트 IX C형";
+				case 58: return "V.Veneto급";
+				case 59: return "아키츠시마급";
+				case 60: return "改카자하야급";
+				case 61: return "Maestrale급";
+				case 62: return "미즈호급";
+				case 63: return "Graf Zeppelin급";
+				case 64: return "Zara급";
+				case 65: return "Iowa급";
+				case 66: return "카미카제급";
+				case 67: return "Queen Elizabeth급";
+				case 68: return "Aquila급";
+				case 69: return "Lexington급";
+				case 70: return "C.Teste급";
+				case 71: return "순잠갑형개2";
+				case 72: return "카모이급";
+				case 73: return "Гангут급";
+				case 74: return "시무슈급";
+				case 75: return "카스가마루급";
+				case 76: return "타이요급";
+				case 77: return "에토로후급";
+				case 78: return "Ark Royal급";
+				case 79: return "Richelieu급";
+				case 80: return "Guglielmo Marconi급";
+				case 81: return "Ташкент급";
+				case 82: return "J급";
+				case 83: return "Casablanca급";
+				case 84: return "Essex급";
+				case 85: return "히부리급";
+				case 86: return "로호잠수함";
+				case 87: return "John C.Butler급";
+				default: return "불명";
 			}
 		}
 
@@ -394,27 +394,27 @@ namespace ElectronicObserver.Data
 			{
 
 				case 0:
-					return "初期位置";
+					return "초기위치";
 				case 1:
-					return "イベントなし";
+					return "이벤트없음";
 				case 2:
-					return "資源";
+					return "자원";
 				case 3:
-					return "渦潮";
+					return "소용돌이";
 				case 4:
-					return "通常戦闘";
+					return "통상전";
 				case 5:
-					return "ボス戦闘";
+					return "보스전";
 				case 6:
-					return "気のせいだった";
+					return "기분탓이었다";
 				case 7:
-					return "航空戦";
+					return "항공전";
 				case 8:
-					return "船団護衛成功";
+					return "선단호위성공";
 				case 9:
-					return "揚陸地点";
+					return "상륙지점";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -427,23 +427,23 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "非戦闘";
+					return "비전투";
 				case 1:
-					return "昼夜戦";
+					return "주야전";
 				case 2:
-					return "夜戦";
+					return "야전";
 				case 3:
-					return "夜昼戦";       // 対通常?
+					return "주야전";       // 対通常?
 				case 4:
-					return "航空戦";
+					return "항공전";
 				case 5:
-					return "敵連合";
+					return "적연합";
 				case 6:
-					return "空襲戦";
+					return "공습전";
 				case 7:
-					return "夜昼戦";       // 対連合
+					return "주야전";       // 対連合
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -457,19 +457,19 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case -1:
-					return "なし";
+					return "없음";
 				case 0:
-					return "未選択";
+					return "미설정";
 				case 1:
-					return "丁";
+					return "정";
 				case 2:
-					return "丙";
+					return "병";
 				case 3:
-					return "乙";
+					return "을";
 				case 4:
-					return "甲";
+					return "갑";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -505,15 +505,15 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 1:
-					return "資源に損害";
+					return "자원 피해";
 				case 2:
-					return "資源・航空隊に損害";
+					return "자원・항공대 피해";
 				case 3:
-					return "航空隊に損害";
+					return "항공대 피해";
 				case 4:
-					return "損害なし";
+					return "피해없음";
 				default:
-					return "発生せず";
+					return "발생하지않음";
 			}
 		}
 
@@ -525,13 +525,13 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 1:
-					return "資源損害";
+					return "자원 피해";
 				case 2:
-					return "資源・航空";
+					return "자원・항공대 피해";
 				case 3:
-					return "航空隊損害";
+					return "항공대 피해";
 				case 4:
-					return "損害なし";
+					return "피해없음";
 				default:
 					return "-";
 			}
@@ -551,25 +551,25 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "単縦陣";
+					return "단종진";
 				case 2:
-					return "複縦陣";
+					return "복종진";
 				case 3:
-					return "輪形陣";
+					return "윤형진";
 				case 4:
-					return "梯形陣";
+					return "제형진";
 				case 5:
-					return "単横陣";
+					return "단횡진";
 				case 6:
-					return "警戒陣";
+					return "경계진";
 				case 11:
-					return "第一警戒航行序列";
+					return "제1경계항행서열";
 				case 12:
-					return "第二警戒航行序列";
+					return "제2경계항행서열";
 				case 13:
-					return "第三警戒航行序列";
+					return "제3경계항행서열";
 				case 14:
-					return "第四警戒航行序列";
+					return "제4경계항행서열";
 				default:
 					return "不明";
 			}
@@ -615,27 +615,27 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "単縦陣";
+					return "단종진";
 				case 2:
-					return "複縦陣";
+					return "복종진";
 				case 3:
-					return "輪形陣";
+					return "윤형진";
 				case 4:
-					return "梯形陣";
+					return "제형진";
 				case 5:
-					return "単横陣";
+					return "단횡진";
 				case 6:
-					return "警戒陣";
+					return "경계진";
 				case 11:
-					return "第一警戒";
+					return "제1경계";
 				case 12:
-					return "第二警戒";
+					return "제2경계";
 				case 13:
-					return "第三警戒";
+					return "제3경계";
 				case 14:
-					return "第四警戒";
+					return "제4경계";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -647,15 +647,15 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "同航戦";
+					return "동항전";
 				case 2:
-					return "反航戦";
+					return "반항전";
 				case 3:
-					return "T字有利";
+					return "T유리";
 				case 4:
-					return "T字不利";
+					return "T불리";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -667,19 +667,19 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "成功";
+					return "성공";
 				case 2:
-					return "成功(未帰還有)";
+					return "성공(미귀환기)";
 				case 3:
-					return "未帰還";
+					return "미귀환";
 				case 4:
-					return "失敗";
+					return "실패";
 				case 5:
-					return "成功(非索敵機)";
+					return "성공(색적기없음)";
 				case 6:
-					return "失敗(非索敵機)";
+					return "실패(색적기없음)";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -691,19 +691,19 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "成功";
+					return "성공";
 				case 2:
-					return "成功△";
+					return "성공△";
 				case 3:
-					return "未帰還";
+					return "미귀환";
 				case 4:
-					return "失敗";
+					return "실패";
 				case 5:
-					return "成功";
+					return "성공";
 				case 6:
-					return "失敗";
+					return "실패";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -715,17 +715,17 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 0:
-					return "航空均衡";
+					return "제공균등";
 				case 1:
-					return "制空権確保";
+					return "제공권확보";
 				case 2:
-					return "航空優勢";
+					return "제공권우세";
 				case 3:
-					return "航空劣勢";
+					return "제공권열세";
 				case 4:
-					return "制空権喪失";
+					return "제공권상실";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -739,43 +739,43 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case DayAttackKind.NormalAttack:
-					return "通常攻撃";
+					return "일반공격";
 				case DayAttackKind.Laser:
-					return "レーザー攻撃";
+					return "레이저공격";
 				case DayAttackKind.DoubleShelling:
-					return "連続射撃";
+					return "연격";
 				case DayAttackKind.CutinMainSub:
-					return "カットイン(主砲/副砲)";
+					return "컷인(주포/부포)";
 				case DayAttackKind.CutinMainRadar:
-					return "カットイン(主砲/電探)";
+					return "컷인(주포/전탐)";
 				case DayAttackKind.CutinMainAP:
-					return "カットイン(主砲/徹甲)";
+					return "컷인(주포/철갑)";
 				case DayAttackKind.CutinMainMain:
-					return "カットイン(主砲/主砲)";
+					return "컷인(주포/주포)";
 				case DayAttackKind.CutinAirAttack:
-					return "空母カットイン";
+					return "대공컷인";
 				case DayAttackKind.Shelling:
-					return "砲撃";
+					return "포격";
 				case DayAttackKind.AirAttack:
-					return "空撃";
+					return "공습";
 				case DayAttackKind.DepthCharge:
-					return "爆雷攻撃";
+					return "폭뢰공격";
 				case DayAttackKind.Torpedo:
-					return "雷撃";
+					return "뇌격";
 				case DayAttackKind.Rocket:
-					return "ロケット砲撃";
+					return "로켓사격";
 				case DayAttackKind.LandingDaihatsu:
-					return "揚陸攻撃(大発動艇)";
+					return "기지공격(대발동정)";
 				case DayAttackKind.LandingTokuDaihatsu:
-					return "揚陸攻撃(特大発動艇)";
+					return "기지공격(특대발동정)";
 				case DayAttackKind.LandingDaihatsuTank:
-					return "揚陸攻撃(大発戦車)";
+					return "기지공격(대발전차)";
 				case DayAttackKind.LandingAmphibious:
-					return "揚陸攻撃(内火艇)";
+					return "기지공격(내화정)";
 				case DayAttackKind.LandingTokuDaihatsuTank:
-					return "揚陸攻撃(特大発戦車)";
+					return "기지공격(특대발전차)";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -788,46 +788,46 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case NightAttackKind.NormalAttack:
-					return "通常攻撃";
+					return "일반공격";
 				case NightAttackKind.DoubleShelling:
-					return "連続射撃";
+					return "연격";
 				case NightAttackKind.CutinMainTorpedo:
-					return "カットイン(主砲/魚雷)";
+					return "컷인(주포/어뢰)";
 				case NightAttackKind.CutinTorpedoTorpedo:
-					return "カットイン(魚雷x2)";
+					return "컷인(어뢰x2)";
 				case NightAttackKind.CutinMainSub:
-					return "カットイン(主砲x2/副砲)";
+					return "컷인(주포x2/부포)";
 				case NightAttackKind.CutinMainMain:
-					return "カットイン(主砲x3)";
+					return "컷인(주포x3)";
 				case NightAttackKind.CutinAirAttack:
-					return "空母カットイン";
+					return "대공컷인";
 				case NightAttackKind.CutinTorpedoRadar:
-					return "駆逐カットイン(主砲/魚雷/電探)";
+					return "구축컷인(주포/어뢰/전탐)";
 				case NightAttackKind.CutinTorpedoPicket:
-					return "駆逐カットイン(魚雷/見張員/電探)";
+					return "구축컷인(어뢰/견시원/전탐)";
 				case NightAttackKind.Shelling:
-					return "砲撃";
+					return "포격";
 				case NightAttackKind.AirAttack:
-					return "空撃";
+					return "공습";
 				case NightAttackKind.DepthCharge:
-					return "爆雷攻撃";
+					return "폭뢰공격";
 				case NightAttackKind.Torpedo:
-					return "雷撃";
+					return "뇌격";
 				case NightAttackKind.Rocket:
-					return "ロケット砲撃";
-				case NightAttackKind.LandingDaihatsu:
-					return "揚陸攻撃(大発動艇)";
-				case NightAttackKind.LandingTokuDaihatsu:
-					return "揚陸攻撃(特大発動艇)";
-				case NightAttackKind.LandingDaihatsuTank:
-					return "揚陸攻撃(大発戦車)";
-				case NightAttackKind.LandingAmphibious:
-					return "揚陸攻撃(内火艇)";
-				case NightAttackKind.LandingTokuDaihatsuTank:
-					return "揚陸攻撃(特大発戦車)";
-				default:
-					return "不明";
-			}
+					return "로켓사격";
+                case NightAttackKind.LandingDaihatsu:
+                    return "기지공격(대발동정)";
+                case NightAttackKind.LandingTokuDaihatsu:
+                    return "기지공격(특대발동정)";
+                case NightAttackKind.LandingDaihatsuTank:
+                    return "기지공격(대발전차)";
+                case NightAttackKind.LandingAmphibious:
+                    return "기지공격(내화정)";
+                case NightAttackKind.LandingTokuDaihatsuTank:
+                    return "기지공격(특대발전차)";
+                default:
+                    return "불명";
+            }
 		}
 
 
@@ -839,63 +839,63 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 0:
-					return "なし";
+					return "없음";
 				case 1:
-					return "高角砲x2/電探<秋月>";
+					return "고각포x2/전탐<秋月>";
 				case 2:
-					return "高角砲/電探<秋月>";
+					return "고각포/전탐<秋月>";
 				case 3:
-					return "高角砲x2<秋月>";
+					return "고각포x2<秋月>";
 				case 4:
-					return "大口径主砲/三式弾/高射装置/電探";
+					return "대구경주포/삼식탄/고사장치/전탐";
 				case 5:
-					return "高角砲+高射装置x2/電探";
+					return "고각포+고사장치x2/전탐";
 				case 6:
-					return "大口径主砲/三式弾/高射装置";
+					return "대구경주포/삼식탄/고사장치";
 				case 7:
-					return "高角砲/高射装置/電探";
+					return "고각포/고사장치/전탐";
 				case 8:
-					return "高角砲+高射装置/電探";
+					return "고각포+고사장치/전탐";
 				case 9:
-					return "高角砲/高射装置";
+					return "고각포/고사장치";
 				case 10:
-					return "高角砲/集中機銃/電探<摩耶>";
+					return "고각포/집중배치/전탐<마야>";
 				case 11:
-					return "高角砲/集中機銃<摩耶>";
+					return "고각포/집중배치<마야>";
 				case 12:
-					return "集中機銃/機銃/電探";
+					return "집중배치/기총/전탐";
 				case 14:
-					return "高角砲/機銃/電探<五十鈴>";
+					return "고각포/기총/전탐<이스즈>";
 				case 15:
-					return "高角砲/機銃<五十鈴>";
+					return "고각포/기총<이스즈>";
 				case 16:
-					return "高角砲/機銃/電探<霞>";
+					return "고각포/기총/전탐<카스미>";
 				case 17:
-					return "高角砲/機銃<霞>";
+					return "고각포/기총<카스미>";
 				case 18:
-					return "集中機銃<皐月>";
+					return "집중배치<사츠키>";
 				case 19:
-					return "高角砲(非高射装置)/集中機銃<鬼怒>";
+					return "고각포(고사장치X)/집중배치<키누>";
 				case 20:
-					return "集中機銃<鬼怒>";
+					return "집중배치<키누>";
 				case 21:
-					return "高角砲/電探<由良>";
+					return "고각포/전탐<유라>";
 				case 22:
-					return "集中機銃<文月>";
+					return "집중배치<후미즈키>";
 				case 23:
-					return "機銃(非集中)<UIT-25>";
+					return "기총(집배X)<UIT-25>";
 				case 24:
-					return "高角砲/機銃(非集中)<龍田>";
+					return "고각포/기총(집배X)<타츠타>";
 				case 25:
-					return "噴進砲改二/電探/三式弾<伊勢>";
+					return "분진포개2/전탐/삼식탄<이세>";
 				case 26:
-					return "高角砲+増設機銃/電探<武蔵>";
+					return "고각포+증설기총/전탐<무사시>";
 				case 28:
-					return "噴進砲改二/電探<伊勢>";
+					return "분진포개2/전탐<이세>";
 				case 29:
-					return "高角砲/電探<浜風>";
+					return "고각포/전탐<하마카제>";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -968,23 +968,23 @@ namespace ElectronicObserver.Data
 			switch (materialID)
 			{
 				case 1:
-					return "燃料";
+					return "연료";
 				case 2:
-					return "弾薬";
+					return "탄약";
 				case 3:
-					return "鋼材";
+					return "강재";
 				case 4:
-					return "ボーキサイト";
+					return "보크사이트";
 				case 5:
-					return "高速建造材";
+					return "고속건조재";
 				case 6:
-					return "高速修復材";
+					return "고속수복재";
 				case 7:
-					return "開発資材";
+					return "개발자재";
 				case 8:
-					return "改修資材";
+					return "개수자재";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -997,27 +997,27 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "元帥";
+					return "원수";
 				case 2:
-					return "大将";
+					return "대장";
 				case 3:
-					return "中将";
+					return "중장";
 				case 4:
-					return "少将";
+					return "소장";
 				case 5:
-					return "大佐";
+					return "대령";
 				case 6:
-					return "中佐";
+					return "중령";
 				case 7:
-					return "新米中佐";
+					return "신입중령";
 				case 8:
-					return "少佐";
+					return "소령";
 				case 9:
-					return "中堅少佐";
+					return "중견소령";
 				case 10:
-					return "新米少佐";
+					return "신입소령";
 				default:
-					return "提督";
+					return "제독";
 			}
 		}
 
@@ -1030,15 +1030,15 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:     //デイリー
-					return "日";
+					return "일간";
 				case 2:     //ウィークリー
-					return "週";
+					return "주간";
 				case 3:     //マンスリー
-					return "月";
+					return "월간";
 				case 4:     //単発
-					return "単";
+					return "일회";
 				case 5:     //その他(輸送5/空母3)
-					return "他";
+					return "기타";
 				default:
 					return "?";
 			}
@@ -1054,23 +1054,23 @@ namespace ElectronicObserver.Data
 			switch (id)
 			{
 				case 1:
-					return "編成";
+					return "편성";
 				case 2:
-					return "出撃";
+					return "출격";
 				case 3:
-					return "演習";
+					return "연습";
 				case 4:
-					return "遠征";
+					return "원정";
 				case 5:
-					return "補給";        //入渠も含むが、文字数の関係
+					return "보급";        //入渠も含むが、文字数の関係
 				case 6:
-					return "工廠";
+					return "공창";
 				case 7:
-					return "改装";
+					return "개수";
 				case 8:
-					return "出撃";
+					return "출격";
 				case 9:
-					return "他";
+					return "기타";
 				default:
 					return "不明";
 			}
@@ -1085,13 +1085,13 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "失敗";
+					return "실패";
 				case 1:
-					return "成功";
+					return "성공";
 				case 2:
-					return "大成功";
+					return "대성공";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -1104,15 +1104,15 @@ namespace ElectronicObserver.Data
 			switch (value)
 			{
 				case 0:
-					return "通常艦隊";
+					return "일반함대";
 				case 1:
-					return "機動部隊";
+					return "기동함대";
 				case 2:
-					return "水上部隊";
+					return "수상부대";
 				case 3:
-					return "輸送部隊";
+					return "수송부대";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 

@@ -180,7 +180,7 @@ namespace ElectronicObserver.Window
 
 							int head = data.IndexOfAny("[{".ToCharArray());
 							if (head == -1)
-								throw new ArgumentException("JSON の開始文字を検出できませんでした。");
+								throw new ArgumentException("JSON 의 시작 문자를 찾을 수 없습니다.");
 							data = data.Substring(head);
 
 							LoadResponse(match.Groups[2].Value.Replace('@', '/'), Codeplex.Data.DynamicJson.Parse(data));
@@ -193,7 +193,7 @@ namespace ElectronicObserver.Window
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "JSON データの読み込みに失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "JSON 데이터 로딩에 실패했습니다.");
 				}
 
 
@@ -455,8 +455,8 @@ namespace ElectronicObserver.Window
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "JSON: CSV 出力に失敗しました。");
-					MessageBox.Show("CSV 出力に失敗しました。\r\n" + ex.Message, "出力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utility.ErrorReporter.SendErrorReport(ex, "JSON: CSV 출력에 실패했습니다.");
+					MessageBox.Show("JSON: CSV 출력에 실패했습니다.\r\n" + ex.Message, "출력에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
 

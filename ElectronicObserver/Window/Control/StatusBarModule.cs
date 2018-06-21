@@ -367,7 +367,7 @@ namespace ElectronicObserver.Window.Control
 		{
 
 			if (colors.Length < 12)
-				throw new ArgumentOutOfRangeException("colors の配列長が足りません。");
+				throw new ArgumentOutOfRangeException("colors 의 배열 길이가 충분하지않습니다.");
 
 
 			_barColor0Begin = colors[0];

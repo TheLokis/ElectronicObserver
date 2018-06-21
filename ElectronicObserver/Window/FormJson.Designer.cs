@@ -116,14 +116,14 @@
 			// 
 			this.TreeContextMenu_Expand.Name = "TreeContextMenu_Expand";
 			this.TreeContextMenu_Expand.Size = new System.Drawing.Size(235, 22);
-			this.TreeContextMenu_Expand.Text = "全て展開";
+			this.TreeContextMenu_Expand.Text = "전체보기";
 			this.TreeContextMenu_Expand.Click += new System.EventHandler(this.TreeContextMenu_Expand_Click);
 			// 
 			// TreeContextMenu_Shrink
 			// 
 			this.TreeContextMenu_Shrink.Name = "TreeContextMenu_Shrink";
 			this.TreeContextMenu_Shrink.Size = new System.Drawing.Size(235, 22);
-			this.TreeContextMenu_Shrink.Text = "全て格納";
+			this.TreeContextMenu_Shrink.Text = "요약보기";
 			this.TreeContextMenu_Shrink.Click += new System.EventHandler(this.TreeContextMenu_Shrink_Click);
 			// 
 			// TreeContextMenu_ShrinkParent
@@ -142,14 +142,14 @@
 			// 
 			this.TreeContextMenu_OutputCSV.Name = "TreeContextMenu_OutputCSV";
 			this.TreeContextMenu_OutputCSV.Size = new System.Drawing.Size(235, 22);
-			this.TreeContextMenu_OutputCSV.Text = "このノードをCSVに出力...";
+			this.TreeContextMenu_OutputCSV.Text = "이 노드를 CSV로 출력...";
 			this.TreeContextMenu_OutputCSV.Click += new System.EventHandler(this.TreeContextMenu_OutputCSV_Click);
 			// 
 			// TreeContextMenu_CopyToClipboard
 			// 
 			this.TreeContextMenu_CopyToClipboard.Name = "TreeContextMenu_CopyToClipboard";
 			this.TreeContextMenu_CopyToClipboard.Size = new System.Drawing.Size(235, 22);
-			this.TreeContextMenu_CopyToClipboard.Text = "このノードをクリップボードへコピー";
+			this.TreeContextMenu_CopyToClipboard.Text = "이 노드를 클립보드에 복사";
 			this.TreeContextMenu_CopyToClipboard.Click += new System.EventHandler(this.TreeContextMenu_CopyToClipboard_Click);
 			// 
 			// tabPage2
@@ -231,7 +231,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(52, 15);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "フィルタ：";
+			this.label1.Text = "필터：";
 			// 
 			// AutoUpdateFilter
 			// 

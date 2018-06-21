@@ -21,14 +21,14 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "噴式基地航空隊攻撃");
-			JetAirBattle = new PhaseJetAirBattle(this, "噴式航空戦");
-			BaseAirAttack = new PhaseBaseAirAttack(this, "基地航空隊攻撃");
-			AirBattle = new PhaseAirBattle(this, "第一次航空戦");
-			Support = new PhaseSupport(this, "支援攻撃");
-			AirBattle2 = new PhaseAirBattle(this, "第二次航空戦", "2");
+            JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
+            JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
+            BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
+            AirBattle = new PhaseAirBattle(this, "1차 항공전");
+            Support = new PhaseSupport(this, "지원 공격");
+            AirBattle2 = new PhaseAirBattle(this, "2차 항공전", "2");
 
-			foreach (var phase in GetPhases())
+            foreach (var phase in GetPhases())
 				phase.EmulateBattle(_resultHPs, _attackDamages);
 
 		}
@@ -36,7 +36,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_combined_battle/airbattle";
 
-		public override string BattleName => "連合艦隊 航空戦";
+		public override string BattleName => "연합 함대 항공전";
 
 
 		public override IEnumerable<PhaseBase> GetPhases()

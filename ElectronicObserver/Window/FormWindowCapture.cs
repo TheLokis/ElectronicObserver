@@ -91,7 +91,7 @@ namespace ElectronicObserver.Window
 			WinAPI.GetWindowText(hWnd, stringBuilder, stringBuilder.Capacity);
 
 			if (MessageBox.Show(stringBuilder.ToString() + "\r\n" + WARNING_MESSAGE,
-				"ウィンドウキャプチャの確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+				"창 캡쳐 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 

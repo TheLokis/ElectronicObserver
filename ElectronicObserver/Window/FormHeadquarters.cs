@@ -459,7 +459,7 @@ namespace ElectronicObserver.Window
 				}
 				catch (Exception ex)
 				{
-					Utility.Logger.Add(3, "資源のクリップボードへのコピーに失敗しました。" + ex.Message);
+					Utility.Logger.Add(3, "자원의 클립보드 복사에 실패했습니다." + ex.Message);
 				}
 			}
 		}
@@ -471,7 +471,7 @@ namespace ElectronicObserver.Window
 			var itemID = Utility.Configuration.Config.FormHeadquarters.DisplayUseItemID;
 			var item = db.UseItems[itemID];
 			var itemMaster = db.MasterUseItems[itemID];
-			string tail = "\r\n(設定から変更可能)";
+			string tail = "\r\n(설정에서 변경 가능)";
 
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectronicObserver.Window;
 
 namespace ElectronicObserver.Data
 {
@@ -24,19 +25,25 @@ namespace ElectronicObserver.Data
 		public int MapAreaID => (int)RawData.api_maparea_id;
 
 		/// <summary>
-		/// 遠征名
+		/// 遠征名 번역됨
 		/// </summary>
-		public string Name => RawData.api_name;
+		public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ExpeditionTitle); }
+        }
 
-		/// <summary>
-		/// 説明文
-		/// </summary>
-		public string Detail => RawData.api_details;
+        /// <summary>
+        /// 説明文 번역됨
+        /// </summary>
+        public string Detail
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ExpeditionDetail); }
+        }
 
-		/// <summary>
-		/// 遠征時間(分単位)
-		/// </summary>
-		public int Time => (int)RawData.api_time;
+        /// <summary>
+        /// 遠征時間(分単位)
+        /// </summary>
+        public int Time => (int)RawData.api_time;
 
 		/// <summary>
 		/// 難易度

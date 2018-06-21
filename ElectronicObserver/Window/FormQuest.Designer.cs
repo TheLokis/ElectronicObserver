@@ -136,7 +136,7 @@
 			// 
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
 			this.QuestView_Type.DefaultCellStyle = dataGridViewCellStyle2;
-			this.QuestView_Type.HeaderText = "種";
+			this.QuestView_Type.HeaderText = "종류";
 			this.QuestView_Type.Name = "QuestView_Type";
 			this.QuestView_Type.ReadOnly = true;
 			this.QuestView_Type.Width = 20;
@@ -145,7 +145,7 @@
 			// 
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
 			this.QuestView_Category.DefaultCellStyle = dataGridViewCellStyle3;
-			this.QuestView_Category.HeaderText = "分類";
+			this.QuestView_Category.HeaderText = "분류";
 			this.QuestView_Category.Name = "QuestView_Category";
 			this.QuestView_Category.ReadOnly = true;
 			this.QuestView_Category.Width = 40;
@@ -153,7 +153,7 @@
 			// QuestView_Name
 			// 
 			this.QuestView_Name.FillWeight = 200F;
-			this.QuestView_Name.HeaderText = "任務名";
+			this.QuestView_Name.HeaderText = "이름";
 			this.QuestView_Name.Name = "QuestView_Name";
 			this.QuestView_Name.ReadOnly = true;
 			this.QuestView_Name.Width = 143;
@@ -181,14 +181,14 @@
 			// 
 			this.MenuProgress_Increment.Name = "MenuProgress_Increment";
 			this.MenuProgress_Increment.Size = new System.Drawing.Size(148, 22);
-			this.MenuProgress_Increment.Text = "進捗 +1(&I)";
+			this.MenuProgress_Increment.Text = "진행도 +1(&I)";
 			this.MenuProgress_Increment.Click += new System.EventHandler(this.MenuProgress_Increment_Click);
 			// 
 			// MenuProgress_Decrement
 			// 
 			this.MenuProgress_Decrement.Name = "MenuProgress_Decrement";
 			this.MenuProgress_Decrement.Size = new System.Drawing.Size(148, 22);
-			this.MenuProgress_Decrement.Text = "進捗 -1(&D)";
+			this.MenuProgress_Decrement.Text = "진행도 -1(&D)";
 			this.MenuProgress_Decrement.Click += new System.EventHandler(this.MenuProgress_Decrement_Click);
 			// 
 			// toolStripSeparator3
@@ -200,7 +200,7 @@
 			// 
 			this.MenuProgress_Reset.Name = "MenuProgress_Reset";
 			this.MenuProgress_Reset.Size = new System.Drawing.Size(148, 22);
-			this.MenuProgress_Reset.Text = "進捗リセット(&R)";
+			this.MenuProgress_Reset.Text = "진행도 리셋(&R)";
 			this.MenuProgress_Reset.Click += new System.EventHandler(this.MenuProgress_Reset_Click);
 			// 
 			// MenuMain
@@ -226,14 +226,14 @@
 			this.MenuMain_ColumnFilter_Progress});
 			this.MenuMain_ColumnFilter.Name = "MenuMain_ColumnFilter";
 			this.MenuMain_ColumnFilter.Size = new System.Drawing.Size(203, 22);
-			this.MenuMain_ColumnFilter.Text = "列フィルタ(&C)";
+			this.MenuMain_ColumnFilter.Text = "열 필터(&C)";
 			// 
 			// MenuMain_ColumnFilter_State
 			// 
 			this.MenuMain_ColumnFilter_State.CheckOnClick = true;
 			this.MenuMain_ColumnFilter_State.Name = "MenuMain_ColumnFilter_State";
 			this.MenuMain_ColumnFilter_State.Size = new System.Drawing.Size(152, 22);
-			this.MenuMain_ColumnFilter_State.Text = "遂行中(&S)";
+			this.MenuMain_ColumnFilter_State.Text = "진행중(&S)";
 			this.MenuMain_ColumnFilter_State.Click += new System.EventHandler(this.MenuMain_ColumnFilter_Click);
 			// 
 			// MenuMain_ColumnFilter_Type
@@ -249,7 +249,7 @@
 			this.MenuMain_ColumnFilter_Category.CheckOnClick = true;
 			this.MenuMain_ColumnFilter_Category.Name = "MenuMain_ColumnFilter_Category";
 			this.MenuMain_ColumnFilter_Category.Size = new System.Drawing.Size(152, 22);
-			this.MenuMain_ColumnFilter_Category.Text = "分類(&C)";
+			this.MenuMain_ColumnFilter_Category.Text = "분류(&C)";
 			this.MenuMain_ColumnFilter_Category.Click += new System.EventHandler(this.MenuMain_ColumnFilter_Click);
 			// 
 			// MenuMain_ColumnFilter_Name
@@ -257,7 +257,7 @@
 			this.MenuMain_ColumnFilter_Name.CheckOnClick = true;
 			this.MenuMain_ColumnFilter_Name.Name = "MenuMain_ColumnFilter_Name";
 			this.MenuMain_ColumnFilter_Name.Size = new System.Drawing.Size(152, 22);
-			this.MenuMain_ColumnFilter_Name.Text = "任務名(&N)";
+			this.MenuMain_ColumnFilter_Name.Text = "이름(&N)";
 			this.MenuMain_ColumnFilter_Name.Click += new System.EventHandler(this.MenuMain_ColumnFilter_Click);
 			// 
 			// MenuMain_ColumnFilter_Progress
@@ -265,7 +265,7 @@
 			this.MenuMain_ColumnFilter_Progress.CheckOnClick = true;
 			this.MenuMain_ColumnFilter_Progress.Name = "MenuMain_ColumnFilter_Progress";
 			this.MenuMain_ColumnFilter_Progress.Size = new System.Drawing.Size(152, 22);
-			this.MenuMain_ColumnFilter_Progress.Text = "進捗(&P)";
+			this.MenuMain_ColumnFilter_Progress.Text = "진행도(&P)";
 			this.MenuMain_ColumnFilter_Progress.Click += new System.EventHandler(this.MenuMain_ColumnFilter_Click);
 			// 
 			// toolStripSeparator1
@@ -277,7 +277,7 @@
 			// 
 			this.MenuMain_Initialize.Name = "MenuMain_Initialize";
 			this.MenuMain_Initialize.Size = new System.Drawing.Size(203, 22);
-			this.MenuMain_Initialize.Text = "初期化(&I)";
+			this.MenuMain_Initialize.Text = "초기화(&I)";
 			this.MenuMain_Initialize.Click += new System.EventHandler(this.MenuMain_Initialize_Click);
 			// 
 			// ToolTipInfo
@@ -299,14 +299,14 @@
 			this.MenuMain_ShowOther});
 			this.MenuMain_QuestFilter.Name = "MenuMain_QuestFilter";
 			this.MenuMain_QuestFilter.Size = new System.Drawing.Size(203, 22);
-			this.MenuMain_QuestFilter.Text = "表示フィルタ(&Q)";
+			this.MenuMain_QuestFilter.Text = "필터설정(&Q)";
 			// 
 			// MenuMain_ShowWeekly
 			// 
 			this.MenuMain_ShowWeekly.CheckOnClick = true;
 			this.MenuMain_ShowWeekly.Name = "MenuMain_ShowWeekly";
 			this.MenuMain_ShowWeekly.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowWeekly.Text = "ウィークリー任務を表示(&W)";
+			this.MenuMain_ShowWeekly.Text = "주간임무 표시(&W)";
 			this.MenuMain_ShowWeekly.Click += new System.EventHandler(this.MenuMain_ShowWeekly_Click);
 			// 
 			// MenuMain_ShowDaily
@@ -314,7 +314,7 @@
 			this.MenuMain_ShowDaily.CheckOnClick = true;
 			this.MenuMain_ShowDaily.Name = "MenuMain_ShowDaily";
 			this.MenuMain_ShowDaily.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowDaily.Text = "デイリー任務を表示(&D)";
+			this.MenuMain_ShowDaily.Text = "일일임무 표시(&D)";
 			this.MenuMain_ShowDaily.Click += new System.EventHandler(this.MenuMain_ShowDaily_Click);
 			// 
 			// MenuMain_ShowOnce
@@ -322,7 +322,7 @@
 			this.MenuMain_ShowOnce.CheckOnClick = true;
 			this.MenuMain_ShowOnce.Name = "MenuMain_ShowOnce";
 			this.MenuMain_ShowOnce.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowOnce.Text = "単発任務を表示(&O)";
+			this.MenuMain_ShowOnce.Text = "일회성임무 표시(&O)";
 			this.MenuMain_ShowOnce.Click += new System.EventHandler(this.MenuMain_ShowOnce_Click);
 			// 
 			// toolStripSeparator2
@@ -335,7 +335,7 @@
 			this.MenuMain_ShowRunningOnly.CheckOnClick = true;
 			this.MenuMain_ShowRunningOnly.Name = "MenuMain_ShowRunningOnly";
 			this.MenuMain_ShowRunningOnly.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowRunningOnly.Text = "遂行中のみ表示(&R)";
+			this.MenuMain_ShowRunningOnly.Text = "진행중인것만 표시(&R)";
 			this.MenuMain_ShowRunningOnly.Click += new System.EventHandler(this.MenuMain_ShowRunningOnly_Click);
 			// 
 			// MenuMain_ShowMonthly
@@ -343,7 +343,7 @@
 			this.MenuMain_ShowMonthly.CheckOnClick = true;
 			this.MenuMain_ShowMonthly.Name = "MenuMain_ShowMonthly";
 			this.MenuMain_ShowMonthly.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowMonthly.Text = "マンスリー任務を表示(&M)";
+			this.MenuMain_ShowMonthly.Text = "월간임무 표시(&M)";
 			this.MenuMain_ShowMonthly.Click += new System.EventHandler(this.MenuMain_ShowMonthly_Click);
 			// 
 			// MenuMain_ShowOther
@@ -351,14 +351,14 @@
 			this.MenuMain_ShowOther.CheckOnClick = true;
 			this.MenuMain_ShowOther.Name = "MenuMain_ShowOther";
 			this.MenuMain_ShowOther.Size = new System.Drawing.Size(204, 22);
-			this.MenuMain_ShowOther.Text = "その他の任務を表示(&R)";
+			this.MenuMain_ShowOther.Text = "기타 임무 표시(&R)";
 			this.MenuMain_ShowOther.Click += new System.EventHandler(this.MenuMain_ShowOther_Click);
 			// 
 			// MenuMain_GoogleQuest
 			// 
 			this.MenuMain_GoogleQuest.Name = "MenuMain_GoogleQuest";
 			this.MenuMain_GoogleQuest.Size = new System.Drawing.Size(203, 22);
-			this.MenuMain_GoogleQuest.Text = "任務名でGoogle検索(&G)";
+			this.MenuMain_GoogleQuest.Text = "이름으로 Google 검색(&G)";
 			this.MenuMain_GoogleQuest.Click += new System.EventHandler(this.MenuMain_GoogleQuest_Click);
 			// 
 			// toolStripSeparator4
@@ -377,7 +377,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormQuest";
-			this.Text = "任務";
+			this.Text = "임무";
 			this.Load += new System.EventHandler(this.FormQuest_Load);
 			((System.ComponentModel.ISupportInitialize)(this.QuestView)).EndInit();
 			this.MenuProgress.ResumeLayout(false);

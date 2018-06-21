@@ -755,7 +755,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (selectedrow == -1)
 			{
-				MessageBox.Show("対象となる行を選択してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				MessageBox.Show("대상 행을 선택하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				return;
 			}
 
@@ -837,7 +837,7 @@ namespace ElectronicObserver.Window.Dialog
 			int procrow = GetSelectedRow(ExpressionView);
 			if (procrow == -1)
 			{
-				MessageBox.Show("対象となる式(左側)の行を選択してください。\r\n行が存在しない場合は追加してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				MessageBox.Show("대상이 되는 식(왼쪽) 행을 선택하십시오.\r\n행이 없는 경우 추가하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				return;
 			}
 
@@ -856,14 +856,14 @@ namespace ElectronicObserver.Window.Dialog
 			int procrow = GetSelectedRow(ExpressionView);
 			if (procrow == -1)
 			{
-				MessageBox.Show("対象となる式列(左側)を選択してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				MessageBox.Show("대상이 되는 식(왼쪽) 행을 선택하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				return;
 			}
 
 			int selectedrow = GetSelectedRow(ExpressionDetailView);
 			if (selectedrow == -1)
 			{
-				MessageBox.Show("対象となる行を選択してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+				MessageBox.Show("대상이 되는 행을 선택하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				return;
 			}
 
@@ -883,15 +883,15 @@ namespace ElectronicObserver.Window.Dialog
 			int procrow = GetSelectedRow(ExpressionView);
 			if (procrow == -1)
 			{
-				MessageBox.Show("対象となる式列(左側)を選択してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-				return;
+                MessageBox.Show("대상이 되는 식(왼쪽) 행을 선택하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
 			}
 
 			int selectedrow = GetSelectedRow(ExpressionDetailView);
 			if (selectedrow == -1)
 			{
-				MessageBox.Show("対象となる行を選択してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-				return;
+                MessageBox.Show("대상이 되는 행을 선택하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
 			}
 
 			_group.Expressions.Expressions[procrow].Expressions.RemoveAt(selectedrow);
@@ -1292,7 +1292,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void ClearConstFilter_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show(ConstFilterSelector.Text + " を初期化します。\r\nよろしいですか?", "初期化の確認",
+			if (MessageBox.Show(ConstFilterSelector.Text + " 를 초기화합니다.\r\n진행 하시겠습니까?", "초기화 확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -1314,7 +1314,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void ConvertToExpression_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("現在の包含/除外リストを式に変換します。\r\n逆変換はできません。\r\nよろしいですか？", "確認",
+			if (MessageBox.Show("현재의 포함 / 제외 목록을 수식으로 변환합니다.\r\n역변환은 할 수 없습니다. \r\n진행 하시겠습니까?", "확인",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 					== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -1358,8 +1358,8 @@ namespace ElectronicObserver.Window.Dialog
 		{
 
 
-			if (MessageBox.Show("クリップボードからフィルタをインポートします。\r\n現在のフィルタは破棄されます。(包含/除外フィルタは維持されます)\r\nよろしいですか？\r\n",
-					"フィルタのインポートの確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+			if (MessageBox.Show("클립 보드에서 필터를 가져옵니다.\r\n현재 필터는 삭제됩니다.(포함/제외 필터는 유지됩니다.)\r\n실행하시겠습니까?\r\n",
+					"필터 가져오기 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 				== System.Windows.Forms.DialogResult.No)
 				return;
 
@@ -1367,8 +1367,8 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (string.IsNullOrEmpty(data))
 			{
-				MessageBox.Show("クリップボードが空です。\r\nフィルタデータをコピーしたうえで再度選択してください。\r\n",
-					"インポートできません", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("클립 보드가 비어 있습니다.\r\n필터 데이터를 복사 한 후 다시 선택해주세요.\r\n",
+					"에러", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
 
@@ -1379,7 +1379,7 @@ namespace ElectronicObserver.Window.Dialog
 				{
 					var exp = (ExpressionManager)_group.Expressions.Load(str);
 					if (exp == null)
-						throw new ArgumentException("インポートできないデータ形式です。");
+						throw new ArgumentException("가져올 수 없는 데이터 형식입니다.");
 					else
 						_group.Expressions = exp;
 				}
@@ -1390,7 +1390,7 @@ namespace ElectronicObserver.Window.Dialog
 			catch (Exception ex)
 			{
 
-				MessageBox.Show("フィルタのインポートに失敗しました。\r\n" + ex.Message, "インポートできません", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("필터 불러오기에 실패했습니다.\r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
 		}
@@ -1406,14 +1406,14 @@ namespace ElectronicObserver.Window.Dialog
 
 				Clipboard.SetText(str.ToString());
 
-				MessageBox.Show("フィルタをクリップボードにエクスポートしました。\r\n「フィルタのインポート」で取り込んだり、\r\nメモ帳等に貼り付けて保存したりしてください。\r\n",
-					"フィルタのエクスポート", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("필터를 클립보드에 복사했습니다.\r\n'필터 가져오기'에서 가져오거나 \r\n메모장 등에 붙여넣어 저장하세요.\r\n",
+					"필터 내보내기", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 			}
 			catch (Exception ex)
 			{
 
-				MessageBox.Show("フィルタのエクスポートに失敗しました。\r\n" + ex.Message, "エクスポートできません", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("필터 내보내기에 실패했습니다.\r\n" + ex.Message, "내보낼 수 없습니다.", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
 		}

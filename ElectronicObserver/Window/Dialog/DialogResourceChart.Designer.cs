@@ -80,13 +80,13 @@
             this.Menu_File_SaveImage});
 			this.Menu_File.Name = "Menu_File";
 			this.Menu_File.Size = new System.Drawing.Size(70, 20);
-			this.Menu_File.Text = "ファイル(&F)";
+			this.Menu_File.Text = "파일(&F)";
 			// 
 			// Menu_File_SaveImage
 			// 
 			this.Menu_File_SaveImage.Name = "Menu_File_SaveImage";
 			this.Menu_File_SaveImage.Size = new System.Drawing.Size(196, 22);
-			this.Menu_File_SaveImage.Text = "チャート画像を保存(&S)...";
+			this.Menu_File_SaveImage.Text = "차트 이미지를 저장(&S)...";
 			this.Menu_File_SaveImage.Click += new System.EventHandler(this.Menu_File_SaveImage_Click);
 			// 
 			// Menu_Graph
@@ -102,20 +102,20 @@
             this.Menu_Graph_ExperienceDiff});
 			this.Menu_Graph.Name = "Menu_Graph";
 			this.Menu_Graph.Size = new System.Drawing.Size(97, 20);
-			this.Menu_Graph.Text = "グラフの選択(&G)";
+			this.Menu_Graph.Text = "그래프 선택(&G)";
 			// 
 			// Menu_Graph_Resource
 			// 
 			this.Menu_Graph_Resource.Name = "Menu_Graph_Resource";
 			this.Menu_Graph_Resource.Size = new System.Drawing.Size(162, 22);
-			this.Menu_Graph_Resource.Text = "資源(&R)";
+			this.Menu_Graph_Resource.Text = "자원(&R)";
 			this.Menu_Graph_Resource.Click += new System.EventHandler(this.Menu_Graph_Resource_Click);
 			// 
 			// Menu_Graph_ResourceDiff
 			// 
 			this.Menu_Graph_ResourceDiff.Name = "Menu_Graph_ResourceDiff";
 			this.Menu_Graph_ResourceDiff.Size = new System.Drawing.Size(162, 22);
-			this.Menu_Graph_ResourceDiff.Text = "資源(差分)(&E)";
+			this.Menu_Graph_ResourceDiff.Text = "자원(차이)(&E)";
 			this.Menu_Graph_ResourceDiff.Click += new System.EventHandler(this.Menu_Graph_ResourceDiff_Click);
 			// 
 			// toolStripSeparator1
@@ -127,14 +127,14 @@
 			// 
 			this.Menu_Graph_Material.Name = "Menu_Graph_Material";
 			this.Menu_Graph_Material.Size = new System.Drawing.Size(162, 22);
-			this.Menu_Graph_Material.Text = "資材(&M)";
+			this.Menu_Graph_Material.Text = "자재(&M)";
 			this.Menu_Graph_Material.Click += new System.EventHandler(this.Menu_Graph_Material_Click);
 			// 
 			// Menu_Graph_MaterialDiff
 			// 
 			this.Menu_Graph_MaterialDiff.Name = "Menu_Graph_MaterialDiff";
 			this.Menu_Graph_MaterialDiff.Size = new System.Drawing.Size(162, 22);
-			this.Menu_Graph_MaterialDiff.Text = "資材(差分)(&A)";
+			this.Menu_Graph_MaterialDiff.Text = "자재(차이)(&A)";
 			this.Menu_Graph_MaterialDiff.Click += new System.EventHandler(this.Menu_Graph_MaterialDiff_Click);
 			// 
 			// toolStripSeparator2
@@ -146,14 +146,14 @@
 			// 
 			this.Menu_Graph_Experience.Name = "Menu_Graph_Experience";
 			this.Menu_Graph_Experience.Size = new System.Drawing.Size(162, 22);
-			this.Menu_Graph_Experience.Text = "経験値(&E)";
+			this.Menu_Graph_Experience.Text = "경험치(&E)";
 			this.Menu_Graph_Experience.Click += new System.EventHandler(this.Menu_Graph_Experience_Click);
 			// 
 			// Menu_Graph_ExperienceDiff
 			// 
 			this.Menu_Graph_ExperienceDiff.Name = "Menu_Graph_ExperienceDiff";
 			this.Menu_Graph_ExperienceDiff.Size = new System.Drawing.Size(162, 22);
-			this.Menu_Graph_ExperienceDiff.Text = "経験値(差分)(&X)";
+			this.Menu_Graph_ExperienceDiff.Text = "경험치(차이)(&X)";
 			this.Menu_Graph_ExperienceDiff.Click += new System.EventHandler(this.Menu_Graph_ExperienceDiff_Click);
 			// 
 			// Menu_Span
@@ -172,48 +172,48 @@
             this.Menu_Span_YearFirst});
 			this.Menu_Span.Name = "Menu_Span";
 			this.Menu_Span.Size = new System.Drawing.Size(61, 20);
-			this.Menu_Span.Text = "範囲(&S)";
+			this.Menu_Span.Text = "범위(&S)";
 			// 
 			// Menu_Span_Day
 			// 
 			this.Menu_Span_Day.Name = "Menu_Span_Day";
 			this.Menu_Span_Day.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_Day.Text = "日(&D)";
+			this.Menu_Span_Day.Text = "일(&D)";
 			this.Menu_Span_Day.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_Week
 			// 
 			this.Menu_Span_Week.Name = "Menu_Span_Week";
 			this.Menu_Span_Week.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_Week.Text = "週(&W)";
+			this.Menu_Span_Week.Text = "주간(&W)";
 			this.Menu_Span_Week.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_Month
 			// 
 			this.Menu_Span_Month.Name = "Menu_Span_Month";
 			this.Menu_Span_Month.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_Month.Text = "月(&M)";
+			this.Menu_Span_Month.Text = "월간(&M)";
 			this.Menu_Span_Month.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_Season
 			// 
 			this.Menu_Span_Season.Name = "Menu_Span_Season";
 			this.Menu_Span_Season.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_Season.Text = "3ヵ月(&S)";
+			this.Menu_Span_Season.Text = "3개월(&S)";
 			this.Menu_Span_Season.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_Year
 			// 
 			this.Menu_Span_Year.Name = "Menu_Span_Year";
 			this.Menu_Span_Year.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_Year.Text = "年(&Y)";
+			this.Menu_Span_Year.Text = "1년(&Y)";
 			this.Menu_Span_Year.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_All
 			// 
 			this.Menu_Span_All.Name = "Menu_Span_All";
 			this.Menu_Span_All.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_All.Text = "すべて(&A)";
+			this.Menu_Span_All.Text = "전부(&A)";
 			this.Menu_Span_All.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// toolStripSeparator3
@@ -225,28 +225,28 @@
 			// 
 			this.Menu_Span_WeekFirst.Name = "Menu_Span_WeekFirst";
 			this.Menu_Span_WeekFirst.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_WeekFirst.Text = "月曜から (&E)";
+			this.Menu_Span_WeekFirst.Text = "월요일부터 (&E)";
 			this.Menu_Span_WeekFirst.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_MonthFirst
 			// 
 			this.Menu_Span_MonthFirst.Name = "Menu_Span_MonthFirst";
 			this.Menu_Span_MonthFirst.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_MonthFirst.Text = "月初から (&O)";
+			this.Menu_Span_MonthFirst.Text = "월초부터 (&O)";
 			this.Menu_Span_MonthFirst.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_SeasonFirst
 			// 
 			this.Menu_Span_SeasonFirst.Name = "Menu_Span_SeasonFirst";
 			this.Menu_Span_SeasonFirst.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_SeasonFirst.Text = "3ヵ月の初めから (&N)";
+			this.Menu_Span_SeasonFirst.Text = "3개월 초부터 (&N)";
 			this.Menu_Span_SeasonFirst.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Span_YearFirst
 			// 
 			this.Menu_Span_YearFirst.Name = "Menu_Span_YearFirst";
 			this.Menu_Span_YearFirst.Size = new System.Drawing.Size(173, 22);
-			this.Menu_Span_YearFirst.Text = "年初から (&R)";
+			this.Menu_Span_YearFirst.Text = "년초부터 (&R)";
 			this.Menu_Span_YearFirst.Click += new System.EventHandler(this.Menu_Span_Menu_Click);
 			// 
 			// Menu_Option
@@ -256,14 +256,14 @@
             this.Menu_Option_DivideByDay});
 			this.Menu_Option.Name = "Menu_Option";
 			this.Menu_Option.Size = new System.Drawing.Size(81, 20);
-			this.Menu_Option.Text = "オプション(&O)";
+			this.Menu_Option.Text = "옵션(&O)";
 			// 
 			// Menu_Option_ShowAllData
 			// 
 			this.Menu_Option_ShowAllData.CheckOnClick = true;
 			this.Menu_Option_ShowAllData.Name = "Menu_Option_ShowAllData";
 			this.Menu_Option_ShowAllData.Size = new System.Drawing.Size(185, 22);
-			this.Menu_Option_ShowAllData.Text = "全てのデータを表示する";
+			this.Menu_Option_ShowAllData.Text = "모든 데이터 표시";
 			this.Menu_Option_ShowAllData.Click += new System.EventHandler(this.Menu_Option_ShowAllData_Click);
 			// 
 			// Menu_Option_DivideByDay
@@ -271,7 +271,7 @@
 			this.Menu_Option_DivideByDay.CheckOnClick = true;
 			this.Menu_Option_DivideByDay.Name = "Menu_Option_DivideByDay";
 			this.Menu_Option_DivideByDay.Size = new System.Drawing.Size(185, 22);
-			this.Menu_Option_DivideByDay.Text = "日単位で平均化";
+			this.Menu_Option_DivideByDay.Text = "일일 평균";
 			this.Menu_Option_DivideByDay.Click += new System.EventHandler(this.Menu_Option_DivideByDay_Click);
 			// 
 			// ResourceChart
@@ -281,7 +281,7 @@
 			this.ResourceChart.Name = "ResourceChart";
 			this.ResourceChart.Size = new System.Drawing.Size(774, 505);
 			this.ResourceChart.TabIndex = 1;
-			this.ResourceChart.Text = "資源チャート";
+			this.ResourceChart.Text = "자원차트";
 			this.ResourceChart.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.ResourceChart_GetToolTipText);
 			this.ResourceChart.CustomizeLegend += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.CustomizeLegendEventArgs>(this.ResourceChart_CustomizeLegend);
 			this.ResourceChart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ResourceChart_MouseDown);
@@ -289,7 +289,7 @@
 			// SaveImageDialog
 			// 
 			this.SaveImageDialog.Filter = "PNG|*.png|File|*";
-			this.SaveImageDialog.Title = "チャートを保存";
+			this.SaveImageDialog.Title = "차트 저장";
 			// 
 			// DialogResourceChart
 			// 
@@ -300,7 +300,7 @@
 			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "DialogResourceChart";
-			this.Text = "資源チャート";
+			this.Text = "자원 차트";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogResourceChart_FormClosed);
 			this.Load += new System.EventHandler(this.DialogResourceChart_Load);
 			this.menuStrip1.ResumeLayout(false);

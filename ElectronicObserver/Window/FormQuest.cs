@@ -516,7 +516,7 @@ namespace ElectronicObserver.Window
 		private void MenuMain_Initialize_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("任務データを初期化します。\r\nデータに齟齬が生じている場合以外での使用は推奨しません。\r\nよろしいですか？", "任務初期化の確認",
+			if (MessageBox.Show("임무 데이터를 초기화합니다.\r\n데이터 충돌이 발생하는 경우 이외에는 권장하지 않습니다.\r\n진행하시겠습니까?", "임무초기화 확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
 			{
 
@@ -607,7 +607,7 @@ namespace ElectronicObserver.Window
 				}
 				catch (Exception)
 				{
-					Utility.Logger.Add(3, string.Format("任務『{0}』の進捗を変更することはできません。", quest.Name));
+					Utility.Logger.Add(3, string.Format("임무『{0}』의 진행도 변경을 할 수 없습니다.", quest.Name));
 					System.Media.SystemSounds.Hand.Play();
 				}
 			}
@@ -631,7 +631,7 @@ namespace ElectronicObserver.Window
 				}
 				catch (Exception)
 				{
-					Utility.Logger.Add(3, string.Format("任務『{0}』の進捗を変更することはできません。", quest.Name));
+					Utility.Logger.Add(3, string.Format("임무『{0}』의 진행도 변경을 할 수 없습니다.", quest.Name));
 					System.Media.SystemSounds.Hand.Play();
 				}
 			}
@@ -648,7 +648,7 @@ namespace ElectronicObserver.Window
 			if (id != -1 && (quest != null || progress != null))
 			{
 
-				if (MessageBox.Show("任務" + (quest != null ? ("『" + quest.Name + "』") : ("ID: " + id.ToString() + " ")) + "を一覧から削除し、進捗をリセットします。\r\nよろしいですか？\r\n(艦これ本体の任務画面を開くと正しく更新されます。)", "任務削除の確認",
+				if (MessageBox.Show("임무" + (quest != null ? ("『" + quest.Name + "』") : ("ID: " + id.ToString() + " ")) + "목록에서 삭제하고 진행도를 리셋합니다.\r\n진행하시겠습니까?\r\n(칸코레 임무 화면을 열면 다시 업데이트됩니다.)", "임무 삭제 확인",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
 				{
 
@@ -730,7 +730,7 @@ namespace ElectronicObserver.Window
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "任務名の Google 検索に失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "임무명 구글 검색에 실패했습니다.");
 				}
 			}
 

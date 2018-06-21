@@ -109,7 +109,7 @@ namespace ElectronicObserver.Resource.Record
 			{
 
 				string[] elem = line.Split(",".ToCharArray());
-				if (elem.Length < 11) throw new ArgumentException("要素数が少なすぎます。");
+				if (elem.Length < 11) throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				EquipmentID = int.Parse(elem[0]);
 				EquipmentName = elem[1];

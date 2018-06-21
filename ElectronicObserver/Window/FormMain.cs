@@ -13,10 +13,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -64,16 +66,32 @@ namespace ElectronicObserver.Window
 		public FormBaseAirCorps fBaseAirCorps;
 		public FormJson fJson;
 
-		#endregion
+        #endregion
+
+        public static FormMain Instance;
+
+        public DynamicTranslator Translator { get; private set; }
 
 
-
-
-		public FormMain()
-		{
-			InitializeComponent();
-
-			this.Text = SoftwareInformation.VersionJapanese;
+        public FormMain()
+        {
+            CultureInfo c = CultureInfo.CurrentCulture;
+            CultureInfo ui = CultureInfo.CurrentUICulture;
+            if (c.Name != "en-US" && c.Name != "ja-JP")
+            {
+                c = new CultureInfo("ko-KR");
+            }
+            if (ui.Name != "en-US" && ui.Name != "ja-JP")
+            {
+                ui = new CultureInfo("ko-KR");
+            }
+            Thread.CurrentThread.CurrentCulture = c;
+            Thread.CurrentThread.CurrentUICulture = ui;
+            Translator = new DynamicTranslator();
+            Instance = this;
+            InitializeComponent();
+            //this.Text = SoftwareInformation.VersionJapanese;
+            this.Text = SoftwareInformation.SoftwareNameKorean;
 		}
 
 		private async void FormMain_Load(object sender, EventArgs e)
@@ -102,7 +120,7 @@ namespace ElectronicObserver.Window
 			});
 			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
-			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameJapanese + " を起動しています…");
+			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameKorean + " 를 시작합니다.");
 
 
 			ResourceManager.Instance.Load();
@@ -201,7 +219,7 @@ namespace ElectronicObserver.Window
 				catch (Exception ex)
 				{
 
-					Utility.Logger.Add(3, "API読み込みに失敗しました。" + ex.Message);
+					Utility.Logger.Add(3, "API 로드를 실패했습니다." + ex.Message);
 				}
 			}
 
@@ -220,7 +238,7 @@ namespace ElectronicObserver.Window
 			UIUpdateTimer.Start();
 
 
-			Utility.Logger.Add(3, "起動処理が完了しました。");
+			Utility.Logger.Add(3, "기동이 완료되었습니다.");
 
 		}
 
@@ -401,7 +419,7 @@ namespace ElectronicObserver.Window
 
 			if (Utility.Configuration.Config.Life.ConfirmOnClosing)
 			{
-				if (MessageBox.Show(SoftwareInformation.SoftwareNameJapanese + " を終了しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+				if (MessageBox.Show(SoftwareInformation.SoftwareNameKorean + "를 종료하시겠습니까？", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 					== System.Windows.Forms.DialogResult.No)
 				{
 					e.Cancel = true;
@@ -410,7 +428,7 @@ namespace ElectronicObserver.Window
 			}
 
 
-			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameJapanese + " を終了しています…");
+			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameKorean + "를 종료합니다…");
 
 			UIUpdateTimer.Stop();
 
@@ -452,7 +470,7 @@ namespace ElectronicObserver.Window
 			APIObserver.Instance.Stop();
 
 
-			Utility.Logger.Add(2, "終了処理が完了しました。");
+			Utility.Logger.Add(2, "종료가 완료되었습니다.");
 
 			if (Utility.Configuration.Config.Log.SaveLogFlag)
 				Utility.Logger.Save();
@@ -560,7 +578,7 @@ namespace ElectronicObserver.Window
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "サブウィンドウ レイアウトの復元に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "서브윈도우 레이아웃 복원에 실패했습니다.");
 			}
 
 		}
@@ -578,7 +596,7 @@ namespace ElectronicObserver.Window
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "サブウィンドウ レイアウトの保存に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "서브 윈도우 레이아웃 저장에 실패했습니다.");
 			}
 
 		}
@@ -598,14 +616,14 @@ namespace ElectronicObserver.Window
 					LoadSubWindowsLayout(archive.GetEntry("SubWindowLayout.xml").Open());
 				}
 
-				Utility.Logger.Add(2, path + " からウィンドウ レイアウトを復元しました。");
+				Utility.Logger.Add(2, path + " 에서 레이아웃을 로드했습니다.");
 
 			}
 			catch (FileNotFoundException)
 			{
 
-				Utility.Logger.Add(3, string.Format("ウィンドウ レイアウト ファイルは存在しません。"));
-				MessageBox.Show("レイアウトが初期化されました。\r\n「表示」メニューからお好みのウィンドウを追加してください。", "ウィンドウ レイアウト ファイルが存在しません",
+				Utility.Logger.Add(3, string.Format("레이아웃 파일이 잘못되었습니다."));
+				MessageBox.Show("레이아웃이 초기화 되었습니다.\r\n'보기'메뉴에서 원하는 창을 추가하십시오.", "레이아웃 파일이 잘못되었습니다.",
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				fBrowser.Show(MainDockPanel);
@@ -614,8 +632,8 @@ namespace ElectronicObserver.Window
 			catch (DirectoryNotFoundException)
 			{
 
-				Utility.Logger.Add(3, string.Format("ウィンドウ レイアウト ファイルは存在しません。"));
-				MessageBox.Show("レイアウトが初期化されました。\r\n「表示」メニューからお好みのウィンドウを追加してください。", "ウィンドウ レイアウト ファイルが存在しません",
+				Utility.Logger.Add(3, string.Format("레이아웃 파일이 존재하지 않습니다."));
+				MessageBox.Show("레이아웃이 초기화 되었습니다.\r\n'보기'메뉴에서 원하는 창을 추가하십시오.", "레이아웃 파일이 존재하지 않습니다.",
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				fBrowser.Show(MainDockPanel);
@@ -624,7 +642,7 @@ namespace ElectronicObserver.Window
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ウィンドウ レイアウトの復元に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "레이아웃 복원에 실패했습니다.");
 
 			}
 			finally
@@ -657,13 +675,13 @@ namespace ElectronicObserver.Window
 				}
 
 
-				Utility.Logger.Add(2, path + " へウィンドウ レイアウトを保存しました。");
+				Utility.Logger.Add(2, path + " 에 레이아웃을 저장했습니다.");
 
 			}
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "ウィンドウ レイアウトの保存に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "레이아웃 저장에 실패했습니다.");
 			}
 
 		}
@@ -733,7 +751,7 @@ namespace ElectronicObserver.Window
 		private void StripMenu_File_SaveData_Load_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("セーブしていないレコードが失われる可能性があります。\r\nロードしますか？", "確認",
+			if (MessageBox.Show("저장하지 않은 기록이 소실될 수 있습니다.\r\n로드하시겠습니까?", "확인",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -751,7 +769,7 @@ namespace ElectronicObserver.Window
 			using (OpenFileDialog ofd = new OpenFileDialog())
 			{
 
-				ofd.Title = "APIリストをロード";
+				ofd.Title = "API리스트를 로드";
 				ofd.Filter = "API List|*.txt|File|*";
 				ofd.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
 
@@ -767,7 +785,7 @@ namespace ElectronicObserver.Window
 					catch (Exception ex)
 					{
 
-						MessageBox.Show("API読み込みに失敗しました。\r\n" + ex.Message, "エラー",
+						MessageBox.Show("API 로드를 실패했습니다.\r\n" + ex.Message, "에러",
 							MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 					}
@@ -863,7 +881,7 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("先に通常の api_start2 を読み込んでください。", "大変ご迷惑をおかけしております", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("먼저 일반 api_start2 를 로드합니다.", "불편을 끼쳐드려 죄송합니다.", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
 
@@ -871,7 +889,7 @@ namespace ElectronicObserver.Window
 			using (OpenFileDialog ofd = new OpenFileDialog())
 			{
 
-				ofd.Title = "旧 api_start2 からレコードを構築";
+				ofd.Title = "이전 api_start2 에서 기록";
 				ofd.Filter = "api_start2|*api_start2*.json|JSON|*.json|File|*";
 
 				if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -902,7 +920,7 @@ namespace ElectronicObserver.Window
 					catch (Exception ex)
 					{
 
-						MessageBox.Show("API読み込みに失敗しました。\r\n" + ex.Message, "エラー",
+						MessageBox.Show("API 로드에 실패했습니다.\r\n" + ex.Message, "에러",
 							MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
@@ -915,17 +933,17 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("先に通常の api_start2 を読み込んでください。", "大変ご迷惑をおかけしております", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return;
-			}
+                MessageBox.Show("먼저 일반 api_start2 를 로드합니다.", "불편을 끼쳐드려 죄송합니다.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
 
 			using (OpenFileDialog ofd = new OpenFileDialog())
 			{
 
-				ofd.Title = "旧 api_start2 から深海棲艦を復元";
-				ofd.Filter = "api_start2|*api_start2*.json|JSON|*.json|File|*";
-				ofd.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
+                ofd.Title = "이전 api_start2 에서 기록";
+                ofd.Filter = "api_start2|*api_start2*.json|JSON|*.json|File|*";
+                ofd.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
 
 				if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 				{
@@ -951,14 +969,15 @@ namespace ElectronicObserver.Window
 							}
 						}
 
-						Utility.Logger.Add(1, "旧 api_start2 からデータを復元しました。");
+						Utility.Logger.Add(1, "이전 api_start2 에서 데이터를 복원했습니다.");
 
 					}
 					catch (Exception ex)
 					{
 
-						MessageBox.Show("API読み込みに失敗しました。\r\n" + ex.Message, "エラー",
-							MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        MessageBox.Show("API 로드에 실패했습니다.\r\n" + ex.Message, "에러",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
 			}
@@ -971,7 +990,7 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("艦船データが読み込まれていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("함선 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 			}
 			else
@@ -988,9 +1007,9 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterEquipments.Count == 0)
 			{
-				MessageBox.Show("装備データが読み込まれていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("장비 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-			}
+            }
 			else
 			{
 				var dialogAlbumMasterEquipment = new DialogAlbumMasterEquipment();
@@ -1004,7 +1023,7 @@ namespace ElectronicObserver.Window
 		private async void StripMenu_Debug_DeleteOldAPI_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("古いAPIデータを削除します。\r\n本当によろしいですか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+			if (MessageBox.Show("이전 API 데이터를 삭제합니다.\r\n실행하시겠습니까?", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 
@@ -1013,13 +1032,13 @@ namespace ElectronicObserver.Window
 
 					int count = await Task.Factory.StartNew(() => DeleteOldAPI());
 
-					MessageBox.Show("削除が完了しました。\r\n" + count + " 個のファイルを削除しました。", "削除成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("삭제가 완료되었습니다.\r\n" + count + " 개 파일을 삭제했습니다.", "삭제 성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 				}
 				catch (Exception ex)
 				{
 
-					MessageBox.Show("削除に失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("삭제에 실패했습니다.\r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
 
@@ -1084,13 +1103,13 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("艦船データが読み込まれていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("함선 데이터가 로드 되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
-			if (MessageBox.Show("通信から保存した艦船リソース名を持つファイル及びフォルダを、艦船名に置換します。\r\n" +
-				"対象は指定されたフォルダ以下のすべてのファイル及びフォルダです。\r\n" +
-				"続行しますか？", "艦船リソースをリネーム", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+			if (MessageBox.Show("저장된 함선 이름을 가진 파일 및 폴더를 다시 로드합니다.\r\n" +
+				"대상은 지정된 폴더 아래의 모든 파일 및 폴더입니다.\r\n" +
+				"계속 하시겠습니까?", "함선 파일의 이름을 변경", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 
@@ -1114,15 +1133,15 @@ namespace ElectronicObserver.Window
 
 					int count = await Task.Factory.StartNew(() => RenameShipResource(path));
 
-					MessageBox.Show(string.Format("リネーム処理が完了しました。\r\n{0} 個のアイテムをリネームしました。", count), "処理完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show(string.Format("작업이 완료되었습니다.\r\n{0} 개 항목의 이름을 변경했습니다.", count), "처리 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 				}
 				catch (Exception ex)
 				{
 
-					Utility.ErrorReporter.SendErrorReport(ex, "艦船リソースのリネームに失敗しました。");
-					MessageBox.Show("艦船リソースのリネームに失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utility.ErrorReporter.SendErrorReport(ex, "함선 파일 이름 바꾸기에 실패했습니다.");
+					MessageBox.Show("함선 파일 이름 바꾸기에 실패했습니다.\r\n" + ex.Message, "애러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				}
 
@@ -1209,7 +1228,7 @@ namespace ElectronicObserver.Window
 		private void StripMenu_Help_Help_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("外部ブラウザでオンラインヘルプを開きます。\r\nよろしいですか？", "ヘルプ",
+			if (MessageBox.Show("외부 브라우저에서 온라인 메뉴얼을 엽니다. 현재는 원어페이지로 연결됩니다.\r\n계속 하시겠습니까?", "도움말",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -1248,7 +1267,7 @@ namespace ElectronicObserver.Window
 			{
 
 				dialog.Filter = "Layout Archive|*.zip|File|*";
-				dialog.Title = "レイアウト ファイルを開く";
+				dialog.Title = "레이아웃 파일 열기";
 
 
 				PathHelper.InitOpenFileDialog(Utility.Configuration.Config.Life.LayoutFilePath, dialog);
@@ -1272,7 +1291,7 @@ namespace ElectronicObserver.Window
 			{
 
 				dialog.Filter = "Layout Archive|*.zip|File|*";
-				dialog.Title = "レイアウト ファイルの保存";
+				dialog.Title = "레이아웃 파일 저장";
 
 
 				PathHelper.InitSaveFileDialog(Utility.Configuration.Config.Life.LayoutFilePath, dialog);
@@ -1303,13 +1322,13 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("艦これを読み込んでから開いてください。", "マスターデータがありません", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("칸코레를 한번 실행하고 열어주세요.", "마스터 데이터가 없습니다.", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
 			if (RecordManager.Instance.ShipDrop.Record.Count == 0)
 			{
-				MessageBox.Show("ドロップレコードがありません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("드롭 기록이 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -1323,14 +1342,14 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("艦これを読み込んでから開いてください。", "マスターデータがありません", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
+                MessageBox.Show("칸코레를 한번 실행하고 열어주세요.", "마스터 데이터가 없습니다.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 			}
 
 			if (RecordManager.Instance.Development.Record.Count == 0)
 			{
-				MessageBox.Show("開発レコードがありません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
+                MessageBox.Show("개발 기록이 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 			}
 
 			new Dialog.DialogDevelopmentRecordViewer().Show(this);
@@ -1342,14 +1361,14 @@ namespace ElectronicObserver.Window
 
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show("艦これを読み込んでから開いてください。", "マスターデータがありません", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
+                MessageBox.Show("칸코레를 한번 실행하고 열어주세요.", "마스터 데이터가 없습니다.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 			}
 
 			if (RecordManager.Instance.Construction.Record.Count == 0)
 			{
-				MessageBox.Show("建造レコードがありません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
+                MessageBox.Show("건조 기록이 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 			}
 
 			new Dialog.DialogConstructionRecordViewer().Show(this);

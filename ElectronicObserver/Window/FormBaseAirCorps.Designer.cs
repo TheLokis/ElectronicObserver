@@ -77,7 +77,7 @@
 			// 
 			this.ContextMenuBaseAirCorps_CopyOrganization.Name = "ContextMenuBaseAirCorps_CopyOrganization";
 			this.ContextMenuBaseAirCorps_CopyOrganization.Size = new System.Drawing.Size(219, 22);
-			this.ContextMenuBaseAirCorps_CopyOrganization.Text = "クリップボードにコピー(&C)";
+			this.ContextMenuBaseAirCorps_CopyOrganization.Text = "클립 보드에 복사(&C)";
 			this.ContextMenuBaseAirCorps_CopyOrganization.Click += new System.EventHandler(this.ContextMenuBaseAirCorps_CopyOrganization_Click);
 			// 
 			// toolStripSeparator1
@@ -89,7 +89,7 @@
 			// 
 			this.ContextMenuBaseAirCorps_DisplayRelocatedEquipments.Name = "ContextMenuBaseAirCorps_DisplayRelocatedEquipments";
 			this.ContextMenuBaseAirCorps_DisplayRelocatedEquipments.Size = new System.Drawing.Size(219, 22);
-			this.ContextMenuBaseAirCorps_DisplayRelocatedEquipments.Text = "配置転換中の装備を確認(&R)";
+			this.ContextMenuBaseAirCorps_DisplayRelocatedEquipments.Text = "배치전환중인 장비(&R)";
 			this.ContextMenuBaseAirCorps_DisplayRelocatedEquipments.Click += new System.EventHandler(this.ContextMenuBaseAirCorps_DisplayRelocatedEquipments_Click);
 			// 
 			// FormBaseAirCorps
@@ -106,7 +106,7 @@
 			this.HideOnClose = true;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "FormBaseAirCorps";
-			this.Text = "基地航空隊";
+			this.Text = "기지항공대";
 			this.Load += new System.EventHandler(this.FormBaseAirCorps_Load);
 			this.ContextMenuBaseAirCorps.ResumeLayout(false);
 			this.ResumeLayout(false);

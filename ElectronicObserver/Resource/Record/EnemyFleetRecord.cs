@@ -114,7 +114,7 @@ namespace ElectronicObserver.Resource.Record
 
 				string[] elem = line.Split(",".ToCharArray());
 				if (elem.Length < 44)
-					throw new ArgumentException("要素数が少なすぎます。");
+					throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ulong id = Convert.ToUInt64(elem[0], 16);
 				FleetName = elem[1];
@@ -137,7 +137,7 @@ namespace ElectronicObserver.Resource.Record
 				FleetID = ComputeHash();
 
 				if (FleetID != id)
-					Utility.Logger.Add(1, $"EnemyFleetRecord: 敵編成IDに誤りがあります。 (記録されているID {id:x16} -> 現在のID {FleetID:x16})");
+					Utility.Logger.Add(1, $"EnemyFleetRecord: 적 편성 ID에 오류가 있습니다. (기록된 ID {id:x16} -> 현재 ID {FleetID:x16})");
 			}
 
 			public override string SaveLine()

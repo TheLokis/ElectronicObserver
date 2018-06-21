@@ -93,7 +93,7 @@ namespace ElectronicObserver.Data
 			public void ToColumn(DataGridViewColumn column)
 			{
 				if (column.Name != Name)
-					throw new ArgumentException("設定する列と Name が異なります。");
+					throw new ArgumentException("설정 열과 이름이 다릅니다.");
 
 				column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;      //width 変更のためいったん戻す
 				column.Width = Width;

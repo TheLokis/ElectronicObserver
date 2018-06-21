@@ -58,7 +58,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(672, 194);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "第一基地航空隊";
+			this.groupBox1.Text = "제1기지항공대";
 			// 
 			// TableBaseAirCorps1
 			// 
@@ -116,7 +116,7 @@
 			this.groupBox3.Size = new System.Drawing.Size(672, 194);
 			this.groupBox3.TabIndex = 2;
 			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "第三基地航空隊";
+			this.groupBox3.Text = "제3기지항공대";
 			// 
 			// TableBaseAirCorps3
 			// 
@@ -156,7 +156,7 @@
 			this.groupBox2.Size = new System.Drawing.Size(672, 194);
 			this.groupBox2.TabIndex = 1;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "第二基地航空隊";
+			this.groupBox2.Text = "제2기지항공대";
 			// 
 			// TableBaseAirCorps2
 			// 
@@ -203,19 +203,19 @@
 			this.TopMenu_Edit_Clear});
 			this.TopMenu_Edit.Name = "TopMenu_Edit";
 			this.TopMenu_Edit.Size = new System.Drawing.Size(60, 20);
-			this.TopMenu_Edit.Text = "編集(&E)";
+			this.TopMenu_Edit.Text = "편집(&E)";
 			// 
 			// TopMenu_Edit_ImportOrganization
 			// 
 			this.TopMenu_Edit_ImportOrganization.Name = "TopMenu_Edit_ImportOrganization";
 			this.TopMenu_Edit_ImportOrganization.Size = new System.Drawing.Size(202, 22);
-			this.TopMenu_Edit_ImportOrganization.Text = "現在の編成をインポート(&I)";
+			this.TopMenu_Edit_ImportOrganization.Text = "현재의 편성을 불러오기(&I)";
 			// 
 			// TopMenu_Edit_Clear
 			// 
 			this.TopMenu_Edit_Clear.Name = "TopMenu_Edit_Clear";
 			this.TopMenu_Edit_Clear.Size = new System.Drawing.Size(202, 22);
-			this.TopMenu_Edit_Clear.Text = "編成をクリア(&C)";
+			this.TopMenu_Edit_Clear.Text = "편성 초기화(&C)";
 			this.TopMenu_Edit_Clear.Click += new System.EventHandler(this.TopMenu_Edit_Clear_Click);
 			// 
 			// ToolTipInfo
@@ -235,7 +235,7 @@
 			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "DialogBaseAirCorpsSimulation";
-			this.Text = "基地航空隊編成シミュレーション";
+			this.Text = "기지 항공대 편성 시뮬레이터";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogBaseAirCorpsSimulation_FormClosed);
 			this.Load += new System.EventHandler(this.DialogBaseAirCorpsSimulation_Load);
 			this.groupBox1.ResumeLayout(false);

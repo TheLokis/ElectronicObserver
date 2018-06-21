@@ -337,7 +337,7 @@
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage1.Size = new System.Drawing.Size(696, 372);
 			this.tabPage1.TabIndex = 0;
-			this.tabPage1.Text = "通信";
+			this.tabPage1.Text = "통신";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// Connection_UpstreamProxyAddress
@@ -348,7 +348,7 @@
 			this.Connection_UpstreamProxyAddress.Name = "Connection_UpstreamProxyAddress";
 			this.Connection_UpstreamProxyAddress.Size = new System.Drawing.Size(432, 23);
 			this.Connection_UpstreamProxyAddress.TabIndex = 12;
-			this.ToolTipInfo.SetToolTip(this.Connection_UpstreamProxyAddress, "上流プロキシのアドレスを指定します。\r\n既定値は 127.0.0.1 です。");
+			this.ToolTipInfo.SetToolTip(this.Connection_UpstreamProxyAddress, "업스트림 프록시 주소를 설정합니다.\r\n기본값은 127.0.0.1 입니다.");
 			// 
 			// Connection_DownstreamProxyLabel
 			// 
@@ -357,7 +357,7 @@
 			this.Connection_DownstreamProxyLabel.Name = "Connection_DownstreamProxyLabel";
 			this.Connection_DownstreamProxyLabel.Size = new System.Drawing.Size(149, 15);
 			this.Connection_DownstreamProxyLabel.TabIndex = 11;
-			this.Connection_DownstreamProxyLabel.Text = "下流プロキシ(上級者向け)：";
+			this.Connection_DownstreamProxyLabel.Text = "다운스트림 프록시(고급)：";
 			// 
 			// Connection_DownstreamProxy
 			// 
@@ -367,7 +367,7 @@
 			this.Connection_DownstreamProxy.Name = "Connection_DownstreamProxy";
 			this.Connection_DownstreamProxy.Size = new System.Drawing.Size(524, 23);
 			this.Connection_DownstreamProxy.TabIndex = 10;
-			this.ToolTipInfo.SetToolTip(this.Connection_DownstreamProxy, "下流プロキシ設定を記述します。\r\nこの設定は上記のポート設定より優先されます。\r\n空欄の場合は上記の設定をもとに自動設定されます。\r\n動作を理解できる方のみ利用し" +
+			this.ToolTipInfo.SetToolTip(this.Connection_DownstreamProxy, "다운스트림 프록시 주소를 설정합니다.\r\n이 설정은 위의 포트 설정보다 우선시됩니다.\r\n입력하지 않은경우 자동 설정됩니다.\r\n이 기능을 이해하시는 경우만 이용해주세요." +
         "てください。");
 			// 
 			// Connection_UseSystemProxy
@@ -377,8 +377,8 @@
 			this.Connection_UseSystemProxy.Name = "Connection_UseSystemProxy";
 			this.Connection_UseSystemProxy.Size = new System.Drawing.Size(135, 19);
 			this.Connection_UseSystemProxy.TabIndex = 9;
-			this.Connection_UseSystemProxy.Text = "システムプロキシを利用";
-			this.ToolTipInfo.SetToolTip(this.Connection_UseSystemProxy, "システムのプロキシ設定を利用します。");
+			this.Connection_UseSystemProxy.Text = "시스템 프록시 사용";
+			this.ToolTipInfo.SetToolTip(this.Connection_UseSystemProxy, "컴퓨터의 프록시 설정을 사용합니다.");
 			this.Connection_UseSystemProxy.UseVisualStyleBackColor = true;
 			// 
 			// Connection_UpstreamProxyPort
@@ -393,7 +393,7 @@
 			this.Connection_UpstreamProxyPort.Size = new System.Drawing.Size(80, 23);
 			this.Connection_UpstreamProxyPort.TabIndex = 4;
 			this.Connection_UpstreamProxyPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.Connection_UpstreamProxyPort, "他のツール・ブラウザで利用しているポート番号を指定します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_UpstreamProxyPort, "다른 툴, 브라우저에서 사용하는 포트 번호를 지정합니다.");
 			// 
 			// Connection_UseUpstreamProxy
 			// 
@@ -402,8 +402,8 @@
 			this.Connection_UseUpstreamProxy.Name = "Connection_UseUpstreamProxy";
 			this.Connection_UseUpstreamProxy.Size = new System.Drawing.Size(152, 19);
 			this.Connection_UseUpstreamProxy.TabIndex = 3;
-			this.Connection_UseUpstreamProxy.Text = "上流プロキシを利用する：";
-			this.ToolTipInfo.SetToolTip(this.Connection_UseUpstreamProxy, "他のプロキシを利用するツール・ブラウザと連携する際に利用します。");
+			this.Connection_UseUpstreamProxy.Text = "업스트림 프록시 사용:";
+			this.ToolTipInfo.SetToolTip(this.Connection_UseUpstreamProxy, "다른 프록시를 이용하는 툴, 브라우저와 함께 이용할때 사용합니다.");
 			this.Connection_UseUpstreamProxy.UseVisualStyleBackColor = true;
 			// 
 			// Connection_RegisterAsSystemProxy
@@ -414,9 +414,9 @@
 			this.Connection_RegisterAsSystemProxy.Name = "Connection_RegisterAsSystemProxy";
 			this.Connection_RegisterAsSystemProxy.Size = new System.Drawing.Size(152, 19);
 			this.Connection_RegisterAsSystemProxy.TabIndex = 2;
-			this.Connection_RegisterAsSystemProxy.Text = "システムプロキシとして登録";
-			this.ToolTipInfo.SetToolTip(this.Connection_RegisterAsSystemProxy, "プロキシをシステムに登録し、自動的に通信できるようにします。\r\nプロキシ設定が不要になりますが、副作用があるため注意してご利用ください。\r\n詳細はオンラインヘルプ" +
-        "を参照してください。");
+			this.Connection_RegisterAsSystemProxy.Text = "시스템 프록시 등록";
+			this.ToolTipInfo.SetToolTip(this.Connection_RegisterAsSystemProxy, "프록시를 시스템에 등록하고 자동으로 사용하게 변경합니다.\r\n프록시 설정이 필요없어지나, 부작용이 있을수 있습니다.\r\n자세한 내용은 온라인 메뉴얼" +
+        "을 참조하십시오.");
 			this.Connection_RegisterAsSystemProxy.UseVisualStyleBackColor = true;
 			this.Connection_RegisterAsSystemProxy.Visible = false;
 			// 
@@ -426,7 +426,7 @@
 			this.Connection_OutputConnectionScript.Name = "Connection_OutputConnectionScript";
 			this.Connection_OutputConnectionScript.Size = new System.Drawing.Size(200, 23);
 			this.Connection_OutputConnectionScript.TabIndex = 8;
-			this.Connection_OutputConnectionScript.Text = "自動プロキシ設定スクリプトの出力...";
+			this.Connection_OutputConnectionScript.Text = "자동 프록시 설정 스크립트 출력...";
 			this.Connection_OutputConnectionScript.UseVisualStyleBackColor = true;
 			this.Connection_OutputConnectionScript.Click += new System.EventHandler(this.Connection_OutputConnectionScript_Click);
 			// 
@@ -437,7 +437,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(201, 15);
 			this.label4.TabIndex = 6;
-			this.label4.Text = "＊膨大なサイズになる可能性があります。";
+			this.label4.Text = "＊용량을 많이 차지할 수 있습니다.";
 			// 
 			// Connection_PanelSaveData
 			// 
@@ -464,7 +464,7 @@
 			this.Connection_ApplyVersion.Size = new System.Drawing.Size(68, 19);
 			this.Connection_ApplyVersion.TabIndex = 9;
 			this.Connection_ApplyVersion.Text = "Version";
-			this.ToolTipInfo.SetToolTip(this.Connection_ApplyVersion, "バージョン名をファイルに追加します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_ApplyVersion, "버전 이름을 파일에 추가합니다.");
 			this.Connection_ApplyVersion.UseVisualStyleBackColor = true;
 			// 
 			// Connection_SaveOtherFile
@@ -475,7 +475,7 @@
 			this.Connection_SaveOtherFile.Size = new System.Drawing.Size(59, 19);
 			this.Connection_SaveOtherFile.TabIndex = 8;
 			this.Connection_SaveOtherFile.Text = "Other";
-			this.ToolTipInfo.SetToolTip(this.Connection_SaveOtherFile, "すべての通信ファイルを保存します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_SaveOtherFile, "모든 통신 파일을 저장합니다.");
 			this.Connection_SaveOtherFile.UseVisualStyleBackColor = true;
 			// 
 			// Connection_SaveSWF
@@ -486,7 +486,7 @@
 			this.Connection_SaveSWF.Size = new System.Drawing.Size(53, 19);
 			this.Connection_SaveSWF.TabIndex = 7;
 			this.Connection_SaveSWF.Text = "SWF";
-			this.ToolTipInfo.SetToolTip(this.Connection_SaveSWF, "SWFファイルを保存します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_SaveSWF, "SWF파일을 저장합니다.");
 			this.Connection_SaveSWF.UseVisualStyleBackColor = true;
 			// 
 			// Connection_SaveResponse
@@ -497,7 +497,7 @@
 			this.Connection_SaveResponse.Size = new System.Drawing.Size(81, 19);
 			this.Connection_SaveResponse.TabIndex = 6;
 			this.Connection_SaveResponse.Text = "Response";
-			this.ToolTipInfo.SetToolTip(this.Connection_SaveResponse, "APIのResponse部を保存します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_SaveResponse, "API의 Response 부분을 저장합니다.");
 			this.Connection_SaveResponse.UseVisualStyleBackColor = true;
 			// 
 			// Connection_SaveRequest
@@ -508,7 +508,7 @@
 			this.Connection_SaveRequest.Size = new System.Drawing.Size(73, 19);
 			this.Connection_SaveRequest.TabIndex = 5;
 			this.Connection_SaveRequest.Text = "Request";
-			this.ToolTipInfo.SetToolTip(this.Connection_SaveRequest, "APIのRequest部を保存します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_SaveRequest, "API의 Request 부분을 저장합니다.");
 			this.Connection_SaveRequest.UseVisualStyleBackColor = true;
 			// 
 			// Connection_SaveDataPathSearch
@@ -529,7 +529,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(55, 15);
 			this.label3.TabIndex = 2;
-			this.label3.Text = "保存先：";
+			this.label3.Text = "경로：";
 			// 
 			// Connection_SaveDataPath
 			// 
@@ -549,7 +549,7 @@
 			this.Connection_SaveReceivedData.Name = "Connection_SaveReceivedData";
 			this.Connection_SaveReceivedData.Size = new System.Drawing.Size(126, 19);
 			this.Connection_SaveReceivedData.TabIndex = 5;
-			this.Connection_SaveReceivedData.Text = "通信内容を保存する";
+			this.Connection_SaveReceivedData.Text = "통신 내용 저장";
 			this.Connection_SaveReceivedData.UseVisualStyleBackColor = true;
 			this.Connection_SaveReceivedData.CheckedChanged += new System.EventHandler(this.Connection_SaveReceivedData_CheckedChanged);
 			// 
@@ -565,7 +565,7 @@
 			this.Connection_Port.Size = new System.Drawing.Size(80, 23);
 			this.Connection_Port.TabIndex = 1;
 			this.Connection_Port.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.Connection_Port, "ポート番号を設定します。");
+			this.ToolTipInfo.SetToolTip(this.Connection_Port, "포트 번호를 설정합니다.");
 			// 
 			// label1
 			// 
@@ -574,7 +574,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(47, 15);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "ポート：";
+			this.label1.Text = "포트：";
 			// 
 			// tabPage2
 			// 
@@ -646,7 +646,7 @@
 			this.UI_RenderingTest.Size = new System.Drawing.Size(136, 20);
 			this.UI_RenderingTest.TabIndex = 12;
 			this.UI_RenderingTest.Text = "Rendering Test: ";
-			this.ToolTipInfo.SetToolTip(this.UI_RenderingTest, "描画プレビューです。\r\n下のバーから値を調整できます。");
+			this.ToolTipInfo.SetToolTip(this.UI_RenderingTest, "렌더링 미리보기. \r\n아래에서 값을 조정할수있습니다.");
 			this.UI_RenderingTest.Value = 401;
 			// 
 			// UI_IsLayoutFixed
@@ -656,9 +656,9 @@
 			this.UI_IsLayoutFixed.Name = "UI_IsLayoutFixed";
 			this.UI_IsLayoutFixed.Size = new System.Drawing.Size(141, 19);
 			this.UI_IsLayoutFixed.TabIndex = 13;
-			this.UI_IsLayoutFixed.Text = "フォントの高さを固定する";
-			this.ToolTipInfo.SetToolTip(this.UI_IsLayoutFixed, "有効な時、どんなフォントでも概ね各UIの列の高さが同じになります(ver. 2.6.2 以前と同様)。\r\n無効な時、フォントによって列の高さが変わります(有効な時" +
-        "より大きくなる場合があります)。\r\n無効にした場合、動作が若干重くなる可能性があります。");
+			this.UI_IsLayoutFixed.Text = "폰트 크기 조정";
+			this.ToolTipInfo.SetToolTip(this.UI_IsLayoutFixed, "활성화 하면, 어떤 폰트라도 UI 열의 높이가 동일하게 됩니다.(ver. 2.6.2 이전처럼)。\r\n비활성화 된 경우, 폰트 크기에 따라 열의 높이가 바뀝니다.(활성화 시" +
+        "보다 더 커질 수 있습니다.)\r\n비활성화 된 경우 프로그램이 느려질 수 있습니다.");
 			this.UI_IsLayoutFixed.UseVisualStyleBackColor = true;
 			// 
 			// UI_BarColorMorphing
@@ -669,7 +669,7 @@
 			this.UI_BarColorMorphing.Size = new System.Drawing.Size(167, 19);
 			this.UI_BarColorMorphing.TabIndex = 11;
 			this.UI_BarColorMorphing.Text = "バーの色を滑らかに変化させる";
-			this.ToolTipInfo.SetToolTip(this.UI_BarColorMorphing, "HP・資源等のバーの色を、艦これUIと同様に滑らかに変化させるか指定します。");
+			this.ToolTipInfo.SetToolTip(this.UI_BarColorMorphing, "HP, 자원등의 바 색상을 칸코레 UI처럼 부드럽게 변화시킬지 설정합니다.");
 			this.UI_BarColorMorphing.UseVisualStyleBackColor = true;
 			this.UI_BarColorMorphing.CheckedChanged += new System.EventHandler(this.UI_BarColorMorphing_CheckedChanged);
 			// 
@@ -703,7 +703,7 @@
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(71, 15);
 			this.label8.TabIndex = 4;
-			this.label8.Text = "サブフォント：";
+			this.label8.Text = "서브 폰트：";
 			// 
 			// UI_MainFontSelect
 			// 
@@ -735,7 +735,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(78, 15);
 			this.label5.TabIndex = 0;
-			this.label5.Text = "メインフォント：";
+			this.label5.Text = "메인 폰트：";
 			// 
 			// tabPage3
 			// 
@@ -754,7 +754,7 @@
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage3.Size = new System.Drawing.Size(696, 372);
 			this.tabPage3.TabIndex = 2;
-			this.tabPage3.Text = "ログ";
+			this.tabPage3.Text = "로그";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
 			// Log_SaveLogImmediately
@@ -764,9 +764,9 @@
 			this.Log_SaveLogImmediately.Name = "Log_SaveLogImmediately";
 			this.Log_SaveLogImmediately.Size = new System.Drawing.Size(140, 19);
 			this.Log_SaveLogImmediately.TabIndex = 9;
-			this.Log_SaveLogImmediately.Text = "ログを即時書き込みする";
-			this.ToolTipInfo.SetToolTip(this.Log_SaveLogImmediately, "ログ追加と同時にログファイルに書き込むかを指定します。\r\n無効の場合はプログラム終了時にまとめて書き込みます。\r\n有効な場合、強制終了等の問題が発生してもログを残" +
-        "せますが、多少処理が重くなる可能性があります。\r\nなお、「ログをファイルに保存する」無効時には本指定は無効になります。");
+			this.Log_SaveLogImmediately.Text = "로그 즉시 저장";
+			this.ToolTipInfo.SetToolTip(this.Log_SaveLogImmediately, "로그 추가와 동시에 로그 파일에 기록할지 설정합니다.\r\n비활성화 한 경우엔 프로그램 종료 시에 로그가 기록됩니다.\r\n활성화 하면 강제 종료등의 문제가 발생해도 로그를 남겨" +
+        "대응이 가능하지만, 프로그램이 느려질 수 있습니다.\r\n또한, '로그 파일에 저장'이 비활성화 된 경우에는 본 설정이 작동하지 않습니다.");
 			this.Log_SaveLogImmediately.UseVisualStyleBackColor = true;
 			// 
 			// Log_SaveBattleLog
@@ -776,8 +776,8 @@
 			this.Log_SaveBattleLog.Name = "Log_SaveBattleLog";
 			this.Log_SaveBattleLog.Size = new System.Drawing.Size(120, 19);
 			this.Log_SaveBattleLog.TabIndex = 8;
-			this.Log_SaveBattleLog.Text = "戦闘ログを保存する";
-			this.ToolTipInfo.SetToolTip(this.Log_SaveBattleLog, "戦闘ログを保存するかを指定します。\r\n戦闘ログは BattleLog フォルダに保存されます。");
+			this.Log_SaveBattleLog.Text = "전투 로그 저장";
+			this.ToolTipInfo.SetToolTip(this.Log_SaveBattleLog, "전투 로그를 저장할지 여부를 설정합니다.\r\n전투 로그는 BattleLog 폴더에 저장됩니다.");
 			this.Log_SaveBattleLog.UseVisualStyleBackColor = true;
 			// 
 			// Log_ShowSpoiler
@@ -787,8 +787,8 @@
 			this.Log_ShowSpoiler.Name = "Log_ShowSpoiler";
 			this.Log_ShowSpoiler.Size = new System.Drawing.Size(115, 19);
 			this.Log_ShowSpoiler.TabIndex = 3;
-			this.Log_ShowSpoiler.Text = "ネタバレを許可する";
-			this.ToolTipInfo.SetToolTip(this.Log_ShowSpoiler, "開発したアイテム名やドロップ艦名などのログを記録するかを指定します。\r\n先にわかってしまうことが気になる方は無効にしてください。\r\n");
+			this.Log_ShowSpoiler.Text = "결과 미리보기";
+			this.ToolTipInfo.SetToolTip(this.Log_ShowSpoiler, "개발한 아이템 이름이나 건조시 결과를 미리 볼지 여부를 설정합니다.\r\n");
 			this.Log_ShowSpoiler.UseVisualStyleBackColor = true;
 			// 
 			// label12
@@ -798,7 +798,7 @@
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(318, 15);
 			this.label12.TabIndex = 7;
-			this.label12.Text = "＊無闇に変更すると設定・レコードが読めなくなる可能性があります";
+			this.label12.Text = "＊설정 기록을 읽을 수 없게 될 가능성이 있습니다.";
 			// 
 			// label11
 			// 
@@ -807,7 +807,7 @@
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(69, 15);
 			this.label11.TabIndex = 5;
-			this.label11.Text = "文字コード：";
+			this.label11.Text = "문자 코드：";
 			// 
 			// Log_FileEncodingID
 			// 
@@ -823,7 +823,7 @@
 			this.Log_FileEncodingID.Name = "Log_FileEncodingID";
 			this.Log_FileEncodingID.Size = new System.Drawing.Size(112, 23);
 			this.Log_FileEncodingID.TabIndex = 6;
-			this.ToolTipInfo.SetToolTip(this.Log_FileEncodingID, "入出力するファイルのエンコーディングを指定します。\r\n＊注意＊変更すると今までの設定やレコードが読み込めなくなる可能性があります。\r\n十分注意して変更してください" +
+			this.ToolTipInfo.SetToolTip(this.Log_FileEncodingID, "입출력 파일의 인코딩을 지정합니다.\r\n＊주의＊변경하면 지금까지의 설정과 기록을 로드하지 못하는 경우가 생길 수 있습니다.\r\n주의해서 변경하십시오." +
         "。");
 			// 
 			// Log_SaveErrorReport
@@ -833,9 +833,9 @@
 			this.Log_SaveErrorReport.Name = "Log_SaveErrorReport";
 			this.Log_SaveErrorReport.Size = new System.Drawing.Size(142, 19);
 			this.Log_SaveErrorReport.TabIndex = 4;
-			this.Log_SaveErrorReport.Text = "エラーレポートを保存する";
-			this.ToolTipInfo.SetToolTip(this.Log_SaveErrorReport, "エラーが発生した際に記録を残します。\r\n記録されたファイルを送信していただければバグ修正に役立てることができます。\r\nデフォルトでは実行フォルダ内 ErrorRe" +
-        "port フォルダに保存されます。");
+			this.Log_SaveErrorReport.Text = "오류 보고서 저장";
+			this.ToolTipInfo.SetToolTip(this.Log_SaveErrorReport, "오류가 발생했을 때 기록을 남깁니다.\r\n보고서를 보내주시면 버그 수정에 도움이 될 수 있습니다.\r\n기본적으론 실행 폴더의 ErrorRe" +
+        "port 폴더에 저장됩니다.");
 			this.Log_SaveErrorReport.UseVisualStyleBackColor = true;
 			// 
 			// Log_SaveLogFlag
@@ -845,7 +845,7 @@
 			this.Log_SaveLogFlag.Name = "Log_SaveLogFlag";
 			this.Log_SaveLogFlag.Size = new System.Drawing.Size(139, 19);
 			this.Log_SaveLogFlag.TabIndex = 0;
-			this.Log_SaveLogFlag.Text = "ログをファイルに保存する";
+			this.Log_SaveLogFlag.Text = "로그를 파일에 저장";
 			this.Log_SaveLogFlag.UseVisualStyleBackColor = true;
 			// 
 			// Log_LogLevel
@@ -860,7 +860,7 @@
 			this.Log_LogLevel.Size = new System.Drawing.Size(80, 23);
 			this.Log_LogLevel.TabIndex = 2;
 			this.Log_LogLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.Log_LogLevel, "小さい値では詳細なログを、大きな値では重要なログのみを表示します。\r\n1: デバッグレベル\r\n2: 通常(推奨)\r\n3: エラーのみ");
+			this.ToolTipInfo.SetToolTip(this.Log_LogLevel, "로그 기록 수준을 설정합니다. 높은 단계 일수록 중요한 로그만 저장합니다.\r\n1: 디버그 수준\r\n2: 보통(권장)\r\n3: 에러만");
 			// 
 			// label6
 			// 
@@ -869,7 +869,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(100, 15);
 			this.label6.TabIndex = 1;
-			this.label6.Text = "ログの出力レベル：";
+			this.label6.Text = "로그 기록 수준：";
 			// 
 			// tabPage4
 			// 
@@ -886,7 +886,7 @@
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage4.Size = new System.Drawing.Size(696, 372);
 			this.tabPage4.TabIndex = 3;
-			this.tabPage4.Text = "動作";
+			this.tabPage4.Text = "동작";
 			this.tabPage4.UseVisualStyleBackColor = true;
 			// 
 			// Control_ShowSallyAreaAlertDialog
@@ -896,9 +896,9 @@
 			this.Control_ShowSallyAreaAlertDialog.Name = "Control_ShowSallyAreaAlertDialog";
 			this.Control_ShowSallyAreaAlertDialog.Size = new System.Drawing.Size(228, 19);
 			this.Control_ShowSallyAreaAlertDialog.TabIndex = 7;
-			this.Control_ShowSallyAreaAlertDialog.Text = "出撃札がない艦娘が出撃したとき警告する";
-			this.ToolTipInfo.SetToolTip(this.Control_ShowSallyAreaAlertDialog, "出撃制限の札がついていない艦娘がイベント海域に出撃したとき、警告ダイアログを表示するかを指定します。\r\n得られる情報が不完全な関係上、誤判定を起こす可能性がありま" +
-        "す。ご了承ください。");
+			this.Control_ShowSallyAreaAlertDialog.Text = "출격 딱지가 없는 칸무스 출격시 경고";
+			this.ToolTipInfo.SetToolTip(this.Control_ShowSallyAreaAlertDialog, "출격 딱지가 없는 칸무스가 이벤트 해역에 출격시, 경고를 표시할지 여부를 설정합니다.\r\n얻을 수 있는 정보가 불완전할 수 있는 게임 특성상, 오판할 가능성이 있습니다." +
+        " 양해 바랍니다.");
 			this.Control_ShowSallyAreaAlertDialog.UseVisualStyleBackColor = true;
 			// 
 			// Control_PowerEngagementForm
@@ -906,15 +906,15 @@
 			this.Control_PowerEngagementForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Control_PowerEngagementForm.FormattingEnabled = true;
 			this.Control_PowerEngagementForm.Items.AddRange(new object[] {
-            "同航戦",
-            "反航戦",
-            "T字有利",
-            "T字不利"});
+            "동항전",
+            "반항전",
+            "T유리",
+            "T불리"});
 			this.Control_PowerEngagementForm.Location = new System.Drawing.Point(124, 64);
 			this.Control_PowerEngagementForm.Name = "Control_PowerEngagementForm";
 			this.Control_PowerEngagementForm.Size = new System.Drawing.Size(121, 23);
 			this.Control_PowerEngagementForm.TabIndex = 5;
-			this.ToolTipInfo.SetToolTip(this.Control_PowerEngagementForm, "威力（戦闘における攻撃力）を計算する際の、基準となる交戦形態を設定します。");
+			this.ToolTipInfo.SetToolTip(this.Control_PowerEngagementForm, "화력(데미지)를 계산하기 위한 교전 형태를 설정합니다.");
 			// 
 			// label29
 			// 
@@ -923,7 +923,7 @@
 			this.label29.Name = "label29";
 			this.label29.Size = new System.Drawing.Size(115, 15);
 			this.label29.TabIndex = 4;
-			this.label29.Text = "威力表示交戦形態：";
+			this.label29.Text = "교전 형태：";
 			// 
 			// Control_UseSystemVolume
 			// 
@@ -932,9 +932,9 @@
 			this.Control_UseSystemVolume.Name = "Control_UseSystemVolume";
 			this.Control_UseSystemVolume.Size = new System.Drawing.Size(230, 19);
 			this.Control_UseSystemVolume.TabIndex = 6;
-			this.Control_UseSystemVolume.Text = "通知・BGM音量にシステム設定を利用する";
-			this.ToolTipInfo.SetToolTip(this.Control_UseSystemVolume, "通知・BGM等の本体音量設定に、システム音量設定を利用するかを指定します。\r\n無効の場合は個別に音量を設定できますが、音量ミキサ等で調整できなくなります。\r\n有効" +
-        "の場合は音量ミキサ等で調整できますが、個別の音量設定は無視されます。");
+			this.Control_UseSystemVolume.Text = "알림, BGM 볼륨 시스템 설정 사용";
+			this.ToolTipInfo.SetToolTip(this.Control_UseSystemVolume, "알림, BGM등의 볼륨 설정을 시스템 볼륨으로 설정할지 여부를 설정합니다.\r\n비활성화 한경우 개별적으로 볼륨 설정이 가능하나, 볼륨 믹서 등으로 조절 할 수 없습니다.\r\n활성화" +
+        "한 경우 볼륨 믹서의 설정만 사용할 수 있습니다.");
 			this.Control_UseSystemVolume.UseVisualStyleBackColor = true;
 			// 
 			// Control_RecordAutoSaving
@@ -942,10 +942,10 @@
 			this.Control_RecordAutoSaving.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Control_RecordAutoSaving.FormattingEnabled = true;
 			this.Control_RecordAutoSaving.Items.AddRange(new object[] {
-            "しない",
-            "1時間ごと",
-            "1日ごと",
-            "即時"});
+            "하지않음",
+            "1시간마다",
+            "1일마다",
+            "즉시"});
 			this.Control_RecordAutoSaving.Location = new System.Drawing.Point(124, 35);
 			this.Control_RecordAutoSaving.Name = "Control_RecordAutoSaving";
 			this.Control_RecordAutoSaving.Size = new System.Drawing.Size(121, 23);
@@ -958,7 +958,7 @@
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(112, 15);
 			this.label9.TabIndex = 2;
-			this.label9.Text = "レコードの自動保存：";
+			this.label9.Text = "기록 자동 저장：";
 			// 
 			// Control_ConditionBorder
 			// 
@@ -980,7 +980,7 @@
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(94, 15);
 			this.label7.TabIndex = 0;
-			this.label7.Text = "疲労度ボーダー：";
+			this.label7.Text = "피로도 경계：";
 			// 
 			// tabPage5
 			// 
@@ -992,7 +992,7 @@
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage5.Size = new System.Drawing.Size(696, 372);
 			this.tabPage5.TabIndex = 4;
-			this.tabPage5.Text = "デバッグ";
+			this.tabPage5.Text = "디버깅";
 			this.tabPage5.UseVisualStyleBackColor = true;
 			// 
 			// Debug_AlertOnError
@@ -1002,7 +1002,7 @@
 			this.Debug_AlertOnError.Name = "Debug_AlertOnError";
 			this.Debug_AlertOnError.Size = new System.Drawing.Size(104, 19);
 			this.Debug_AlertOnError.TabIndex = 2;
-			this.Debug_AlertOnError.Text = "エラー音を鳴らす";
+			this.Debug_AlertOnError.Text = "에러시 소리 울림";
 			this.Debug_AlertOnError.UseVisualStyleBackColor = true;
 			// 
 			// Debug_SealingPanel
@@ -1035,8 +1035,8 @@
 			this.Debug_LoadAPIListOnLoad.Name = "Debug_LoadAPIListOnLoad";
 			this.Debug_LoadAPIListOnLoad.Size = new System.Drawing.Size(151, 19);
 			this.Debug_LoadAPIListOnLoad.TabIndex = 0;
-			this.Debug_LoadAPIListOnLoad.Text = "起動時にAPIリストをロード";
-			this.ToolTipInfo.SetToolTip(this.Debug_LoadAPIListOnLoad, "起動時に、下記テキストボックスで指定されるAPIリストを自動的に読み込みます。\r\nAPIリストの書式や用法はオンラインヘルプを参照してください。");
+			this.Debug_LoadAPIListOnLoad.Text = "시작시 API 목록을 로드";
+			this.ToolTipInfo.SetToolTip(this.Debug_LoadAPIListOnLoad, "시작할때, 지정된 API 목록을 자동으로 로드합니다.\r\nAPI 목록의 서식과 사용법은 온라인 메뉴얼을 참조하십시오.");
 			this.Debug_LoadAPIListOnLoad.UseVisualStyleBackColor = true;
 			// 
 			// Debug_APIListPathSearch
@@ -1057,9 +1057,9 @@
 			this.Debug_EnableDebugMenu.Name = "Debug_EnableDebugMenu";
 			this.Debug_EnableDebugMenu.Size = new System.Drawing.Size(162, 19);
 			this.Debug_EnableDebugMenu.TabIndex = 0;
-			this.Debug_EnableDebugMenu.Text = "デバッグ メニューを有効にする";
-			this.ToolTipInfo.SetToolTip(this.Debug_EnableDebugMenu, "メインウィンドウの[デバッグ]メニューを有効にします。\r\nデバッグ用の機能であるため、通常ユーザーの操作は推奨されません。\r\n使用時の動作は保証されないので、＊自" +
-        "己責任で＊使用してください。");
+			this.Debug_EnableDebugMenu.Text = "디버그 메뉴 활성화";
+			this.ToolTipInfo.SetToolTip(this.Debug_EnableDebugMenu, "메인 창에서 디버그 메뉴를 활성화합니다.\r\n디버깅용 기능이므로, 일반 사용자의 조작은 권장되지 않습니다.\r\n사용시 에러등은 보증되지 않았으므로＊自" +
+        "활성화시 책임지지 않습니다.");
 			this.Debug_EnableDebugMenu.UseVisualStyleBackColor = true;
 			this.Debug_EnableDebugMenu.CheckedChanged += new System.EventHandler(this.Debug_EnableDebugMenu_CheckedChanged);
 			// 
@@ -1081,7 +1081,7 @@
 			this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage6.Size = new System.Drawing.Size(696, 372);
 			this.tabPage6.TabIndex = 5;
-			this.tabPage6.Text = "ウィンドウ";
+			this.tabPage6.Text = "윈도우";
 			this.tabPage6.UseVisualStyleBackColor = true;
 			// 
 			// Life_CanCloseFloatWindowInLock
@@ -1103,8 +1103,8 @@
 			this.Life_LockLayout.Name = "Life_LockLayout";
 			this.Life_LockLayout.Size = new System.Drawing.Size(122, 19);
 			this.Life_LockLayout.TabIndex = 9;
-			this.Life_LockLayout.Text = "レイアウトをロックする";
-			this.ToolTipInfo.SetToolTip(this.Life_LockLayout, "サイズやレイアウトの変更を防止するかを指定します。");
+			this.Life_LockLayout.Text = "레이아웃 잠금";
+			this.ToolTipInfo.SetToolTip(this.Life_LockLayout, "크기와 레이아웃의 변경을 비활성화합니다.");
 			this.Life_LockLayout.UseVisualStyleBackColor = true;
 			// 
 			// label24
@@ -1114,16 +1114,16 @@
 			this.label24.Name = "label24";
 			this.label24.Size = new System.Drawing.Size(67, 15);
 			this.label24.TabIndex = 8;
-			this.label24.Text = "時計表示：";
+			this.label24.Text = "시간 표시：";
 			// 
 			// Life_ClockFormat
 			// 
 			this.Life_ClockFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Life_ClockFormat.FormattingEnabled = true;
 			this.Life_ClockFormat.Items.AddRange(new object[] {
-            "現在時刻",
-            "演習更新まで",
-            "任務更新まで"});
+            "현재 시간",
+            "연습전 갱신까지",
+            "임무 갱신까지"});
 			this.Life_ClockFormat.Location = new System.Drawing.Point(81, 135);
 			this.Life_ClockFormat.Name = "Life_ClockFormat";
 			this.Life_ClockFormat.Size = new System.Drawing.Size(121, 23);
@@ -1136,7 +1136,7 @@
 			this.Life_ShowStatusBar.Name = "Life_ShowStatusBar";
 			this.Life_ShowStatusBar.Size = new System.Drawing.Size(143, 19);
 			this.Life_ShowStatusBar.TabIndex = 6;
-			this.Life_ShowStatusBar.Text = "ステータスバーを表示する";
+			this.Life_ShowStatusBar.Text = "상태 표시줄을 표시";
 			this.Life_ShowStatusBar.UseVisualStyleBackColor = true;
 			// 
 			// Life_CheckUpdateInformation
@@ -1146,7 +1146,7 @@
 			this.Life_CheckUpdateInformation.Name = "Life_CheckUpdateInformation";
 			this.Life_CheckUpdateInformation.Size = new System.Drawing.Size(131, 19);
 			this.Life_CheckUpdateInformation.TabIndex = 5;
-			this.Life_CheckUpdateInformation.Text = "アップデートを確認する";
+			this.Life_CheckUpdateInformation.Text = "업데이트 확인";
 			this.Life_CheckUpdateInformation.UseVisualStyleBackColor = true;
 			// 
 			// Life_LayoutFilePathSearch
@@ -1176,7 +1176,7 @@
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(97, 15);
 			this.label14.TabIndex = 0;
-			this.label14.Text = "レイアウトファイル：";
+			this.label14.Text = "레이아웃 파일：";
 			// 
 			// Life_TopMost
 			// 
@@ -1185,7 +1185,7 @@
 			this.Life_TopMost.Name = "Life_TopMost";
 			this.Life_TopMost.Size = new System.Drawing.Size(114, 19);
 			this.Life_TopMost.TabIndex = 4;
-			this.Life_TopMost.Text = "最前面に表示する";
+			this.Life_TopMost.Text = "맨 위에 표시";
 			this.Life_TopMost.UseVisualStyleBackColor = true;
 			// 
 			// Life_ConfirmOnClosing
@@ -1195,7 +1195,7 @@
 			this.Life_ConfirmOnClosing.Name = "Life_ConfirmOnClosing";
 			this.Life_ConfirmOnClosing.Size = new System.Drawing.Size(114, 19);
 			this.Life_ConfirmOnClosing.TabIndex = 3;
-			this.Life_ConfirmOnClosing.Text = "終了時に確認する";
+			this.Life_ConfirmOnClosing.Text = "종료시에 확인";
 			this.Life_ConfirmOnClosing.UseVisualStyleBackColor = true;
 			// 
 			// tabPage7
@@ -1206,7 +1206,7 @@
 			this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage7.Size = new System.Drawing.Size(696, 372);
 			this.tabPage7.TabIndex = 6;
-			this.tabPage7.Text = "サブウィンドウ";
+			this.tabPage7.Text = "서브 윈도우";
 			this.tabPage7.UseVisualStyleBackColor = true;
 			// 
 			// tabControl2
@@ -1260,7 +1260,7 @@
 			this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage8.Size = new System.Drawing.Size(682, 338);
 			this.tabPage8.TabIndex = 0;
-			this.tabPage8.Text = "艦隊";
+			this.tabPage8.Text = "함대";
 			this.tabPage8.UseVisualStyleBackColor = true;
 			// 
 			// label43
@@ -1270,17 +1270,17 @@
 			this.label43.Name = "label43";
 			this.label43.Size = new System.Drawing.Size(91, 15);
 			this.label43.TabIndex = 22;
-			this.label43.Text = "艦隊状態表示：";
+			this.label43.Text = "함대 상태 표시：";
 			// 
 			// FormFleet_FleetStateDisplayMode
 			// 
 			this.FormFleet_FleetStateDisplayMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormFleet_FleetStateDisplayMode.FormattingEnabled = true;
 			this.FormFleet_FleetStateDisplayMode.Items.AddRange(new object[] {
-            "1つだけ表示",
-            "全て短縮表示",
-            "複数表示時に短縮",
-            "全て通常表示"});
+            "하나만 표시",
+            "전부 요약보기",
+            "여러함대 볼때 요약",
+            "전부 상세보기"});
 			this.FormFleet_FleetStateDisplayMode.Location = new System.Drawing.Point(115, 30);
 			this.FormFleet_FleetStateDisplayMode.Name = "FormFleet_FleetStateDisplayMode";
 			this.FormFleet_FleetStateDisplayMode.Size = new System.Drawing.Size(121, 23);
@@ -1293,8 +1293,8 @@
 			this.FormFleet_EmphasizesSubFleetInPort.Name = "FormFleet_EmphasizesSubFleetInPort";
 			this.FormFleet_EmphasizesSubFleetInPort.Size = new System.Drawing.Size(179, 19);
 			this.FormFleet_EmphasizesSubFleetInPort.TabIndex = 20;
-			this.FormFleet_EmphasizesSubFleetInPort.Text = "遠征艦隊未出撃時に強調表示";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_EmphasizesSubFleetInPort, "第2~4艦隊が母港に存在するとき、色付きで表示するようにします。");
+			this.FormFleet_EmphasizesSubFleetInPort.Text = "원정 함대 미 출격시 알림";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_EmphasizesSubFleetInPort, "제 2~4 함대가 모항에 존재할 때 색으로 표시하도록 합니다.");
 			this.FormFleet_EmphasizesSubFleetInPort.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_BlinkAtDamaged
@@ -1304,8 +1304,8 @@
 			this.FormFleet_BlinkAtDamaged.Name = "FormFleet_BlinkAtDamaged";
 			this.FormFleet_BlinkAtDamaged.Size = new System.Drawing.Size(122, 19);
 			this.FormFleet_BlinkAtDamaged.TabIndex = 19;
-			this.FormFleet_BlinkAtDamaged.Text = "大破時に点滅させる";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_BlinkAtDamaged, "母港において、大破艦が存在するときに点滅表示させるかを指定します。\r\n出撃時は常に点滅が有効です。");
+			this.FormFleet_BlinkAtDamaged.Text = "대파시 점멸";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_BlinkAtDamaged, "모항에서 대파함이 있을때 점멸 표시할지 여부를 설정합니다.\r\n출격시에는 항상 점멸합니다.");
 			this.FormFleet_BlinkAtDamaged.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_ReflectAnchorageRepairHealing
@@ -1315,7 +1315,7 @@
 			this.FormFleet_ReflectAnchorageRepairHealing.Name = "FormFleet_ReflectAnchorageRepairHealing";
 			this.FormFleet_ReflectAnchorageRepairHealing.Size = new System.Drawing.Size(193, 19);
 			this.FormFleet_ReflectAnchorageRepairHealing.TabIndex = 16;
-			this.FormFleet_ReflectAnchorageRepairHealing.Text = "泊地修理によるHP回復を反映する";
+			this.FormFleet_ReflectAnchorageRepairHealing.Text = "아카시 수리의 회복을 반영";
 			this.ToolTipInfo.SetToolTip(this.FormFleet_ReflectAnchorageRepairHealing, "有効な場合、泊地修理開始から20分以上経過するとHPバーに回復量が表示されるようになります。");
 			this.FormFleet_ReflectAnchorageRepairHealing.UseVisualStyleBackColor = true;
 			// 
@@ -1326,8 +1326,8 @@
 			this.FormFleet_ShowAirSuperiorityRange.Name = "FormFleet_ShowAirSuperiorityRange";
 			this.FormFleet_ShowAirSuperiorityRange.Size = new System.Drawing.Size(150, 19);
 			this.FormFleet_ShowAirSuperiorityRange.TabIndex = 14;
-			this.FormFleet_ShowAirSuperiorityRange.Text = "制空戦力を範囲表示する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowAirSuperiorityRange, "制空戦力の範囲を「内部熟練度最小～最大」として範囲表示するかを指定します。\r\n通常、制空戦力は最低の内部熟練度を持つとして計算されます。");
+			this.FormFleet_ShowAirSuperiorityRange.Text = "제공전력 범위보기";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowAirSuperiorityRange, "제공치의 범위를 내부 숙련도 최소~최대로 범위 표시할지 여부를 설정합니다.\r\n일반적으로는 최소 내부 숙련도로 계산됩니다.");
 			this.FormFleet_ShowAirSuperiorityRange.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_ShowAircraftLevelByNumber
@@ -1337,8 +1337,8 @@
 			this.FormFleet_ShowAircraftLevelByNumber.Name = "FormFleet_ShowAircraftLevelByNumber";
 			this.FormFleet_ShowAircraftLevelByNumber.Size = new System.Drawing.Size(184, 19);
 			this.FormFleet_ShowAircraftLevelByNumber.TabIndex = 18;
-			this.FormFleet_ShowAircraftLevelByNumber.Text = "艦載機熟練度を数字で表示する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowAircraftLevelByNumber, "艦載機熟練度を記号（|, || など）ではなく、数字（1, 2 など）で表示するかを指定します。");
+			this.FormFleet_ShowAircraftLevelByNumber.Text = "함재기 숙련도를 숫자로 표시";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowAircraftLevelByNumber, "함재기 숙련도를 기호 (I, << 등) 대신, 숫자 (1,7 등)으로 표시할지 설정합니다.");
 			this.FormFleet_ShowAircraftLevelByNumber.UseVisualStyleBackColor = true;
 			// 
 			// label35
@@ -1367,7 +1367,7 @@
 			this.FormFleet_FixedShipNameWidth.Size = new System.Drawing.Size(60, 23);
 			this.FormFleet_FixedShipNameWidth.TabIndex = 9;
 			this.FormFleet_FixedShipNameWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.FormFleet_FixedShipNameWidth, "艦名の横幅固定が有効なときのサイズを指定します。");
+			this.ToolTipInfo.SetToolTip(this.FormFleet_FixedShipNameWidth, "함명 가로 고정이 활성화됬을때의 크기를 설정합니다.");
 			this.FormFleet_FixedShipNameWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -1381,8 +1381,8 @@
 			this.FormFleet_ShowConditionIcon.Name = "FormFleet_ShowConditionIcon";
 			this.FormFleet_ShowConditionIcon.Size = new System.Drawing.Size(149, 19);
 			this.FormFleet_ShowConditionIcon.TabIndex = 13;
-			this.FormFleet_ShowConditionIcon.Text = "疲労度アイコンを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowConditionIcon, "疲労度のアイコンを表示するかを指定します。\r\n表示しない場合、背景色で区別されます。");
+			this.FormFleet_ShowConditionIcon.Text = "피로도 아이콘 표시";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowConditionIcon, "피로도 아이콘을 표시할지 여부를 설정합니다.\r\n비활성화 한 경우, 배경색으로 구분됩니다.");
 			this.FormFleet_ShowConditionIcon.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_EquipmentLevelVisibility
@@ -1390,19 +1390,19 @@
 			this.FormFleet_EquipmentLevelVisibility.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormFleet_EquipmentLevelVisibility.FormattingEnabled = true;
 			this.FormFleet_EquipmentLevelVisibility.Items.AddRange(new object[] {
-            "非表示",
-            "改修レベルのみ",
-            "艦載機熟練度のみ",
-            "改修レベル優先",
-            "艦載機熟練度優先",
-            "両方表示",
-            "熟練度オーバーレイ"});
+            "숨기기",
+            "개수단계만",
+            "함재기숙련도만",
+            "개수단계우선",
+            "함재기숙련도우선",
+            "모두보기",
+            "숙련도 오버레이"});
 			this.FormFleet_EquipmentLevelVisibility.Location = new System.Drawing.Point(253, 86);
 			this.FormFleet_EquipmentLevelVisibility.Name = "FormFleet_EquipmentLevelVisibility";
 			this.FormFleet_EquipmentLevelVisibility.Size = new System.Drawing.Size(160, 23);
 			this.FormFleet_EquipmentLevelVisibility.TabIndex = 7;
-			this.ToolTipInfo.SetToolTip(this.FormFleet_EquipmentLevelVisibility, "装備の改修レベルや艦載機熟練度の表示を指定します。\r\n「非表示」の場合は表示しません。\r\n「～優先」の場合、どちらもLv.1以上の時にそれぞれを優先して表示します" +
-        "。\r\n「両方表示」の場合は常にどちらも表示します。");
+			this.ToolTipInfo.SetToolTip(this.FormFleet_EquipmentLevelVisibility, "장비의 개수 단계와 함재기 숙련도 표시를 설정합니다.\r\n숨기기의 경우는 표시되지 않습니다.\r\n~우선의 경우, 1단계 이상일때 각 값을 우선적으로 표시합니다." +
+        "\r\n모두보기의 경우 모두 표시합니다.");
 			// 
 			// label28
 			// 
@@ -1411,7 +1411,7 @@
 			this.label28.Name = "label28";
 			this.label28.Size = new System.Drawing.Size(91, 15);
 			this.label28.TabIndex = 6;
-			this.label28.Text = "装備情報表示：";
+			this.label28.Text = "장비 정보 표시：";
 			// 
 			// FormFleet_BlinkAtCompletion
 			// 
@@ -1420,8 +1420,8 @@
 			this.FormFleet_BlinkAtCompletion.Name = "FormFleet_BlinkAtCompletion";
 			this.FormFleet_BlinkAtCompletion.Size = new System.Drawing.Size(158, 19);
 			this.FormFleet_BlinkAtCompletion.TabIndex = 17;
-			this.FormFleet_BlinkAtCompletion.Text = "タイマー完了時に点滅させる";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_BlinkAtCompletion, "遠征・入渠等の完了時に、ラベルを点滅させるかを指定します。");
+			this.FormFleet_BlinkAtCompletion.Text = "타이머 완료시 점멸";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_BlinkAtCompletion, "원정, 입거등이 완료되면 창을 점멸시킬지 설정합니다.");
 			this.FormFleet_BlinkAtCompletion.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_ShowAnchorageRepairingTimer
@@ -1431,8 +1431,8 @@
 			this.FormFleet_ShowAnchorageRepairingTimer.Name = "FormFleet_ShowAnchorageRepairingTimer";
 			this.FormFleet_ShowAnchorageRepairingTimer.Size = new System.Drawing.Size(152, 19);
 			this.FormFleet_ShowAnchorageRepairingTimer.TabIndex = 15;
-			this.FormFleet_ShowAnchorageRepairingTimer.Text = "泊地修理タイマを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowAnchorageRepairingTimer, "艦隊一覧の泊地修理タイマを表示するかを指定します。");
+			this.FormFleet_ShowAnchorageRepairingTimer.Text = "아카시 타이머를 표시";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowAnchorageRepairingTimer, "아카시 타이머를 표시할지를 설정합니다.");
 			this.FormFleet_ShowAnchorageRepairingTimer.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_AirSuperiorityMethod
@@ -1440,8 +1440,8 @@
 			this.FormFleet_AirSuperiorityMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormFleet_AirSuperiorityMethod.FormattingEnabled = true;
 			this.FormFleet_AirSuperiorityMethod.Items.AddRange(new object[] {
-            "熟練度を無視",
-            "熟練度を含む"});
+            "숙련도 무시",
+            "숙련도 포함"});
 			this.FormFleet_AirSuperiorityMethod.Location = new System.Drawing.Point(115, 59);
 			this.FormFleet_AirSuperiorityMethod.Name = "FormFleet_AirSuperiorityMethod";
 			this.FormFleet_AirSuperiorityMethod.Size = new System.Drawing.Size(121, 23);
@@ -1454,7 +1454,7 @@
 			this.label23.Name = "label23";
 			this.label23.Size = new System.Drawing.Size(103, 15);
 			this.label23.TabIndex = 3;
-			this.label23.Text = "制空戦力計算式：";
+			this.label23.Text = "제공치 계산식：";
 			// 
 			// FormFleet_ShowNextExp
 			// 
@@ -1463,8 +1463,8 @@
 			this.FormFleet_ShowNextExp.Name = "FormFleet_ShowNextExp";
 			this.FormFleet_ShowNextExp.Size = new System.Drawing.Size(112, 19);
 			this.FormFleet_ShowNextExp.TabIndex = 12;
-			this.FormFleet_ShowNextExp.Text = "next. を表示する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowNextExp, "「次のレベルまでに必要な経験値」を表示するかを指定します。\r\n省略した場合スペースを節約できます。");
+			this.FormFleet_ShowNextExp.Text = "다음 레벨까지 경험치 보기";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowNextExp, "다음 레벨까지 필요한 경험치를 표시할지 설정합니다.\r\n생략하면 공간을 절약할 수 있습니다.");
 			this.FormFleet_ShowNextExp.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_ShortenHPBar
@@ -1474,8 +1474,8 @@
 			this.FormFleet_ShortenHPBar.Name = "FormFleet_ShortenHPBar";
 			this.FormFleet_ShortenHPBar.Size = new System.Drawing.Size(114, 19);
 			this.FormFleet_ShortenHPBar.TabIndex = 11;
-			this.FormFleet_ShortenHPBar.Text = "HPバーを短縮する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_ShortenHPBar, "HPバーを短縮し、スペースを節約します。");
+			this.FormFleet_ShortenHPBar.Text = "HP 바를 단축 표시";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_ShortenHPBar, "HP 바를 단축하고 공간을 절약합니다.");
 			this.FormFleet_ShortenHPBar.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_FixShipNameWidth
@@ -1485,8 +1485,8 @@
 			this.FormFleet_FixShipNameWidth.Name = "FormFleet_FixShipNameWidth";
 			this.FormFleet_FixShipNameWidth.Size = new System.Drawing.Size(136, 19);
 			this.FormFleet_FixShipNameWidth.TabIndex = 8;
-			this.FormFleet_FixShipNameWidth.Text = "艦名の横幅を固定する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_FixShipNameWidth, "艦名表示部の幅を固定し、スペースを節約します。\r\n代わりに長い名前を持つ艦娘は見切れます。");
+			this.FormFleet_FixShipNameWidth.Text = "함선 이름 폭 고정";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_FixShipNameWidth, "함선 이름 창의 폭을 고정합니다.\r\n긴 이름을 가진 칸무스에는 적용되지 않습니다.");
 			this.FormFleet_FixShipNameWidth.UseVisualStyleBackColor = true;
 			this.FormFleet_FixShipNameWidth.CheckedChanged += new System.EventHandler(this.FormFleet_FixShipNameWidth_CheckedChanged);
 			// 
@@ -1497,8 +1497,8 @@
 			this.FormFleet_IsScrollable.Name = "FormFleet_IsScrollable";
 			this.FormFleet_IsScrollable.Size = new System.Drawing.Size(144, 19);
 			this.FormFleet_IsScrollable.TabIndex = 5;
-			this.FormFleet_IsScrollable.Text = "スクロールバーを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormFleet_IsScrollable, "表示エリアがはみ出した場合にスクロールバーを表示するかを指定します。\r\n収まりきった場合は表示しません。");
+			this.FormFleet_IsScrollable.Text = "스크롤 바 표시";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_IsScrollable, "스크롤 바 부분을 표시할지 여부를 설정합니다.\r\n収まりきった場合は表示しません。");
 			this.FormFleet_IsScrollable.UseVisualStyleBackColor = true;
 			// 
 			// FormFleet_SearchingAbilityMethod
@@ -1507,11 +1507,11 @@
 			this.FormFleet_SearchingAbilityMethod.Enabled = false;
 			this.FormFleet_SearchingAbilityMethod.FormattingEnabled = true;
 			this.FormFleet_SearchingAbilityMethod.Items.AddRange(new object[] {
-            "(旧)2-5式",
-            "2-5式(秋)",
-            "2-5新秋簡易式",
-            "判定式(33)",
-            "新判定式(33)"});
+            "(구)2-5식",
+            "2-5식(가을)",
+            "2-5신가을식",
+            "33식",
+            "신규33식"});
 			this.FormFleet_SearchingAbilityMethod.Location = new System.Drawing.Point(358, 30);
 			this.FormFleet_SearchingAbilityMethod.Name = "FormFleet_SearchingAbilityMethod";
 			this.FormFleet_SearchingAbilityMethod.Size = new System.Drawing.Size(121, 23);
@@ -1526,7 +1526,7 @@
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(103, 15);
 			this.label13.TabIndex = 1;
-			this.label13.Text = "索敵能力計算式：";
+			this.label13.Text = "색적 능력 계산식：";
 			this.label13.Visible = false;
 			// 
 			// FormFleet_ShowAircraft
@@ -1536,7 +1536,7 @@
 			this.FormFleet_ShowAircraft.Name = "FormFleet_ShowAircraft";
 			this.FormFleet_ShowAircraft.Size = new System.Drawing.Size(126, 19);
 			this.FormFleet_ShowAircraft.TabIndex = 0;
-			this.FormFleet_ShowAircraft.Text = "艦載機数を表示する";
+			this.FormFleet_ShowAircraft.Text = "함재기 수 표시";
 			this.FormFleet_ShowAircraft.UseVisualStyleBackColor = true;
 			// 
 			// tabPage9
@@ -1551,7 +1551,7 @@
 			this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage9.Size = new System.Drawing.Size(682, 340);
 			this.tabPage9.TabIndex = 1;
-			this.tabPage9.Text = "工廠";
+			this.tabPage9.Text = "공창";
 			this.tabPage9.UseVisualStyleBackColor = true;
 			// 
 			// label38
@@ -1561,7 +1561,7 @@
 			this.label38.Name = "label38";
 			this.label38.Size = new System.Drawing.Size(101, 15);
 			this.label38.TabIndex = 12;
-			this.label38.Text = "艦名の最大横幅：";
+			this.label38.Text = "함선 이름 최대 폭：";
 			// 
 			// label37
 			// 
@@ -1589,7 +1589,7 @@
 			this.FormArsenal_MaxShipNameWidth.Size = new System.Drawing.Size(60, 23);
 			this.FormArsenal_MaxShipNameWidth.TabIndex = 10;
 			this.FormArsenal_MaxShipNameWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.FormArsenal_MaxShipNameWidth, "艦名の表示幅の最大値を指定します。");
+			this.ToolTipInfo.SetToolTip(this.FormArsenal_MaxShipNameWidth, "함선 이름 표시 폭의 최대값을 설정합니다.");
 			this.FormArsenal_MaxShipNameWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -1603,7 +1603,7 @@
 			this.FormArsenal_BlinkAtCompletion.Name = "FormArsenal_BlinkAtCompletion";
 			this.FormArsenal_BlinkAtCompletion.Size = new System.Drawing.Size(122, 19);
 			this.FormArsenal_BlinkAtCompletion.TabIndex = 2;
-			this.FormArsenal_BlinkAtCompletion.Text = "完了時に点滅させる";
+			this.FormArsenal_BlinkAtCompletion.Text = "완료시 점멸";
 			this.FormArsenal_BlinkAtCompletion.UseVisualStyleBackColor = true;
 			// 
 			// FormArsenal_ShowShipName
@@ -1613,7 +1613,7 @@
 			this.FormArsenal_ShowShipName.Name = "FormArsenal_ShowShipName";
 			this.FormArsenal_ShowShipName.Size = new System.Drawing.Size(102, 19);
 			this.FormArsenal_ShowShipName.TabIndex = 1;
-			this.FormArsenal_ShowShipName.Text = "艦名を表示する";
+			this.FormArsenal_ShowShipName.Text = "함명보기";
 			this.FormArsenal_ShowShipName.UseVisualStyleBackColor = true;
 			// 
 			// tabPage19
@@ -1627,7 +1627,7 @@
 			this.tabPage19.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage19.Size = new System.Drawing.Size(682, 340);
 			this.tabPage19.TabIndex = 8;
-			this.tabPage19.Text = "入渠";
+			this.tabPage19.Text = "입거";
 			this.tabPage19.UseVisualStyleBackColor = true;
 			// 
 			// label39
@@ -1637,7 +1637,7 @@
 			this.label39.Name = "label39";
 			this.label39.Size = new System.Drawing.Size(101, 15);
 			this.label39.TabIndex = 12;
-			this.label39.Text = "艦名の最大横幅：";
+			this.label39.Text = "함선 이름 최대 폭 ：";
 			// 
 			// label36
 			// 
@@ -1665,7 +1665,7 @@
 			this.FormDock_MaxShipNameWidth.Size = new System.Drawing.Size(60, 23);
 			this.FormDock_MaxShipNameWidth.TabIndex = 10;
 			this.FormDock_MaxShipNameWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.FormDock_MaxShipNameWidth, "艦名の表示幅の最大値を指定します。");
+			this.ToolTipInfo.SetToolTip(this.FormDock_MaxShipNameWidth, "함선 이름 표시 폭의 최대값을 설정합니다.");
 			this.FormDock_MaxShipNameWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -1679,7 +1679,7 @@
 			this.FormDock_BlinkAtCompletion.Name = "FormDock_BlinkAtCompletion";
 			this.FormDock_BlinkAtCompletion.Size = new System.Drawing.Size(122, 19);
 			this.FormDock_BlinkAtCompletion.TabIndex = 3;
-			this.FormDock_BlinkAtCompletion.Text = "完了時に点滅させる";
+			this.FormDock_BlinkAtCompletion.Text = "완료시 점멸";
 			this.FormDock_BlinkAtCompletion.UseVisualStyleBackColor = true;
 			// 
 			// tabPage16
@@ -1694,7 +1694,7 @@
 			this.tabPage16.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage16.Size = new System.Drawing.Size(682, 340);
 			this.tabPage16.TabIndex = 6;
-			this.tabPage16.Text = "司令部";
+			this.tabPage16.Text = "사령부";
 			this.tabPage16.UseVisualStyleBackColor = true;
 			// 
 			// label34
@@ -1704,7 +1704,7 @@
 			this.label34.Name = "label34";
 			this.label34.Size = new System.Drawing.Size(116, 15);
 			this.label34.TabIndex = 4;
-			this.label34.Text = "自由アイテム表示欄：";
+			this.label34.Text = "자유 항목 표시란：";
 			// 
 			// FormHeadquarters_DisplayUseItemID
 			// 
@@ -1721,7 +1721,7 @@
 			this.label26.Name = "label26";
 			this.label26.Size = new System.Drawing.Size(108, 15);
 			this.label26.TabIndex = 2;
-			this.label26.Text = "表示/非表示設定：";
+			this.label26.Text = "표시/숨기기 설정：";
 			// 
 			// FormHeadquarters_Visibility
 			// 
@@ -1742,7 +1742,7 @@
 			this.FormHeadquarters_BlinkAtMaximum.Name = "FormHeadquarters_BlinkAtMaximum";
 			this.FormHeadquarters_BlinkAtMaximum.Size = new System.Drawing.Size(183, 19);
 			this.FormHeadquarters_BlinkAtMaximum.TabIndex = 0;
-			this.FormHeadquarters_BlinkAtMaximum.Text = "艦船/装備が満タンの時点滅する";
+			this.FormHeadquarters_BlinkAtMaximum.Text = "함선/장비칸이 가득찰시 점멸";
 			this.FormHeadquarters_BlinkAtMaximum.UseVisualStyleBackColor = true;
 			// 
 			// tabPage18
@@ -1758,7 +1758,7 @@
 			this.tabPage18.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage18.Size = new System.Drawing.Size(682, 340);
 			this.tabPage18.TabIndex = 7;
-			this.tabPage18.Text = "羅針盤";
+			this.tabPage18.Text = "나침반";
 			this.tabPage18.UseVisualStyleBackColor = true;
 			// 
 			// label40
@@ -1768,7 +1768,7 @@
 			this.label40.Name = "label40";
 			this.label40.Size = new System.Drawing.Size(101, 15);
 			this.label40.TabIndex = 15;
-			this.label40.Text = "艦名の最大横幅：";
+			this.label40.Text = "함선 이름 최대 폭：";
 			// 
 			// label41
 			// 
@@ -1796,7 +1796,7 @@
 			this.FormCompass_MaxShipNameWidth.Size = new System.Drawing.Size(60, 23);
 			this.FormCompass_MaxShipNameWidth.TabIndex = 13;
 			this.FormCompass_MaxShipNameWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.FormCompass_MaxShipNameWidth, "艦名の表示幅の最大値を指定します。");
+			this.ToolTipInfo.SetToolTip(this.FormCompass_MaxShipNameWidth, "함선 이름 표시 폭의 최대값을 설정합니다.");
 			this.FormCompass_MaxShipNameWidth.Value = new decimal(new int[] {
             1,
             0,
@@ -1810,8 +1810,8 @@
 			this.FormCompass_IsScrollable.Name = "FormCompass_IsScrollable";
 			this.FormCompass_IsScrollable.Size = new System.Drawing.Size(144, 19);
 			this.FormCompass_IsScrollable.TabIndex = 6;
-			this.FormCompass_IsScrollable.Text = "スクロールバーを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormCompass_IsScrollable, "表示エリアがはみ出した場合にスクロールバーを表示するかを指定します。\r\n収まりきった場合は表示しません。");
+			this.FormCompass_IsScrollable.Text = "스크롤 바 표시";
+			this.ToolTipInfo.SetToolTip(this.FormCompass_IsScrollable, "스크롤 바 부분을 표시할지 여부를 설정합니다.\r\n収まりきった場合は表示しません。");
 			this.FormCompass_IsScrollable.UseVisualStyleBackColor = true;
 			// 
 			// FormCompass_CandidateDisplayCount
@@ -1844,7 +1844,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(131, 15);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "一度に表示する候補数：";
+			this.label2.Text = "한번에 표시되는 수：";
 			// 
 			// tabPage10
 			// 
@@ -1858,7 +1858,7 @@
 			this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage10.Size = new System.Drawing.Size(682, 340);
 			this.tabPage10.TabIndex = 2;
-			this.tabPage10.Text = "任務";
+			this.tabPage10.Text = "임무";
 			this.tabPage10.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_AllowUserToSortRows
@@ -1868,7 +1868,7 @@
 			this.FormQuest_AllowUserToSortRows.Name = "FormQuest_AllowUserToSortRows";
 			this.FormQuest_AllowUserToSortRows.Size = new System.Drawing.Size(150, 19);
 			this.FormQuest_AllowUserToSortRows.TabIndex = 6;
-			this.FormQuest_AllowUserToSortRows.Text = "ソート順を変更可能にする";
+			this.FormQuest_AllowUserToSortRows.Text = "정렬 순서 변경을 허용";
 			this.FormQuest_AllowUserToSortRows.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_ProgressAutoSaving
@@ -1876,9 +1876,9 @@
 			this.FormQuest_ProgressAutoSaving.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormQuest_ProgressAutoSaving.FormattingEnabled = true;
 			this.FormQuest_ProgressAutoSaving.Items.AddRange(new object[] {
-            "しない",
-            "1時間ごと",
-            "1日ごと"});
+            "하지않음",
+            "1시간마다",
+            "1일마다"});
 			this.FormQuest_ProgressAutoSaving.Location = new System.Drawing.Point(269, 6);
 			this.FormQuest_ProgressAutoSaving.Name = "FormQuest_ProgressAutoSaving";
 			this.FormQuest_ProgressAutoSaving.Size = new System.Drawing.Size(121, 23);
@@ -1891,7 +1891,7 @@
 			this.label27.Name = "label27";
 			this.label27.Size = new System.Drawing.Size(125, 15);
 			this.label27.TabIndex = 4;
-			this.label27.Text = "任務進捗の自動保存：";
+			this.label27.Text = "임무 진행도 자동 저장：";
 			// 
 			// groupBox1
 			// 
@@ -1905,7 +1905,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(126, 152);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "フィルタ";
+			this.groupBox1.Text = "필터";
 			// 
 			// FormQuest_ShowOther
 			// 
@@ -1914,7 +1914,7 @@
 			this.FormQuest_ShowOther.Name = "FormQuest_ShowOther";
 			this.FormQuest_ShowOther.Size = new System.Drawing.Size(57, 19);
 			this.FormQuest_ShowOther.TabIndex = 5;
-			this.FormQuest_ShowOther.Text = "その他";
+			this.FormQuest_ShowOther.Text = "기타";
 			this.FormQuest_ShowOther.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_ShowMonthly
@@ -1924,7 +1924,7 @@
 			this.FormQuest_ShowMonthly.Name = "FormQuest_ShowMonthly";
 			this.FormQuest_ShowMonthly.Size = new System.Drawing.Size(70, 19);
 			this.FormQuest_ShowMonthly.TabIndex = 4;
-			this.FormQuest_ShowMonthly.Text = "マンスリー";
+			this.FormQuest_ShowMonthly.Text = "월간";
 			this.FormQuest_ShowMonthly.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_ShowWeekly
@@ -1934,7 +1934,7 @@
 			this.FormQuest_ShowWeekly.Name = "FormQuest_ShowWeekly";
 			this.FormQuest_ShowWeekly.Size = new System.Drawing.Size(77, 19);
 			this.FormQuest_ShowWeekly.TabIndex = 3;
-			this.FormQuest_ShowWeekly.Text = "ウィークリー";
+			this.FormQuest_ShowWeekly.Text = "주간";
 			this.FormQuest_ShowWeekly.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_ShowDaily
@@ -1944,7 +1944,7 @@
 			this.FormQuest_ShowDaily.Name = "FormQuest_ShowDaily";
 			this.FormQuest_ShowDaily.Size = new System.Drawing.Size(62, 19);
 			this.FormQuest_ShowDaily.TabIndex = 2;
-			this.FormQuest_ShowDaily.Text = "デイリー";
+			this.FormQuest_ShowDaily.Text = "일일";
 			this.FormQuest_ShowDaily.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_ShowOnce
@@ -1954,7 +1954,7 @@
 			this.FormQuest_ShowOnce.Name = "FormQuest_ShowOnce";
 			this.FormQuest_ShowOnce.Size = new System.Drawing.Size(50, 19);
 			this.FormQuest_ShowOnce.TabIndex = 1;
-			this.FormQuest_ShowOnce.Text = "単発";
+			this.FormQuest_ShowOnce.Text = "일회성";
 			this.FormQuest_ShowOnce.UseVisualStyleBackColor = true;
 			// 
 			// FormQuest_ShowRunningOnly
@@ -1964,7 +1964,7 @@
 			this.FormQuest_ShowRunningOnly.Name = "FormQuest_ShowRunningOnly";
 			this.FormQuest_ShowRunningOnly.Size = new System.Drawing.Size(126, 19);
 			this.FormQuest_ShowRunningOnly.TabIndex = 0;
-			this.FormQuest_ShowRunningOnly.Text = "遂行中のみ表示する";
+			this.FormQuest_ShowRunningOnly.Text = "수행중에만 표시";
 			this.FormQuest_ShowRunningOnly.UseVisualStyleBackColor = true;
 			// 
 			// tabPage13
@@ -1978,7 +1978,7 @@
 			this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage13.Size = new System.Drawing.Size(682, 340);
 			this.tabPage13.TabIndex = 4;
-			this.tabPage13.Text = "グループ";
+			this.tabPage13.Text = "그룹";
 			this.tabPage13.UseVisualStyleBackColor = true;
 			// 
 			// FormShipGroup_ShipNameSortMethod
@@ -1986,8 +1986,8 @@
 			this.FormShipGroup_ShipNameSortMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormShipGroup_ShipNameSortMethod.FormattingEnabled = true;
 			this.FormShipGroup_ShipNameSortMethod.Items.AddRange(new object[] {
-            "図鑑番号順",
-            "あいうえお順"});
+            "도감번호순서",
+            "문자열순서"});
 			this.FormShipGroup_ShipNameSortMethod.Location = new System.Drawing.Point(116, 56);
 			this.FormShipGroup_ShipNameSortMethod.Name = "FormShipGroup_ShipNameSortMethod";
 			this.FormShipGroup_ShipNameSortMethod.Size = new System.Drawing.Size(121, 23);
@@ -2000,7 +2000,7 @@
 			this.label25.Name = "label25";
 			this.label25.Size = new System.Drawing.Size(104, 15);
 			this.label25.TabIndex = 6;
-			this.label25.Text = "艦名列のソート順：";
+			this.label25.Text = "함선 정렬 순서：";
 			// 
 			// FormShipGroup_ShowStatusBar
 			// 
@@ -2009,8 +2009,8 @@
 			this.FormShipGroup_ShowStatusBar.Name = "FormShipGroup_ShowStatusBar";
 			this.FormShipGroup_ShowStatusBar.Size = new System.Drawing.Size(143, 19);
 			this.FormShipGroup_ShowStatusBar.TabIndex = 2;
-			this.FormShipGroup_ShowStatusBar.Text = "ステータスバーを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormShipGroup_ShowStatusBar, "下部のステータスバー(所属艦数など)を表示するかを指定します。\r\nわずかですが表示行数を増やすことができます。");
+			this.FormShipGroup_ShowStatusBar.Text = "상태 표시줄 표시";
+			this.ToolTipInfo.SetToolTip(this.FormShipGroup_ShowStatusBar, "하단의 상태 표시줄(함선 수)등을 표시할지 설정합니다.\r\n공간을 좀 더 차지합니다.");
 			this.FormShipGroup_ShowStatusBar.UseVisualStyleBackColor = true;
 			// 
 			// FormShipGroup_AutoUpdate
@@ -2020,8 +2020,8 @@
 			this.FormShipGroup_AutoUpdate.Name = "FormShipGroup_AutoUpdate";
 			this.FormShipGroup_AutoUpdate.Size = new System.Drawing.Size(93, 19);
 			this.FormShipGroup_AutoUpdate.TabIndex = 1;
-			this.FormShipGroup_AutoUpdate.Text = "自動更新する";
-			this.ToolTipInfo.SetToolTip(this.FormShipGroup_AutoUpdate, "艦船データを自動更新するかを指定します。\r\n");
+			this.FormShipGroup_AutoUpdate.Text = "자동 갱신";
+			this.ToolTipInfo.SetToolTip(this.FormShipGroup_AutoUpdate, "함선 데이터를 자동 갱신할지 여부를 설정합니다.\r\n");
 			this.FormShipGroup_AutoUpdate.UseVisualStyleBackColor = true;
 			// 
 			// tabPage20
@@ -2036,7 +2036,7 @@
 			this.tabPage20.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage20.Size = new System.Drawing.Size(682, 340);
 			this.tabPage20.TabIndex = 10;
-			this.tabPage20.Text = "戦闘";
+			this.tabPage20.Text = "전투";
 			this.tabPage20.UseVisualStyleBackColor = true;
 			// 
 			// FormBattle_Display7thAsSingleLine
@@ -2046,9 +2046,9 @@
 			this.FormBattle_Display7thAsSingleLine.Name = "FormBattle_Display7thAsSingleLine";
 			this.FormBattle_Display7thAsSingleLine.Size = new System.Drawing.Size(151, 19);
 			this.FormBattle_Display7thAsSingleLine.TabIndex = 10;
-			this.FormBattle_Display7thAsSingleLine.Text = "7番艦を同じ行に表示する";
-			this.ToolTipInfo.SetToolTip(this.FormBattle_Display7thAsSingleLine, "遊撃部隊(7隻編成)での出撃時、7隻目の情報をどこに表示するか指定します。\r\n有効時は6隻目の下に、無効時は随伴艦隊1隻目と同じ位置に表示されます。\r\n無効にする" +
-        "と若干スペースを節約できます。");
+			this.FormBattle_Display7thAsSingleLine.Text = "7번함을 같은 줄에 표시";
+			this.ToolTipInfo.SetToolTip(this.FormBattle_Display7thAsSingleLine, "유격함대(7척 편성)에서 출격시 7번째 칸무스의 정보를 어디에 표시할지 설정합니다.\r\n활성화시 6번째 칸무스 밑에, 해제시 첫번째에 표시됩니다. \r\n비활성화 하면" +
+        "약간 공간을 절약 할 수 있습니다.");
 			this.FormBattle_Display7thAsSingleLine.UseVisualStyleBackColor = true;
 			// 
 			// FormBattle_ShowShipTypeInHPBar
@@ -2058,8 +2058,8 @@
 			this.FormBattle_ShowShipTypeInHPBar.Name = "FormBattle_ShowShipTypeInHPBar";
 			this.FormBattle_ShowShipTypeInHPBar.Size = new System.Drawing.Size(171, 19);
 			this.FormBattle_ShowShipTypeInHPBar.TabIndex = 9;
-			this.FormBattle_ShowShipTypeInHPBar.Text = "HPバーに艦種略号を表示する";
-			this.ToolTipInfo.SetToolTip(this.FormBattle_ShowShipTypeInHPBar, "\"HP:\" 表示の代わりに艦種略号を表示するかを指定します。\r\n長い略号の艦種は表示が被る可能性があります。");
+			this.FormBattle_ShowShipTypeInHPBar.Text = "HP바에 함종 약어를 표시합니다.";
+			this.ToolTipInfo.SetToolTip(this.FormBattle_ShowShipTypeInHPBar, "\"HP:\" 표시 대신 함종 약어를 표시할지 설정합니다.\r\n긴 약어는 표시가 안될 수 있습니다.");
 			this.FormBattle_ShowShipTypeInHPBar.UseVisualStyleBackColor = true;
 			// 
 			// FormBattle_ShowHPBar
@@ -2069,8 +2069,8 @@
 			this.FormBattle_ShowHPBar.Name = "FormBattle_ShowHPBar";
 			this.FormBattle_ShowHPBar.Size = new System.Drawing.Size(114, 19);
 			this.FormBattle_ShowHPBar.TabIndex = 8;
-			this.FormBattle_ShowHPBar.Text = "HPバーを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormBattle_ShowHPBar, "非表示にするとわずかではありますが縦幅を節約できます。");
+			this.FormBattle_ShowHPBar.Text = "HP 바 표시";
+			this.ToolTipInfo.SetToolTip(this.FormBattle_ShowHPBar, "숨기면 근소하게 공간을 절약 할 수 있습니다.");
 			this.FormBattle_ShowHPBar.UseVisualStyleBackColor = true;
 			// 
 			// FormBattle_HideDuringBattle
@@ -2080,8 +2080,8 @@
 			this.FormBattle_HideDuringBattle.Name = "FormBattle_HideDuringBattle";
 			this.FormBattle_HideDuringBattle.Size = new System.Drawing.Size(115, 19);
 			this.FormBattle_HideDuringBattle.TabIndex = 7;
-			this.FormBattle_HideDuringBattle.Text = "戦闘終了まで隠す";
-			this.ToolTipInfo.SetToolTip(this.FormBattle_HideDuringBattle, "戦闘中に戦闘予測画面を非表示にすることで、ネタバレを回避します。\r\n非表示状態でも、戦闘ウィンドウの右クリックメニューから一時的に表示することができます。");
+			this.FormBattle_HideDuringBattle.Text = "전투종료까지 숨기기";
+			this.ToolTipInfo.SetToolTip(this.FormBattle_HideDuringBattle, "전투중에 전투 예측화면을 숨깁니다.\r\n숨김 상태에서도 오른쪽 클릭 메뉴에서 표시할 수 있습니다.");
 			this.FormBattle_HideDuringBattle.UseVisualStyleBackColor = true;
 			// 
 			// FormBattle_IsScrollable
@@ -2091,8 +2091,8 @@
 			this.FormBattle_IsScrollable.Name = "FormBattle_IsScrollable";
 			this.FormBattle_IsScrollable.Size = new System.Drawing.Size(144, 19);
 			this.FormBattle_IsScrollable.TabIndex = 6;
-			this.FormBattle_IsScrollable.Text = "スクロールバーを表示する";
-			this.ToolTipInfo.SetToolTip(this.FormBattle_IsScrollable, "表示エリアがはみ出した場合にスクロールバーを表示するかを指定します。\r\n収まりきった場合は表示しません。");
+			this.FormBattle_IsScrollable.Text = "스크롤 바 표시";
+			this.ToolTipInfo.SetToolTip(this.FormBattle_IsScrollable, "스크롤 바 부분을 표시할지 여부를 설정합니다.\r\n収まりきった場合は表示しません。");
 			this.FormBattle_IsScrollable.UseVisualStyleBackColor = true;
 			// 
 			// tabPage12
@@ -2115,7 +2115,7 @@
 			this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage12.Size = new System.Drawing.Size(682, 340);
 			this.tabPage12.TabIndex = 3;
-			this.tabPage12.Text = "ブラウザ";
+			this.tabPage12.Text = "브라우저";
 			this.tabPage12.UseVisualStyleBackColor = true;
 			// 
 			// FormBrowser_IsDMMreloadDialogDestroyable
@@ -2125,8 +2125,8 @@
 			this.FormBrowser_IsDMMreloadDialogDestroyable.Name = "FormBrowser_IsDMMreloadDialogDestroyable";
 			this.FormBrowser_IsDMMreloadDialogDestroyable.Size = new System.Drawing.Size(254, 19);
 			this.FormBrowser_IsDMMreloadDialogDestroyable.TabIndex = 12;
-			this.FormBrowser_IsDMMreloadDialogDestroyable.Text = "DMMによるページ更新ダイアログを非表示にする";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_IsDMMreloadDialogDestroyable, "DMMによる「エラーが発生したため、ページ更新します。」の確認ダイアログを表示されないようにします。");
+			this.FormBrowser_IsDMMreloadDialogDestroyable.Text = "DMM 경고창을 숨김";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_IsDMMreloadDialogDestroyable, "DMM페이지의「エラーが発生したため、ページ更新します。」창이 표시되지 않도록 합니다.");
 			this.FormBrowser_IsDMMreloadDialogDestroyable.UseVisualStyleBackColor = true;
 			// 
 			// FormBrowser_ToolMenuDockStyle
@@ -2134,11 +2134,11 @@
 			this.FormBrowser_ToolMenuDockStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormBrowser_ToolMenuDockStyle.FormattingEnabled = true;
 			this.FormBrowser_ToolMenuDockStyle.Items.AddRange(new object[] {
-            "上",
-            "下",
-            "左",
-            "右",
-            "非表示"});
+            "상단",
+            "하단",
+            "좌측",
+            "우측",
+            "숨김"});
 			this.FormBrowser_ToolMenuDockStyle.Location = new System.Drawing.Point(129, 88);
 			this.FormBrowser_ToolMenuDockStyle.Name = "FormBrowser_ToolMenuDockStyle";
 			this.FormBrowser_ToolMenuDockStyle.Size = new System.Drawing.Size(121, 23);
@@ -2151,7 +2151,7 @@
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(117, 15);
 			this.label30.TabIndex = 10;
-			this.label30.Text = "ツールメニューの配置：";
+			this.label30.Text = "툴 메뉴 배치：";
 			// 
 			// FormBrowser_ZoomFit
 			// 
@@ -2160,8 +2160,8 @@
 			this.FormBrowser_ZoomFit.Name = "FormBrowser_ZoomFit";
 			this.FormBrowser_ZoomFit.Size = new System.Drawing.Size(61, 19);
 			this.FormBrowser_ZoomFit.TabIndex = 5;
-			this.FormBrowser_ZoomFit.Text = "ぴったり";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_ZoomFit, "有効な場合、画面に合わせて自動的に拡大・縮小します。");
+			this.FormBrowser_ZoomFit.Text = "맞춤";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_ZoomFit, "활성화하면 화면에 맞게 자동으로 크기를 조절합니다.");
 			this.FormBrowser_ZoomFit.UseVisualStyleBackColor = true;
 			// 
 			// FormBrowser_AppliesStyleSheet
@@ -2171,8 +2171,8 @@
 			this.FormBrowser_AppliesStyleSheet.Name = "FormBrowser_AppliesStyleSheet";
 			this.FormBrowser_AppliesStyleSheet.Size = new System.Drawing.Size(142, 19);
 			this.FormBrowser_AppliesStyleSheet.TabIndex = 7;
-			this.FormBrowser_AppliesStyleSheet.Text = "スタイルシートを適用する";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_AppliesStyleSheet, "艦これ画面のみを表示できるようにします。\r\n環境によっては表示が乱れます、その場合は無効にしてください。");
+			this.FormBrowser_AppliesStyleSheet.Text = "스타일 시트를 적용";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_AppliesStyleSheet, "칸코레 화면만 보여지도록 합니다.\r\n환경에 따라서는 표시가 흐트러집니다. 이 경우엔 비활성화해주세요.");
 			this.FormBrowser_AppliesStyleSheet.UseVisualStyleBackColor = true;
 			// 
 			// FormBrowser_ConfirmAtRefresh
@@ -2182,8 +2182,8 @@
 			this.FormBrowser_ConfirmAtRefresh.Name = "FormBrowser_ConfirmAtRefresh";
 			this.FormBrowser_ConfirmAtRefresh.Size = new System.Drawing.Size(148, 19);
 			this.FormBrowser_ConfirmAtRefresh.TabIndex = 6;
-			this.FormBrowser_ConfirmAtRefresh.Text = "再読み込み時に確認する";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_ConfirmAtRefresh, "有効な場合再読み込みするときに確認ダイアログを表示します。\r\n誤爆防止にご利用ください。");
+			this.FormBrowser_ConfirmAtRefresh.Text = "새로고침시 확인";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_ConfirmAtRefresh, "활성화시 새로고침시에 확인창을 띄웁니다.\r\n잘못 입력했을시에 유용합니다.");
 			this.FormBrowser_ConfirmAtRefresh.UseVisualStyleBackColor = true;
 			// 
 			// groupBox2
@@ -2203,7 +2203,7 @@
 			this.groupBox2.Size = new System.Drawing.Size(670, 77);
 			this.groupBox2.TabIndex = 0;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "スクリーンショット";
+			this.groupBox2.Text = "스크린 샷";
 			// 
 			// label42
 			// 
@@ -2212,16 +2212,16 @@
 			this.label42.Name = "label42";
 			this.label42.Size = new System.Drawing.Size(67, 15);
 			this.label42.TabIndex = 15;
-			this.label42.Text = "保存方法：";
+			this.label42.Text = "저장방식：";
 			// 
 			// FormBrowser_ScreenShotSaveMode
 			// 
 			this.FormBrowser_ScreenShotSaveMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.FormBrowser_ScreenShotSaveMode.FormattingEnabled = true;
 			this.FormBrowser_ScreenShotSaveMode.Items.AddRange(new object[] {
-            "ファイルに保存",
-            "クリップボードにコピー",
-            "両方保存"});
+            "파일로 저장",
+            "클립보드에 복사",
+            "모두 저장"});
 			this.FormBrowser_ScreenShotSaveMode.Location = new System.Drawing.Point(423, 18);
 			this.FormBrowser_ScreenShotSaveMode.Name = "FormBrowser_ScreenShotSaveMode";
 			this.FormBrowser_ScreenShotSaveMode.Size = new System.Drawing.Size(121, 23);
@@ -2235,9 +2235,8 @@
 			this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Name = "FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration";
 			this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Size = new System.Drawing.Size(182, 19);
 			this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.TabIndex = 13;
-			this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Text = "Twitter の画像圧縮を回避する";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration, "Twitter に PNG 形式の画像をアップロードすると、自動的に JPEG 形式に変換され画質が劣化します。\\r\\nそれを回避するための情報を埋め込むかを指定" +
-        "します。");
+			this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Text = "Twitter의 이미지 압축을 피하기";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration, "Twitter 에 PNG 이미지를 업로드하면 자동으로 JPEG형식으로 변환되어 화질이 저하됩니다.\r\n이를 피할지 여부를 설정합니다.");
 			this.FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.UseVisualStyleBackColor = true;
 			// 
 			// label18
@@ -2247,7 +2246,7 @@
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(48, 15);
 			this.label18.TabIndex = 2;
-			this.label18.Text = "保存先:";
+			this.label18.Text = "경로 : ";
 			// 
 			// FormBrowser_ScreenShotFormat_PNG
 			// 
@@ -2300,7 +2299,7 @@
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(72, 15);
 			this.label17.TabIndex = 8;
-			this.label17.Text = "ログインURL:";
+			this.label17.Text = "로그인URL:";
 			// 
 			// label16
 			// 
@@ -2318,7 +2317,7 @@
 			this.FormBrowser_IsEnabled.Name = "FormBrowser_IsEnabled";
 			this.FormBrowser_IsEnabled.Size = new System.Drawing.Size(116, 19);
 			this.FormBrowser_IsEnabled.TabIndex = 0;
-			this.FormBrowser_IsEnabled.Text = "起動時に読み込む";
+			this.FormBrowser_IsEnabled.Text = "프로그램 실행시 로드";
 			this.FormBrowser_IsEnabled.UseVisualStyleBackColor = true;
 			// 
 			// FormBrowser_LogInPageURL
@@ -2360,7 +2359,7 @@
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(73, 15);
 			this.label15.TabIndex = 1;
-			this.label15.Text = "ズーム倍率：";
+			this.label15.Text = "줌 배율：";
 			// 
 			// tabPage14
 			// 
@@ -2371,7 +2370,7 @@
 			this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage14.Size = new System.Drawing.Size(682, 340);
 			this.tabPage14.TabIndex = 5;
-			this.tabPage14.Text = "ブラウザ2";
+			this.tabPage14.Text = "브라우저2";
 			this.tabPage14.UseVisualStyleBackColor = true;
 			// 
 			// groupBox4
@@ -2385,7 +2384,7 @@
 			this.groupBox4.Size = new System.Drawing.Size(200, 80);
 			this.groupBox4.TabIndex = 1;
 			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Flash品質設定";
+			this.groupBox4.Text = "Flash품질 설정";
 			this.groupBox4.Visible = false;
 			// 
 			// label21
@@ -2395,7 +2394,7 @@
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(46, 15);
 			this.label21.TabIndex = 2;
-			this.label21.Text = "モード：";
+			this.label21.Text = "모드：";
 			// 
 			// FormBrowser_FlashWMode
 			// 
@@ -2407,7 +2406,7 @@
 			this.FormBrowser_FlashWMode.Name = "FormBrowser_FlashWMode";
 			this.FormBrowser_FlashWMode.Size = new System.Drawing.Size(121, 23);
 			this.FormBrowser_FlashWMode.TabIndex = 3;
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_FlashWMode, "Flashのモードを指定します。\r\n既定値は opaque です。\r\ndirect にするとパフォーマンスが向上する可能性があります。");
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_FlashWMode, "Flash모드를 지정합니다.\r\n기본값은 opaque입니다.\r\ndirect로하면 성능이 향상됩니다.");
 			// 
 			// label20
 			// 
@@ -2430,7 +2429,7 @@
 			this.FormBrowser_FlashQuality.Name = "FormBrowser_FlashQuality";
 			this.FormBrowser_FlashQuality.Size = new System.Drawing.Size(121, 23);
 			this.FormBrowser_FlashQuality.TabIndex = 1;
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_FlashQuality, "Flashの品質を設定します。\r\n既定値は high です。");
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_FlashQuality, "Flash의 품질을 설정합니다.。\r\n기본값은 high입니다.");
 			// 
 			// groupBox3
 			// 
@@ -2446,7 +2445,7 @@
 			this.groupBox3.Size = new System.Drawing.Size(670, 46);
 			this.groupBox3.TabIndex = 0;
 			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "レジストリ";
+			this.groupBox3.Text = "레지스트리";
 			// 
 			// FormBrowser_BrowserVersion
 			// 
@@ -2466,8 +2465,7 @@
 			this.FormBrowser_BrowserVersion.Size = new System.Drawing.Size(60, 23);
 			this.FormBrowser_BrowserVersion.TabIndex = 1;
 			this.FormBrowser_BrowserVersion.Text = "7000";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_BrowserVersion, "内蔵ブラウザのバージョンを指定します。\r\n7000がIE7相当、8000がIE8相当、11000がIE11相当です。\r\nバージョンによって動作が変わる可能性があり" +
-        "ます。");
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_BrowserVersion, "내장 브라우저의 버전을 지정합니다.\r\n7000이IE7, 8000이IE8, 11000이IE11급입니다.。\r\n버전에 따라 동작이 달라질 수 있습니다.");
 			// 
 			// FormBrowser_DeleteRegistry
 			// 
@@ -2477,7 +2475,7 @@
 			this.FormBrowser_DeleteRegistry.Size = new System.Drawing.Size(50, 23);
 			this.FormBrowser_DeleteRegistry.TabIndex = 4;
 			this.FormBrowser_DeleteRegistry.Text = "削除";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_DeleteRegistry, "レジストリを削除します。");
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_DeleteRegistry, "레지스트리를 삭제합니다.");
 			this.FormBrowser_DeleteRegistry.UseVisualStyleBackColor = true;
 			this.FormBrowser_DeleteRegistry.Click += new System.EventHandler(this.FormBrowser_DeleteRegistry_Click);
 			// 
@@ -2488,8 +2486,8 @@
 			this.FormBrowser_GPURendering.Name = "FormBrowser_GPURendering";
 			this.FormBrowser_GPURendering.Size = new System.Drawing.Size(103, 19);
 			this.FormBrowser_GPURendering.TabIndex = 2;
-			this.FormBrowser_GPURendering.Text = "GPUレンダリング";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_GPURendering, "内蔵ブラウザでGPUレンダリングを使用するかを指定します。\r\n環境によっては処理が高速化します。");
+			this.FormBrowser_GPURendering.Text = "GPU렌더링";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_GPURendering, "내장 브라우저에서 GPU 렌더링을 사용할지 여부를 설정합니다.\r\n처리속도가 빨라집니다.");
 			this.FormBrowser_GPURendering.UseVisualStyleBackColor = true;
 			// 
 			// FormBrowser_ApplyRegistry
@@ -2499,8 +2497,8 @@
 			this.FormBrowser_ApplyRegistry.Name = "FormBrowser_ApplyRegistry";
 			this.FormBrowser_ApplyRegistry.Size = new System.Drawing.Size(50, 23);
 			this.FormBrowser_ApplyRegistry.TabIndex = 3;
-			this.FormBrowser_ApplyRegistry.Text = "適用";
-			this.ToolTipInfo.SetToolTip(this.FormBrowser_ApplyRegistry, "レジストリに対して設定を適用します。\r\n下の[OK]ボタンでは反映されないのでご注意ください。");
+			this.FormBrowser_ApplyRegistry.Text = "적용";
+			this.ToolTipInfo.SetToolTip(this.FormBrowser_ApplyRegistry, "레지스트리 설정을 적용합니다.\r\n아래의 [OK]버튼은 반영되지 않으므로 주의해주세요.");
 			this.FormBrowser_ApplyRegistry.UseVisualStyleBackColor = true;
 			this.FormBrowser_ApplyRegistry.Click += new System.EventHandler(this.FormBrowser_ApplyRegistry_Click);
 			// 
@@ -2511,7 +2509,7 @@
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(100, 15);
 			this.label19.TabIndex = 0;
-			this.label19.Text = "ブラウザバージョン：";
+			this.label19.Text = "브라우저 버전：";
 			// 
 			// tabPage21
 			// 
@@ -2521,7 +2519,7 @@
 			this.tabPage21.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage21.Size = new System.Drawing.Size(682, 340);
 			this.tabPage21.TabIndex = 11;
-			this.tabPage21.Text = "基地航空隊";
+			this.tabPage21.Text = "기지항공대";
 			this.tabPage21.UseVisualStyleBackColor = true;
 			// 
 			// FormBaseAirCorps_ShowEventMapOnly
@@ -2531,8 +2529,8 @@
 			this.FormBaseAirCorps_ShowEventMapOnly.Name = "FormBaseAirCorps_ShowEventMapOnly";
 			this.FormBaseAirCorps_ShowEventMapOnly.Size = new System.Drawing.Size(184, 19);
 			this.FormBaseAirCorps_ShowEventMapOnly.TabIndex = 0;
-			this.FormBaseAirCorps_ShowEventMapOnly.Text = "イベント海域の基地のみ表示する";
-			this.ToolTipInfo.SetToolTip(this.FormBaseAirCorps_ShowEventMapOnly, "有効な場合、イベント時に通常海域の基地航空隊を非表示にします。\r\nイベント期間外ではすべての航空隊が表示されます。");
+			this.FormBaseAirCorps_ShowEventMapOnly.Text = "이벤트 해역 기항대만보기";
+			this.ToolTipInfo.SetToolTip(this.FormBaseAirCorps_ShowEventMapOnly, "활성화한경우 일반해역의 기지항공대를 숨길수있습니다.\r\n이벤트 기간에만 적용됩니다.");
 			this.FormBaseAirCorps_ShowEventMapOnly.UseVisualStyleBackColor = true;
 			// 
 			// SubWindow_Json
@@ -2569,8 +2567,8 @@
 			this.FormJson_AutoUpdate.Name = "FormJson_AutoUpdate";
 			this.FormJson_AutoUpdate.Size = new System.Drawing.Size(93, 19);
 			this.FormJson_AutoUpdate.TabIndex = 0;
-			this.FormJson_AutoUpdate.Text = "自動更新する";
-			this.ToolTipInfo.SetToolTip(this.FormJson_AutoUpdate, "API の送受信時に、自動で表示を更新するかを指定します。\r\n多少重くなる可能性があります。\r\n");
+			this.FormJson_AutoUpdate.Text = "자동 업데이트";
+			this.ToolTipInfo.SetToolTip(this.FormJson_AutoUpdate, "API 송수신때 자동 업데이트할지 여부를 설정합니다.\r\n프로그램이 무거워 질 수 있습니다.\r\n");
 			this.FormJson_AutoUpdate.UseVisualStyleBackColor = true;
 			// 
 			// label32
@@ -2580,7 +2578,7 @@
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(144, 44);
 			this.label32.TabIndex = 5;
-			this.label32.Text = "※自動更新を有効にすると、\r\n　重くなる可能性があります";
+			this.label32.Text = "※자동 업데이트를 사용하면,\r\n프로그램이 무거워 질 수 있습니다.";
 			this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// FormJson_UpdatesTree
@@ -2590,8 +2588,8 @@
 			this.FormJson_UpdatesTree.Name = "FormJson_UpdatesTree";
 			this.FormJson_UpdatesTree.Size = new System.Drawing.Size(104, 19);
 			this.FormJson_UpdatesTree.TabIndex = 1;
-			this.FormJson_UpdatesTree.Text = "Treeも更新する";
-			this.ToolTipInfo.SetToolTip(this.FormJson_UpdatesTree, "API の送受信時に、自動で Tree 表示を更新するかを指定します。\r\n上の「自動更新する」が有効の時のみ更新されます。\r\n多少重くなる可能性があります。");
+			this.FormJson_UpdatesTree.Text = "Tree 업데이트";
+			this.ToolTipInfo.SetToolTip(this.FormJson_UpdatesTree, "API 송수신때 자동으로 Tree를 업데이트 할지 여부를 설정합니다.\r\n위의 자동 업데이트를 사용할때만 업데이트 됩니다.\r\n프로그램이 무거워 질 수 있습니다.");
 			this.FormJson_UpdatesTree.UseVisualStyleBackColor = true;
 			// 
 			// FormJson_AutoUpdateFilter
@@ -2602,7 +2600,7 @@
 			this.FormJson_AutoUpdateFilter.Name = "FormJson_AutoUpdateFilter";
 			this.FormJson_AutoUpdateFilter.Size = new System.Drawing.Size(564, 23);
 			this.FormJson_AutoUpdateFilter.TabIndex = 3;
-			this.ToolTipInfo.SetToolTip(this.FormJson_AutoUpdateFilter, "自動更新時に読み込む API を選択するフィルタです。\r\n正規表現も利用可能です。");
+			this.ToolTipInfo.SetToolTip(this.FormJson_AutoUpdateFilter, "자동 업데이트시 로드할 API를 선택하는 필터입니다. \r\n정규 표현식을 사용할 수 있습니다.");
 			// 
 			// label31
 			// 
@@ -2611,7 +2609,7 @@
 			this.label31.Name = "label31";
 			this.label31.Size = new System.Drawing.Size(100, 15);
 			this.label31.TabIndex = 2;
-			this.label31.Text = "自動更新フィルタ：";
+			this.label31.Text = "자동 업데이트 필터：";
 			// 
 			// label33
 			// 
@@ -2620,7 +2618,7 @@
 			this.label33.Name = "label33";
 			this.label33.Size = new System.Drawing.Size(253, 15);
 			this.label33.TabIndex = 0;
-			this.label33.Text = "(非表示です。デバッグメニューを有効にしてください。)";
+			this.label33.Text = "(숨겨져 있습니다. 디버그 기능을 활성화하세요.)";
 			// 
 			// tabPage11
 			// 
@@ -2638,7 +2636,7 @@
 			this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage11.Size = new System.Drawing.Size(696, 372);
 			this.tabPage11.TabIndex = 7;
-			this.tabPage11.Text = "通知";
+			this.tabPage11.Text = "알림";
 			this.tabPage11.UseVisualStyleBackColor = true;
 			// 
 			// silenceFullscreen
@@ -2660,8 +2658,8 @@
 			this.Notification_Silencio.Name = "Notification_Silencio";
 			this.Notification_Silencio.Size = new System.Drawing.Size(131, 19);
 			this.Notification_Silencio.TabIndex = 7;
-			this.Notification_Silencio.Text = "すべての通知をミュート";
-			this.ToolTipInfo.SetToolTip(this.Notification_Silencio, "すべての通知を非表示にし、通知音の発声も停止します。\r\n\r\n「シレンシオ！黙れ！」");
+			this.Notification_Silencio.Text = "모든 알림 음소거";
+			this.ToolTipInfo.SetToolTip(this.Notification_Silencio, "모든 알림을 숨깁니다. 사운드도 음소거됩니다.\r\n\r\n「실렌시오！닥쳐！」");
 			this.Notification_Silencio.UseVisualStyleBackColor = true;
 			// 
 			// Notification_AnchorageRepair
@@ -2670,7 +2668,7 @@
 			this.Notification_AnchorageRepair.Name = "Notification_AnchorageRepair";
 			this.Notification_AnchorageRepair.Size = new System.Drawing.Size(150, 23);
 			this.Notification_AnchorageRepair.TabIndex = 6;
-			this.Notification_AnchorageRepair.Text = "泊地修理通知の設定...";
+			this.Notification_AnchorageRepair.Text = "아카시 타이머 알림 설정...";
 			this.Notification_AnchorageRepair.UseVisualStyleBackColor = true;
 			this.Notification_AnchorageRepair.Click += new System.EventHandler(this.Notification_AnchorageRepair_Click);
 			// 
@@ -2682,7 +2680,7 @@
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(238, 15);
 			this.label10.TabIndex = 5;
-			this.label10.Text = "＊各ダイアログでOKを押した時点で適用されます";
+			this.label10.Text = "＊각 창의 OK 버튼을 누르는 즉시 적용됩니다.";
 			// 
 			// Notification_Damage
 			// 
@@ -2690,7 +2688,7 @@
 			this.Notification_Damage.Name = "Notification_Damage";
 			this.Notification_Damage.Size = new System.Drawing.Size(150, 23);
 			this.Notification_Damage.TabIndex = 4;
-			this.Notification_Damage.Text = "大破進撃通知の設定...";
+			this.Notification_Damage.Text = "대파 진격 알림 설정...";
 			this.Notification_Damage.UseVisualStyleBackColor = true;
 			this.Notification_Damage.Click += new System.EventHandler(this.Notification_Damage_Click);
 			// 
@@ -2700,7 +2698,7 @@
 			this.Notification_Condition.Name = "Notification_Condition";
 			this.Notification_Condition.Size = new System.Drawing.Size(150, 23);
 			this.Notification_Condition.TabIndex = 3;
-			this.Notification_Condition.Text = "疲労回復通知の設定...";
+			this.Notification_Condition.Text = "피로 회복 알림 설정...";
 			this.Notification_Condition.UseVisualStyleBackColor = true;
 			this.Notification_Condition.Click += new System.EventHandler(this.Notification_Condition_Click);
 			// 
@@ -2710,7 +2708,7 @@
 			this.Notification_Repair.Name = "Notification_Repair";
 			this.Notification_Repair.Size = new System.Drawing.Size(150, 23);
 			this.Notification_Repair.TabIndex = 2;
-			this.Notification_Repair.Text = "入渠完了通知の設定...";
+			this.Notification_Repair.Text = "수리 완료 알림 설정...";
 			this.Notification_Repair.UseVisualStyleBackColor = true;
 			this.Notification_Repair.Click += new System.EventHandler(this.Notification_Repair_Click);
 			// 
@@ -2720,7 +2718,7 @@
 			this.Notification_Construction.Name = "Notification_Construction";
 			this.Notification_Construction.Size = new System.Drawing.Size(150, 23);
 			this.Notification_Construction.TabIndex = 1;
-			this.Notification_Construction.Text = "建造完了通知の設定...";
+			this.Notification_Construction.Text = "건조 완료 알림 설정...";
 			this.Notification_Construction.UseVisualStyleBackColor = true;
 			this.Notification_Construction.Click += new System.EventHandler(this.Notification_Construction_Click);
 			// 
@@ -2730,7 +2728,7 @@
 			this.Notification_Expedition.Name = "Notification_Expedition";
 			this.Notification_Expedition.Size = new System.Drawing.Size(150, 23);
 			this.Notification_Expedition.TabIndex = 0;
-			this.Notification_Expedition.Text = "遠征帰投通知の設定...";
+			this.Notification_Expedition.Text = "원정 귀환 알림 설정...";
 			this.Notification_Expedition.UseVisualStyleBackColor = true;
 			this.Notification_Expedition.Click += new System.EventHandler(this.Notification_Expedition_Click);
 			// 
@@ -2756,8 +2754,8 @@
 			this.BGMPlayer_SyncBrowserMute.Name = "BGMPlayer_SyncBrowserMute";
 			this.BGMPlayer_SyncBrowserMute.Size = new System.Drawing.Size(92, 19);
 			this.BGMPlayer_SyncBrowserMute.TabIndex = 4;
-			this.BGMPlayer_SyncBrowserMute.Text = "ミュートを同期";
-			this.ToolTipInfo.SetToolTip(this.BGMPlayer_SyncBrowserMute, "ブラウザのミュートと連動させるかを指定します。");
+			this.BGMPlayer_SyncBrowserMute.Text = "음소거 동기화";
+			this.ToolTipInfo.SetToolTip(this.BGMPlayer_SyncBrowserMute, "브라우저의 음소거와 연동하는지 여부를 설정합니다.");
 			this.BGMPlayer_SyncBrowserMute.UseVisualStyleBackColor = true;
 			// 
 			// BGMPlayer_SetVolumeAll
@@ -2766,7 +2764,7 @@
 			this.BGMPlayer_SetVolumeAll.Name = "BGMPlayer_SetVolumeAll";
 			this.BGMPlayer_SetVolumeAll.Size = new System.Drawing.Size(100, 23);
 			this.BGMPlayer_SetVolumeAll.TabIndex = 3;
-			this.BGMPlayer_SetVolumeAll.Text = "音量一括適用";
+			this.BGMPlayer_SetVolumeAll.Text = "볼륨 일괄 적용";
 			this.BGMPlayer_SetVolumeAll.UseVisualStyleBackColor = true;
 			this.BGMPlayer_SetVolumeAll.Click += new System.EventHandler(this.BGMPlayer_SetVolumeAll_Click);
 			// 
@@ -2790,8 +2788,8 @@
 			this.BGMPlayer_Enabled.Name = "BGMPlayer_Enabled";
 			this.BGMPlayer_Enabled.Size = new System.Drawing.Size(161, 19);
 			this.BGMPlayer_Enabled.TabIndex = 1;
-			this.BGMPlayer_Enabled.Text = "BGMプレイヤーを有効にする";
-			this.ToolTipInfo.SetToolTip(this.BGMPlayer_Enabled, "現在の場面に合わせてお好みのBGMを再生する機能です。");
+			this.BGMPlayer_Enabled.Text = "BGM 플레이어 사용";
+			this.ToolTipInfo.SetToolTip(this.BGMPlayer_Enabled, "현재 상황에 맞게 원하는 BGM을 재생합니다.");
 			this.BGMPlayer_Enabled.UseVisualStyleBackColor = true;
 			// 
 			// BGMPlayer_ControlGrid
@@ -2839,7 +2837,7 @@
 			// 
 			// BGMPlayer_ColumnContent
 			// 
-			this.BGMPlayer_ColumnContent.HeaderText = "シーン";
+			this.BGMPlayer_ColumnContent.HeaderText = "씬";
 			this.BGMPlayer_ColumnContent.Name = "BGMPlayer_ColumnContent";
 			this.BGMPlayer_ColumnContent.ReadOnly = true;
 			this.BGMPlayer_ColumnContent.Width = 80;
@@ -2847,14 +2845,14 @@
 			// BGMPlayer_ColumnPath
 			// 
 			this.BGMPlayer_ColumnPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.BGMPlayer_ColumnPath.HeaderText = "ファイル名";
+			this.BGMPlayer_ColumnPath.HeaderText = "파일 이름";
 			this.BGMPlayer_ColumnPath.Name = "BGMPlayer_ColumnPath";
 			this.BGMPlayer_ColumnPath.ReadOnly = true;
 			this.BGMPlayer_ColumnPath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// BGMPlayer_ColumnSetting
 			// 
-			this.BGMPlayer_ColumnSetting.HeaderText = "設定";
+			this.BGMPlayer_ColumnSetting.HeaderText = "설정";
 			this.BGMPlayer_ColumnSetting.Name = "BGMPlayer_ColumnSetting";
 			this.BGMPlayer_ColumnSetting.Width = 40;
 			// 
@@ -2884,12 +2882,12 @@
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 2;
-			this.ButtonCancel.Text = "キャンセル";
+			this.ButtonCancel.Text = "취소";
 			this.ButtonCancel.UseVisualStyleBackColor = true;
 			// 
 			// FolderBrowser
 			// 
-			this.FolderBrowser.Description = "フォルダの参照";
+			this.FolderBrowser.Description = "폴더 참조";
 			// 
 			// FontSelector
 			// 
@@ -2898,12 +2896,12 @@
 			// LayoutFileBrowser
 			// 
 			this.LayoutFileBrowser.Filter = "Layout Archive|*.zip|File|*";
-			this.LayoutFileBrowser.Title = "レイアウト ファイルを開く";
+			this.LayoutFileBrowser.Title = "레이아웃 파일 열기";
 			// 
 			// APIListBrowser
 			// 
 			this.APIListBrowser.Filter = "Text File|*.txt|File|*";
-			this.APIListBrowser.Title = "API リストを開く";
+			this.APIListBrowser.Title = "API 목록 열기";
 			// 
 			// Log_PlayTime
 			// 
@@ -2913,7 +2911,7 @@
 			this.Log_PlayTime.Name = "Log_PlayTime";
 			this.Log_PlayTime.Size = new System.Drawing.Size(58, 15);
 			this.Log_PlayTime.TabIndex = 3;
-			this.Log_PlayTime.Text = "プレイ時間";
+			this.Log_PlayTime.Text = "플레이시간";
 			// 
 			// PlayTimeTimer
 			// 
@@ -2938,7 +2936,7 @@
 			this.Name = "DialogConfiguration";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "設定";
+			this.Text = "설정";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogConfiguration_FormClosed);
 			this.Load += new System.EventHandler(this.DialogConfiguration_Load);
 			this.tabControl1.ResumeLayout(false);

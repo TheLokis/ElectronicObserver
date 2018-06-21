@@ -18,7 +18,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			InitializeComponent();
 
-			TextVersion.Text = string.Format("{0} (ver. {1} - {2} Release)", SoftwareInformation.VersionJapanese, SoftwareInformation.VersionEnglish, SoftwareInformation.UpdateTime.ToString("d"));
+			TextVersion.Text = string.Format("{0} (ver. {1} - {2} Release)", SoftwareInformation.SoftwareNameKorean, SoftwareInformation.VersionEnglish, SoftwareInformation.UpdateTime.ToString("d"));
 		}
 
 		private void TextAuthor_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -42,10 +42,30 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
-		private void DialogVersion_Load(object sender, EventArgs e)
+        private void TextTranslator_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            System.Diagnostics.Process.Start("http://thelokis.egloos.com/");
+
+        }
+
+        private void Gall_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            System.Diagnostics.Process.Start("http://gall.dcinside.com/board/lists/?id=kancolle");
+
+        }
+
+
+        private void DialogVersion_Load(object sender, EventArgs e)
 		{
 
 			this.Icon = ResourceManager.Instance.AppIcon;
 		}
-	}
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

@@ -247,8 +247,8 @@ namespace ElectronicObserver.Resource
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "リソースファイルの読み込みに失敗しました。");
-				MessageBox.Show("リソースファイルの読み込みに失敗しました。\r\n" + ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Utility.ErrorReporter.SendErrorReport(ex, "리소스 파일 로드에 실패했습니다.");
+				MessageBox.Show("리소스 파일 로드에 실패했습니다.\r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				FillWithBlankImage(Icons, Enum.GetValues(typeof(IconContent)).Length);
 				FillWithBlankImage(Equipments, Enum.GetValues(typeof(EquipmentContent)).Length);
@@ -464,7 +464,7 @@ namespace ElectronicObserver.Resource
 
 			if (entry == null)
 			{
-				Utility.Logger.Add(3, string.Format("画像リソース {0} は存在しません。", path));
+				Utility.Logger.Add(3, string.Format("이미지 파일 {0} 은 존재하지 않습니다.", path));
 				imglist.Images.Add(name, new Bitmap(imglist.ImageSize.Width, imglist.ImageSize.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb));
 				return;
 			}
@@ -490,7 +490,7 @@ namespace ElectronicObserver.Resource
 			catch (Exception)
 			{
 
-				Utility.Logger.Add(3, string.Format("画像リソース {0} の読み込みに失敗しました。", path));
+				Utility.Logger.Add(3, string.Format("이미지 파일 {0} 의 로드에 실패했습니다.", path));
 				imglist.Images.Add(name, CreateBlankImage());
 				return;
 			}
@@ -504,7 +504,7 @@ namespace ElectronicObserver.Resource
 
 			if (entry == null)
 			{
-				Utility.Logger.Add(3, string.Format("画像リソース {0} は存在しません。", path));
+				Utility.Logger.Add(3, string.Format("이미지 파일 {0} 은 존재하지 않습니다.", path));
 				return null;
 			}
 
@@ -531,7 +531,7 @@ namespace ElectronicObserver.Resource
 			catch (Exception)
 			{
 
-				Utility.Logger.Add(3, string.Format("画像リソース {0} の読み込みに失敗しました。", path));
+				Utility.Logger.Add(3, string.Format("이미지 파일 {0} 의 로드에 실패했습니다.", path));
 			}
 
 			return null;
@@ -565,7 +565,7 @@ namespace ElectronicObserver.Resource
 
 				if (entry == null)
 				{
-					Utility.Logger.Add(3, string.Format("{0} は存在しません。", entrypath));
+					Utility.Logger.Add(3, string.Format("{0} 은 존재하지 않습니다.", entrypath));
 					return false;
 				}
 
@@ -589,13 +589,13 @@ namespace ElectronicObserver.Resource
 					{
 						entry.ExtractToFile(destination);
 					}
-					Utility.Logger.Add(2, string.Format("{0} をコピーしました。", entrypath));
+					Utility.Logger.Add(2, string.Format("{0} 을 복사했습니다.", entrypath));
 
 				}
 				catch (Exception ex)
 				{
 
-					Utility.Logger.Add(3, string.Format("{0} のコピーに失敗しました。{1}", entrypath, ex.Message));
+					Utility.Logger.Add(3, string.Format("{0} 의 복사에 실패했습니다. {1}", entrypath, ex.Message));
 					return false;
 				}
 			}
@@ -647,7 +647,7 @@ namespace ElectronicObserver.Resource
 
 				if (entry == null)
 				{
-					Utility.Logger.Add(3, string.Format("{0} は存在しません。", entrypath));
+					Utility.Logger.Add(3, string.Format("{0} 은 존재하지 않습니다.", entrypath));
 					return null;
 				}
 
@@ -670,7 +670,7 @@ namespace ElectronicObserver.Resource
 				catch (Exception ex)
 				{
 
-					Utility.Logger.Add(3, string.Format("{0} の展開に失敗しました。{1}", entrypath, ex.Message));
+					Utility.Logger.Add(3, string.Format("{0} 의 배포에 실패했습니다.{1}", entrypath, ex.Message));
 					return null;
 				}
 			}

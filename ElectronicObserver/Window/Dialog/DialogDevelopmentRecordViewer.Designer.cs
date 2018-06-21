@@ -108,7 +108,7 @@
 			this.ButtonRun.Name = "ButtonRun";
 			this.ButtonRun.Size = new System.Drawing.Size(75, 23);
 			this.ButtonRun.TabIndex = 22;
-			this.ButtonRun.Text = "検索";
+			this.ButtonRun.Text = "시작";
 			this.ButtonRun.UseVisualStyleBackColor = true;
 			this.ButtonRun.Click += new System.EventHandler(this.ButtonRun_Click);
 			// 
@@ -120,7 +120,7 @@
 			this.MergeRows.Name = "MergeRows";
 			this.MergeRows.Size = new System.Drawing.Size(62, 19);
 			this.MergeRows.TabIndex = 21;
-			this.MergeRows.Text = "まとめる";
+			this.MergeRows.Text = "정리";
 			this.MergeRows.UseVisualStyleBackColor = true;
 			// 
 			// label6
@@ -130,7 +130,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(35, 15);
 			this.label6.TabIndex = 20;
-			this.label6.Text = "レシピ";
+			this.label6.Text = "식";
 			// 
 			// Recipe
 			// 
@@ -170,7 +170,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(43, 15);
 			this.label5.TabIndex = 16;
-			this.label5.Text = "秘書艦";
+			this.label5.Text = "비서함";
 			// 
 			// DateEnd
 			// 
@@ -193,7 +193,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(31, 15);
 			this.label4.TabIndex = 13;
-			this.label4.Text = "終了";
+			this.label4.Text = "종료";
 			// 
 			// label3
 			// 
@@ -202,7 +202,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(31, 15);
 			this.label3.TabIndex = 12;
-			this.label3.Text = "開始";
+			this.label3.Text = "시작";
 			// 
 			// label2
 			// 
@@ -211,7 +211,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(41, 15);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "カテゴリ";
+			this.label2.Text = "카테고리";
 			// 
 			// EquipmentCategory
 			// 
@@ -230,7 +230,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(43, 15);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "装備名";
+			this.label1.Text = "장비명";
 			// 
 			// EquipmentName
 			// 
@@ -297,39 +297,39 @@
 			// RecordView_Name
 			// 
 			this.RecordView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.RecordView_Name.HeaderText = "名前";
+			this.RecordView_Name.HeaderText = "이름";
 			this.RecordView_Name.Name = "RecordView_Name";
 			this.RecordView_Name.ReadOnly = true;
 			// 
 			// RecordView_Date
 			// 
-			this.RecordView_Date.HeaderText = "日付";
+			this.RecordView_Date.HeaderText = "날짜";
 			this.RecordView_Date.Name = "RecordView_Date";
 			this.RecordView_Date.ReadOnly = true;
 			// 
 			// RecordView_Recipe
 			// 
-			this.RecordView_Recipe.HeaderText = "レシピ";
+			this.RecordView_Recipe.HeaderText = "레시피";
 			this.RecordView_Recipe.Name = "RecordView_Recipe";
 			this.RecordView_Recipe.ReadOnly = true;
 			this.RecordView_Recipe.Width = 200;
 			// 
 			// RecordView_FlagshipType
 			// 
-			this.RecordView_FlagshipType.HeaderText = "艦種";
+			this.RecordView_FlagshipType.HeaderText = "비서함종";
 			this.RecordView_FlagshipType.Name = "RecordView_FlagshipType";
 			this.RecordView_FlagshipType.ReadOnly = true;
 			// 
 			// RecordView_Flagship
 			// 
-			this.RecordView_Flagship.HeaderText = "秘書艦";
+			this.RecordView_Flagship.HeaderText = "비서함";
 			this.RecordView_Flagship.Name = "RecordView_Flagship";
 			this.RecordView_Flagship.ReadOnly = true;
 			// 
 			// RecordView_Detail
 			// 
 			this.RecordView_Detail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.RecordView_Detail.HeaderText = "詳細";
+			this.RecordView_Detail.HeaderText = "상세";
 			this.RecordView_Detail.Name = "RecordView_Detail";
 			this.RecordView_Detail.ReadOnly = true;
 			// 
@@ -371,7 +371,7 @@
 			this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "DialogDevelopmentRecordViewer";
-			this.Text = "開発記録";
+			this.Text = "개발기록";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogDevelopmentRecordViewer_FormClosed);
 			this.Load += new System.EventHandler(this.DialogDevelopmentRecordViewer_Load);
 			this.splitContainer1.Panel1.ResumeLayout(false);

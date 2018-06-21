@@ -64,7 +64,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (!RecordManager.Instance.Resource.Record.Any())
 			{
-				MessageBox.Show("レコード データが存在しません。\n一度母港に移動してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("기록 데이터가 존재하지 않습니다.\n모항화면으로 한번 이동해주세요.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Close();
 				return;
 			}
@@ -122,23 +122,23 @@ namespace ElectronicObserver.Window.Dialog
 
 			setSeries(fuel);
 			fuel.Color = Color.FromArgb(0, 128, 0);
-			fuel.LegendText = "燃料";
+			fuel.LegendText = "연료";
 
 			setSeries(ammo);
 			ammo.Color = Color.FromArgb(255, 128, 0);
-			ammo.LegendText = "弾薬";
+			ammo.LegendText = "탄약";
 
 			setSeries(steel);
 			steel.Color = Color.FromArgb(64, 64, 64);
-			steel.LegendText = "鋼材";
+			steel.LegendText = "강재";
 
 			setSeries(bauxite);
 			bauxite.Color = Color.FromArgb(255, 0, 0);
-			bauxite.LegendText = "ボーキ";
+			bauxite.LegendText = "보키";
 
 			setSeries(instantRepair);
 			instantRepair.Color = Color.FromArgb(32, 128, 255);
-			instantRepair.LegendText = "高速修復材";
+			instantRepair.LegendText = "고속수복재";
 			instantRepair.YAxisType = AxisType.Secondary;
 
 
@@ -205,27 +205,27 @@ namespace ElectronicObserver.Window.Dialog
 			setSeries(fuel);
 			fuel.Color = Color.FromArgb(64, 0, 128, 0);
 			fuel.BorderColor = Color.FromArgb(255, 0, 128, 0);
-			fuel.LegendText = "燃料";
+			fuel.LegendText = "연료";
 
 			setSeries(ammo);
 			ammo.Color = Color.FromArgb(64, 255, 128, 0);
 			ammo.BorderColor = Color.FromArgb(255, 255, 128, 0);
-			ammo.LegendText = "弾薬";
+			ammo.LegendText = "탄약";
 
 			setSeries(steel);
 			steel.Color = Color.FromArgb(64, 64, 64, 64);
 			steel.BorderColor = Color.FromArgb(255, 64, 64, 64);
-			steel.LegendText = "鋼材";
+			steel.LegendText = "강재";
 
 			setSeries(bauxite);
 			bauxite.Color = Color.FromArgb(64, 255, 0, 0);
 			bauxite.BorderColor = Color.FromArgb(255, 255, 0, 0);
-			bauxite.LegendText = "ボーキ";
+			bauxite.LegendText = "보키";
 
 			setSeries(instantRepair);
 			instantRepair.Color = Color.FromArgb(64, 32, 128, 255);
 			instantRepair.BorderColor = Color.FromArgb(255, 32, 128, 255);
-			instantRepair.LegendText = "高速修復材";
+			instantRepair.LegendText = "고속수복재";
 			instantRepair.YAxisType = AxisType.Secondary;
 
 
@@ -310,19 +310,19 @@ namespace ElectronicObserver.Window.Dialog
 
 			setSeries(instantConstruction);
 			instantConstruction.Color = Color.FromArgb(255, 128, 0);
-			instantConstruction.LegendText = "高速建造材";
+			instantConstruction.LegendText = "고속건조재";
 
 			setSeries(instantRepair);
 			instantRepair.Color = Color.FromArgb(0, 128, 0);
-			instantRepair.LegendText = "高速修復材";
+			instantRepair.LegendText = "고속수복재";
 
 			setSeries(developmentMaterial);
 			developmentMaterial.Color = Color.FromArgb(0, 0, 255);
-			developmentMaterial.LegendText = "開発資材";
+			developmentMaterial.LegendText = "개발자재";
 
 			setSeries(moddingMaterial);
 			moddingMaterial.Color = Color.FromArgb(64, 64, 64);
-			moddingMaterial.LegendText = "改修資材";
+			moddingMaterial.LegendText = "개수자재";
 
 
 			//データ設定
@@ -395,22 +395,22 @@ namespace ElectronicObserver.Window.Dialog
 			setSeries(instantConstruction);
 			instantConstruction.Color = Color.FromArgb(64, 255, 128, 0);
 			instantConstruction.BorderColor = Color.FromArgb(255, 255, 128, 0);
-			instantConstruction.LegendText = "高速建造材";
+			instantConstruction.LegendText = "고속건조재";
 
 			setSeries(instantRepair);
 			instantRepair.Color = Color.FromArgb(64, 0, 128, 0);
 			instantRepair.BorderColor = Color.FromArgb(255, 0, 128, 0);
-			instantRepair.LegendText = "高速修復材";
+			instantRepair.LegendText = "고속수복재";
 
 			setSeries(developmentMaterial);
 			developmentMaterial.Color = Color.FromArgb(64, 0, 0, 255);
 			developmentMaterial.BorderColor = Color.FromArgb(255, 0, 0, 255);
-			developmentMaterial.LegendText = "開発資材";
+			developmentMaterial.LegendText = "개발자재";
 
 			setSeries(moddingMaterial);
 			moddingMaterial.Color = Color.FromArgb(64, 64, 64, 64);
 			moddingMaterial.BorderColor = Color.FromArgb(255, 64, 64, 64);
-			moddingMaterial.LegendText = "改修資材";
+			moddingMaterial.LegendText = "개수자재";
 
 
 			//データ設定
@@ -497,7 +497,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			setSeries(exp);
 			exp.Color = Color.FromArgb(0, 0, 255);
-			exp.LegendText = "提督経験値";
+			exp.LegendText = "제독경험치";
 
 
 			//データ設定
@@ -564,7 +564,7 @@ namespace ElectronicObserver.Window.Dialog
 			setSeries(exp);
 			exp.Color = Color.FromArgb(64, 0, 0, 255);
 			exp.BorderColor = Color.FromArgb(255, 0, 0, 255);
-			exp.LegendText = "提督経験値";
+			exp.LegendText = "제독경험치";
 
 
 			//データ設定
@@ -1047,7 +1047,7 @@ namespace ElectronicObserver.Window.Dialog
 				}
 				catch (Exception ex)
 				{
-					Utility.ErrorReporter.SendErrorReport(ex, "資源チャート画像の保存に失敗しました。");
+					Utility.ErrorReporter.SendErrorReport(ex, "자원 차트 이미지 저장에 실패했습니다.");
 				}
 			}
 		}

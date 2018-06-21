@@ -111,7 +111,7 @@ namespace ElectronicObserver.Utility
 			_mp = new MediaPlayer();
 
 			if (!_mp.IsAvailable)
-				Utility.Logger.Add(3, "Windows Media Player のロードに失敗しました。音声の再生はできません。");
+				Utility.Logger.Add(3, "Windows Media Player 의 로드에 실패했습니다. 음성 재생이 되지 않습니다.");
 
 			_mp.AutoPlay = false;
 			_mp.IsShuffle = true;
@@ -354,39 +354,39 @@ namespace ElectronicObserver.Utility
 			switch (id)
 			{
 				case SoundHandleID.Port:
-					return "母港";
+					return "모항";
 				case SoundHandleID.Sortie:
-					return "出撃中";
+					return "출격중";
 				case SoundHandleID.BattleDay:
-					return "昼戦";
+					return "주간전";
 				case SoundHandleID.BattleNight:
-					return "夜戦";
+					return "야간전";
 				case SoundHandleID.BattleAir:
-					return "航空戦";
+					return "항공전";
 				case SoundHandleID.BattleBoss:
-					return "ボス戦";
+					return "보스전";
 				case SoundHandleID.BattlePracticeDay:
-					return "演習昼戦";
+					return "연전주간";
 				case SoundHandleID.BattlePracticeNight:
-					return "演習夜戦";
+					return "연전야간";
 				case SoundHandleID.ResultWin:
-					return "勝利";
+					return "승리";
 				case SoundHandleID.ResultLose:
-					return "敗北";
+					return "패배";
 				case SoundHandleID.ResultBossWin:
-					return "ボス勝利";
+					return "보스승리";
 				case SoundHandleID.Record:
-					return "戦績";
+					return "전적";
 				case SoundHandleID.Item:
-					return "アイテム";
+					return "아이템";
 				case SoundHandleID.Quest:
-					return "任務";
+					return "임무";
 				case SoundHandleID.Album:
-					return "図鑑";
+					return "도감";
 				case SoundHandleID.ImprovementArsenal:
-					return "改修工廠";
+					return "개수공창";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 	}

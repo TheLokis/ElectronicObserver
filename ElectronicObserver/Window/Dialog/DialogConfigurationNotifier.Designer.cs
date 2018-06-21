@@ -106,7 +106,7 @@
 			this.ButtonCancel.Name = "ButtonCancel";
 			this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
 			this.ButtonCancel.TabIndex = 7;
-			this.ButtonCancel.Text = "キャンセル";
+			this.ButtonCancel.Text = "취소";
 			this.ButtonCancel.UseVisualStyleBackColor = true;
 			this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
 			// 
@@ -117,7 +117,7 @@
 			this.ButtonOK.Name = "ButtonOK";
 			this.ButtonOK.Size = new System.Drawing.Size(75, 23);
 			this.ButtonOK.TabIndex = 6;
-			this.ButtonOK.Text = "OK";
+			this.ButtonOK.Text = "확인";
 			this.ButtonOK.UseVisualStyleBackColor = true;
 			this.ButtonOK.Click += new System.EventHandler(this.ButtonOK_Click);
 			// 
@@ -135,7 +135,7 @@
 			this.GroupSound.Size = new System.Drawing.Size(298, 78);
 			this.GroupSound.TabIndex = 1;
 			this.GroupSound.TabStop = false;
-			this.GroupSound.Text = "通知音";
+			this.GroupSound.Text = "알림음";
 			this.GroupSound.DragDrop += new System.Windows.Forms.DragEventHandler(this.GroupSound_DragDrop);
 			this.GroupSound.DragEnter += new System.Windows.Forms.DragEventHandler(this.GroupSound_DragEnter);
 			// 
@@ -147,7 +147,7 @@
 			this.SoundPathDirectorize.Size = new System.Drawing.Size(32, 23);
 			this.SoundPathDirectorize.TabIndex = 6;
 			this.SoundPathDirectorize.Text = "Dir";
-			this.ToolTipText.SetToolTip(this.SoundPathDirectorize, "パスのファイル名部分を削除し、フォルダ指定にします。\r\nパスにフォルダを指定した場合、そのフォルダに含まれる音声ファイルがランダムに再生されます。");
+			this.ToolTipText.SetToolTip(this.SoundPathDirectorize, "경로의 파일 이름을 삭제하고 폴더를 지정합니다.\r\n폴더를 지정하면 해당 폴더에 포함된 음성 파일이 무작위로 재생됩니다.");
 			this.SoundPathDirectorize.UseVisualStyleBackColor = true;
 			this.SoundPathDirectorize.Click += new System.EventHandler(this.SoundPathDirectorize_Click);
 			// 
@@ -158,7 +158,7 @@
 			this.LoopsSound.Name = "LoopsSound";
 			this.LoopsSound.Size = new System.Drawing.Size(55, 19);
 			this.LoopsSound.TabIndex = 5;
-			this.LoopsSound.Text = "ループ";
+			this.LoopsSound.Text = "반복";
 			this.LoopsSound.UseVisualStyleBackColor = true;
 			// 
 			// label9
@@ -168,7 +168,7 @@
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(43, 15);
 			this.label9.TabIndex = 1;
-			this.label9.Text = "音量：";
+			this.label9.Text = "볼륨：";
 			// 
 			// SoundVolume
 			// 
@@ -177,7 +177,7 @@
 			this.SoundVolume.Size = new System.Drawing.Size(80, 23);
 			this.SoundVolume.TabIndex = 2;
 			this.SoundVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipText.SetToolTip(this.SoundVolume, "通知音の音量を指定します。\r\n0が無音で100が最大音量です。");
+			this.ToolTipText.SetToolTip(this.SoundVolume, "알림음의 크기를 조절합니다. \r\n0이 무음, 100이 최대치입니다.");
 			// 
 			// PlaysSound
 			// 
@@ -186,7 +186,7 @@
 			this.PlaysSound.Name = "PlaysSound";
 			this.PlaysSound.Size = new System.Drawing.Size(78, 19);
 			this.PlaysSound.TabIndex = 0;
-			this.PlaysSound.Text = "有効にする";
+			this.PlaysSound.Text = "활성화";
 			this.PlaysSound.UseVisualStyleBackColor = true;
 			// 
 			// SoundPathSearch
@@ -218,8 +218,8 @@
 			this.ButtonTest.Name = "ButtonTest";
 			this.ButtonTest.Size = new System.Drawing.Size(75, 23);
 			this.ButtonTest.TabIndex = 5;
-			this.ButtonTest.Text = "テスト";
-			this.ToolTipText.SetToolTip(this.ButtonTest, "通知のテスト再生を行います。\r\n設定が適用・保存されるため注意してください。");
+			this.ButtonTest.Text = "테스트";
+			this.ToolTipText.SetToolTip(this.ButtonTest, "테스트 알림입니다.\r\n적용시 설정이 저장됩니다.");
 			this.ButtonTest.UseVisualStyleBackColor = true;
 			this.ButtonTest.Click += new System.EventHandler(this.ButtonTest_Click);
 			// 
@@ -230,7 +230,7 @@
 			this.IsEnabled.Name = "IsEnabled";
 			this.IsEnabled.Size = new System.Drawing.Size(111, 19);
 			this.IsEnabled.TabIndex = 0;
-			this.IsEnabled.Text = "通知を有効にする";
+			this.IsEnabled.Text = "알림 활성화";
 			this.IsEnabled.UseVisualStyleBackColor = true;
 			// 
 			// GroupImage
@@ -243,7 +243,7 @@
 			this.GroupImage.Size = new System.Drawing.Size(298, 78);
 			this.GroupImage.TabIndex = 2;
 			this.GroupImage.TabStop = false;
-			this.GroupImage.Text = "通知画像";
+			this.GroupImage.Text = "알림 이미지";
 			this.GroupImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.GroupImage_DragDrop);
 			this.GroupImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.GroupImage_DragEnter);
 			// 
@@ -254,7 +254,7 @@
 			this.DrawsImage.Name = "DrawsImage";
 			this.DrawsImage.Size = new System.Drawing.Size(78, 19);
 			this.DrawsImage.TabIndex = 0;
-			this.DrawsImage.Text = "有効にする";
+			this.DrawsImage.Text = "활성화";
 			this.DrawsImage.UseVisualStyleBackColor = true;
 			// 
 			// ImagePathSearch
@@ -308,7 +308,7 @@
 			this.GroupDialog.Size = new System.Drawing.Size(602, 171);
 			this.GroupDialog.TabIndex = 3;
 			this.GroupDialog.TabStop = false;
-			this.GroupDialog.Text = "通知ダイアログ";
+			this.GroupDialog.Text = "알림 메시지";
 			// 
 			// label5
 			// 
@@ -317,7 +317,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(49, 15);
 			this.label5.TabIndex = 20;
-			this.label5.Text = "閉じる：";
+			this.label5.Text = "닫기：";
 			// 
 			// CloseList
 			// 
@@ -325,13 +325,13 @@
 			this.CloseList.CheckOnClick = true;
 			this.CloseList.FormattingEnabled = true;
 			this.CloseList.Items.AddRange(new object[] {
-			"左クリック",
-			"左ダブルクリック",
-			"右クリック",
-			"右ダブルクリック",
-			"中クリック",
-			"中ダブルクリック",
-			"マウスオーバー"});
+			"왼쪽클릭",
+			"왼쪽더블클릭",
+			"오른쪽클릭",
+			"오른쪽더블클릭",
+			"가운데버튼클릭",
+			"가운데버튼더블클릭",
+			"마우스오버"});
 			this.CloseList.Location = new System.Drawing.Point(476, 35);
 			this.CloseList.Name = "CloseList";
 			this.CloseList.Size = new System.Drawing.Size(120, 130);
@@ -344,8 +344,8 @@
 			this.ShowWithActivation.Name = "ShowWithActivation";
 			this.ShowWithActivation.Size = new System.Drawing.Size(151, 19);
 			this.ShowWithActivation.TabIndex = 8;
-			this.ShowWithActivation.Text = "表示時にアクティベートする";
-			this.ToolTipText.SetToolTip(this.ShowWithActivation, "表示時にダイアログをアクティブにします。\r\n無効にすると操作を妨げない代わりにダイアログが隠れやすくなります。");
+			this.ShowWithActivation.Text = "화면활성화시 활성화하기";
+			this.ToolTipText.SetToolTip(this.ShowWithActivation, "화면을 보고 있을때 알림을 활성화합니다. \r\n작업시 사용에 좋습니다.");
 			this.ShowWithActivation.UseVisualStyleBackColor = true;
 			// 
 			// label4
@@ -355,7 +355,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(43, 15);
 			this.label4.TabIndex = 3;
-			this.label4.Text = "座標：";
+			this.label4.Text = "좌표：";
 			// 
 			// DrawsMessage
 			// 
@@ -364,8 +364,8 @@
 			this.DrawsMessage.Name = "DrawsMessage";
 			this.DrawsMessage.Size = new System.Drawing.Size(123, 19);
 			this.DrawsMessage.TabIndex = 6;
-			this.DrawsMessage.Text = "メッセージを表示する";
-			this.ToolTipText.SetToolTip(this.DrawsMessage, "ダイアログ内に通知テキストを描画するかを設定します。\r\n画像のみで足りる場合は非表示にできます。");
+			this.DrawsMessage.Text = "메시지보기";
+			this.ToolTipText.SetToolTip(this.DrawsMessage, "메시지에 알림 텍스트를 표시할지 여부를 정합니다.\r\n이미지만으로 충분한 경우 사용해주세요.");
 			this.DrawsMessage.UseVisualStyleBackColor = true;
 			// 
 			// HasFormBorder
@@ -375,8 +375,8 @@
 			this.HasFormBorder.Name = "HasFormBorder";
 			this.HasFormBorder.Size = new System.Drawing.Size(102, 19);
 			this.HasFormBorder.TabIndex = 7;
-			this.HasFormBorder.Text = "窓枠を表示する";
-			this.ToolTipText.SetToolTip(this.HasFormBorder, "通知ダイアログのウィンドウ枠を表示するかを指定できます。\r\n画像のみで足りる場合は非表示にできます。");
+			this.HasFormBorder.Text = "윈도우 틀 보기";
+			this.ToolTipText.SetToolTip(this.HasFormBorder, "알림 텍스트의 틀을 표시할지를 설정합니다.\r\n이미지만으로 충분한 경우 사용해주세요.");
 			this.HasFormBorder.UseVisualStyleBackColor = true;
 			// 
 			// label6
@@ -386,7 +386,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(19, 15);
 			this.label6.TabIndex = 14;
-			this.label6.Text = "秒";
+			this.label6.Text = "초";
 			// 
 			// label7
 			// 
@@ -395,7 +395,7 @@
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(83, 15);
 			this.label7.TabIndex = 12;
-			this.label7.Text = "自動で閉じる：";
+			this.label7.Text = "자동으로 닫기";
 			// 
 			// ClosingInterval
 			// 
@@ -409,7 +409,7 @@
 			this.ClosingInterval.Size = new System.Drawing.Size(80, 23);
 			this.ClosingInterval.TabIndex = 13;
 			this.ClosingInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipText.SetToolTip(this.ClosingInterval, "通知ダイアログを放置した時に自動で閉じるまでの時間を指定します。\r\n0秒を指定した場合は時間経過では閉じません。");
+			this.ToolTipText.SetToolTip(this.ClosingInterval, "알림 메시지가 자동으로 닫히는 시간을 지정합니다.\r\n0초로 설정한 경우 자동으로 닫히지 않습니다.");
 			// 
 			// BackColorPreview
 			// 
@@ -418,8 +418,8 @@
 			this.BackColorPreview.Name = "BackColorPreview";
 			this.BackColorPreview.Size = new System.Drawing.Size(67, 15);
 			this.BackColorPreview.TabIndex = 18;
-			this.BackColorPreview.Text = "■背景色：";
-			this.ToolTipText.SetToolTip(this.BackColorPreview, "通知ダイアログの背景色を指定します。\r\nこのラベルの■に色プレビューが表示されます。\r\n");
+			this.BackColorPreview.Text = "■배경색：";
+			this.ToolTipText.SetToolTip(this.BackColorPreview, "알림 메시지의 배경색을 지정합니다.\r\n이 레이블의 ■ 색상으로 표시됩니다.\r\n");
 			this.BackColorPreview.ForeColorChanged += new System.EventHandler(this.BackColorPreview_ForeColorChanged);
 			// 
 			// BackColorSelect
@@ -430,7 +430,7 @@
 			this.BackColorSelect.Size = new System.Drawing.Size(32, 23);
 			this.BackColorSelect.TabIndex = 19;
 			this.BackColorSelect.Text = "...";
-			this.ToolTipText.SetToolTip(this.BackColorSelect, "通知ダイアログの背景色を指定します。\r\n左側のラベルの■に色プレビューが表示されます。\r\n");
+			this.ToolTipText.SetToolTip(this.BackColorSelect, "알림 메시지의 배경색을 지정합니다. \r\n왼쪽의 레이블의 ■ 색상으로 표시됩니다.\r\n");
 			this.BackColorSelect.UseVisualStyleBackColor = true;
 			this.BackColorSelect.Click += new System.EventHandler(this.BackColorSelect_Click);
 			// 
@@ -441,8 +441,8 @@
 			this.ForeColorPreview.Name = "ForeColorPreview";
 			this.ForeColorPreview.Size = new System.Drawing.Size(67, 15);
 			this.ForeColorPreview.TabIndex = 16;
-			this.ForeColorPreview.Text = "■前景色：";
-			this.ToolTipText.SetToolTip(this.ForeColorPreview, "通知ダイアログの文字色を指定します。\r\nこのラベルの■に色プレビューが表示されます。\r\n");
+			this.ForeColorPreview.Text = "■글자색：";
+			this.ToolTipText.SetToolTip(this.ForeColorPreview, "알림 메시지의 글자 색을 지정합니다.\r\n이 레이블의 ■ 색상으로 표시됩니다.\r\n");
 			this.ForeColorPreview.ForeColorChanged += new System.EventHandler(this.ForeColorPreview_ForeColorChanged);
 			// 
 			// ForeColorSelect
@@ -453,7 +453,7 @@
 			this.ForeColorSelect.Size = new System.Drawing.Size(32, 23);
 			this.ForeColorSelect.TabIndex = 17;
 			this.ForeColorSelect.Text = "...";
-			this.ToolTipText.SetToolTip(this.ForeColorSelect, "通知ダイアログの文字色を指定します。\r\n左側のラベルの■に色プレビューが表示されます。");
+			this.ToolTipText.SetToolTip(this.ForeColorSelect, "알림 메시지의 글자 색을 지정합니다.\r\n왼쪽의 레이블의 ■ 색상으로 표시됩니다.");
 			this.ForeColorSelect.UseVisualStyleBackColor = true;
 			this.ForeColorSelect.Click += new System.EventHandler(this.ForeColorSelect_Click);
 			// 
@@ -464,7 +464,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(19, 15);
 			this.label3.TabIndex = 11;
-			this.label3.Text = "秒";
+			this.label3.Text = "초";
 			// 
 			// label2
 			// 
@@ -473,7 +473,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(83, 15);
 			this.label2.TabIndex = 9;
-			this.label2.Text = "通知を早める：";
+			this.label2.Text = "알림 여유 시간";
 			// 
 			// AccelInterval
 			// 
@@ -487,7 +487,7 @@
 			this.AccelInterval.Size = new System.Drawing.Size(80, 23);
 			this.AccelInterval.TabIndex = 10;
 			this.AccelInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipText.SetToolTip(this.AccelInterval, "通知を早める秒数を指定します。\r\n遠征・入渠を60秒早めるのがおすすめです。");
+			this.ToolTipText.SetToolTip(this.AccelInterval, "알림을 앞당기는 시간을 지정합니다.\r\n원정, 입거를 60초 앞당기는 것을 추천합니다.");
 			// 
 			// TopMostFlag
 			// 
@@ -496,7 +496,7 @@
 			this.TopMostFlag.Name = "TopMostFlag";
 			this.TopMostFlag.Size = new System.Drawing.Size(114, 19);
 			this.TopMostFlag.TabIndex = 15;
-			this.TopMostFlag.Text = "最前面に表示する";
+			this.TopMostFlag.Text = "맨 위에 표시";
 			this.TopMostFlag.UseVisualStyleBackColor = true;
 			// 
 			// LocationY
@@ -516,7 +516,7 @@
 			this.LocationY.Size = new System.Drawing.Size(80, 23);
 			this.LocationY.TabIndex = 5;
 			this.LocationY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipText.SetToolTip(this.LocationY, "配置：手動設定時の出現座標を指定します。");
+			this.ToolTipText.SetToolTip(this.LocationY, "위치：수동 설정시의 출력 좌표를 설정합니다.");
 			this.LocationY.Value = new decimal(new int[] {
 			99999,
 			0,
@@ -540,7 +540,7 @@
 			this.LocationX.Size = new System.Drawing.Size(80, 23);
 			this.LocationX.TabIndex = 4;
 			this.LocationX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipText.SetToolTip(this.LocationX, "配置：手動設定時の出現座標を指定します。");
+			this.ToolTipText.SetToolTip(this.LocationX, "위치：수동 설정시의 출력 좌표를 설정합니다.");
 			this.LocationX.Value = new decimal(new int[] {
 			99999,
 			0,
@@ -554,30 +554,30 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(43, 15);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "配置：";
+			this.label1.Text = "배치：";
 			// 
 			// Alignment
 			// 
 			this.Alignment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.Alignment.FormattingEnabled = true;
 			this.Alignment.Items.AddRange(new object[] {
-			"未指定",
-			"左上",
-			"上",
-			"右上",
-			"左",
-			"中央",
-			"右",
-			"左下",
-			"下",
-			"右下",
-			"手動(絶対)",
-			"手動(相対)"});
+			"미지정",
+			"좌상단",
+			"상단",
+			"우상단",
+			"우측",
+			"중앙",
+			"좌측",
+			"좌하단",
+			"하단",
+			"우하단",
+			"수동(절대좌표)",
+			"수동(상대좌표)"});
 			this.Alignment.Location = new System.Drawing.Point(55, 47);
 			this.Alignment.Name = "Alignment";
 			this.Alignment.Size = new System.Drawing.Size(121, 23);
 			this.Alignment.TabIndex = 2;
-			this.ToolTipText.SetToolTip(this.Alignment, "通知ダイアログの出現位置を設定します。");
+			this.ToolTipText.SetToolTip(this.Alignment, "알림 메시지의 출력 위치를 설정합니다.");
 			// 
 			// ShowsDialog
 			// 
@@ -586,7 +586,7 @@
 			this.ShowsDialog.Name = "ShowsDialog";
 			this.ShowsDialog.Size = new System.Drawing.Size(78, 19);
 			this.ShowsDialog.TabIndex = 0;
-			this.ShowsDialog.Text = "有効にする";
+			this.ShowsDialog.Text = "활성화";
 			this.ShowsDialog.UseVisualStyleBackColor = true;
 			// 
 			// GroupDamage
@@ -605,7 +605,7 @@
 			this.GroupDamage.Size = new System.Drawing.Size(602, 103);
 			this.GroupDamage.TabIndex = 4;
 			this.GroupDamage.TabStop = false;
-			this.GroupDamage.Text = "大破警告";
+			this.GroupDamage.Text = "대파경고";
 			// 
 			// NotifiesAtEndpoint
 			// 
@@ -614,8 +614,8 @@
 			this.NotifiesAtEndpoint.Name = "NotifiesAtEndpoint";
 			this.NotifiesAtEndpoint.Size = new System.Drawing.Size(112, 19);
 			this.NotifiesAtEndpoint.TabIndex = 6;
-			this.NotifiesAtEndpoint.Text = "終点でも通知する";
-			this.ToolTipText.SetToolTip(this.NotifiesAtEndpoint, "マップの最終セルでも通知するかを指定します。");
+			this.NotifiesAtEndpoint.Text = "마지막 노드에서도 활성화";
+			this.ToolTipText.SetToolTip(this.NotifiesAtEndpoint, "맵의 마지막 노드에서도 활성화할지 설정합니다.");
 			this.NotifiesAtEndpoint.UseVisualStyleBackColor = true;
 			// 
 			// ContainsFlagship
@@ -625,7 +625,7 @@
 			this.ContainsFlagship.Name = "ContainsFlagship";
 			this.ContainsFlagship.Size = new System.Drawing.Size(90, 19);
 			this.ContainsFlagship.TabIndex = 5;
-			this.ContainsFlagship.Text = "旗艦を含める";
+			this.ContainsFlagship.Text = "기함 포함";
 			this.ContainsFlagship.UseVisualStyleBackColor = true;
 			// 
 			// ContainsSafeShip
@@ -635,7 +635,7 @@
 			this.ContainsSafeShip.Name = "ContainsSafeShip";
 			this.ContainsSafeShip.Size = new System.Drawing.Size(136, 19);
 			this.ContainsSafeShip.TabIndex = 4;
-			this.ContainsSafeShip.Text = "ダメコン装備艦を含める";
+			this.ContainsSafeShip.Text = "다메콘 장착함 포함";
 			this.ContainsSafeShip.UseVisualStyleBackColor = true;
 			// 
 			// ContainsNotLockedShip
@@ -645,7 +645,7 @@
 			this.ContainsNotLockedShip.Name = "ContainsNotLockedShip";
 			this.ContainsNotLockedShip.Size = new System.Drawing.Size(114, 19);
 			this.ContainsNotLockedShip.TabIndex = 3;
-			this.ContainsNotLockedShip.Text = "非ロック艦を含める";
+			this.ContainsNotLockedShip.Text = "잠금되지않은함 포함";
 			this.ContainsNotLockedShip.UseVisualStyleBackColor = true;
 			// 
 			// label8
@@ -655,7 +655,7 @@
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(56, 15);
 			this.label8.TabIndex = 7;
-			this.label8.Text = "最低Lv：";
+			this.label8.Text = "최소Lv：";
 			// 
 			// LevelBorder
 			// 
@@ -674,7 +674,7 @@
 			this.LevelBorder.Size = new System.Drawing.Size(80, 23);
 			this.LevelBorder.TabIndex = 8;
 			this.LevelBorder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipText.SetToolTip(this.LevelBorder, "通知する大破艦の最低Lvを指定します。\r\nこれよりLvの低い艦は通知されないので注意してください。");
+			this.ToolTipText.SetToolTip(this.LevelBorder, "대파 대상 함선의 최소 Lv을 설정합니다.\r\n이 레벨 보다 낮은 함선의 대파시, 경고가 발생하지않습니다.");
 			this.LevelBorder.Value = new decimal(new int[] {
 			1,
 			0,
@@ -688,8 +688,8 @@
 			this.NotifiesAfter.Name = "NotifiesAfter";
 			this.NotifiesAfter.Size = new System.Drawing.Size(135, 19);
 			this.NotifiesAfter.TabIndex = 2;
-			this.NotifiesAfter.Text = "事後通知を有効にする";
-			this.ToolTipText.SetToolTip(this.NotifiesAfter, "大破進撃中に通知します。");
+			this.NotifiesAfter.Text = "전투 이후 경고 활성화";
+			this.ToolTipText.SetToolTip(this.NotifiesAfter, "대파 진격중 경고합니다.");
 			this.NotifiesAfter.UseVisualStyleBackColor = true;
 			// 
 			// NotifiesNow
@@ -699,8 +699,8 @@
 			this.NotifiesNow.Name = "NotifiesNow";
 			this.NotifiesNow.Size = new System.Drawing.Size(135, 19);
 			this.NotifiesNow.TabIndex = 1;
-			this.NotifiesNow.Text = "事中通知を有効にする";
-			this.ToolTipText.SetToolTip(this.NotifiesNow, "出撃前及び戦闘終了時に通知します。");
+			this.NotifiesNow.Text = "출격중 경고 활성화";
+			this.ToolTipText.SetToolTip(this.NotifiesNow, "출격 전 및 전투 종료시에 경고합니다.");
 			this.NotifiesNow.UseVisualStyleBackColor = true;
 			// 
 			// NotifiesBefore
@@ -710,8 +710,8 @@
 			this.NotifiesBefore.Name = "NotifiesBefore";
 			this.NotifiesBefore.Size = new System.Drawing.Size(135, 19);
 			this.NotifiesBefore.TabIndex = 0;
-			this.NotifiesBefore.Text = "事前通知を有効にする";
-			this.ToolTipText.SetToolTip(this.NotifiesBefore, "出撃前及び戦闘開始直後に通知します。");
+			this.NotifiesBefore.Text = "미리 대파 경고";
+			this.ToolTipText.SetToolTip(this.NotifiesBefore, "출격 전 및 전투 개시 직전에 경고합니다.");
 			this.NotifiesBefore.UseVisualStyleBackColor = true;
 			// 
 			// DialogColor
@@ -722,13 +722,13 @@
 			// DialogOpenSound
 			// 
 			this.DialogOpenSound.Filter = "Wave|*.wav|File|*";
-			this.DialogOpenSound.Title = "音声ファイルを開く";
+			this.DialogOpenSound.Title = "사운드 파일 열기";
 			// 
 			// DialogOpenImage
 			// 
 			this.DialogOpenImage.Filter = "Image|*.bmp;*.div;*.jpg;*.jpeg;*.jpe;*.jfif;*.gif;*.png;*.tif;*.tiff|BMP|*.bmp;*." +
 	"div|JPEG|*.jpg;*.jpeg;*.jpe;*.jfif|GIF|*.gif|PNG|*.png|TIFF|*.tif;*.tiff|File|*";
-			this.DialogOpenImage.Title = "画像ファイルを開く";
+			this.DialogOpenImage.Title = "이미지 파일 열기";
 			// 
 			// ToolTipText
 			// 
@@ -743,7 +743,7 @@
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(213, 15);
 			this.label10.TabIndex = 8;
-			this.label10.Text = "＊テストを行った時点で設定が適用されます";
+			this.label10.Text = "＊테스트 한 시점으로 설정이 적용됩니다.";
 			// 
 			// GroupAnchorageRepair
 			// 
@@ -754,7 +754,7 @@
 			this.GroupAnchorageRepair.Size = new System.Drawing.Size(602, 103);
 			this.GroupAnchorageRepair.TabIndex = 9;
 			this.GroupAnchorageRepair.TabStop = false;
-			this.GroupAnchorageRepair.Text = "泊地修理設定";
+			this.GroupAnchorageRepair.Text = "아카시 수리 설정";
 			// 
 			// label11
 			// 
@@ -763,22 +763,21 @@
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(67, 15);
 			this.label11.TabIndex = 0;
-			this.label11.Text = "発動条件：";
+			this.label11.Text = "발동 조건：";
 			// 
 			// AnchorageRepairNotificationLevel
 			// 
 			this.AnchorageRepairNotificationLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.AnchorageRepairNotificationLevel.FormattingEnabled = true;
 			this.AnchorageRepairNotificationLevel.Items.AddRange(new object[] {
-			"いつでも",
-			"明石旗艦の時",
-			"修理艦もいる時"});
+			"언제나",
+			"아카시 기함때만",
+			"수리함 편성시"});
 			this.AnchorageRepairNotificationLevel.Location = new System.Drawing.Point(80, 20);
 			this.AnchorageRepairNotificationLevel.Name = "AnchorageRepairNotificationLevel";
 			this.AnchorageRepairNotificationLevel.Size = new System.Drawing.Size(160, 23);
 			this.AnchorageRepairNotificationLevel.TabIndex = 1;
-			this.ToolTipText.SetToolTip(this.AnchorageRepairNotificationLevel, "いつでも：20分経過したら通知します。\r\n明石旗艦の時：上記に加え、明石旗艦の時のみ通知します。\r\n修理艦もいるとき：上記に加え、実際に修理可能な条件の時のみ通知" +
-		"します。");
+			this.ToolTipText.SetToolTip(this.AnchorageRepairNotificationLevel, "언제나：20분마다 알립니다. \r\n아카시 기함때만 : 아카시가 기함일때만 알립니다.\r\n수리함 편성시 : 위 조건 이외에 수리가능할시 알립니다.");
 			// 
 			// DialogConfigurationNotifier
 			// 
@@ -801,7 +800,7 @@
 			this.Name = "DialogConfigurationNotifier";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "通知の設定";
+			this.Text = "알림 설정";
 			this.Load += new System.EventHandler(this.DialogConfigurationNotifier_Load);
 			this.GroupSound.ResumeLayout(false);
 			this.GroupSound.PerformLayout();

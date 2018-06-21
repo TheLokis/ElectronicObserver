@@ -89,7 +89,7 @@ namespace BrowserLib
 		}
 
 
-		private const string ErrorMessageNotFound = "指定したプロセスIDの音量オブジェクトは存在しません。";
+		private const string ErrorMessageNotFound = "지정한 프로세스 개체는 존재하지 않습니다.";
 
 		/// <summary>
 		/// 音量を取得します。

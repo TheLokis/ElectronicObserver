@@ -18,10 +18,10 @@ namespace ElectronicObserver.Window.Dialog
 
 		private ShipDropRecord _record;
 
-		private const string NameAny = "(全て)";
-		private const string NameNotExist = "(なし)";
-		private const string NameFullPort = "(満員)";
-		private const string NameExist = "(ドロップ)";
+		private const string NameAny = "(전부)";
+		private const string NameNotExist = "(없음)";
+		private const string NameFullPort = "(여유공간X)";
+		private const string NameExist = "(드롭)";
 
 		private const string MapAny = "*";
 
@@ -405,7 +405,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (Searcher.IsBusy)
 			{
-				if (MessageBox.Show("検索を中止しますか?", "検索中です", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
+				if (MessageBox.Show("검색을 취소하시겠습니까?", "검색중입니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 					== System.Windows.Forms.DialogResult.Yes)
 				{
 					Searcher.CancelAsync();
@@ -445,7 +445,7 @@ namespace ElectronicObserver.Window.Dialog
 			if (MergeRows.Checked)
 			{
 				RecordView_Name.DisplayIndex = 0;
-				RecordView_Header.HeaderText = "回数";
+				RecordView_Header.HeaderText = "회수";
 				RecordView_Header.Width = 100;
 				RecordView_Header.DisplayIndex = 1;
 				RecordView_RankS.Width = 100;
@@ -480,7 +480,7 @@ namespace ElectronicObserver.Window.Dialog
 			RecordView.ColumnHeadersVisible = true;
 
 
-			StatusInfo.Text = "検索中です...";
+			StatusInfo.Text = "검색중입니다...";
 			StatusInfo.Tag = DateTime.Now;
 
 			Searcher.RunWorkerAsync(args);
@@ -777,13 +777,13 @@ namespace ElectronicObserver.Window.Dialog
 				RecordView.Sort(RecordView.SortedColumn ?? RecordView_Header,
 					RecordView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
-				StatusInfo.Text = "検索が完了しました。(" + (int)(DateTime.Now - (DateTime)StatusInfo.Tag).TotalMilliseconds + " ms)";
+				StatusInfo.Text = "검색이 완료되었습니다. (" + (int)(DateTime.Now - (DateTime)StatusInfo.Tag).TotalMilliseconds + " ms)";
 
 			}
 			else
 			{
 
-				StatusInfo.Text = "検索がキャンセルされました。";
+				StatusInfo.Text = "검색이 취소되었습니다. ";
 			}
 
 		}
@@ -919,11 +919,11 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (!Directory.Exists(Data.Battle.BattleManager.BattleLogPath))
 				{
-					StatusInfo.Text = "戦闘ログが見つかりませんでした。";
+					StatusInfo.Text = "전투 로그를 찾을 수 없습니다.";
 					return;
 				}
 
-				StatusInfo.Text = "戦闘ログを検索しています…";
+				StatusInfo.Text = "전투 로그를 검색하고 있습니다...";
 				string battleLogFile = Directory.EnumerateFiles(Data.Battle.BattleManager.BattleLogPath,
 					time.ToString("yyyyMMdd_HHmmss", System.Globalization.CultureInfo.InvariantCulture) + "*.txt",
 					SearchOption.TopDirectoryOnly)
@@ -931,18 +931,18 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (battleLogFile == null)
 				{
-					StatusInfo.Text = "戦闘ログが見つかりませんでした。";
+					StatusInfo.Text = "전투 로그를 찾을 수 없습니다.";
 					return;
 				}
 
-				StatusInfo.Text = string.Format("戦闘ログ {0} を開きます。", Path.GetFileName(battleLogFile));
+				StatusInfo.Text = string.Format("전투 로그 {0} 를 엽니다.", Path.GetFileName(battleLogFile));
 				System.Diagnostics.Process.Start(battleLogFile);
 
 
 			}
 			catch (Exception)
 			{
-				StatusInfo.Text = "戦闘ログを開けませんでした。";
+				StatusInfo.Text = "전투 로그를 열 수 없습니다.";
 			}
 
 		}
@@ -963,13 +963,13 @@ namespace ElectronicObserver.Window.Dialog
 				int count = RecordView.SelectedRows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
 				int allcount = RecordView.Rows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
 
-				StatusInfo.Text = string.Format("選択項目の合計: {0} / {1} ({2:p1})",
+				StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
 					count, allcount, (double)count / allcount);
 			}
 			else
 			{
 				int allcount = RecordView.RowCount;
-				StatusInfo.Text = string.Format("選択項目の合計: {0} / {1} ({2:p1})",
+				StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
 					selectedCount, allcount, (double)selectedCount / allcount);
 			}
 		}

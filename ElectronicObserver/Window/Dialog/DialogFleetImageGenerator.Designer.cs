@@ -141,7 +141,7 @@
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage1.Size = new System.Drawing.Size(456, 373);
 			this.tabPage1.TabIndex = 0;
-			this.tabPage1.Text = "基本";
+			this.tabPage1.Text = "기본";
 			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// GroupOutputPath
@@ -155,7 +155,7 @@
 			this.GroupOutputPath.Size = new System.Drawing.Size(440, 57);
 			this.GroupOutputPath.TabIndex = 10;
 			this.GroupOutputPath.TabStop = false;
-			this.GroupOutputPath.Text = "出力先";
+			this.GroupOutputPath.Text = "대상";
 			// 
 			// SearchOutputPath
 			// 
@@ -165,7 +165,7 @@
 			this.SearchOutputPath.Size = new System.Drawing.Size(40, 23);
 			this.SearchOutputPath.TabIndex = 6;
 			this.SearchOutputPath.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SearchOutputPath, "出力先のファイルを検索・指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SearchOutputPath, "파일 검색 창을 엽니다.");
 			this.SearchOutputPath.UseVisualStyleBackColor = true;
 			this.SearchOutputPath.Click += new System.EventHandler(this.SearchOutputPath_Click);
 			// 
@@ -177,7 +177,7 @@
 			this.OutputPath.Name = "OutputPath";
 			this.OutputPath.Size = new System.Drawing.Size(382, 23);
 			this.OutputPath.TabIndex = 5;
-			this.ToolTipInfo.SetToolTip(this.OutputPath, "出力先のファイル名を指定します。");
+			this.ToolTipInfo.SetToolTip(this.OutputPath, "대상 파일 이름을 지정합니다.");
 			this.OutputPath.TextChanged += new System.EventHandler(this.OutputPath_TextChanged);
 			// 
 			// groupBox7
@@ -194,7 +194,7 @@
 			this.groupBox7.Size = new System.Drawing.Size(440, 138);
 			this.groupBox7.TabIndex = 9;
 			this.groupBox7.TabStop = false;
-			this.groupBox7.Text = "自由入力欄";
+			this.groupBox7.Text = "자유입력라";
 			// 
 			// label2
 			// 
@@ -203,7 +203,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(54, 15);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "タイトル：";
+			this.label2.Text = "제목：";
 			// 
 			// Title
 			// 
@@ -222,7 +222,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(52, 15);
 			this.label3.TabIndex = 5;
-			this.label3.Text = "コメント：";
+			this.label3.Text = "코멘트：";
 			// 
 			// Comment
 			// 
@@ -266,7 +266,7 @@
 			this.groupBox3.Size = new System.Drawing.Size(440, 52);
 			this.groupBox3.TabIndex = 0;
 			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "出力モード";
+			this.groupBox3.Text = "출력모드";
 			// 
 			// ImageTypeBaseAirCorps
 			// 
@@ -276,7 +276,7 @@
 			this.ImageTypeBaseAirCorps.Name = "ImageTypeBaseAirCorps";
 			this.ImageTypeBaseAirCorps.Size = new System.Drawing.Size(85, 19);
 			this.ImageTypeBaseAirCorps.TabIndex = 3;
-			this.ImageTypeBaseAirCorps.Text = "基地航空隊";
+			this.ImageTypeBaseAirCorps.Text = "기지항공대";
 			this.ImageTypeBaseAirCorps.UseVisualStyleBackColor = true;
 			this.ImageTypeBaseAirCorps.Visible = false;
 			// 
@@ -287,7 +287,7 @@
 			this.ImageTypeBanner.Name = "ImageTypeBanner";
 			this.ImageTypeBanner.Size = new System.Drawing.Size(93, 19);
 			this.ImageTypeBanner.TabIndex = 2;
-			this.ImageTypeBanner.Text = "バナー (小型)";
+			this.ImageTypeBanner.Text = "배너 (소형)";
 			this.ImageTypeBanner.UseVisualStyleBackColor = true;
 			this.ImageTypeBanner.CheckedChanged += new System.EventHandler(this.ImageTypeBanner_CheckedChanged);
 			// 
@@ -298,7 +298,7 @@
 			this.ImageTypeCutin.Name = "ImageTypeCutin";
 			this.ImageTypeCutin.Size = new System.Drawing.Size(105, 19);
 			this.ImageTypeCutin.TabIndex = 1;
-			this.ImageTypeCutin.Text = "カットイン (中型)";
+			this.ImageTypeCutin.Text = "컷인 (중형)";
 			this.ImageTypeCutin.UseVisualStyleBackColor = true;
 			this.ImageTypeCutin.CheckedChanged += new System.EventHandler(this.ImageTypeCutin_CheckedChanged);
 			// 
@@ -309,7 +309,7 @@
 			this.ImageTypeCard.Name = "ImageTypeCard";
 			this.ImageTypeCard.Size = new System.Drawing.Size(90, 19);
 			this.ImageTypeCard.TabIndex = 0;
-			this.ImageTypeCard.Text = "カード (大型)";
+			this.ImageTypeCard.Text = "카드 (대형)";
 			this.ImageTypeCard.UseVisualStyleBackColor = true;
 			this.ImageTypeCard.CheckedChanged += new System.EventHandler(this.ImageTypeCard_CheckedChanged);
 			// 
@@ -349,7 +349,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(440, 52);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "対象艦隊";
+			this.groupBox1.Text = "대상함대";
 			// 
 			// TargetFleet4
 			// 
@@ -405,7 +405,7 @@
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage2.Size = new System.Drawing.Size(456, 373);
 			this.tabPage2.TabIndex = 1;
-			this.tabPage2.Text = "詳細";
+			this.tabPage2.Text = "자세히";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
 			// groupBox2
@@ -422,7 +422,7 @@
 			this.groupBox2.Size = new System.Drawing.Size(440, 101);
 			this.groupBox2.TabIndex = 11;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "出力先";
+			this.groupBox2.Text = "대상";
 			// 
 			// SyncronizeTitleAndFileName
 			// 
@@ -431,8 +431,8 @@
 			this.SyncronizeTitleAndFileName.Name = "SyncronizeTitleAndFileName";
 			this.SyncronizeTitleAndFileName.Size = new System.Drawing.Size(148, 19);
 			this.SyncronizeTitleAndFileName.TabIndex = 9;
-			this.SyncronizeTitleAndFileName.Text = "タイトルとファイル名を同期";
-			this.ToolTipInfo.SetToolTip(this.SyncronizeTitleAndFileName, "タイトルと出力ファイル名を同じにします。");
+			this.SyncronizeTitleAndFileName.Text = "제목과 파일이름을 동기화";
+			this.ToolTipInfo.SetToolTip(this.SyncronizeTitleAndFileName, "제목과 파일이름을 동일하게 설정합니다.");
 			this.SyncronizeTitleAndFileName.UseVisualStyleBackColor = true;
 			this.SyncronizeTitleAndFileName.CheckedChanged += new System.EventHandler(this.SyncronizeTitleAndFileName_CheckedChanged);
 			// 
@@ -443,8 +443,8 @@
 			this.AutoSetFileNameToDate.Name = "AutoSetFileNameToDate";
 			this.AutoSetFileNameToDate.Size = new System.Drawing.Size(181, 19);
 			this.AutoSetFileNameToDate.TabIndex = 8;
-			this.AutoSetFileNameToDate.Text = "出力ファイル名を現在日時にする";
-			this.ToolTipInfo.SetToolTip(this.AutoSetFileNameToDate, "自動的にファイル名を現在の日付にします。");
+			this.AutoSetFileNameToDate.Text = "출력 파일 이름을 현재 날짜로";
+			this.ToolTipInfo.SetToolTip(this.AutoSetFileNameToDate, "자동으로 파일이름을 현재 날짜로 합니다.");
 			this.AutoSetFileNameToDate.UseVisualStyleBackColor = true;
 			this.AutoSetFileNameToDate.CheckedChanged += new System.EventHandler(this.AutoSetFileNameToDate_CheckedChanged);
 			// 
@@ -455,8 +455,8 @@
 			this.OutputToClipboard.Name = "OutputToClipboard";
 			this.OutputToClipboard.Size = new System.Drawing.Size(118, 19);
 			this.OutputToClipboard.TabIndex = 7;
-			this.OutputToClipboard.Text = "クリップボードに出力";
-			this.ToolTipInfo.SetToolTip(this.OutputToClipboard, "画像をクリップボードに出力します。\r\nファイル系の指定は無視されます。\r\n");
+			this.OutputToClipboard.Text = "클립 보드에 출력";
+			this.ToolTipInfo.SetToolTip(this.OutputToClipboard, "이미지를 클립 보드에 출력합니다.\r\n파일 시스템 스펙은 무시됩니다.\r\n");
 			this.OutputToClipboard.UseVisualStyleBackColor = true;
 			this.OutputToClipboard.CheckedChanged += new System.EventHandler(this.OutputToClipboard_CheckedChanged);
 			// 
@@ -467,8 +467,8 @@
 			this.DisableOverwritePrompt.Name = "DisableOverwritePrompt";
 			this.DisableOverwritePrompt.Size = new System.Drawing.Size(113, 19);
 			this.DisableOverwritePrompt.TabIndex = 5;
-			this.DisableOverwritePrompt.Text = "上書きを常に許可";
-			this.ToolTipInfo.SetToolTip(this.DisableOverwritePrompt, "ファイルの上書きチェックを無効にし、常に上書き可能にします。");
+			this.DisableOverwritePrompt.Text = "항상 덮어쓰기";
+			this.ToolTipInfo.SetToolTip(this.DisableOverwritePrompt, "파일을 항상 덮어씁니다.");
 			this.DisableOverwritePrompt.UseVisualStyleBackColor = true;
 			// 
 			// OpenImageAfterOutput
@@ -478,7 +478,7 @@
 			this.OpenImageAfterOutput.Name = "OpenImageAfterOutput";
 			this.OpenImageAfterOutput.Size = new System.Drawing.Size(89, 19);
 			this.OpenImageAfterOutput.TabIndex = 2;
-			this.OpenImageAfterOutput.Text = "保存後に開く";
+			this.OpenImageAfterOutput.Text = "저장 후 열기";
 			this.ToolTipInfo.SetToolTip(this.OpenImageAfterOutput, "出力先が「ファイル」の場合、出力後にその画像をビューアで開くかを指定します。\r\nその画像に紐づけられている既定のビューアが起動します。");
 			this.OpenImageAfterOutput.UseVisualStyleBackColor = true;
 			// 
@@ -494,7 +494,7 @@
 			this.groupBox5.Size = new System.Drawing.Size(440, 58);
 			this.groupBox5.TabIndex = 1;
 			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "背景画像";
+			this.groupBox5.Text = "배경이미지";
 			// 
 			// ClearBackgroundPath
 			// 
@@ -503,8 +503,8 @@
 			this.ClearBackgroundPath.Name = "ClearBackgroundPath";
 			this.ClearBackgroundPath.Size = new System.Drawing.Size(40, 23);
 			this.ClearBackgroundPath.TabIndex = 2;
-			this.ClearBackgroundPath.Text = "なし";
-			this.ToolTipInfo.SetToolTip(this.ClearBackgroundPath, "背景画像をクリアします。");
+			this.ClearBackgroundPath.Text = "없음";
+			this.ToolTipInfo.SetToolTip(this.ClearBackgroundPath, "배경이미지를 지웁니다.");
 			this.ClearBackgroundPath.UseVisualStyleBackColor = true;
 			this.ClearBackgroundPath.Click += new System.EventHandler(this.ClearBackgroundPath_Click);
 			// 
@@ -516,7 +516,7 @@
 			this.SearchBackgroundImagePath.Size = new System.Drawing.Size(40, 23);
 			this.SearchBackgroundImagePath.TabIndex = 1;
 			this.SearchBackgroundImagePath.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SearchBackgroundImagePath, "背景画像を検索・指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SearchBackgroundImagePath, "배경 이미지를 검색합니다.");
 			this.SearchBackgroundImagePath.UseVisualStyleBackColor = true;
 			this.SearchBackgroundImagePath.Click += new System.EventHandler(this.SearchBackgroundImagePath_Click);
 			// 
@@ -528,7 +528,7 @@
 			this.BackgroundImagePath.Name = "BackgroundImagePath";
 			this.BackgroundImagePath.Size = new System.Drawing.Size(336, 23);
 			this.BackgroundImagePath.TabIndex = 0;
-			this.ToolTipInfo.SetToolTip(this.BackgroundImagePath, "背景画像へのパスを指定します。\r\n空白の場合は背景画像なしで出力されます。");
+			this.ToolTipInfo.SetToolTip(this.BackgroundImagePath, "배경 이미지 경로를 지정합니다.\r\n비어있으면 배경 이미지 없이 출력합니다.");
 			// 
 			// groupBox4
 			// 
@@ -545,7 +545,7 @@
 			this.groupBox4.Size = new System.Drawing.Size(440, 88);
 			this.groupBox4.TabIndex = 0;
 			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "レイアウト";
+			this.groupBox4.Text = "레이아웃";
 			// 
 			// AvoidTwitterDeterioration
 			// 
@@ -554,8 +554,8 @@
 			this.AvoidTwitterDeterioration.Name = "AvoidTwitterDeterioration";
 			this.AvoidTwitterDeterioration.Size = new System.Drawing.Size(182, 19);
 			this.AvoidTwitterDeterioration.TabIndex = 5;
-			this.AvoidTwitterDeterioration.Text = "Twitter の画像圧縮を回避する";
-			this.ToolTipInfo.SetToolTip(this.AvoidTwitterDeterioration, "Twitter に PNG 形式の画像をアップロードすると、自動的に JPEG 形式に変換され画質が劣化します。\r\nそれを回避するための情報を埋め込むかを指定しま" +
+			this.AvoidTwitterDeterioration.Text = "Twitter의 이미지 압축을 피하기";
+			this.ToolTipInfo.SetToolTip(this.AvoidTwitterDeterioration, "Twitter 에 PNG 이미지를 업로드하면 자동으로 JPEG형식으로 변환되어 화질이 저하됩니다.\r\n이를 피할지 여부를 설정합니다." +
         "す。");
 			this.AvoidTwitterDeterioration.UseVisualStyleBackColor = true;
 			// 
@@ -566,8 +566,8 @@
 			this.ReflectDamageGraphic.Name = "ReflectDamageGraphic";
 			this.ReflectDamageGraphic.Size = new System.Drawing.Size(149, 19);
 			this.ReflectDamageGraphic.TabIndex = 4;
-			this.ReflectDamageGraphic.Text = "中破グラフィックを適用する";
-			this.ToolTipInfo.SetToolTip(this.ReflectDamageGraphic, "艦娘が中破している場合、出力画像でも中破グラフィックにするかを指定します。");
+			this.ReflectDamageGraphic.Text = "중파 그래픽 적용";
+			this.ToolTipInfo.SetToolTip(this.ReflectDamageGraphic, "함선의 중파 그래픽을 적용할지를 설정합니다.");
 			this.ReflectDamageGraphic.UseVisualStyleBackColor = true;
 			// 
 			// label5
@@ -577,7 +577,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(77, 15);
 			this.label5.TabIndex = 2;
-			this.label5.Text = "艦船の横幅：";
+			this.label5.Text = "함선의 폭：";
 			// 
 			// HorizontalShipCount
 			// 
@@ -596,7 +596,7 @@
 			this.HorizontalShipCount.Size = new System.Drawing.Size(60, 23);
 			this.HorizontalShipCount.TabIndex = 3;
 			this.HorizontalShipCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.HorizontalShipCount, "艦船を横に並べる個数を指定します。\r\nこれ以上の数の艦船を出力したとき、改行されます。\r\n");
+			this.ToolTipInfo.SetToolTip(this.HorizontalShipCount, "칸무스의 가로 길이를 지정합니다.\r\n많은 칸무스가 있을 경우 개행처리됩니다.\r\n");
 			this.HorizontalShipCount.Value = new decimal(new int[] {
             1,
             0,
@@ -620,7 +620,7 @@
 			this.HorizontalFleetCount.Size = new System.Drawing.Size(60, 23);
 			this.HorizontalFleetCount.TabIndex = 1;
 			this.HorizontalFleetCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.ToolTipInfo.SetToolTip(this.HorizontalFleetCount, "艦隊を横に並べる個数を指定します。\r\nこれ以上の数の艦隊を出力したとき、改行されます。\r\n");
+			this.ToolTipInfo.SetToolTip(this.HorizontalFleetCount, "함대의 가로 길이를 지정합니다.\r\n많은 함대가 있을 경우 개행처리됩니다.\r\n");
 			this.HorizontalFleetCount.Value = new decimal(new int[] {
             1,
             0,
@@ -634,7 +634,7 @@
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(77, 15);
 			this.label4.TabIndex = 0;
-			this.label4.Text = "艦隊の横幅：";
+			this.label4.Text = "함대의 폭：";
 			// 
 			// tabPage3
 			// 
@@ -644,7 +644,7 @@
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPage3.Size = new System.Drawing.Size(456, 373);
 			this.tabPage3.TabIndex = 2;
-			this.tabPage3.Text = "フォント";
+			this.tabPage3.Text = "폰트";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
 			// groupBox6
@@ -680,7 +680,7 @@
 			this.groupBox6.Size = new System.Drawing.Size(442, 341);
 			this.groupBox6.TabIndex = 0;
 			this.groupBox6.TabStop = false;
-			this.groupBox6.Text = "フォント";
+			this.groupBox6.Text = "폰트";
 			// 
 			// ButtonClearFont
 			// 
@@ -689,7 +689,7 @@
 			this.ButtonClearFont.Name = "ButtonClearFont";
 			this.ButtonClearFont.Size = new System.Drawing.Size(75, 23);
 			this.ButtonClearFont.TabIndex = 22;
-			this.ButtonClearFont.Text = "デフォルト";
+			this.ButtonClearFont.Text = "기본";
 			this.ButtonClearFont.UseVisualStyleBackColor = true;
 			this.ButtonClearFont.Click += new System.EventHandler(this.ButtonClearFont_Click);
 			// 
@@ -701,7 +701,7 @@
 			this.ApplyGeneralFont.Size = new System.Drawing.Size(40, 23);
 			this.ApplyGeneralFont.TabIndex = 2;
 			this.ApplyGeneralFont.Text = "▼";
-			this.ToolTipInfo.SetToolTip(this.ApplyGeneralFont, "左のフォント設定を下の各フォントに適用します。");
+			this.ToolTipInfo.SetToolTip(this.ApplyGeneralFont, "왼쪽의 폰트 설정을 각 폰트에 적용합니다.");
 			this.ApplyGeneralFont.UseVisualStyleBackColor = true;
 			this.ApplyGeneralFont.Click += new System.EventHandler(this.ApplyGeneralFont_Click);
 			// 
@@ -722,7 +722,7 @@
 			this.SelectSmallDigitFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectSmallDigitFont.TabIndex = 21;
 			this.SelectSmallDigitFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectSmallDigitFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectSmallDigitFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectSmallDigitFont.UseVisualStyleBackColor = true;
 			// 
 			// TextSmallDigitFont
@@ -733,7 +733,7 @@
 			this.TextSmallDigitFont.Name = "TextSmallDigitFont";
 			this.TextSmallDigitFont.Size = new System.Drawing.Size(290, 23);
 			this.TextSmallDigitFont.TabIndex = 20;
-			this.ToolTipInfo.SetToolTip(this.TextSmallDigitFont, "搭載機数などの補助的な数値の描画に用いられます。");
+			this.ToolTipInfo.SetToolTip(this.TextSmallDigitFont, "탑재수 등의 수치를 출력하는데 사용됩니다.");
 			// 
 			// label11
 			// 
@@ -752,7 +752,7 @@
 			this.SelectMediumDigitFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectMediumDigitFont.TabIndex = 18;
 			this.SelectMediumDigitFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectMediumDigitFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectMediumDigitFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectMediumDigitFont.UseVisualStyleBackColor = true;
 			// 
 			// TextMediumDigitFont
@@ -763,7 +763,7 @@
 			this.TextMediumDigitFont.Name = "TextMediumDigitFont";
 			this.TextMediumDigitFont.Size = new System.Drawing.Size(290, 23);
 			this.TextMediumDigitFont.TabIndex = 17;
-			this.ToolTipInfo.SetToolTip(this.TextMediumDigitFont, "Lv などの主要な数字の描画に用いられます。");
+			this.ToolTipInfo.SetToolTip(this.TextMediumDigitFont, "Lv같은 중요 데이터를 출력하는데 사용됩니다.");
 			// 
 			// label10
 			// 
@@ -782,7 +782,7 @@
 			this.SelectSmallFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectSmallFont.TabIndex = 15;
 			this.SelectSmallFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectSmallFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectSmallFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectSmallFont.UseVisualStyleBackColor = true;
 			// 
 			// TextSmallFont
@@ -793,7 +793,7 @@
 			this.TextSmallFont.Name = "TextSmallFont";
 			this.TextSmallFont.Size = new System.Drawing.Size(290, 23);
 			this.TextSmallFont.TabIndex = 14;
-			this.ToolTipInfo.SetToolTip(this.TextSmallFont, "補助的な文字列に利用されます。");
+			this.ToolTipInfo.SetToolTip(this.TextSmallFont, "보조 문자열에 사용됩니다.");
 			// 
 			// label9
 			// 
@@ -812,7 +812,7 @@
 			this.SelectMediumFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectMediumFont.TabIndex = 12;
 			this.SelectMediumFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectMediumFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectMediumFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectMediumFont.UseVisualStyleBackColor = true;
 			// 
 			// TextMediumFont
@@ -823,7 +823,7 @@
 			this.TextMediumFont.Name = "TextMediumFont";
 			this.TextMediumFont.Size = new System.Drawing.Size(290, 23);
 			this.TextMediumFont.TabIndex = 11;
-			this.ToolTipInfo.SetToolTip(this.TextMediumFont, "装備名など、通常の文字列に使用されます。");
+			this.ToolTipInfo.SetToolTip(this.TextMediumFont, "장비 이름등 일반 문자열에 사용됩니다.");
 			// 
 			// label8
 			// 
@@ -842,7 +842,7 @@
 			this.SelectLargeFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectLargeFont.TabIndex = 9;
 			this.SelectLargeFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectLargeFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectLargeFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectLargeFont.UseVisualStyleBackColor = true;
 			// 
 			// TextLargeFont
@@ -853,7 +853,7 @@
 			this.TextLargeFont.Name = "TextLargeFont";
 			this.TextLargeFont.Size = new System.Drawing.Size(290, 23);
 			this.TextLargeFont.TabIndex = 8;
-			this.ToolTipInfo.SetToolTip(this.TextLargeFont, "主に艦隊名に使用されるフォントです。");
+			this.ToolTipInfo.SetToolTip(this.TextLargeFont, "주로 함대 이름등에 사용되는 폰트입니다.");
 			// 
 			// label7
 			// 
@@ -862,7 +862,7 @@
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(54, 15);
 			this.label7.TabIndex = 4;
-			this.label7.Text = "タイトル：";
+			this.label7.Text = "제목：";
 			// 
 			// SelectTitleFont
 			// 
@@ -872,7 +872,7 @@
 			this.SelectTitleFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectTitleFont.TabIndex = 6;
 			this.SelectTitleFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectTitleFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectTitleFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectTitleFont.UseVisualStyleBackColor = true;
 			// 
 			// TextTitleFont
@@ -883,7 +883,7 @@
 			this.TextTitleFont.Name = "TextTitleFont";
 			this.TextTitleFont.Size = new System.Drawing.Size(290, 23);
 			this.TextTitleFont.TabIndex = 5;
-			this.ToolTipInfo.SetToolTip(this.TextTitleFont, "タイトルに利用されるフォントです。");
+			this.ToolTipInfo.SetToolTip(this.TextTitleFont, "제목에 사용되는 폰트입니다.");
 			// 
 			// label6
 			// 
@@ -892,7 +892,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(79, 15);
 			this.label6.TabIndex = 0;
-			this.label6.Text = "まとめて変更：";
+			this.label6.Text = "전부 변경：";
 			// 
 			// SelectGeneralFont
 			// 
@@ -902,7 +902,7 @@
 			this.SelectGeneralFont.Size = new System.Drawing.Size(40, 23);
 			this.SelectGeneralFont.TabIndex = 3;
 			this.SelectGeneralFont.Text = "...";
-			this.ToolTipInfo.SetToolTip(this.SelectGeneralFont, "フォントを指定するダイアログを開きます。");
+			this.ToolTipInfo.SetToolTip(this.SelectGeneralFont, "폰트 지정 대화 상자를 엽니다.");
 			this.SelectGeneralFont.UseVisualStyleBackColor = true;
 			this.SelectGeneralFont.Click += new System.EventHandler(this.SelectGeneralFont_Click);
 			// 
@@ -914,7 +914,7 @@
 			this.TextGeneralFont.Name = "TextGeneralFont";
 			this.TextGeneralFont.Size = new System.Drawing.Size(244, 23);
 			this.TextGeneralFont.TabIndex = 1;
-			this.ToolTipInfo.SetToolTip(this.TextGeneralFont, "下記フォントを自動変更するためのフォントを指定します。\r\n右の ▼ ボタンを押すと適用されます。");
+			this.ToolTipInfo.SetToolTip(this.TextGeneralFont, "아래 폰트를 자동 변경하기 위한 폰트를 지정합니다.\r\n우측의 ▼ 버튼을 누르면 적용됩니다.");
 			// 
 			// fontDialog1
 			// 
@@ -925,13 +925,13 @@
 			this.OpenImageDialog.Filter = "All Images|*.bmp;*.dib;*.jpg;*.jpeg;*.jpe;*.jfif;*.gif;*.png;*.tif;*.tiff|BMP|*.b" +
     "mp;*.dib|JPEG|*.jpg;*.jpeg;*.jpe;*.jfif|GIF|*.gif|PNG|*.png|TIFF|*.tif;*.tiff|Fi" +
     "le|*";
-			this.OpenImageDialog.Title = "背景画像の参照";
+			this.OpenImageDialog.Title = "배경 이미지 참조";
 			// 
 			// SaveImageDialog
 			// 
 			this.SaveImageDialog.Filter = "PNG|*.png|JPEG|*.jpg|File|*";
 			this.SaveImageDialog.OverwritePrompt = false;
-			this.SaveImageDialog.Title = "編成画像の保存";
+			this.SaveImageDialog.Title = "편성 이미지 저장";
 			// 
 			// ToolTipInfo
 			// 
@@ -954,7 +954,7 @@
 			this.Name = "DialogFleetImageGenerator";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "編成画像出力";
+			this.Text = "편성 이미지 출력";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DialogFleetImageGenerator_FormClosing);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogFleetImageGenerator_FormClosed);
 			this.Load += new System.EventHandler(this.DialogFleetImageGenerator_Load);

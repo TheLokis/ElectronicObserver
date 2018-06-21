@@ -635,10 +635,10 @@ namespace ElectronicObserver.Utility.Data
 		/// IDではなく名前なのは本家の処理に倣ったため
 		/// </summary>
 		private static readonly HashSet<string> HardInstallationNames = new HashSet<string>() {
-			"離島棲姫",
-			"砲台小鬼",
-			"集積地棲姫",
-			"集積地棲姫-壊",
+			"이도서희",
+			"포대소귀",
+			"집적지서희",
+			"집적지서희-괴",
 		};
 
 
@@ -1041,7 +1041,7 @@ namespace ElectronicObserver.Utility.Data
 
 					if (attackerShipID == 432 || attackerShipID == 353 || attackerShipID == 433)        // Graf Zeppelin(改), Saratoga
 						return NightAttackKind.Shelling;
-					else if (attacker.Name == "リコリス棲姫" || attacker.Name == "深海海月姫")
+					else if (attacker.Name == "리코리스서희" || attacker.Name == "심해해월희")
 						return NightAttackKind.Shelling;
 					else
 						return NightAttackKind.AirAttack;

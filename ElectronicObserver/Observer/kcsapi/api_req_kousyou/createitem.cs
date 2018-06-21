@@ -54,7 +54,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 
 					int eqid = (int)data.api_slot_item.api_slotitem_id;
 
-					Utility.Logger.Add(2, string.Format("{0}「{1}」の開発に成功しました。({2}/{3}/{4}/{5} 秘書艦: {6})",
+					Utility.Logger.Add(2, string.Format("{0}「{1}」의 개발에 성공했습니다. ({2}/{3}/{4}/{5} 비서함: {6})",
 						db.MasterEquipments[eqid].CategoryTypeInstance.Name,
 						db.MasterEquipments[eqid].Name,
 						materials[0], materials[1], materials[2], materials[3],
@@ -62,7 +62,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 				}
 				else
 				{
-					Utility.Logger.Add(2, string.Format("開発に失敗しました。({0}/{1}/{2}/{3} 秘書艦: {4})",
+					Utility.Logger.Add(2, string.Format("개발에 실패했습니다. ({0}/{1}/{2}/{3} 비서함: {4})",
 						materials[0], materials[1], materials[2], materials[3],
 						db.Fleet[1].MembersInstance[0].NameWithLevel));
 				}

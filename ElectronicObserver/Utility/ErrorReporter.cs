@@ -48,17 +48,17 @@ namespace ElectronicObserver.Utility
 				using (StreamWriter sw = new StreamWriter(path, false, new System.Text.UTF8Encoding(false)))
 				{
 
-					sw.WriteLine("エラーレポート [ver. {0}] : {1}", SoftwareInformation.VersionEnglish, DateTimeHelper.TimeToCSVString(DateTime.Now));
-					sw.WriteLine("エラー : {0}", ex.GetType().Name);
+					sw.WriteLine("오류 보고서 [ver. {0}] : {1}", SoftwareInformation.VersionEnglish, DateTimeHelper.TimeToCSVString(DateTime.Now));
+					sw.WriteLine("에러 : {0}", ex.GetType().Name);
 					sw.WriteLine(ex.Message);
-					sw.WriteLine("追加情報 : {0}", message);
-					sw.WriteLine("スタックトレース：");
+					sw.WriteLine("추가 정보 : {0}", message);
+					sw.WriteLine("스택 트레이스：");
 					sw.WriteLine(ex.StackTrace);
 
 					if (connectionName != null && connectionData != null)
 					{
 						sw.WriteLine();
-						sw.WriteLine("通信内容 : {0}", connectionName);
+						sw.WriteLine("통신 내용 : {0}", connectionName);
 						sw.WriteLine(connectionData);
 					}
 				}
@@ -67,7 +67,7 @@ namespace ElectronicObserver.Utility
 			catch (Exception)
 			{
 
-				Utility.Logger.Add(3, string.Format("エラーレポートの書き込みに失敗しました。\r\n{0}\r\n{1}", ex.Message, ex.StackTrace));
+				Utility.Logger.Add(3, string.Format("오류 보고서의 작성에 실패했습니다. \r\n{0}\r\n{1}", ex.Message, ex.StackTrace));
 			}
 
 		}

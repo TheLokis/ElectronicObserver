@@ -18,10 +18,10 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			NightInitial = new PhaseNightInitial(this, "夜戦開始", false);
-			FriendlySupport = new PhaseFriendlySupport(this, "友軍艦隊援護");
-			Support = new PhaseSupport(this, "夜間支援攻撃", true);
-			NightBattle = new PhaseNightBattle(this, "夜戦", 0);
+			NightInitial = new PhaseNightInitial(this, "야전개시", false);
+			FriendlySupport = new PhaseFriendlySupport(this, "우군함대원호");
+			Support = new PhaseSupport(this, "야간지원공격", true);
+			NightBattle = new PhaseNightBattle(this, "야전", 0);
 			
 
 			foreach (var phase in GetPhases())
@@ -31,7 +31,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_battle_midnight/sp_midnight";
 
-		public override string BattleName => "通常艦隊 開幕夜戦";
+		public override string BattleName => "통상함대 개막야전";
 
 	
 

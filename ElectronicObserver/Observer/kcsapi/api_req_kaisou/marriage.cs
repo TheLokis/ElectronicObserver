@@ -14,7 +14,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 		public override void OnResponseReceived(dynamic data)
 		{
 
-			Utility.Logger.Add(2, string.Format("{0} とケッコンカッコカリしました。おめでとうございます！", KCDatabase.Instance.Ships[(int)data.api_id].Name));
+			Utility.Logger.Add(2, string.Format("{0} 와 결혼 했습니다. 축하드립니다!", KCDatabase.Instance.Ships[(int)data.api_id].Name));
 
 			base.OnResponseReceived((object)data);
 		}

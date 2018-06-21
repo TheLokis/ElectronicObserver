@@ -84,7 +84,7 @@
 			this.Description.Name = "Description";
 			this.Description.Size = new System.Drawing.Size(127, 15);
 			this.Description.TabIndex = 0;
-			this.Description.Text = "項目を選択してください：";
+			this.Description.Text = "항목을 선택하십시오.：";
 			// 
 			// TextSelect
 			// 
@@ -111,7 +111,7 @@
 			this.MinimizeBox = false;
 			this.Name = "DialogTextSelect";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "項目を選択";
+			this.Text = "항목 선택";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);

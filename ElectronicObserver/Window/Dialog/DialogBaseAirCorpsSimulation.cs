@@ -235,17 +235,17 @@ namespace ElectronicObserver.Window.Dialog
 
 				bool isLand = eq.CategoryType == EquipmentTypes.Interceptor;
 
-				Add("火力", eq.Firepower);
-				Add("雷装", eq.Torpedo);
-				Add("爆装", eq.Bomber);
-				Add("対空", eq.AA);
-				Add("装甲", eq.Armor);
-				Add("対潜", eq.ASW);
-				Add(isLand ? "迎撃" : "回避", eq.Evasion);
-				Add("索敵", eq.LOS);
-				Add(isLand ? "対爆" : "命中", eq.Accuracy);
-				AddNoSign("コスト", eq.AircraftCost);
-				AddNoSign("半径", eq.AircraftDistance);
+				Add("화력", eq.Firepower);
+				Add("뇌장", eq.Torpedo);
+				Add("폭장", eq.Bomber);
+				Add("대공", eq.AA);
+				Add("장갑", eq.Armor);
+				Add("대잠", eq.ASW);
+				Add(isLand ? "영격" : "회피", eq.Evasion);
+				Add("색적", eq.LOS);
+				Add(isLand ? "대폭" : "명중", eq.Accuracy);
+				AddNoSign("배치비용", eq.AircraftCost);
+				AddNoSign("행동반경", eq.AircraftDistance);
 
 				return sb.ToString();
 			}
@@ -369,17 +369,17 @@ namespace ElectronicObserver.Window.Dialog
 				TitleAutoAirSuperiority = NewTitleLabel();
 				TitleAutoDistance = NewTitleLabel();
 
-				TitleAircraftCategory.Text = "カテゴリ";
-				TitleAircraft.Text = "配備機";
-				TitleAircraftCount.Text = "機数";
-				TitleAirSuperioritySortie.Text = "出撃制空";
-				TitleAirSuperiorityAirDefense.Text = "防空制空";
-				TitleDistance.Text = "半径";
-				TitleBomber.Text = "爆装";
-				TitleTorpedo.Text = "雷装";
-				TitleOrganizationCost.Text = "配備コスト";
-				TitleAutoAirSuperiority.Text = "目標制空";
-				TitleAutoDistance.Text = "目標半径";
+				TitleAircraftCategory.Text = "카테고리";
+				TitleAircraft.Text = "배치기";
+				TitleAircraftCount.Text = "수";
+				TitleAirSuperioritySortie.Text = "출격제공";
+				TitleAirSuperiorityAirDefense.Text = "방공제공";
+				TitleDistance.Text = "행동반경";
+				TitleBomber.Text = "폭장";
+				TitleTorpedo.Text = "뇌장";
+				TitleOrganizationCost.Text = "배치코스트";
+				TitleAutoAirSuperiority.Text = "목표제공";
+				TitleAutoDistance.Text = "목표반경";
 
 				AutoAirSuperiority = new NumericUpDown();
 				AutoAirSuperiority.Size = new Size(60, AutoAirSuperiority.Height);
@@ -414,7 +414,7 @@ namespace ElectronicObserver.Window.Dialog
 				AutoOrganizeSortie.Size = new Size(60, AutoOrganizeSortie.Height);
 				AutoOrganizeSortie.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 				AutoOrganizeSortie.Margin = new Padding(2, 0, 2, 0);
-				AutoOrganizeSortie.Text = "出撃編成";
+				AutoOrganizeSortie.Text = "출격편성";
 				AutoOrganizeSortie.Click += AutoOrganize_Click;
 
 				AutoOrganizeAirDefense = new Button
@@ -422,7 +422,7 @@ namespace ElectronicObserver.Window.Dialog
 					Size = new Size(60, AutoOrganizeSortie.Height),
 					Anchor = AnchorStyles.Left | AnchorStyles.Right,
 					Margin = new Padding(2, 0, 2, 0),
-					Text = "防空編成"
+					Text = "방공편성"
 				};
 				AutoOrganizeAirDefense.Click += AutoOrganize_Click;
 
@@ -440,7 +440,7 @@ namespace ElectronicObserver.Window.Dialog
 				TotalDistance = NewTotalLabel();
 				TotalOrganizationCost = NewTotalLabel();
 
-				TitleTotal.Text = "合計";
+				TitleTotal.Text = "합계";
 				DuplicateCheck.TextAlign = ContentAlignment.MiddleLeft;
 				DuplicateCheck.ForeColor = Color.Red;
 
@@ -525,7 +525,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				TotalAirSuperioritySortie.Text = airSortie.ToString();
 				ToolTipInternal.SetToolTip(TotalAirSuperioritySortie,
-					string.Format("確保: {0}\r\n優勢: {1}\r\n均衡: {2}\r\n劣勢: {3}\r\n",
+					string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
 						(int)(airSortie / 3.0),
 						(int)(airSortie / 1.5),
 						Math.Max((int)(airSortie * 1.5 - 1), 0),
@@ -557,8 +557,8 @@ namespace ElectronicObserver.Window.Dialog
 
 				TotalAirSuperiorityAirDefense.Text = airDefense.ToString();
 				ToolTipInternal.SetToolTip(TotalAirSuperiorityAirDefense,
-					string.Format("確保: {0}\r\n優勢: {1}\r\n均衡: {2}\r\n劣勢: {3}\r\n",
-						(int)(airDefense / 3.0),
+                    string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
+                        (int)(airDefense / 3.0),
 						(int)(airDefense / 1.5),
 						Math.Max((int)(airDefense * 1.5 - 1), 0),
 						Math.Max((int)(airDefense * 3.0 - 1), 0)));
@@ -639,8 +639,8 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (orgs == null || orgs.All(o => o == null))
 				{
-					MessageBox.Show("自動編成に失敗しました。\r\n条件が厳しすぎるか、航空機が不足しています。\r\n",
-						"自動編成失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("자동편성에 실패했습니다. \r\n조건이 너무 높거나, 항공기가 부족합니다.\r\n",
+						"자동편성실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 
@@ -703,7 +703,7 @@ namespace ElectronicObserver.Window.Dialog
 			public override string ToString()
 			{
 				if (EquipmentType == null)
-					return "(不明)";
+					return "(불명)";
 				else
 					return EquipmentType.Name;
 			}
@@ -797,7 +797,7 @@ namespace ElectronicObserver.Window.Dialog
 					return sb.ToString();
 
 				}
-				else return "(なし)";
+				else return "(없음)";
 			}
 		}
 
@@ -847,7 +847,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (!KCDatabase.Instance.BaseAirCorps.Any())
 			{
-				MessageBox.Show("基地航空隊のデータがありません。\r\n一度出撃画面に移動してください。", "基地航空隊データ未受信",
+				MessageBox.Show("기지항공대 데이터가 없습니다.\r\n출격화면으로 한번 이동해주세요.", "기지 항공대 데이터 없음",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 				Close();
 			}
@@ -868,7 +868,7 @@ namespace ElectronicObserver.Window.Dialog
 					string name = map.Name;
 
 					if (string.IsNullOrWhiteSpace(map.Name) || map.Name == "※")
-						name = "イベント海域";
+						name = "이벤트해역";
 
 					var tool = new ToolStripMenuItem(string.Format("#{0} {1}", mapAreaID, name), null,
 						new EventHandler((ssender, ee) => TopMenu_Edit_MapArea_Click(mapAreaID)));
@@ -920,7 +920,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (dupelist.Any())
 				{
-					ui.DuplicateCheck.Text = "重複あり " + string.Join(", ", dupelist.Select(d => "#" + (d + 1)));
+					ui.DuplicateCheck.Text = "중복가능 " + string.Join(", ", dupelist.Select(d => "#" + (d + 1)));
 				}
 				else
 				{
@@ -981,7 +981,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void TopMenu_Edit_Clear_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("編成をすべてクリアします。\r\nよろしいですか？", "編成クリア", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+			if (MessageBox.Show("편성을 모두 지웁니다. \r\n지우시겠습니까?", "편성 초기화", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 

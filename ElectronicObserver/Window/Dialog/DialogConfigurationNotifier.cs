@@ -99,7 +99,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			DialogOpenSound.Filter = "音楽ファイル|" + string.Join(";", Utility.MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
+			DialogOpenSound.Filter = "사운드파일|" + string.Join(";", Utility.MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
 
 		}
 
@@ -276,7 +276,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				if (!_notifier.LoadSound(SoundPath.Text) && PlaysSound.Checked)
 				{
-					MessageBox.Show("音声ファイルの読み込みに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("사운드파일 불러오기에 실패했습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 			}
@@ -284,7 +284,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				if (!_notifier.DialogData.LoadImage(ImagePath.Text) && DrawsImage.Checked)
 				{
-					MessageBox.Show("画像ファイルの読み込みに失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("사운드파일 불러오기에 실패했습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 			}
@@ -347,7 +347,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (_notifier.DialogData.Alignment == NotifierDialogAlignment.Custom)
 			{
-				_notifier.DialogData.Message = "テスト 通知です。\r\n移動して閉じると表示位置が更新されます。";
+				_notifier.DialogData.Message = "테스트 알림입니다.\r\n移動して閉じると表示位置が更新されます。";
 				_notifier.Notify((_sender, _e) =>
 				{
 					var dialog = _sender as DialogNotifier;
@@ -361,7 +361,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			else
 			{
-				_notifier.DialogData.Message = "テスト 通知です。";
+				_notifier.DialogData.Message = "테스트 알림입니다.";
 				_notifier.Notify();
 			}
 		}

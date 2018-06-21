@@ -144,7 +144,7 @@ namespace Browser
 				using (var g = Graphics.FromImage(control.Image))
 				{
 					g.Clear(SystemColors.Control);
-					g.DrawString("スクリーンショットをまだ撮影していません。\r\n", Font, Brushes.Black, new Point(4, 4));
+					g.DrawString("스크린샷을 아직 촬영하지 않았습니다.\r\n", Font, Brushes.Black, new Point(4, 4));
 				}
 
 				var host = new ToolStripControlHost(control, "ToolMenu_Other_LastScreenShot_ImageHost");
@@ -518,7 +518,7 @@ namespace Browser
 
 			if (!IsKanColleLoaded)
 			{
-				AddLog(3, string.Format("艦これが読み込まれていないため、スクリーンショットを撮ることはできません。"));
+				AddLog(3, string.Format("칸코레가 실행돼지 않아 스크린샷을 찍을 수 없습니다."));
 				System.Media.SystemSounds.Beep.Play();
 				return null;
 			}
@@ -534,7 +534,7 @@ namespace Browser
 					viewobj = wb.Document.GetElementsByTagName("embed")[0].DomElement as IViewObject;
 					if (viewobj == null)
 					{
-						throw new InvalidOperationException("embed 要素の取得に失敗しました。");
+						throw new InvalidOperationException("embed 요소의 취득에 실패했습니다.");
 					}
 
 					//width = ( (HTMLEmbed)viewobj ).clientWidth;
@@ -547,7 +547,7 @@ namespace Browser
 					var swf = getFrameElementById(wb.Document, "externalswf");
 					if (swf == null)
 					{
-						throw new InvalidOperationException("対象の swf が見つかりませんでした。");
+						throw new InvalidOperationException("대상 swf를 찾을 수 없습니다.");
 					}
 
 					Func<dynamic, bool> isvalid = target =>
@@ -563,7 +563,7 @@ namespace Browser
 
 					if (!isvalid(swf.DomElement as HTMLEmbed) && !isvalid(swf.DomElement as HTMLObjectElement))
 					{
-						throw new InvalidOperationException("対象の swf が見つかりませんでした。");
+						throw new InvalidOperationException("대상 swf를 찾을 수 없습니다.");
 					}
 				}
 
@@ -599,7 +599,7 @@ namespace Browser
 			catch (Exception ex)
 			{
 
-				SendErrorReport(ex.ToString(), "スクリーンショットの撮影時にエラーが発生しました。");
+				SendErrorReport(ex.ToString(), "스크린 샷 촬영에 오류가 발생했습니다.");
 				System.Media.SystemSounds.Beep.Play();
 
 			}
@@ -656,13 +656,13 @@ namespace Browser
 						image.Save(path, imgFormat);
 						_lastScreenShotPath = path;
 
-						AddLog(2, string.Format("スクリーンショットを {0} に保存しました。", path));
+						AddLog(2, string.Format("스크린샷을 {0} 에 저장했습니다.", path));
 
 					}
 					catch (Exception ex)
 					{
 
-						SendErrorReport(ex.ToString(), "スクリーンショットの保存に失敗しました。");
+						SendErrorReport(ex.ToString(), "스크린 샷 저장에 실패했습니다.");
 					}
 				}
 
@@ -676,13 +676,13 @@ namespace Browser
 						Clipboard.SetImage(image);
 
 						if ((savemode & 3) != 3)
-							AddLog(2, "スクリーンショットをクリップボードにコピーしました。");
+							AddLog(2, "스크린 샷을 클립 보드에 복사했습니다.");
 
 					}
 					catch (Exception ex)
 					{
 
-						SendErrorReport(ex.ToString(), "スクリーンショットのクリップボードへのコピーに失敗しました。");
+						SendErrorReport(ex.ToString(), "스크린 샷 클립 보드 복사에 실패했습니다.");
 					}
 				}
 			}
@@ -989,7 +989,7 @@ namespace Browser
 		{
 
 			if (!Configuration.ConfirmAtRefresh ||
-				MessageBox.Show("再読み込みします。\r\nよろしいですか？", "確認",
+				MessageBox.Show("새로고침합니다. \r\n괜찮으십니까?", "확인",
 				MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.OK)
 			{
@@ -1001,7 +1001,7 @@ namespace Browser
 		private void ToolMenu_Other_NavigateToLogInPage_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("ログインページへ移動します。\r\nよろしいですか？", "確認",
+			if (MessageBox.Show("로그인 페이지로 이동합니다.\r\n진행하시겠습니까?", "확인",
 				MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.OK)
 			{
@@ -1054,7 +1054,7 @@ namespace Browser
 		private void ToolMenu_Other_ClearCache_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("ブラウザのキャッシュを削除します。\nよろしいですか？", "キャッシュの削除", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+			if (MessageBox.Show("브라우저의 캐시를 삭제합니다.\n삭제하시겠습니까?", "캐시 삭제", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
 				== System.Windows.Forms.DialogResult.OK)
 			{
 
@@ -1062,9 +1062,9 @@ namespace Browser
 				{
 					bool succeeded = ClearCache();
 					if (succeeded)
-						MessageBox.Show("キャッシュの削除が完了しました。", "削除完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						MessageBox.Show("캐시 삭제가 완료되었습니다.", "삭제 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					else
-						MessageBox.Show("時間がかかりすぎたため、キャッシュの削除を中断しました。\r\n削除しきれていない可能性があります。", "削除中断", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+						MessageBox.Show("캐시 삭제 진행이 너무 오래걸려 중단했습니다.\r\n삭제 돼지 않았을 가능성이 있습니다.", "삭제 중단", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 				}));
 
 			}

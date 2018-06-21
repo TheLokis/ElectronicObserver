@@ -150,8 +150,8 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 			if (Battle.IsPractice)
 				builder.AppendFormat("{0}{1} → {2}{3}",
-					Attacker == null ? "" : AttackerIndex.IsFriend ? "自軍 " : "敵軍 ", GetAttackerName(),
-					DefenderIndex.IsFriend ? "自軍 " : "敵軍 ", GetDefenderName()
+					Attacker == null ? "" : AttackerIndex.IsFriend ? "아군 " : "적 ", GetAttackerName(),
+					DefenderIndex.IsFriend ? "아군 " : "적  ", GetDefenderName()
 					).AppendLine();
 			else
 				builder.AppendFormat("{0} → {1}", GetAttackerName(), GetDefenderName()).AppendLine();
@@ -177,7 +177,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 					builder.Append(" , ");
 
 				if (GuardsFlagship[i])
-					builder.Append("<かばう> ");
+					builder.Append("<기함보호> ");
 
 				switch (CriticalTypes[i])
 				{
@@ -218,10 +218,10 @@ namespace ElectronicObserver.Data.Battle.Detail
 					int id = defender.DamageControlID;
 
 					if (id == 42)
-						builder.AppendFormat("　応急修理要員発動　HP{0}", (int)(defender.HPMax * 0.2)).AppendLine();
+						builder.AppendFormat("　응급 수리 요원 발동　HP{0}", (int)(defender.HPMax * 0.2)).AppendLine();
 
 					else if (id == 43)
-						builder.AppendFormat("　応急修理女神発動　HP{0}", defender.HPMax).AppendLine();
+						builder.AppendFormat("　응급 수리 여신 발동　HP{0}", defender.HPMax).AppendLine();
 
 				}
 			}
@@ -300,7 +300,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 		protected override string GetAttackerName()
 		{
-			return "支援艦隊";
+			return "지원함대";
 		}
 
 		protected override int CaclulateAttackKind(int[] slots, int attackerShipID, int defenderShipID)
@@ -313,15 +313,15 @@ namespace ElectronicObserver.Data.Battle.Detail
 			switch (AttackType)
 			{
 				case 1:
-					return "空撃";
+					return "공습";
 				case 2:
-					return "砲撃";
+					return "포격";
 				case 3:
-					return "雷撃";
+					return "뇌격";
 				case 4:
-					return "爆撃";
+					return "폭격";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -377,14 +377,14 @@ namespace ElectronicObserver.Data.Battle.Detail
 			if (WaveIndex <= 0)
 			{
 				if (DefenderIndex.Side == BattleSides.FriendMain || DefenderIndex.Side == BattleSides.FriendEscort)
-					return "敵軍航空隊";
+					return "적항공대";
 				else
-					return "自軍航空隊";
+					return "아군항공대";
 
 			}
 			else
 			{
-				return string.Format("基地航空隊 第{0}波", WaveIndex);
+				return string.Format("기지항공대 제{0}격", WaveIndex);
 
 			}
 		}
@@ -392,7 +392,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 		protected override string GetDefenderName()
 		{
 			if (WaveIndex < 0 && DefenderIndex.Side == BattleSides.FriendMain)
-				return string.Format("第{0}基地", DefenderIndex.Index + 1);
+				return string.Format("제{0}기지", DefenderIndex.Index + 1);
 
 			return base.GetDefenderName();
 		}
@@ -407,13 +407,13 @@ namespace ElectronicObserver.Data.Battle.Detail
 			switch (AttackType)
 			{
 				case 1:
-					return "雷撃";
+					return "뇌격";
 				case 2:
-					return "爆撃";
+					return "폭격";
 				case 3:
-					return "雷撃+爆撃";
+					return "뇌격+폭격";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 

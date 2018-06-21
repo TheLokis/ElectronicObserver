@@ -219,7 +219,7 @@ namespace ElectronicObserver.Observer.kcsapi
 			}
 
 
-			Utility.Logger.Add(2, "提督が鎮守府に着任しました。これより艦隊の指揮を執ります。");
+			Utility.Logger.Add(2, "제독이 진수부에 착임했습니다. 지금 부터 함대의 지휘를 맡습니다.");
 
 			base.OnResponseReceived((object)data);
 		}

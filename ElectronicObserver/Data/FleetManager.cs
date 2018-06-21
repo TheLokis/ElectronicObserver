@@ -239,7 +239,7 @@ namespace ElectronicObserver.Data
 
 						//debug
 						if (Utility.Configuration.Config.Debug.EnableDebugMenu)
-							Utility.Logger.Add(1, "泊地修理: 回復を検知したためタイマーをリセットします。");
+							Utility.Logger.Add(1, "아카시 수리: 타이머를 재설정합니다.");
 						return;
 					}
 

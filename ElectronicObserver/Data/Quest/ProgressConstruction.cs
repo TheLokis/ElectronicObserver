@@ -23,7 +23,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return "建造" + ProgressMax;
+			return "건조" + ProgressMax;
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			BaseAirRaid = new PhaseBaseAirRaid(this, "防空戦");
+			BaseAirRaid = new PhaseBaseAirRaid(this, "방공전");
 
 			foreach (var phase in GetPhases())
 				phase.EmulateBattle(_resultHPs, _attackDamages);
@@ -30,7 +30,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_map/next";
 
-		public override string BattleName => "基地防空戦";
+		public override string BattleName => "기지항공대";
 
 		public override bool IsBaseAirRaid => true;
 

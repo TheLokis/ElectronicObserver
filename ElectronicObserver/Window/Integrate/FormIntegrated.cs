@@ -434,7 +434,7 @@ namespace ElectronicObserver.Window.Integrate
 			WinAPI.GetWindowText(hWnd, stringBuilder, stringBuilder.Capacity);
 
 			if (MessageBox.Show(stringBuilder.ToString() + "\r\n" + FormWindowCapture.WARNING_MESSAGE,
-				"ウィンドウキャプチャの確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+				"윈도우 캡쳐 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 

@@ -39,7 +39,7 @@ namespace ElectronicObserver
 				if (!created && !allowMultiInstance)
 				{
 					// 多重起動禁止
-					MessageBox.Show("既に起動しています。多重起動はできません。\r\n誤検出の場合は、コマンドラインから -m オプションを付けて起動してください。", "七四式電子観測儀", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					MessageBox.Show("이미 74식 전자관측의가 실행되고 있습니다. \r\n실행중이 아닐때 이 메시지가 뜨는 경우, 명령줄에서 -m 을 사용해 실행하십시오.", "74식 전자관측의", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 					return;
 				}
 

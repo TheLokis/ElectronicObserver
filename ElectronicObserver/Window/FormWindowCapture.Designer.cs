@@ -40,7 +40,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(243, 50);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "取り込みたいウィンドウへボタンをドラッグ＆ドロップしてください。";
+			this.label1.Text = "캡쳐하려는 창에 버튼을 드래그＆드롭하십시오.";
 			// 
 			// windowCaptureButton
 			// 

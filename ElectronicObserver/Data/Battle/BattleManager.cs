@@ -337,7 +337,7 @@ namespace ElectronicObserver.Data.Battle
 			if (IsPractice)
 			{
 				Utility.Logger.Add(2,
-					string.Format("演習 で「{0}」{1}の「{2}」と交戦しました。( ランク: {3}, 提督Exp+{4}, 艦娘Exp+{5} )",
+					string.Format("연습에서「{0}」{1}의「{2}」와 교전했습니다.( ランク: {3}, 제독 경험치+{4}, 함선 경험치+{5} )",
 						EnemyAdmiralName, EnemyAdmiralRank, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
 			}
 			else if (IsBaseAirRaid)
@@ -347,14 +347,14 @@ namespace ElectronicObserver.Data.Battle
 				var airraid = ((BattleBaseAirRaid)BattleDay).BaseAirRaid;
 
 				Utility.Logger.Add(2,
-					string.Format("{0}-{1}-{2} で基地に空襲を受けました。( {3}, 被ダメージ合計: {4}, {5} )",
+					string.Format("{0}-{1}-{2} 로 기지에 공습을 받았습니다.( {3}, 데미지 합계: {4}, {5} )",
 						Compass.MapAreaID, Compass.MapInfoID, Compass.Destination,
 						Constants.GetAirSuperiority(airraid.IsAvailable ? airraid.AirSuperiority : -1), damage, Constants.GetAirRaidDamage(Compass.AirRaidDamageKind)));
 			}
 			else
 			{
 				Utility.Logger.Add(2,
-					string.Format("{0}-{1}-{2} で「{3}」と交戦しました。( ランク: {4}, 提督Exp+{5}, 艦娘Exp+{6} )",
+					string.Format("{0}-{1}-{2} 에서「{3}」와 교전했습니다. ( 랭크: {4}, 제독경험치+{5}, 함선경험치+{6} )",
 						Compass.MapAreaID, Compass.MapInfoID, Compass.Destination, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
 			}
 
@@ -371,7 +371,7 @@ namespace ElectronicObserver.Data.Battle
 						var ship = FirstBattle.Initial.FriendFleet.MembersInstance[i];
 						int increment = Math.Max(lvup[i].Length - 2, 1);
 
-						Utility.Logger.Add(2, string.Format("{0} が Lv. {1} になりました。", ship.Name, ship.Level + increment));
+						Utility.Logger.Add(2, string.Format("{0} 가 Lv. {1} 이 되었습니다.", ship.Name, ship.Level + increment));
 					}
 				}
 
@@ -386,7 +386,7 @@ namespace ElectronicObserver.Data.Battle
 							var ship = FirstBattle.Initial.FriendFleetEscort.MembersInstance[i];
 							int increment = Math.Max(lvup[i].Length - 2, 1);
 
-							Utility.Logger.Add(2, string.Format("{0} が Lv. {1} になりました。", ship.Name, ship.Level + increment));
+							Utility.Logger.Add(2, string.Format("{0} 가 Lv. {1} 이 되었습니다.", ship.Name, ship.Level + increment));
 						}
 					}
 				}
@@ -416,7 +416,7 @@ namespace ElectronicObserver.Data.Battle
 						DroppedEquipmentCount += defaultSlot.Count(id => id != -1);
 
 					if (showLog)
-						Utility.Logger.Add(2, string.Format("{0}「{1}」が戦列に加わりました。", ship.ShipTypeName, ship.NameWithClass));
+						Utility.Logger.Add(2, string.Format("{0}「{1}」이 함대에 합류했습니다.", ship.ShipTypeName, ship.NameWithClass));
 				}
 
 				if (itemID != -1)
@@ -430,7 +430,7 @@ namespace ElectronicObserver.Data.Battle
 					{
 						var item = KCDatabase.Instance.UseItems[itemID];
 						var itemmaster = KCDatabase.Instance.MasterUseItems[itemID];
-						Utility.Logger.Add(2, string.Format("アイテム「{0}」を入手しました。( 合計: {1}個 )", itemmaster?.Name ?? ("不明なアイテム - ID:" + itemID), (item?.Count ?? 0) + DroppedItemCount[itemID]));
+						Utility.Logger.Add(2, string.Format("아이템「{0} 을 얻었습니다. ( 합계: {1}個 )", itemmaster?.Name ?? ("알수없는아이템 - ID:" + itemID), (item?.Count ?? 0) + DroppedItemCount[itemID]));
 					}
 				}
 
@@ -442,7 +442,7 @@ namespace ElectronicObserver.Data.Battle
 
 					if (showLog)
 					{
-						Utility.Logger.Add(2, string.Format("{0}「{1}」を入手しました。", eq.CategoryTypeInstance.Name, eq.Name));
+						Utility.Logger.Add(2, string.Format("{0}「{1}」를 얻었습니다.", eq.CategoryTypeInstance.Name, eq.Name));
 					}
 				}
 
@@ -732,7 +732,7 @@ namespace ElectronicObserver.Data.Battle
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, "戦闘ログの出力に失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "전투 로그 출력을 실패했습니다.");
 			}
 		}
 

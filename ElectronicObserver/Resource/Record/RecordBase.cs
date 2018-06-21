@@ -63,12 +63,12 @@ namespace ElectronicObserver.Resource.Record
 			}
 			catch (FileNotFoundException)
 			{
-				Utility.Logger.Add(1, "レコード " + path + " は存在しません。");
+				Utility.Logger.Add(1, "기록 " + path + " 은 존재하지않습니다.");
 
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, "レコード " + path + " の読み込みに失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "기록 " + path + " 로드에 실패했습니다.");
 			}
 
 			return false;
@@ -101,7 +101,7 @@ namespace ElectronicObserver.Resource.Record
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, "レコード " + path + " の書き込みに失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "기록 " + path + " 저장에 실패했습니다.");
 			}
 
 			return false;
@@ -140,7 +140,7 @@ namespace ElectronicObserver.Resource.Record
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, "レコード " + path + " の書き込みに失敗しました。");
+				Utility.ErrorReporter.SendErrorReport(ex, "기록 " + path + " 저장에 실패했습니다.");
 			}
 
 			return false;

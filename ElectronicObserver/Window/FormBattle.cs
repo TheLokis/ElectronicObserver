@@ -974,19 +974,19 @@ namespace ElectronicObserver.Window
 					}
 
 					FleetFriend.ImageAlign = ContentAlignment.MiddleLeft;
-					ToolTipInfo.SetToolTip(FleetFriend, "支援攻撃\r\n" + support.GetBattleDetail());
+					ToolTipInfo.SetToolTip(FleetFriend, "지원공격\r\n" + support.GetBattleDetail());
 
 					if ((isFriendCombined || hasFriend7thShip) && isEnemyCombined)
-						FleetFriend.Text = "自軍";
+						FleetFriend.Text = "아군";
 					else
-						FleetFriend.Text = "自軍艦隊";
+						FleetFriend.Text = "아군함대";
 
 				}
 				else
 				{
 					FleetFriend.ImageIndex = -1;
 					FleetFriend.ImageAlign = ContentAlignment.MiddleCenter;
-					FleetFriend.Text = "自軍艦隊";
+					FleetFriend.Text = "아군함대";
 					ToolTipInfo.SetToolTip(FleetFriend, null);
 
 				}
@@ -1090,7 +1090,7 @@ namespace ElectronicObserver.Window
 					AirStage1Friend.ForeColor = SystemColors.ControlText;
 					AirStage1Friend.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage1Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
-					ToolTipInfo.SetToolTip(AirStage1Friend, "探照灯照射: " + ship.NameWithLevel);
+					ToolTipInfo.SetToolTip(AirStage1Friend, "탐조등조사: " + ship.NameWithLevel);
 				}
 				else
 				{
@@ -1107,7 +1107,7 @@ namespace ElectronicObserver.Window
 					AirStage1Enemy.ForeColor = SystemColors.ControlText;
 					AirStage1Enemy.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage1Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
-					ToolTipInfo.SetToolTip(AirStage1Enemy, "探照灯照射: " + pd.SearchlightEnemyInstance.NameWithClass);
+					ToolTipInfo.SetToolTip(AirStage1Enemy, "탐조등조사: " + pd.SearchlightEnemyInstance.NameWithClass);
 				}
 				else
 				{
@@ -1119,10 +1119,10 @@ namespace ElectronicObserver.Window
 			//夜間触接判定
 			if (pd.TouchAircraftFriend != -1)
 			{
-				SearchingFriend.Text = "夜間触接";
+				SearchingFriend.Text = "야간촉접";
 				SearchingFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
 				SearchingFriend.ImageAlign = ContentAlignment.MiddleLeft;
-				ToolTipInfo.SetToolTip(SearchingFriend, "夜間触接中: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftFriend].Name);
+				ToolTipInfo.SetToolTip(SearchingFriend, "야간촉접중: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftFriend].Name);
 			}
 			else
 			{
@@ -1131,10 +1131,10 @@ namespace ElectronicObserver.Window
 
 			if (pd.TouchAircraftEnemy != -1)
 			{
-				SearchingEnemy.Text = "夜間触接";
+				SearchingEnemy.Text = "야간촉접";
 				SearchingEnemy.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
 				SearchingFriend.ImageAlign = ContentAlignment.MiddleLeft;
-				ToolTipInfo.SetToolTip(SearchingEnemy, "夜間触接中: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftEnemy].Name);
+				ToolTipInfo.SetToolTip(SearchingEnemy, "야간촉접중: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftEnemy].Name);
 			}
 			else
 			{
@@ -1373,7 +1373,10 @@ namespace ElectronicObserver.Window
 			return "Battle";
 		}
 
+        private void AirSuperiority_Click(object sender, EventArgs e)
+        {
 
-	}
+        }
+    }
 
 }

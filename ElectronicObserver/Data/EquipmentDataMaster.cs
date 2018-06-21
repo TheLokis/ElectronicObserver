@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectronicObserver.Window;
 
 namespace ElectronicObserver.Data
 {
@@ -26,16 +27,19 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int AlbumNo => (int)RawData.api_sortno;
 
-		/// <summary>
-		/// 名前
-		/// </summary>
-		public string Name => RawData.api_name;
+        /// <summary>
+        /// 名前
+        /// </summary>
+        public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment); }
+        }
 
 
-		/// <summary>
-		/// 装備種別
-		/// </summary>
-		public ReadOnlyCollection<int> EquipmentType => Array.AsReadOnly((int[])RawData.api_type);
+        /// <summary>
+        /// 装備種別
+        /// </summary>
+        public ReadOnlyCollection<int> EquipmentType => Array.AsReadOnly((int[])RawData.api_type);
 
 
 

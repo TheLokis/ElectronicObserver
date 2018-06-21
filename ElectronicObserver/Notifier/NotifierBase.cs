@@ -184,7 +184,7 @@ namespace ElectronicObserver.Notifier
 				}
 				else
 				{
-					throw new FileNotFoundException("指定されたファイルまたはディレクトリが見つかりませんでした。");
+					throw new FileNotFoundException("지정된 파일 또는 디렉토리를 찾을 수 없습니다.");
 				}
 
 				SoundPath = path;
@@ -195,7 +195,7 @@ namespace ElectronicObserver.Notifier
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, string.Format("通知システム: 通知音 {0} のロードに失敗しました。", path));
+				Utility.ErrorReporter.SendErrorReport(ex, string.Format("알림 시스템 : 알림 사운드 {0}의 로드에 실패했습니다.", path));
 				DisposeSound();
 
 			}
@@ -230,7 +230,7 @@ namespace ElectronicObserver.Notifier
 			catch (Exception ex)
 			{
 
-				Utility.Logger.Add(3, "通知システム: 通知音の再生に失敗しました。" + ex.Message);
+				Utility.Logger.Add(3, "알림 시스템 : 알림음 재생에 실패했습니다." + ex.Message);
 			}
 		}
 
