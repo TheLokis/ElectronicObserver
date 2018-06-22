@@ -29,7 +29,7 @@ namespace ElectronicObserver.Window
 		private readonly Color TabActiveColor = Color.FromArgb(0xFF, 0xFF, 0xCC);
 
 		/// <summary>タブ背景色(非アクティブ)</summary>
-		private readonly Color TabInactiveColor = SystemColors.Control;
+		private readonly Color TabInactiveColor = SystemColors.ControlDarkDark;
 
 
 
@@ -78,7 +78,7 @@ namespace ElectronicObserver.Window
 			CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft,
-				BackColor = SystemColors.Control,
+				BackColor = SystemColors.ControlDarkDark,
 				Font = Font,
 				ForeColor = SystemColors.ControlText,
 				SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),
@@ -558,7 +558,7 @@ namespace ElectronicObserver.Window
 			//status bar
 			if (KCDatabase.Instance.Ships.Count > 0)
 			{
-				Status_ShipCount.Text = string.Format("소속: {0}隻", group.Members.Count);
+				Status_ShipCount.Text = string.Format("소속: {0}척", group.Members.Count);
 				Status_LevelTotal.Text = string.Format("합계Lv: {0}", group.MembersInstance.Where(s => s != null).Sum(s => s.Level));
 				Status_LevelAverage.Text = string.Format("평균Lv: {0:F2}", group.Members.Count > 0 ? group.MembersInstance.Where(s => s != null).Average(s => s.Level) : 0);
 			}

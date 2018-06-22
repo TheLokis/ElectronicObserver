@@ -68,7 +68,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return (Categories == null ? "" : string.Join("・", Categories.OrderBy(s => s).Select(s => KCDatabase.Instance.EquipmentTypes[s].Name))) + "폐기" + ProgressMax + (CountsAmount ? "個" : "回");
+			return (Categories == null ? "" : string.Join("・", Categories.OrderBy(s => s).Select(s => KCDatabase.Instance.EquipmentTypes[s].Name))) + "폐기" + ProgressMax + (CountsAmount ? "개" : "회");
 		}
 
 	}

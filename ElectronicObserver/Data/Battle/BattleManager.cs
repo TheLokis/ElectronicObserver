@@ -337,7 +337,7 @@ namespace ElectronicObserver.Data.Battle
 			if (IsPractice)
 			{
 				Utility.Logger.Add(2,
-					string.Format("연습에서「{0}」{1}의「{2}」와 교전했습니다.( ランク: {3}, 제독 경험치+{4}, 함선 경험치+{5} )",
+					string.Format("연습에서「{0}」{1}의「{2}」와 교전했습니다.( 랭크: {3}, 제독 경험치+{4}, 함선 경험치+{5} )",
 						EnemyAdmiralName, EnemyAdmiralRank, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
 			}
 			else if (IsBaseAirRaid)
@@ -416,7 +416,7 @@ namespace ElectronicObserver.Data.Battle
 						DroppedEquipmentCount += defaultSlot.Count(id => id != -1);
 
 					if (showLog)
-						Utility.Logger.Add(2, string.Format("{0}「{1}」이 함대에 합류했습니다.", ship.ShipTypeName, ship.NameWithClass));
+						Utility.Logger.Add(2, string.Format("{0}「{1}」가 함대에 합류했습니다.", ship.ShipTypeName, ship.NameWithClass));
 				}
 
 				if (itemID != -1)
@@ -430,7 +430,7 @@ namespace ElectronicObserver.Data.Battle
 					{
 						var item = KCDatabase.Instance.UseItems[itemID];
 						var itemmaster = KCDatabase.Instance.MasterUseItems[itemID];
-						Utility.Logger.Add(2, string.Format("아이템「{0} 을 얻었습니다. ( 합계: {1}個 )", itemmaster?.Name ?? ("알수없는아이템 - ID:" + itemID), (item?.Count ?? 0) + DroppedItemCount[itemID]));
+						Utility.Logger.Add(2, string.Format("아이템「{0} 을 얻었습니다. ( 합계: {1}개 )", itemmaster?.Name ?? ("알수없는아이템 - ID:" + itemID), (item?.Count ?? 0) + DroppedItemCount[itemID]));
 					}
 				}
 

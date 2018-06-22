@@ -355,6 +355,7 @@ namespace ElectronicObserver.Window.Dialog
 				UI_RenderingTestChanger.Maximum = UI_RenderingTest.MaximumValue;
 				UI_RenderingTestChanger.Value = UI_RenderingTest.Value;
 			}
+            DarkSkinCheckBox.Checked = config.UI.IsDarkSkinUse;
 
 			//[ログ]
 			Log_LogLevel.Value = config.Log.LogLevel;
@@ -596,6 +597,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			config.UI.BarColorMorphing = UI_BarColorMorphing.Checked;
 			config.UI.IsLayoutFixed = UI_IsLayoutFixed.Checked;
+            config.UI.IsDarkSkinUse = DarkSkinCheckBox.Checked;
 
 			//[ログ]
 			config.Log.LogLevel = (int)Log_LogLevel.Value;

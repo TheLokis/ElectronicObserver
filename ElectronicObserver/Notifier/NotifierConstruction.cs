@@ -71,7 +71,7 @@ namespace ElectronicObserver.Notifier
 		{
 
 			DialogData.Message = string.Format("공창 도크 #{0} 에서「{1}」의 건조가 완료되었습니다.",
-				arsenalID, Utility.Configuration.Config.FormArsenal.ShowShipName ? KCDatabase.Instance.MasterShips[shipID].NameWithClass : "함딸");
+				arsenalID, Utility.Configuration.Config.FormArsenal.ShowShipName ? KCDatabase.Instance.MasterShips[shipID].NameWithClass : "칸무스");
 
 			base.Notify();
 		}

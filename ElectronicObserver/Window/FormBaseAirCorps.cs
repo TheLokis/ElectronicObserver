@@ -153,7 +153,7 @@ namespace ElectronicObserver.Window
 
 					string areaName = KCDatabase.Instance.MapArea.ContainsKey(corps.MapAreaID) ? KCDatabase.Instance.MapArea[corps.MapAreaID].Name : "バミューダ海域";
 
-					sb.AppendLine("所属海域: " + areaName);
+					sb.AppendLine("소속해역: " + areaName);
 
 					// state 
 
@@ -166,14 +166,14 @@ namespace ElectronicObserver.Window
 						{
 							Name.ImageAlign = ContentAlignment.MiddleRight;
 							Name.ImageIndex = (int)ResourceManager.IconContent.ConditionTired;
-							sb.AppendLine("疲労");
+							sb.AppendLine("피로");
 
 						}
 						else
 						{
 							Name.ImageAlign = ContentAlignment.MiddleRight;
 							Name.ImageIndex = (int)ResourceManager.IconContent.ConditionVeryTired;
-							sb.AppendLine("過労");
+							sb.AppendLine("과로");
 
 						}
 
@@ -213,7 +213,7 @@ namespace ElectronicObserver.Window
 						}
 
 						ToolTipInfo.SetToolTip(AirSuperiority,
-							string.Format("確保: {0}\r\n優勢: {1}\r\n均衡: {2}\r\n劣勢: {3}\r\n",
+							string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
 							(int)(airSuperiority / 3.0),
 							(int)(airSuperiority / 1.5),
 							Math.Max((int)(airSuperiority * 1.5 - 1), 0),
@@ -263,7 +263,7 @@ namespace ElectronicObserver.Window
 				var sb = new StringBuilder();
 
 				if (corps == null)
-					return "(未開放)\r\n";
+					return "(미개방)\r\n";
 
 				foreach (var squadron in corps.Squadrons.Values)
 				{
@@ -276,7 +276,7 @@ namespace ElectronicObserver.Window
 					{
 						case 0:     // 未配属
 						default:
-							sb.AppendLine("(なし)");
+							sb.AppendLine("(없음)");
 							break;
 
 						case 1:     // 配属済み
@@ -292,18 +292,18 @@ namespace ElectronicObserver.Window
 								default:
 									break;
 								case 2:
-									sb.Append("[疲労] ");
+									sb.Append("[피로] ");
 									break;
 								case 3:
-									sb.Append("[過労] ");
+									sb.Append("[과로] ");
 									break;
 							}
 
-							sb.AppendFormat("{0} (半径: {1})\r\n", eq.NameWithLevel, eq.MasterEquipment.AircraftDistance);
+							sb.AppendFormat("{0} (반경: {1})\r\n", eq.NameWithLevel, eq.MasterEquipment.AircraftDistance);
 							break;
 
 						case 2:     // 配置転換中
-							sb.AppendFormat("配置転換中 (開始時刻: {0})\r\n",
+							sb.AppendFormat("배치전환중 (시작시간: {0})\r\n",
 								DateTimeHelper.TimeToCSVString(squadron.RelocatedTime));
 							break;
 					}
@@ -466,7 +466,7 @@ namespace ElectronicObserver.Window
 
 				string areaName = KCDatabase.Instance.MapArea.ContainsKey(corps.MapAreaID) ? KCDatabase.Instance.MapArea[corps.MapAreaID].Name : "バミューダ海域";
 
-				sb.AppendFormat("{0}\t[{1}] 制空戦力{2}/戦闘行動半径{3}\r\n",
+				sb.AppendFormat("{0}\t[{1}] 제공전력{2}/행동반경{3}\r\n",
 					(areaid == -1 ? (areaName + "：") : "") + corps.Name,
 					Constants.GetBaseAirCorpsActionKind(corps.ActionKind),
 					Calculator.GetAirSuperiority(corps),
@@ -481,27 +481,27 @@ namespace ElectronicObserver.Window
 
 					if (sq[i] == null)
 					{
-						sb.Append("(消息不明)");
+						sb.Append("(소식불명)");
 						continue;
 					}
 
 					switch (sq[i].State)
 					{
 						case 0:
-							sb.Append("(未配属)");
+							sb.Append("(미배속)");
 							break;
 						case 1:
 							{
 								var eq = sq[i].EquipmentInstance;
 
-								sb.Append(eq?.NameWithLevel ?? "(なし)");
+								sb.Append(eq?.NameWithLevel ?? "(없음)");
 
 								if (sq[i].AircraftCurrent < sq[i].AircraftMax)
 									sb.AppendFormat("[{0}/{1}]", sq[i].AircraftCurrent, sq[i].AircraftMax);
 							}
 							break;
 						case 2:
-							sb.Append("(配置転換中)");
+							sb.Append("(배치전환중)");
 							break;
 					}
 				}

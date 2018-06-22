@@ -348,7 +348,7 @@ namespace ElectronicObserver.Window.Dialog
 				sb.Append(cell);
 			}
 			if (isboss)
-				sb.Append(" [ボス]");
+				sb.Append(" [보스]");
 
 			if (insertEnemyFleetName)
 			{

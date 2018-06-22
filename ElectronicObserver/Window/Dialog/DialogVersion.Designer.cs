@@ -178,6 +178,7 @@
             this.GallLink.TabIndex = 11;
             this.GallLink.TabStop = true;
             this.GallLink.Text = "http://gall.dcinside.com/board/lists/?id=kancolle";
+            this.GallLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Gall_LinkClicked);
             // 
             // DialogVersion
             // 

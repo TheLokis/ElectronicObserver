@@ -82,7 +82,7 @@ namespace ElectronicObserver.Notifier
 
 		private void Initialize()
 		{
-			DialogData.Title = "！大破警告！";
+			DialogData.Title = "！대파경고！";
 
 			APIObserver o = APIObserver.Instance;
 
@@ -242,7 +242,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(string[] messages)
 		{
 
-			DialogData.Message = string.Format("{0} が大破しています！",
+			DialogData.Message = string.Format("{0} 가 대파하였습니다!",
 				string.Join(", ", messages));
 
 			base.Notify();

@@ -43,7 +43,7 @@ namespace ElectronicObserver.Window.Dialog
 			CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft,
-				BackColor = SystemColors.Control,
+				BackColor = SystemColors.ControlDarkDark,
 				Font = Font,
 				ForeColor = SystemColors.ControlText,
 				SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),

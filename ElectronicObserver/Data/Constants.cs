@@ -111,7 +111,7 @@ namespace ElectronicObserver.Data
 				case 6:
 					return "SS홀로+";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -1036,7 +1036,7 @@ namespace ElectronicObserver.Data
 				case 3:     //マンスリー
 					return "월간";
 				case 4:     //単発
-					return "일회";
+					return "단발";
 				case 5:     //その他(輸送5/空母3)
 					return "기타";
 				default:

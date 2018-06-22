@@ -284,7 +284,10 @@ namespace ElectronicObserver.Utility
             {
                 IEnumerable<XElement> translationList = this.GetTranslationList(type);
 
-                if (translationList == null) return jpString;
+                if (translationList == null)
+                {
+                    return jpString;
+                }
 
                 string jpChildElement = "JP-Name";
                 string trChildElement = "TR-Name";
@@ -296,9 +299,18 @@ namespace ElectronicObserver.Utility
                 }
 
                 string translated = jpString;
-                if (this.GetTranslation(jpString, translationList, jpChildElement, trChildElement, id, ref translated))
+                if (this.GetTranslation(jpString, translationList, jpChildElement, trChildElement, id, ref translated, type))
                 {
                     return translated;
+                } else
+                {
+                    /*
+                    if(type == TranslationType.QuestTitle)
+                        ErrorReporter.SendErrorReport(new Exception(), jpString);
+                    else if(type == TranslationType.QuestDetail)
+                        ErrorReporter.SendErrorReport(new Exception(), jpString);
+                        */
+                    //Utility.Logger.Add(3, id + ":::" + jpChildElement + "/" + jpString + ":" + jpString.Equals(jpString));
                 }
             }
             catch (Exception e)
@@ -309,13 +321,17 @@ namespace ElectronicObserver.Utility
             return jpString;
         }
 
-        public bool GetTranslation(string jpString, IEnumerable<XElement> translationList, string jpChildElement, string trChildElement, int id, ref string translate)
+        public bool GetTranslation(string jpString, IEnumerable<XElement> translationList, string jpChildElement, string trChildElement, int id, ref string translate, TranslationType type)
         {
             IEnumerable<XElement> foundTranslation = translationList.Where(el =>
             {
                 try
                 {
+                    
+
+                    
                     if (el.Element(jpChildElement).Value.Equals(jpString)) return true;
+
                     if (el.Attribute("mode") != null)
                     {
                         if (el.Attribute("mode").Value.Equals("suffix"))
@@ -347,7 +363,7 @@ namespace ElectronicObserver.Utility
                         try
                         {
                             string t = jpString.Substring(0, jpString.Length - el.Element(jpChildElement).Value.Length);
-                            if (this.GetTranslation(t, translationList, jpChildElement, trChildElement, -1, ref t))
+                            if (this.GetTranslation(t, translationList, jpChildElement, trChildElement, -1, ref t, type))
                             {
                                 if ((el.Attribute("suffixType") != null) && el.Attribute("suffixType").Value.Equals("pre")) translate = el.Element(trChildElement).Value + t;
                                 else translate = t + el.Element(trChildElement).Value;
@@ -376,6 +392,7 @@ namespace ElectronicObserver.Utility
                             if (id >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == id)
                             {
                                 translate = el.Element(trChildElement).Value;
+
                                 return true;
                             }
                         }
@@ -398,7 +415,9 @@ namespace ElectronicObserver.Utility
             }
             return false;
         }
-    }
+}
+
+
 
     public enum TranslationType
     {

@@ -157,7 +157,8 @@ namespace ElectronicObserver.Window
 			StripMenu_Tool_ResourceChart.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart];
 			StripMenu_Tool_AlbumMasterShip.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip];
 			StripMenu_Tool_AlbumMasterEquipment.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
-			StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
+            StripMenu_Tool_MasterExpedition.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
+            StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
 			StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
 			StripMenu_Tool_BaseAirCorpsSimulation.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
 			StripMenu_Tool_ExpChecker.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker];
@@ -1019,8 +1020,16 @@ namespace ElectronicObserver.Window
 
 		}
 
+        private void StripMenu_Tool_MasterExpeditionClick(object sender, EventArgs e)
+        {
 
-		private async void StripMenu_Debug_DeleteOldAPI_Click(object sender, EventArgs e)
+                var dialogAlbumMasterExpedition = new DialogAlbumMasterExpedition();
+                FormMain_RefreshTopMost();
+                dialogAlbumMasterExpedition.Show(this);
+        }
+
+
+        private async void StripMenu_Debug_DeleteOldAPI_Click(object sender, EventArgs e)
 		{
 
 			if (MessageBox.Show("이전 API 데이터를 삭제합니다.\r\n실행하시겠습니까?", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)

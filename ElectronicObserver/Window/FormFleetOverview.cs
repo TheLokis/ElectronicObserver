@@ -262,7 +262,7 @@ namespace ElectronicObserver.Window
 				var landing = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
 
 
-				ToolTipInfo.SetToolTip(CombinedTag, string.Format("ドラム缶搭載: {0}個\r\n大発動艇搭載: {1}個\r\n輸送量(TP): S {2} / A {3}\r\n\r\n制空戦力合計: {4}\r\n索敵能力合計: {5:f2}\r\n新判定式(33):\r\n　分岐点係数1: {6:f2}\r\n　分岐点係数3: {7:f2}\r\n　分岐点係数4: {8:f2}",
+				ToolTipInfo.SetToolTip(CombinedTag, string.Format("드럼탑재: {0}개\r\n대발탑재: {1}개\r\n수송량(TP): S {2} / A {3}\r\n\r\n제공합계: {4}\r\n색적합계: {5:f2}\r\n신식(33):\r\n　분기점계수1: {6:f2}\r\n　분기점계수3: {7:f2}\r\n　분기점계수4: {8:f2}",
 					transport.Sum(),
 					landing.Sum(),
 					tp,
@@ -286,7 +286,7 @@ namespace ElectronicObserver.Window
 			{
 				AnchorageRepairingTimer.Text = DateTimeHelper.ToTimeElapsedString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer);
 				AnchorageRepairingTimer.Tag = KCDatabase.Instance.Fleet.AnchorageRepairingTimer;
-				ToolTipInfo.SetToolTip(AnchorageRepairingTimer, "泊地修理タイマ\r\n開始: " + DateTimeHelper.TimeToCSVString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer) + "\r\n回復: " + DateTimeHelper.TimeToCSVString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer.AddMinutes(20)));
+				ToolTipInfo.SetToolTip(AnchorageRepairingTimer, "아카시타이머\r\n시작: " + DateTimeHelper.TimeToCSVString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer) + "\r\n회복: " + DateTimeHelper.TimeToCSVString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer.AddMinutes(20)));
 			}
 
 			TableFleet.ResumeLayout();

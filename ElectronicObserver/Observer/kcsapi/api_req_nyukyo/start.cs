@@ -25,7 +25,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_nyukyo
 			ShipData ship = db.Ships[shipID];
 
 
-			Utility.Logger.Add(2, string.Format("입거도크 #{0}で {1} ({2}/{3}) 의 수리를 시작했습니다. (연료x{4}, 강재x{5}, {6})",
+			Utility.Logger.Add(2, string.Format("입거도크 #{0}에서 {1} ({2}/{3}) 의 수리를 시작했습니다. (연료x{4}, 강재x{5}, {6})",
 				dock.DockID, ship.NameWithLevel,
 				ship.HPCurrent, ship.HPMax,
 				ship.RepairFuel, ship.RepairSteel,

@@ -49,7 +49,7 @@ namespace ElectronicObserver.Utility
 
 
 		private static System.Net.WebClient client;
-		private static readonly Uri uri = new Uri("https://www.dropbox.com/s/vk073iw1wvktq4d/version.txt?dl=1");
+		private static readonly Uri uri = new Uri("https://thelokis.github.io/EOTranslation/Translations/softwareversion.txt");
 
 		public static void CheckUpdate()
 		{

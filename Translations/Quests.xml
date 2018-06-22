@@ -1,0 +1,2730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Quests Version="1.3.7">
+  <Quest>
+    <ID>SF</ID>
+    <JP-Name>初夏の整理整頓</JP-Name>
+    <TR-Name>초여름의 정리정돈</TR-Name>
+    <JP-Detail>不要な装備を複数「廃棄」して、夏を迎える準備をしましょう！</JP-Detail>
+    <TR-Detail>장비 5개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>WF01</ID>
+    <JP-Name>式の準備！(その壱)</JP-Name>
+    <TR-Name>결혼식 준비!(첫번째)</TR-Name>
+    <JP-Detail>式の準備をします！「工廠」で装備アイテムを2回「廃棄」して身の回りの整理を！</JP-Detail>
+    <TR-Detail>결혼식을 준비합니다! 「공창」에서 장비 아이템을 2 회 "폐기"하고 신변의 정리를!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>WC01</ID>
+    <JP-Name>式の準備！(その弐)</JP-Name>
+    <TR-Name>결혼식 준비!(두번째)</TR-Name>
+    <JP-Detail>本日中に「演習」で2回以上「勝利」をおさめ、式への気持ちを整理しよう！</JP-Detail>
+    <TR-Detail>오늘안에 「연습」에서 2회 이상 '승리'하여 결혼전에 마음을 정리하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>WB02</ID>
+    <JP-Name>二人でする初めての任務！</JP-Name>
+    <TR-Name>둘이 같이 하는 첫 임무!</TR-Name>
+    <JP-Detail>強い絆を結んだ艦娘を旗艦とした第一艦隊でリランカ島へ出撃、敵中枢を撃滅せよ！</JP-Detail>
+    <TR-Detail>100Lv이상 칸무스를 1함대 기함으로 하고 4-3 보스전 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>WA02</ID>
+    <JP-Name>新たなる旅立ち！</JP-Name>
+    <TR-Name>새로운 출발!</TR-Name>
+    <JP-Detail>第一艦隊旗艦に強い絆を結んだLv.100以上の艦娘を配備した6隻の艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>1함대에 결혼한 Lv.100이상 칸무스를 기함으로 배치한 6척의 함대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>WA01</ID>
+    <JP-Name>式の準備！(その参)</JP-Name>
+    <TR-Name>결혼식 준비!(세번째)</TR-Name>
+    <JP-Detail>第一艦隊旗艦に練度の高い(Lv.90以上～99以下)艦娘を配備して気持ちを整理せよ！</JP-Detail>
+    <TR-Detail>제1함대 기함에 숙련도가 높은(Lv.90-99)칸무스를 배치하고 마음을 정리하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>SN04</ID>
+    <JP-Name>「赤城」に艦攻「村田隊」を配属せよ！</JP-Name>
+    <TR-Name>아카기에 함공 무라타대를 배치하라!</TR-Name>
+    <JP-Detail>秘書艦を航空母艦「赤城」とし、同艦に艦攻「村田隊」を配属せよ！</JP-Detail>
+    <TR-Detail>아카기에 97식 함상 공격기를 장비</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>G4</ID>
+    <JP-Name>「大型艦建造」の準備！(その壱)</JP-Name>
+    <TR-Name>「대형함건조」 준비(제1차)</TR-Name>
+    <JP-Detail>大型艦/新型艦建造のための準備を行う。任意の艦で近代化改修を4回成功させよ！</JP-Detail>
+    <TR-Detail>근대화 개수 4번 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>G1</ID>
+    <JP-Name>はじめての「近代化改修」！</JP-Name>
+    <TR-Name>첫 「근대화 개수」</TR-Name>
+    <JP-Detail>任意の艦を近代化改修(合成)して、強化せよ！</JP-Detail>
+    <TR-Detail>종류에 관계 없이 군함 1척을 근대화 개수 한다.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>F3</ID>
+    <JP-Name>はじめての「解体」！</JP-Name>
+    <TR-Name>첫 해체</TR-Name>
+    <JP-Detail>「工廠」で不要な艦を「解体」してみよう！</JP-Detail>
+    <TR-Detail>「공창」에서 종류에 관계 없이 군함 1척 「해체」</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>F2</ID>
+    <JP-Name>はじめての「開発」！</JP-Name>
+    <TR-Name>첫 「개발」</TR-Name>
+    <JP-Detail>「工廠」でボーキサイトなどの資材を使って新しい装備アイテムを「開発」しよう！</JP-Detail>
+    <TR-Detail>「공창」에서 장비를 1회 「개발」</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>F10</ID>
+    <JP-Name>「大型艦建造」の準備！(その弐)</JP-Name>
+    <TR-Name>대형함건조 준비(제2차)</TR-Name>
+    <JP-Detail>大型艦建造の準備をします！「工廠」で装備アイテムを4回「廃棄」してみてください！</JP-Detail>
+    <TR-Detail>「공창」에서 장비 4회 「폐기」</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>F1</ID>
+    <JP-Name>はじめての「建造」！</JP-Name>
+    <TR-Name>첫 건조</TR-Name>
+    <JP-Detail>「工廠」で鋼材などの資材を使って新しい艦を「建造」しよう！</JP-Detail>
+    <TR-Detail>「공창」에서 군함 1회 「건조」</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>E2</ID>
+    <JP-Name>はじめての「入渠」！</JP-Name>
+    <TR-Name>첫 입거</TR-Name>
+    <JP-Detail>戦闘で傷ついた艦を「入渠」させて修理して、次の出撃に備えよう！</JP-Detail>
+    <TR-Detail>전투로 인한 상처받은 군함 1회 「입거」</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>E1</ID>
+    <JP-Name>はじめての「補給」！</JP-Name>
+    <TR-Name>첫 보급</TR-Name>
+    <JP-Detail>補給は大事です！燃料・弾薬を艦に「補給」しよう！</JP-Detail>
+    <TR-Detail>연료와 탄약을 「보급」</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>D5</ID>
+    <JP-Name>第一次潜水艦派遣作戦</JP-Name>
+    <TR-Name>제1차 잠수함 파견작전</TR-Name>
+    <JP-Detail>はじめての潜水艦派遣作戦を成功させよう！</JP-Detail>
+    <TR-Detail>원정번호30번 잠수함 파견작전 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>D1</ID>
+    <JP-Name>はじめての「遠征」！</JP-Name>
+    <TR-Name>첫 「원정」!</TR-Name>
+    <JP-Detail>艦隊を「遠征」に出発させよう！</JP-Detail>
+    <TR-Detail>성공과 실패 관계 없이 「원정」 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>C1</ID>
+    <JP-Name>はじめての「演習」！</JP-Name>
+    <TR-Name>첫「연습」</TR-Name>
+    <JP-Detail>他の提督(プレイヤー)の艦隊と「演習」を行おう！</JP-Detail>
+    <TR-Detail>승패에 관계 없이 연습전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>Bw9</ID>
+    <JP-Name>南方海域珊瑚諸島沖の制空権を握れ！</JP-Name>
+    <TR-Name>남방해역 산호섬 앞바다 제공권 장악</TR-Name>
+    <JP-Detail>南方海域珊瑚諸島沖に出撃し、敵機動部隊本体を捕捉撃滅、これに完全勝利せよ！</JP-Detail>
+    <TR-Detail>5-2보스함대에서 2회 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B71</ID>
+    <JP-Name>鎮守府近海航路の安全確保を強化せよ！</JP-Name>
+    <TR-Name>진수부근해항로의 안전을 확보하라!</TR-Name>
+    <JP-Detail>水雷戦隊を含む新編戦隊を鎮守府近海航路に出撃させ、同航路の安全確保に努めよ！</JP-Detail>
+    <TR-Detail>경순양함을 기함으로한 수뢰전대(구축함 4척)로 1-6 클리어</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B70</ID>
+    <JP-Name>新編艦隊、南西諸島防衛線へ急行せよ！</JP-Name>
+    <TR-Name>신편 함대, 남서제독방위선으로 급행하라!</TR-Name>
+    <JP-Detail>水雷戦隊を含む新編艦隊を南西諸島防衛線に展開、同方面に来襲する敵艦隊を撃破せよ！</JP-Detail>
+    <TR-Detail>경순양함을 기함으로한 수뢰전대(구축함 4척)로 1-4보스전 A승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B22</ID>
+    <JP-Name>「第三十駆逐隊(第一次)」出撃せよ！</JP-Name>
+    <TR-Name>제30구축대(1차)출격!</TR-Name>
+    <JP-Detail>「第三十駆逐隊(第一次)」を含む艦隊で出撃し、キス島沖の主力艦隊と交戦せよ！</JP-Detail>
+    <TR-Detail>무츠키,키사라기,야요이,모치즈키를 포함한 함대로 3-2 보스전에서 C패배 이상 달성 (남은 2척은 자유배치)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B21</ID>
+    <JP-Name>「第十八駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>제18구축함대 출격!!</TR-Name>
+    <JP-Detail>編成した「第十八駆逐隊」を含む艦隊で出撃し、北方海域モーレイ海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>카스미, 아라레, 카게로우, 시라누이가 포함된 함대로 3-1 해역 보스전 승리 (남은 2척은 자유배치)※기함자유</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B20</ID>
+    <JP-Name>「第八駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>제8구축함대 출격!</TR-Name>
+    <JP-Detail>編成した「第八駆逐隊」を含む艦隊で出撃し、オリョール海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>아사시오, 미치시오, 오오시오, 아라시오가 포함된 함대로 2-3 해역 보스전 승리 (남은 2척은 자유배치)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B19</ID>
+    <JP-Name>「第六戦隊」出撃せよ！</JP-Name>
+    <TR-Name>제6전대 출격</TR-Name>
+    <JP-Detail>編成した「第六戦隊」をもって出撃し、オリョール海の敵を撃滅「完全勝利」せよ！</JP-Detail>
+    <TR-Detail>후루타카, 카코, 아오바, 키누가사가 포함된 함대로 2-3 해역 보스전 S랭크 승리 (남은 2척은 자유배치)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B18</ID>
+    <JP-Name>「航空水上打撃艦隊」出撃せよ！</JP-Name>
+    <TR-Name>항공수상타격함대 출격</TR-Name>
+    <JP-Detail>航空戦艦2隻と航空巡洋艦2隻を基幹とする艦隊でカレー洋の制海権を握れ！</JP-Detail>
+    <TR-Detail>항공전함 2척, 항공순양함 2척이 포함된 함대로 4-2 보스전 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B17</ID>
+    <JP-Name>「潜水艦隊」出撃せよ！</JP-Name>
+    <TR-Name>잠수함대 출격</TR-Name>
+    <JP-Detail>伊号潜水艦2隻からなる潜水艦隊でオリョール海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>잠수함 2척이 포함된 함대로 2-3보스전 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B16</ID>
+    <JP-Name>新「三川艦隊」出撃せよ！</JP-Name>
+    <TR-Name>신 미카와 함대 출격</TR-Name>
+    <JP-Detail>完全編成した「三川艦隊」をもって、オリョール海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>쵸카이, 아오바, 키누가사, 카코, 후루타카, 텐류를 함대 배치 후 2-3 해역 보스전 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B15</ID>
+    <JP-Name>「第五航空戦隊」出撃せよ！</JP-Name>
+    <TR-Name>제5항공전대 출격</TR-Name>
+    <JP-Detail>「翔鶴」「瑞鶴」を基幹とする第五航空戦隊で、北方海域モーレイ海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>쇼우카쿠, 즈이카쿠가 포함된 함대로 3-1해역의 보스전 승리 (남은 4척은 자유배치)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B14</ID>
+    <JP-Name>「西村艦隊」出撃せよ！</JP-Name>
+    <TR-Name>니시무라 함대 출격</TR-Name>
+    <JP-Detail>「扶桑」「山城」「最上」「時雨」を基幹とする西村艦隊で、オリョール海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>후소우, 야마시로, 모가미, 시구레를 함대 배치 후 2-3 보스전 승리 (남은 2척은 자유배치)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B13</ID>
+    <JP-Name>「第四戦隊」出撃せよ！</JP-Name>
+    <TR-Name>제4전대 출격</TR-Name>
+    <JP-Detail>「愛宕」「高雄」「鳥海」「摩耶」を基幹とする第四戦隊で、バシー島沖の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>아타고, 타카오, 쵸카이, 마야를 함대 배치 후 2-2 해역 보스전 승리 (남은 2척은 자유배치)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B12</ID>
+    <JP-Name>「第六駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>제6구축함대 출격</TR-Name>
+    <JP-Detail>「暁」「響」「雷」「電」による第六駆逐隊、出撃せよ！</JP-Detail>
+    <TR-Detail>아카츠키, 히비키, 이나즈마, 이카즈치 4대만으로만 구성된 함대로 승패 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B11</ID>
+    <JP-Name>「三川艦隊」出撃せよ！</JP-Name>
+    <TR-Name>미카와 함대 출격</TR-Name>
+    <JP-Detail>新編成した「三川艦隊」で出撃せよ！</JP-Detail>
+    <TR-Detail>쵸카이, 아오바, 카코, 후루타카, 텐류와 고속함 1척으로 함대 편성 후 승패와 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B10</ID>
+    <JP-Name>敵空母を撃沈せよ！</JP-Name>
+    <TR-Name>적 공모 격침!(정규공모 아카기 획득 임무)</TR-Name>
+    <JP-Detail>敵機動部隊を捕捉し、これを邀撃、敵空母を轟沈せよ！</JP-Detail>
+    <TR-Detail>정규공모 또는 경공모가 포함된 적 함대 격파(함대에 항모가 "없어도" 아카기 획득 가능)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B9</ID>
+    <JP-Name>「空母機動部隊」出撃せよ！</JP-Name>
+    <TR-Name>공모기동부대 출격</TR-Name>
+    <JP-Detail>空母1隻とその護衛艦艇で構成した空母機動部隊を出撃させよ！</JP-Detail>
+    <TR-Detail>정규공모나 경공모 1척과 구축함 3대를 함대 배치 후 승패과 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B8</ID>
+    <JP-Name>「戦艦」を出撃させよ！</JP-Name>
+    <TR-Name>전함 출격</TR-Name>
+    <JP-Detail>海上の覇者、戦艦を旗艦とした艦隊を編成、これを出撃させよ！</JP-Detail>
+    <TR-Detail>기함을 전함으로 배치, 승패와 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B7</ID>
+    <JP-Name>「重巡洋艦」を出撃させよ！</JP-Name>
+    <TR-Name>중순양함 출격</TR-Name>
+    <JP-Detail>重巡洋艦を旗艦とした艦隊を編成、これを出撃させよ！</JP-Detail>
+    <TR-Detail>기함을 중순양함으로 배치, 승패와 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B6</ID>
+    <JP-Name>「水雷戦隊」で出撃せよ！</JP-Name>
+    <TR-Name>수뢰전대 출격</TR-Name>
+    <JP-Detail>軽巡洋艦1隻を旗艦とし、複数の駆逐艦からなる水雷戦隊で出撃せよ！</JP-Detail>
+    <TR-Detail>기함을 경순양함으로 배치 후 구축함 2~5대를 포함, 승패와 관계없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B5</ID>
+    <JP-Name>接近する「敵前衛艦隊」を迎撃せよ！</JP-Name>
+    <TR-Name>접근하는 적 전위함대 요격</TR-Name>
+    <JP-Detail>南西諸島沖に接近する「敵前衛艦隊」を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>1-2 해역 보스전에서 1회 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B4</ID>
+    <JP-Name>南西諸島沖に出撃せよ！</JP-Name>
+    <TR-Name>남서제도 앞바다 출격</TR-Name>
+    <JP-Detail>南西諸島沖に艦隊を出撃させ、敵艦隊と交戦せよ！</JP-Detail>
+    <TR-Detail>1-2 해역에서 승패와 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B3</ID>
+    <JP-Name>第2艦隊、出撃せよ！</JP-Name>
+    <TR-Name>제2함대 출격</TR-Name>
+    <JP-Detail>新たに編成した「第2艦隊」を出撃せよ！</JP-Detail>
+    <TR-Detail>승패와 관계 없이 2함대로 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>B1</ID>
+    <JP-Name>はじめての「出撃」！</JP-Name>
+    <TR-Name>첫 출격!</TR-Name>
+    <JP-Detail>艦隊を出撃させ、敵艦隊と交戦せよ！</JP-Detail>
+    <TR-Detail>승패와 관계 없이 전투 1회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A69</ID>
+    <JP-Name>新編「水雷戦隊」を含む艦隊を再編成せよ！</JP-Name>
+    <TR-Name>신편 수뢰전대를 포함한 함대를 재편성하라!</TR-Name>
+    <JP-Detail></JP-Detail>
+    <TR-Detail>경순양함을 기함으로한 수뢰전대(구축함 4척)를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A33</ID>
+    <JP-Name>「第三十駆逐隊(第一次)」を編成せよ！</JP-Name>
+    <TR-Name>제30구축대(제1차)를 편성하라!</TR-Name>
+    <JP-Detail>「睦月」「如月」「弥生」「望月」4隻による第三十駆逐隊(第一次)を編成せよ！</JP-Detail>
+    <TR-Detail>「 무츠키」 「키사라기」 「야요이」 「모치즈키」 4척만으로 구성된 30구축대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A32</ID>
+    <JP-Name>「第十八駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>제18구축함대 편성</TR-Name>
+    <JP-Detail>「霞」「霰」「陽炎」「不知火」4隻による第十八駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>카스미, 아라레, 카게로우, 시라누이를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A31</ID>
+    <JP-Name>「第八駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>제8구축함대 편성</TR-Name>
+    <JP-Detail>「朝潮」「満潮」「大潮」「荒潮」4隻による第八駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>아사시오, 미치시오, 오오시오, 아라시오를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A28</ID>
+    <JP-Name>「第六戦隊」を編成せよ！</JP-Name>
+    <TR-Name>제6전대 편성</TR-Name>
+    <JP-Detail>「古鷹」「加古」「青葉」「衣笠」を基幹とした第六戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>후루타카, 카코, 아오바,키누가사를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A27</ID>
+    <JP-Name>中規模潜水艦隊を編成せよ！</JP-Name>
+    <TR-Name>중간규모의 잠수함 함대 편성</TR-Name>
+    <JP-Detail>伊号潜水艦3隻以上からなる潜水艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>잠수함 3척을 같은 함대에 배치(잠수공모도 가능)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A26</ID>
+    <JP-Name>航空水上打撃艦隊を編成せよ！</JP-Name>
+    <TR-Name>항공수상타격함대 편성</TR-Name>
+    <JP-Detail>航空戦艦2隻と航空巡洋艦2隻を基幹とする艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>항공전함 2척, 항공순양함 2척을 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A25</ID>
+    <JP-Name>潜水艦隊を編成せよ！</JP-Name>
+    <TR-Name>잠수함대 편성</TR-Name>
+    <JP-Detail>伊号潜水艦2隻からなる潜水艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>이168, 이58, 이19, 이8, 이401 중 2척을 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A24</ID>
+    <JP-Name>新「三川艦隊」を編成せよ！</JP-Name>
+    <TR-Name>신 미카와 함대 편성</TR-Name>
+    <JP-Detail>「鳥海」「青葉」「衣笠」「加古」「古鷹」「天龍」からなる三川艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>쵸카이, 아오바, 키누가사, 카코, 후루타카, 텐류를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A23</ID>
+    <JP-Name>「第五航空戦隊」を編成せよ！</JP-Name>
+    <TR-Name>제5항공전대 편성</TR-Name>
+    <JP-Detail>「翔鶴」「瑞鶴」を基幹とし、駆逐艦2隻を加えた第五航空戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>쇼우카쿠, 즈이카쿠와 구축함 2척을 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A22</ID>
+    <JP-Name>「西村艦隊」を編成せよ！</JP-Name>
+    <TR-Name>니시무라 함대 편성</TR-Name>
+    <JP-Detail>「扶桑」「山城」「最上」「時雨」を基幹とした西村艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>후소, 야마시로, 모가미, 시구레를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A21</ID>
+    <JP-Name>「第四戦隊」を編成せよ！</JP-Name>
+    <TR-Name>제4전대 편성</TR-Name>
+    <JP-Detail>「愛宕」「高雄」「鳥海」「摩耶」を基幹とした第四戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>아타고, 타카오, 쵸카이, 마야를 함대 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A20</ID>
+    <JP-Name>「三川艦隊」を編成せよ！</JP-Name>
+    <TR-Name>미카와 함대 편성</TR-Name>
+    <JP-Detail>「鳥海」「青葉」「加古」「古鷹」「天龍」を含む高速艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>쵸카이, 아오바, 카코, 후루타카, 텐류와 고속함 1척으로 함대 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A19</ID>
+    <JP-Name>「南雲機動部隊」を編成せよ！</JP-Name>
+    <TR-Name>나구모 기동부대 편성</TR-Name>
+    <JP-Detail>一航戦「赤城」「加賀」二航戦「飛龍」「蒼龍」からなる第一機動部隊を編成せよ！</JP-Detail>
+    <TR-Detail>아카기, 카가, 히류, 소류만으로 함대 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A18</ID>
+    <JP-Name>「伊勢」型戦艦姉妹の全２隻を編成せよ！</JP-Name>
+    <TR-Name>「이세」급 전함 자매 총 2 척을 편성하라!</TR-Name>
+    <JP-Detail>伊勢型戦艦「伊勢」「日向」を同一艦隊に配属せよ！</JP-Detail>
+    <TR-Detail>이세, 휴우가를 같은 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A17</ID>
+    <JP-Name>「扶桑」型戦艦姉妹の全２隻を編成せよ！</JP-Name>
+    <TR-Name>「후소」급 전함 자매 총 2 척을 편성하라!</TR-Name>
+    <JP-Detail>扶桑型戦艦「扶桑」「山城」を同一艦隊に配属せよ！</JP-Detail>
+    <TR-Detail>후소, 야마시로를 같은 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A15</ID>
+    <JP-Name>「妙高」型重巡姉妹の全4隻を編成せよ！</JP-Name>
+    <TR-Name>「묘크」급 중순양함 자매 4척 함대 편성</TR-Name>
+    <JP-Detail>妙高型重巡洋艦「妙高」「那智」「足柄」「羽黒」を同一艦隊に配属せよ！</JP-Detail>
+    <TR-Detail>묘코, 나치, 아시가라, 하구로를 같은 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A13</ID>
+    <JP-Name>戦艦と重巡による主力艦隊を編成せよ！</JP-Name>
+    <TR-Name>전함과 중순양함으로 주력함대 편성</TR-Name>
+    <JP-Detail>戦艦1隻以上、重巡2隻以上を主力とした水上打撃艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>전함 1척과 중순양함 2척을 넣은 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A12</ID>
+    <JP-Name>空母機動部隊を編成せよ！</JP-Name>
+    <TR-Name>공모기동부대 편성</TR-Name>
+    <JP-Detail>空母1隻以上を旗艦とし、その護衛艦艇と共に、空母機動部隊を編成せよ！</JP-Detail>
+    <TR-Detail>정규공모나 경공모 중 하나를 기함으로 하고 구축함 3척을 함대에 넣어 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A11</ID>
+    <JP-Name>第2艦隊で空母機動部隊を編成せよ！</JP-Name>
+    <TR-Name>제2함대 공모기동부대 편성</TR-Name>
+    <JP-Detail>第2艦隊に空母を配備して、空母機動部隊を編成せよ！</JP-Detail>
+    <TR-Detail>정규공모나 경공모 중 하나를 기함으로 하고 구축함 3척을 제2함대에 넣어 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A10</ID>
+    <JP-Name>「第六駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>제6구축함대 편성</TR-Name>
+    <JP-Detail>「暁」「響」「雷」「電」4隻による第六駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>아카츠키, 히비키, 이카즈치, 이나즈마 4척으로 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A8</ID>
+    <JP-Name>「天龍」型軽巡姉妹の全2艦を編成せよ！</JP-Name>
+    <TR-Name>텐류급 경순양함 2척 편성</TR-Name>
+    <JP-Detail>天龍型軽巡洋艦「天龍」「龍田」を同一艦隊に配属せよ！</JP-Detail>
+    <TR-Detail>텐류와 타츠타를 같은 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A7</ID>
+    <JP-Name>「重巡戦隊」を編成せよ！</JP-Name>
+    <TR-Name>중순양함 편성</TR-Name>
+    <JP-Detail>重巡洋艦２隻を擁する重巡艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>중순양함 2척을 넣은 함대 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A6</ID>
+    <JP-Name>第2艦隊を編成せよ！</JP-Name>
+    <TR-Name>제2함대 배치</TR-Name>
+    <JP-Detail>二つ目の艦隊、第2艦隊の旗艦を指定して、第2艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>종류에 관계 없이 2함대 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A5</ID>
+    <JP-Name>軽巡2隻を擁する隊を編成せよ！</JP-Name>
+    <TR-Name>경순양함 배치</TR-Name>
+    <JP-Detail>軽巡洋艦2隻を擁する高速艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>경순양함 2척 함대 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A4</ID>
+    <JP-Name>6隻編成の艦隊を編成せよ！</JP-Name>
+    <TR-Name>6척 편성</TR-Name>
+    <JP-Detail>全6隻で構成される主力艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>함대에 종류 상관없이 군함 6척 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>A3</ID>
+    <JP-Name>「水雷戦隊」を編成せよ！</JP-Name>
+    <TR-Name>수뢰전대 편성</TR-Name>
+    <JP-Detail>軽巡洋艦を旗艦とし、数隻の駆逐艦で構成される「水雷戦隊」を編成せよ！</JP-Detail>
+    <TR-Detail>기함을 경순양함으로 하고 구축함 1~5척을 넣어 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>809</ID>
+    <JP-Name>強襲上陸作戦用戦力を増強せよ！</JP-Name>
+    <TR-Name>강습상륙작전용 전력을 증강하라!</TR-Name>
+    <JP-Detail>中部海域における航空偵察「K作戦」を実施しつつ、強襲上陸作戦用戦力の強化を図れ！</JP-Detail>
+    <TR-Detail>6-3보스전에서 B승리 이상 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>808</ID>
+    <JP-Name>「第二七駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>제 27구축대 출격!</TR-Name>
+    <JP-Detail>「白露改」旗艦の第二七戦隊を含む艦隊をオリョール海に展開、同海域の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>시라츠유改를 기함으로 하고 시구레, 하루사메, 사미다레+자유2척으로 구성된 함대로 2-3보스전 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>807</ID>
+    <JP-Name>「第三十一戦隊」出撃せよ！</JP-Name>
+    <TR-Name>제 31전대 출격!</TR-Name>
+    <JP-Detail>「第三十一戦隊(第一次)を鎮守府近海航路に出撃させ、同航路の安全確保に努めよ！</JP-Detail>
+    <TR-Detail>이스즈改2를 기함으로 사츠키改2,우즈키改, 자유편성3이 포함된 대잠 기동 수상부대로 1-6을 클리어(골 지점으로 향하기)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>806</ID>
+    <JP-Name>旗艦「霞」出撃！敵艦隊を撃滅せよ！</JP-Name>
+    <TR-Name>기함 카스미 출격! 적의 함대를 격멸하라!</TR-Name>
+    <JP-Detail>旗艦「霞改二」で駆逐艦3隻を含む艦隊で南西諸島沖ノ島沖に突入！敵主力を撃滅せよ！</JP-Detail>
+    <TR-Detail>카스미 改2(改2을도 가능)기함,구축2+자유3편성으로 2-5 보스전 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>805</ID>
+    <JP-Name>旗艦「霞」北方海域を哨戒せよ！</JP-Name>
+    <TR-Name>기함 카스미 북방해역을 순찰하라!</TR-Name>
+    <JP-Detail>旗艦「霞改二」で駆逐艦4隻を含む艦隊を北方海域に投入し、モーレイ海哨戒を実施せよ！</JP-Detail>
+    <TR-Detail>카스미 改2(改2을도 가능)을 기함으로 하고 구축3+자유2로 3-1 보스전 승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>801</ID>
+    <JP-Name>謹賀新年！「水雷戦隊」出撃始め！</JP-Name>
+    <TR-Name>근하신년! 구뢰전대 출격하라!</TR-Name>
+    <JP-Detail>新春特別任務：軽巡を旗艦とした水雷戦隊を南西諸島沖、製油所地帯沿岸及び南西諸島防衛線に展開！同三海域の敵艦隊を邀撃、新年の暁に勝利を刻むのです！</JP-Detail>
+    <TR-Detail>1-2, 1-3, 1-4 각각 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>802</ID>
+    <JP-Name>新春「伊良湖」のお手伝い！</JP-Name>
+    <TR-Name>신춘 이라코의 심부름!</TR-Name>
+    <JP-Detail>新春特別任務：新春からお手伝い、すみません！水上機母艦、潜水母艦、または駆逐艦を旗艦とした艦隊で、東部オリョール海に反復出撃です！同海域の敵艦隊を撃滅、制海権確保をお願いします！</JP-Detail>
+    <TR-Detail>수상기모함, 잠수모함, 구축함 기함 + 자유 5척으로 2-3 보스전 3회 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>803</ID>
+    <JP-Name>時代が来たか！航空火力艦なお正月！</JP-Name>
+    <TR-Name>시대가 왔다! 항공화력함 정월!</TR-Name>
+    <JP-Detail>新春特別任務：航空戦艦を旗艦とする、航空戦艦2隻と航空巡洋艦2隻を基幹戦力とする艦隊をカレー洋へ展開！反復出撃し、同海域の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>항공전함을 기함으로 항전2척+항순2척+자유2척으로 4-2 보스전 3회 S승 (시운 / Ro.43 수상정찰기 / OS2U 선택보상)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>804</ID>
+    <JP-Name>迎春！「空母機動部隊」出撃開始！</JP-Name>
+    <TR-Name>영춘! 공모기동부대 출격개시!</TR-Name>
+    <JP-Detail>新春特別任務：航空母艦を旗艦とする護衛の駆逐艦2隻以上を擁する機動部隊で北方AL海域に展開！反復出撃によって、同艦域の敵戦力を撃滅せよ！空母機動部隊、出撃！</JP-Detail>
+    <TR-Detail>공모 기함 + 구축함 2척 + 자유 3척으로 3-5 보스전 3회 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>703</ID>
+    <JP-Name>「近代化改修」を進め、戦備を整えよ！</JP-Name>
+    <TR-Name>근대화개수를 진행하여 군비를 갖춰라 - 주간</TR-Name>
+    <JP-Detail>一週間の間に、近代化改修を15回成功させよ！</JP-Detail>
+    <TR-Detail>월요일 05시부터 다음주 월요일 04:59까지 근대화 개수 15회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>702</ID>
+    <JP-Name>艦の「近代化改修」を実施せよ！</JP-Name>
+    <TR-Name>군함의 근대화 개수 실시 - 일일반복</TR-Name>
+    <JP-Detail>近代化改修を実施して、2回以上これを成功させよ！</JP-Detail>
+    <TR-Detail>당일 05:00 부터 다음날 04:59 까지 근대화 개수 2회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>633</ID>
+    <JP-Name>機種転換＆部隊再編</JP-Name>
+    <TR-Name>기종전환,부대재편</TR-Name>
+    <JP-Detail>部隊を再編する！練度max「零戦52型甲(付岩本小隊)」搭載「瑞鶴」秘書艦で、「彩雲」を2つ廃棄！</JP-Detail>
+    <TR-Detail>숙련도 Max인「영전52형갑(이와모토 소대)」를 탑재한「즈이카쿠」를 비서함으로,「사이운」2기 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>632</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종전환</TR-Name>
+    <JP-Detail>練度max「零戦21型(付岩本小隊)」搭載「瑞鶴」秘書艦で「零戦52型」を2つ廃棄！</JP-Detail>
+    <TR-Detail>숙련도 Max인「영전21형(이와모토 소대)」를 탑재한「즈이카쿠」를 비서함으로,「영전52형」2기 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>631</ID>
+    <JP-Name>機種転換＆部隊再編</JP-Name>
+    <TR-Name>기종전환,부대재편</TR-Name>
+    <JP-Detail>練度max「零戦52型丙(付岩井小隊)」搭載「瑞鶴」秘書艦で「零戦62型(爆戦)」を2つ廃棄！</JP-Detail>
+    <TR-Detail>숙련도 Max인「영전52병형(이와이 소대)」를 탑재한「즈이카쿠」를 비서함으로,「영전62형(폭전)」2기 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>630</ID>
+    <JP-Name>「艦戦」隊の再編成</JP-Name>
+    <TR-Name>「함전」대의 재편성</TR-Name>
+    <JP-Detail>練度max「零戦21型(熟練)」搭載「瑞鶴」が秘書の状態で「零戦21型」を2つ廃棄！</JP-Detail>
+    <TR-Detail>숙련도 Max인「영전 21형(숙련)」을 탑재한「즈이카쿠」를 비서함으로「영전 21형」 2기 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>629</ID>
+    <JP-Name>「艦戦」隊の再編成</JP-Name>
+    <TR-Name>「함전」대의 재편성</TR-Name>
+    <JP-Detail>練度max「零戦52型(熟練)」搭載「瑞鶴」が秘書艦で「零戦52型丙(六〇一空)」を廃棄！</JP-Detail>
+    <TR-Detail>숙련도 Max인「영전 52형(숙련)」을 탑재한「즈이카쿠」를 비서함으로「영전 52형병형(601항공대)」폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>628</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종전환</TR-Name>
+    <JP-Detail>練度max「零戦21型(熟練)」搭載空母を秘書艦にして、新たに「零戦52型」を2つ廃棄！</JP-Detail>
+    <TR-Detail>숙련도 Max「영전21형(숙련)」을 탑재한 공모를 기함으로, 새롭게「영전52형」2기 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>627</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종전환</TR-Name>
+    <JP-Detail>「零戦21型(熟練)」搭載空母を秘書艦にして、新たに「零戦52型」を2つ廃棄！</JP-Detail>
+    <TR-Detail>「영전21형(숙련)」을 탑재한 공모를 비서함으로,「영전52형」2기 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>626</ID>
+    <JP-Name>精鋭「艦戦」隊の新編成</JP-Name>
+    <TR-Name>정예 [함전] 대의 신편성</TR-Name>
+    <JP-Detail>要熟練搭乗員：練度max「零戦21型」搭載「鳳翔」秘書艦で「零戦21型」×2「九六艦戦」×1廃棄！</JP-Detail>
+    <TR-Detail>※숙련승무원[熟練搭乗員]이 없으면 달성불가. 임무 달성시 숙련승무원을 1개 소모)숙련도 MAX 영식 함상 전투기 21형을 탑제한 호쇼를 비서함으로 하고 영식 함상 전투기 21형 2개와 96식 함상 전투기 1개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>625</ID>
+    <JP-Name>試製航空艤装の追加試作</JP-Name>
+    <TR-Name>시제 항공의장의 추가 시험품</TR-Name>
+    <JP-Detail>	「工廠」で装備アイテムを9つ「廃棄」して、「試製甲板カタパルト」を追加試作します。</JP-Detail>
+    <TR-Detail>공창에서 장비아이템을 9개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>624</ID>
+    <JP-Name>試作艤装の準備</JP-Name>
+    <TR-Name>시작 의장의 준비</TR-Name>
+    <JP-Detail>「工廠」で装備アイテムを7つ「廃棄」して、「試製甲板カタパルト」を準備します。</JP-Detail>
+    <TR-Detail>「공창」에서 장비 7개를「폐기」하여,「시제갑판 캐터펠트」를 준비하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>623</ID>
+    <JP-Name>精鋭「九七式艦攻」部隊の編成</JP-Name>
+    <TR-Name>정예 '97식 함공' 부대의 편성</TR-Name>
+    <JP-Detail>「翔鶴」または「赤城」を秘書艦にした状態で新たに「九七式艦攻」を3つ廃棄！</JP-Detail>
+    <TR-Detail>'쇼카쿠' 또는 '아카기'를 비서함으로 한 상태로 '97식 함공'을 3기 폐기하라! (임무 수행 전 자물쇠 해제 확인 철저히!)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>622</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종전환</TR-Name>
+    <JP-Detail>「九七式艦攻(村田隊)」搭載「翔鶴」を秘書艦にして、新たに「天山」を2つ廃棄！</JP-Detail>
+    <TR-Detail>'97식 함공 (무라타 대)'를 탑재한 '쇼카쿠'를 비서함으로 하여, '텐잔'을 2기 폐기하라. (임무 수행 전 자물쇠 해제 확인 철저히!)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>621</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종전환</TR-Name>
+    <JP-Detail>「九七式艦攻(村田隊)」搭載「翔鶴」を秘書艦にして、新たに「天山」を2つ廃棄！</JP-Detail>
+    <TR-Detail>「97식함공(무라타대)」을 탑재한「쇼카쿠」를 비서함으로「텐잔」2개 폐기(무라타대 장비잠금 해제 필수,잠금상태 시 임무 실패)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>620</ID>
+    <JP-Name>「工廠」倉庫の整理整頓！</JP-Name>
+    <TR-Name>"공창" 창고의 정리정돈!</TR-Name>
+    <JP-Detail>不要な装備を複数「廃棄」して、新装備受け入れのため「工廠」倉庫の整理を進めましょう！</JP-Detail>
+    <TR-Detail>불필요한 장비를 복수 "폐기"하여 신장비 수령을 위한 "공창" 창고의 정리를 추진합시다!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>619</ID>
+    <JP-Name>装備の改修強化</JP-Name>
+    <TR-Name>장비의 개수 강화</TR-Name>
+    <JP-Detail>「改修工廠」で「装備」の改修強化に努めます。</JP-Detail>
+    <TR-Detail>개수 공창에서 장비의 개수 강화를 1회하라.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>618</ID>
+    <JP-Name>はじめての「装備改修」！</JP-Name>
+    <TR-Name>첫 「장비 개수」!</TR-Name>
+    <JP-Detail>「改修工廠」で「装備」を改修してみましょう！明石さん、お願いします！</JP-Detail>
+    <TR-Detail>「개수공창」에서「장비」를 개수하자! 아카시 씨, 부탁드립니다!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>617</ID>
+    <JP-Name>「伊良湖」の準備</JP-Name>
+    <TR-Name>「이라코」 준비</TR-Name>
+    <JP-Detail>「工廠」で不要な装備アイテムをいくつか「廃棄」して、新型給糧艦召喚の準備をしましょう！</JP-Detail>
+    <TR-Detail>「공창」에서 필요없는 장비를 10개 분해하여, 신형 보급함 소환 준비를 하자!.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>616</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종 전환</TR-Name>
+    <JP-Detail>「零戦52型丙(六〇一空)」搭載空母を秘書艦にした状態で新たに「烈風」を2つ廃棄！</JP-Detail>
+    <TR-Detail>「영식 함상전투기 52형병(601전대)」를 탑재한 공모를 비서함으로 「렛푸」2기를 폐기(임무 완료전까지 601영전 장비변경,잠금 및 기함변경 시 실패)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>615</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종 전환</TR-Name>
+    <JP-Detail>「九九式艦爆(江草隊)」搭載空母を秘書艦にした状態で新たに「彗星」を2つ廃棄！</JP-Detail>
+    <TR-Detail>「99식함폭기(에구사 대)」를 탑재한 공모를 비서함함으로 「스이세이」2기를 폐기(임무 완료전까지 장비변경,잠금 및 기함변경 시 실패)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>614</ID>
+    <JP-Name>機種転換</JP-Name>
+    <TR-Name>기종변환(토모나가)</TR-Name>
+    <JP-Detail>「九七式艦攻(友永隊)」搭載空母を秘書艦にした状態で新たに「天山」を2つ廃棄！</JP-Detail>
+    <TR-Detail>「97식함폭 개(토모나가대)」를 장착한 항공모함을 비서함으로 두고, 텐잔을 2대 폐기 (비서함의 '아이템잠금'을 비활성화시켜야함)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>613</ID>
+    <JP-Name>資源の再利用</JP-Name>
+    <TR-Name>자원의 재이용</TR-Name>
+    <JP-Detail>「工廠」で余剰の装備アイテムをなるべく多く「廃棄」して、鋼材の再利用に努めよう！</JP-Detail>
+    <TR-Detail>공창에서 장비를 24회 폐기. (복수의 아이템을 동시 폐기는 1회로 간주함)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>612</ID>
+    <JP-Name>輸送用ドラム缶の準備</JP-Name>
+    <TR-Name>수송용 드럼통의 준비</TR-Name>
+    <JP-Detail>「工廠」で装備アイテムを3回「廃棄」して、輸送用のドラム缶を準備します。</JP-Detail>
+    <TR-Detail>공창에서 장비를 3개 폐기하여 수송용 드럼통을 준비한다.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>609</ID>
+    <JP-Name>軍縮条約対応！</JP-Name>
+    <TR-Name>군축 조약 대응!</TR-Name>
+    <JP-Detail>少し艦隊規模が大きくなりすぎました！「工廠」で不要な艦を2隻「解体」してください！</JP-Detail>
+    <TR-Detail>공창에서 불필요한 함선을 2척 해체해 주십시오!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>608</ID>
+    <JP-Name>艦娘「建造」艦隊強化！</JP-Name>
+    <TR-Name>칸무스「건조」함대 강화!</TR-Name>
+    <JP-Detail>艦隊強化のため、「工廠」で艦娘を本日中に3隻「建造」しよう！</JP-Detail>
+    <TR-Detail>함대 강화를 위해, 공창에서 칸무스를 오늘 안에 3척 건조하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>607</ID>
+    <JP-Name>装備「開発」集中強化！</JP-Name>
+    <TR-Name>장비「개발」집중강화!</TR-Name>
+    <JP-Detail>「工廠」で装備アイテムを本日中に3回「開発」しよう(失敗もOK)！</JP-Detail>
+    <TR-Detail>공창에서 장비 아이템을 오늘 안에 3회 개발하자 (실패도 OK)!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>606</ID>
+    <JP-Name>新造艦「建造」指令</JP-Name>
+    <TR-Name>신조함「건조」지령</TR-Name>
+    <JP-Detail>「工廠」で艦娘を本日中に新たに「建造」しよう！</JP-Detail>
+    <TR-Detail>공창에서 함선을 1회 건조하라.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>605</ID>
+    <JP-Name>新装備「開発」指令</JP-Name>
+    <TR-Name>신장비 「개발」지령</TR-Name>
+    <JP-Detail>「工廠」で装備アイテムを新たに「開発」しよう(失敗もOK)！</JP-Detail>
+    <TR-Detail>공창에서 장비를 새롭게 개발하자 (실패도 OK)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>604</ID>
+    <JP-Name>はじめての「廃棄」！</JP-Name>
+    <TR-Name>첫 「폐기」!</TR-Name>
+    <JP-Detail>「工廠」で不要な装備アイテムを「廃棄」してみよう！</JP-Detail>
+    <TR-Detail>「공창」에서 불필요한 장비 아이템을「폐기」해보자！</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>504</ID>
+    <JP-Name>艦隊酒保祭り！</JP-Name>
+    <TR-Name>함대 PX 축제! - 일일반복</TR-Name>
+    <JP-Detail>艦隊酒保祭り！各艦に延べ15回以上の補給を実施しよう！</JP-Detail>
+    <TR-Detail>당일 05:00 부터 다음날 04:59 까지 15회 보급 (일괄보급은 1회로 계산되니 주의)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>503</ID>
+    <JP-Name>艦隊大整備！</JP-Name>
+    <TR-Name>함대 대정비 - 일일반복</TR-Name>
+    <JP-Detail>各艦隊から整備が必要な艦を5隻以上ドック入りさせ、大規模な整備をしよう！</JP-Detail>
+    <TR-Detail>당일 05:00 부터 다음날 04:59 까지 군함 5척 수리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>420</ID>
+    <JP-Name>機動部隊の運用を強化せよ！</JP-Name>
+    <TR-Name>기동부대의 운용을 강화하라!</TR-Name>
+    <JP-Detail>機動部隊遠征を実施、「MO作戦」及び「敵母港空襲作戦」を展開、これを成功させよ！</JP-Detail>
+    <TR-Detail>기동부대 원정을 실시,「MO작전」및「적 모항 공습작전」(80시간 원정)을 전개, 성공시켜라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>419</ID>
+    <JP-Name>観艦式を敢行せよ！</JP-Name>
+    <TR-Name>관함식을 감행하자!</TR-Name>
+    <JP-Detail>練度の高い艦隊で観艦式本番を実施する。「観艦式」を実施し、これを成功させよ！</JP-Detail>
+    <TR-Detail>「관함식」(8번)원정을 1회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>418</ID>
+    <JP-Name>観艦式予行を実施せよ！</JP-Name>
+    <TR-Name>관함식예행을 실시하자!</TR-Name>
+    <JP-Detail>観艦式を実施する。予行として「観艦式予行」を複数回実施し、これを2回成功させよ！</JP-Detail>
+    <TR-Detail>「관함식예행」(7번)원정을 2회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>417</ID>
+    <JP-Name>囮機動部隊支援作戦を実施せよ！</JP-Name>
+    <TR-Name>미끼기동부대지원작전을 수행하라!</TR-Name>
+    <JP-Detail>「囮機動部隊支援作戦」を実施し、これを成功させよ!</JP-Detail>
+    <TR-Detail>「미끼 기동부대 지원작전」(15번)원정을 1회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>416</ID>
+    <JP-Name>防空射撃演習を実施せよ！</JP-Name>
+    <TR-Name>방공사격연습을 실시하라!</TR-Name>
+    <JP-Detail>「防空射撃演習」を複数回実施し、艦隊の防空能力を高めよ！</JP-Detail>
+    <TR-Detail>「방공 사격 연습」(6번)원정을 3회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>415</ID>
+    <JP-Name>遠洋潜水艦作戦の成果を拡大せよ！</JP-Name>
+    <TR-Name>원양잠수함작전의 성과를 확대하자!</TR-Name>
+    <JP-Detail>「遠洋潜水艦作戦」を継続実施し、潜水艦隊の練度向上と敵艦隊漸減に努めよ！</JP-Detail>
+    <TR-Detail>"원양잠수함작전"을 실시, 잠수함대의 숙련도 향상과 적함대점멸에 힘써라! (#39 원정 2회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>414</ID>
+    <JP-Name>遠洋潜水艦作戦を実施せよ！</JP-Name>
+    <TR-Name>원양 잠수함 작전을 실시하라!</TR-Name>
+    <JP-Detail>「遠洋潜水艦作戦」を実施し、潜水艦隊の練度向上と敵艦隊漸滅に努めよ！</JP-Detail>
+    <TR-Detail>"원양잠수함작전"을 실시, 잠수함대의 숙련도 향상과 적함대점멸에 힘써라! (#39 원정 1회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>413</ID>
+    <JP-Name>	(続)航空火力艦の運用を強化せよ！</JP-Name>
+    <TR-Name>(계속)항공화력함의 운용을 강화하라!</TR-Name>
+    <JP-Detail>「航空戦艦運用演習」を継続実施し、航空火力艦の運用の強化に引き続き努めよ！</JP-Detail>
+    <TR-Detail>"항공전함운용연습"을 계속 실시하여, 항공화력함의 운용을 계속 강화하자! (#23 원정 3회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>412</ID>
+    <JP-Name>航空火力艦の運用を強化せよ！</JP-Name>
+    <TR-Name>항공 화력함의 운용을 강화하라!</TR-Name>
+    <JP-Detail>「航空戦艦運用演習」を実施し、航空火力艦の運用の強化に努めよ！</JP-Detail>
+    <TR-Detail>"항공전함운용연습"을 실시하여 항공화력함의 운용을 강화하자! (#23 원정 1회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>411</ID>
+    <JP-Name>南方への鼠輸送を継続実施せよ!</JP-Name>
+    <TR-Name>남방쥐수송을 계속 실시하라!</TR-Name>
+    <JP-Detail>今週中に「東京急行」系遠征を継続的に実施、同種作戦を7回成功させよう!</JP-Detail>
+    <TR-Detail>금주 안에 "도쿄급행"계(#37, #38) 원정을 지속적으로 실시, 동종 작전을 7회 성공시켜라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>410</ID>
+    <JP-Name>南方への輸送作戦を成功させよ！</JP-Name>
+    <TR-Name>남쪽으로 수송 작전을 성공시켜라!</TR-Name>
+    <JP-Detail>激戦海域である南方海域への「東京急行」系遠征を敢行、これを成功させよ！</JP-Detail>
+    <TR-Detail>도쿄급행 계열 원정 1회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>409</ID>
+    <JP-Name>潜水艦派遣による海外艦との接触作戦</JP-Name>
+    <TR-Name>잠수함파견에 의한 해외함과의 접촉작전</TR-Name>
+    <JP-Detail>有力な潜水艦隊派遣による海外艦との接触作戦を成功させよ！</JP-Detail>
+    <TR-Detail>유력한 잠수함대 파견으로 해외함과의 접촉작전을 성공시켜라! (#31 원정 1회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>408</ID>
+    <JP-Name>潜水艦派遣作戦による技術入手の継続！</JP-Name>
+    <TR-Name>잠수함파견작전으로 기술 입수를 계속!</TR-Name>
+    <JP-Detail>第3次及び第4次潜水艦派遣作戦を成功させ、他国製技術の導入に努めよ！</JP-Detail>
+    <TR-Detail>제3차 및 제4차 잠수함파견작전을 성공시켜, 외국제 기술을 수입하라! (#30 원정 2회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>406</ID>
+    <JP-Name>第二次潜水艦派遣作戦</JP-Name>
+    <TR-Name>제2차 잠수함 파견작전</TR-Name>
+    <JP-Detail>第2次潜水艦派遣作戦を成功させよう！</JP-Detail>
+    <TR-Detail>제2차 잠수함 파견작전을 성공시켜라! (#30 원정 1회 성공)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>404</ID>
+    <TR-Name>대규모 원정작전 발령 - 주간</TR-Name>
+    <TR-Detail>월요일 05시부터 다음주 월요일 04:59까지 원정 30회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>403</ID>
+    <JP-Name>「遠征」を１０回成功させよう！</JP-Name>
+    <TR-Name>원정 10회 성공 - 일일반복</TR-Name>
+    <JP-Detail>本日中に「遠征」10回成功させよう！</JP-Detail>
+    <TR-Detail>당일 05:00 부터 다음날 04:59 까지 원정 10번 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>402</ID>
+    <JP-Name>「遠征」を3回成功させよう！</JP-Name>
+    <TR-Name>원정 3회 성공 - 일일반복</TR-Name>
+    <JP-Detail>本日中に「遠征」3回成功させよう！</JP-Detail>
+    <TR-Detail>당일 05:00 부터 다음날 04:59 까지 원정 3번 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>311</ID>
+    <JP-Name>精鋭艦隊演習</JP-Name>
+    <TR-Name>정예 함대 연습</TR-Name>
+    <JP-Detail>同日中に「演習」で7回以上「勝利」をおさめ、我が精鋭艦隊の練度を示そう！</JP-Detail>
+    <TR-Detail>하루 중에 "연습"에서 7회 이상 승리해 정예부대의 훈련도를 과시하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>310</ID>
+    <TR-Name>FS작전에 대비해 함대 숙련도 향상에 진력하라!</TR-Name>
+    <TR-Detail>FS작전에 대비해 함대 숙련도의 향상을 도모한다! 오늘 중으로 "연습"에서 4회 이상 "승리"하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>309</ID>
+    <JP-Name>北方再突入に備え、練度向上に努めよ！</JP-Name>
+    <TR-Name>북방재돌입을 대비하여 숙련도 향상에 힘쓰자!</TR-Name>
+    <JP-Detail>北方再突入に備え、練度向上に努めよ！</JP-Detail>
+    <TR-Detail>함대재돌입에 대비해, 함대 숙련도 향상을 도모! 오늘 내에 「연습」에서 4회이상 승리하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>308</ID>
+    <JP-Name>演習を強化、艦隊の練度向上に努めよ！</JP-Name>
+    <TR-Name>연습을 강화, 함대의 숙련도를 향상시키자!</TR-Name>
+    <JP-Detail>艦隊のさらなる練度向上を図る！本日中に「演習」で4回以上「勝利」をおさめよう！</JP-Detail>
+    <TR-Detail>함대의 추가 숙련도 향상을 위해 오늘 내에 「연습」4회 승리하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>307</ID>
+    <JP-Name>艦隊の練度向上に努めよ！</JP-Name>
+    <TR-Name>함대의 숙련도 향상에 힘써라!</TR-Name>
+    <JP-Detail>作戦前に艦隊の練度向上を図る！本日中に「演習」で3回以上「勝利」をおさめよう！</JP-Detail>
+    <TR-Detail>작전에 앞서 함대의 숙련도 향상을 도모하라! 오늘 안에 「연습」에서 3회 이상 「승리」를 쟁취하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>304</ID>
+    <JP-Name>「演習」で他提督を圧倒せよ！</JP-Name>
+    <TR-Name>"연습"으로 타 제독을 압도하라!</TR-Name>
+    <JP-Detail>本日中に他の司令官の艦隊との「演習」で5回以上「勝利」をおさめよう！</JP-Detail>
+    <TR-Detail>오늘 안에 다른 사령관의 함대와의 "연습"에서 5회 이상 "승리"를 거두자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>303</ID>
+    <JP-Name>「演習」で練度向上！</JP-Name>
+    <TR-Name>"연습"으로 숙련도 향상!</TR-Name>
+    <JP-Detail>本日中に他の司令官の艦隊に対して3回「演習」を挑もう！</JP-Detail>
+    <TR-Detail>오늘 안에 다른 사령관의 함대에게 3회 연습 도전하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>302</ID>
+    <JP-Name>大規模演習</JP-Name>
+    <TR-Name>대규모연습 - 주간</TR-Name>
+    <JP-Detail>今週中に「演習」で他の提督の艦隊に対して20回「勝利」しよう！</JP-Detail>
+    <TR-Detail>이번 주 안에 "연습"으로 타 제독의 함대에게 20회 "승리"하자!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>299</ID>
+    <JP-Name>年越し準備！師走の「間宮」のお手伝い</JP-Name>
+    <TR-Name>새해맞이 준비! 연말의 "마미야" 돕기</TR-Name>
+    <JP-Detail>提督…もしよかったら…「お飾り材料」32個使って、お飾りを一緒に作りませんか？</JP-Detail>
+    <TR-Detail>제독님... 혹시 괜찮으시다면... "장식 재료" 32개를 써서, 장식을 함께 만드시지 않겠나요? (장식 재료 32개 소지로 달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>298</ID>
+    <JP-Name>師走の「間宮」のお手伝い</JP-Name>
+    <TR-Name>연말의 "마미야" 돕기</TR-Name>
+    <JP-Detail>提督お手伝いすみません…「お飾り材料」を16個集めて頂けないでしょうか？</JP-Detail>
+    <TR-Detail>제독님, 도움을 요청해 죄송합니다... "장식 재료"를 16개 모아주실 수 없을까요? (장식 재료 16개 소지로 달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>297</ID>
+    <JP-Name>「礼号作戦」実施せよ！</JP-Name>
+    <TR-Name>"례호작전"을 실시하라!</TR-Name>
+    <JP-Detail>精強な「水上反撃部隊」で、南西諸島沖ノ島沖に突入！同海域の敵戦力を撃滅せよ！</JP-Detail>&gt;
+    <TR-Detail>정강한 "수상반격부대"로 남서제도 오키노시마 앞바다(2-5)에 돌입, 적 전력을 격멸하라! (카스미 기함, 아시가라, 오오요도, 아사시모, 키요시모 최대 6척)</TR-Detail></Quest>
+  <Quest>
+    <ID>296</ID>
+    <JP-Name>新編成航空戦隊、北方へ進出せよ！</JP-Name>
+    <TR-Name>신편성 항공전대, 북방으로 진출하라!</TR-Name>
+    <JP-Detail>「新編成航空戦隊」をアルフォンシーノ方面へ進出、敵泊地の機動部隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>"신편성 항공전대"를 알폰시노방면(3-3)에 진출시켜 적 정박지의 기동부대를 격멸하라! (항모 2척+항공전함 or 항공순양함 2척+구축함 2척으로 보스방 S 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>295</ID>
+    <JP-Name>「第十六戦隊(第二次)」出撃せよ！</JP-Name>
+    <TR-Name>"제16전대"(제2차) 출격하라!</TR-Name>
+    <JP-Detail>「第十六戦隊(第二次)」をオリョール海に展開、敵主力艦隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>제16전대"(제2차)를 오룔해(2-3)에 전개, 적 주력을 포착, 격멸하라! (나토리 기함, 이스즈, 키누 포함 최대 6척)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>294</ID>
+    <JP-Name>「小沢艦隊」出撃せよ！</JP-Name>
+    <TR-Name>"오자와 함대" 출격하라!</TR-Name>
+    <JP-Detail>「小沢艦隊」を沖ノ島海域前面に展開し、侵攻する敵機動部隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>오자와 함대를 오키노시마 해역 전면(2-4)에 전개해 침공하는 적 기동부대를 포착, 이를 격멸하라! (즈이카쿠 개 기함, 즈이호 개, 치토세 항, 치요다 항, 이세 개, 휴가 개 편성으로 보스전 S승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>293</ID>
+    <JP-Name>「第三航空戦隊」南西諸島防衛線に出撃！</JP-Name>
+    <TR-Name>"제3항공전대", 남서제도방위선으로 출격!</TR-Name>
+    <JP-Detail>編成した「第三航空戦隊」を南西諸島防衛線に展開、敵侵攻部隊を捕捉迎撃せよ！</JP-Detail>
+    <TR-Detail>편성한 "제3항공전대"를 남서제도방위선(1-4)에 전개, 적 침공부대를 포착, 격멸하라! (즈이카쿠 개 기함, 즈이호, 치토세 항, 치요다 항 포함 최대 6척 편성으로 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>292</ID>
+    <JP-Name>秋刀魚漁：もっと頑張ってもいいのよ！</JP-Name>
+    <TR-Name>꽁치잡이: 더 열심히 해도 된다구!</TR-Name>
+    <JP-Detail>かなり大変だけれど、秋刀魚漁、もっともっと頑張ってもいいのよ！</JP-Detail>
+    <TR-Detail>아주 힘들겠지만, 꽁치잡이, 더 많이 열심히 해도 된다구!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>291</ID>
+    <JP-Name>秋刀魚漁：「秋刀魚」をもっと収獲しなきゃ！</JP-Name>
+    <TR-Name>꽁치잡이:[꽁치]를 더 수확하라!</TR-Name>
+    <JP-Detail>ちょっと大変だけれど、漁場の安全を確保して「秋刀魚」を10尾確保しなきゃ駄目よ！</JP-Detail>
+    <TR-Detail>조금 힘들겠지만, 어장의 안전을 확보해서 "꽁치"를 10마리 확보하지 않으면 안 돼!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>290</ID>
+    <JP-Name>秋刀魚漁：「秋刀魚」を収獲しよう！</JP-Name>
+    <TR-Name>꽁치잡이:[꽁치]를 수확하라!</TR-Name>
+    <JP-Detail>近海及び北方海域の漁場に展開する敵艦隊を撃破して、「秋刀魚」を3尾入手せよ！</JP-Detail>
+    <TR-Detail>진수부 근해 및 북방해역의 어장에 전개한 적 함대를 격파해 "꽁치"를 3마리 입수하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>289</ID>
+    <JP-Name>「第十六戦隊(第一次)」出撃せよ！</JP-Name>
+    <TR-Name>"제16전대 (제1차)" 출격하라!</TR-Name>
+    <JP-Detail>「第十六戦隊(第一次)」をバシー島沖に展開、敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>「아시가라(기함)」「쿠마」「나가라」를 포함한 제16전대(제1차)로 2-2 보스전 S승(3척 자유편성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>288</ID>
+    <JP-Name>新編「第二一戦隊」北方へ出撃せよ！</JP-Name>
+    <TR-Name>신편 "제21전대" 북방으로 출격하라!</TR-Name>
+    <JP-Detail>新編「第二一戦隊」を基幹とする艦隊で北方海域モーレイ海に出撃、敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>"신편 "제21전대"를 중핵으로 하는 함대를 북방해역 모레이해(3-1)에 출격시켜 적을 격멸하라! (나치 개2, 아시가라 개2, 타마, 키소 포함 최대 6척 편성으로 보스전 S승리)"</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>287</ID>
+    <JP-Name>「第五航空戦隊」珊瑚諸島沖に出撃せよ！</JP-Name>
+    <TR-Name>"제5항공전대" 산호제도 앞바다에 출격하라!</TR-Name>
+    <JP-Detail>再編成した「第五航空戦隊」を珊瑚諸島沖に展開、敵機動部隊を捕捉撃滅せよ！</JP-Detail>
+    <TR-Detail>재편성한 "제5항공전대"를 산호제도 해역(5-2)에 전개해 적 기동부대를 포착, 격파하라!(쇼카쿠, 즈이카쿠, 오보로, 아키구모 포함 최대 6척 편성으로 보스전 S승리)"</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>286</ID>
+    <JP-Name>鎮守府正面の対潜哨戒を強化せよ！</JP-Name>
+    <TR-Name>진수부 정면의 대잠초계를 강화하라!</TR-Name>
+    <JP-Detail>鎮守府正面の対潜哨戒を強化し、海上資源輸送路の安全を確立せよ！</JP-Detail>
+    <TR-Detail>진수부 정면에 대한 대잠초계를 강화해, 해상자원수송로의 안전을 확보하라! (1-5해역 보스 A승리 4회로 달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>285</ID>
+    <JP-Name>「空母機動部隊」北方海域に進出せよ！</JP-Name>
+    <TR-Name>"항모기동부대", 북방해역으로 진출하라!</TR-Name>
+    <JP-Detail>航空母艦を旗艦とした空母機動部隊を北方AL海域方面に展開、敵戦力を撃滅せよ！</JP-Detail>
+    <TR-Detail>항공모함을 기함으로 한 항모기동부대를 북방AL해역 방면으로 전개해 적 전력을 격멸하라! (3-5해역 보스에서 S승리로 달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>284</ID>
+    <TR-Name>FS작전의 교두보를 확보하라!</TR-Name>
+    <TR-Detail>적 기동부대를 포착하여 맹공하여 적 항모의 감세를 도모하므로써 FS방면 진출을 위한 교두보를 형성하라!(적 항공모함(정규공모,경공모) 10회 격침(추천:2-3))</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>283</ID>
+    <TR-Name>서부 방면 파견 함대, 출격하라！</TR-Name>
+    <TR-Detail>이벤트해역 E-5 클리어</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>282</ID>
+    <TR-Name>솔로몬 바다 쪽의 제공권을 빼앗아라!</TR-Name>
+    <TR-Detail>이벤트해역 E-4 게이지 파괴 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>281</ID>
+    <TR-Name>주력 기동 부대 전로 초계를 실시하라!</TR-Name>
+    <TR-Detail>적 잠수함 6척 격침(추천:1-5)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>280</ID>
+    <TR-Name>제2차 SN작전, 초동작전 완료!</TR-Name>
+    <TR-Detail>솔로몬 해역 전방에 전개한 적의 전력을 파쇄하여 초동작전(E1,E2)를 완수하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>279</ID>
+    <JP-Name>「第一水雷戦隊」北方ケ号作戦、再突入！</JP-Name>
+    <TR-Name>"제1수뢰전대", 북방 케호작전 재돌입!</TR-Name>
+    <JP-Detail>北方再突入準備の新編「一水戦」で北方キス島に再突入を敢行、同撤収作戦を完遂せよ!</JP-Detail>
+    <TR-Detail>북방재돌입 준비를 마치고 재편성된 \"1수전\"으로 북방 키스섬에 재돌입! 철수작전을 완수하라!("아부쿠마 개2"를 기함으로 "히비키(베르니)", "유구모", "나가나미", "아키구모", "시마카제"로 구성된 함대로 3-2해역 보스전 S승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>278</ID>
+    <JP-Name>「第一水雷戦隊」ケ号作戦、突入せよ！</JP-Name>
+    <TR-Name>"제1수뢰전대", 케호작전 돌입하라!</TR-Name>
+    <JP-Detail></JP-Detail>
+    <TR-Detail>북방돌입 준비를 완료했다. "1수전"으로 북방 키스섬에 돌입! 포위망을 뚫고 아군을 구출하라! (아부쿠마를 기함으로 하고 히비키,하츠시모,와카바,사미다레,시마카제로 구성된 함대로 3-2 보스전에서 승리달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>277</ID>
+    <JP-Name>「第六駆逐隊」対潜哨戒を徹底なのです！</JP-Name>
+    <TR-Name>제6구축대 대잠초계를 철저히 하는거예요!</TR-Name>
+    <JP-Detail>「第六駆逐隊」を含む艦隊で鎮守府正面で対潜哨戒を実施、敵潜水艦部隊を痛打せよ！</JP-Detail>
+    <TR-Detail>아카츠키,히비키,이나즈마,이카즈치로 구성된 함대로 1-5보스전 A승리 이상 달성(B이하 불가,상기 4척만으로 구성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>276</ID>
+    <JP-Name>海上突入部隊、進発せよ！</JP-Name>
+    <TR-Name>해상 돌입 부대, 출발하라!</TR-Name>
+    <JP-Detail>「比叡」「霧島」「長良」「暁」「雷」「電」の艦隊で、南方海域進出作戦を実施、敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>히에이,키리시마,나가라,아카츠키,이나즈마,이카즈치로 구성된 함대로 5-1보스전 S승 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>275</ID>
+    <JP-Name>抜錨！「第十八戦隊」</JP-Name>
+    <TR-Name>발묘! "제18전대"</TR-Name>
+    <JP-Detail>「天龍」「龍田」を基幹戦力とした「第十八戦隊」で出撃し、オリョール海の敵主力を撃滅せよ！</JP-Detail>
+    <TR-Detail>2-3 보스전 S승 달성.편성임무와 동일하게 텐류+타츠다 이외의 함이 추가로 편성되어있어도 무방.기함지정 없음</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>274</ID>
+    <JP-Name>「第六駆逐隊」対潜哨戒なのです！</JP-Name>
+    <TR-Name>"제6구축대" 대잠초계인 거에요!</TR-Name>
+    <JP-Detail>「第六駆逐隊」を含む艦隊で鎮守府正面へ展開、対潜哨戒を実施せよ！</JP-Detail>
+    <TR-Detail>아카츠키,히비키,이나즈마,이카즈치로 구성된 함대로 1-5보스전 승리 또는 C패배 달성(상기 4척만으로 구성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>273</ID>
+    <JP-Name>新編「三川艦隊」ソロモン方面へ！</JP-Name>
+    <TR-Name>신 편성 "미카와 함대" 솔로몬 방면으로~!</TR-Name>
+    <JP-Detail>第一艦隊に編成した「三川艦隊」を南方海域に進出させ、同方面の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>쵸카이改2를 기함으로 미카와 함대(「후루타카」 「카코」 「아오바」 「키누가사」 「유바리」 「텐류」 중 5척 선택)를 편성하여 5-1 보스전 S승 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>272</ID>
+    <JP-Name>「改装防空重巡」出撃せよ！</JP-Name>
+    <TR-Name>「개수방공중순」출격하라!</TR-Name>
+    <JP-Detail>摩耶改または摩耶改二及び軽巡1駆逐2隻を含む艦隊でオリョール海の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>마야改2 또는 마야改, 경순1, 구축2척을 포함한 함대로 2-3보스전에서 S승리 달성. 기함자유. 상기한 4척에 다른 칸무스를 더 추가해도OK</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>271</ID>
+    <JP-Name>「那智戦隊」抜錨せよ！</JP-Name>
+    <TR-Name>「나치전대」발묘하라!</TR-Name>
+    <JP-Detail>旗艦「那智」及び「初霜」「霞」「潮」「曙」他1隻の艦隊でバシー島沖の敵を殲滅せよ！</JP-Detail>
+    <TR-Detail>기함「나치」및「하츠시모」「카스미」「우시오」「아케보노」외 1척의 함대로 2-2 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>270</ID>
+    <JP-Name>「第二二駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>「제22구축대」출격하라!</TR-Name>
+    <JP-Detail>「第二二駆逐隊」を含む艦隊で南西諸島防衛線に出撃、敵主力艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>「제22구축대」(사츠키,후미즈키,나가즈키+구축함1척)를 포함한 함대로 1-4 보스전 S승리(그 외 자유편성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>269</ID>
+    <JP-Name>「第二一駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>「제21구축대」출격하라!</TR-Name>
+    <JP-Detail>「第二一駆逐隊」を含む艦隊で出撃し、北方海域モーレイ海の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>「제21구축대」(하츠하루,네노히,와카바,하츠시모)를 포함한 함대로 3-1 보스전 S승리(그 외 자유편성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>268</ID>
+    <JP-Name>「第十一駆逐隊」対潜哨戒！</JP-Name>
+    <TR-Name>「제11구축대」대잠초계!</TR-Name>
+    <JP-Detail>「第十一駆逐隊」を含む艦隊で鎮守府正面へ展開、対潜哨戒を実施せよ！</JP-Detail>
+    <TR-Detail>「제11구축대」(후부키,시라유키,하츠유키,무라쿠모)로 구성된 함대로 1-5 보스전 C패배 이상 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>267</ID>
+    <JP-Name>「第十一駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>「제11구축대」출격하라!</TR-Name>\
+    <JP-Detail>「第十一駆逐隊」を含む艦隊で出撃し、オリョール海の敵を撃破せよ！</JP-Detail><TR-Detail>「제11구축대」(후부키,시라유키,하츠유키,무라쿠모)를 포함한 함대로 2-3 보스전 승리(그 외 자유편성)※기함자유</TR-Detail></Quest>
+  <Quest>
+    <ID>266</ID>
+    <JP-Name>「水上反撃部隊」突入せよ！</JP-Name>
+    <TR-Name>"수상반격부대" 돌입하라! </TR-Name>
+    <JP-Detail>駆逐艦を旗艦とした重巡1隻(航巡不可)軽巡1隻駆逐艦4隻からなる水上挺身部隊、沖ノ島沖に突入せよ！</JP-Detail>
+    <TR-Detail>구축함을 기함으로,중순 1척과 경순1척,구축함 4척으로 구성된 함대로 2-5 보스 S승리 (윗길 색적주의!)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>265</ID>
+    <JP-Name>海上護衛強化月間</JP-Name>
+    <TR-Name>해상 호위 강화 월간</TR-Name>
+    <JP-Detail>鎮守府正面海域の対潜哨戒を強化し、敵潜水艦を制圧、安全な海上輸送体制を確立せよ！</JP-Detail>
+    <TR-Detail>진수부 전면 해역의 대잠초계를 강화하고 적의 잠수함을 제압해 안전한 해상 수송 체제를 확립하라!(1-5 보스전 A승 이상 10회)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>264</ID>
+    <JP-Name>「空母機動部隊」西へ！</JP-Name>
+    <TR-Name>「공모기동부대」서쪽으로!</TR-Name>
+    <JP-Detail>航空母艦2隻(随伴駆逐艦2隻)を基幹とする空母機動部隊で、カレー洋の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>항공모함 2척과 구축함 2척을 중심으로하는 공모기동부대로 4-2보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>263</ID>
+    <JP-Name>「第六戦隊」南西海域へ出撃せよ！</JP-Name>
+    <TR-Name>「제6전대」남서해역으로 출격하라!</TR-Name>
+    <JP-Detail>「古鷹」「加古」「青葉」「衣笠」を基幹とした「第六戦隊」で、沖ノ島沖の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>「후루타카」「카코」「아오바」「키누가사」로 구성된「제6전대」로 2-5 보스 S승리(그 외 자유편성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>262</ID>
+    <JP-Name>「西村艦隊」南方海域へ進出せよ！</JP-Name>
+    <TR-Name>「니시무라 함대」남방해역에 진출하라!</TR-Name>
+    <JP-Detail>「西村艦隊」を南方海域へ進出させ、敵主力艦隊へ突入、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>「니시무라 함대」(후소,야마시로,모가미,시구레,미치시오)를 중심으로 한 함대로 5-1 보스전 S승 (1척 자유편성,기함자유)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>261</ID>
+    <JP-Name>海上輸送路の安全確保に努めよ！</JP-Name>
+    <TR-Name>해상수송로의 안전을 확보하라</TR-Name>
+    <JP-Detail>鎮守府正面の対潜哨戒を反復実施し、安全な海上輸送路を確保せよ！</JP-Detail>
+    <TR-Detail>진수부 근해의 대잠 초계를 반복 실시하여 안전한 해상 수송로를 확보하라!!(1-5보스전을 3회이상 A이상으로 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>260</ID>
+    <JP-Name>「戦艦部隊」北方海域に突入せよ！</JP-Name>
+    <TR-Name>전함부대 북방해역에 돌입하라!</TR-Name>
+    <JP-Detail>戦艦2隻と直援軽空母1隻(正規空母無し)基幹の艦隊で北方AL海域に突入、敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>전함 2척과 지원 경항모 1척(정규항모 안됨)을 기반으로 한 함대로 북방 AL해역에 돌입, 적을 격멸하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>259</ID>
+    <JP-Name>「水上打撃部隊」南方へ！</JP-Name>
+    <TR-Name>수상타격부대 남방으로!</TR-Name>
+    <JP-Detail>	戦艦3隻軽巡1隻他を基幹とした水上打撃部隊で南方海域へ進出、敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>전함3척 경순1척을 기반으로 한 수상타격대를 남방해역에 진출, 적전력을 격멸하라!(5-1 보스를 S승리로 1번 클리어, 워스파이트를 제외한 저속/항공전함으로 편성)"</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>258</ID>
+    <JP-Name>「第二戦隊」抜錨！</JP-Name>
+    <TR-Name>제2전대 발묘!</TR-Name>
+    <JP-Detail>「第二戦隊」を基幹とした艦隊でカレー洋に進出、反復出撃により敵海上兵力を撃破せよ！</JP-Detail>
+    <TR-Detail>제2전대를 기반으로한 함대로 카레양에 진출. 반복출격으로 적 해상병력을 격파하라!(나가토형과 후소형 4척을 포함한 함대로 4-2 보스전 S승 2회 달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>257</ID>
+    <JP-Name>「水雷戦隊」南西へ！</JP-Name>
+    <TR-Name>"수뢰전대" 남서쪽으로!</TR-Name>
+    <JP-Detail>軽巡旗艦の水雷戦隊(軽巡最大3隻他駆逐艦)を急派、南西諸島防衛線で敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>경순양함을 기함으로 한 수뢰전대(경순양함 최대 3척, 구축함 1척 이상. 이외의 함종 불가)을 파견, 남서제도해역(1-4)보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>256</ID>
+    <JP-Name>「潜水艦隊」出撃せよ！</JP-Name>
+    <TR-Name>「잠수함대」출격하라!</TR-Name>
+    <JP-Detail>潜水艦戦力を中核とした艦隊で中部海域哨戒線へ反復出撃、敵戦力を漸滅せよ！</JP-Detail>
+    <TR-Detail>잠수함 전력을 중핵으로 구성한 함대를 중부해역초계선에 반복 출격시켜 적전력을 깎아내라!(중부해역 6-1 보스방을 S승으로 3번 클리어)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>255</ID>
+    <JP-Name>「水雷戦隊」バシー島沖緊急展開</JP-Name>
+    <TR-Name>수뢰전대 바시섬 바다 긴급전개</TR-Name>
+    <JP-Detail>軽巡を旗艦とした水雷戦隊(軽巡最大2隻他駆逐艦)でバシー島沖の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>경순양함을 기함으로한 수뢰전대(경순양함 최대2척,그외 구축함)으로 2-2 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>254</ID>
+    <JP-Name>「軽空母」戦隊、出撃せよ！</JP-Name>
+    <TR-Name>「경항모」전대 출격하라!</TR-Name>
+    <JP-Detail>軽空母1～2隻、軽巡1隻、駆逐艦3～4隻の艦隊でカムラン半島の敵を撃滅せよ！</JP-Detail>
+    <TR-Detail>경항모1~2척、경순1척、구축함3～4척의 함대로 2-1 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>253</ID>
+    <JP-Name>「第六〇一航空隊」出撃せよ！</JP-Name>
+    <TR-Name>601항공대 출격하라!</TR-Name>
+    <JP-Detail>雲龍型航空母艦「雲龍改」含む機動部隊で珊瑚島沖に出撃、敵機動部隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>「운류改」를 포함한 기동부대로 5-2 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>252</ID>
+    <JP-Name>戦艦「榛名」出撃せよ！</JP-Name>
+    <TR-Name>전함 하루나 출격하라!</TR-Name>
+    <JP-Detail>第二次改装実施した「榛名改二」を基幹とした艦隊で「南方海域」へ進出、敵艦隊主力を撃滅せよ！</JP-Detail>
+    <TR-Detail>제2차 개장실시를 끝낸 하루나를 기본으로 한 함대로, 남방해역에 진출 적 주력부대를 격파하라! (하루나 개2를 포함한 함대로 5-1 보스전 S승)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>251</ID>
+    <JP-Name>精鋭「第二航空戦隊」抜錨せよ！</JP-Name>
+    <TR-Name>정예 「제2항공전대」출격하라!</TR-Name>
+    <JP-Detail>錬成を終え再編成「二航戦」を基幹とした艦隊で、敵リランカ島を空襲、破砕せよ！</JP-Detail>
+    <TR-Detail>4-3보스전 S랭크 승리(「소류改2」(※기함),「히류改2」,구축함2척을 포함한 함대구성으로 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>250</ID>
+    <JP-Name>新編「第二航空戦隊」出撃せよ！</JP-Name>
+    <TR-Name>신편성「제2항공전대」 출격하라!</TR-Name>
+    <JP-Detail>新編「二航戦」を基幹とした艦隊で、珊瑚諸島沖に出撃、敵機動部隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>「히류改2」를 기함으로 하고 소류 와 구축함 두척이 포함된 함대로 5-2 보스전 S승리.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>249</ID>
+    <JP-Name>「第五戦隊」出撃せよ！</JP-Name>
+    <TR-Name>"제5전대" 출격하라!</TR-Name>
+    <JP-Detail>「第五戦隊」は沖ノ島沖の戦闘哨戒を実施、敵艦隊主力を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>「묘코」「나치」「하구로」를 중심으로 한 함대로 2-5 S랭크 클리어</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>248</ID>
+    <JP-Name>「第三十駆逐隊」対潜哨戒！</JP-Name>
+    <TR-Name>「제30구축대」대잠초계！</TR-Name>
+    <JP-Detail>「第三十駆逐隊(第二次)」は直ちに抜錨！鎮守府正面の対潜哨戒を実施せよ！</JP-Detail>
+    <TR-Detail>「무츠키」 「야요이」 「우즈키」 「모치즈키」4척으로 1-5 C패배 이상 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>247</ID>
+    <JP-Name>「航空戦艦」抜錨せよ！</JP-Name>
+    <TR-Name>「항공전함」 출항하라!</TR-Name>
+    <JP-Detail>航空戦艦2隻を基幹とする艦隊で、西方海域カスガダマ島の敵勢力を撃破せよ！</JP-Detail>
+    <TR-Detail>항공전함2대를 포함한 함대로 4-4보스전 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>245</ID>
+    <JP-Name>式の準備！(最終)</JP-Name>
+    <TR-Name>식의 준비! (최종)</TR-Name>
+    <JP-Detail>練度の高い(Lv.90～99)第一艦隊旗艦で出撃し、オリョール海の暁に勝利を刻め！</JP-Detail>
+    <TR-Detail>숙련도가 높은(Lv.90~99) 칸무스를 제1함대 기함으로 출격하여, 오룔 해(2-3)의 수평선에 승리를 새겨라!(레벨 90 이상의 칸무스를 기함으로 삼아 동부 오룔 해(2-3)의 보스전에서 S승리를 거두면 달성.)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>242</ID>
+    <JP-Name>敵東方中枢艦隊を撃破せよ！</JP-Name>
+    <TR-Name>적 동방중추함대를 격멸하라!</TR-Name>
+    <JP-Detail>西方海域カスガダマ島沖に出撃し、敵東方中枢艦隊を捕捉、これを撃破せよ！</JP-Detail>
+    <TR-Detail>서방해역 카스가다마 섬 앞바다에 출격하여 적 동방중추함대를 포착, 격파하라!(4-4 해역 보스전 1회 승리 - 구축2척, 항순1척이 함대에 포함시 보방 앞까지 루트고정)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>241</ID>
+    <JP-Name>敵北方艦隊主力を撃滅せよ！</JP-Name>
+    <TR-Name>적 북방함대 주력을 격멸하라!</TR-Name>
+    <JP-Detail>北方海域の深部に出撃し、敵北方艦隊の主力艦隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>북방해역의 심부에 출격하여 적 북방함대의 주력을 포착, 격멸하라!(3-3 or 3-4 or 3-5 해역 보스전 5회 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>230</ID>
+    <JP-Name>敵潜水艦を制圧せよ！</JP-Name>
+    <TR-Name>적 잠수함을 제압하라!</TR-Name>
+    <JP-Detail>対潜能力の充実した艦隊で出撃、敵潜水艦狩りを実施せよ！</JP-Detail>
+    <TR-Detail>대잠능력을 충실히 갖춘 함대로 출격해 적 잠수함 사냥을 실시하라! ※(잠수함을 6척 격침하면 달성.)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>229</ID>
+    <JP-Name>敵東方艦隊を撃滅せよ！</JP-Name>
+    <TR-Name>적 동방함대를 격멸하라!</TR-Name>
+    <JP-Detail>西方海域に出撃し、敵東方艦隊の主力を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>서방해역에 출격하여, 적 동방함대의 주력을 포착, 격멸하라!(서방해역(4해역) 보스전 12회 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>228</ID>
+    <JP-Name>海上護衛戦</JP-Name>
+    <TR-Name>해상호위전</TR-Name>
+    <JP-Detail>有力な対潜能力を持つ海上護衛隊によって、可能な限り多くの敵潜水艦を撃滅せよ！</JP-Detail>
+    <TR-Detail>월요일 05시부터 다음주 월요일 04:59까지 잠수함 15척 격침(추천: 1-5혹은 4해역)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>226</ID>
+    <JP-Name>南西諸島海域の制海権を握れ！</JP-Name>
+    <TR-Name>남서제도해역 제해권 획득 - 일일반복</TR-Name>
+    <JP-Detail>艦隊を南西諸島海域に全力出撃させ、多数の敵艦隊「主力」群を捕捉、撃滅せよ！</JP-Detail>
+    <TR-Detail>함대를 남서제도해역에 전력 출격시켜 다수의 적함대 '주력'군을 포착하여 격파하라 (2해역 보스전 5회 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>221</ID>
+    <JP-Name>ろ号作戦</JP-Name>
+    <TR-Name>로호작전</TR-Name>
+    <JP-Detail>1週間の全力出撃を行い、敵輸送船団を捕捉・撃滅、敵の補給路を寸断せよ！</JP-Detail>
+    <TR-Detail>월요일 05시부터 다음주 월요일 04:59까지 수송선(보급함 포함) 50척 격침(추천: 2-2,2-3)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>220</ID>
+    <JP-Name>い号作戦</JP-Name>
+    <TR-Name>이호작전</TR-Name>
+    <JP-Detail>有力な母艦航空隊で1週間の全力出撃を行い、可能な限り多くの敵空母を撃滅せよ！</JP-Detail>
+    <TR-Detail>유력한 모함항공대로 1주일간 전력으로 출격하여, 가능한 한 많은 적 항모를 격멸하라! (적 항공모함 또는 경항모를 20척 격침하면 달성.)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>218</ID>
+    <JP-Name>敵補給艦を3隻撃沈せよ！</JP-Name>
+    <TR-Name>적 보급함을 3척 격침하라!</TR-Name>
+    <JP-Detail>艦隊を出撃させ、敵補給艦を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>함대를 출격시켜 적 보급함을 포착, 이를 격침하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>216</ID>
+    <JP-Name>敵艦隊主力を撃滅せよ！</JP-Name>
+    <TR-Name>적 함대 주력을 격멸하라!</TR-Name>
+    <JP-Detail>艦隊を出撃させ、敵艦隊「主力」を捕捉！これを撃滅せよ！</JP-Detail>
+    <TR-Detail>함대를 출격시켜 적 함대 "주력"을 포착, 격멸하라! (해역 상관 없이 전투 1회 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>215</ID>
+    <JP-Name>第2艦隊、出撃せよ！</JP-Name>
+    <TR-Name>제2함대, 출격하라!</TR-Name>
+    <JP-Detail>新たに編成した「第2艦隊」を出撃せよ！</JP-Detail>
+    <TR-Detail>새롭게 편성한 제2함대를 출격시켜라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>214</ID>
+    <JP-Name>あ号作戦</JP-Name>
+    <TR-Name>아호작전</TR-Name>
+    <JP-Detail>1週間の全力出撃を行い、可能な限り多くの敵艦隊を捕捉、これを迎撃せよ！</JP-Detail>
+    <TR-Detail>1주간 전력으로 출격하여, 가능한 한 많은 적 함대를 포착, 요격하라! ※출격 36회, 보스전 도달 24회, 보스전 승리 12회, S승리 6회</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>213</ID>
+    <JP-Name>海上通商破壊作戦</JP-Name>
+    <TR-Name>해상통상파괴작전 - 주간</TR-Name>
+    <JP-Detail>1週間で敵輸送船を20隻以上撃沈せよ！</JP-Detail>
+    <TR-Detail>1주일간 적 수송선을 20척 이상 격침시켜라!(추천:2-2,2-3)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>212</ID>
+    <JP-Name>敵輸送船団を叩け！</JP-Name>
+    <TR-Name>적 수송선단을 타격하라!</TR-Name>
+    <JP-Detail>敵の輸送船5隻以上を撃沈し、敵の補給路を寸断せよ！</JP-Detail>
+    <TR-Detail>적 수송선 5척 이상을 굉침시켜 적 수송로를 단절시켜라!(추천:2-2,2-3)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>211</ID>
+    <JP-Name>敵空母を3隻撃沈せよ！</JP-Name>
+    <TR-Name>적 공모 3척 격침 - 일일반복</TR-Name>
+    <JP-Detail>艦隊の脅威となる敵空母群。これを捕捉撃滅し、3隻轟沈せよ！</JP-Detail>
+    <TR-Detail>함대에 위협이 되는 적 항모 무리를 포착 격멸, 3척을 굉침시켜라! ※경항모 격침도 가능 ※장갑항모(일부 보스)는 공모에 해당되지 않음.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>210</ID>
+    <JP-Name>敵艦隊を10回邀撃せよ！</JP-Name>
+    <TR-Name>적 함대 10회 요격 - 일일반복</TR-Name>
+    <JP-Detail>艦隊全力出撃！遊弋する敵艦隊を10回邀撃せよ！</JP-Detail>
+    <TR-Detail>함대 주력 출격! 배회 중인 적 함대를 10회 요격하라! (전투 10회 수행)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>203</ID>
+    <JP-Name>鎮守府正面海域を護れ！</JP-Name>
+    <TR-Name>진수부정면해역을 지켜라！</TR-Name>
+    <JP-Detail>鎮守府正面海域に艦隊を出撃させ、敵艦の跋梁を阻止せよ！</JP-Detail>
+    <TR-Detail>진수부정면해역에 함대를 출격시켜 적 함대의 공격을 저지하라!(1-1해역에 출격하여 보스전까지 클리어하면 달성.)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>201</ID>
+    <JP-Name>敵艦隊を撃破せよ！</JP-Name>
+    <TR-Name>적 함대를 격파하라!</TR-Name>
+    <JP-Detail>艦隊を出撃させ、敵艦隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>함대를 출격시켜 적 함대를 포착하여 격멸하라!(전투 1회 승리)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>172</ID>
+    <JP-Name>「第二七駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>"제27구축대"를 편성하라!</TR-Name>
+    <JP-Detail>「白露改」旗艦、「時雨」「春雨」「五月雨」4隻による第二七駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>시라츠유改를 기함으로 하고 시구레,하루사메,사미다레 4척으로 구성된 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>171</ID>
+    <JP-Name>	「第三十一戦隊(第一次)」を編成せよ！</JP-Name>
+    <TR-Name>제 31전대(제 1차)를 편성하라!</TR-Name>
+    <JP-Detail>「五十鈴改二」旗艦、「皐月改二」「卯月改」を含む、対潜機動水上部隊を編成せよ！</JP-Detail>
+    <TR-Detail>이스즈改2를 기함으로 사츠키改2,우즈키改가 포함된 대잠 기동 수상부대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>170</ID>
+    <JP-Name>精強な「水上反撃部隊」を再編成せよ！</JP-Name>
+    <TR-Name>정예 수상반격부대를 편성하라</TR-Name>
+    <JP-Detail>駆逐艦「霞」旗艦、「足柄」「大淀」「朝霜」「清霜」他の水上反撃部隊を再編成せよ！</JP-Detail>
+    <TR-Detail>카스미를 기함으로 하고 아시가라,오요도,아사시모,키요시모로 수상반격부대를 재편성하라</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>169</ID>
+    <JP-Name>「新編成航空戦隊」を編成せよ！</JP-Name>
+    <TR-Name>신편성항공전대를 편성하라</TR-Name>
+    <JP-Detail>空母2隻＋(航空戦艦or航空巡洋艦)2隻＋駆逐艦2隻の新航空戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>공모2척+(항공전함 OR 항공순양함)2척+구축함2척의 신항공전대를 편성하라</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>168</ID>
+    <JP-Name>「第十六戦隊(第二次)」を編成せよ！</JP-Name>
+    <TR-Name>제 16전대(제2차)를 편성하라</TR-Name>
+    <JP-Detail>「名取」を旗艦として「五十鈴」「鬼怒」を擁する、第十六戦隊(第二次)を編成せよ！</JP-Detail>
+    <TR-Detail>나토리를 기함으로 이스즈, 키누를 포함한 16전대(제2차)를 편성하라</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>167</ID>
+    <JP-Name>新航空戦隊を編成せよ！</JP-Name>
+    <TR-Name>신 항공전대를 편성하라!</TR-Name>
+    <JP-Detail>改二改装を終えた翔鶴型航空母艦2隻と同護衛艦による新航空戦隊を新編成せよ！</JP-Detail>
+    <TR-Detail>2차개장을 마친 쇼카쿠改2,즈이카쿠改2와 함께 호위 구축함 2척으로 이루어진 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>166</ID>
+    <JP-Name>「小沢艦隊」を編成せよ！</JP-Name>
+    <TR-Name>"오자와 함대"를 편성하라!</TR-Name>
+    <JP-Detail>「瑞鶴改」旗艦、空母「瑞鳳改」「千歳」「千代田」及び「伊勢改」「日向改」を配備せよ！</JP-Detail>
+    <TR-Detail>즈이카쿠改를 기함으로 하고 즈이호改, 치토세, 치요다, 이세改, 휴가改로 함대를 편성(경공모 개장필요)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>165</ID>
+    <JP-Name>「第四航空戦隊」を編成せよ！</JP-Name>
+    <TR-Name>"제4항공전대"를 편성하라!</TR-Name>
+    <JP-Detail>航空戦艦「伊勢改」及び「日向改」を基幹戦力とした第四航空戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>항공전함 "이세 개" 및 "휴가 개"를 핵심전력으로 하는 제4항공전대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>164</ID>
+    <JP-Name>「第三航空戦隊」を編成せよ！</JP-Name>
+    <TR-Name>제 3 항공전대 편성</TR-Name>
+    <JP-Detail>「瑞鶴改」を旗艦とした「瑞鳳」「千歳」「千代田」を加えた4隻の空母部隊を編制せよ！</JP-Detail>
+    <TR-Detail>즈이카쿠改를 기함으로 하여 즈이호, 치토세, 치요다로 함대 편성(총4, 경공모 개장필요)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>163</ID>
+    <JP-Name>「第十六戦隊(第一次)」を編成せよ！</JP-Name>
+    <TR-Name>「제16전대(제1차)」를 편성하라!</TR-Name>
+    <JP-Detail>「足柄」を旗艦として「球磨」「長良」を擁する、第十六戦隊(第一次)を編成せよ！</JP-Detail>
+    <TR-Detail>「아시가라」를 기함으로「쿠마」「나가라」를 포함한 제16전대(제1차)를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>162</ID>
+    <JP-Name>	新編「第二一戦隊」出撃準備！</JP-Name>
+    <TR-Name>신편「제21전대」출격준비!</TR-Name>
+    <JP-Detail>「那智改二」「足柄改二」及び「多摩」「木曾」を基幹とした、第二一戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>「아시가라改2」「나치改2」및「타마」「키소」를 기반으로 한, 제21전대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>161</ID>
+    <JP-Name>「第五航空戦隊」を再編成せよ！</JP-Name>
+    <TR-Name>「제5항공전대」를 재구성하라!</TR-Name>
+    <JP-Detail>「翔鶴」「瑞鶴」と随伴駆逐艦「朧」「秋雲」を基幹とした第五航空戦隊を再編成せよ！</JP-Detail>
+    <TR-Detail>「쇼카쿠」「즈이카쿠」와 수반구축함「오보로」「아키구모」를 기반으로한 제5항공전대를 재편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>160</ID>
+    <JP-Name>空母機動部隊「第三艦隊」を編成せよ！</JP-Name>
+    <TR-Name>항공모함 기동부대「제3함대」를 편성하라!</TR-Name>
+    <JP-Detail>連合艦隊編成で第一艦隊に「翔鶴」「瑞鶴」「瑞鳳」を配備した、第三艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>연합함대 편성으로 제1함대에「쇼카쿠」「즈이카쿠」「즈이호」를 배치하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>159</ID>
+    <JP-Name>「翔鶴」に艦攻「村田隊」を配置転換せよ！</JP-Name>
+    <TR-Name>「쇼카쿠」에 함상공격기「무라타대」를 배치하라!</TR-Name>
+    <JP-Detail>秘書艦を航空母艦「翔鶴」として、同艦に艦攻「村田隊」を配属転換せよ！</JP-Detail>
+    <TR-Detail>비서함을「쇼카쿠」로 하여 함상공격기「무라타대」장착하고, 수반함 한 척을 배치하라.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>158</ID>
+    <JP-Name>「赤城」に艦攻「村田隊」を配属せよ！</JP-Name>
+    <TR-Name>[158]「아카기」에 함상공격기「무라타대」를 배치하라！</TR-Name>
+    <JP-Detail>秘書艦を航空母艦「赤城」とし、同艦に艦攻「村田隊」を配属せよ！</JP-Detail>
+    <TR-Detail>비서함을 항공모함「아카기」로 하여「무라타대」장착</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>157</ID>
+    <JP-Name>「第一水雷戦隊」北方再突入準備！</JP-Name>
+    <TR-Name>"제1 수뢰전대" 북방 재돌입준비!</TR-Name>
+    <JP-Detail>「阿武隈改二」を旗艦として「響」「夕雲」「長波」「秋雲」「島風」の一水戦を再編成せよ!</JP-Detail>
+    <TR-Detail>아부쿠마改2를 기함으로 하고 히비키, 유우구모,나가나미,아키구모,시마카제로 구성된 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>156</ID>
+    <JP-Name>「第一水雷戦隊」北方突入準備！</JP-Name>
+    <TR-Name>제1수뢰전대 북방 돌입 준비</TR-Name>
+    <JP-Detail>「阿武隈」を旗艦として「響」「初霜」「若葉」「五月雨」「島風」による一水戦を編成せよ！</JP-Detail>
+    <TR-Detail>아부쿠마를 기함으로 하고 히비키, 하츠시모,와카바,사미다레,시마카제로 구성된 함대를 편성(개조상태 상관없음)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>155</ID>
+    <JP-Name>新編「第六駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>신편「제6구축대」를 편성하라!</TR-Name>
+    <JP-Detail>「暁改二」を旗艦とした「響」「雷」「電」4隻による第六駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>「아카츠키改2」를 기함으로 한「히비키」「이나즈마」「이카즈치」4척으로 구성된 제6구축대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>154</ID>
+    <JP-Name>海上突入部隊を編成せよ！</JP-Name>
+    <TR-Name>해상진입부대를 편성하라!</TR-Name>
+    <JP-Detail>戦艦「比叡」「霧島」軽巡「長良」駆逐艦「暁」「雷」「電」による海上突入部隊を編成せよ！</JP-Detail>
+    <TR-Detail>전함「히에이」「키리시마」,경순「나가라」,구축함「아카츠키」「이나즈마」「이카즈치」로 구성된 해상진입부대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>153</ID>
+    <JP-Name>「第十八戦隊」を新編成せよ！</JP-Name>
+    <TR-Name>제18전대를 새롭게 편성하라!</TR-Name>
+    <JP-Detail>軽巡洋艦「天龍」「龍田」を基幹戦力とした「第十八戦隊」を4隻以上で新編成せよ！</JP-Detail>
+    <TR-Detail>텐류,타츠다를 포함한 함대를 구성. 다른 함이 있어도 무방. 기함 지정 없음</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>152</ID>
+    <JP-Name>「三川艦隊」を新編、突入準備せよ！</JP-Name>
+    <TR-Name>미카와 함대를 새로 편성하여 돌입을 준비하라</TR-Name>
+    <JP-Detail>第一艦隊において、「鳥海改二」を旗艦とする三川艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>쵸카이改2를 기함으로 하고	「후루타카」 「카코」 「아오바」 「키누가사」 「유바리」 「텐류」중 5척을 선택해 총 인원 6척의 함대를 구성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>151</ID>
+    <JP-Name>「第二二駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>「제22구축대」를 편성하라!</TR-Name>
+    <JP-Detail>「皐月」「文月」「長月」他1隻計駆逐艦4隻による第二二駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>「사츠키」「후미즈키」「나가즈키」3척과 그 외 1척 총 구축함 4척으로 구성된 제22구축대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>150</ID>
+    <JP-Name>「第二一駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>「제21구축대」를 편성하라!</TR-Name>
+    <JP-Detail>「初春」「子日」「若葉」「初霜」4隻による「第二一駆逐隊」を編成せよ！</JP-Detail>
+    <TR-Detail>「하츠하루」「네노히」「와카바」「하츠시모」4척으로 구성된 제21구축대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>149</ID>
+    <JP-Name>「第十一駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>「제11구축대」를 편성하라!</TR-Name>
+    <JP-Detail>特I型駆逐艦「吹雪」「白雪」「初雪」「叢雲」4隻による第十一駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>특1형구축함「후부키」「시라유키」「하츠유키」「무라쿠모」4척으로 이루어진 제11구축대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>148</ID>
+    <JP-Name>軽快な「水上反撃部隊」を編成せよ！</JP-Name>
+    <TR-Name>경쾌한「수상반격부대」를 편성하라!</TR-Name>
+    <JP-Detail>駆逐艦「霞」(かすみ)を旗艦とした重巡「足柄」及び軽巡1隻駆逐艦4隻の水上挺身部隊を編成せよ！</JP-Detail>
+    <TR-Detail>구축함「카스미」를 기함으로,중순「아시가라」를 필수로 한 경순1척과 구축함4척(카스미 포함)을 추가한 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>147</ID>
+    <JP-Name>	「西村艦隊」を再編成せよ！</JP-Name>
+    <TR-Name>「니시무라 함대」를 재구성하라!</TR-Name>
+    <JP-Detail>「扶桑」「山城」「最上」「時雨」「満潮」を基幹とした西村艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>「후소」「야마시로」「모가미」「시구레」「미치시오」를 중심으로 한 니시무라 함대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>146</ID>
+    <JP-Name>改修工廠を準備せよ！</JP-Name>
+    <TR-Name>개수공창을 준비하라!</TR-Name>
+    <JP-Detail>第一艦隊の旗艦に工作艦「明石」を配備、「改修工廠」の準備をせよ！</JP-Detail>
+    <TR-Detail>제1함대의 기함에 공작함「아카시」를 배치, 개수공창의 준비를 실시하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>145</ID>
+    <JP-Name>戦艦を主力とした水上打撃部隊を編成せよ！</JP-Name>
+    <TR-Name>전함을 주력으로 한 수상타격부대를 편성하라!</TR-Name>
+    <JP-Detail>大和型・長門型・伊勢型・扶桑型のいずれか3隻と軽巡1隻他の水上打撃部隊を配備せよ！</JP-Detail>
+    <TR-Detail>야마토급, 나가토급, 이세급, 후소급 중 3척과 경순 1척의 수상타격부대를 배치 (해당 급의 함들을 4척 이상 편성 시 달성 불가)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>144</ID>
+    <JP-Name>主力戦艦部隊「第二戦隊」を編成せよ！</JP-Name>
+    <TR-Name>주력전함부대「제2전대」를 편성하라!</TR-Name>
+    <JP-Detail>長門型2隻及び扶桑型2隻の計4隻の主力戦艦からなる第二戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>나가토급 2척과 후소급 2척의 합계 4척을 주력으로 하는 제2전대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>143</ID>
+    <JP-Name>「新型正規空母」を配備せよ！</JP-Name>
+    <TR-Name>「신형정규모함」을 배치하라!</TR-Name>
+    <JP-Detail>雲龍型航空母艦一番艦「雲龍」を第一艦隊機旗艦に配備せよ！</JP-Detail>
+    <TR-Detail>운류형 항공모함 1번함 「운류」를 제1함대 기함에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>142</ID>
+    <JP-Name>精鋭「第三戦隊」全艦集結せよ！</JP-Name>
+    <TR-Name>정예「제3전대」전함 집결하라!</TR-Name>
+    <JP-Detail>第二次改装を完了した改装金剛型高速戦艦4隻を集結させよ！</JP-Detail>
+    <TR-Detail>2차개조를 모두 마친 콩고형 전함 4척으로 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>141</ID>
+    <JP-Name>	再編成「第二航空戦隊」を強化せよ！</JP-Name>
+    <TR-Name>재구성! 「제2항공전대」를 강화</TR-Name>
+    <JP-Detail>「蒼龍改二」(※旗艦)及び「飛龍改二」を基幹とした二航戦(要駆逐艦2隻)を編成せよ！</JP-Detail>
+    <TR-Detail>「소류改2」(※기함),「히류改2」를 기본으로한 2항전(필요구축2척)을 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>140</ID>
+    <JP-Name>新型電探を配備せよ！</JP-Name>
+    <TR-Name>신형전탐을 배치하라!</TR-Name>
+    <JP-Detail>新型電探運用試験のため、第一艦隊の旗艦に「妙高改二」を配備せよ！</JP-Detail>
+    <TR-Detail>1함대 기함에 묘코改2를 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>139</ID>
+    <JP-Name>潜水艦隊「第六艦隊」を編成せよ！</JP-Name>
+    <TR-Name>잠수함대「제6함대」를 편성하라！</TR-Name>
+    <JP-Detail>「潜水母艦」(※旗艦)と複数の潜水艦(4隻以上)からなる潜水艦隊「第六艦隊」を編成せよ！</JP-Detail>
+    <TR-Detail>「다이게이」와 여러 잠수함(4대이상)으로 구성된 제6함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>138</ID>
+    <JP-Name>新編「第二航空戦隊」を編成せよ！</JP-Name>
+    <TR-Name>신편성「제2항공전대」를 편성하라!</TR-Name>
+    <JP-Detail>「飛龍改二」(※旗艦)及び「蒼龍」を基幹とした二航戦(要駆逐艦2隻)を編成せよ！</JP-Detail>
+    <TR-Detail>「히류改2」(※기함)과「소류」를 기본으로 한 함대 편성(필요구성:2항전,구축2)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>137</ID>
+    <JP-Name>「第五戦隊」を編成せよ！</JP-Name>
+    <TR-Name>「제5전대」를 편성하라!</TR-Name>
+    <JP-Detail>「妙高」「那智」「羽黒」を基幹とした第五戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>「묘코」「나치」「하구로」를 중심으로한 제5전대를 편성!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>136</ID>
+    <JP-Name>「第三十駆逐隊(第二次)」を編成せよ！</JP-Name>
+    <TR-Name>제30구축대(제2차)」를 편성하라!</TR-Name>
+    <JP-Detail>「睦月」「卯月」「弥生」「望月」4隻による第三十駆逐隊(第二次)を編成せよ！</JP-Detail>
+    <TR-Detail>「무츠키」 「야요이」 「우즈키」 「모치즈키」4척으로 30구축대(2차)를 구성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>130</ID>
+    <JP-Name>「第一水雷戦隊」を編成せよ！</JP-Name>
+    <TR-Name>"제1수뢰전대"를 편성하라!</TR-Name>
+    <JP-Detail>「阿武隈」「曙」「潮」「霞(かすみ)」「不知火」を中核とした第一水雷戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>"아부쿠마", "아케보노", "우시오", "카스미", "시라누이"를 중핵으로 한 "제1수뢰전대"를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>129</ID>
+    <JP-Name>「第五艦隊」を編成せよ！</JP-Name>
+    <TR-Name>제5함대 편성</TR-Name>
+    <JP-Detail>「那智」「足柄」「多摩」「木曾」を中核とした第五艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>나치, 아시가라, 타마, 키소를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>118</ID>
+    <JP-Name>「金剛」型による高速戦艦部隊を編成せよ！</JP-Name>
+    <TR-Name>콩고급으로 편성된 고속전함부대를 편성하라!</TR-Name>
+    <JP-Detail>金剛型戦艦「金剛」「比叡」「榛名」「霧島」全4隻の高速戦艦を集中配備せよ！</JP-Detail>
+    <TR-Detail>"콩고"급 전함 "콩고", "히에이", "하루나", "키리시마" 전 4척의 고속전함을 집중 배치하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>117</ID>
+    <JP-Name>第2艦隊で空母機動部隊を編成せよ！</JP-Name>
+    <TR-Name>제2함대로 항모기동부대를 편성하라!</TR-Name>
+    <JP-Detail>第2艦隊に空母を配備して、空母機動部隊を編成せよ！</JP-Detail>
+    <TR-Detail>제2함대에 항모를 배치하여 항모기동부대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>116</ID>
+    <JP-Name>「水上機母艦」を配備せよ！</JP-Name>
+    <TR-Name>"수상기모함"을 배치하라!</TR-Name>
+    <JP-Detail>多数の水上偵察機を運用する「水上機母艦」を艦隊に配備せよ！</JP-Detail>
+    <TR-Detail>「수상기모함」치토세와 치요다 중 1대를 함대에 배치</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>115</ID>
+    <JP-Name>第2艦隊を編成せよ！</JP-Name>
+    <TR-Name>제2함대를 편성하라!</TR-Name>
+    <JP-Detail>二つ目の艦隊、第2艦隊の旗艦を指定して、第2艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>두번째 함대, 제2함대의 기함을 지정하여 제2함대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>109</ID>
+    <JP-Name>「川内」型軽巡姉妹の全3艦を編成せよ！</JP-Name>
+    <TR-Name>"센다이"급 경순 자매 전 3척을 편성하라!</TR-Name>
+    <JP-Detail>川内型軽巡洋艦、「川内」「神通」「那珂」を同一艦隊に編成せよ！</JP-Detail>
+    <TR-Detail>"센다이"급 경순양함 "센다이", "진츠", "나카"를 동일함대에 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>105</ID>
+    <JP-Name>軽巡2隻を擁する隊を編成せよ！</JP-Name>
+    <TR-Name>경순양함 2척을 거느린 함대를 편성하라！</TR-Name>
+    <JP-Detail>軽巡洋艦2隻を擁する高速艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>경순양함 2척 이상을 거느린 고속함대를 편성하라！</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>102</ID>
+    <JP-Name>「駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>「구축대」를 편성하라！</TR-Name>
+    <JP-Detail>駆逐艦4隻以上で編成される「駆逐隊」を編成せよ！</JP-Detail>
+    <TR-Detail>구축함 4척이상으로 이루어진 구축대를 편성하라！</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>101</ID>
+    <JP-Name>はじめての「編成」！</JP-Name>
+    <TR-Name>첫「편성」！</TR-Name>
+    <JP-Detail>2隻以上の艦で編成される「艦隊」を編成せよ！</JP-Detail>
+    <TR-Detail>2척 이상의 함선으로 이루어진 함대를 편성하라！</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>634</ID>
+    <JP-Name>新家具の準備</JP-Name>
+    <TR-Name>신규 가구의 준비</TR-Name>
+    <JP-Detail>「工廠」で装備アイテムを9つ「廃棄」して、新家具の準備をします。</JP-Detail>
+    <TR-Detail>"공창"에서 장비 아이템을 9개 "폐기"하여 신규 가구의 준비를 합니다.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>810</ID>
+    <JP-Name>製油所地帯を防衛せよ！</JP-Name>
+    <TR-Name>제유소 지대를 방위하라!</TR-Name>
+    <JP-Detail>水雷戦隊を製油所地帯沿岸に展開！同海域に出没する敵艦隊を三回以上撃滅せよ！</JP-Detail>
+    <TR-Detail>수뢰전대를 제유소 지대 연안(1-3)에 전개! 해당 해역에 출몰하는 적 함대를 3번 이상 격파하라! (경순 1척과 구축함만으로 편성, 1-3 보스방에서 S승리 3회로 달성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>811</ID>
+    <JP-Name>南西諸島防衛線を強化せよ！</JP-Name>
+    <TR-Name>난세이 제도 방어선을 강화하라!</TR-Name>
+    <JP-Detail>南西諸島防衛線に有力な艦隊を展開、同方面に来襲する敵艦隊を五回以上撃滅せよ！</JP-Detail>
+    <TR-Detail>1-4보스전 5회 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>812</ID>
+    <JP-Name>オリョール海の制海権を確保せよ！</JP-Name>
+    <TR-Name>오룔해의 제해권을 확보하라!</TR-Name>
+    <JP-Detail>大潮を旗艦とする艦隊を東部オリョール海に反復出撃、同方面敵艦隊を完全撃滅せよ！</JP-Detail>
+    <TR-Detail>오오시오를 기함으로 한 함대로 2-3 보스전 6회 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>813</ID>
+    <JP-Name>旗艦「大潮」出撃せよ！</JP-Name>
+    <TR-Name>기함 오오시오 改2 출격하라!</TR-Name>
+    <JP-Detail>「大潮改二」旗艦の有力な艦隊を北方AL海域に展開、北方海域戦闘哨戒を実施せよ！</JP-Detail>
+    <TR-Detail>오오시오改2를 기함으로 한 함대로 3-5보스전 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>173</ID>
+    <JP-Name>強行高速輸送部隊を編成せよ！</JP-Name>
+    <TR-Name>강행 고속 수송부대를 편성하라!</TR-Name>
+    <JP-Detail>「川内改二」旗艦、「江風改二」「時雨改二」他駆逐2隻による水雷戦隊を編成せよ！</JP-Detail>
+    <TR-Detail>센다이改2를 기함, 카와카제改2와 시구레改2+구축함 2척을 포함한 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>814</ID>
+    <JP-Name>強行高速輸送部隊、出撃せよ！</JP-Name>
+    <TR-Name>강행 고속 수송부대 출격하라!</TR-Name>
+    <JP-Detail>「江風改二」「時雨改二」「川内改二」他駆逐2隻を含む艦隊で、ジャム島攻略作戦を実施せよ！</JP-Detail>
+    <TR-Detail>센다이改2를 기함, 카와카제改2와 시구레改2+구축함 2척+자유로 편성된 함대로 4-1보스전 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>815</ID>
+    <JP-Name>「第一航空戦隊」西へ！</JP-Name>
+    <TR-Name>제1항공전대 서쪽으로!</TR-Name>
+    <JP-Detail>旗艦「赤城」同僚艦「加賀」を中核とする艦隊で、深海東洋艦隊漸減作戦を貫徹せよ！</JP-Detail>
+    <TR-Detail>아카기를 기함으로 하고 카가가 포함된 함대로 4-5보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>816</ID>
+    <JP-Name>艦隊、三周年！</JP-Name>
+    <TR-Name>함대, 3주년!</TR-Name>
+    <JP-Detail>三周年を記念しバシー島沖及び東部オリョール海に出撃、同海域の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>2-2보스전 또는 2-3보스전 S승리 달성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>635</ID>
+    <JP-Name>新装備の準備</JP-Name>
+    <TR-Name>신규 장비의 준비</TR-Name>
+    <JP-Detail>「工廠」で装備を5つ「廃棄」して、新装備配備の準備をします。</JP-Detail>
+    <TR-Detail>"공창"에서 장비 아이템을 5개 \"폐기\"하여 신규 장비 배치의 준비를 합니다.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>312</ID>
+    <JP-Name>上陸部隊演習</JP-Name>
+    <TR-Name>상륙부대 연습</TR-Name>
+    <JP-Detail>島嶼攻略部隊の練度向上のため、本日中に演習で4回以上「勝利」せよ！</JP-Detail>
+    <TR-Detail>도서공략부대의 숙련도 향상을 위해 오늘 중으로 "연습"에서 4회 이상 승리하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>636</ID>
+    <JP-Name>上陸戦用新装備の調達</JP-Name>
+    <TR-Name>상륙전용 신규 장비의 조달</TR-Name>
+    <JP-Detail>「工廠」で「7.7mm機銃」及び「12.7mm単装機銃」を二つずつ廃棄！</JP-Detail>
+    <TR-Detail>"공창"에서 "7.7mm 기총" 및 "12.7mm 단장기총"을 각각 2개씩 폐기하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>638</ID>
+    <JP-Name>対空機銃量産</JP-Name>
+    <TR-Name>대공 기관총 양산</TR-Name>
+    <JP-Detail>「機銃」系装備を量産し、工廠で6個廃棄！ 「装備改修」強化をサポートせよ！</JP-Detail>
+    <TR-Detail>기총계열 장비 6개 폐기 (한번에 폐기 가능)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>637</ID>
+    <JP-Name>「熟練搭乗員」養成</JP-Name>
+    <TR-Name>"숙련 탑승원" 양성</TR-Name>
+    <JP-Detail>勲章x2消費：「鳳翔」秘書艦に練度max及び改修max「九六式艦戦」を搭載、熟練搭乗員を養成せよ！&lt;br&gt;(任務達成後、部隊は消滅します)</JP-Detail>
+    <TR-Detail>숙련도와 개수 Max인「96식 함상전투기」를 탑재한「호쇼」를 비서함으로 두고 훈장 2개를 소모하여 숙련탑승원으로 변환</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>639</ID>
+    <JP-Name>新型魚雷兵装の開発</JP-Name>
+    <TR-Name>신형 어뢰 장비 개발</TR-Name>
+    <JP-Detail>勲章x2消費：「島風」秘書艦に改修max「61cm五連装(酸素)魚雷」と&lt;br&gt;改修max「61cm三連装(酸素)魚雷」を装備！(任務達成後、各装備は消滅します)</JP-Detail>
+    <TR-Detail>개수 Max인「3연장 산소 어뢰」와「5연장 산소 어뢰」를 탑재한「시마카제」를 비서함으로 두고 훈장 2개를 소모하여 「시제 6연장 산소 어뢰」로 변환</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>823</ID>
+    <JP-Name>水雷戦隊、南西防衛線に反復出撃せよ！</JP-Name>
+    <TR-Name>수뢰 전대, 남서쪽 방어선에 반복 출격하자!</TR-Name>
+    <JP-Detail>軽巡級旗艦と駆逐艦4隻の水雷戦隊を基幹とした艦隊を編成、&lt;br&gt;南西諸島防衛線に反復出撃し、同海域の制海権確保に努めよ！</JP-Detail>
+    <TR-Detail>경순양함 기함과 구축함 4척을 포함한 수뢰전대로 1-4 보스전 2회 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>824</ID>
+    <JP-Name>製油所地帯沿岸の哨戒を実施せよ！</JP-Name>
+    <TR-Name>제유소 지대 연안 초계를 실시한다!</TR-Name>
+    <JP-Detail>軽空母旗艦と駆逐艦3隻を基幹とした護衛艦隊を編成、&lt;br&gt;製油所地帯沿岸に展開し、同海域の哨戒を実施、同海域の安全を確保せよ！</JP-Detail>
+    <TR-Detail>경공모 기함과 구축함 3척을 포함한 함대로 1-3 보스전 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>175</ID>
+    <JP-Name>新編「第八駆逐隊」を再編成せよ！</JP-Name>
+    <TR-Name>신편 제8구축대를 재편성하다!</TR-Name>
+    <JP-Detail>「朝潮改二」を旗艦とした「満潮」「大潮」「荒潮」4隻による第八駆逐隊を再編成せよ！</JP-Detail>
+    <TR-Detail>아사시오改2를 기함으로 미치시오, 오오시오, 아라시오 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>822</ID>
+    <JP-Name>沖ノ島海域迎撃戦</JP-Name>
+    <TR-Name>오키노시마 해역 요격전</TR-Name>
+    <JP-Detail>有力な艦隊を沖ノ島海域前面に反復投入、侵攻する敵機動部隊を迎撃、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>2-4 보스전 2회 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>819</ID>
+    <JP-Name>「第三十一戦隊」敵潜を制圧せよ！</JP-Name>
+    <TR-Name>제31전대 적잠을 제압하라!</TR-Name>
+    <JP-Detail>第三十一戦隊(第一次)を鎮守府近海航路に再投入！反復出撃し、敵潜を制圧せよ！</JP-Detail>
+    <TR-Detail>이스즈改2를 기함으로 사츠키改2와 우즈키改를 포함한 최대 6척 편성으로 1-6 최종방 2회 도달</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>176</ID>
+    <JP-Name>精鋭！八駆第一小隊！</JP-Name>
+    <TR-Name>정예! 8구 제1소대!</TR-Name>
+    <JP-Detail>「朝潮改二丁」及び「大潮改二」を含む艦隊を編成せよ！</JP-Detail>
+    <TR-Detail>아사시오改2정 오오시오改2를 포함한 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>313</ID>
+    <JP-Name>秋季大演習</JP-Name>
+    <TR-Name>추계 대훈련</TR-Name>
+    <JP-Detail>秋の一日中に「演習」で8回以上「勝利」をおさめ、艦隊のさらなる練度に努めよ！</JP-Detail>
+    <TR-Detail>05시부터 익일 04:59까지 연습전 8회 B승리 이상 기록</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>825</ID>
+    <JP-Name>水雷戦隊、南西諸島海域を哨戒せよ！</JP-Name>
+    <TR-Name>수뢰 전대, 난세이제도 해역을 초계하라!</TR-Name>
+    <JP-Detail>水雷戦隊を基幹とした有力な艦隊で南西諸島海域バシー島沖及び東部オリョール海を哨戒、&lt;br&gt;同海域に遊弋する敵艦隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>경순양함 기함과 구축함 4척을 포함한 수뢰전대로 2-2 및 2-3 보스전 S승리 (나머지 한 척 수상기모함 가능, 자유편성)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>641</ID>
+    <JP-Name>「航空基地設営」事前準備</JP-Name>
+    <TR-Name>항공 기지 구축 사전 준비</TR-Name>
+    <JP-Detail>「航空基地設営」の事前準備を開始する。「ドラム缶(輸送用)」を二つ「工廠」で廃棄し、「7.7mm機銃」及び「九六式艦戦」を各二つずつ用意せよ！(任務達成後、用意した必要装備は消滅します)</JP-Detail>
+    <TR-Detail>7.7mm기총 2개와 96식함전 2개를 보유한 상태로 드럼통 2개를 폐기하여 96식육공으로 변환 (기총과 함전은 달성 후 소모)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>642</ID>
+    <JP-Name>「陸攻」隊の増勢</JP-Name>
+    <TR-Name>육상공격기 부대의 증세</TR-Name>
+    <JP-Detail>「基地航空隊」開設に向け、「陸攻」の追加調達を行う。「7.7mm機銃」及び&lt;br&gt;「九九式艦爆」を各二つずつ準備せよ！(任務達成後、同装備は消滅します)</JP-Detail>
+    <TR-Detail>7.7mm기총 2개와 99식함폭 2개를 보유하여 96식육공으로 변환 (기총과 함폭은 달성 후 소모)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>643</ID>
+    <JP-Name>主力「陸攻」の調達</JP-Name>
+    <TR-Name>주력 육상공격기 조달</TR-Name>
+    <JP-Detail>主力陸上攻撃機「一式陸攻」の新規調達を行う。「零式艦戦21型」を二つ「工廠」で廃棄し、&lt;br&gt;「九六式陸攻」一つと「九七式艦攻」二つを準備せよ！(任務達成後、用意した必要装備は消滅します)</JP-Detail>
+    <TR-Detail>96식육공 하나와 97식함공 2개를 보유한 상태로 영식함전21형 2개를 폐기하여 1식육공으로 변환 (육공과 함공은 달성 후 소모)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>644</ID>
+    <JP-Name>「一式陸攻」性能向上型の調達</JP-Name>
+    <TR-Name>1식육공 성능향상형의 조달</TR-Name>
+    <JP-Detail>「一式陸攻」性能向上型の配備を行う。「一式陸攻」一つと「天山」二つを準備せよ！&lt;br&gt;(任務達成後、用意した必要装備は消滅します/「一式陸攻」の熟練度は継承されます)</JP-Detail>
+    <TR-Detail>1식육공과 텐잔2개를 보유하여 1식육공 22형갑으로 변환 (육공과 함공은 달성 후 소모)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>645</ID>
+    <JP-Name>「洋上補給」物資の調達</JP-Name>
+    <TR-Name>해상 보급 물자 조달</TR-Name>
+    <JP-Detail>「三式弾」一つを廃棄し、燃料750及び弾薬750と「ドラム缶(輸送用)」二つと「九一式徹甲弾」一つを&lt;br&gt;用意せよ！※任務達成後、用意した資源及び必要装備(徹甲弾は改修値の低いもの優先)は消滅します。</JP-Detail>
+    <TR-Detail>연료와 탄약 750, 드럼통 두개와 91식철갑탄을 소지한 상태로 삼식탄 폐기 (자원과 장비는 소멸되며, 철갑탄은 개수치가 낮은 장비가 소멸됩니다)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>646</ID>
+    <JP-Name>「特注家具」の調達</JP-Name>
+    <TR-Name>특별 주문 가구 조달</TR-Name>
+    <JP-Detail>「25mm単装機銃」一つを廃棄、家具コイン5,000と「25mm連装機銃」及び「25mm三連装機銃」を各&lt;br&gt;二つ準備せよ！　※任務達成後、用意した家具コイン及び必要装備(改修値の低いもの優先)は消滅します。</JP-Detail>
+    <TR-Detail>가구코인 5000과 25mm연장기총과 25mm3연장기총을 2개씩 소지한 상태로 25mm단장기총 폐기 (자원과 장비는 소멸되며, 개수치가 낮은 장비가 소멸됩니다)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>177</ID>
+    <JP-Name>「第十九駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>제19구축대를 편성하라!</TR-Name>
+    <JP-Detail>特型駆逐艦「磯波」「浦波」「綾波」「敷波」4隻による第十九駆逐隊を編成せよ！</JP-Detail>
+    <TR-Detail>「이소나미」 「우라나미」 「아야나미」 「시키나미」 4척만으로 구성된 제19구축대를 편성하라!</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>647</ID>
+    <JP-Name>中部海域「基地航空隊」展開！</JP-Name>
+    <TR-Name>중부해역 기지항공대 전개!</TR-Name>
+    <JP-Detail>「ドラム缶(輸送用)」二つを破棄、燃料1200およびボーキサイト3000、さらに「設営隊」一つを準備せよ！ ※任務達成後、用意した資源及び「設営隊」は消滅します。</JP-Detail>
+    <TR-Detail>연료 1200, 보키 3000, 설영대를 갖춘 상태에서 드럼통을 2개 폐기 (자원과 아이템은 임무 달성 후 소멸)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>826</ID>
+    <JP-Name>「第十九駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>제19구축대 출격하라!</TR-Name>
+    <JP-Detail>特型駆逐艦4隻による「第十九駆逐隊」を鎮守府近海に展開！&lt;br&gt;鎮守府正面対潜哨戒を実施し、跳梁する敵潜部隊の制圧に努めよ！</JP-Detail>
+    <TR-Detail>「이소나미」 「우라나미」 「아야나미」 「시키나미」 4척만으로 1-5 보스전 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>827</ID>
+    <JP-Name>「第十九駆逐隊」敵主力に突入せよ！</JP-Name>
+    <TR-Name>제19구축대 적 주력에 돌입하라!</TR-Name>
+    <JP-Detail>「第十九駆逐隊」を含む有力な艦隊を編成し、南西諸島海域沖ノ島沖に展開！&lt;br&gt;同方面に遊弋する敵主力を捕捉、これを撃破せよ！</JP-Detail>
+    <TR-Detail>「이소나미」 「우라나미」 「아야나미」 「시키나미」가 포함된 함대로 2-5 보스전 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>828</ID>
+    <JP-Name>飛行場設営の準備を実施せよ！</JP-Name>
+    <TR-Name>비행장 설영의 준비를 실시하라!</TR-Name>
+    <JP-Detail>中部海域における航空偵察「K作戦」を再度実施、さらに同方面に遊弋する敵艦隊を撃滅し、中部海域における飛行場設営の準備を実施せよ！</JP-Detail>
+    <TR-Detail>6-3 보스전 S승리. 보상 설영대</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>829</ID>
+    <JP-Name>夜間突入！敵上陸部隊を叩け！</JP-Name>
+    <TR-Name>야간 돌입! 적의 상륙 부대를 쓰러뜨려라!</TR-Name>
+    <JP-Detail>南方サブ島沖海域へ精鋭部隊を突入！敵部隊の邀撃を突破し、同方面の敵上陸部隊を叩け！！</JP-Detail>
+    <TR-Detail>5-3 보스전 보스전 A승 이상. 보상 설영대</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>830</ID>
+    <JP-Name>夜の海を照らす「灯り」を入手せよ！</JP-Name>
+    <TR-Name>밤 바다를 비추는 등불을 입수하라!</TR-Name>
+    <JP-Detail>有力な艦隊をカムラン半島に投入、同方面に出没する敵艦隊を捕捉、これを撃滅せよ！&lt;br&gt;そして、夜を照らす「灯り」を入手せよ！　ある季節は夜戦以外にも使い道があるようだ！</JP-Detail>
+    <TR-Detail>편성 자유 2-1 보스전 S승리. 보상 탐조등, 전투식량</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>831</ID>
+    <JP-Name>秋刀魚漁：きらりーん！秋刀魚漁支援！</JP-Name>
+    <TR-Name>꽁치잡이: 반짜~악! 꽁치잡이 지원!</TR-Name>
+    <JP-Detail>秋刀魚漁の漁場に展開、遊弋する敵艦隊を撃破して、「秋刀魚」を三尾入手せよ、ですって！近海、北方海域、中部海域のどこかに秋刀魚漁に適した漁場があるみたい！</JP-Detail>
+    <TR-Detail>꽁치가 드롭되는 해역 전투에서 승리하여 꽁치 3마리 모으기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>832</ID>
+    <JP-Name>秋刀魚漁：もっともーっと秋刀魚漁！</JP-Name>
+    <TR-Name>꽁치잡이: 더욱더~욱 꽁치잡이!</TR-Name>
+    <JP-Detail>ちょおっと大変だけど、漁場の安全を確保して「秋刀魚」を八尾確保するんだって！あまり乱獲したり、しばらく同じ海域で続けてると獲れにくくなるみたい。海域を変えてみましょ！</JP-Detail>
+    <TR-Detail>꽁치가 드롭되는 해역 전투에서 승리하여 꽁치 8마리 모으기 (보상: 대발동정, 탐조등, WG42 택1)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>833</ID>
+    <JP-Name>秋刀魚漁：最新鋭の秋刀魚！もっとぉ！</JP-Name>
+    <TR-Name>꽁치잡이: 최신예의 꽁치! 더욱!</TR-Name>
+    <JP-Detail>かなーり大変だけれど、ほら、私たち最新鋭の秋刀魚漁支援艦隊じゃない？&lt;br&gt;最新鋭、最新鋭、最新鋭の秋刀魚漁、張り切っていきましょー！よろしくお願いしまぁーす！</JP-Detail>
+    <TR-Detail>꽁치가 드롭되는 해역 전투에서 승리하여 꽁치 24마리 모으기 (보상: 96식 150cm 탐조등, 함대풍어기(가구), 16식 풍어기(가구) 택1)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>178</ID>
+    <JP-Name>「第十六戦隊(第三次)」を編成せよ！</JP-Name>
+    <TR-Name>제16전대(제3차)를 편성하라!</TR-Name>
+    <JP-Detail>「鬼怒」「青葉」「北上」「大井」を擁する、第十六戦隊(第三次)を編成せよ！</JP-Detail>
+    <TR-Detail>키누, 아오바, 키타카미, 오오이를 포함해서 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>834</ID>
+    <JP-Name>南西諸島防衛線を増強せよ！</JP-Name>
+    <TR-Name>남서 제도 방어선을 증강하라!</TR-Name>
+    <JP-Detail>水上機母艦または航空巡洋艦を旗艦とする有力な艦隊を南西諸島防衛線に投入、&lt;br&gt;水上機戦力によって同防衛線を強化、同方面の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>수상기모함이나 항공순양함을 기함으로 1-4 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>835</ID>
+    <JP-Name>「第十六戦隊(第三次)」出撃せよ！</JP-Name>
+    <TR-Name>제16전대(제3차) 출격하라!</TR-Name>
+    <JP-Detail>「第十六戦隊(第三次)」を沖ノ島海域前面に展開、敵主力艦隊を捕捉、これを撃破せよ！</JP-Detail>
+    <TR-Detail>키누, 아오바, 키타카미, 오오이를 포함하는 함대로 2-4 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>314</ID>
+    <JP-Name>冬季大演習</JP-Name>
+    <TR-Name>겨울철 대연습</TR-Name>
+    <JP-Detail>冬の一日中に「演習」で8回以上「勝利」をおさめ、艦隊のさらなる練度に努めよ！</JP-Detail>
+    <TR-Detail>05시부터 익일 04:59까지 연습전 8회 B승리 이상 기록</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>422</ID>
+    <JP-Name>潜水艦派遣作戦による航空機技術入手</JP-Name>
+    <TR-Name>잠수 함 파견 작전에 의한 항공기 기술 입수</TR-Name>
+    <JP-Detail>潜水艦派遣作戦により、新型航空機技術の導入に努めよ！</JP-Detail>
+    <TR-Detail>30, 31번 원정을 한 번씩 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>648</ID>
+    <JP-Name>「特注家具」の調達</JP-Name>
+    <TR-Name>특별 주문 가구 조달</TR-Name>
+    <JP-Detail>「12.7cm連装高角砲」二つを廃棄し、家具コイン5,000と「14cm単装砲」及び「15.2cm単装砲」を各二つずつ準備せよ！　※任務達成後、用意した家具コイン及び必要装備(低改修を優先)は消費します。</JP-Detail>
+    <TR-Detail>가구코인 5000, 14cm단장포 2개, 15.2단장포(부포) 2개를 소지한 상태에서 12.7.cm연장고각포 두개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>838</ID>
+    <JP-Name>重巡戦隊、抜錨せよ！</JP-Name>
+    <TR-Name>중순전대, 발묘하라!</TR-Name>
+    <JP-Detail>重巡4隻を基幹戦力とした重巡旗艦の艦隊を南西諸島海域東部オリョール海に展開し、&lt;br&gt;同海域の敵艦隊を撃滅、制海権を確保せよ！</JP-Detail>
+    <TR-Detail>중순양함 4척 기함 + 2척 자유 편성으로 2-3 보스전 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>705</ID>
+    <JP-Name>航空艤装の近代化改修</JP-Name>
+    <TR-Name>항공 의장의 근대화 개수</TR-Name>
+    <JP-Detail>鉄鋼5,500及びボーキサイト2,500を準備して、任意の正規空母の近代化改修を&lt;br&gt;[航空母艦]x5隻同時使用により2回成功させよ！※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 5500, 보크사이트 2500을 소지한 상태로 경항모,정규항모 합계 5척을 재료로 정규항모에 근대화개수를 2번 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>839</ID>
+    <JP-Name>戦艦戦隊、出撃せよ！</JP-Name>
+    <TR-Name>전함 전대, 출격하자!</TR-Name>
+    <JP-Detail>戦艦2隻を中核戦力とする戦艦旗艦の艦隊を北方海域アルフォンシーノ方面に進出させ、&lt;br&gt;同海域の敵艦隊を撃滅、北方海域の制海権確保に努めよ！</JP-Detail>
+    <TR-Detail>전함 2척 기함 + 항모2척 + 자유2척으로 3-3 보스전 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>840</ID>
+    <JP-Name>冬季特別任務：精鋭「駆逐隊」、出撃！</JP-Name>
+    <TR-Name>겨울 특별 임무: 정예 구축대 출격!</TR-Name>
+    <JP-Detail>駆逐艦4隻による精鋭「駆逐隊」を編成し、鎮守府正面海域及び南西諸島沖に出撃、&lt;br&gt;両海域の敵艦隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>구축함 4척 고정으로 1-1, 1-2 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>841</ID>
+    <JP-Name>冬季特別任務：水上機母艦、抜錨せよ！</JP-Name>
+    <TR-Name>겨울 특별 임무: 수상기모함, 발묘하라!</TR-Name>
+    <JP-Detail>水上機母艦を旗艦とし、護衛駆逐艦3隻を含む艦隊を編成、&lt;br&gt;製油所地帯沿岸及び南西諸島防衛線に展開、同海域に出没する敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>수상기모함 기함+구축함 3척으로 1-3, 1-4 보스전 S승리 (자유편성 여부는 불명)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>843</ID>
+    <JP-Name>節分特別出撃：制海権を確保せよ！</JP-Name>
+    <TR-Name>절분 특별 출격: 제해권을 확보하라!</TR-Name>
+    <JP-Detail>節分実施の準備として第1艦隊に4隻(内駆逐艦2隻含む)からなる精鋭艦隊を配備、鎮守府正面海域、&lt;br&gt;南西諸島沖、及び東部オリョール海へ展開、同海域の敵艦隊を撃滅し、節分の制海権を確保せよ！</JP-Detail>
+    <TR-Detail>1함대에 구축함 2척을 포함하는 4척으로 1-1, 1-4, 2-3 보스전 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>653</ID>
+    <JP-Name>節分特別任務：節分準備！</JP-Name>
+    <TR-Name>절분 특별 임무: 절분 준비!</TR-Name>
+    <JP-Detail>「20.3cm連装砲(無印)」を二つ廃棄、家具コイン5,000と「12cm単装砲」「零式水上偵察機」各二つを準備せよ！　※任務達成後、用意した家具コイン及び必要装備(低改修値のもの優先)は消費します。</JP-Detail>
+    <TR-Detail>가구코인 5000, 12cm단장포 2개, 영식수상정찰기 2개를 소지한 상태로 20.3cm연장포 두개 폐기 (가구코인과 장비는 달성 후 소멸, 개수치가 낮은 장비부터 소멸)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>655</ID>
+    <JP-Name>「彩雲」輸送分解</JP-Name>
+    <TR-Name>사이운 수송 분해</TR-Name>
+    <JP-Detail>彩雲分解任務：「零式水上偵察機」一つを廃棄、開発資材x20と「彩雲」一つを準備せよ！&lt;br&gt;※任務達成後、用意した開発資材及び必要装備(低改修値のもの優先)は消費します。</JP-Detail>
+    <TR-Detail>사이운 1개와 개발자재 20개를 소지한 상태로 영식수상정찰기 하나 폐기 (개발자재와 장비는 달성 후 소멸, 개수치가 낮은 장비부터 소멸)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>845</ID>
+    <JP-Name>敵大規模泊地の後方兵站線を分断せよ！</JP-Name>
+    <TR-Name>적 대규모 정박지의 후방 병참선을 분단하라!</TR-Name>
+    <JP-Detail>敵の大規模泊地の後方兵站線を分断する！敵泊地の北東にある敵離島拠点を攻撃し、同拠点を無力化、&lt;br&gt;補強兵站線を破壊することで、敵大規模泊地の防衛力低下を図れ！</JP-Detail>
+    <TR-Detail>E-3 이도서희 전투방 S승리? 2회</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>846</ID>
+    <JP-Name>潜水艦隊、中部海域の哨戒を実施せよ！</JP-Name>
+    <TR-Name>잠수 함대, 중부해역의 초계를 실시하라!</TR-Name>
+    <JP-Detail>潜水艦を旗艦とし、4隻以上の有力な潜水艦を配備した第一艦隊、精鋭潜水艦隊で&lt;br&gt;中部海域哨戒線に進出、回航中の敵空母を捕捉、これを襲撃せよ！</JP-Detail>
+    <TR-Detail>잠수함 4척 기함, 나머지 자유편성 함대로 6-1 A승리 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>848</ID>
+    <JP-Name>重装甲巡洋艦、鉄底海峡に突入せよ！</JP-Name>
+    <TR-Name>중장갑순양함, 철저해협에 돌입하라!</TR-Name>
+    <JP-Detail>第一艦隊旗艦に「Zara due」を配備、同艦隊で南方サブ島沖海域へ突入！同方面の敵艦隊群を突破し、鉄底海峡に展開する敵戦力を撃破せよ！</JP-Detail>
+    <TR-Detail>1함대에 Zara due를 배치하고 5-3 보스전 A승리 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>657</ID>
+    <JP-Name>春の準備任務：桃の節句準備！</JP-Name>
+    <TR-Name>봄의 준비 임무: 복숭아의 명절 준비!</TR-Name>
+    <JP-Detail>春の準備任務：「14cm単装砲」を二つ廃棄、家具コイン5,000と「九九式艦爆」「61cm三連装魚雷」各二つを準備せよ！　※任務達成後、用意した家具コイン及び必要装備(低改修値のもの優先)は消費します。</JP-Detail>
+    <TR-Detail>가구코인 5000, 99식 함상폭격기 2개, 61cm 3연장어뢰 2개를 소지한 상태로 14cm 단장포 2개 폐기 (가구코인과 장비는 달성후 소멸, 개수치가 낮은 장비부터 소멸)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>847</ID>
+    <JP-Name>春の準備任務：桃の節句準備を完遂せよ！</JP-Name>
+    <TR-Name>봄의 준비 임무: 복숭아의 명절 준비를 완수하라!</TR-Name>
+    <JP-Detail>春の準備任務：艦隊を東部オリョール海に反復出撃、同方面敵艦隊を覆滅し、&lt;br&gt;同海域周辺の制海権を完全に確保、桃の節句を迎える準備を完遂せよ！</JP-Detail>
+    <TR-Detail>2-3 보스전 S승리 5회</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>658</ID>
+    <JP-Name>潜水艦武装の強化</JP-Name>
+    <TR-Name>잠수함 무장 강화</TR-Name>
+    <JP-Detail>「61cm三連装魚雷」を四つ廃棄、開発資材x120と「61cm四連装(酸素)魚雷」「九三式水中聴音機」各三つを準備せよ！　※任務達成後、用意した開発資材及び必要装備(低改修値のもの優先)は消費します。</JP-Detail>
+    <TR-Detail>개발자재 120개, 61cm 4연장(산소)어뢰 3개, 94식 소나 3개를 소지한 상태로 61cm 3연장어뢰 4개 폐기 (개발자재와 장비는 달성후 소멸, 개수치가 낮은 장비부터 소멸)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>849</ID>
+    <JP-Name>南西諸島方面の敵艦隊を撃破せよ！</JP-Name>
+    <TR-Name>남서제도방면의 적 함대를 격파하라!</TR-Name>
+    <JP-Detail>軽巡を旗艦とした艦隊を編成し、南西諸島防衛線、バシー島沖及び&lt;br&gt;東部オリョール海に展開、同海域に遊弋する敵艦隊を撃破せよ！</JP-Detail>
+    <TR-Detail>경순 기함으로 1-4, 2-2, 2-3 보스전 S승</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>850</ID>
+    <JP-Name>洋上航空戦力を拡充せよ！</JP-Name>
+    <TR-Name>해상 항공 전력을 확충하라!</TR-Name>
+    <JP-Detail>航空母艦、または水上機母艦を旗艦とした有力な艦隊を編成、北方AL海域、&lt;br&gt;西方海域カスガダマ沖 、中部海域MS諸島沖に展開し、各海域の敵艦隊を撃滅せよ！</JP-Detail>
+    <TR-Detail>항모 또는 수상기모함 기함으로 3-5, 4-4, 6-2 보스전 S승?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>659</ID>
+    <JP-Name>精鋭「水戦」隊の新編成</JP-Name>
+    <TR-Name>정예 수상전투기 편대의 새 편성</TR-Name>
+    <JP-Detail>精鋭飛行隊の新編成：練度max及び改修maxの「二式水戦改」を一番スロットに搭載した秘書艦で、&lt;br&gt;「零式艦戦21型」x2「瑞雲」x2を廃棄！　※新飛行隊を編成する「熟練搭乗員」が必要です。</JP-Detail>
+    <TR-Detail>비서함에 숙련도max, 개수max인 "2식 수상전투기改"를 첫 슬롯에 장착하고 "영식 함상전투기21형"x2, "즈이운"x2 폐기 ※숙련탑승원 필요</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>423</ID>
+    <JP-Name>潜水艦派遣作戦による噴式技術の入手</JP-Name>
+    <TR-Name>잠수함 파견 작전으로 분식 기술의 입수</TR-Name>
+    <JP-Detail>鉄鋼5,000及びボーキサイト1,500を準備して、潜水艦派遣作戦により&lt;br&gt;噴式エンジン技術の導入に努めよ！※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 5000, 보크사이트 1500을 소지한 상태로 30번, 31번 원정 성공 ※임무 달성 후 준비한 자원은 사라집니다</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>315</ID>
+    <JP-Name>春季大演習</JP-Name>
+    <TR-Name>춘계 대연습</TR-Name>
+    <JP-Detail>春の一日中に「演習」で8回以上「勝利」をおさめ、艦隊の練度向上に努めよ！</JP-Detail>
+    <TR-Detail>연습전 8회 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>851</ID>
+    <JP-Name>改装航空巡洋艦、出撃！</JP-Name>
+    <TR-Name>개장 항공순양함, 출격!</TR-Name>
+    <JP-Detail>改装航空巡洋艦「鈴谷改二」を旗艦とした精強な艦隊を編成、同艦隊を南方海域に展開、&lt;br&gt;南方海域前面、及びサブ島沖海域に遊弋する敵艦隊群を捕捉、これを撃破せよ！</JP-Detail>
+    <TR-Detail>스즈야改2 기함으로 5-1, 5-3 보스전 S승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>853</ID>
+    <JP-Name>鎮守府海域警戒を厳とせよ！</JP-Name>
+    <TR-Name>진수부 해상 경계를 확실히하라!</TR-Name>
+    <JP-Detail>巡洋艦クラスを旗艦に配備、2隻以上の駆逐艦を擁する警戒艦隊を編成せよ。同警戒艦隊を以て、&lt;br&gt;鎮守府海域(南西諸島/製油所地帯沿岸/南西諸島防衛線/鎮守府近海)の警戒任務にあたれ！</JP-Detail>
+    <TR-Detail>순양함 기함, 구축함 2척 이상 함대로 1-2, 1-3, 1-4, 1-5 보스전 S승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>854</ID>
+    <JP-Name>戦果拡張任務！「Z作戦」前段作戦</JP-Name>
+    <TR-Name>전과 확장 임무! "Z작전" 전단 작전</TR-Name>
+    <JP-Detail>戦果拡張作戦：我が第一艦隊に精鋭艦艇を集中配備、同精鋭艦隊を以て、南西諸島の沖ノ島海域、&lt;br&gt;中部海域哨戒線、グアノ環礁沖の敵艦隊を撃破、中部北海域ピーコック島の敵戦力を破砕殲滅せよ！</JP-Detail>
+    <TR-Detail>2-4, 6-1, 6-3, 6-4 보스전 승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>180</ID>
+    <JP-Name>新編「第一戦隊」を編成せよ！</JP-Name>
+    <TR-Name>신편 제1전대를 편성하라!</TR-Name>
+    <JP-Detail>編成任務：第一艦隊に新改装された長門型戦艦一番艦「長門改二」及び同二番艦「陸奥改」からなる&lt;br&gt;新編第一戦隊を配備せよ！</JP-Detail>
+    <TR-Detail>1함대에 나가토改2 기함, 무츠改 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>424</ID>
+    <JP-Name>輸送船団護衛を強化せよ！</JP-Name>
+    <TR-Name>수송선단 호위를 강화하라!</TR-Name>
+    <JP-Detail>遠征任務：「海上護衛任務」を反復実施し、輸送船団の護衛に務めよ！</JP-Detail>
+    <TR-Detail>원정 [5] 해상 호위 임무 5회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>844</ID>
+    <JP-Name>精鋭「第八駆逐隊」突入せよ！</JP-Name>
+    <TR-Name>정예 제8구축대 돌입하라!</TR-Name>
+    <JP-Detail>「荒潮改二」を旗艦とし、僚艦に「第八駆逐隊」から1隻を配備した精鋭第1艦隊で&lt;br&gt;サーモン海域北方に突入、同方面に接近する有力な敵艦隊を捕捉、同方面の敵戦力の漸減に努めよ！</JP-Detail>
+    <TR-Detail>아라시오改2 기함, 아사시오 오오시오 미치시오 중 하나를 포함한 함대로 5-5 보스전 A승 이상 2회</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>855</ID>
+    <JP-Name>海上護衛体制の強化に努めよ！</JP-Name>
+    <TR-Name>해상 호위 체제 강화에 힘쓰자!</TR-Name>
+    <JP-Detail>海上護衛作戦：駆逐艦または海防艦3隻以上を含む護衛艦隊を編成し、鎮守府海域の製油所地帯沿岸、&lt;br&gt;南西諸島防衛線、鎮守府近海、鎮守府近海航路にそれぞれ展開、各海域における作戦を成功させよ！</JP-Detail>
+    <TR-Detail>구축함 또는 해방함 3척 이상 포함한 함대로 1-3, 1-4, 1-5, 1-6 보스전 A승 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>179</ID>
+    <JP-Name>精鋭「第十六戦隊」を再編成せよ！</JP-Name>
+    <TR-Name>정예 "제16전대"를 재편성하라!</TR-Name>
+    <JP-Detail>「鬼怒改二」を旗艦として、「北上改二」「大井改二」「球磨改」及び&lt;br&gt;「青葉改」「浦波改」「敷波改」から5隻、計6隻の精鋭「第十六戦隊」を再編成せよ！</JP-Detail>
+    <TR-Detail>"키누改2" 기함으로, "키타카미改2" "오오이改2" "쿠마改" 포함하고, "아오바改", "우라나미改", "시키나미改" 중 둘을 골라 6척을 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>836</ID>
+    <JP-Name>精鋭「第十六戦隊」突入せよ！</JP-Name>
+    <TR-Name>정예 "제16전대" 돌입하라!</TR-Name>
+    <JP-Detail>再編成を完了した精鋭「第十六戦隊」を南西諸島海域沖ノ島沖に展開、&lt;br&gt;同方面に遊弋する敵主力を捕捉、これを撃破せよ！</JP-Detail>
+    <TR-Detail>"키누改2" 기함으로, "키타카미改2" "오오이改2" "쿠마改" 포함하고, "아오바改", "우라나미改", "시키나미改" 중 둘을 골라 6척을 편성한 함대로 2-5 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>837</ID>
+    <JP-Name>輸送作戦を成功させ、帰還せよ！</JP-Name>
+    <TR-Name>수송 작전을 성공시키고, 귀환하라!</TR-Name>
+    <JP-Detail>「鬼怒改二」を旗艦、僚艦に「浦波改」他駆逐艦3隻の計5隻の艦隊で&lt;br&gt;バシー島沖における柳輸送作戦を実施、同輸送作戦を完全成功させ、帰還せよ！</JP-Detail>
+    <TR-Detail>"키누改2" 기함으로, "우라나미改" 및 구축 3척 포함하여 총 5척 함대로 2-2 보스전 S 승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>425</ID>
+    <JP-Name>海上護衛総隊、遠征開始！</JP-Name>
+    <TR-Name>해상 호위 총대, 원정 개시!</TR-Name>
+    <JP-Detail>遠征任務：遠征任務「対潜警戒任務」「海上護衛任務」「タンカー護衛任務」を実施、&lt;br&gt;軽巡、駆逐艦、海防艦などから編成された護衛艦隊で各遠征を成功させよ！</JP-Detail>
+    <TR-Detail>[4]대잠 경계 임무, [5]해상 호위 임무, [9]유조선 호위 임무 한 번 씩 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>857</ID>
+    <JP-Name>増強海上護衛総隊、抜錨せよ！</JP-Name>
+    <TR-Name>증강 해상 호위 총대, 발묘하라!</TR-Name>
+    <JP-Detail>出撃任務：軽巡1隻以上、駆逐艦または海防艦2隻以上、さらに航空巡洋艦または軽空母で増強した&lt;br&gt;第一護衛艦隊を第一艦隊に編成、南西諸島海域の各海域に展開、敵艦隊を撃破、各作戦を成功させよ！</JP-Detail>
+    <TR-Detail>경순 1척 이상, 구축 또는 해방함 2척 이상, 항공순양함 또는 경공모, 2척 자유로 편성하고 2-2 ~ 2-5 보스전 S 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>663</ID>
+    <JP-Name>新型艤装の継続研究</JP-Name>
+    <TR-Name>신형 의장 연구의 계속</TR-Name>
+    <JP-Detail>工廠任務：新型艤装の開発を継続実施する。「大口径主砲」系装備x10を廃棄、鉄鋼18,000を準備せよ！&lt;br&gt;※任務達成後、準備した資源は消費します。「勲章」と「新型砲熕兵装資材」の獲得選択が可能です。</JP-Detail>
+    <TR-Detail>강재 18,000을 소지, 대구경 주포계 장비 10개 폐기 ※임무 달성 후 준비한 자원은 소비합니다. 훈장 또는 신형포공병기자재 선택가능</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>182</ID>
+    <JP-Name>精鋭「第四航空戦隊」を再編成せよ！</JP-Name>
+    <TR-Name>정예 「제4항공전대」를 재편성하라!</TR-Name>
+    <JP-Detail>編成任務：第一艦隊旗艦及び同二番艦に練度50以上の航空戦艦「伊勢」「日向」を配備、&lt;br&gt;随伴艦に軽巡洋艦1隻、駆逐艦2隻他を伴う精鋭「第四航空戦隊」を再編成せよ！</JP-Detail>
+    <TR-Detail>기함과 2번함에 레벨50 이상 항공전함, 나머지 경순 1척, 구축함 2척 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>183</ID>
+    <JP-Name>新編「第四水雷戦隊」を編成せよ！</JP-Name>
+    <TR-Name>신편 「제4수뢰전대」를 편성하라!</TR-Name>
+    <JP-Detail>編成任務：第一艦隊旗艦に「由良改二」を配備、随伴艦に二駆「村雨」「夕立」「春雨」「五月雨」&lt;br&gt;他1隻の駆逐艦を配備、新編「第四水雷戦隊」を編成せよ！</JP-Detail>
+    <TR-Detail>유라改2 기함, 무라사메, 유다치, 하루사메, 사미다레, 그 외 구축함 1척 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>664</ID>
+    <JP-Name>電探技術の射撃装置への活用</JP-Name>
+    <TR-Name>전탐 기술의 사격 장치로의 활용</TR-Name>
+    <JP-Detail>工廠任務：電探技術の射撃装置への活用を研究する。「電探」系装備x10を廃棄、弾薬及び鉄鋼を各8,000&lt;br&gt;準備せよ！※任務達成後、準備した資源は消費します。「勲章」と「兵装資材」の獲得選択が可能です。</JP-Detail>
+    <TR-Detail>탄약과 강재를 각각 8,000 소지하고, 전탐 x10 폐기 ※ 훈장 혹은 신형포공병장자재 선택 가능</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>665</ID>
+    <JP-Name>民生産業への協力</JP-Name>
+    <TR-Name>민생 산업에 대한 협력</TR-Name>
+    <JP-Detail>工廠任務：軍需物資を放出し、民生産業に協力する。「小口径主砲」系装備x16を廃棄、燃料12,000を&lt;br&gt;準備せよ！※任務達成後、準備した資源は消費します。「勲章」と「兵装資材」の獲得選択が可能です。</JP-Detail>
+    <TR-Detail>연료를 12,000 소지하고, 소구경 주포 x16 폐기 ※ 훈장 혹은 신형포공병장자재 선택 가능</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>859</ID>
+    <JP-Name>精鋭「第四航空戦隊」、抜錨せよ！</JP-Name>
+    <TR-Name>정예 「제4항공전대」, 발묘하라!</TR-Name>
+    <JP-Detail>精鋭「第四航空戦隊」出撃任務：精鋭航空戦艦を主戦力に再編された「第四航空戦隊」、抜錨せよ！&lt;br&gt;沖ノ島沖戦闘哨戒及び北方AL海域戦闘哨戒を実施、同方面の敵艦隊主力を捕捉、これを撃破せよ！</JP-Detail>
+    <TR-Detail>편성한 정예 「제4항공전대」로 2-5, 3-5 보스전 A승 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>184</ID>
+    <JP-Name>精鋭「第二二駆逐隊」を再編成せよ！</JP-Name>
+    <TR-Name>정예 「제22구축대」를 재편성하라!</TR-Name>
+    <JP-Detail>編成任務：「文月改二」「皐月改二」「水無月改」「長月改」の精強駆逐艦4隻の編成による&lt;br&gt;精鋭第二二駆逐隊を再編成せよ！</JP-Detail>
+    <TR-Detail>편성 임무: 「후미즈키改2」 「사츠키改2」 「미나즈키改」 「나가츠키改」를 한 함대에 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>862</ID>
+    <JP-Name>前線の航空偵察を実施せよ！</JP-Name>
+    <TR-Name>전선의 항공 정찰을 실시하라!</TR-Name>
+    <JP-Detail>偵察任務：水上機母艦1隻と軽巡2隻を中核とした偵察艦隊を、中部海域グアノ環礁沖海域に展開、&lt;br&gt;航空偵察作戦「K作戦」を反復実施せよ！さらに同方面の敵艦隊を捕捉、敵戦力の撃破に努めよ！</JP-Detail>
+    <TR-Detail>정찰 임무: 수상기모함 1척, 경순 2척을 포함한 함대로 6-3 보스전 A승 이상 2회다</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>861</ID>
+    <JP-Name>強行輸送艦隊、抜錨！</JP-Name>
+    <TR-Name>강행수송함대, 발묘!</TR-Name>
+    <JP-Detail>航路護衛任務：航空戦艦(または補給艦でも可)2隻を中核とした艦隊で、鎮守府近海航路における&lt;br&gt;輸送船団護衛作戦を実施。同輸送護衛作戦を2回成功させよ！</JP-Detail>
+    <TR-Detail>항전 또는 보급함 2척 포함한 함대로 1-6 2회 수행</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>426</ID>
+    <JP-Name>海上通商航路の警戒を厳とせよ！</JP-Name>
+    <TR-Name>해상통상항로의 경계를 엄격히 하라!</TR-Name>
+    <JP-Detail>遠征任務：遠征任務「警備任務」「対潜警戒任務」「海上護衛任務」「強行偵察任務」&lt;br&gt;を実施し、敵の通商破壊部隊を制圧、海上通商航路の安全を確保せよ！</JP-Detail>
+    <TR-Detail>[3] 경비 임무, [4] 대잠 경계 임무, [5] 해상 호위 임무, [10] 강행 정찰 임무	원정을 한 번씩 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>863</ID>
+    <JP-Name>精鋭「第二二駆逐隊」出撃せよ！</JP-Name>
+    <TR-Name>정예 제 22구축대 출격하라!</TR-Name>
+    <JP-Detail>出撃任務：再編した精鋭「第二二駆逐隊」を含む精強な水雷戦隊で北方海域キス島沖に出撃、&lt;br&gt;キス島撤退作戦を完全成功させよ！</JP-Detail>
+    <TR-Detail>「후미즈키改2」 「사츠키改2」 「미나즈키改」 「나가츠키改」를 포함한 수뢰전대로 3-2 보스전 S승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>860</ID>
+    <JP-Name>旗艦「由良」、抜錨！</JP-Name>
+    <TR-Name>기함 유라, 발묘!</TR-Name>
+    <JP-Detail>出撃任務：旗艦に「由良改二」、随伴艦に二駆「村雨」「夕立」「春雨」「五月雨」及び「秋月」から&lt;br&gt;二隻以上を配備した第一艦隊を展開、東部オリョール海及び南方海域前面の敵戦力を撃滅せよ！</JP-Detail>
+    <TR-Detail>유라改2 기함, "시구레, 유다치, 하루사메, 사미다레, 아키즈키" 중 2척을 포함한 함대로 2-3, 5-1 보스전 S승?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>185</ID>
+    <JP-Name>精強「任務部隊」を編成せよ！</JP-Name>
+    <TR-Name>정예 임무부대를 편성하라!</TR-Name>
+    <JP-Detail>編成任務：第一艦隊旗艦に「Saratoga Mk.II」または同「Mod.2」を配備、随伴艦に&lt;br&gt;軽巡洋艦1隻、駆逐艦2隻以上を配した夜間作戦可能な機動部隊を新編せよ！</JP-Detail>
+    <TR-Detail>1함대에 Saratoga Mk.II 또는 Mod.2 기함, 경순1, 구축2 포함 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>316</ID>
+    <JP-Name>輸送部隊の練度向上に努めよ！</JP-Name>
+    <TR-Name>수송 부대의 숙련도 향상에 노력하라!</TR-Name>
+    <JP-Detail>演習任務：輸送部隊の練度向上を図る！本日中に演習で4回以上「勝利」せよ！</JP-Detail>
+    <TR-Detail>05시부터 다음날 04:59까지 연습전 4회 B승리 이상 기록</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>864</ID>
+    <JP-Name>精強大型航空母艦、抜錨！</JP-Name>
+    <TR-Name>정예 대형 항공모함, 발묘!</TR-Name>
+    <JP-Detail>出撃任務：「Saratoga Mk.II」または同「Mod.2」を旗艦とした「任務部隊」で、南方海域サーモン海域&lt;br&gt;北方及び中部海域MS諸島沖に展開、同海域敵戦力を捕捉撃滅、「MS諸島防衛戦」を成功させよ！</JP-Detail>
+    <TR-Detail>Saratoga Mk.II 또는 Mod.2 기함, 경순1, 구축2 포함 함대로 5-5, 6-2 보스전 S 승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>669</ID>
+    <JP-Name>夜戦型艦上戦闘機の開発</JP-Name>
+    <TR-Name>야전형 함상전투기 개발</TR-Name>
+    <JP-Detail>練度&amp;改修maxの「F6F-3」を秘書艦一番スロットに搭載、 「13号対空電探」x2 「22号対水上電探」x2&lt;br&gt;を廃棄、開発資材x30、改修資材x6、ボーキサイト5,000、「新型航空兵装資材」x1を準備せよ！</JP-Detail>
+    <TR-Detail>숙련도, 개수 max F6F-3을 비서함 1번 슬롯에 탑재, 개발자재 30개와 개수자재 6개, 보크사이트 5000, 신형 항공 병기 자재 하나를 준비하고, 13호 대공 레이더 2개와 22호 대수상 레이더 2개를 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>852</ID>
+    <JP-Name>改装攻撃型軽空母、前線展開せよ！</JP-Name>
+    <TR-Name>개장 공격형 경항모, 전선 전개하라!</TR-Name>
+    <JP-Detail>改装航空母艦「鈴谷航改二」を旗艦とした精強な機動部隊を編成、同艦隊を中部海域に進出。&lt;br&gt;MS諸島沖、KW環礁沖海域に展開し、同海域の敵機動部隊を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>스즈야航改2 기함, 6-2, 6-5 보스전 S승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>666</ID>
+    <JP-Name>精鋭「瑞雲」隊の編成</JP-Name>
+    <TR-Name>정예 즈이운 부대 편성</TR-Name>
+    <JP-Detail>秘書艦「日向改」の四番スロットに改修max「瑞雲(六三四空)」を搭載して、ドラム缶(輸送用)x2を廃棄。&lt;br&gt;さらに「九九式艦爆」x2「瑞雲」x2を用意せよ！　※新飛行隊を編成する「熟練搭乗員」が必要です。</JP-Detail>
+    <TR-Detail>비서함 휴가改 의 4번 슬롯에 개수 max 즈이운(634 해군항공대) 를 탑재, 99식 함상폭격기 2개와 즈이운 2개와 숙련탑승원을 준비하고, 드럼통(수송용) 2개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>865</ID>
+    <JP-Name>夜間作戦空母、前線に出撃せよ！</JP-Name>
+    <TR-Name>야간작전 항공모함, 전선에 출격하라!</TR-Name>
+    <JP-Detail>出撃任務：「Saratoga Mk.II」を旗艦とした第一艦隊を KW環礁沖海域に展開、敵機動部隊を迎撃！&lt;br&gt;「空母機動部隊迎撃戦」を見事成功させよ！　夜戦作戦空母、抜錨！　前線に出撃せよ！</JP-Detail>
+    <TR-Detail>Saratoga Mk.II 기함 (Mod.II 안됨), 6-5 보스전 S승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>181</ID>
+    <JP-Name>新編「第七戦隊」を編成せよ！</JP-Name>
+    <TR-Name>신편 제 7전대를 편성하라!</TR-Name>
+    <JP-Detail>編成任務：第一艦隊旗艦に新改装された改鈴谷型「熊野改二」、同二番艦に「鈴谷改二」、&lt;br&gt;僚艦に「最上改」「三隈改」を配した新編第七戦隊を配備せよ！</JP-Detail>
+    <TR-Detail>1함대 기함에 쿠마노改2, 2번함에 스즈야改2, 수반함으로 모가미改, 미쿠마改를 포함한 함대 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>660</ID>
+    <JP-Name>精鋭「水戦」隊の増勢</JP-Name>
+    <TR-Name>정예 수전 부대의 증세</TR-Name>
+    <JP-Detail>精鋭飛行隊の増勢：練度max及び改修maxの「二式水戦改」を一番スロットに搭載した秘書艦で、&lt;br&gt;「零式艦戦21型」x2「瑞雲」x2を廃棄！　※新飛行隊を編成する「熟練搭乗員」が必要です。</JP-Detail>
+    <TR-Detail>숙련도, 개수 max 2식 수상전투기改를 비서함 1번 슬롯에 탑재, 숙련탑승원을 준비하고, 영식 함상전투기 21형 2개, 즈이운 2개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>858</ID>
+    <JP-Name>新編「第七戦隊」、出撃せよ！</JP-Name>
+    <TR-Name>신편 제 7전대, 출격하라!</TR-Name>
+    <JP-Detail>出撃任務：新編「第七戦隊」を出撃！　カレー洋リランカ島沖「深海東洋艦隊漸減作戦」、&lt;br&gt;MS諸島沖「MS諸島防衛戦」において、敵艦隊主力を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>쿠마노改2 기함, 2번함에 스즈야改2, 수반함으로 모가미改, 미쿠마改를 포함한 함대로 4-5, 6-2 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>672</ID>
+    <JP-Name>「遊撃部隊」艦隊司令部の創設</JP-Name>
+    <TR-Name>「유격부대」 함대사령부 창설</TR-Name>
+    <JP-Detail>遊撃部隊任務：「遊撃部隊 艦隊司令部」を創設する。「艦隊司令部施設」を秘書艦一番スロットに搭載、 &lt;br&gt;電探系装備x3を廃棄、開発資材x10、鋼材x2,000、そして「戦闘詳報」x2を準備せよ！</JP-Detail>
+    <TR-Detail>비서함 1번 슬롯에 함대사령부시설 장비 후 개발자재 20개와 강재 2000, 전투상보 2개를 준비하고 전탐 3개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>870</ID>
+    <JP-Name>「第八駆逐隊」、南西へ！</JP-Name>
+    <TR-Name>「제8 구축대」, 남서로!</TR-Name>
+    <JP-Detail>第八駆逐隊任務：「第八駆逐隊」を含む艦隊で、鎮守府海域南西諸島沖、及び南西諸島海域バシー島沖に&lt;br&gt;展開！同海域に跳梁する敵艦隊戦力を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>「제8 구축대」를 포함한 함대로 1-2 및 2-2 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>872</ID>
+    <JP-Name>「捷一号作戦」兵站補給線を確保せよ！</JP-Name>
+    <TR-Name>「첩 1호 작전」 병참 보급선을 확보하라!</TR-Name>
+    <JP-Detail>捷号作戦後方任務：有力な艦隊を編成し、作戦第二海域、台湾沖/ルソン島沖に展開、同海域付近で&lt;br&gt;我が後方兵站線攻撃を図る敵艦隊を捕捉、これを複数回撃破、同制海権を確保せよ。</JP-Detail>
+    <TR-Detail>E-2 보스전 2회 S 승리?</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>670</ID>
+    <JP-Name>夜戦型艦上戦闘機の性能強化</JP-Name>
+    <TR-Name>야전형 함상 전투기의 성능 강화</TR-Name>
+    <JP-Detail>練度&amp;改修maxの「F6F-5」を秘書艦一番スロットに搭載、 「13号対空電探」x2 「22号対水上電探」x2&lt;br&gt;を廃棄、開発資材x40、改修資材x8、ボーキサイト6,000、「新型航空兵装資材」x1を準備せよ！</JP-Detail>
+    <TR-Detail>비서함 1슬롯에 숙련도 및 개수 max F6F-5 를 장비 후 개발자재 40개와 개수자재 8개, 보크사이트 6000개, 신형항공병기자재를 준비하고 13호 대공 전탐 2개, 22호 수상 전탐 2개를 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>856</ID>
+    <JP-Name>新編「第一戦隊」、抜錨せよ！</JP-Name>
+    <TR-Name>신편 「제1 전대」, 발묘하라!</TR-Name>
+    <JP-Detail>新編「第一戦隊」出撃任務：戦艦「長門改二」を旗艦、二番艦に「陸奥改」を配備した第一艦隊で出撃！&lt;br&gt;カレー洋リランカ島沖、サーモン海域北方に展開し、同海域の敵艦隊主力を捕捉、これを撃滅せよ！</JP-Detail>
+    <TR-Detail>나가토改2 기함, 무츠改 2번함으로 배치하고 4-5, 5-5 보스전 S승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>876</ID>
+    <JP-Name>松輸送作戦、開始せよ！</JP-Name>
+    <TR-Name>소나무 수송 작전, 개시하라!</TR-Name>
+    <JP-Detail>防衛ラインの強化のため、艦隊旗艦「龍田改二」または「龍田改」、3隻以上の駆逐艦または海防艦を含む輸送護衛艦隊を編成、南西諸島防衛線及び鎮守府近海航路における作戦を複数回成功させよ！</JP-Detail>
+    <TR-Detail>위선 강화를 위해, 함대 기함 [타츠타 개2] 또는 [타츠타 개], 3척 이상의 구축함 또는 해방함을 포함한 수송 호위 함대를 편성, 남서 제도 방위선(1-4) 및 진수부 근해 항로(1-6)에서의 작전을 복수회 성공시켜라! (기함 타츠타 개2 또는 타츠타 개, 구축 또는 해방함 3척 이상 편성, 1-4, 1-6 각 2회 S승리/완주)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>874</ID>
+    <JP-Name>北方海域戦闘哨戒を実施せよ！</JP-Name>
+    <TR-Name>북방해역 전투초계를 실시하라!</TR-Name>
+    <JP-Detail>北方海域戦闘哨戒任務：北方AL海域に軽空母と水上機母艦及び軽巡を基幹戦力とした精鋭艦隊を投入。&lt;br&gt;北方戦闘哨戒を反復実施、同方面の敵増援部隊主力を捕捉、これを撃滅し、北方海域戦線を防衛せよ！</JP-Detail>
+    <TR-Detail>경항모 1, 수상기모함 1, 경순 1, 자유 3으로 3-5 보스전 S승 2회</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>174</ID>
+    <JP-Name>新編「水雷戦隊」を含む艦隊を再編成せよ！</JP-Name>
+    <TR-Name>신편 「수뢰전대」를 포함한 함대를 재편성하라!</TR-Name>
+    <JP-Detail>軽巡級を旗艦とした駆逐艦4隻からなる強力な水雷戦隊を含む艦隊を再編成せよ！</JP-Detail>
+    <TR-Detail>경순/중뇌장/연습순양함 기함, 구축함 4척 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>661</ID>
+    <JP-Name>新型砲熕兵装、戦力化開始！</JP-Name>
+    <TR-Name>신형 포공 병기, 전력화 시작!</TR-Name>
+    <JP-Detail>工廠任務：新型砲熕兵装の開発及び同戦力化を開始する。「副砲」系装備x10を廃棄、&lt;br&gt;鉄鋼6,000を準備せよ！　※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 6000 준비하고 부포 10개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>869</ID>
+    <JP-Name>補給線の安全を確保せよ！</JP-Name>
+    <TR-Name>보급선의 안전을 확보하라!</TR-Name>
+    <JP-Detail>軽巡クラスの艦隊旗艦と2隻以上の駆逐艦または海防艦を中核とした警戒艦隊を編成、同艦隊で&lt;br&gt;鎮守府海域(製油所地帯沿岸/南西諸島防衛線/鎮守府近海)の警戒と補給線安全確保にあたれ！</JP-Detail>
+    <TR-Detail>경순 기함, 구축함 또는 해방함 2척, 3척 자유 편성으로 1-3, 1-4, 1-5 보스전 A승 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>188</ID>
+    <JP-Name>精鋭「三一駆」第一小隊、抜錨準備！</JP-Name>
+    <TR-Name>정예 「31구축대」 제1소대, 발묘 준비!</TR-Name>
+    <JP-Detail>編成任務：「長波改二」旗艦、僚艦に「高波改」または「沖波改」「朝霜改」を配した、&lt;br&gt;第三一駆逐隊第一小隊(2隻艦隊)を編成せよ！</JP-Detail>
+    <TR-Detail>나가나미改2 기함, 2번함에 타카나미改 혹은 오키나미改, 아사시모改를 편성 (2척 함대)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>190</ID>
+    <JP-Name>精鋭「第二一駆逐隊」、抜錨準備！</JP-Name>
+    <TR-Name>정예 「제21구축대」, 발묘 준비!</TR-Name>
+    <JP-Detail>精鋭駆逐隊編成任務：捷一号作戦を支援する。同決戦正面の基地航空への資材輸送任務のため、&lt;br&gt;「若葉改」「初春改二」「初霜改二」を含む3～4隻の精鋭「第二一駆逐隊」の編成を完了せよ！</JP-Detail>
+    <TR-Detail>와카바改, 하츠하루改2, 하츠시모改2를 포함한 함대를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>878</ID>
+    <JP-Name>松輸送作戦、継続実施せよ！</JP-Name>
+    <TR-Name>소나무 수송 작전, 계속 실시하라!</TR-Name>
+    <JP-Detail>艦隊旗艦に軽巡級または駆逐艦、さらに3隻以上の駆逐艦または海防艦を含む輸送護衛艦隊を編成、&lt;br&gt;防衛ラインの強化のため、南西諸島防衛線及び鎮守府近海航路における作戦を継続的に成功させよ！</JP-Detail>
+    <TR-Detail>경순양함 혹은 구축함 기함, 3척 이상의 구축함 또는 해방함을 포함한 함대로 1-4 보스전 3회 승리 및 1-6 도착지점 3회 도달</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>879</ID>
+    <JP-Name>新編「四航戦」、全力出撃！</JP-Name>
+    <TR-Name>신편 「4항전」 전력 출격!</TR-Name>
+    <JP-Detail>航空戦艦「伊勢改」「日向改」及び軽巡「大淀改」と1隻以上の駆逐艦を含む新編第四航空戦隊を編成、&lt;br&gt;鎮守府近海航路、沖ノ島沖及び北方AL海域戦闘哨戒、カレー洋リランカ島沖の作戦に投入せよ！</JP-Detail>
+    <TR-Detail>이세改 휴가改 오요도改 구축1 포함한 함대로 1-6, 2-5, 3-5, 4-5 보스전 A승리 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>673</ID>
+    <JP-Name>装備開発力の整備</JP-Name>
+    <TR-Name>장비 개발력 정비</TR-Name>
+    <JP-Detail>工廠整備任務：装備開発力を整備する。「小口径主砲」系装備x4を廃棄せよ！</JP-Detail>
+    <TR-Detail>소구경 주포 4개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>679</ID>
+    <JP-Name>対空兵装の拡充</JP-Name>
+    <TR-Name>대공 병기의 확충</TR-Name>
+    <JP-Detail>対空兵装の整備拡充を実施する！「中口径主砲」系装備x6、「副砲」系装備x3を廃棄、&lt;br&gt;ボーキサイト900を準備せよ！　※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>보크사이트 900을 소지한 상태로 중구경 주포 6개, 부포 3개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>674</ID>
+    <JP-Name>工廠環境の整備</JP-Name>
+    <TR-Name>공창 환경의 정비</TR-Name>
+    <JP-Detail>工廠整備任務：工廠環境の重整備を実施する。「機銃」系装備x3を廃棄、鋼材300を準備せよ！&lt;br&gt;※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 300을 소지한 상태로 기총 3개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>675</ID>
+    <JP-Name>運用装備の統合整備</JP-Name>
+    <TR-Name>운용장비의 통합 정비</TR-Name>
+    <JP-Detail>運用装備統合任務：装備の統合整備を実施する。「艦上戦闘機」系装備x6、「機銃」系装備x4を廃棄、&lt;br&gt;ボーキサイト800を準備(本任務は時局により更新されます)。※任務達成後、準備資源を消費します。</JP-Detail>
+    <TR-Detail>운용장비 통합임무: 장비의 통합 정비를 실시한다. "함상전투기"계 장비 x6, "기총"계 장비 x4를 폐기, 보크 사이트 800을 준비(본 임무는 시국에 따라 갱신됩니다) ※임무 달성 후 준비 자원을 소비합니다. (분기퀘스트)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>676</ID>
+    <JP-Name>装備開発力の集中整備</JP-Name>
+    <TR-Name>장비 개발력의 집중 정비</TR-Name>
+    <JP-Detail>工廠環境の集中整備を実施する！「中口径主砲」系装備x3、「副砲」系装備x3、「ドラム缶(輸送用)」x1&lt;br&gt;を廃棄、鋼材2,400を準備せよ！　※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 2400을 소지한 상태로 중구경 주포 3개, 부포 3개, 드럼통(수송용) 1개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>677</ID>
+    <JP-Name>継戦支援能力の整備</JP-Name>
+    <TR-Name>계전 지원 능력의 정비</TR-Name>
+    <JP-Detail>艦娘の継戦支援体制の整備強化を実施する！「大口径主砲」系装備x4、「水上偵察機」系装備x2、&lt;br&gt;「魚雷」系装備x3を廃棄、鋼材3,600を準備せよ！　※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 3600을 소지한 상태로 대구경 주포 4개, 수상정찰기 2개, 어뢰 3개 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>318</ID>
+    <JP-Name>給糧艦「伊良湖」の支援</JP-Name>
+    <TR-Name>급양함 이라코 지원</TR-Name>
+    <JP-Detail>伊良湖支援任務：軽巡を2隻以上配備した第一艦隊で本日中に演習で3回「勝利」、その後、&lt;br&gt;第一艦隊旗艦に戦闘糧食を二つ装備せよ！　※任務達成後、同戦闘糧食は消費します</JP-Detail>
+    <TR-Detail>경순양함 2척을 포함한 함대로 연습 3회 승리하고 전투식량 2개를 장비</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>319</ID>
+    <JP-Name>精鋭「第二一駆」、猛特訓！</JP-Name>
+    <TR-Name>정예 「제21구축대」, 맹훈련!</TR-Name>
+    <JP-Detail>駆逐隊演習任務：精鋭「第二一駆逐隊」3隻を含む艦隊を編成。作戦に先立ち、猛特訓を開始する！&lt;br&gt;同艦隊で、本日中に演習で4回勝利せよ！</JP-Detail>
+    <TR-Detail>와카바改, 하츠하루改2, 하츠시모改2를 포함한 함대로 연습전 4회 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>678</ID>
+    <JP-Name>主力艦上戦闘機の更新</JP-Name>
+    <TR-Name>주력 함상전투기의 갱신</TR-Name>
+    <JP-Detail>艦上戦闘機「九六式艦戦」x3、「零式艦戦21型」x5を廃棄。秘書艦の一番及び二番装備スロットに&lt;br&gt;「零式艦戦52型」を装備。ボーキサイト4,000を準備せよ。※任務達成後、準備資源は消費します。</JP-Detail>
+    <TR-Detail>보크사이트 4000을 소지한 상태로 96식 함전 3개 및 영식 함상전투기 21형 5개 폐기, 비서함의 1번 및 2번 슬롯에 영식 함상전투기 52형 장비</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>428</ID>
+    <JP-Name>近海に侵入する敵潜を制圧せよ！</JP-Name>
+    <TR-Name>근해에 돌입하여 적 잠수함을 제압하라!</TR-Name>
+    <JP-Detail>敵潜制圧任務：遠征任務「対潜警戒任務」「海峡警備行動」「長時間対潜警戒」を&lt;br&gt;それぞれ複数回実施し、近海に潜り込む敵潜部隊を制圧、我が領海から叩き出せ！</JP-Detail>
+    <TR-Detail>[4] 대잠 경계 임무, [A2] 해협 경비 행동, [A3] 장시간 대잠 경계 각각 2회 성공</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>873</ID>
+    <JP-Name>北方海域警備を実施せよ！</JP-Name>
+    <TR-Name>북방 해역 경비를 실시하라!</TR-Name>
+    <JP-Detail>北方海域警備任務：北方海域の警備を実施する。軽巡を1隻以上含む艦隊で、北方海域モーレイ海、&lt;br&gt;キス島沖、アルフォンシーノ方面に艦隊を展開、北方海域方面の警備と制海権確保に努めよ！</JP-Detail>
+    <TR-Detail>경순 1척, 자유 5척으로 3-1, 3-2, 3-3 보스전 A승 이상</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>320</ID>
+    <JP-Name>駆逐隊、特訓始め！</JP-Name>
+    <TR-Name>구축대, 훈련 시작!</TR-Name>
+    <JP-Detail>駆逐隊演習任務：駆逐艦4隻で編成される駆逐隊。この駆逐隊を含む艦隊を編成。&lt;br&gt;特訓を開始する！同艦隊で本日中に演習にて4回以上勝利せよ！</JP-Detail>
+    <TR-Detail>구축함 4척 포함한 함대로 연습전 4회 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>192</ID>
+    <JP-Name>精鋭「第十八駆逐隊」を編成せよ！</JP-Name>
+    <TR-Name>정예 「제18구축대」를 편성하라!</TR-Name>
+    <JP-Detail>精鋭駆逐隊編成任務：「霰改二」「霞改二/改二乙」「陽炎改」「不知火改」4隻による&lt;br&gt;精鋭「第十八駆逐隊」を編成せよ！</JP-Detail>
+    <TR-Detail>아라레改2, 카스미改2/改2乙, 카게로改, 시라누이改 를 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>681</ID>
+    <JP-Name>五周年任務【壱：工廠】</JP-Name>
+    <TR-Name>5주년 임무 [1:공창]</TR-Name>
+    <JP-Detail>五周年任務：艦隊五周年特別任務群を開始する！同任務群は全五任務で構成。まずは工廠の整理から！&lt;br&gt;「小口径主砲」系装備x5 及び「中口径主砲」系装備x5 を廃棄、工廠環境の向上と整理整頓を実施せよ！</JP-Detail>
+    <TR-Detail>소구경 주포 x5, 중구경 주포 x5 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>882</ID>
+    <JP-Name>五周年任務【弐：鎮守府海域警戒】</JP-Name>
+    <TR-Name>5주년 임무 [2:진수부 해역 경계]</TR-Name>
+    <JP-Detail>五周年任務：軽巡クラスを旗艦に配備、駆逐艦または海防艦3隻以上を含む五周年艦隊で、鎮守府海域&lt;br&gt;(同正面海域/南西諸島沖/製油所地帯沿岸/南西諸島防衛線/鎮守府近海)の警戒防衛任務にあたれ！</JP-Detail>
+    <TR-Detail>경순 기함, 구축함 혹은 해방함 3척 포함 함대로 1-1, 1-2, 1-3, 1-4, 1-5 보스전 A승 이상 1회씩</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>706</ID>
+    <JP-Name>五周年任務【参：近代化改修】</JP-Name>
+    <TR-Name>5주년 임무 [3:근대화 개수]</TR-Name>
+    <JP-Detail>五周年任務：鉄鋼555及びボーキサイト555を準備して、任意の海防艦の近代化改修を[駆逐艦]x5隻&lt;br&gt;同時使用により2回成功させよ！※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>강재 555, 보크사이트 555를 소지한 상태로 해방함에 한번에 "구축함 5척"을 근대화개수 2회</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>321</ID>
+    <JP-Name>五周年任務【肆：演習】</JP-Name>
+    <TR-Name>5주년 임무 [4:연습]</TR-Name>
+    <JP-Detail>五周年任務：駆逐艦または海防艦2隻以上を含む五隻の特別編成の艦隊を編成！&lt;br&gt;この五周年特別艦隊で、本日中に演習で4回以上勝利せよ！</JP-Detail>
+    <TR-Detail>구축함 또는 해방함 2척 포함 "5척 함대"로 하루 안에 연습전 4회 승리</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>883</ID>
+    <JP-Name>五周年任務【伍：五周年艦隊出撃！】</JP-Name>
+    <TR-Name>5주년 임무 [5:5주년 함대 출격!]</TR-Name>
+    <JP-Detail>五周年任務：軽巡クラス１隻、駆逐艦または海防艦2隻以上を含む五周年艦隊で、1)南西諸島海域全作戦&lt;br&gt;2)南方サブ島沖海域及びサーモン海域北方	3)中部海域KW環礁沖海域	いずれかの作戦を成功させよ！</JP-Detail>
+    <TR-Detail>경순/연순/뇌순 1척, 구축함 또는 해방함 2척 포함 함대로 [2-1, 2-2, 2-3, 2-4, 2-5 보스전 A승 이상 1회씩] 또는 [5-3, 5-5 보스전 A승 이상 1회씩] 또는 [6-5 보스전 A승 이상 1회]</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>680</ID>
+    <JP-Name>対空兵装の整備拡充</JP-Name>
+    <TR-Name>대공 병기의 정비 확충</TR-Name>
+    <JP-Detail>対空兵装の整備拡充を継続実施する！「機銃」系装備x4、「電探」系装備x4を廃棄、&lt;br&gt;ボーキサイト1,500を準備せよ！　※任務達成後、準備した資源は消費します。</JP-Detail>
+    <TR-Detail>보크사이트 1500을 소지하고 기총계 장비 x4, 전탐계 장비 x4 폐기</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>191</ID>
+    <JP-Name>改装「第十七駆逐隊」、再編始め！</JP-Name>
+    <TR-Name>개장「제17구축대」, 개편 시작!</TR-Name>
+    <JP-Detail>改装駆逐隊編成任務：改装した陽炎型駆逐艦「浦風改」「谷風改」、そして対空戦闘の激化に備え、&lt;br&gt;対空兵装を軸に大幅強化改装した「磯風乙改」「浜風乙改」による「第十七駆逐隊」を再編せよ！</JP-Detail>
+    <TR-Detail>이소카제乙改, 하마카제乙改, 우라카제改, 타니카제改를 한 함대에 편성</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>880</ID>
+    <JP-Name>精鋭駆逐隊、獅子奮迅！</JP-Name>
+    <TR-Name>정예 구축대, 사자분신!</TR-Name>
+    <JP-Detail>十分な装備と練度を誇る駆逐艦4隻からなる精鋭駆逐隊を含む艦隊を編成。鎮守府近海航路、&lt;br&gt;東部オリョール海、北方キス島沖、西方カレー洋に投入、各戦線の作戦展開を成功させよ！</JP-Detail>
+    <TR-Detail>구축함 4척 포함 함대로 1-6, 2-3, 3-2, 4-2 보스전 A승 이상/도착지점 도달</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>505</ID>
+    <JP-Name>主計科任務【おにぎりを作る！】</JP-Name>
+    <TR-Name>주계과 임무 【주먹밥을 만들자!】</TR-Name>
+    <JP-Detail>主計科任務：回収した「お米」炊いて、「おにぎり」を作ろう。&lt;br&gt;海の上で食う握り飯は……美味いぞ！</JP-Detail>
+    <TR-Detail>「쌀」로 「주먹밥」 제작 (쌀 x5 -&gt; 주먹밥) ※제작한 주먹밥은 사라집니다.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>506</ID>
+    <JP-Name>主計科任務【おにぎりを振る舞おう！】</JP-Name>
+    <TR-Name>주계과 임무 【주먹밥을 대접하자!】</TR-Name>
+    <JP-Detail>主計科任務：美味しい「お米」と「梅干」と「海苔」で、「高級おにぎり」を作りましょう。&lt;br&gt;いい食材で、丁寧に作った握り飯は……美味しい！提督、美味しいです！</JP-Detail>
+    <TR-Detail>「쌀」로 「주먹밥」 x3 제작 (쌀 x5 -&gt; 주먹밥) ※제작한 주먹밥은 사라집니다.</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>507</ID>
+    <JP-Name>主計科任務【高級おにぎりを作る！】</JP-Name>
+    <TR-Name>주계과 임무 【고급 주먹밥을 만들자!】</TR-Name>
+    <JP-Detail>主計科任務：美味しい「お米」と「梅干」と「海苔」で、「高級おにぎり」を作りましょう。&lt;br&gt;いい食材で、丁寧に作った握り飯は……美味しい！提督、美味しいです！</JP-Detail>
+    <TR-Detail>「쌀」, 「우메보시」, 「김」으로 「고급 주먹밥」 제작 (쌀 x6, 우메보시 x2, 김 x3 -&gt; 고급 주먹밥)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>508</ID>
+    <JP-Name>主計科任務【差し入れ！高級おにぎり】</JP-Name>
+    <TR-Name>주계과 임무 【가져다 주자! 고급 주먹밥】</TR-Name>
+    <JP-Detail>主計科任務：そうだ、提督、いいこと考えました！この美味しい「高級おにぎり」を一杯作って&lt;br&gt;空技廠の皆さんに差し入れしましょう！ね、加賀さん！(※高級おにぎりを後2回作りましょう)</JP-Detail>
+    <TR-Detail>「쌀」, 「우메보시」, 「김」으로 「고급 주먹밥」 x2 제작 (쌀 x6, 우메보시 x2, 김 x3 -&gt; 고급 주먹밥)</TR-Detail>
+  </Quest>
+  <Quest>
+    <ID>509</ID>
+    <JP-Name>主計科任務【お茶漬けを作る！】</JP-Name>
+    <TR-Name>주계과 임무 【오차즈케를 만들자!】</TR-Name>
+    <JP-Detail>主計科任務：「お米」と「梅干」と「海苔」、そして良い「お茶」で、「お茶漬け」を作りましょう。&lt;br&gt;さらさら～っと食べれるお茶漬けは、夜食にも、飲みの後の〆の一杯としても最高ですね！</JP-Detail>
+    <TR-Detail>「쌀」, 「우메보시」, 「김」, 「차」로 「오차즈케」 제작 (쌀 x8, 우메보시 x3, 김 x3, 차 x4 -&gt; 오차즈케)</TR-Detail>
+  </Quest>
+</Quests>

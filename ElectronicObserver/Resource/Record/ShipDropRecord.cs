@@ -110,9 +110,9 @@ namespace ElectronicObserver.Resource.Record
 			{
 				ShipID = shipID;
 				if (shipID == -1)
-					ShipName = "(なし)";
+					ShipName = "(없음)";
 				else if (shipID == -2)
-					ShipName = "(満員)";
+					ShipName = "(여유공간X)";
 				else
 				{
 					var ship = KCDatabase.Instance.MasterShips[shipID];
@@ -124,7 +124,7 @@ namespace ElectronicObserver.Resource.Record
 
 				ItemID = itemID;
 				if (itemID == -1)
-					ItemName = "(なし)";
+					ItemName = "(없음)";
 				else
 				{
 					var item = KCDatabase.Instance.MasterUseItems[itemID];
@@ -136,7 +136,7 @@ namespace ElectronicObserver.Resource.Record
 
 				EquipmentID = equipmentID;
 				if (equipmentID == -1)
-					EquipmentName = "(なし)";
+					EquipmentName = "(없음)";
 				else
 				{
 					var eq = KCDatabase.Instance.MasterEquipments[equipmentID];
@@ -175,7 +175,7 @@ namespace ElectronicObserver.Resource.Record
 				MapInfoID = int.Parse(elem[8]);
 				CellID = int.Parse(elem[9]);
 				Difficulty = Constants.GetDifficulty(elem[10]);
-				IsBossNode = string.Compare(elem[11], "ボス") == 0;
+				IsBossNode = string.Compare(elem[11], "보스") == 0;
 				EnemyFleetID = Convert.ToUInt64(elem[12], 16);
 				Rank = elem[13];
 				HQLevel = int.Parse(elem[14]);
@@ -197,7 +197,7 @@ namespace ElectronicObserver.Resource.Record
 					MapInfoID,
 					CellID,
 					Constants.GetDifficulty(Difficulty),
-					IsBossNode ? "ボス" : "-",
+					IsBossNode ? "보스" : "-",
 					EnemyFleetID.ToString("x16"),
 					Rank,
 					HQLevel);
@@ -278,7 +278,7 @@ namespace ElectronicObserver.Resource.Record
 		}
 
 
-		public override string RecordHeader => "艦船ID,艦名,アイテムID,アイテム名,装備ID,装備名,入手日時,海域,海域,セル,難易度,ボス,敵編成ID,ランク,司令部Lv";
+		public override string RecordHeader => "함선ID,함명,아이템ID,아이템이름,장비ID장비명,시간,해역,해역,노드,난이도,보스,적편성ID,랭크,사령부Lv";
 
 		public override string FileName => "ShipDropRecord.csv";
 	}
