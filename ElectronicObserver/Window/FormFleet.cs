@@ -547,8 +547,8 @@ namespace ElectronicObserver.Window
 					}
 					else
 					{
-						HP.BackColor = SystemColors.Control;
-					}
+                        HP.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                    }
 					{
 						StringBuilder sb = new StringBuilder();
 						double hprate = (double)ship.HPCurrent / ship.HPMax;
@@ -755,12 +755,12 @@ namespace ElectronicObserver.Window
 						}
 
 						if (airbattle > 0)
-							sb.AppendFormat("제공전력: {0} / 항공위력: {1}\r\n", airsup_str, airbattle);
+							sb.AppendFormat("제공: {0} / 항공화력: {1}\r\n", airsup_str, airbattle);
 						else
-							sb.AppendFormat("제공전력: {0}\r\n", airsup_str);
+							sb.AppendFormat("제공: {0}\r\n", airsup_str);
 					}
 					else if (airbattle > 0)
-						sb.AppendFormat("항공위력: {0}\r\n", airbattle);
+						sb.AppendFormat("항공화력: {0}\r\n", airbattle);
 				}
 
 				return sb.ToString();
@@ -783,7 +783,7 @@ namespace ElectronicObserver.Window
 					else if (cond < 50)
 						Condition.BackColor = Color.Transparent;
 					else
-						Condition.BackColor = Color.LightGreen;
+						Condition.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
 
 				}
 				else
@@ -855,10 +855,10 @@ namespace ElectronicObserver.Window
 
 			ConfigurationChanged();
 
-			MainFontColor = Color.FromArgb(0x00, 0x00, 0x00);
-			SubFontColor = Color.FromArgb(0x88, 0x88, 0x88);
+            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-			AnchorageRepairBound = 0;
+            AnchorageRepairBound = 0;
 
 			//ui init
 
@@ -1049,7 +1049,7 @@ namespace ElectronicObserver.Window
 			FleetData fleet = db.Fleet[FleetID];
 			if (fleet == null) return;
 
-			sb.AppendFormat("{0}\t제공전력{1} / 색적능력 {2} / 수송능력 {3}\r\n", fleet.Name, fleet.GetAirSuperiority(), fleet.GetSearchingAbilityString(ControlFleet.BranchWeight), Calculator.GetTPDamage(fleet));
+			sb.AppendFormat("{0}\t제공치{1} / 색적능력 {2} / 수송능력 {3}\r\n", fleet.Name, fleet.GetAirSuperiority(), fleet.GetSearchingAbilityString(ControlFleet.BranchWeight), Calculator.GetTPDamage(fleet));
 			for (int i = 0; i < fleet.Members.Count; i++)
 			{
 				if (fleet[i] == -1)
@@ -1279,8 +1279,12 @@ namespace ElectronicObserver.Window
 
 			MainFont = Font = c.UI.MainFont;
 			SubFont = c.UI.SubFont;
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-			AutoScroll = c.FormFleet.IsScrollable;
+            AutoScroll = c.FormFleet.IsScrollable;
 
 			var fleet = KCDatabase.Instance.Fleet[FleetID];
 

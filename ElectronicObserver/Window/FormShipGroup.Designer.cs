@@ -601,7 +601,7 @@
             // 
             // ShipView_AirBattlePower
             // 
-            this.ShipView_AirBattlePower.HeaderText = "航空威力";
+            this.ShipView_AirBattlePower.HeaderText = "제공";
             this.ShipView_AirBattlePower.Name = "ShipView_AirBattlePower";
             this.ShipView_AirBattlePower.ReadOnly = true;
             this.ShipView_AirBattlePower.Width = 40;
@@ -615,7 +615,7 @@
             // 
             // ShipView_AircraftPower
             // 
-            this.ShipView_AircraftPower.HeaderText = "空撃威力";
+            this.ShipView_AircraftPower.HeaderText = "화력";
             this.ShipView_AircraftPower.Name = "ShipView_AircraftPower";
             this.ShipView_AircraftPower.ReadOnly = true;
             this.ShipView_AircraftPower.Width = 40;

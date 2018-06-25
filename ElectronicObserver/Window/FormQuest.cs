@@ -39,23 +39,24 @@ namespace ElectronicObserver.Window
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft
 			};
+
 			CSDefaultLeft.BackColor =
-			CSDefaultLeft.SelectionBackColor = SystemColors.Control;
-			CSDefaultLeft.ForeColor = SystemColors.ControlText;
-			CSDefaultLeft.SelectionForeColor = SystemColors.ControlText;
-			CSDefaultLeft.WrapMode = DataGridViewTriState.False;
+            CSDefaultLeft.SelectionBackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            CSDefaultLeft.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            CSDefaultLeft.SelectionForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            CSDefaultLeft.WrapMode = DataGridViewTriState.False;
 
-			CSDefaultCenter = new DataGridViewCellStyle(CSDefaultLeft)
-			{
-				Alignment = DataGridViewContentAlignment.MiddleCenter
-			};
 
-			CSCategories = new DataGridViewCellStyle[9];
+            CSDefaultCenter = new DataGridViewCellStyle(CSDefaultLeft)
+            {
+                Alignment = DataGridViewContentAlignment.MiddleCenter,
+            };
+            CSCategories = new DataGridViewCellStyle[9];
 			for (int i = 0; i < CSCategories.Length; i++)
 			{
 				CSCategories[i] = new DataGridViewCellStyle(CSDefaultCenter);
 
-				Color c;
+                Color c;
 				switch (i + 1)
 				{
 					case 1:     //編成
@@ -88,11 +89,18 @@ namespace ElectronicObserver.Window
 						break;
 				}
 
-				CSCategories[i].BackColor =
+                CSCategories[i].ForeColor =
+                CSCategories[i].SelectionForeColor = SystemColors.ControlText;
+                CSCategories[i].BackColor =
 				CSCategories[i].SelectionBackColor = c;
-			}
+            }
 
-			QuestView.DefaultCellStyle = CSDefaultCenter;
+            for (int i = 0; i < CSCategories.Length; i++)
+            {
+
+            }
+
+                QuestView.DefaultCellStyle = CSDefaultCenter;
 			QuestView_Category.DefaultCellStyle = CSCategories[CSCategories.Length - 1];
 			QuestView_Name.DefaultCellStyle = CSDefaultLeft;
 			QuestView_Progress.DefaultCellStyle = CSDefaultLeft;
@@ -151,8 +159,12 @@ namespace ElectronicObserver.Window
 			var c = Utility.Configuration.Config;
 
 			QuestView.Font = Font = c.UI.MainFont;
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            QuestView.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            QuestView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-			MenuMain_ShowRunningOnly.Checked = c.FormQuest.ShowRunningOnly;
+            MenuMain_ShowRunningOnly.Checked = c.FormQuest.ShowRunningOnly;
 			MenuMain_ShowOnce.Checked = c.FormQuest.ShowOnce;
 			MenuMain_ShowDaily.Checked = c.FormQuest.ShowDaily;
 			MenuMain_ShowWeekly.Checked = c.FormQuest.ShowWeekly;
@@ -271,11 +283,10 @@ namespace ElectronicObserver.Window
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(QuestView);
 				row.Height = 21;
-
 				row.Cells[QuestView_State.Index].Value = (q.State == 3) ? ((bool?)null) : (q.State == 2);
 				row.Cells[QuestView_Type.Index].Value = q.Type;
 				row.Cells[QuestView_Category.Index].Value = q.Category;
-				row.Cells[QuestView_Category.Index].Style = CSCategories[Math.Min(q.Category - 1, 8 - 1)];
+				row.Cells[QuestView_Category.Index].Style = CSCategories[Math.Min(q.Category - 1, 8 - 1)]; //아마도이거
 				row.Cells[QuestView_Name.Index].Value = q.QuestID;
 				{
 					var progress = KCDatabase.Instance.QuestProgress[q.QuestID];
@@ -391,7 +402,6 @@ namespace ElectronicObserver.Window
 
 		private void QuestView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
 		{
-
 			if (e.Column.Index == QuestView_State.Index)
 			{
 				e.SortResult = (e.CellValue1 == null ? 2 : ((bool)e.CellValue1 ? 1 : 0)) -
@@ -537,8 +547,8 @@ namespace ElectronicObserver.Window
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(QuestView);
 				row.SetValues(null, null, null, "(미취득)", null);
-				QuestView.Rows.Add(row);
-			}
+                QuestView.Rows.Add(row);
+            }
 
 		}
 

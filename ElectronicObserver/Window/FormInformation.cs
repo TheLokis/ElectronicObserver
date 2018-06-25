@@ -66,7 +66,12 @@ namespace ElectronicObserver.Window
 
 			Font = TextInformation.Font = Utility.Configuration.Config.UI.MainFont;
 			TextInformation.LanguageOption = RichTextBoxLanguageOptions.UIFonts;
-		}
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            TextInformation.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            TextInformation.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+
+        }
 
 
 		void Updated(string apiname, dynamic data)
@@ -420,8 +425,7 @@ namespace ElectronicObserver.Window
             sb.AppendFormat("결과: {0}\r\n", Constants.GetExpeditionResult((int)data.api_clear_result));
 			sb.AppendFormat("제독경험치: +{0}\r\n", (int)data.api_get_exp);
 			sb.AppendFormat("함선경험치: +{0}\r\n", ((int[])data.api_get_ship_exp).Min());
-
-			return sb.ToString();
+            return sb.ToString();
 		}
 
 
@@ -430,7 +434,7 @@ namespace ElectronicObserver.Window
 			StringBuilder sb = new StringBuilder();
 
 			sb.AppendLine("[전투종료]");
-			sb.AppendFormat("적함대명: {0}\r\n", FormMain.Instance.Translator.GetTranslation(data.api_enemy_info.api_deck_name, Utility.TranslationType.Operations));
+			sb.AppendFormat("적함대명: {0}\r\n", FormMain.Instance.Translator.GetTranslation(data.api_enemy_info.api_deck_name, Utility.TranslationType.OperationSortie));
 			sb.AppendFormat("승패판정: {0}\r\n", data.api_win_rank);
 			sb.AppendFormat("제독경험치: +{0}\r\n", (int)data.api_get_exp);
 

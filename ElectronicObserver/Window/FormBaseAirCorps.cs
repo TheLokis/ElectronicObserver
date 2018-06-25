@@ -245,6 +245,8 @@ namespace ElectronicObserver.Window
 				var mainfont = config.UI.MainFont;
 				var subfont = config.UI.SubFont;
 
+
+
 				Name.Font = mainfont;
 				ActionKind.Font = mainfont;
 				AirSuperiority.Font = mainfont;
@@ -378,7 +380,10 @@ namespace ElectronicObserver.Window
 
 			TableMember.ResumeLayout();
 
-			if (KCDatabase.Instance.BaseAirCorps.Any())
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+
+            if (KCDatabase.Instance.BaseAirCorps.Any())
 				Updated(null, null);
 		}
 
@@ -466,7 +471,7 @@ namespace ElectronicObserver.Window
 
 				string areaName = KCDatabase.Instance.MapArea.ContainsKey(corps.MapAreaID) ? KCDatabase.Instance.MapArea[corps.MapAreaID].Name : "バミューダ海域";
 
-				sb.AppendFormat("{0}\t[{1}] 제공전력{2}/행동반경{3}\r\n",
+				sb.AppendFormat("{0}\t[{1}] 제공치{2}/행동반경{3}\r\n",
 					(areaid == -1 ? (areaName + "：") : "") + corps.Name,
 					Constants.GetBaseAirCorpsActionKind(corps.ActionKind),
 					Calculator.GetAirSuperiority(corps),

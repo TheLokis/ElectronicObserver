@@ -345,7 +345,9 @@ namespace ElectronicObserver.Window.Dialog
 			//[UI]
 			UI_MainFont.Text = config.UI.MainFont.SerializeFontAttribute;
 			UI_SubFont.Text = config.UI.SubFont.SerializeFontAttribute;
-			UI_BarColorMorphing.Checked = config.UI.BarColorMorphing;
+            selectTheme.DataSource = Enum.GetValues(typeof(Theme));
+            selectTheme.SelectedItem = config.UI.Theme;
+            UI_BarColorMorphing.Checked = config.UI.BarColorMorphing;
 			UI_IsLayoutFixed.Checked = config.UI.IsLayoutFixed;
 			{
 				UI_RenderingTest.MainFont = config.UI.MainFont.FontData;
@@ -407,7 +409,8 @@ namespace ElectronicObserver.Window.Dialog
 			FormFleet_EquipmentLevelVisibility.SelectedIndex = (int)config.FormFleet.EquipmentLevelVisibility;
 			FormFleet_ShowAircraftLevelByNumber.Checked = config.FormFleet.ShowAircraftLevelByNumber;
 			FormFleet_AirSuperiorityMethod.SelectedIndex = config.FormFleet.AirSuperiorityMethod;
-			FormFleet_ShowAnchorageRepairingTimer.Checked = config.FormFleet.ShowAnchorageRepairingTimer;
+            ExpCheckerOpList.SelectedIndex = config.FormFleet.ExpCheckerOption;
+            FormFleet_ShowAnchorageRepairingTimer.Checked = config.FormFleet.ShowAnchorageRepairingTimer;
 			FormFleet_BlinkAtCompletion.Checked = config.FormFleet.BlinkAtCompletion;
 			FormFleet_ShowConditionIcon.Checked = config.FormFleet.ShowConditionIcon;
 			FormFleet_FixedShipNameWidth.Value = config.FormFleet.FixedShipNameWidth;
@@ -597,8 +600,12 @@ namespace ElectronicObserver.Window.Dialog
 			config.UI.BarColorMorphing = UI_BarColorMorphing.Checked;
 			config.UI.IsLayoutFixed = UI_IsLayoutFixed.Checked;
 
-			//[ログ]
-			config.Log.LogLevel = (int)Log_LogLevel.Value;
+            Theme theme;
+            Enum.TryParse(selectTheme.SelectedValue.ToString(), out theme);
+            config.UI.Theme = theme;
+
+            //[ログ]
+            config.Log.LogLevel = (int)Log_LogLevel.Value;
 			config.Log.SaveLogFlag = Log_SaveLogFlag.Checked;
 			config.Log.SaveErrorReport = Log_SaveErrorReport.Checked;
 			config.Log.FileEncodingID = Log_FileEncodingID.SelectedIndex;
@@ -646,7 +653,8 @@ namespace ElectronicObserver.Window.Dialog
 			config.FormFleet.EquipmentLevelVisibility = (Window.Control.ShipStatusEquipment.LevelVisibilityFlag)FormFleet_EquipmentLevelVisibility.SelectedIndex;
 			config.FormFleet.ShowAircraftLevelByNumber = FormFleet_ShowAircraftLevelByNumber.Checked;
 			config.FormFleet.AirSuperiorityMethod = FormFleet_AirSuperiorityMethod.SelectedIndex;
-			config.FormFleet.ShowAnchorageRepairingTimer = FormFleet_ShowAnchorageRepairingTimer.Checked;
+            config.FormFleet.ExpCheckerOption = ExpCheckerOpList.SelectedIndex;
+            config.FormFleet.ShowAnchorageRepairingTimer = FormFleet_ShowAnchorageRepairingTimer.Checked;
 			config.FormFleet.BlinkAtCompletion = FormFleet_BlinkAtCompletion.Checked;
 			config.FormFleet.ShowConditionIcon = FormFleet_ShowConditionIcon.Checked;
 			config.FormFleet.FixedShipNameWidth = (int)FormFleet_FixedShipNameWidth.Value;

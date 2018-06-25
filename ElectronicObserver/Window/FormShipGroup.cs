@@ -25,24 +25,24 @@ namespace ElectronicObserver.Window
 	{
 
 
-		/// <summary>タブ背景色(アクティブ)</summary>
-		private readonly Color TabActiveColor = Color.FromArgb(0xFF, 0xFF, 0xCC);
+        /// <summary>タブ背景色(アクティブ)</summary>
+        private readonly Color TabActiveColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-		/// <summary>タブ背景色(非アクティブ)</summary>
-		private readonly Color TabInactiveColor = SystemColors.Control;
+        /// <summary>タブ背景色(非アクティブ)</summary>
+        private readonly Color TabInactiveColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
 
 
-		// セル背景色
-		private readonly Color CellColorRed = Color.FromArgb(0xFF, 0xBB, 0xBB);
-		private readonly Color CellColorOrange = Color.FromArgb(0xFF, 0xDD, 0xBB);
-		private readonly Color CellColorYellow = Color.FromArgb(0xFF, 0xFF, 0xBB);
-		private readonly Color CellColorGreen = Color.FromArgb(0xBB, 0xFF, 0xBB);
-		private readonly Color CellColorGray = Color.FromArgb(0xBB, 0xBB, 0xBB);
-		private readonly Color CellColorCherry = Color.FromArgb(0xFF, 0xDD, 0xDD);
+        // セル背景色
+        private readonly Color CellColorRed = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+        private readonly Color CellColorOrange = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.OrangeHighlight);
+        private readonly Color CellColorYellow = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.YellowHighlight);
+        private readonly Color CellColorGreen = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
+        private readonly Color CellColorGray = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GrayHighlight);
+        private readonly Color CellColorCherry = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.PinkHighlight);
 
-		//セルスタイル
-		private DataGridViewCellStyle CSDefaultLeft, CSDefaultCenter, CSDefaultRight,
+        //セルスタイル
+        private DataGridViewCellStyle CSDefaultLeft, CSDefaultCenter, CSDefaultRight,
 			CSRedRight, CSOrangeRight, CSYellowRight, CSGreenRight, CSGrayRight, CSCherryRight,
 			CSIsLocked;
 
@@ -78,10 +78,10 @@ namespace ElectronicObserver.Window
 			CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft,
-				BackColor = SystemColors.Control,
-				Font = Font,
-				ForeColor = SystemColors.ControlText,
-				SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),
+				BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor),
+                Font = Font,
+				ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor),
+                SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),
 				SelectionForeColor = SystemColors.ControlText,
 				WrapMode = DataGridViewTriState.False
 			};
@@ -227,8 +227,15 @@ namespace ElectronicObserver.Window
 			MenuGroup_ShowStatusBar.Checked = config.FormShipGroup.ShowStatusBar;
 			_shipNameSortMethod = config.FormShipGroup.ShipNameSortMethod;
 
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            ShipView.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            ShipView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            StatusBar.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            StatusBar.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-			int rowHeight;
+
+            int rowHeight;
 			if (config.UI.IsLayoutFixed)
 			{
 				ShipView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -1396,9 +1403,9 @@ namespace ElectronicObserver.Window
 
 
 
-        private static readonly string ShipCSVHeaderUser = "고유ID,함종,함명,Lv,Exp,next,개장까지,내구,최대내구,피로,연료,탄약,슬롯1,슬롯2,슬롯3,슬롯4,슬롯5,보강슬롯,입거,기본화력,화력개수,화력,기본뇌장,뇌장개수,뇌장,기본대공,대공개수,대공,기본장갑,장갑개수,장갑,기본대잠,대잠,기본회피,회피,기본색적,색적,기본운,운 개수,운,사정,속력,잠금,출격지,항공위력,포격위력,공습위력,대잠위력,뇌격위력,화뇌합";
+        private static readonly string ShipCSVHeaderUser = "고유ID,함종,함명,Lv,Exp,next,개장까지,내구,최대내구,피로,연료,탄약,슬롯1,슬롯2,슬롯3,슬롯4,슬롯5,보강슬롯,입거,기본화력,화력개수,화력,기본뇌장,뇌장개수,뇌장,기본대공,대공개수,대공,기본장갑,장갑개수,장갑,기본대잠,대잠,기본회피,회피,기본색적,색적,기본운,운 개수,운,사정,속력,잠금,출격지,제공,포격위력,항공화력,대잠위력,뇌격위력,화뇌합";
 
-        private static readonly string ShipCSVHeaderData = "고유ID,함종,함명,함선ID,Lv,Exp,next,개장까지,내구,최대내구,피로,연료,탄약,슬롯1,슬롯2,슬롯3,슬롯4,슬롯5,보강슬롯,장비ID1,장비ID2,장비ID3,장비ID4,장비ID5,보강슬롯ID,탑재1,탑재2,탑재3,탑재4,탑재5,입거,입거연료,입거강재,기본화력,화력개수,화력,기본뇌장,뇌장개수,뇌장,기본대공,대공개수,대공,기본장갑,장갑개수,장갑,기본대잠,대잠,기본회피,회피,기본색적,색적,기본운,운 개수,운,사정,속력,잠금,출격지,항공전력,포격위력,공습위력,대잠공격,뇌격위력,화뇌합";
+        private static readonly string ShipCSVHeaderData = "고유ID,함종,함명,함선ID,Lv,Exp,next,개장까지,내구,최대내구,피로,연료,탄약,슬롯1,슬롯2,슬롯3,슬롯4,슬롯5,보강슬롯,장비ID1,장비ID2,장비ID3,장비ID4,장비ID5,보강슬롯ID,탑재1,탑재2,탑재3,탑재4,탑재5,입거,입거연료,입거강재,기본화력,화력개수,화력,기본뇌장,뇌장개수,뇌장,기본대공,대공개수,대공,기본장갑,장갑개수,장갑,기본대잠,대잠,기본회피,회피,기본색적,색적,기본운,운 개수,운,사정,속력,잠금,출격지,제공,포격위력,항공화력,대잠공격,뇌격위력,화뇌합";
 
 
 		private void MenuMember_CSVOutput_Click(object sender, EventArgs e)

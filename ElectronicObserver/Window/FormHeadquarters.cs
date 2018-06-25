@@ -121,19 +121,24 @@ namespace ElectronicObserver.Window
 			HQLevel.MainFont = Utility.Configuration.Config.UI.MainFont;
 			HQLevel.SubFont = Utility.Configuration.Config.UI.SubFont;
 
-			// 点滅しない設定にしたときに消灯状態で固定されるのを防ぐ
-			if (!Utility.Configuration.Config.FormHeadquarters.BlinkAtMaximum)
-			{
-				if (ShipCount.Tag as bool? ?? false)
-				{
-					ShipCount.BackColor = Color.LightCoral;
-				}
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            HQLevel.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            HQLevel.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-				if (EquipmentCount.Tag as bool? ?? false)
-				{
-					EquipmentCount.BackColor = Color.LightCoral;
-				}
-			}
+            // 点滅しない設定にしたときに消灯状態で固定されるのを防ぐ
+            if (!Utility.Configuration.Config.FormHeadquarters.BlinkAtMaximum)
+			{
+                if (ShipCount.Tag as bool? ?? false)
+                {
+                    ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                }
+
+                if (EquipmentCount.Tag as bool? ?? false)
+                {
+                    EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                }
+            }
 
 			//visibility
 			CheckVisibilityConfiguration();
@@ -212,11 +217,11 @@ namespace ElectronicObserver.Window
 
 
 			// 資源上限超過時の色
-			Color overcolor = Color.Moccasin;
+			Color overcolor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.OrangeHighlight);
 
 
 
-			FlowPanelMaster.SuspendLayout();
+            FlowPanelMaster.SuspendLayout();
 
 			//Admiral
 			FlowPanelAdmiral.SuspendLayout();
@@ -299,8 +304,8 @@ namespace ElectronicObserver.Window
 				ShipCount.Text = string.Format("{0}/{1}", RealShipCount, db.Admiral.MaxShipCount);
 				if (RealShipCount > db.Admiral.MaxShipCount - 5)
 				{
-					ShipCount.BackColor = Color.LightCoral;
-				}
+                    ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                }
 				else
 				{
 					ShipCount.BackColor = Color.Transparent;
@@ -310,8 +315,8 @@ namespace ElectronicObserver.Window
 				EquipmentCount.Text = string.Format("{0}/{1}", RealEquipmentCount, db.Admiral.MaxEquipmentCount);
 				if (RealEquipmentCount > db.Admiral.MaxEquipmentCount + 3 - 20)
 				{
-					EquipmentCount.BackColor = Color.LightCoral;
-				}
+                    EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                }
 				else
 				{
 					EquipmentCount.BackColor = Color.Transparent;
@@ -429,16 +434,16 @@ namespace ElectronicObserver.Window
 
 			if (Utility.Configuration.Config.FormHeadquarters.BlinkAtMaximum)
 			{
-				if (ShipCount.Tag as bool? ?? false)
-				{
-					ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightCoral : Color.Transparent;
-				}
+                if (ShipCount.Tag as bool? ?? false)
+                {
+                    ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
+                }
 
-				if (EquipmentCount.Tag as bool? ?? false)
-				{
-					EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightCoral : Color.Transparent;
-				}
-			}
+                if (EquipmentCount.Tag as bool? ?? false)
+                {
+                    EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
+                }
+            }
 		}
 
 

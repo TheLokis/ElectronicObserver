@@ -598,7 +598,7 @@ namespace ElectronicObserver.Window.Dialog
 					int val = (int)e.Value;
 
 					if (val == -1)
-						e.Value = "ちょうど";
+						e.Value = "설정안함";
 					else
 						e.Value = Constants.GetAirSuperiority(val);
 				}

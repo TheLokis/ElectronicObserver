@@ -141,7 +141,7 @@ namespace ElectronicObserver.Window
 
 					if (Utility.Configuration.Config.FormDock.BlinkAtCompletion && (time - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierRepair.AccelInterval)
 					{
-						RepairTime.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightGreen : Color.Transparent;
+						RepairTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 					}
 				}
 			}
@@ -155,8 +155,11 @@ namespace ElectronicObserver.Window
 				ShipName.Font = parent.Font;
 				RepairTime.Font = parent.Font;
 				RepairTime.BackColor = Color.Transparent;
+                ShipName.ForeColor = parent.ForeColor;
+                RepairTime.ForeColor = parent.ForeColor;
 
-				ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
+
+                ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
 			}
 
 			public void Dispose()
@@ -249,8 +252,10 @@ namespace ElectronicObserver.Window
 		{
 
 			Font = Utility.Configuration.Config.UI.MainFont;
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-			if (ControlDock != null)
+            if (ControlDock != null)
 			{
 				TableDock.SuspendLayout();
 

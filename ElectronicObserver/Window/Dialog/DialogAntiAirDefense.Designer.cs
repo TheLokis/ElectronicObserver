@@ -328,7 +328,7 @@
 			// ResultView_ShootDownBoth
 			// 
 			this.ResultView_ShootDownBoth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.ResultView_ShootDownBoth.HeaderText = "両方成功";
+			this.ResultView_ShootDownBoth.HeaderText = "비율+고정";
 			this.ResultView_ShootDownBoth.Name = "ResultView_ShootDownBoth";
 			this.ResultView_ShootDownBoth.ReadOnly = true;
 			this.ResultView_ShootDownBoth.ToolTipText = "비율격추 및 고정격추에 모두 성공했을경우의 격추수";

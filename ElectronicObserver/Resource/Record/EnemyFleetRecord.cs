@@ -1,5 +1,6 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Data.Battle;
+using ElectronicObserver.Window;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -91,8 +92,8 @@ namespace ElectronicObserver.Resource.Record
 			public EnemyFleetElement(string fleetName, int mapAreaID, int mapInfoID, int cellID, int difficulty, int formation, int[] fleetMember, int[] fleetMemberLevel, int expShip)
 				: base()
 			{
-				FleetName = fleetName;
-				MapAreaID = mapAreaID;
+				FleetName = FormMain.Instance.Translator.GetTranslation(fleetName, Utility.TranslationType.OperationSortie);
+                MapAreaID = mapAreaID;
 				MapInfoID = mapInfoID;
 				CellID = cellID;
 				Difficulty = difficulty;
@@ -117,8 +118,9 @@ namespace ElectronicObserver.Resource.Record
 					throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ulong id = Convert.ToUInt64(elem[0], 16);
-				FleetName = elem[1];
-				MapAreaID = int.Parse(elem[2]);
+				FleetName = FormMain.Instance.Translator.GetTranslation(elem[1], Utility.TranslationType.OperationSortie);
+                    //elem[1];
+                    MapAreaID = int.Parse(elem[2]);
 				MapInfoID = int.Parse(elem[3]);
 				CellID = int.Parse(elem[4]);
 				Difficulty = Constants.GetDifficulty(elem[5]);
@@ -176,7 +178,7 @@ namespace ElectronicObserver.Resource.Record
 			{
 
 				var battle = KCDatabase.Instance.Battle;
-				string fleetName = battle.IsBaseAirRaid ? "敵基地空襲" : battle.Result?.EnemyFleetName ?? "";
+				string fleetName = battle.IsBaseAirRaid ? "적기지공습" : battle.Result?.EnemyFleetName ?? "";
 				int baseExp = battle.Result?.BaseExp ?? 0;
 				var initial = battle.FirstBattle.Initial;
 
@@ -298,7 +300,7 @@ namespace ElectronicObserver.Resource.Record
 		}
 
 
-		public override string RecordHeader => "敵編成ID,敵艦隊名,海域,海域,セル,難易度,陣形,艦娘経験値,ID#01,ID#02,ID#03,ID#04,ID#05,ID#06,ID#07,ID#08,ID#09,ID#10,ID#11,ID#12,艦名#01,艦名#02,艦名#03,艦名#04,艦名#05,艦名#06,艦名#07,艦名#08,艦名#09,艦名#10,艦名#11,艦名#12,Lv#01,Lv#02,Lv#03,Lv#04,Lv#05,Lv#06,Lv#07,Lv#08,Lv#09,Lv#10,Lv#11,Lv#12";
+		public override string RecordHeader => "적편성ID,적함대명,해역,해역,노드,난이도,진형,함선경험치,ID#01,ID#02,ID#03,ID#04,ID#05,ID#06,ID#07,ID#08,ID#09,ID#10,ID#11,ID#12,함명#01,함명#02,함명#03,함명#04,함명#05,함명#06,함명,함명#08,함명#09,함명#10,함명#11,함명#12,Lv#01,Lv#02,Lv#03,Lv#04,Lv#05,Lv#06,Lv#07,Lv#08,Lv#09,Lv#10,Lv#11,Lv#12";
 
 		public override string FileName => "EnemyFleetRecord.csv";
 	}

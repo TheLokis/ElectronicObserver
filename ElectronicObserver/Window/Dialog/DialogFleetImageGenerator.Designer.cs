@@ -712,7 +712,7 @@
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(65, 15);
 			this.label12.TabIndex = 19;
-			this.label12.Text = "小(英数)：";
+			this.label12.Text = "소형(숫자)：";
 			// 
 			// SelectSmallDigitFont
 			// 
@@ -742,7 +742,7 @@
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(65, 15);
 			this.label11.TabIndex = 16;
-			this.label11.Text = "中(英数)：";
+			this.label11.Text = "중형(중요)：";
 			// 
 			// SelectMediumDigitFont
 			// 
@@ -772,7 +772,7 @@
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(65, 15);
 			this.label10.TabIndex = 13;
-			this.label10.Text = "小(通常)：";
+			this.label10.Text = "소형(보조)：";
 			// 
 			// SelectSmallFont
 			// 
@@ -802,7 +802,7 @@
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(65, 15);
 			this.label9.TabIndex = 10;
-			this.label9.Text = "中(通常)：";
+			this.label9.Text = "중형(일반)：";
 			// 
 			// SelectMediumFont
 			// 
@@ -832,7 +832,7 @@
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(65, 15);
 			this.label8.TabIndex = 7;
-			this.label8.Text = "大(通常)：";
+			this.label8.Text = "대형(일반)：";
 			// 
 			// SelectLargeFont
 			// 

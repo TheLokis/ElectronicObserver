@@ -39,7 +39,7 @@
 			this.QuestView_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.QuestView_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.QuestView_Progress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.MenuProgress = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuProgress = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.MenuProgress_Increment = new System.Windows.Forms.ToolStripMenuItem();
 			this.MenuProgress_Decrement = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -85,7 +85,7 @@
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.QuestView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.QuestView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-			this.QuestView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.QuestView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
 			this.QuestView_State,
 			this.QuestView_Type,
 			this.QuestView_Category,
@@ -176,10 +176,12 @@
 			this.MenuProgress_Reset});
 			this.MenuProgress.Name = "MenuProgress";
 			this.MenuProgress.Size = new System.Drawing.Size(149, 76);
-			// 
-			// MenuProgress_Increment
-			// 
-			this.MenuProgress_Increment.Name = "MenuProgress_Increment";
+            this.MenuProgress.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.MenuProgress.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            // 
+            // MenuProgress_Increment
+            // 
+            this.MenuProgress_Increment.Name = "MenuProgress_Increment";
 			this.MenuProgress_Increment.Size = new System.Drawing.Size(148, 22);
 			this.MenuProgress_Increment.Text = "진행도 +1(&I)";
 			this.MenuProgress_Increment.Click += new System.EventHandler(this.MenuProgress_Increment_Click);
@@ -365,10 +367,10 @@
 			// 
 			this.toolStripSeparator4.Name = "toolStripSeparator4";
 			this.toolStripSeparator4.Size = new System.Drawing.Size(200, 6);
-			// 
-			// FormQuest
-			// 
-			this.AutoHidePortion = 150D;
+            // 
+            // FormQuest
+            // 
+            this.AutoHidePortion = 150D;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(300, 200);
 			this.Controls.Add(this.QuestView);

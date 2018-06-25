@@ -151,14 +151,14 @@ namespace ElectronicObserver.Window
 
 					if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && (time - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierConstruction.AccelInterval)
 					{
-						CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightGreen : Color.Transparent;
+						CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 					}
 
 				}
 				else if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && !string.IsNullOrWhiteSpace(CompletionTime.Text))
 				{
 					//完成しているので
-					CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightGreen : Color.Transparent;
+					CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 				}
 			}
 
@@ -172,7 +172,10 @@ namespace ElectronicObserver.Window
 				CompletionTime.Font = parent.Font;
 				CompletionTime.BackColor = Color.Transparent;
 				ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
-			}
+                ShipName.ForeColor = parent.ForeColor;
+                CompletionTime.ForeColor = parent.ForeColor;
+
+            }
 
 			public void Dispose()
 			{
@@ -300,8 +303,9 @@ namespace ElectronicObserver.Window
 
 			Font = Utility.Configuration.Config.UI.MainFont;
 			MenuMain_ShowShipName.Checked = Utility.Configuration.Config.FormArsenal.ShowShipName;
-
-			if (ControlArsenal != null)
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            if (ControlArsenal != null)
 			{
 				TableArsenal.SuspendLayout();
 
@@ -312,7 +316,9 @@ namespace ElectronicObserver.Window
 
 				TableArsenal.ResumeLayout();
 			}
-		}
+
+
+        }
 
 
 		private void MenuMain_ShowShipName_CheckedChanged(object sender, EventArgs e)

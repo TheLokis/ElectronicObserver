@@ -256,6 +256,8 @@ namespace ElectronicObserver.Window.Dialog
 
 			TextShip.Items.Clear();
 
+            //작업 체크용 1
+
 			if (SearchInFleet.Checked)
 			{
 				TextShip.Items.AddRange(ships
@@ -266,11 +268,22 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			else
 			{
-				TextShip.Items.AddRange(ships
-					.OrderBy(s => s.MasterShip.ShipType)
-					.ThenByDescending(s => s.Level)
-					.Select(s => new ComboShipData(s))
-					.ToArray());
+                if(Utility.Configuration.Config.FormFleet.ExpCheckerOption == 1)
+                {
+                    TextShip.Items.AddRange(ships
+    .OrderBy(s => s.MasterShip.ShipType)
+    .ThenByDescending(s => s.Level)
+    .Select(s => new ComboShipData(s))
+    .ToArray());
+                } else
+                {
+                    TextShip.Items.AddRange(ships
+    .OrderByDescending(s => s.Level)
+    .Select(s => new ComboShipData(s))
+    .ToArray());
+                }
+
+
 			}
 
 			TextShip.SelectedIndex = 0;

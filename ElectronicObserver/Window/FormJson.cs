@@ -307,8 +307,10 @@ namespace ElectronicObserver.Window
 			UpdatesTree.Checked = c.FormJson.UpdatesTree;
 			AutoUpdateFilter.Text = c.FormJson.AutoUpdateFilter;
 
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-			JsonTreeView.Nodes.Clear();
+            JsonTreeView.Nodes.Clear();
 
 			if (!AutoUpdate.Checked || !UpdatesTree.Checked)
 				JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);

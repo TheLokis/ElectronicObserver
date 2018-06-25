@@ -280,35 +280,35 @@
     <JP-Detail>複数の水上機母艦を有する軽巡を旗艦とした艦隊で、水上機の前線輸送を実施せよ！</JP-Detail>
     <TR-Detail>숙련도가 높은 경순양함을 기함으로 수상기모함들과 같이 수송 작전을 실시하라!</TR-Detail>
   </Expedition>
-    <Expedition>
+  <Expedition>
     <ID>100</ID>
     <JP-Name>兵站強化任務</JP-Name>
     <TR-Name>병참강화임무</TR-Name>
     <JP-Detail>複数の水上機母艦を有する軽巡を旗艦とした艦隊で、水上機の前線輸送を実施せよ！</JP-Detail>
     <TR-Detail>항만 시설 강화와 병참 비축 시설 확충에 협력하고, 보급 체제를 강화하라!</TR-Detail>
   </Expedition>
-    <Expedition>
+  <Expedition>
     <ID>101</ID>
     <JP-Name>海峡警備行動</JP-Name>
     <TR-Name>해협경비행동</TR-Name>
     <JP-Detail>海防艦や駆逐艦による、沿岸警備部隊で、海峡警備を実施しよう！</JP-Detail>
     <TR-Detail>해방함이나 구축함에 의한 연안 경비 부대로 해협 경비를 실시하라!</TR-Detail>
   </Expedition>
-    <Expedition>
+  <Expedition>
     <ID>102</ID>
     <JP-Name>長時間対潜警戒</JP-Name>
     <TR-Name>장시간 대잠 경계</TR-Name>
     <JP-Detail>高練度の対潜部隊を展開、敵潜を制圧し、航路の安全を確保せよ！</JP-Detail>
     <TR-Detail>높은 숙련도의 대잠 부대를 전개, 적잠을 제압하고, 항로의 안전을 확보하라!</TR-Detail>
   </Expedition>
-    <Expedition>
+  <Expedition>
     <ID>110</ID>
     <JP-Name>南西方面航空偵察作戦</JP-Name>
     <TR-Name>남서방면 항공정찰 작전</TR-Name>
     <JP-Detail>索敵力の高い水上機母艦及び軽巡を伴う艦隊で敵情勢を偵察せよ！</JP-Detail>
     <TR-Detail>색적 능력이 높은 수상기모함 및 경순을 포함하는 함대로 적 정세를 정찰하라!</TR-Detail>
   </Expedition>
-    <Expedition>
+  <Expedition>
     <ID>111</ID>
     <JP-Name>敵泊地強襲反撃作戦</JP-Name>
     <TR-Name>적 정박지 강습 반격작전</TR-Name>

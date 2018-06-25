@@ -94,7 +94,7 @@
 			// 
 			this.ContextMenuFleet_CopyFleetDeckBuilder.Name = "ContextMenuFleet_CopyFleetDeckBuilder";
 			this.ContextMenuFleet_CopyFleetDeckBuilder.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_CopyFleetDeckBuilder.Text = "편성복사(편성 시뮬레이터로)(&D)";
+			this.ContextMenuFleet_CopyFleetDeckBuilder.Text = "편성복사(덱 빌더용)(&D)";
 			this.ContextMenuFleet_CopyFleetDeckBuilder.Click += new System.EventHandler(this.ContextMenuFleet_CopyFleetDeckBuilder_Click);
 			// 
 			// ContextMenuFleet_CopyKanmusuList
