@@ -130,7 +130,7 @@
 			// 
 			this.TreeContextMenu_ShrinkParent.Name = "TreeContextMenu_ShrinkParent";
 			this.TreeContextMenu_ShrinkParent.Size = new System.Drawing.Size(235, 22);
-			this.TreeContextMenu_ShrinkParent.Text = "親ノードを格納";
+			this.TreeContextMenu_ShrinkParent.Text = "부모노드 포함";
 			this.TreeContextMenu_ShrinkParent.Click += new System.EventHandler(this.TreeContextMenu_ShrinkParent_Click);
 			// 
 			// toolStripSeparator1
@@ -200,7 +200,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(249, 15);
 			this.label3.TabIndex = 5;
-			this.label3.Text = "◆ D&D で保存した json ファイル を読み込めます";
+			this.label3.Text = "◆ D&D 에 저장된 json 을 가져옵니다.";
 			this.label3.UseMnemonic = false;
 			// 
 			// label2
@@ -210,7 +210,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(144, 44);
 			this.label2.TabIndex = 4;
-			this.label2.Text = "※自動更新を有効にすると、\r\n　重くなる可能性があります";
+			this.label2.Text = "※자동업데이트를 사용하면, \r\n프로그램이 무거워 질 수 있습니다.";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// UpdatesTree
@@ -220,7 +220,7 @@
 			this.UpdatesTree.Name = "UpdatesTree";
 			this.UpdatesTree.Size = new System.Drawing.Size(104, 19);
 			this.UpdatesTree.TabIndex = 3;
-			this.UpdatesTree.Text = "Treeも更新する";
+			this.UpdatesTree.Text = "Tree도 갱신";
 			this.UpdatesTree.UseVisualStyleBackColor = true;
 			this.UpdatesTree.CheckedChanged += new System.EventHandler(this.UpdatesTree_CheckedChanged);
 			// 
@@ -250,20 +250,20 @@
 			this.AutoUpdate.Name = "AutoUpdate";
 			this.AutoUpdate.Size = new System.Drawing.Size(93, 19);
 			this.AutoUpdate.TabIndex = 0;
-			this.AutoUpdate.Text = "自動更新する";
+			this.AutoUpdate.Text = "자동업데이트";
 			this.AutoUpdate.UseVisualStyleBackColor = true;
 			this.AutoUpdate.CheckedChanged += new System.EventHandler(this.AutoUpdate_CheckedChanged);
 			// 
 			// CSVSaver
 			// 
 			this.CSVSaver.Filter = "CSV|*.csv|File|*";
-			this.CSVSaver.Title = "ノードを CSV に出力";
+			this.CSVSaver.Title = "노드를 CSV 에 출력";
 			// 
 			// TreeContextMenu_CopyAsDocument
 			// 
 			this.TreeContextMenu_CopyAsDocument.Name = "TreeContextMenu_CopyAsDocument";
 			this.TreeContextMenu_CopyAsDocument.Size = new System.Drawing.Size(235, 22);
-			this.TreeContextMenu_CopyAsDocument.Text = "このノードをドキュメント化してコピー";
+			this.TreeContextMenu_CopyAsDocument.Text = "이 노드를 문서화하고 복사";
 			this.TreeContextMenu_CopyAsDocument.Click += new System.EventHandler(this.TreeContextMenu_CopyAsDocument_Click);
 			// 
 			// FormJson

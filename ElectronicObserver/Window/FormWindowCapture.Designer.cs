@@ -62,7 +62,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.HideOnClose = true;
 			this.Name = "FormWindowCapture";
-			this.Text = "ウィンドウキャプチャ";
+			this.Text = "캡쳐 윈도우";
 			this.ResumeLayout(false);
 
 		}

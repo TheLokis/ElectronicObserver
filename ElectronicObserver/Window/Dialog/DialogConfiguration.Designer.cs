@@ -372,7 +372,7 @@ namespace ElectronicObserver.Window.Dialog
             this.Connection_DownstreamProxy.Size = new System.Drawing.Size(524, 23);
             this.Connection_DownstreamProxy.TabIndex = 10;
             this.ToolTipInfo.SetToolTip(this.Connection_DownstreamProxy, "다운스트림 프록시 주소를 설정합니다.\r\n이 설정은 위의 포트 설정보다 우선시됩니다.\r\n입력하지 않은경우 자동 설정됩니다.\r\n이 기능을 이해하시는 " +
-        "경우만 이용해주세요.てください。");
+        "경우만 이용해주세요.");
             // 
             // Connection_UseSystemProxy
             // 
@@ -634,8 +634,8 @@ namespace ElectronicObserver.Window.Dialog
             this.UI_RenderingTestChanger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UI_RenderingTestChanger.AutoSize = false;
-            this.UI_RenderingTestChanger.BackColor = Utility.Configuration.Config.UI.SkinColor(ConfigUI.SkinType.BackColor, System.Drawing.SystemColors.Window);
-                //System.Drawing.SystemColors.Window;
+            this.UI_RenderingTestChanger.BackColor = System.Drawing.SystemColors.Window;
+            //System.Drawing.SystemColors.Window;
             this.UI_RenderingTestChanger.Location = new System.Drawing.Point(3, 29);
             this.UI_RenderingTestChanger.Name = "UI_RenderingTestChanger";
             this.UI_RenderingTestChanger.Size = new System.Drawing.Size(162, 25);
@@ -670,7 +670,7 @@ namespace ElectronicObserver.Window.Dialog
             // UI_IsLayoutFixed
             // 
             this.UI_IsLayoutFixed.AutoSize = true;
-            this.UI_IsLayoutFixed.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.UI_IsLayoutFixed.BackColor = System.Drawing.SystemColors.Control;
             this.UI_IsLayoutFixed.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.UI_IsLayoutFixed.Location = new System.Drawing.Point(8, 89);
             this.UI_IsLayoutFixed.Name = "UI_IsLayoutFixed";
@@ -688,7 +688,7 @@ namespace ElectronicObserver.Window.Dialog
             this.UI_BarColorMorphing.Name = "UI_BarColorMorphing";
             this.UI_BarColorMorphing.Size = new System.Drawing.Size(167, 19);
             this.UI_BarColorMorphing.TabIndex = 11;
-            this.UI_BarColorMorphing.Text = "バーの色を滑らかに変化させる";
+            this.UI_BarColorMorphing.Text = "게이지바를 부드럽게 표현";
             this.ToolTipInfo.SetToolTip(this.UI_BarColorMorphing, "HP, 자원등의 바 색상을 칸코레 UI처럼 부드럽게 변화시킬지 설정합니다.");
             this.UI_BarColorMorphing.UseVisualStyleBackColor = true;
             this.UI_BarColorMorphing.CheckedChanged += new System.EventHandler(this.UI_BarColorMorphing_CheckedChanged);
@@ -1112,9 +1112,8 @@ namespace ElectronicObserver.Window.Dialog
             this.Life_CanCloseFloatWindowInLock.Name = "Life_CanCloseFloatWindowInLock";
             this.Life_CanCloseFloatWindowInLock.Size = new System.Drawing.Size(197, 19);
             this.Life_CanCloseFloatWindowInLock.TabIndex = 10;
-            this.Life_CanCloseFloatWindowInLock.Text = "ロック中でもフロートウィンドウを閉じる";
-            this.ToolTipInfo.SetToolTip(this.Life_CanCloseFloatWindowInLock, "上記「レイアウトをロックする」が有効な時でも、\r\nフロートウィンドウ(本体とは分離したウィンドウ)を閉じられるようにするかを指定します。\r\nよくウィンドウを一時的" +
-        "に開く方は有効にすると便利です。");
+            this.Life_CanCloseFloatWindowInLock.Text = "레이아웃 잠금중 플로트 윈도우 닫을수있게 설정";
+            this.ToolTipInfo.SetToolTip(this.Life_CanCloseFloatWindowInLock, "레이아웃이 잠금상태인 경우에도,\r\n플로트 윈도우(본체로부터 분리된 창. 이 경우 '보기'에서 열수있는 메뉴들이 해당됩니다.)\r\n를 닫을 수 있게 해줍니다.");
             this.Life_CanCloseFloatWindowInLock.UseVisualStyleBackColor = true;
             // 
             // Life_LockLayout
@@ -2496,7 +2495,7 @@ namespace ElectronicObserver.Window.Dialog
             this.FormBrowser_DeleteRegistry.Name = "FormBrowser_DeleteRegistry";
             this.FormBrowser_DeleteRegistry.Size = new System.Drawing.Size(50, 23);
             this.FormBrowser_DeleteRegistry.TabIndex = 4;
-            this.FormBrowser_DeleteRegistry.Text = "削除";
+            this.FormBrowser_DeleteRegistry.Text = "삭제";
             this.ToolTipInfo.SetToolTip(this.FormBrowser_DeleteRegistry, "레지스트리를 삭제합니다.");
             this.FormBrowser_DeleteRegistry.UseVisualStyleBackColor = true;
             this.FormBrowser_DeleteRegistry.Click += new System.EventHandler(this.FormBrowser_DeleteRegistry_Click);

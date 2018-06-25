@@ -21,9 +21,9 @@ namespace ElectronicObserver.Window
 	{
 
 		public static readonly String WARNING_MESSAGE =
-				"このウィンドウをキャプチャします。よろしいですか？\r\n\r\n" +
-				"注意: ウィンドウによっては正常に取り込めず、不安定になる可能性があります。\r\n" +
-				"データを保存する・母港に戻るなど、安全を確保してから実行してください。\r\n";
+				"이창을 캡쳐합니다. 괜찮으시겠습니까?\r\n\r\n" +
+				"주의: 몇몇 프로그램의 경우 캡쳐할수없으며, 불안정해질 수 있습니다.\r\n" +
+				"데이터를 저장하거나 칸코레를 종료해도 되는 시점에서 사용해주십시오.\r\n";
 
 		private FormMain parent;
 

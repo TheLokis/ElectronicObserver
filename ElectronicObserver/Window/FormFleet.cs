@@ -37,12 +37,13 @@ namespace ElectronicObserver.Window
 			public ImageLabel SearchingAbility;
 			public ImageLabel AntiAirPower;
 			public ToolTip ToolTipInfo;
+            public FormFleet Parent;
 
 			public int BranchWeight { get; private set; } = 1;
 
 			public TableFleetControl(FormFleet parent)
 			{
-
+                this.Parent = parent;
 				#region Initialize
 
 				Name = new Label
@@ -113,6 +114,7 @@ namespace ElectronicObserver.Window
 			public TableFleetControl(FormFleet parent, TableLayoutPanel table)
 				: this(parent)
 			{
+                this.Parent = parent;
 				AddToTable(table);
 			}
 
@@ -153,9 +155,11 @@ namespace ElectronicObserver.Window
 
 				if (fleet == null) return;
 
+                //Utility.Logger.Add(1, fleet.FleetID + "함대의 편성이 바뀌었습니다.");
+                //Parent.Select();
 
 
-				Name.Text = fleet.Name;
+                Name.Text = fleet.Name;
 				{
 					var members = fleet.MembersInstance.Where(s => s != null);
 
@@ -461,10 +465,12 @@ namespace ElectronicObserver.Window
 				KCDatabase db = KCDatabase.Instance;
 				ShipData ship = db.Ships[shipMasterID];
 
-				if (ship != null)
-				{
 
-					bool isEscaped = KCDatabase.Instance.Fleet[Parent.FleetID].EscapedShipList.Contains(shipMasterID);
+                if (ship != null)
+				{
+                    //Utility.Logger.Add(1, ship.Fleet + "함대의 편성이 바뀌었습니다. // 2");
+
+                    bool isEscaped = KCDatabase.Instance.Fleet[Parent.FleetID].EscapedShipList.Contains(shipMasterID);
 
 
 					Name.Text = ship.MasterShip.NameWithClass;
@@ -541,7 +547,7 @@ namespace ElectronicObserver.Window
 					}
 					else
 					{
-						HP.BackColor = SystemColors.ControlDarkDark;
+						HP.BackColor = SystemColors.Control;
 					}
 					{
 						StringBuilder sb = new StringBuilder();
@@ -946,9 +952,12 @@ namespace ElectronicObserver.Window
 			if (db.Ships.Count == 0) return;
 
 			FleetData fleet = db.Fleet.Fleets[FleetID];
+            
 			if (fleet == null) return;
 
-			TableFleet.SuspendLayout();
+            //Utility.Logger.Add(1, fleet.FleetID + "함대의 편성이 바뀌었습니다. // 1");
+
+            TableFleet.SuspendLayout();
 			ControlFleet.Update(fleet);
 			TableFleet.Visible = true;
 			TableFleet.ResumeLayout();
@@ -1297,7 +1306,7 @@ namespace ElectronicObserver.Window
 				bool showAircraftLevelByNumber = c.FormFleet.ShowAircraftLevelByNumber;
 				int fixedShipNameWidth = c.FormFleet.FixedShipNameWidth;
 				bool isLayoutFixed = c.UI.IsLayoutFixed;
-                bool IsDarkSkinUse = c.UI.IsDarkSkinUse;
+               // bool IsDarkSkinUse = c.UI.IsDarkSkinUse;
 
 				for (int i = 0; i < ControlMember.Length; i++)
 				{

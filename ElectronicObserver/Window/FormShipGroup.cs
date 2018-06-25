@@ -29,7 +29,7 @@ namespace ElectronicObserver.Window
 		private readonly Color TabActiveColor = Color.FromArgb(0xFF, 0xFF, 0xCC);
 
 		/// <summary>タブ背景色(非アクティブ)</summary>
-		private readonly Color TabInactiveColor = SystemColors.ControlDarkDark;
+		private readonly Color TabInactiveColor = SystemColors.Control;
 
 
 
@@ -78,7 +78,7 @@ namespace ElectronicObserver.Window
 			CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft,
-				BackColor = SystemColors.ControlDarkDark,
+				BackColor = SystemColors.Control,
 				Font = Font,
 				ForeColor = SystemColors.ControlText,
 				SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),

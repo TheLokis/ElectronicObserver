@@ -717,7 +717,7 @@ namespace ElectronicObserver.Window
 				HPBars[index].Value = resultHP;
 				HPBars[index].PrevValue = initialHP;
 				HPBars[index].MaximumValue = maxHP;
-				HPBars[index].BackColor = SystemColors.ControlDarkDark;
+				HPBars[index].BackColor = SystemColors.Control;
 				HPBars[index].Visible = true;
 			}
 

@@ -220,10 +220,10 @@ namespace ElectronicObserver.Window.Dialog
 				_dtRightOperand_equipment.Columns.AddRange(new DataColumn[]{
 					new DataColumn( "Value", typeof( int ) ),
 					new DataColumn( "Display", typeof( string ) ) });
-				_dtRightOperand_equipment.Rows.Add(-1, "(なし)");
+				_dtRightOperand_equipment.Rows.Add(-1, "(없음)");
 				foreach (var eq in KCDatabase.Instance.MasterEquipments.Values.Where(eq => !eq.IsAbyssalEquipment).OrderBy(eq => eq.CategoryType))
 					_dtRightOperand_equipment.Rows.Add(eq.EquipmentID, eq.Name);
-				_dtRightOperand_equipment.Rows.Add(0, "(未開放)");
+				_dtRightOperand_equipment.Rows.Add(0, "(미개방)");
 				_dtRightOperand_equipment.AcceptChanges();
 			}
 
@@ -351,7 +351,7 @@ namespace ElectronicObserver.Window.Dialog
 				rows[i].CreateCells(ConstFilterView);
 
 				var ship = KCDatabase.Instance.Ships[values[i]];
-				rows[i].SetValues(values[i], ship?.NameWithLevel ?? "(未在籍)");
+				rows[i].SetValues(values[i], ship?.NameWithLevel ?? "(미등록)");
 			}
 
 			ConstFilterView.Rows.AddRange(rows);
@@ -543,7 +543,7 @@ namespace ElectronicObserver.Window.Dialog
 					case ".RepairingDockID":
 						RightOperand_NumericUpDown.Minimum = -1;
 						RightOperand_NumericUpDown.Maximum = 4;
-						Description.Text = "-1=未入渠, 1～4=入渠中(ドック番号)";
+						Description.Text = "-1=미입거, 1～4=입거중(도크번호)";
 						break;
 					case ".RepairTime":
 						RightOperand_NumericUpDown.Minimum = 0;
@@ -1166,7 +1166,7 @@ namespace ElectronicObserver.Window.Dialog
 						}
 						else
 						{
-							Description.Text = "(未在籍)";
+							Description.Text = "(미등록)";
 						}
 					}
 					break;
@@ -1180,14 +1180,14 @@ namespace ElectronicObserver.Window.Dialog
 						}
 						else
 						{
-							Description.Text = "(存在せず)";
+							Description.Text = "(불명)";
 						}
 					}
 					break;
 
 				case ".RepairTime":
 					{
-						Description.Text = string.Format("(ミリ秒単位) {0}", DateTimeHelper.ToTimeRemainString(DateTimeHelper.FromAPITimeSpan(intvalue)));
+						Description.Text = string.Format("(밀리초) {0}", DateTimeHelper.ToTimeRemainString(DateTimeHelper.FromAPITimeSpan(intvalue)));
 					}
 					break;
 
@@ -1195,7 +1195,7 @@ namespace ElectronicObserver.Window.Dialog
 					{
 						var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.AlbumNo == intvalue);
 						if (ship == null)
-							Description.Text = "(存在せず)";
+							Description.Text = "(불명)";
 						else
 							Description.Text = ship.ShipTypeName + " " + ship.NameWithClass;
 
@@ -1206,13 +1206,13 @@ namespace ElectronicObserver.Window.Dialog
 					{
 						if (intvalue == 0)
 						{
-							Description.Text = "(未改装)";
+							Description.Text = "(미개장)";
 						}
 						else
 						{
 							var ship = KCDatabase.Instance.MasterShips[intvalue];
 							if (ship == null)
-								Description.Text = "(存在せず)";
+								Description.Text = "(불명)";
 							else
 							{
 								var before = ship.RemodelBeforeShip;
@@ -1226,13 +1226,13 @@ namespace ElectronicObserver.Window.Dialog
 					{
 						if (intvalue == 0)
 						{
-							Description.Text = "(最終改装)";
+							Description.Text = "(최종개장)";
 						}
 						else
 						{
 							var ship = KCDatabase.Instance.MasterShips[intvalue];
 							if (ship == null)
-								Description.Text = "(存在せず)";
+								Description.Text = "(불명)";
 							else
 							{
 								var after = ship.RemodelAfterShip;

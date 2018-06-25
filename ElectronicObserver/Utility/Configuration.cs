@@ -243,7 +243,6 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public bool IsLayoutFixed;
 
-                public bool IsDarkSkinUse;
 
                 public ConfigUI()
 				{
@@ -251,9 +250,8 @@ namespace ElectronicObserver.Utility
 					SubFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
 					BarColorMorphing = false;
 					IsLayoutFixed = true;
-                    IsDarkSkinUse = false;
                 }
-
+                /*
                 public enum SkinType
                 {
                     BackColor = 0,
@@ -282,7 +280,7 @@ namespace ElectronicObserver.Utility
                     }
 
                     return DefaultColor;
-                }
+                }*/
             }
 			/// <summary>UI</summary>
 			[DataMember]

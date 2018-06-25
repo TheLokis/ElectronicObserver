@@ -37,7 +37,7 @@
 			| System.Windows.Forms.AnchorStyles.Left)
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.TextInformation.AutoWordSelection = true;
-			this.TextInformation.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+			this.TextInformation.BackColor = System.Drawing.SystemColors.Control;
 			this.TextInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.TextInformation.DetectUrls = false;
 			this.TextInformation.Location = new System.Drawing.Point(3, 3);
