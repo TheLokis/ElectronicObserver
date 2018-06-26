@@ -49,8 +49,8 @@ namespace ElectronicObserver.Utility
                     if (File.Exists("Translations\\Operations.xml")) this.operationsXml = XDocument.Load("Translations\\Operations.xml");
                     if (File.Exists("Translations\\Quests.xml")) this.questsXml = XDocument.Load("Translations\\Quests.xml");
                     if (File.Exists("Translations\\Expeditions.xml")) this.expeditionsXml = XDocument.Load("Translations\\Expeditions.xml");
-                    if (File.Exists("Translations\\Items.xml")) this.questsXml = XDocument.Load("Translations\\Items.xml");
-                    if (File.Exists("Translations\\ExpeditionData.xml")) this.expeditionsXml = XDocument.Load("Translations\\ExpeditionData.xml");
+                    if (File.Exists("Translations\\Items.xml")) this.ItemsXml = XDocument.Load("Translations\\Items.xml");
+                    if (File.Exists("Translations\\ExpeditionData.xml")) this.expeditionsdataXml = XDocument.Load("Translations\\ExpeditionData.xml");
                 }
             }
             catch (Exception ex)
