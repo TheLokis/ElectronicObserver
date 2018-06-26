@@ -155,8 +155,11 @@ namespace ElectronicObserver.Window
 				ShipName.Font = parent.Font;
 				RepairTime.Font = parent.Font;
 				RepairTime.BackColor = Color.Transparent;
+                ShipName.ForeColor = parent.ForeColor;
+                RepairTime.ForeColor = parent.ForeColor;
 
-				ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
+
+                ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
 			}
 
 			public void Dispose()
@@ -249,8 +252,10 @@ namespace ElectronicObserver.Window
 		{
 
 			Font = Utility.Configuration.Config.UI.MainFont;
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-			if (ControlDock != null)
+            if (ControlDock != null)
 			{
 				TableDock.SuspendLayout();
 

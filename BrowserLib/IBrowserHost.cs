@@ -175,5 +175,8 @@ namespace BrowserLib
 		[DataMember]
 		public bool IsMute { get; set; }
 
-	}
+        [DataMember]
+        public uint Theme { get; set; } //  테마 작업 체크포인트
+
+    }
 }

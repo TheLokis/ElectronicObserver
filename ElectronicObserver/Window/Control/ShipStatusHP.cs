@@ -382,8 +382,8 @@ namespace ElectronicObserver.Window.Control
 			_subFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
 			_subFontColor = FromArgb(0xFF888888);
 
-			_repairFontColor = FromArgb(0xFF000088);
-			_text = "HP:";
+            _repairFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RepairColor);
+            _text = "HP:";
 
 			_HPBar.UsePrevValue = true;
 			_showDifference = false;

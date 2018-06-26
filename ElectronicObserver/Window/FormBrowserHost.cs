@@ -132,8 +132,19 @@ namespace ElectronicObserver.Window
 		internal void ConfigurationChanged()
 		{
 			Font = Utility.Configuration.Config.UI.MainFont;
-			Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
-		}
+            Configuration.Theme = (uint)Utility.Configuration.Config.UI.Theme;
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+
+            Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
+
+
+            Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
+            Font = Utility.Configuration.Config.UI.MainFont;
+            Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
+
+
+        }
 
 
 		//ロード直後の適用ではレイアウトがなぜか崩れるのでこのタイミングでも適用

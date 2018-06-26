@@ -556,11 +556,11 @@ namespace ElectronicObserver.Window
 
 
 
-			MainFontColor = Color.FromArgb(0x00, 0x00, 0x00);
-			SubFontColor = Color.FromArgb(0x88, 0x88, 0x88);
+            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
 
-			ControlHelper.SetDoubleBuffered(BasePanel);
+            ControlHelper.SetDoubleBuffered(BasePanel);
 			ControlHelper.SetDoubleBuffered(TableEnemyFleet);
 			ControlHelper.SetDoubleBuffered(TableEnemyMember);
 
@@ -648,8 +648,8 @@ namespace ElectronicObserver.Window
 					case 0:
 					case 1:
 					default:    //昼夜戦・その他
-						return SystemColors.ControlText;
-					case 2:
+                        return Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    case 2:
 					case 3:     //夜戦・夜昼戦
 						return Color.Navy;
 					case 4:     //航空戦
@@ -1273,7 +1273,6 @@ namespace ElectronicObserver.Window
 				TableEnemyMember.ResumeLayout();
 			}
 
-
 			if (ControlCandidates != null)
 			{
 				TableEnemyCandidate.SuspendLayout();
@@ -1285,7 +1284,12 @@ namespace ElectronicObserver.Window
 				ControlHelper.SetTableColumnStyles(TableEnemyCandidate, ControlHelper.GetDefaultColumnStyle());
 				TableEnemyCandidate.ResumeLayout();
 			}
-		}
+
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+        }
 
 
 

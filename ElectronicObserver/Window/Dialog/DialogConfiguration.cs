@@ -345,7 +345,9 @@ namespace ElectronicObserver.Window.Dialog
 			//[UI]
 			UI_MainFont.Text = config.UI.MainFont.SerializeFontAttribute;
 			UI_SubFont.Text = config.UI.SubFont.SerializeFontAttribute;
-			UI_BarColorMorphing.Checked = config.UI.BarColorMorphing;
+            selectTheme.DataSource = Enum.GetValues(typeof(Theme));
+            selectTheme.SelectedItem = config.UI.Theme;
+            UI_BarColorMorphing.Checked = config.UI.BarColorMorphing;
 			UI_IsLayoutFixed.Checked = config.UI.IsLayoutFixed;
 			{
 				UI_RenderingTest.MainFont = config.UI.MainFont.FontData;
@@ -597,8 +599,12 @@ namespace ElectronicObserver.Window.Dialog
 			config.UI.BarColorMorphing = UI_BarColorMorphing.Checked;
 			config.UI.IsLayoutFixed = UI_IsLayoutFixed.Checked;
 
-			//[ログ]
-			config.Log.LogLevel = (int)Log_LogLevel.Value;
+            Theme theme;
+            Enum.TryParse(selectTheme.SelectedValue.ToString(), out theme);
+            config.UI.Theme = theme;
+
+            //[ログ]
+            config.Log.LogLevel = (int)Log_LogLevel.Value;
 			config.Log.SaveLogFlag = Log_SaveLogFlag.Checked;
 			config.Log.SaveErrorReport = Log_SaveErrorReport.Checked;
 			config.Log.FileEncodingID = Log_FileEncodingID.SelectedIndex;

@@ -91,6 +91,22 @@ namespace ElectronicObserver.Window
             Instance = this;
             InitializeComponent();
             //this.Text = SoftwareInformation.VersionJapanese;
+
+            ThemeBase thm;
+            switch (Configuration.Config.UI.Theme)
+            {
+                case Theme.Light:
+                    thm = new VS2012LightTheme();
+
+                    break;
+                case Theme.Dark:
+                    thm = new VS2012DarkTheme();
+                    break;
+                default:
+                    thm = new VS2012LightTheme();
+                    break;
+            }
+            thm.Apply(MainDockPanel);
             this.Text = SoftwareInformation.SoftwareNameKorean;
 		}
 
@@ -266,7 +282,14 @@ namespace ElectronicObserver.Window
 
 			var c = Utility.Configuration.Config;
 
-			StripMenu_Debug.Enabled = StripMenu_Debug.Visible =
+            BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+            StripMenu.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            StripMenu.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+            StripStatus.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            StripStatus.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+
+            StripMenu_Debug.Enabled = StripMenu_Debug.Visible =
 			StripMenu_View_Json.Enabled = StripMenu_View_Json.Visible =
 				c.Debug.EnableDebugMenu;
 

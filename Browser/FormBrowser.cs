@@ -224,7 +224,24 @@ namespace Browser
 			ToolMenu.Dock = (DockStyle)Configuration.ToolMenuDockStyle;
 			ToolMenu.Visible = Configuration.IsToolMenuVisible;
 
-		}
+            switch (conf.Theme)
+            {
+                default:
+                case 0:
+                    BackColor = SystemColors.Control;
+                    ForeColor = SystemColors.ControlText;
+                    ToolMenu.BackColor = SystemColors.Control;
+                    ToolMenu.ForeColor = SystemColors.ControlText;
+                    break;
+                case 1:
+                    var charcoal = Color.FromArgb(0x22, 0x22, 0x22);
+                    BackColor = charcoal;
+                    ForeColor = SystemColors.Control;
+                    ToolMenu.BackColor = charcoal;
+                    ToolMenu.ForeColor = SystemColors.Control;
+                    break;
+            }
+        }
 
 		private void ConfigurationUpdated()
 		{

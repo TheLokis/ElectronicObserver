@@ -244,43 +244,17 @@ namespace ElectronicObserver.Utility
 				public bool IsLayoutFixed;
 
 
+                public Theme Theme { get; set; }
+
                 public ConfigUI()
 				{
 					MainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
 					SubFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
 					BarColorMorphing = false;
 					IsLayoutFixed = true;
+                    Theme = Theme.Light;
                 }
-                /*
-                public enum SkinType
-                {
-                    BackColor = 0,
-                    ForeColor = 1,
-                }
-
-                public Color SkinColor(SkinType Type, Color DefaultColor)
-                {
-                    if(IsDarkSkinUse)
-                    {
-                        switch(Type)
-                        {
-                            case SkinType.BackColor:
-                                {
-                                    return SystemColors.ControlDarkDark;
-                                }
-                            case SkinType.ForeColor:
-                                {
-                                    return SystemColors.ControlLightLight;
-                                }
-                            default:
-                                {
-                                    return SystemColors.Window;
-                                }
-                        }
-                    }
-
-                    return DefaultColor;
-                }*/
+                
             }
 			/// <summary>UI</summary>
 			[DataMember]
@@ -313,10 +287,11 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public int FileEncodingID { get; set; }
 
-				/// <summary>
-				/// ファイル エンコーディング
-				/// </summary>
-				[IgnoreDataMember]
+
+                /// <summary>
+                /// ファイル エンコーディング
+                /// </summary>
+                [IgnoreDataMember]
 				public Encoding FileEncoding
 				{
 					get

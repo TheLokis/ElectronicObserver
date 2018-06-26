@@ -245,6 +245,8 @@ namespace ElectronicObserver.Window
 				var mainfont = config.UI.MainFont;
 				var subfont = config.UI.SubFont;
 
+
+
 				Name.Font = mainfont;
 				ActionKind.Font = mainfont;
 				AirSuperiority.Font = mainfont;
@@ -378,7 +380,10 @@ namespace ElectronicObserver.Window
 
 			TableMember.ResumeLayout();
 
-			if (KCDatabase.Instance.BaseAirCorps.Any())
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+
+            if (KCDatabase.Instance.BaseAirCorps.Any())
 				Updated(null, null);
 		}
 

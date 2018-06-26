@@ -547,8 +547,8 @@ namespace ElectronicObserver.Window
 					}
 					else
 					{
-						HP.BackColor = SystemColors.Control;
-					}
+                        HP.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                    }
 					{
 						StringBuilder sb = new StringBuilder();
 						double hprate = (double)ship.HPCurrent / ship.HPMax;
@@ -855,10 +855,10 @@ namespace ElectronicObserver.Window
 
 			ConfigurationChanged();
 
-			MainFontColor = Color.FromArgb(0x00, 0x00, 0x00);
-			SubFontColor = Color.FromArgb(0x88, 0x88, 0x88);
+            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-			AnchorageRepairBound = 0;
+            AnchorageRepairBound = 0;
 
 			//ui init
 
@@ -1279,8 +1279,12 @@ namespace ElectronicObserver.Window
 
 			MainFont = Font = c.UI.MainFont;
 			SubFont = c.UI.SubFont;
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-			AutoScroll = c.FormFleet.IsScrollable;
+            AutoScroll = c.FormFleet.IsScrollable;
 
 			var fleet = KCDatabase.Instance.Fleet[FleetID];
 

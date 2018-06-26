@@ -219,8 +219,10 @@ namespace ElectronicObserver.Window
 			TableFleet.SuspendLayout();
 
 			Font = Utility.Configuration.Config.UI.MainFont;
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
 
-			AutoScroll = Utility.Configuration.Config.FormFleet.IsScrollable;
+            AutoScroll = Utility.Configuration.Config.FormFleet.IsScrollable;
 
 			foreach (var c in ControlFleet)
 				c.ConfigurationChanged(this);

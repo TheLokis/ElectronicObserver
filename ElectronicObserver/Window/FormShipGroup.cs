@@ -25,24 +25,24 @@ namespace ElectronicObserver.Window
 	{
 
 
-		/// <summary>タブ背景色(アクティブ)</summary>
-		private readonly Color TabActiveColor = Color.FromArgb(0xFF, 0xFF, 0xCC);
+        /// <summary>タブ背景色(アクティブ)</summary>
+        private readonly Color TabActiveColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-		/// <summary>タブ背景色(非アクティブ)</summary>
-		private readonly Color TabInactiveColor = SystemColors.Control;
+        /// <summary>タブ背景色(非アクティブ)</summary>
+        private readonly Color TabInactiveColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
 
 
-		// セル背景色
-		private readonly Color CellColorRed = Color.FromArgb(0xFF, 0xBB, 0xBB);
-		private readonly Color CellColorOrange = Color.FromArgb(0xFF, 0xDD, 0xBB);
-		private readonly Color CellColorYellow = Color.FromArgb(0xFF, 0xFF, 0xBB);
-		private readonly Color CellColorGreen = Color.FromArgb(0xBB, 0xFF, 0xBB);
-		private readonly Color CellColorGray = Color.FromArgb(0xBB, 0xBB, 0xBB);
-		private readonly Color CellColorCherry = Color.FromArgb(0xFF, 0xDD, 0xDD);
+        // セル背景色
+        private readonly Color CellColorRed = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+        private readonly Color CellColorOrange = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.OrangeHighlight);
+        private readonly Color CellColorYellow = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.YellowHighlight);
+        private readonly Color CellColorGreen = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
+        private readonly Color CellColorGray = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GrayHighlight);
+        private readonly Color CellColorCherry = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.PinkHighlight);
 
-		//セルスタイル
-		private DataGridViewCellStyle CSDefaultLeft, CSDefaultCenter, CSDefaultRight,
+        //セルスタイル
+        private DataGridViewCellStyle CSDefaultLeft, CSDefaultCenter, CSDefaultRight,
 			CSRedRight, CSOrangeRight, CSYellowRight, CSGreenRight, CSGrayRight, CSCherryRight,
 			CSIsLocked;
 
@@ -78,10 +78,10 @@ namespace ElectronicObserver.Window
 			CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft,
-				BackColor = SystemColors.Control,
-				Font = Font,
-				ForeColor = SystemColors.ControlText,
-				SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),
+				BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor),
+                Font = Font,
+				ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor),
+                SelectionBackColor = Color.FromArgb(0xFF, 0xFF, 0xCC),
 				SelectionForeColor = SystemColors.ControlText,
 				WrapMode = DataGridViewTriState.False
 			};
@@ -227,8 +227,15 @@ namespace ElectronicObserver.Window
 			MenuGroup_ShowStatusBar.Checked = config.FormShipGroup.ShowStatusBar;
 			_shipNameSortMethod = config.FormShipGroup.ShipNameSortMethod;
 
+            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            ShipView.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            ShipView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            StatusBar.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            StatusBar.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-			int rowHeight;
+
+            int rowHeight;
 			if (config.UI.IsLayoutFixed)
 			{
 				ShipView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
