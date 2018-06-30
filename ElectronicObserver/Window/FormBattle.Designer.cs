@@ -90,7 +90,7 @@
             this.TableBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.TableBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 0F));
             this.TableBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.TableBottom.Size = new System.Drawing.Size(220, 168);
+            this.TableBottom.Size = new System.Drawing.Size(228, 168);
             this.TableBottom.TabIndex = 1;
             this.TableBottom.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.TableBottom_CellPaint);
             // 
@@ -120,7 +120,7 @@
             // 
             this.FleetEnemyEscort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FleetEnemyEscort.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FleetEnemyEscort.Location = new System.Drawing.Point(113, 3);
+            this.FleetEnemyEscort.Location = new System.Drawing.Point(129, 3);
             this.FleetEnemyEscort.Name = "FleetEnemyEscort";
             this.FleetEnemyEscort.Size = new System.Drawing.Size(49, 15);
             this.FleetEnemyEscort.TabIndex = 19;
@@ -135,7 +135,7 @@
             this.WinRank.Location = new System.Drawing.Point(58, 150);
             this.WinRank.MinimumSize = new System.Drawing.Size(80, 0);
             this.WinRank.Name = "WinRank";
-            this.WinRank.Size = new System.Drawing.Size(104, 15);
+            this.WinRank.Size = new System.Drawing.Size(120, 15);
             this.WinRank.TabIndex = 4;
             this.WinRank.Text = "승리판정";
             this.WinRank.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -144,9 +144,9 @@
             // 
             this.DamageEnemy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.DamageEnemy.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.DamageEnemy.Location = new System.Drawing.Point(168, 150);
+            this.DamageEnemy.Location = new System.Drawing.Point(184, 150);
             this.DamageEnemy.Name = "DamageEnemy";
-            this.DamageEnemy.Size = new System.Drawing.Size(49, 15);
+            this.DamageEnemy.Size = new System.Drawing.Size(41, 15);
             this.DamageEnemy.TabIndex = 5;
             this.DamageEnemy.Text = "손상율";
             this.DamageEnemy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -157,7 +157,7 @@
             this.FleetFriendEscort.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.FleetFriendEscort.Location = new System.Drawing.Point(58, 3);
             this.FleetFriendEscort.Name = "FleetFriendEscort";
-            this.FleetFriendEscort.Size = new System.Drawing.Size(49, 15);
+            this.FleetFriendEscort.Size = new System.Drawing.Size(65, 15);
             this.FleetFriendEscort.TabIndex = 1;
             this.FleetFriendEscort.Text = "아군 수반함";
             this.FleetFriendEscort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -166,9 +166,9 @@
             // 
             this.FleetEnemy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FleetEnemy.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FleetEnemy.Location = new System.Drawing.Point(168, 3);
+            this.FleetEnemy.Location = new System.Drawing.Point(184, 3);
             this.FleetEnemy.Name = "FleetEnemy";
-            this.FleetEnemy.Size = new System.Drawing.Size(49, 15);
+            this.FleetEnemy.Size = new System.Drawing.Size(41, 15);
             this.FleetEnemy.TabIndex = 2;
             this.FleetEnemy.Text = "적 함대";
             this.FleetEnemy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -371,25 +371,25 @@
             this.toolStripSeparator1,
             this.RightClickMenu_ShowBattleResult});
             this.RightClickMenu.Name = "RightClickMenu";
-            this.RightClickMenu.Size = new System.Drawing.Size(225, 54);
+            this.RightClickMenu.Size = new System.Drawing.Size(231, 54);
             this.RightClickMenu.Opening += new System.ComponentModel.CancelEventHandler(this.RightClickMenu_Opening);
             // 
             // RightClickMenu_ShowBattleDetail
             // 
             this.RightClickMenu_ShowBattleDetail.Name = "RightClickMenu_ShowBattleDetail";
-            this.RightClickMenu_ShowBattleDetail.Size = new System.Drawing.Size(224, 22);
+            this.RightClickMenu_ShowBattleDetail.Size = new System.Drawing.Size(230, 22);
             this.RightClickMenu_ShowBattleDetail.Text = "전투상세보기(&D)...";
             this.RightClickMenu_ShowBattleDetail.Click += new System.EventHandler(this.RightClickMenu_ShowBattleDetail_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(227, 6);
             // 
             // RightClickMenu_ShowBattleResult
             // 
             this.RightClickMenu_ShowBattleResult.Name = "RightClickMenu_ShowBattleResult";
-            this.RightClickMenu_ShowBattleResult.Size = new System.Drawing.Size(224, 22);
+            this.RightClickMenu_ShowBattleResult.Size = new System.Drawing.Size(230, 22);
             this.RightClickMenu_ShowBattleResult.Text = "전투결과 일시적으로 표시(&V)";
             this.RightClickMenu_ShowBattleResult.Click += new System.EventHandler(this.RightClickMenu_ShowBattleResult_Click);
             // 

@@ -508,7 +508,7 @@
             this.TitleAirSuperiority.Name = "TitleAirSuperiority";
             this.TitleAirSuperiority.Size = new System.Drawing.Size(68, 16);
             this.TitleAirSuperiority.TabIndex = 18;
-            this.TitleAirSuperiority.Text = "제공전력";
+            this.TitleAirSuperiority.Text = "제공치";
             this.TitleAirSuperiority.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // AlbumNo

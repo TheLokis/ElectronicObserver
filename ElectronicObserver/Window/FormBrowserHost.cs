@@ -135,15 +135,8 @@ namespace ElectronicObserver.Window
             Configuration.Theme = (uint)Utility.Configuration.Config.UI.Theme;
             BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
             ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-
             Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
-
-
             Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
-            Font = Utility.Configuration.Config.UI.MainFont;
-            Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
-
-
         }
 
 
@@ -248,8 +241,8 @@ namespace ElectronicObserver.Window
 				config.ToolMenuDockStyle = (int)c.ToolMenuDockStyle;
 				config.IsToolMenuVisible = c.IsToolMenuVisible;
 				config.ConfirmAtRefresh = c.ConfirmAtRefresh;
-
-				return config;
+                config.Theme = (uint)Utility.Configuration.Config.UI.Theme;
+                return config;
 			}
 		}
 

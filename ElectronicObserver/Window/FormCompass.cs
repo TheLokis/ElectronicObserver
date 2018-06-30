@@ -290,8 +290,8 @@ namespace ElectronicObserver.Window
 					{
 						// nothing
 						ShipNames[i].Text = "-";
-						ShipNames[i].ForeColor = Color.Black;
-						ShipNames[i].Tag = -1;
+						ShipNames[i].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BlackFontColor);
+                        ShipNames[i].Tag = -1;
 						ShipNames[i].Cursor = Cursors.Default;
 						ToolTipInfo.SetToolTip(ShipNames[i], null);
 

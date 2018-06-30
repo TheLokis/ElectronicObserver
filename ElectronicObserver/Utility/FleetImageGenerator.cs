@@ -1340,7 +1340,7 @@ namespace ElectronicObserver.Utility
 			var linePen = new Pen(subTextColor);
 
 
-			string baseAirSuperiorityTitle = "제공전력";
+			string baseAirSuperiorityTitle = "제공치";
 			string baseDistanceTitle = "행동반경";
 
 			// for measure space of strings

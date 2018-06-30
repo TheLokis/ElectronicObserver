@@ -410,7 +410,7 @@ namespace ElectronicObserver.Window.Control
 				for (int i = 0; i < index; i++)
 				{
 					if (StateLabels[i].Label.BackColor == Color.Transparent)
-						StateLabels[i].Label.BackColor = Color.LightGreen;
+						StateLabels[i].Label.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
 				}
 			}
 
@@ -475,7 +475,7 @@ namespace ElectronicObserver.Window.Control
 						state.Text = "입거중 " + state.ShortenedText;
 						state.UpdateText();
 						if (Utility.Configuration.Config.FormFleet.BlinkAtCompletion && (state.Timer - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierRepair.AccelInterval)
-							state.Label.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightGreen : Color.Transparent;
+							state.Label.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 						break;
 
 					case FleetStates.Expedition:
@@ -483,7 +483,7 @@ namespace ElectronicObserver.Window.Control
 						state.Text = "원정중 " + state.ShortenedText;
 						state.UpdateText();
 						if (Utility.Configuration.Config.FormFleet.BlinkAtCompletion && (state.Timer - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierExpedition.AccelInterval)
-							state.Label.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightGreen : Color.Transparent;
+							state.Label.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 						break;
 
 					case FleetStates.Tired:
@@ -491,7 +491,7 @@ namespace ElectronicObserver.Window.Control
 						state.Text = "피로도 " + state.ShortenedText;
 						state.UpdateText();
 						if (Utility.Configuration.Config.FormFleet.BlinkAtCompletion && (state.Timer - DateTime.Now).TotalMilliseconds <= 0)
-							state.Label.BackColor = DateTime.Now.Second % 2 == 0 ? Color.LightGreen : Color.Transparent;
+							state.Label.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 						break;
 
 					case FleetStates.AnchorageRepairing:

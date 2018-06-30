@@ -56,8 +56,10 @@ namespace ElectronicObserver.Window
 				HPBars[i].Margin = new Padding(2, 0, 2, 0);
 				HPBars[i].Anchor = AnchorStyles.Left | AnchorStyles.Right;
 				HPBars[i].MainFont = MainFont;
-				HPBars[i].SubFont = SubFont;
-				HPBars[i].UsePrevValue = true;
+                HPBars[i].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                HPBars[i].SubFont = SubFont;
+                HPBars[i].SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+                HPBars[i].UsePrevValue = true;
 				HPBars[i].ShowDifference = true;
 				HPBars[i].MaximumDigit = 9999;
 
@@ -581,7 +583,7 @@ namespace ElectronicObserver.Window
 				if (phasesEnabled.Any(p => p.GetAircraftTotal(stage, isFriend) > 0 && p.GetAircraftLost(stage, isFriend) == p.GetAircraftTotal(stage, isFriend)))
 					label.ForeColor = Color.Red;
 				else
-					//label.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+					label.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
 
                 label.ImageAlign = ContentAlignment.MiddleCenter;
                 label.ImageIndex = -1;
@@ -717,6 +719,7 @@ namespace ElectronicObserver.Window
 				HPBars[index].PrevValue = initialHP;
 				HPBars[index].MaximumValue = maxHP;
 				HPBars[index].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                HPBars[index].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
                 HPBars[index].Visible = true;
 			}
 

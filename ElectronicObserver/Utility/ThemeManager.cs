@@ -25,6 +25,7 @@ namespace ElectronicObserver.Utility
             colors.Add(Tuple.Create(Theme.Light, ThemeColors.PinkHighlight), Color.LightCoral);
             colors.Add(Tuple.Create(Theme.Light, ThemeColors.MVPHighlight), Color.Moccasin);
             colors.Add(Tuple.Create(Theme.Light, ThemeColors.RepairColor), Color.FromArgb(0, 0, 0x88));
+            colors.Add(Tuple.Create(Theme.Light, ThemeColors.BlackFontColor), Color.Black);
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.MainFontColor), SystemColors.Control);
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.SubFontColor), SystemColors.ControlDark);
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.BackgroundColor), Color.FromArgb(0x22, 0x22, 0x22));
@@ -36,6 +37,7 @@ namespace ElectronicObserver.Utility
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.PinkHighlight), Color.LightCoral);
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.MVPHighlight), Color.FromArgb(0xCC, 0xB6, 0x90));
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.RepairColor), Color.LightBlue);
+            colors.Add(Tuple.Create(Theme.Dark, ThemeColors.BlackFontColor), Color.White);
         }
 
         public static Color GetColor(Theme th, ThemeColors tr)
@@ -65,6 +67,7 @@ namespace ElectronicObserver.Utility
         GrayHighlight,
         PinkHighlight,
         MVPHighlight,
-        RepairColor
+        RepairColor,
+        BlackFontColor
     }
 }

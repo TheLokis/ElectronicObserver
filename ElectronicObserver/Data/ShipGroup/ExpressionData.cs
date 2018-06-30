@@ -137,7 +137,7 @@ namespace ElectronicObserver.Data.ShipGroup
 			{ ".SallyArea", "출격해역" },
 			{ ".FleetWithIndex", "소속함대" },
 			{ ".IsMarried", "결혼" },
-			{ ".AirBattlePower", "제공전력" },
+			{ ".AirBattlePower", "제공치" },
 			{ ".ShellingPower", "포격화력" },
 			{ ".AircraftPower", "항공화력" },
 			{ ".AntiSubmarinePower", "대잠공격" },

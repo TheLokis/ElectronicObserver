@@ -347,7 +347,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (_notifier.DialogData.Alignment == NotifierDialogAlignment.Custom)
 			{
-				_notifier.DialogData.Message = "테스트 알림입니다.\r\n移動して閉じると表示位置が更新されます。";
+				_notifier.DialogData.Message = "테스트 알림입니다.\r\n창을 이동시킨후 닫으면 해당위치로 좌표가 수정됩니다.";
 				_notifier.Notify((_sender, _e) =>
 				{
 					var dialog = _sender as DialogNotifier;

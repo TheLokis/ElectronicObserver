@@ -91,22 +91,24 @@ namespace ElectronicObserver.Window
             Instance = this;
             InitializeComponent();
             //this.Text = SoftwareInformation.VersionJapanese;
+            Utility.Configuration.Instance.Load(this);
 
             ThemeBase thm;
+
             switch (Configuration.Config.UI.Theme)
             {
                 case Theme.Light:
-                    thm = new VS2012LightTheme();
-
+                    thm = new VS2005Theme();
                     break;
                 case Theme.Dark:
-                    thm = new VS2012DarkTheme();
+                    thm = new VS2013BlueTheme();
                     break;
                 default:
                     thm = new VS2012LightTheme();
                     break;
             }
-            thm.Apply(MainDockPanel);
+
+            this.MainDockPanel.Theme = thm;
             this.Text = SoftwareInformation.SoftwareNameKorean;
 		}
 
@@ -117,7 +119,7 @@ namespace ElectronicObserver.Window
 				Directory.CreateDirectory("Settings");
 
 
-			Utility.Configuration.Instance.Load(this);
+			//Utility.Configuration.Instance.Load(this);
 
 
 			Utility.Logger.Instance.LogAdded += new Utility.LogAddedEventHandler((Utility.Logger.LogData data) =>
@@ -1525,6 +1527,17 @@ namespace ElectronicObserver.Window
         {
             System.Diagnostics.Process.Start("http://db.kcwiki.moe/drop/");
         }
+
+        private void StripMenu_Tool_Oyodo_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://ooyodo-quest.net/latest");
+        }
+
+        private void StripMenu_Tool_DeckB_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://kancolle-calc.net/deckbuilder.html");
+        }
+
 
         #region フォーム表示
 

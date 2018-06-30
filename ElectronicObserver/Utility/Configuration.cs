@@ -621,56 +621,61 @@ namespace ElectronicObserver.Utility
 			public ConfigFormHeadquarters FormHeadquarters { get; private set; }
 
 
-			/// <summary>
-			/// [艦隊]ウィンドウの設定を扱います。
-			/// </summary>
-			public class ConfigFormFleet : ConfigPartBase
-			{
+            /// <summary>
+            /// [艦隊]ウィンドウの設定を扱います。
+            /// </summary>
+            public class ConfigFormFleet : ConfigPartBase
+            {
 
-				/// <summary>
-				/// 艦載機を表示するか
-				/// </summary>
-				public bool ShowAircraft { get; set; }
+                /// <summary>
+                /// 艦載機を表示するか
+                /// </summary>
+                public bool ShowAircraft { get; set; }
 
-				/// <summary>
-				/// 索敵式の計算方法
-				/// </summary>
-				public int SearchingAbilityMethod { get; set; }
+                /// <summary>
+                /// 索敵式の計算方法
+                /// </summary>
+                public int SearchingAbilityMethod { get; set; }
 
-				/// <summary>
-				/// スクロール可能か
-				/// </summary>
-				public bool IsScrollable { get; set; }
+                /// <summary>
+                /// スクロール可能か
+                /// </summary>
+                public bool IsScrollable { get; set; }
 
-				/// <summary>
-				/// 艦名表示の幅を固定するか
-				/// </summary>
-				public bool FixShipNameWidth { get; set; }
+                /// <summary>
+                /// 艦名表示の幅を固定するか
+                /// </summary>
+                public bool FixShipNameWidth { get; set; }
 
-				/// <summary>
-				/// HPバーを短縮するか
-				/// </summary>
-				public bool ShortenHPBar { get; set; }
+                /// <summary>
+                /// HPバーを短縮するか
+                /// </summary>
+                public bool ShortenHPBar { get; set; }
 
-				/// <summary>
-				/// next lv. を表示するか
-				/// </summary>
-				public bool ShowNextExp { get; set; }
+                /// <summary>
+                /// next lv. を表示するか
+                /// </summary>
+                public bool ShowNextExp { get; set; }
 
-				/// <summary>
-				/// 装備の改修レベル・艦載機熟練度の表示フラグ
-				/// </summary>
-				public Window.Control.ShipStatusEquipment.LevelVisibilityFlag EquipmentLevelVisibility { get; set; }
+                /// <summary>
+                /// 装備の改修レベル・艦載機熟練度の表示フラグ
+                /// </summary>
+                public Window.Control.ShipStatusEquipment.LevelVisibilityFlag EquipmentLevelVisibility { get; set; }
 
-				/// <summary>
-				/// 艦載機熟練度を数字で表示するフラグ
-				/// </summary>
-				public bool ShowAircraftLevelByNumber { get; set; }
+                /// <summary>
+                /// 艦載機熟練度を数字で表示するフラグ
+                /// </summary>
+                public bool ShowAircraftLevelByNumber { get; set; }
 
-				/// <summary>
-				/// 制空戦力の計算方法
-				/// </summary>
-				public int AirSuperiorityMethod { get; set; }
+                /// <summary>
+                /// 制空戦力の計算方法
+                /// </summary>
+                public int AirSuperiorityMethod { get; set; }
+
+                /// <summary>
+                /// EXP 계산기 정렬 방식 결정
+                /// </summary>
+                public int ExpCheckerOption { get; set; }
 
 				/// <summary>
 				/// 泊地修理タイマを表示するか
@@ -728,7 +733,8 @@ namespace ElectronicObserver.Utility
 					EquipmentLevelVisibility = Window.Control.ShipStatusEquipment.LevelVisibilityFlag.Both;
 					ShowAircraftLevelByNumber = false;
 					AirSuperiorityMethod = 1;
-					ShowAnchorageRepairingTimer = true;
+                    ExpCheckerOption = 1;
+                    ShowAnchorageRepairingTimer = true;
 					BlinkAtCompletion = true;
 					ShowConditionIcon = true;
 					FixedShipNameWidth = 40;
@@ -803,6 +809,8 @@ namespace ElectronicObserver.Utility
 				public int ProgressAutoSaving { get; set; }
 
 				public bool AllowUserToSortRows { get; set; }
+
+
 
 				public ConfigFormQuest()
 				{

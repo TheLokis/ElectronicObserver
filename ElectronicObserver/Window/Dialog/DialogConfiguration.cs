@@ -409,7 +409,8 @@ namespace ElectronicObserver.Window.Dialog
 			FormFleet_EquipmentLevelVisibility.SelectedIndex = (int)config.FormFleet.EquipmentLevelVisibility;
 			FormFleet_ShowAircraftLevelByNumber.Checked = config.FormFleet.ShowAircraftLevelByNumber;
 			FormFleet_AirSuperiorityMethod.SelectedIndex = config.FormFleet.AirSuperiorityMethod;
-			FormFleet_ShowAnchorageRepairingTimer.Checked = config.FormFleet.ShowAnchorageRepairingTimer;
+            ExpCheckerOpList.SelectedIndex = config.FormFleet.ExpCheckerOption;
+            FormFleet_ShowAnchorageRepairingTimer.Checked = config.FormFleet.ShowAnchorageRepairingTimer;
 			FormFleet_BlinkAtCompletion.Checked = config.FormFleet.BlinkAtCompletion;
 			FormFleet_ShowConditionIcon.Checked = config.FormFleet.ShowConditionIcon;
 			FormFleet_FixedShipNameWidth.Value = config.FormFleet.FixedShipNameWidth;
@@ -652,7 +653,8 @@ namespace ElectronicObserver.Window.Dialog
 			config.FormFleet.EquipmentLevelVisibility = (Window.Control.ShipStatusEquipment.LevelVisibilityFlag)FormFleet_EquipmentLevelVisibility.SelectedIndex;
 			config.FormFleet.ShowAircraftLevelByNumber = FormFleet_ShowAircraftLevelByNumber.Checked;
 			config.FormFleet.AirSuperiorityMethod = FormFleet_AirSuperiorityMethod.SelectedIndex;
-			config.FormFleet.ShowAnchorageRepairingTimer = FormFleet_ShowAnchorageRepairingTimer.Checked;
+            config.FormFleet.ExpCheckerOption = ExpCheckerOpList.SelectedIndex;
+            config.FormFleet.ShowAnchorageRepairingTimer = FormFleet_ShowAnchorageRepairingTimer.Checked;
 			config.FormFleet.BlinkAtCompletion = FormFleet_BlinkAtCompletion.Checked;
 			config.FormFleet.ShowConditionIcon = FormFleet_ShowConditionIcon.Checked;
 			config.FormFleet.FixedShipNameWidth = (int)FormFleet_FixedShipNameWidth.Value;

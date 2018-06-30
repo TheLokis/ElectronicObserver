@@ -84,23 +84,23 @@
     <JP-Name>鎮守府近海</JP-Name>
     <TR-Name>진수부 근해</TR-Name>
   </Map>
-    <Map>
+  <Map>
     <JP-Name>中部海域哨戒線</JP-Name>
     <TR-Name>중부해역 초계선</TR-Name>
   </Map>
-    <Map>
+  <Map>
     <JP-Name>MS諸島沖</JP-Name>
     <TR-Name>MS 제도 앞바다</TR-Name>
   </Map>
-    <Map>
+  <Map>
     <JP-Name>グアノ環礁沖海域</JP-Name>
     <TR-Name>구아노 환초 앞바다 해역</TR-Name>
   </Map>
-    <Map>
+  <Map>
     <JP-Name>中部北海域ピーコック島沖</JP-Name>
     <TR-Name>중부 북부 해역 피콕 섬 앞바다</TR-Name>
   </Map>
-    <Map>
+  <Map>
     <JP-Name>KW環礁沖海域</JP-Name>
     <TR-Name>KW 환초 앞바다</TR-Name>
   </Map>

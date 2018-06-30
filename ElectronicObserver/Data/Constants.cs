@@ -1040,7 +1040,7 @@ namespace ElectronicObserver.Data
 				case 5:     //その他(輸送5/空母3)
 					return "기타";
 				default:
-					return "?";
+					return "불명";
 			}
 
 		}
@@ -1072,7 +1072,7 @@ namespace ElectronicObserver.Data
 				case 9:
 					return "기타";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
