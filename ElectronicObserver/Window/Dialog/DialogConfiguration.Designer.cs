@@ -1541,7 +1541,7 @@ namespace ElectronicObserver.Window.Dialog
             this.FormFleet_IsScrollable.Size = new System.Drawing.Size(106, 19);
             this.FormFleet_IsScrollable.TabIndex = 5;
             this.FormFleet_IsScrollable.Text = "스크롤 바 표시";
-            this.ToolTipInfo.SetToolTip(this.FormFleet_IsScrollable, "스크롤 바 부분을 표시할지 여부를 설정합니다.\r\n収まりきった場合は表示しません。");
+            this.ToolTipInfo.SetToolTip(this.FormFleet_IsScrollable, "스크롤 바 부분을 표시할지 여부를 설정합니다.\r\n창 크기가 딱 맞춰진 경우에는 표시하지 않습니다.");
             this.FormFleet_IsScrollable.UseVisualStyleBackColor = true;
             // 
             // FormFleet_SearchingAbilityMethod

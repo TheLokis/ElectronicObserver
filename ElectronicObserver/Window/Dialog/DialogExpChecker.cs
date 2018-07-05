@@ -1,5 +1,6 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Resource;
+using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Data;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,17 @@ namespace ElectronicObserver.Window.Dialog
 		private static readonly string DefaultTitle = "경험치 계산기";
 		private DataGridViewCellStyle CellStyleModernized;
 
+        public static Dictionary<string, int> SortieExpTable = new Dictionary<string, int>
+        {
+            {"1-1", 30}, {"1-2", 50}, {"1-3", 80}, {"1-4", 100}, {"1-5", 150},
+            {"2-1", 120}, {"2-2", 150}, {"2-3", 200},{"2-4", 300}, {"2-5", 250},
+            {"3-1", 310}, {"3-2", 320}, {"3-3", 330}, {"3-4", 350}, {"3-5", 400},
+            {"4-1", 310}, {"4-2", 320}, {"4-3", 330}, {"4-4", 340},
+            {"5-1", 360}, {"5-2", 380}, {"5-3", 400}, {"5-4", 420}, {"5-5", 450},
+            {"6-1", 400}, {"6-2", 420},
+        };
 
-		private int DefaultShipID = -1;
+        private int DefaultShipID = -1;
 
 
 
@@ -56,8 +66,8 @@ namespace ElectronicObserver.Window.Dialog
 			InitializeComponent();
 
 			CellStyleModernized = new DataGridViewCellStyle(ColumnLevel.DefaultCellStyle);
-			CellStyleModernized.BackColor =
-				CellStyleModernized.SelectionBackColor = Color.LightGreen;
+			CellStyleModernized.BackColor = 
+            CellStyleModernized.SelectionBackColor = Color.LightGreen;
 
 		}
 
@@ -78,10 +88,33 @@ namespace ElectronicObserver.Window.Dialog
 				return;
 			}
 
-			SearchInFleet_CheckedChanged(this, new EventArgs());
-			ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
+            if(Utility.Configuration.Config.Control.MapSelect.Equals("") || Utility.Configuration.Config.Control.MapSelect == null)
+            {
+                Utility.Configuration.Config.Control.MapSelect = "1-1";
+            }
 
-			if (DefaultShipID != -1)
+            if (Utility.Configuration.Config.Control.Rank.Equals("") || Utility.Configuration.Config.Control.Rank == null)
+            {
+                Utility.Configuration.Config.Control.Rank = "S";
+            }
+
+            MapSelect.SelectedItem = MapSelect.Items.OfType<String>().FirstOrDefault(x => x.Equals(Utility.Configuration.Config.Control.MapSelect));
+            ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
+            MVP_Check.Checked = Utility.Configuration.Config.Control.MVPCheck;
+            FlagShip_Check.Checked = Utility.Configuration.Config.Control.FlagShipCheck;
+            Rank_List.SelectedItem = Rank_List.Items.OfType<String>().FirstOrDefault(x => x.Equals(Utility.Configuration.Config.Control.Rank));
+            ExpControl.Checked = Utility.Configuration.Config.Control.ExpManual;
+            ExpUnit.ReadOnly = !Utility.Configuration.Config.Control.ExpManual;
+            MapSelect.Enabled = !ExpControl.Checked;
+            MVP_Check.Enabled = !ExpControl.Checked;
+            FlagShip_Check.Enabled = !ExpControl.Checked;
+            Rank_List.Enabled = !ExpControl.Checked;
+            label4.Enabled = !ExpControl.Checked;
+            label5.Enabled = !ExpControl.Checked;
+
+            SearchInFleet_CheckedChanged(this, new EventArgs());
+
+            if (DefaultShipID != -1)
 				TextShip.SelectedItem = TextShip.Items.OfType<ComboShipData>().FirstOrDefault(f => f.Ship.MasterID == DefaultShipID);
 
 
@@ -91,14 +124,45 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogExpChecker_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Utility.Configuration.Config.Control.ExpCheckerExpUnit = (int)ExpUnit.Value;
-			ResourceManager.DestroyIcon(Icon);
+            Utility.Configuration.Config.Control.MapSelect = (string)MapSelect.SelectedItem;
+            Utility.Configuration.Config.Control.MVPCheck = MVP_Check.Checked;
+            Utility.Configuration.Config.Control.FlagShipCheck = FlagShip_Check.Checked;
+            Utility.Configuration.Config.Control.Rank = (string)Rank_List.SelectedItem;
+            Utility.Configuration.Config.Control.ExpManual = ExpControl.Checked;
+            ResourceManager.DestroyIcon(Icon);
 		}
 
+        private void UpdateProperty()
+        {
+            float ExpValue = (float)ExpUnit.Value;
+            ExpValue = SortieExpTable[(string)MapSelect.SelectedItem];
+            if (MVP_Check.Checked) ExpValue *= 2;
+            if (FlagShip_Check.Checked) { ExpValue *= 1.5f; }
 
+            switch (Rank_List.Text)
+            {
+                case "S":
+                    ExpValue *= 1.2f;
+                    break;
+                case "C":
+                    ExpValue *= 0.8f;
+                    break;
+                case "D":
+                    ExpValue *= 0.7f;
+                    break;
+                case "E":
+                    ExpValue *= 0.5f;
+                    break;
+                default:
+                    break;
+            }
+
+            ExpUnit.Value = (decimal)ExpValue;
+        }
 
 		private void UpdateLevelView()
 		{
-			var selectedShip = (TextShip.SelectedItem as ComboShipData)?.Ship;
+            var selectedShip = (TextShip.SelectedItem as ComboShipData)?.Ship;
 
 			if (selectedShip == null)
 			{
@@ -177,31 +241,98 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				if (selectedShip.SlotSize >= 4)
 				{
-					ASWEquipmentPairs.Add(openingASWborder - 51, "[4식수중청음기x3, 시제15cm9연장대잠분진포]");
-					ASWEquipmentPairs.Add(openingASWborder - 48, "[4식수중청음기x4]");
-					ASWEquipmentPairs.Add(openingASWborder - 44, "[4식수중청음기x3, 삼식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 51, "[4식소나x3, 시제15cm9연장대잠분진포]");
+					ASWEquipmentPairs.Add(openingASWborder - 48, "[4식소나x4]");
+					ASWEquipmentPairs.Add(openingASWborder - 44, "[4식소나x3, 3식폭뢰투사기]");
 				}
 				if (selectedShip.SlotSize >= 3)
 				{
-					ASWEquipmentPairs.Add(openingASWborder - 39, "[4식수중청음기x2, 시제15cm9연장대잠분진포]");
-					ASWEquipmentPairs.Add(openingASWborder - 36, "[4식수중청음기x3]");
-					ASWEquipmentPairs.Add(openingASWborder - 32, "[4식수중청음기x2, 삼식폭뢰투사기]");
-					ASWEquipmentPairs.Add(openingASWborder - 28, "[3식수중청음기x2, 삼식폭뢰투사기]");
-					ASWEquipmentPairs.Add(openingASWborder - 27, "[4식수중청음기, 삼식폭뢰투사기, 2식폭뢰]");
-				}
+                    ASWEquipmentPairs.Add(openingASWborder - 42, "[4식소나, HF/DF + Type144/147 ASDIC, 시제15cm9연장대잠분진포]");
+                    ASWEquipmentPairs.Add(openingASWborder - 40, "[4식소나, Type144/147 ASDIC, 시제15cm9연장대잠분진포]");
+                    ASWEquipmentPairs.Add(openingASWborder - 39, "[4식소나x2, 시제15cm9연장대잠분진포]");
+                    ASWEquipmentPairs.Add(openingASWborder - 36, "[4식소나x3]");
+					ASWEquipmentPairs.Add(openingASWborder - 32, "[4식소나x2, 3식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 28, "[3식소나x2, 3식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 27, "[4식소나, 3식폭뢰투사기, 2식폭뢰]");
+                }
 				if (selectedShip.SlotSize >= 2)
 				{
-					if (ASWEquipmentPairs.ContainsKey(openingASWborder - 27))
-						ASWEquipmentPairs[openingASWborder - 27] += ", [4식수중청음기, 시제15cm9연장대잠분진포]";
-					else
-						ASWEquipmentPairs.Add(openingASWborder - 27, "[4식수중청음기, 시제15cm9연장대잠분진포]");
-					ASWEquipmentPairs.Add(openingASWborder - 20, "[4식수중청음기, 삼식폭뢰투사기]");
-					ASWEquipmentPairs.Add(openingASWborder - 18, "[3식수중청음기, 삼식폭뢰투사기]");
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 30))
+                        ASWEquipmentPairs[openingASWborder - 30] += ", [HF/DF + Type144/147 ASDIC, 시제15cm9연장대잠분진포]";
+                    else
+                        ASWEquipmentPairs.Add(openingASWborder - 30, "[HF/DF + Type144/147 ASDIC, 시제15cm9연장대잠분진포]");
+
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 28))
+                    {
+                        ASWEquipmentPairs[openingASWborder - 28] += ", [Type144/147 ASDIC, 시제15cm9연장대잠분진포]";
+                        ASWEquipmentPairs[openingASWborder - 28] += ", [Type144/147 ASDIC, HF/DF + Type144/147 ASDIC]";
+                    }
+                    else
+                    {
+                        ASWEquipmentPairs.Add(openingASWborder - 28, "[Type144/147 ASDIC, 시제15cm9연장대잠분진포]");
+                        ASWEquipmentPairs[openingASWborder - 28] += ", [Type144/147 ASDIC, HF/DF + Type144/147 ASDIC]";
+                    }
+
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 27))
+                    {
+                        ASWEquipmentPairs[openingASWborder - 27] += ", [4식소나, 시제15cm9연장대잠분진포]";
+                        ASWEquipmentPairs[openingASWborder - 27] += ", [4식소나, HF/DF + Type144/147 ASDIC]";
+                    }
+                    else
+                    {
+                        ASWEquipmentPairs.Add(openingASWborder - 27, "[4식소나, 시제15cm9연장대잠분진포]");
+                        ASWEquipmentPairs[openingASWborder - 27] += ", [4식소나, HF/DF + Type144/147 ASDIC]";
+                    }
+
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 26))
+                    {
+                        ASWEquipmentPairs[openingASWborder - 26] += ", [HF/DF + Type144/147 ASDIC, Type124 ASDIC]";
+                        ASWEquipmentPairs[openingASWborder - 26] += ", [시제15cm9연장대잠분진포, Type124 ASDIC]";
+                    }
+                    else
+                    {
+                        ASWEquipmentPairs.Add(openingASWborder - 26, "[HF/DF + Type144/147 ASDIC, Type124 ASDIC]");
+                        ASWEquipmentPairs[openingASWborder - 26] += ", [시제15cm9연장대잠분진포, Type124 ASDIC]";
+                    }
+
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 25))
+                    {
+                        ASWEquipmentPairs[openingASWborder - 25] += ", [Type144/147 ASDIC, 3식폭뢰투사기 집중배치]";
+                        ASWEquipmentPairs[openingASWborder - 25] += ", [Type144/147 ASDIC, 4식소나]";
+                    }
+                    else
+                    {
+                        ASWEquipmentPairs.Add(openingASWborder - 25, "[Type144/147 ASDIC, 3식폭뢰투사기 집중배치]");
+                        ASWEquipmentPairs[openingASWborder - 25] += ", [Type144/147 ASDIC, 4식소나]";
+                    }
+
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 24))
+                    {
+                        ASWEquipmentPairs[openingASWborder - 24] += ", [4식소나x2]";
+                        ASWEquipmentPairs[openingASWborder - 24] += ", [4식소나x2]";
+                    }
+                    else
+                    {
+                        ASWEquipmentPairs.Add(openingASWborder - 24, "[4식소나x2]");
+                        ASWEquipmentPairs[openingASWborder - 24] += ", [4식소나x2]";
+                    }
+
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 22))
+                    {
+                        ASWEquipmentPairs[openingASWborder - 22] += ", [Type124 ASDICx2]";
+                        ASWEquipmentPairs[openingASWborder - 22] += ", [Type124 ASDICx2]";
+                    }
+                    else
+                    {
+                        ASWEquipmentPairs.Add(openingASWborder - 22, "[Type124 ASDICx2]");
+                        ASWEquipmentPairs[openingASWborder - 22] += ", [Type124 ASDICx2]";
+                    }
+
+                    ASWEquipmentPairs.Add(openingASWborder - 20, "[4식소나, 3식폭뢰투사기]");
+					ASWEquipmentPairs.Add(openingASWborder - 18, "[3식소나, 3식폭뢰투사기]");
 				}
-				ASWEquipmentPairs.Add(openingASWborder - 12, "[4식수중청음기]");
+				ASWEquipmentPairs.Add(openingASWborder - 12, "[4식소나]");
 			}
-
-
 
 
 			int aswmin = selectedShip.MasterShip.ASW.Minimum;
@@ -321,7 +452,41 @@ namespace ElectronicObserver.Window.Dialog
 			UpdateLevelView();
 		}
 
-		private int[] GetRemodelLevelTable(ShipDataMaster ship)
+        // 작업 체크용 3
+        private void FlagShip_CheckChanged(object sender, EventArgs e)
+        {
+            UpdateProperty();
+        }
+
+        private void MVP_CheckChanged(object sender, EventArgs e)
+        {
+            UpdateProperty();
+        }
+
+        private void Rank_IndexChanged(object sender, EventArgs e)
+        {
+            UpdateProperty();
+        }
+
+        private void ExpControl_CheckChanged(object sender, EventArgs e)
+        {
+            Utility.Configuration.Config.Control.ExpManual = ExpControl.Checked;
+            ExpControl.Checked = ExpControl.Checked;
+            ExpUnit.ReadOnly = !ExpControl.Checked;
+            MapSelect.Enabled = !ExpControl.Checked;
+            MVP_Check.Enabled = !ExpControl.Checked;
+            FlagShip_Check.Enabled = !ExpControl.Checked;
+            Rank_List.Enabled = !ExpControl.Checked;
+            label4.Enabled = !ExpControl.Checked;
+            label5.Enabled = !ExpControl.Checked;
+        }
+
+        private void MapSelect_IndexChanged(object sender, EventArgs e)
+        {
+            UpdateProperty();
+        }
+
+        private int[] GetRemodelLevelTable(ShipDataMaster ship)
 		{
 			while (ship.RemodelBeforeShip != null)
 				ship = ship.RemodelBeforeShip;

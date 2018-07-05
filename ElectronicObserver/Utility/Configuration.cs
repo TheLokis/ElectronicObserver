@@ -407,8 +407,12 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public int ExpCheckerExpUnit { get; set; }
 
-
-				public ConfigControl()
+                public bool MVPCheck { get; set; }
+                public bool FlagShipCheck { get; set; }
+                public string MapSelect { get; set; }
+                public string Rank { get; set; }
+                public bool ExpManual { get; set; }
+                public ConfigControl()
 				{
 					ConditionBorder = 40;
 					RecordAutoSaving = 1;
@@ -418,6 +422,11 @@ namespace ElectronicObserver.Utility
 					PowerEngagementForm = 1;
 					ShowSallyAreaAlertDialog = true;
 					ExpCheckerExpUnit = 2268;
+                    MVPCheck = false;
+                    FlagShipCheck = false;
+                    MapSelect = "1-1";
+                    Rank = "S";
+                    ExpManual = false;
 				}
 			}
 			/// <summary>動作</summary>

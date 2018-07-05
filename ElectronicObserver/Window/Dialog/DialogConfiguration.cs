@@ -24,7 +24,7 @@ namespace ElectronicObserver.Window.Dialog
 		public const string RegistryPathGPURendering = @"FEATURE_GPU_RENDERING\";
 
 		public const int DefaultBrowserVersion = 11001;
-		public const bool DefaultGPURendering = false;
+		public const bool DefaultGPURendering = true;
 
 		/// <summary> 司令部「任意アイテム表示」から除外するアイテムのIDリスト </summary>
 		private readonly HashSet<int> IgnoredItems = new HashSet<int>() { 1, 2, 3, 4, 50, 51, 66, 67, 69 };
@@ -793,7 +793,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void FormBrowser_ApplyRegistry_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("레지스트리를 등록합니다.\r\n＊완전히 적용하려면 컴퓨터의 재시작이 필요합니다.", "확인",
+			if (MessageBox.Show("레지스트리를 등록합니다.\r\n＊완전히 적용하려면 프로그램의 재시작이 필요합니다.", "확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -820,7 +820,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void FormBrowser_DeleteRegistry_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("레지스트리를 삭제합니다. \r\n＊완전히 적용하려면 컴퓨터의 재시작이 필요합니다.", "확인",
+			if (MessageBox.Show("레지스트리를 삭제합니다. \r\n＊완전히 적용하려면 프로그램의 재시작이 필요합니다.", "확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -923,7 +923,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void UpdatePlayTime()
 		{
 			double elapsed = (DateTime.Now - _shownTime).TotalSeconds;
-			Log_PlayTime.Text = "재생 시간: " + ElectronicObserver.Utility.Mathematics.DateTimeHelper.ToTimeElapsedString(TimeSpan.FromSeconds(_playTimeCache + elapsed));
+			Log_PlayTime.Text = "플레이시간: " + ElectronicObserver.Utility.Mathematics.DateTimeHelper.ToTimeElapsedString(TimeSpan.FromSeconds(_playTimeCache + elapsed));
 		}
 
 		private void PlayTimeTimer_Tick(object sender, EventArgs e)

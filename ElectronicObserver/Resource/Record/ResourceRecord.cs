@@ -332,7 +332,7 @@ namespace ElectronicObserver.Resource.Record
 
 
 
-		public override string RecordHeader => "日時,燃料,弾薬,鋼材,ボーキ,高速建造材,高速修復材,開発資材,改修資材,司令部Lv,提督Exp";
+		public override string RecordHeader => "날짜,연료,탄약,강재,보키,고속건조재,고속수복재,개발자재,개수자재,사령부Lv,제독Exp";
 
 		public override string FileName => "ResourceRecord.csv";
 	}

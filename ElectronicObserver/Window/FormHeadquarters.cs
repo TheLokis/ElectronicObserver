@@ -202,7 +202,7 @@ namespace ElectronicObserver.Window
 			yield return "탄약";
 			yield return "강재";
 			yield return "보크사이트";
-			yield return "모든아이템";
+			yield return "자유항목";
 		}
 
 

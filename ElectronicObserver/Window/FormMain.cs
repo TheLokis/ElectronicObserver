@@ -104,7 +104,7 @@ namespace ElectronicObserver.Window
                     thm = new VS2013BlueTheme();
                     break;
                 default:
-                    thm = new VS2012LightTheme();
+                    thm = new VS2005Theme();
                     break;
             }
 

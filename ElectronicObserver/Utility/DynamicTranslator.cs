@@ -375,12 +375,13 @@ namespace ElectronicObserver.Utility
                     return translated;
                 }
                 else
-                {/*
+                {
+                    
                     if(type == TranslationType.QuestTitle)
-                        ErrorReporter.SendErrorReport2(new Exception(), jpString);
+                        ErrorReporter.SendErrorReport(new Exception(), jpString);
                     else if(type == TranslationType.QuestDetail)
-                        ErrorReporter.SendErrorReport2(new Exception(), jpString);
-                        */
+                        ErrorReporter.SendErrorReport(new Exception(), jpString);
+                       
                     //Utility.Logger.Add(3, id + ":::" + jpChildElement + "/" + jpString + ":" + jpString.Equals(jpString));
                 }
             }

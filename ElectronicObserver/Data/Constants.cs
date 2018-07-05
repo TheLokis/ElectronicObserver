@@ -55,7 +55,7 @@ namespace ElectronicObserver.Data
 				case 5:
 					return "최장+";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -63,6 +63,34 @@ namespace ElectronicObserver.Data
 		/// 艦船のレアリティを表す文字列を取得します。
 		/// </summary>
 		public static string GetShipRarity(int value)
+		{
+			switch (value)
+			{
+				case 0:
+					return "-";
+				case 1:
+					return "커먼";
+				case 2:
+					return "커먼";
+				case 3:
+					return "슈퍼커먼";
+				case 4:
+					return "레어";
+				case 5:
+					return "슈퍼레어";
+				case 6:
+					return "홀로";
+				case 7:
+					return "슈퍼홀로";
+				case 8:
+					return "사쿠라홀로";
+				default:
+					return "불명";
+			}
+		}
+
+        /*
+         * 		public static string GetShipRarity(int value)
 		{
 			switch (value)
 			{
@@ -87,7 +115,7 @@ namespace ElectronicObserver.Data
 				default:
 					return "不明";
 			}
-		}
+		}*/
 
 		/// <summary>
 		/// 装備のレアリティを表す文字列を取得します。
@@ -329,7 +357,7 @@ namespace ElectronicObserver.Data
 				case 39: return "순잠을형";
 				case 40: return "순잠3형";
 				case 41: return "아가노급";
-				case 42: return "「霧」";
+				case 42: return "안개의 함대 ";
 				case 43: return "다이호급";
 				case 44: return "센토쿠급(이400급잠수함)";
 				case 45: return "특종선병형";
@@ -571,7 +599,7 @@ namespace ElectronicObserver.Data
 				case 14:
 					return "제4경계항행서열";
 				default:
-					return "不明";
+					return "불명";
 			}
 		}
 
@@ -582,25 +610,25 @@ namespace ElectronicObserver.Data
 		{
 			switch (value)
 			{
-				case "単縦陣":
+				case "단종진":
 					return 1;
-				case "複縦陣":
+				case "복종진":
 					return 2;
-				case "輪形陣":
+				case "윤형진":
 					return 3;
-				case "梯形陣":
+				case "제형진":
 					return 4;
-				case "単横陣":
+				case "단횡진":
 					return 5;
-				case "警戒陣":
+				case "경계진":
 					return 6;
-				case "第一警戒航行序列":
+				case "제1경계항행서열":
 					return 11;
-				case "第二警戒航行序列":
+				case "제2경계항행서열":
 					return 12;
-				case "第三警戒航行序列":
+				case "제3경계항행서열":
 					return 13;
-				case "第四警戒航行序列":
+				case "제4경계항행서열":
 					return 14;
 				default:
 					return -1;
@@ -753,7 +781,7 @@ namespace ElectronicObserver.Data
 				case DayAttackKind.CutinMainMain:
 					return "컷인(주포/주포)";
 				case DayAttackKind.CutinAirAttack:
-					return "대공컷인";
+					return "항모컷인";
 				case DayAttackKind.Shelling:
 					return "포격";
 				case DayAttackKind.AirAttack:
@@ -800,7 +828,7 @@ namespace ElectronicObserver.Data
 				case NightAttackKind.CutinMainMain:
 					return "컷인(주포x3)";
 				case NightAttackKind.CutinAirAttack:
-					return "대공컷인";
+					return "항모컷인";
 				case NightAttackKind.CutinTorpedoRadar:
 					return "구축컷인(주포/어뢰/전탐)";
 				case NightAttackKind.CutinTorpedoPicket:

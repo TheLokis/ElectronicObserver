@@ -275,10 +275,14 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int FirepowerTotal => (int)RawData.api_karyoku[0];
 
-		/// <summary>
-		/// 雷装総合値
-		/// </summary>
-		public int TorpedoTotal => (int)RawData.api_raisou[0];
+        /// <summary>
+        /// 화뇌합
+        /// </summary>
+        public int SumTorPower => this.FirepowerBase + this.TorpedoBase;
+        /// <summary>
+        /// 雷装総合値
+        /// </summary>
+        public int TorpedoTotal => (int)RawData.api_raisou[0];
 
 		/// <summary>
 		/// 対空総合値
