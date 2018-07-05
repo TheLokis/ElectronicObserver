@@ -793,7 +793,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void FormBrowser_ApplyRegistry_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("레지스트리를 등록합니다.\r\n＊완전히 적용하려면 컴퓨터의 재시작이 필요합니다.", "확인",
+			if (MessageBox.Show("레지스트리를 등록합니다.\r\n＊완전히 적용하려면 프로그램의 재시작이 필요합니다.", "확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -820,7 +820,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void FormBrowser_DeleteRegistry_Click(object sender, EventArgs e)
 		{
 
-			if (MessageBox.Show("레지스트리를 삭제합니다. \r\n＊완전히 적용하려면 컴퓨터의 재시작이 필요합니다.", "확인",
+			if (MessageBox.Show("레지스트리를 삭제합니다. \r\n＊완전히 적용하려면 프로그램의 재시작이 필요합니다.", "확인",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{

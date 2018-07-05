@@ -155,7 +155,7 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		[IgnoreDataMember]
 		public static readonly Dictionary<ExpressionOperator, string> OperatorNameTable = new Dictionary<ExpressionOperator, string>() {
-			{ ExpressionOperator.Equal, "같음" },
+			{ ExpressionOperator.Equal, "일치" },
 			{ ExpressionOperator.NotEqual, "같지않음" },
 			{ ExpressionOperator.LessThan, "미만" },
 			{ ExpressionOperator.LessEqual, "이하" },
@@ -344,7 +344,7 @@ namespace ElectronicObserver.Data.ShipGroup
 
 
 
-		public override string ToString() => $"{LeftOperandToString()} は {RightOperandToString()} {OperatorToString()}";
+		public override string ToString() => $"{LeftOperandToString()} 값이 {RightOperandToString()} {OperatorToString()}";
 
 
 

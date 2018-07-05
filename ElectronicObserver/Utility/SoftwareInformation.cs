@@ -36,14 +36,14 @@ namespace ElectronicObserver.Utility
 		/// <summary>
 		/// バージョン(英語)
 		/// </summary>
-		public static string VersionEnglish => "3.1.2.001";
+		public static string VersionEnglish => "3.1.2.R2";
 
-        public static string VersionKorean => "3.1.2.001";
+        public static string VersionKorean => "3.1.2.R2";
 
         /// <summary>
         /// 更新日時
         /// </summary>
-        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/06/24 20:00:00");
+        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/06/30 18:00:00");
 
 
 

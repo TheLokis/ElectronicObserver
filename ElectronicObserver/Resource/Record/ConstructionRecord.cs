@@ -259,7 +259,7 @@ namespace ElectronicObserver.Resource.Record
 		}
 
 
-		public override string RecordHeader => "艦船ID,艦船名,建造日時,燃料,弾薬,鋼材,ボーキ,開発資材,大型建造,空ドック,旗艦ID,旗艦名,司令部Lv";
+		public override string RecordHeader => "함선ID,함선명,날짜,연료,탄약,강재,보키,개발자재,대형건조,남은도크,기함ID,기함,사령부Lv";
 
 		public override string FileName => "ConstructionRecord.csv";
 	}

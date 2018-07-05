@@ -698,9 +698,56 @@ namespace ElectronicObserver.Data
 			RemodelBeforeShipID = 0;
 		}
 
+        public Color GetShipNameColor(bool uis)
+        {
+
+            if (!IsAbyssalShip)
+            {
+                return SystemColors.ControlText;
+            }
+
+            bool isLateModel = Name.Contains("후기형");
+            bool isRemodeled = Name.Contains("개");
+            bool isDestroyed = Name.EndsWith("-괴");
+            bool isDemon = Name.EndsWith("귀");
+            bool isPrincess = Name.EndsWith("희");
+            bool isWaterDemon = Name.EndsWith("수귀");
+            bool isWaterPrincess = Name.EndsWith("수희");
+            bool isElite = NameReading == "elite";
+            bool isFlagship = NameReading == "flagship";
 
 
-		public int ID => ShipID;
+            if (isDestroyed)
+                return Color.FromArgb(0xFF, 0x00, 0xFF);
+
+            else if (isWaterPrincess)
+                return ShipNameColors[6];
+            else if (isWaterDemon)
+                return ShipNameColors[5];
+            else if (isPrincess)
+                return ShipNameColors[4];
+            else if (isDemon)
+                return ShipNameColors[3];
+            else
+            {
+
+                int tier;
+
+                if (isFlagship)
+                    tier = 2;
+                else if (isElite)
+                    tier = 1;
+                else
+                    tier = 0;
+
+                if (isLateModel || isRemodeled)
+                    tier += 3;
+
+                return ShipNameColors[tier];
+            }
+        }
+
+        public int ID => ShipID;
 
 
 		public override string ToString() => $"[{ShipID}] {NameWithClass}";

@@ -306,8 +306,9 @@ namespace ElectronicObserver.Window.Dialog
 				ToolTipInfo.SetToolTip(ShipType, $"{Constants.GetShipClass(ship.ShipClass)}: {ship.ShipClass}");
 
 			ShipName.Text = ship.NameWithClass;
-			ShipName.ForeColor = ship.GetShipNameColor();
-			ToolTipInfo.SetToolTip(ShipName, (!ship.IsAbyssalShip ? ship.NameReading + "\r\n" : "") + "(우클릭으로 복사)");
+			ShipName.ForeColor = ship.GetShipNameColor(true);
+
+            ToolTipInfo.SetToolTip(ShipName, (!ship.IsAbyssalShip ? ship.NameReading + "\r\n" : "") + "(우클릭으로 복사)");
 			TableShipName.ResumeLayout();
 
 
