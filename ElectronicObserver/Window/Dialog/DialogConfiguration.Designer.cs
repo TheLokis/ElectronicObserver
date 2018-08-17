@@ -32,8 +32,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            ElectronicObserver.Window.Control.StatusBarModule statusBarModule2 = new ElectronicObserver.Window.Control.StatusBarModule();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            ElectronicObserver.Window.Control.StatusBarModule statusBarModule1 = new ElectronicObserver.Window.Control.StatusBarModule();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Connection_UpstreamProxyAddress = new System.Windows.Forms.TextBox();
@@ -114,6 +114,8 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.ExpCheckerOpList = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.FormFleet_FleetStateDisplayMode = new System.Windows.Forms.ComboBox();
             this.FormFleet_EmphasizesSubFleetInPort = new System.Windows.Forms.CheckBox();
@@ -256,8 +258,7 @@ namespace ElectronicObserver.Window.Dialog
             this.APIListBrowser = new System.Windows.Forms.OpenFileDialog();
             this.Log_PlayTime = new System.Windows.Forms.Label();
             this.PlayTimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.label44 = new System.Windows.Forms.Label();
-            this.ExpCheckerOpList = new System.Windows.Forms.ComboBox();
+            this.NodeToAlphabetBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Connection_UpstreamProxyPort)).BeginInit();
@@ -667,12 +668,12 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.UI_RenderingTest.AutoSize = true;
             this.UI_RenderingTest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            statusBarModule2.BarColor0Begin = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            statusBarModule2.BarColor0End = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            statusBarModule2.MaximumValue = 500;
-            statusBarModule2.PrevValue = 401;
-            statusBarModule2.Value = 401;
-            this.UI_RenderingTest.HPBar = statusBarModule2;
+            statusBarModule1.BarColor0Begin = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            statusBarModule1.BarColor0End = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            statusBarModule1.MaximumValue = 500;
+            statusBarModule1.PrevValue = 401;
+            statusBarModule1.Value = 401;
+            this.UI_RenderingTest.HPBar = statusBarModule1;
             this.UI_RenderingTest.Location = new System.Drawing.Point(16, 3);
             this.UI_RenderingTest.MainFontColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.UI_RenderingTest.Margin = new System.Windows.Forms.Padding(16, 3, 16, 3);
@@ -1056,7 +1057,7 @@ namespace ElectronicObserver.Window.Dialog
             this.Debug_SealingPanel.Controls.Add(this.Debug_APIListPathSearch);
             this.Debug_SealingPanel.Location = new System.Drawing.Point(0, 56);
             this.Debug_SealingPanel.Name = "Debug_SealingPanel";
-            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 261);
+            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 259);
             this.Debug_SealingPanel.TabIndex = 1;
             // 
             // Debug_APIListPath
@@ -1305,6 +1306,29 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage8.TabIndex = 0;
             this.tabPage8.Text = "함대";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // ExpCheckerOpList
+            // 
+            this.ExpCheckerOpList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ExpCheckerOpList.FormattingEnabled = true;
+            this.ExpCheckerOpList.Items.AddRange(new object[] {
+            "레벨순",
+            "함종-레벨순"});
+            this.ExpCheckerOpList.Location = new System.Drawing.Point(160, 254);
+            this.ExpCheckerOpList.Name = "ExpCheckerOpList";
+            this.ExpCheckerOpList.Size = new System.Drawing.Size(160, 23);
+            this.ExpCheckerOpList.TabIndex = 24;
+            this.ToolTipInfo.SetToolTip(this.ExpCheckerOpList, "장비의 개수 단계와 함재기 숙련도 표시를 설정합니다.\r\n숨기기의 경우는 표시되지 않습니다.\r\n~우선의 경우, 1단계 이상일때 각 값을 우선적으로 " +
+        "표시합니다.\r\n모두보기의 경우 모두 표시합니다.");
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(6, 257);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(148, 15);
+            this.label44.TabIndex = 23;
+            this.label44.Text = "경험치 계산기 정렬 순서 :";
             // 
             // label43
             // 
@@ -1589,10 +1613,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage9.Controls.Add(this.FormArsenal_MaxShipNameWidth);
             this.tabPage9.Controls.Add(this.FormArsenal_BlinkAtCompletion);
             this.tabPage9.Controls.Add(this.FormArsenal_ShowShipName);
-            this.tabPage9.Location = new System.Drawing.Point(4, 24);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(682, 338);
+            this.tabPage9.Size = new System.Drawing.Size(682, 340);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "공창";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1665,10 +1689,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage19.Controls.Add(this.label36);
             this.tabPage19.Controls.Add(this.FormDock_MaxShipNameWidth);
             this.tabPage19.Controls.Add(this.FormDock_BlinkAtCompletion);
-            this.tabPage19.Location = new System.Drawing.Point(4, 24);
+            this.tabPage19.Location = new System.Drawing.Point(4, 22);
             this.tabPage19.Name = "tabPage19";
             this.tabPage19.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage19.Size = new System.Drawing.Size(682, 338);
+            this.tabPage19.Size = new System.Drawing.Size(682, 340);
             this.tabPage19.TabIndex = 8;
             this.tabPage19.Text = "입거";
             this.tabPage19.UseVisualStyleBackColor = true;
@@ -1732,10 +1756,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage16.Controls.Add(this.label26);
             this.tabPage16.Controls.Add(this.FormHeadquarters_Visibility);
             this.tabPage16.Controls.Add(this.FormHeadquarters_BlinkAtMaximum);
-            this.tabPage16.Location = new System.Drawing.Point(4, 24);
+            this.tabPage16.Location = new System.Drawing.Point(4, 22);
             this.tabPage16.Name = "tabPage16";
             this.tabPage16.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage16.Size = new System.Drawing.Size(682, 338);
+            this.tabPage16.Size = new System.Drawing.Size(682, 340);
             this.tabPage16.TabIndex = 6;
             this.tabPage16.Text = "사령부";
             this.tabPage16.UseVisualStyleBackColor = true;
@@ -1775,7 +1799,7 @@ namespace ElectronicObserver.Window.Dialog
             this.FormHeadquarters_Visibility.IntegralHeight = false;
             this.FormHeadquarters_Visibility.Location = new System.Drawing.Point(6, 46);
             this.FormHeadquarters_Visibility.Name = "FormHeadquarters_Visibility";
-            this.FormHeadquarters_Visibility.Size = new System.Drawing.Size(150, 284);
+            this.FormHeadquarters_Visibility.Size = new System.Drawing.Size(150, 286);
             this.FormHeadquarters_Visibility.TabIndex = 1;
             // 
             // FormHeadquarters_BlinkAtMaximum
@@ -1790,6 +1814,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // tabPage18
             // 
+            this.tabPage18.Controls.Add(this.NodeToAlphabetBox);
             this.tabPage18.Controls.Add(this.label40);
             this.tabPage18.Controls.Add(this.label41);
             this.tabPage18.Controls.Add(this.FormCompass_MaxShipNameWidth);
@@ -1807,7 +1832,7 @@ namespace ElectronicObserver.Window.Dialog
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(6, 62);
+            this.label40.Location = new System.Drawing.Point(6, 76);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(115, 15);
             this.label40.TabIndex = 15;
@@ -1816,7 +1841,7 @@ namespace ElectronicObserver.Window.Dialog
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(179, 62);
+            this.label41.Location = new System.Drawing.Point(193, 76);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(21, 15);
             this.label41.TabIndex = 14;
@@ -1824,7 +1849,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // FormCompass_MaxShipNameWidth
             // 
-            this.FormCompass_MaxShipNameWidth.Location = new System.Drawing.Point(113, 60);
+            this.FormCompass_MaxShipNameWidth.Location = new System.Drawing.Point(127, 74);
             this.FormCompass_MaxShipNameWidth.Maximum = new decimal(new int[] {
             999,
             0,
@@ -1849,7 +1874,7 @@ namespace ElectronicObserver.Window.Dialog
             // FormCompass_IsScrollable
             // 
             this.FormCompass_IsScrollable.AutoSize = true;
-            this.FormCompass_IsScrollable.Location = new System.Drawing.Point(6, 35);
+            this.FormCompass_IsScrollable.Location = new System.Drawing.Point(9, 40);
             this.FormCompass_IsScrollable.Name = "FormCompass_IsScrollable";
             this.FormCompass_IsScrollable.Size = new System.Drawing.Size(106, 19);
             this.FormCompass_IsScrollable.TabIndex = 6;
@@ -1896,10 +1921,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage10.Controls.Add(this.label27);
             this.tabPage10.Controls.Add(this.groupBox1);
             this.tabPage10.Controls.Add(this.FormQuest_ShowRunningOnly);
-            this.tabPage10.Location = new System.Drawing.Point(4, 24);
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(682, 338);
+            this.tabPage10.Size = new System.Drawing.Size(682, 340);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "임무";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -2016,10 +2041,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage13.Controls.Add(this.label25);
             this.tabPage13.Controls.Add(this.FormShipGroup_ShowStatusBar);
             this.tabPage13.Controls.Add(this.FormShipGroup_AutoUpdate);
-            this.tabPage13.Location = new System.Drawing.Point(4, 24);
+            this.tabPage13.Location = new System.Drawing.Point(4, 22);
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(682, 338);
+            this.tabPage13.Size = new System.Drawing.Size(682, 340);
             this.tabPage13.TabIndex = 4;
             this.tabPage13.Text = "그룹";
             this.tabPage13.UseVisualStyleBackColor = true;
@@ -2074,10 +2099,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage20.Controls.Add(this.FormBattle_ShowHPBar);
             this.tabPage20.Controls.Add(this.FormBattle_HideDuringBattle);
             this.tabPage20.Controls.Add(this.FormBattle_IsScrollable);
-            this.tabPage20.Location = new System.Drawing.Point(4, 24);
+            this.tabPage20.Location = new System.Drawing.Point(4, 22);
             this.tabPage20.Name = "tabPage20";
             this.tabPage20.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage20.Size = new System.Drawing.Size(682, 338);
+            this.tabPage20.Size = new System.Drawing.Size(682, 340);
             this.tabPage20.TabIndex = 10;
             this.tabPage20.Text = "전투";
             this.tabPage20.UseVisualStyleBackColor = true;
@@ -2153,10 +2178,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage12.Controls.Add(this.FormBrowser_LogInPageURL);
             this.tabPage12.Controls.Add(this.FormBrowser_ZoomRate);
             this.tabPage12.Controls.Add(this.label15);
-            this.tabPage12.Location = new System.Drawing.Point(4, 24);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(682, 338);
+            this.tabPage12.Size = new System.Drawing.Size(682, 340);
             this.tabPage12.TabIndex = 3;
             this.tabPage12.Text = "브라우저";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -2408,10 +2433,10 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.tabPage14.Controls.Add(this.groupBox4);
             this.tabPage14.Controls.Add(this.groupBox3);
-            this.tabPage14.Location = new System.Drawing.Point(4, 24);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
             this.tabPage14.Name = "tabPage14";
             this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage14.Size = new System.Drawing.Size(682, 338);
+            this.tabPage14.Size = new System.Drawing.Size(682, 340);
             this.tabPage14.TabIndex = 5;
             this.tabPage14.Text = "브라우저2";
             this.tabPage14.UseVisualStyleBackColor = true;
@@ -2721,7 +2746,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 332);
+            this.label10.Location = new System.Drawing.Point(3, 330);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(256, 15);
             this.label10.TabIndex = 5;
@@ -2852,21 +2877,21 @@ namespace ElectronicObserver.Window.Dialog
             this.BGMPlayer_ColumnContent,
             this.BGMPlayer_ColumnPath,
             this.BGMPlayer_ColumnSetting});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.BGMPlayer_ControlGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BGMPlayer_ControlGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.BGMPlayer_ControlGrid.Location = new System.Drawing.Point(6, 35);
             this.BGMPlayer_ControlGrid.MultiSelect = false;
             this.BGMPlayer_ControlGrid.Name = "BGMPlayer_ControlGrid";
             this.BGMPlayer_ControlGrid.RowHeadersVisible = false;
             this.BGMPlayer_ControlGrid.RowTemplate.Height = 21;
             this.BGMPlayer_ControlGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 281);
+            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 279);
             this.BGMPlayer_ControlGrid.TabIndex = 0;
             this.BGMPlayer_ControlGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BGMPlayer_ControlGrid_CellContentClick);
             this.BGMPlayer_ControlGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.BGMPlayer_ControlGrid_CellFormatting);
@@ -2964,28 +2989,17 @@ namespace ElectronicObserver.Window.Dialog
             this.PlayTimeTimer.Interval = 1000;
             this.PlayTimeTimer.Tick += new System.EventHandler(this.PlayTimeTimer_Tick);
             // 
-            // label44
+            // NodeToAlphabetBox
             // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(6, 257);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(148, 15);
-            this.label44.TabIndex = 23;
-            this.label44.Text = "경험치 계산기 정렬 순서 :";
-            // 
-            // ExpCheckerOpList
-            // 
-            this.ExpCheckerOpList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ExpCheckerOpList.FormattingEnabled = true;
-            this.ExpCheckerOpList.Items.AddRange(new object[] {
-            "레벨순",
-            "함종-레벨순"});
-            this.ExpCheckerOpList.Location = new System.Drawing.Point(160, 254);
-            this.ExpCheckerOpList.Name = "ExpCheckerOpList";
-            this.ExpCheckerOpList.Size = new System.Drawing.Size(160, 23);
-            this.ExpCheckerOpList.TabIndex = 24;
-            this.ToolTipInfo.SetToolTip(this.ExpCheckerOpList, "장비의 개수 단계와 함재기 숙련도 표시를 설정합니다.\r\n숨기기의 경우는 표시되지 않습니다.\r\n~우선의 경우, 1단계 이상일때 각 값을 우선적으로 " +
-        "표시합니다.\r\n모두보기의 경우 모두 표시합니다.");
+            this.NodeToAlphabetBox.AutoSize = true;
+            this.NodeToAlphabetBox.Location = new System.Drawing.Point(242, 10);
+            this.NodeToAlphabetBox.Name = "NodeToAlphabetBox";
+            this.NodeToAlphabetBox.Size = new System.Drawing.Size(182, 19);
+            this.NodeToAlphabetBox.TabIndex = 16;
+            this.NodeToAlphabetBox.Text = "노드 번호를 알파벳으로 표시";
+            this.ToolTipInfo.SetToolTip(this.NodeToAlphabetBox, "노드 번호를 알파벳으로 표시합니다. EX ) 7-1-1 -> 7-1-A");
+            this.NodeToAlphabetBox.UseVisualStyleBackColor = true;
+            this.NodeToAlphabetBox.CheckedChanged += new System.EventHandler(this.NodeToAlphabetBox_CheckedChanged);
             // 
             // DialogConfiguration
             // 
@@ -3309,5 +3323,6 @@ namespace ElectronicObserver.Window.Dialog
         private System.Windows.Forms.ComboBox selectTheme;
         private System.Windows.Forms.ComboBox ExpCheckerOpList;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.CheckBox NodeToAlphabetBox;
     }
 }

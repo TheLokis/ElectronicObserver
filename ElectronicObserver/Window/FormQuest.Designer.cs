@@ -243,7 +243,7 @@
 			this.MenuMain_ColumnFilter_Type.CheckOnClick = true;
 			this.MenuMain_ColumnFilter_Type.Name = "MenuMain_ColumnFilter_Type";
 			this.MenuMain_ColumnFilter_Type.Size = new System.Drawing.Size(152, 22);
-			this.MenuMain_ColumnFilter_Type.Text = "出現種別(&T)";
+			this.MenuMain_ColumnFilter_Type.Text = "종류(&T)";
 			this.MenuMain_ColumnFilter_Type.Click += new System.EventHandler(this.MenuMain_ColumnFilter_Click);
 			// 
 			// MenuMain_ColumnFilter_Category

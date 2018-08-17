@@ -87,13 +87,24 @@ namespace ElectronicObserver.Window.Dialog
 				Close();
 				return;
 			}
-
-            if(Utility.Configuration.Config.Control.MapSelect.Equals("") || Utility.Configuration.Config.Control.MapSelect == null)
+            try
+            {
+                if (Utility.Configuration.Config.Control.MapSelect.Equals("") || Utility.Configuration.Config.Control.MapSelect == null)
+                {
+                    Utility.Configuration.Config.Control.MapSelect = "1-1";
+                }
+            } catch
             {
                 Utility.Configuration.Config.Control.MapSelect = "1-1";
             }
 
-            if (Utility.Configuration.Config.Control.Rank.Equals("") || Utility.Configuration.Config.Control.Rank == null)
+            try
+            {
+                if (Utility.Configuration.Config.Control.Rank.Equals("") || Utility.Configuration.Config.Control.Rank == null)
+                {
+                    Utility.Configuration.Config.Control.Rank = "S";
+                }
+            } catch
             {
                 Utility.Configuration.Config.Control.Rank = "S";
             }

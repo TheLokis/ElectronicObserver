@@ -372,7 +372,7 @@ namespace Browser
 			catch (Exception ex)
 			{
 
-				SendErrorReport(ex.ToString(), "スタイルシートの適用に失敗しました。");
+				SendErrorReport(ex.ToString(), "스타일 시트의 적용에 실패했습니다.");
 			}
 
 		}
@@ -401,7 +401,7 @@ namespace Browser
 			catch (Exception ex)
 			{
 
-				SendErrorReport(ex.ToString(), "DMMによるページ更新ダイアログの非表示に失敗しました。");
+				SendErrorReport(ex.ToString(), "DMM에 의한 페이지 새로고침 안내창 숨기기에 실패했습니다.");
 			}
 
 		}
@@ -474,18 +474,18 @@ namespace Browser
 
 				if (fit)
 				{
-					ToolMenu_Other_Zoom_Current.Text = string.Format("現在: ぴったり");
+					ToolMenu_Other_Zoom_Current.Text = string.Format("현재: 딱맞춤");
 				}
 				else
 				{
-					ToolMenu_Other_Zoom_Current.Text = string.Format("現在: {0}%", zoomRate);
+					ToolMenu_Other_Zoom_Current.Text = string.Format("현재: {0}%", zoomRate);
 				}
 
 
 			}
 			catch (Exception ex)
 			{
-				AddLog(3, "ズームの適用に失敗しました。" + ex.Message);
+				AddLog(3, "줌의 적용에 실패했습니다." + ex.Message);
 			}
 
 		}
@@ -1030,7 +1030,8 @@ namespace Browser
 			}
 		}
 
-		private void ToolMenu_Other_NavigateToLogInPage_Click(object sender, EventArgs e)
+
+        private void ToolMenu_Other_NavigateToLogInPage_Click(object sender, EventArgs e)
 		{
 
 			if (MessageBox.Show("로그인 페이지로 이동합니다.\r\n진행하시겠습니까?", "확인",
@@ -1259,12 +1260,12 @@ namespace Browser
 					using (var img = new Bitmap(_lastScreenShotPath))
 					{
 						Clipboard.SetImage(img);
-						AddLog(2, string.Format("スクリーンショット {0} をクリップボードにコピーしました。", _lastScreenShotPath));
+						AddLog(2, string.Format("스크린샷 {0} 을 클립보드에 복사했습니다.", _lastScreenShotPath));
 					}
 				}
 				catch (Exception ex)
 				{
-					SendErrorReport(ex.Message, "スクリーンショットのクリップボードへのコピーに失敗しました。");
+					SendErrorReport(ex.Message, "스크린샷을 클립보드에 복사하는데 실패했습니다.");
 				}
 			}
 		}

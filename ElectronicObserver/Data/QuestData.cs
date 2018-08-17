@@ -46,7 +46,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation((string)RawData.api_title, Utility.TranslationType.QuestTitle); }
+            get { return FormMain.Instance.Translator.GetTranslation((string)RawData.api_title, Utility.TranslationType.QuestTitle, ID); }
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                return FormMain.Instance.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail);
+                return FormMain.Instance.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail, ID);
             }
         }
 

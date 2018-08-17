@@ -383,7 +383,7 @@ namespace ElectronicObserver.Window.Control
 					{       //戦意高揚
 						var state = GetStateLabel(index);
 
-						state.SetInformation(FleetStates.Sparkled, "피로도 높음！", "", (int)ResourceManager.IconContent.ConditionSparkle, colorInPort);
+						state.SetInformation(FleetStates.Sparkled, "피로도 좋음！", "", (int)ResourceManager.IconContent.ConditionSparkle, colorInPort);
 						tooltip.SetToolTip(state.Label, string.Format("최소cond: {0}\r\n, {1} 회 원정가능", cond, Math.Ceiling((cond - 49) / 3.0)));
 
 						index++;

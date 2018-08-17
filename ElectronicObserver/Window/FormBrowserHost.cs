@@ -316,7 +316,7 @@ namespace ElectronicObserver.Window
 		public void RequestNavigation(string baseurl)
 		{
 
-			using (var dialog = new Window.Dialog.DialogTextInput("移動先の入力", "移動先の URL を入力してください。"))
+			using (var dialog = new Window.Dialog.DialogTextInput("대상 주소 입력", "대상 URL을 입력하십시오."))
 			{
 				dialog.InputtedText = baseurl;
 
@@ -352,7 +352,7 @@ namespace ElectronicObserver.Window
 
 				Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
-				APIObserver.Instance.APIList["api_start2"].ResponseReceived +=
+				APIObserver.Instance.APIList["api_start2/getData"].ResponseReceived +=
 					(string apiname, dynamic data) => InitialAPIReceived(apiname, data);
 
 				// プロキシをセット

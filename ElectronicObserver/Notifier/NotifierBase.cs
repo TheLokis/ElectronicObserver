@@ -223,6 +223,7 @@ namespace ElectronicObserver.Notifier
 
 					//音量の再設定(システム側の音量変更によって設定が変わることがあるので)
 					SoundVolume = _soundVolume;
+                    
 					Sound.Play();
 				}
 

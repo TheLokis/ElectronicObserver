@@ -509,15 +509,15 @@ namespace ElectronicObserver.Data
 
 			switch (value)
 			{
-				case "未選択":
+				case "미설정":
 					return 0;
-				case "丁":
+				case "정":
 					return 1;
-				case "丙":
+				case "병":
 					return 2;
-				case "乙":
+				case "을":
 					return 3;
-				case "甲":
+				case "갑":
 					return 4;
 				default:
 					return -1;
@@ -869,11 +869,11 @@ namespace ElectronicObserver.Data
 				case 0:
 					return "없음";
 				case 1:
-					return "고각포x2/전탐<秋月>";
+					return "고각포x2/전탐<아키즈키>";
 				case 2:
-					return "고각포/전탐<秋月>";
+					return "고각포/전탐<아키즈키>";
 				case 3:
-					return "고각포x2<秋月>";
+					return "고각포x2<아키즈키>";
 				case 4:
 					return "대구경주포/삼식탄/고사장치/전탐";
 				case 5:

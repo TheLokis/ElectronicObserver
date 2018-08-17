@@ -159,6 +159,7 @@
     <Compile Include="Data\MapInfoData.cs" />
     <Compile Include="Data\MaterialData.cs" />
     <Compile Include="Data\MissionData.cs" />
+    <Compile Include="Data\NodeData.cs" />
     <Compile Include="Data\QuestData.cs" />
     <Compile Include="Data\QuestManager.cs" />
     <Compile Include="Data\APIWrapper.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="Observer\kcsapi\api_req_sortie\goback_port.cs" />
     <Compile Include="Observer\kcsapi\api_req_sortie\ld_airbattle.cs" />
     <Compile Include="Observer\kcsapi\api_req_sortie\night_to_day.cs" />
+    <Compile Include="Observer\kcsapi\api_start2\getData.cs" />
     <Compile Include="Resource\Record\ResourceRecord.cs" />
     <Compile Include="Resource\SwfHelper.cs" />
     <Compile Include="Utility\Data\RecordHash.cs" />

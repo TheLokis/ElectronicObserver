@@ -3,6 +3,7 @@ using ElectronicObserver.Data.Battle;
 using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
 using ElectronicObserver.Resource.Record;
+using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Data;
 using ElectronicObserver.Window.Control;
 using ElectronicObserver.Window.Dialog;
@@ -733,8 +734,14 @@ namespace ElectronicObserver.Window
 					}
 				}
 
+                string NodeNumber = compass.Destination.ToString();
 
-				TextDestination.Text = string.Format("다음노드 : {0}{1}", compass.Destination, (compass.IsEndPoint ? " (마지막)" : ""));
+                if(Utility.Configuration.Config.FormCompass.ToAlphabet)
+                {
+                    NodeNumber = compass.Destination_Name;
+                }
+
+                TextDestination.Text = string.Format("다음노드 : {0}{1}", NodeNumber, (compass.IsEndPoint ? " (마지막)" : ""));
 				if (compass.LaunchedRecon != 0)
 				{
 					TextDestination.ImageAlign = ContentAlignment.MiddleRight;

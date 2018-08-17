@@ -61,8 +61,13 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
+        private void NodeToAlphabetBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Configuration.Config.FormCompass.ToAlphabet = NodeToAlphabetBox.Checked;
+        }
 
-		private void Connection_SaveDataPath_TextChanged(object sender, EventArgs e)
+
+        private void Connection_SaveDataPath_TextChanged(object sender, EventArgs e)
 		{
 
 			if (Directory.Exists(Connection_SaveDataPath.Text))
@@ -514,7 +519,8 @@ namespace ElectronicObserver.Window.Dialog
 
 			FormCompass_CandidateDisplayCount.Value = config.FormCompass.CandidateDisplayCount;
 			FormCompass_IsScrollable.Checked = config.FormCompass.IsScrollable;
-			FormCompass_MaxShipNameWidth.Value = config.FormCompass.MaxShipNameWidth;
+            NodeToAlphabetBox.Checked = config.FormCompass.ToAlphabet;
+            FormCompass_MaxShipNameWidth.Value = config.FormCompass.MaxShipNameWidth;
 
 			FormJson_AutoUpdate.Checked = config.FormJson.AutoUpdate;
 			FormJson_UpdatesTree.Checked = config.FormJson.UpdatesTree;
@@ -744,6 +750,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			config.FormCompass.CandidateDisplayCount = (int)FormCompass_CandidateDisplayCount.Value;
 			config.FormCompass.IsScrollable = FormCompass_IsScrollable.Checked;
+            config.FormCompass.ToAlphabet = NodeToAlphabetBox.Checked;
 			config.FormCompass.MaxShipNameWidth = (int)FormCompass_MaxShipNameWidth.Value;
 
 			config.FormJson.AutoUpdate = FormJson_AutoUpdate.Checked;

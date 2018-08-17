@@ -256,8 +256,10 @@ namespace ElectronicObserver.Window
 
 			UIUpdateTimer.Start();
 
+            SoftwareInformation.CheckMaintenance();
 
-			Utility.Logger.Add(3, "기동이 완료되었습니다.");
+
+            Utility.Logger.Add(3, "기동이 완료되었습니다.");
 
 		}
 
@@ -375,7 +377,7 @@ namespace ElectronicObserver.Window
 			{
 				case 0: //時計表示
 					StripStatus_Clock.Text = now.ToString("HH\\:mm\\:ss");
-					StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd)");
+					StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd)") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
 					break;
 
 				case 1: //演習更新まで
@@ -386,7 +388,7 @@ namespace ElectronicObserver.Window
 
 						TimeSpan ts = border - now;
 						StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
-						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss");
+						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
 
 					}
 					break;
@@ -399,7 +401,7 @@ namespace ElectronicObserver.Window
 
 						TimeSpan ts = border - now;
 						StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
-						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss");
+						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
 
 					}
 					break;

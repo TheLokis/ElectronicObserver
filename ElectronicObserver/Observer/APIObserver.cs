@@ -51,7 +51,7 @@ namespace ElectronicObserver.Observer
 
 			APIList = new APIDictionary
 			{
-				new kcsapi.api_start2(),
+				new kcsapi.api_start2.getData(),
 				new kcsapi.api_get_member.basic(),
 				new kcsapi.api_get_member.slot_item(),
 				new kcsapi.api_get_member.useitem(),
@@ -159,7 +159,7 @@ namespace ElectronicObserver.Observer
 
 			this.UIControl = UIControl;
 
-
+            // http 포트 수신
 			HttpProxy.Shutdown();
 			try
 			{

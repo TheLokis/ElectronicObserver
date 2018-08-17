@@ -106,10 +106,10 @@ namespace ElectronicObserver.Window.Integrate
 		}
 
 		private static String[] MATCH_COMBO_ITEMS = new String[] {
-				  "完全一致",
-				  "含む",
-				  "前方後方一致",
-				  "条件を無視"
+				  "완전일치",
+				  "포함",
+				  "전,후 일치",
+				  "조건 무시"
 		};
 
 		private FormMain parent;
@@ -261,7 +261,7 @@ namespace ElectronicObserver.Window.Integrate
 				Attach(hWnd, false);
 				return true;
 			}
-			infoLabel.Text = "ウィンドウが見つかりませんでした";
+			infoLabel.Text = "창을 찾을 수 없습니다.";
 			return false;
 		}
 
@@ -386,7 +386,7 @@ namespace ElectronicObserver.Window.Integrate
 				InternalDetach();
 				settingPanel.Visible = true;
 				StripMenu_Detach.Enabled = false;
-				infoLabel.Text = "ウィンドウを開放しました";
+				infoLabel.Text = "창을 개방 했습니다.";
 			}
 		}
 

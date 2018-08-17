@@ -149,142 +149,149 @@ namespace ElectronicObserver.Utility
 
         private void CheckForUpdates()
         {
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            Directory.CreateDirectory("Translations");
-            string locale = Thread.CurrentThread.CurrentCulture.Name;
-            if (locale != "ja-JP")
+            try
             {
-                WebRequest rq = HttpWebRequest.Create(hubsite + "VersionManifest.xml");
-                using (WebResponse resp = rq.GetResponse())
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                Directory.CreateDirectory("Translations");
+                string locale = Thread.CurrentThread.CurrentCulture.Name;
+                if (locale != "ja-JP")
                 {
-                    Stream responseStream = resp.GetResponseStream();
-                    this.versionManifest = XDocument.Load(responseStream);
-                }
-                string newShipVer = versionManifest.Root.Element("Ships").Attribute("version").Value;
-                string newShipTypeVer = versionManifest.Root.Element("ShipTypes").Attribute("version").Value;
-                string newEquipVer = versionManifest.Root.Element("Equipment").Attribute("version").Value;
-                string newEquipTypeVer = versionManifest.Root.Element("EquipmentTypes").Attribute("version").Value;
-                string newOperationVer = versionManifest.Root.Element("Operations").Attribute("version").Value;
-                string newQuestVer = versionManifest.Root.Element("Quests").Attribute("version").Value;
-                string newExpedVer = versionManifest.Root.Element("Expeditions").Attribute("version").Value;
-                string newItemVer = versionManifest.Root.Element("Items").Attribute("version").Value;
-                string newExpeddataVer = versionManifest.Root.Element("ExpeditionData").Attribute("version").Value;
+                    WebRequest rq = HttpWebRequest.Create(hubsite + "VersionManifest.xml");
+                    using (WebResponse resp = rq.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.versionManifest = XDocument.Load(responseStream);
+                    }
+                    string newShipVer = versionManifest.Root.Element("Ships").Attribute("version").Value;
+                    string newShipTypeVer = versionManifest.Root.Element("ShipTypes").Attribute("version").Value;
+                    string newEquipVer = versionManifest.Root.Element("Equipment").Attribute("version").Value;
+                    string newEquipTypeVer = versionManifest.Root.Element("EquipmentTypes").Attribute("version").Value;
+                    string newOperationVer = versionManifest.Root.Element("Operations").Attribute("version").Value;
+                    string newQuestVer = versionManifest.Root.Element("Quests").Attribute("version").Value;
+                    string newExpedVer = versionManifest.Root.Element("Expeditions").Attribute("version").Value;
+                    string newItemVer = versionManifest.Root.Element("Items").Attribute("version").Value;
+                    string newExpeddataVer = versionManifest.Root.Element("ExpeditionData").Attribute("version").Value;
 
-                if (newShipVer != shipsVersion)
-                {
-                    shipsXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "/Ships.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newShipVer != shipsVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.shipsXml = XDocument.Load(responseStream);
-                        shipsXml.Save("Translations\\Ships.xml");
+                        shipsXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "/Ships.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.shipsXml = XDocument.Load(responseStream);
+                            shipsXml.Save("Translations\\Ships.xml");
+                        }
+                        Logger.Add(2, "함선 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newShipVer + ".");
                     }
-                    Logger.Add(2, "함선 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newShipVer + ".");
-                }
-                if (newShipTypeVer != shipTypesVersion)
-                {
-                    shipTypesXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "ShipTypes.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newShipTypeVer != shipTypesVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.shipTypesXml = XDocument.Load(responseStream);
-                        shipTypesXml.Save("Translations\\ShipTypes.xml");
+                        shipTypesXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "ShipTypes.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.shipTypesXml = XDocument.Load(responseStream);
+                            shipTypesXml.Save("Translations\\ShipTypes.xml");
+                        }
+                        Logger.Add(2, "함종 번역이 업데이트 되었습니다. 신규 버전 : " + newShipTypeVer + ".");
                     }
-                    Logger.Add(2, "함종 번역이 업데이트 되었습니다. 신규 버전 : " + newShipTypeVer + ".");
-                }
-                if (newEquipVer != equipmentVersion)
-                {
-                    equipmentXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Equipment.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newEquipVer != equipmentVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.equipmentXml = XDocument.Load(responseStream);
-                        equipmentXml.Save("Translations\\Equipment.xml");
+                        equipmentXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Equipment.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.equipmentXml = XDocument.Load(responseStream);
+                            equipmentXml.Save("Translations\\Equipment.xml");
+                        }
+                        Logger.Add(2, "장비 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipVer + ".");
                     }
-                    Logger.Add(2, "장비 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipVer + ".");
-                }
-                if (newEquipTypeVer != equipTypesVersion)
-                {
-                    equipTypesXML = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "EquipmentTypes.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newEquipTypeVer != equipTypesVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.equipTypesXML = XDocument.Load(responseStream);
-                        equipTypesXML.Save("Translations\\EquipmentTypes.xml");
+                        equipTypesXML = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "EquipmentTypes.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.equipTypesXML = XDocument.Load(responseStream);
+                            equipTypesXML.Save("Translations\\EquipmentTypes.xml");
+                        }
+                        Logger.Add(2, "장비 종류 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipTypeVer + ".");
                     }
-                    Logger.Add(2, "장비 종류 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipTypeVer + ".");
-                }
-                if (newOperationVer != operationsVersion)
-                {
-                    operationsXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Operations.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newOperationVer != operationsVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.operationsXml = XDocument.Load(responseStream);
-                        operationsXml.Save("Translations\\Operations.xml");
+                        operationsXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Operations.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.operationsXml = XDocument.Load(responseStream);
+                            operationsXml.Save("Translations\\Operations.xml");
+                        }
+                        Logger.Add(2, "해역 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newOperationVer + ".");
                     }
-                    Logger.Add(2, "해역 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newOperationVer + ".");
-                }
-                if (newQuestVer != questsVersion)
-                {
-                    questsXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Quests.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newQuestVer != questsVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.questsXml = XDocument.Load(responseStream);
-                        questsXml.Save("Translations\\Quests.xml");
+                        questsXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Quests.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.questsXml = XDocument.Load(responseStream);
+                            questsXml.Save("Translations\\Quests.xml");
+                        }
+                        Logger.Add(2, "임무 번역이 업데이트 되었습니다. 신규 버전 : " + newQuestVer + ".");
                     }
-                    Logger.Add(2, "임무 번역이 업데이트 되었습니다. 신규 버전 : " + newQuestVer + ".");
-                }
-                if (newExpedVer != expeditionsVersion)
-                {
-                    expeditionsXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Expeditions.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newExpedVer != expeditionsVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.expeditionsXml = XDocument.Load(responseStream);
-                        expeditionsXml.Save("Translations\\Expeditions.xml");
+                        expeditionsXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Expeditions.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.expeditionsXml = XDocument.Load(responseStream);
+                            expeditionsXml.Save("Translations\\Expeditions.xml");
+                        }
+                        Logger.Add(2, "원정 번역이 업데이트 되었습니다. 신규 버전 : " + newExpedVer + ".");
                     }
-                    Logger.Add(2, "원정 번역이 업데이트 되었습니다. 신규 버전 : " + newExpedVer + ".");
-                }
 
-                if (newExpeddataVer != expeditionsdataVersion)
-                {
-                    expeditionsdataXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "ExpeditionData.xml");
-                    using (WebResponse resp = r2.GetResponse())
+                    if (newExpeddataVer != expeditionsdataVersion)
                     {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.expeditionsdataXml = XDocument.Load(responseStream);
-                        expeditionsdataXml.Save("Translations\\ExpeditionData.xml");
+                        expeditionsdataXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "ExpeditionData.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.expeditionsdataXml = XDocument.Load(responseStream);
+                            expeditionsdataXml.Save("Translations\\ExpeditionData.xml");
+                        }
+                        Logger.Add(2, "원정 데이터가 업데이트 되었습니다. 신규 버전 : " + newExpeddataVer + ".");
                     }
-                    Logger.Add(2, "원정 데이터가 업데이트 되었습니다. 신규 버전 : " + newExpeddataVer + ".");
-                }
-
-
-                if (newItemVer != ItemsVersion)
-                {
-                    ItemsXml = null;
-                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Items.xml");
-                    using (WebResponse resp = r2.GetResponse())
-                    {
-                        Stream responseStream = resp.GetResponseStream();
-                        this.ItemsXml = XDocument.Load(responseStream);
-                        ItemsXml.Save("Translations\\Items.xml");
-                    }
-                    Logger.Add(2, "아이템 번역이 업데이트 되었습니다. 신규 버전 : " + newItemVer + ".");
-                }
 
 
-                GetVersions();
+                    if (newItemVer != ItemsVersion)
+                    {
+                        ItemsXml = null;
+                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Items.xml");
+                        using (WebResponse resp = r2.GetResponse())
+                        {
+                            Stream responseStream = resp.GetResponseStream();
+                            this.ItemsXml = XDocument.Load(responseStream);
+                            ItemsXml.Save("Translations\\Items.xml");
+                        }
+                        Logger.Add(2, "아이템 번역이 업데이트 되었습니다. 신규 버전 : " + newItemVer + ".");
+                    }
+
+
+                    GetVersions();
+                }
+            }
+            catch
+            {
+                Logger.Add(2, "해당 버전은 번역 업데이트가 중단된 버전입니다.");
             }
         }
 
@@ -376,13 +383,13 @@ namespace ElectronicObserver.Utility
                 }
                 else
                 {
-                    
+                    /*
                     if(type == TranslationType.QuestTitle)
                         ErrorReporter.SendErrorReport(new Exception(), jpString);
                     else if(type == TranslationType.QuestDetail)
                         ErrorReporter.SendErrorReport(new Exception(), jpString);
                        
-                    //Utility.Logger.Add(3, id + ":::" + jpChildElement + "/" + jpString + ":" + jpString.Equals(jpString));
+                    Utility.Logger.Add(3, id + ":::" + jpChildElement + "/" + jpString + ":" + jpString.Equals(jpString));*/
                 }
             }
             catch (Exception e)
@@ -399,10 +406,16 @@ namespace ElectronicObserver.Utility
             {
                 try
                 {
-
-
-
-                    if (el.Element(jpChildElement).Value.Equals(jpString)) return true;
+                    if (id >= 0)
+                    {
+                        if (el.Element(jpChildElement).Value.Equals(jpString) || Convert.ToInt32(el.Element("ID").Value) == id)
+                            return true;
+                    }
+                    else
+                    {
+                        if (el.Element(jpChildElement).Value.Equals(jpString))
+                            return true;
+                    }
 
                     if (el.Attribute("mode") != null)
                     {
@@ -411,7 +424,10 @@ namespace ElectronicObserver.Utility
                             int sl = el.Element(jpChildElement).Value.Length;
                             if (jpString.Length > sl)
                             {
-                                if (el.Element(jpChildElement).Value.Equals(jpString.Substring(jpString.Length - sl))) return true;
+                                if (el.Element(jpChildElement).Value.Equals(jpString.Substring(jpString.Length - sl)))
+                                {
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -420,10 +436,10 @@ namespace ElectronicObserver.Utility
                 {
                     return false;
                 }
+
                 return false;
             }
             );
-
             bool foundWrongID = false;
             int n;
             foreach (XElement el in foundTranslation)
@@ -444,7 +460,6 @@ namespace ElectronicObserver.Utility
                         }
                         catch (NullReferenceException)
                         {
-
                         }
                     }
                     continue;
@@ -461,12 +476,8 @@ namespace ElectronicObserver.Utility
                         }
                         else
                         {
-                            if (id >= 0 && el.Element("ID") != null && Convert.ToInt32(el.Element("ID").Value) == id)
-                            {
-                                translate = el.Element(trChildElement).Value;
-
-                                return true;
-                            }
+                            translate = el.Element(trChildElement).Value;
+                            return true;
                         }
                     }
                     else
@@ -477,7 +488,6 @@ namespace ElectronicObserver.Utility
                 }
                 catch (NullReferenceException)
                 {
-
                 }
             }
 
@@ -485,10 +495,11 @@ namespace ElectronicObserver.Utility
             {
                 return true;
             }
+
             return false;
         }
-
     }
+
 
     public enum TranslationType
     {

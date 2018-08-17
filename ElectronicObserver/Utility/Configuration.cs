@@ -1018,12 +1018,14 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public int MaxShipNameWidth { get; set; }
 
+                public bool ToAlphabet { get; set; }
 
 				public ConfigFormCompass()
 				{
 					CandidateDisplayCount = 4;
 					IsScrollable = false;
 					MaxShipNameWidth = 60;
+                    ToAlphabet = false;
 				}
 			}
 			/// <summary>[羅針盤]ウィンドウ</summary>

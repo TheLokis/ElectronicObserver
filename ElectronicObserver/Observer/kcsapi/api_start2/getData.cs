@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectronicObserver.Observer.kcsapi
+namespace ElectronicObserver.Observer.kcsapi.api_start2
 {
-    [Obsolete]
-	public class api_start2_old : APIBase
+
+	public class getData : APIBase
 	{
 
 
@@ -224,7 +224,7 @@ namespace ElectronicObserver.Observer.kcsapi
 			base.OnResponseReceived((object)data);
 		}
 
-		public override string APIName => "api_start2";
+		public override string APIName => "api_start2/getData";
 	}
 
 

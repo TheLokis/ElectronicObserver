@@ -25,9 +25,17 @@ namespace ElectronicObserver.Data
 		public int MapInfoID => (int)RawData.api_mapinfo_no;
 
 		/// <summary>
-		/// 次に向かうセルのID
+		/// 次に向かうセルのID 노드
 		/// </summary>
 		public int Destination => (int)RawData.api_no;
+
+        public string Destination_Name
+        {
+            get
+            {
+                return NodeData.GetNodeName(MapAreaID, MapInfoID, Destination);
+            }
+        }
 
 		/// <summary>
 		/// 次のセルのグラフィック
