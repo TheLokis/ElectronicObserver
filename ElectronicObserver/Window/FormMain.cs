@@ -94,7 +94,6 @@ namespace ElectronicObserver.Window
             Utility.Configuration.Instance.Load(this);
 
             ThemeBase thm;
-
             switch (Configuration.Config.UI.Theme)
             {
                 case Theme.Light:
@@ -109,6 +108,8 @@ namespace ElectronicObserver.Window
             }
 
             this.MainDockPanel.Theme = thm;
+            thm.Apply(MainDockPanel);
+
             this.Text = SoftwareInformation.SoftwareNameKorean;
 		}
 
@@ -218,6 +219,8 @@ namespace ElectronicObserver.Window
 
 			ConfigurationChanged();     //設定から初期化
 
+
+
 			LoadLayout(Configuration.Config.Life.LayoutFilePath);
 
 
@@ -261,7 +264,7 @@ namespace ElectronicObserver.Window
 
             Utility.Logger.Add(3, "기동이 완료되었습니다.");
 
-		}
+        }
 
 
 		private void FormMain_Shown(object sender, EventArgs e)
@@ -309,10 +312,10 @@ namespace ElectronicObserver.Window
 			//StripMenu.Font = Font;
 			StripStatus.Font = Font;
 			MainDockPanel.Skin.AutoHideStripSkin.TextFont = Font;
-			MainDockPanel.Skin.DockPaneStripSkin.TextFont = Font;
 
+            MainDockPanel.Skin.DockPaneStripSkin.TextFont = Font;
 
-			if (c.Life.LockLayout)
+            if (c.Life.LockLayout)
 			{
 				MainDockPanel.AllowChangeLayout = false;
 				FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -800,8 +803,10 @@ namespace ElectronicObserver.Window
 				ofd.Title = "API리스트를 로드";
 				ofd.Filter = "API List|*.txt|File|*";
 				ofd.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
+                if (!string.IsNullOrWhiteSpace(Utility.Configuration.Config.Debug.APIListPath))
+                    ofd.FileName = Utility.Configuration.Config.Debug.APIListPath;
 
-				if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 				{
 
 					try

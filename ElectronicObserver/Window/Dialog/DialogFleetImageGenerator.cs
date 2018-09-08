@@ -101,10 +101,10 @@ namespace ElectronicObserver.Window.Dialog
 			OutputPath.Text = config.LastOutputPath;
 			try
 			{
-				SaveImageDialog.FileName = System.IO.Path.GetFileName(config.LastOutputPath);
-				SaveImageDialog.InitialDirectory = string.IsNullOrWhiteSpace(config.LastOutputPath) ? "" : System.IO.Path.GetDirectoryName(config.LastOutputPath);
-			}
-			catch (Exception)
+                SaveImageDialog.FileName = Path.GetFileName(config.LastOutputPath);
+                SaveImageDialog.InitialDirectory = string.IsNullOrWhiteSpace(config.LastOutputPath) ? "" : Path.GetDirectoryName(config.LastOutputPath);
+            }
+            catch (Exception)
 			{
 			}
 
@@ -204,7 +204,23 @@ namespace ElectronicObserver.Window.Dialog
 			return ret;
 		}
 
-		private int[] ToFleetIDs()
+        private int ImageType
+        {
+            get
+            {
+                if (ImageTypeCard.Checked)
+                    return 0;
+                if (ImageTypeCutin.Checked)
+                    return 1;
+                if (ImageTypeBanner.Checked)
+                    return 2;
+                if (ImageTypeBaseAirCorps.Checked)
+                    return 3;
+                return 0;
+            }
+        }
+
+        private int[] ToFleetIDs()
 		{
 			return new[]{
 				TargetFleet1.Checked ? 1 : 0,
@@ -258,8 +274,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void SelectGeneralFont_Click(object sender, EventArgs e)
 		{
 			fontDialog1.Font = GeneralFont;
-			if (fontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
 				GeneralFont = fontDialog1.Font;
 				TextGeneralFont.Text = SerializableFont.FontToString(GeneralFont, true);
 			}
@@ -268,7 +284,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void SelectFont_Click(object sender, EventArgs e, int index)
 		{
 			fontDialog1.Font = SerializableFont.StringToFont(TextFontList[index].Text, true);
-			if (fontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (fontDialog1.ShowDialog() == DialogResult.OK)
 			{
 				TextFontList[index].Text = SerializableFont.FontToString(fontDialog1.Font, true);
 			}
@@ -278,7 +294,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void SearchBackgroundImagePath_Click(object sender, EventArgs e)
 		{
 			OpenImageDialog.FileName = BackgroundImagePath.Text;
-			if (OpenImageDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (OpenImageDialog.ShowDialog() ==DialogResult.OK)
 			{
 				BackgroundImagePath.Text = OpenImageDialog.FileName;
 			}
@@ -347,18 +363,9 @@ namespace ElectronicObserver.Window.Dialog
 				}
 			}
 
-			int mode;
-			if (ImageTypeCard.Checked)
-				mode = 0;
-			else if (ImageTypeCutin.Checked)
-				mode = 1;
-			else if (ImageTypeBanner.Checked)
-				mode = 2;
-			else
-				mode = 3;
+            int mode = ImageType;
 
-
-			try
+            try
 			{
 
 				if (!OutputToClipboard.Checked)
@@ -481,39 +488,58 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (ImageTypeCard.Checked)
 				HorizontalShipCount.Value = 2;
-		}
+
+            UpdateButtonAlert();
+        }
 
 		private void ImageTypeCutin_CheckedChanged(object sender, EventArgs e)
 		{
 			if (ImageTypeCutin.Checked)
 				HorizontalShipCount.Value = 1;
-		}
+
+            UpdateButtonAlert();
+        }
 
 		private void ImageTypeBanner_CheckedChanged(object sender, EventArgs e)
 		{
 			if (ImageTypeBanner.Checked)
 				HorizontalShipCount.Value = 2;
-		}
 
+            UpdateButtonAlert();
+        }
 
+        private bool HasShipImage()
+        {
+            switch (ImageType)
+            {
+                case 0:
+                    return FleetImageGenerator.HasShipImageCard(ToFleetIDs(), ReflectDamageGraphic.Checked);
+                case 1:
+                    return FleetImageGenerator.HasShipImageCutin(ToFleetIDs(), ReflectDamageGraphic.Checked);
+                case 2:
+                    return FleetImageGenerator.HasShipImageBanner(ToFleetIDs(), ReflectDamageGraphic.Checked);
+                default:
+                    return true;
+            }
+        }
 
-		private void UpdateButtonAlert()
+        private void UpdateButtonAlert()
 		{
 
 			bool visibility = false;
 
-			if (!Utility.Configuration.Config.Connection.SaveReceivedData || !Utility.Configuration.Config.Connection.SaveSWF)
-			{
+            if (!Utility.Configuration.Config.Connection.SaveReceivedData || !Utility.Configuration.Config.Connection.SaveOtherFile)
+            {
 
-				visibility = true;
+                visibility = true;
 				ButtonAlert.Text = "함선 이미지 저장 설정이 잘못되었습니다.(상세보기...)";
 
 			}
 
-			if (!FleetImageGenerator.HasShipSwfImage(ToFleetIDs()))
-			{
+            if (!HasShipImage())
+            {
 
-				visibility = true;
+                visibility = true;
 				ButtonAlert.Text = "함선 이미지가 충분하지 않습니다.(상세보기...)";
 
 			}
@@ -525,34 +551,52 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void ButtonAlert_Click(object sender, EventArgs e)
 		{
+            var config = Utility.Configuration.Config.Connection;
 
-			if (!Utility.Configuration.Config.Connection.SaveReceivedData || !Utility.Configuration.Config.Connection.SaveSWF)
-			{
+            if (!config.SaveReceivedData || !config.SaveOtherFile)
+            {
 
-				if (MessageBox.Show("편성 이미지를 출력하기 위해서는 함선 이미지 저장 설정을 활성화해야합니다.\r\n활성화 하시겠습니까?",
+                if (MessageBox.Show("편성 이미지를 출력하기 위해서는 함선 이미지 저장 설정을 활성화해야합니다.\r\n활성화 하시겠습니까?",
 					"함선 이미지 저장 설정이 잘못되었습니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 					== System.Windows.Forms.DialogResult.Yes)
 				{
 
-					if (!Utility.Configuration.Config.Connection.SaveReceivedData)
-					{
-						Utility.Configuration.Config.Connection.SaveReceivedData = true;
-						Utility.Configuration.Config.Connection.SaveResponse = false;       // もともと不要にしていたユーザーには res は邪魔なだけだと思うので
-					}
-					Utility.Configuration.Config.Connection.SaveSWF = true;
+                    if (!config.SaveReceivedData)
+                    {
+                        config.SaveReceivedData = true;
+                        config.SaveResponse = false;            // もともと不要にしていたユーザーには res は邪魔なだけだと思うので
+                    }
 
-					UpdateButtonAlert();
+                    config.SaveOtherFile = true;
+
+                    UpdateButtonAlert();
 				}
 
 			}
 
-			if (!FleetImageGenerator.HasShipSwfImage(ToFleetIDs()))
-			{
+            if (!HasShipImage())
+            {
+                string needs;
+                switch (ImageType)
+                {
+                    case 0:
+                        needs = "칸코레 편성 화면에서 각 함선의 정보를 열면";
+                        break;
+                    case 1:
+                        needs = "이 편성으로 전투를 시작하면";
+                        break;
+                    case 2:
+                        needs = "칸코레 편성 화면을 열면";
+                        break;
+                    default:
+                        needs = "칸코레에서 필요한 이미지가 표시될 때";
+                        break;
+                }
 
-				MessageBox.Show("현재의 함대의 함선 이미지 데이터가 부족합니다\r\n\r\n캐시를 삭제한 후 다시 로드하시기 바랍니다.\r\n칸코레 게임에서 출력 하고 싶은 함대의 편성화면을 열때\r\n함선 이미지 데이터가 저장됩니다.",
+                MessageBox.Show("현재의 함대의 함선 이미지 데이터가 부족합니다\r\n\r\n캐시를 삭제한 후 다시 로드하시기 바랍니다.\r\n" + needs + "\r\n함선 이미지 데이터가 저장됩니다.",
 					"함선 이미지 데이터 부족", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-				UpdateButtonAlert();
+                UpdateButtonAlert();
 			}
 
 		}

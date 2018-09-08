@@ -103,17 +103,6 @@ namespace ElectronicObserver.Observer.kcsapi.api_start2
 				}
 			}
 
-			//api_mst_slotitemgraph
-			/*
-			foreach ( var elem in data.api_mst_slotitemgraph ) {
-
-				int id = (int)elem.api_id;
-				EquipmentDataMaster eq = db.MasterEquipments[id];
-				if ( eq != null ) {
-					eq.ResourceVersion = elem.api_version;
-				}
-			}
-			*/
 
 			//api_mst_useitem
 			foreach (var elem in data.api_mst_useitem)
@@ -218,8 +207,34 @@ namespace ElectronicObserver.Observer.kcsapi.api_start2
 				}
 			}
 
+            foreach (var elem in data.api_mst_equip_ship)
+            {
+                int id = (int)elem.api_ship_id;
+                db.MasterShips[id].specialEquippableCategory = (int[])elem.api_equip_type;
+            }
+            foreach (var elem in data.api_mst_equip_exslot_ship)
+            {
+                int id = (int)elem.api_slotitem_id;
+                db.MasterEquipments[id].equippableShipsAtExpansion = (int[])elem.api_ship_ids;
+            }
+            //api_mst_shipgraph
+            foreach (var elem in data.api_mst_shipgraph)
+            {
+                int id = (int)elem.api_id;
+                if (db.ShipGraphics[id] == null)
+                {
+                    var sgd = new ShipGraphicData();
+                    sgd.LoadFromResponse(APIName, elem);
+                    db.ShipGraphics.Add(sgd);
+                }
+                else
+                {
+                    db.ShipGraphics[id].LoadFromResponse(APIName, elem);
+                }
+            }
 
-			Utility.Logger.Add(2, "제독이 진수부에 착임했습니다. 지금 부터 함대의 지휘를 맡습니다.");
+
+            Utility.Logger.Add(2, "제독이 진수부에 착임했습니다. 지금 부터 함대의 지휘를 맡습니다.");
 
 			base.OnResponseReceived((object)data);
 		}

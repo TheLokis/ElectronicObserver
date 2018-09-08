@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ElectronicObserver</RootNamespace>
     <AssemblyName>ElectronicObserver</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -26,6 +26,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -183,6 +184,7 @@
     <Compile Include="Data\RelocationData.cs" />
     <Compile Include="Data\ResponseWrapper.cs" />
     <Compile Include="Data\CompassData.cs" />
+    <Compile Include="Data\ShipGraphicData.cs" />
     <Compile Include="Data\ShipGroupData.cs" />
     <Compile Include="Data\ShipGroupManager.cs" />
     <Compile Include="Data\ShipGroup\ExpressionData.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="Observer\kcsapi\api_req_sortie\night_to_day.cs" />
     <Compile Include="Observer\kcsapi\api_start2\getData.cs" />
     <Compile Include="Resource\Record\ResourceRecord.cs" />
+    <Compile Include="Resource\KCResourceHelper.cs" />
     <Compile Include="Resource\SwfHelper.cs" />
     <Compile Include="Utility\Data\RecordHash.cs" />
     <Compile Include="Utility\DynamicTranslator.cs" />
@@ -823,6 +826,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Window\FormQuest.resx">
       <DependentUpon>FormQuest.cs</DependentUpon>

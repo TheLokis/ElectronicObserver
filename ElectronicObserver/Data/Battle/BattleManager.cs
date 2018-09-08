@@ -355,7 +355,7 @@ namespace ElectronicObserver.Data.Battle
 			{
 				Utility.Logger.Add(2,
 					string.Format("{0}-{1}-{2} 에서「{3}」와 교전했습니다. ( 랭크: {4}, 제독경험치+{5}, 함선경험치+{6} )",
-						Compass.MapAreaID, Compass.MapInfoID, Compass.Destination, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
+						Compass.MapAreaID, Compass.MapInfoID, Compass.Destination_Name, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
 			}
 
 

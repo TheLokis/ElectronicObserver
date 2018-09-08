@@ -337,7 +337,6 @@ namespace ElectronicObserver.Window.Dialog
 			Connection_SaveDataPath.Text = config.Connection.SaveDataPath;
 			Connection_SaveRequest.Checked = config.Connection.SaveRequest;
 			Connection_SaveResponse.Checked = config.Connection.SaveResponse;
-			Connection_SaveSWF.Checked = config.Connection.SaveSWF;
 			Connection_SaveOtherFile.Checked = config.Connection.SaveOtherFile;
 			Connection_ApplyVersion.Checked = config.Connection.ApplyVersion;
 			Connection_RegisterAsSystemProxy.Checked = config.Connection.RegisterAsSystemProxy;
@@ -471,8 +470,8 @@ namespace ElectronicObserver.Window.Dialog
 			FormBattle_Display7thAsSingleLine.Checked = config.FormBattle.Display7thAsSingleLine;
 
 			FormBrowser_IsEnabled.Checked = config.FormBrowser.IsEnabled;
-			FormBrowser_ZoomRate.Value = config.FormBrowser.ZoomRate;
-			FormBrowser_ZoomFit.Checked = config.FormBrowser.ZoomFit;
+            FormBrowser_ZoomRate.Value = (decimal)Math.Min(Math.Max(config.FormBrowser.ZoomRate * 100, 10), 1000);
+            FormBrowser_ZoomFit.Checked = config.FormBrowser.ZoomFit;
 			FormBrowser_LogInPageURL.Text = config.FormBrowser.LogInPageURL;
 			FormBrowser_ScreenShotFormat_JPEG.Checked = config.FormBrowser.ScreenShotFormat == 1;
 			FormBrowser_ScreenShotFormat_PNG.Checked = config.FormBrowser.ScreenShotFormat == 2;
@@ -482,37 +481,11 @@ namespace ElectronicObserver.Window.Dialog
 			FormBrowser_IsDMMreloadDialogDestroyable.Checked = config.FormBrowser.IsDMMreloadDialogDestroyable;
 			FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Checked = config.FormBrowser.AvoidTwitterDeterioration;
 			FormBrowser_ScreenShotSaveMode.SelectedIndex = config.FormBrowser.ScreenShotSaveMode - 1;
+            FormBrowser_HardwareAccelerationEnabled.Checked = config.FormBrowser.HardwareAccelerationEnabled;
+            FormBrowser_PreserveDrawingBuffer.Checked = config.FormBrowser.PreserveDrawingBuffer;
+            FormBrowser_ForceColorProfile.Checked = config.FormBrowser.ForceColorProfile;
 
-			try
-			{
-				using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathBrowserVersion))
-				{
-					FormBrowser_BrowserVersion.Text = (reg?.GetValue(FormBrowserHost.BrowserExeName) ?? DefaultBrowserVersion).ToString();
-				}
-			}
-			catch (Exception ex)
-			{
-				FormBrowser_BrowserVersion.Text = DefaultBrowserVersion.ToString();
-				Utility.Logger.Add(3, "설정 : 레지스트리 로드에 실패했습니다. : BrowserVersion, " + ex.Message);
-			}
-
-			try
-			{
-				using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathGPURendering))
-				{
-					var gpu = reg?.GetValue(FormBrowserHost.BrowserExeName) as int?;
-					FormBrowser_GPURendering.Checked = gpu != null ? gpu != 0 : DefaultGPURendering;
-				}
-			}
-			catch (Exception ex)
-			{
-				FormBrowser_GPURendering.Checked = DefaultGPURendering;
-				Utility.Logger.Add(3, "설정 : 레지스트리 로드에 실패했습니다. : GPURendering, " + ex.Message);
-			}
-
-			FormBrowser_FlashQuality.Text = config.FormBrowser.FlashQuality;
-			FormBrowser_FlashWMode.Text = config.FormBrowser.FlashWMode;
-			if (!config.FormBrowser.IsToolMenuVisible)
+            if (!config.FormBrowser.IsToolMenuVisible)
 				FormBrowser_ToolMenuDockStyle.SelectedIndex = 4;
 			else
 				FormBrowser_ToolMenuDockStyle.SelectedIndex = (int)config.FormBrowser.ToolMenuDockStyle - 1;
@@ -565,7 +538,6 @@ namespace ElectronicObserver.Window.Dialog
 				config.Connection.SaveDataPath = Connection_SaveDataPath.Text.Trim(@"\ """.ToCharArray());
 				config.Connection.SaveRequest = Connection_SaveRequest.Checked;
 				config.Connection.SaveResponse = Connection_SaveResponse.Checked;
-				config.Connection.SaveSWF = Connection_SaveSWF.Checked;
 				config.Connection.SaveOtherFile = Connection_SaveOtherFile.Checked;
 				config.Connection.ApplyVersion = Connection_ApplyVersion.Checked;
 
@@ -723,8 +695,8 @@ namespace ElectronicObserver.Window.Dialog
 			config.FormBattle.Display7thAsSingleLine = FormBattle_Display7thAsSingleLine.Checked;
 
 			config.FormBrowser.IsEnabled = FormBrowser_IsEnabled.Checked;
-			config.FormBrowser.ZoomRate = (int)FormBrowser_ZoomRate.Value;
-			config.FormBrowser.ZoomFit = FormBrowser_ZoomFit.Checked;
+            config.FormBrowser.ZoomRate = (double)FormBrowser_ZoomRate.Value / 100;
+            config.FormBrowser.ZoomFit = FormBrowser_ZoomFit.Checked;
 			config.FormBrowser.LogInPageURL = FormBrowser_LogInPageURL.Text;
 			if (FormBrowser_ScreenShotFormat_JPEG.Checked)
 				config.FormBrowser.ScreenShotFormat = 1;
@@ -734,10 +706,11 @@ namespace ElectronicObserver.Window.Dialog
 			config.FormBrowser.ConfirmAtRefresh = FormBrowser_ConfirmAtRefresh.Checked;
 			config.FormBrowser.AppliesStyleSheet = FormBrowser_AppliesStyleSheet.Checked;
 			config.FormBrowser.IsDMMreloadDialogDestroyable = FormBrowser_IsDMMreloadDialogDestroyable.Checked;
-			config.FormBrowser.AvoidTwitterDeterioration = FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Checked;
-			config.FormBrowser.FlashQuality = FormBrowser_FlashQuality.Text;
-			config.FormBrowser.FlashWMode = FormBrowser_FlashWMode.Text;
-			if (FormBrowser_ToolMenuDockStyle.SelectedIndex == 4)
+            config.FormBrowser.HardwareAccelerationEnabled = FormBrowser_HardwareAccelerationEnabled.Checked;
+            config.FormBrowser.AvoidTwitterDeterioration = FormBrowser_ScreenShotFormat_AvoidTwitterDeterioration.Checked;
+            config.FormBrowser.PreserveDrawingBuffer = FormBrowser_PreserveDrawingBuffer.Checked;
+            config.FormBrowser.ForceColorProfile = FormBrowser_ForceColorProfile.Checked;
+            if (FormBrowser_ToolMenuDockStyle.SelectedIndex == 4)
 			{
 				config.FormBrowser.IsToolMenuVisible = false;
 			}
@@ -795,60 +768,6 @@ namespace ElectronicObserver.Window.Dialog
 
 			BGMPlayer_VolumeAll.Value = (int)BGMHandles.Values.Average(h => h.Volume);
 		}
-
-
-		private void FormBrowser_ApplyRegistry_Click(object sender, EventArgs e)
-		{
-
-			if (MessageBox.Show("레지스트리를 등록합니다.\r\n＊완전히 적용하려면 프로그램의 재시작이 필요합니다.", "확인",
-				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-				== System.Windows.Forms.DialogResult.Yes)
-			{
-				try
-				{
-					using (var reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(RegistryPathMaster + RegistryPathBrowserVersion))
-						reg.SetValue(FormBrowserHost.BrowserExeName, int.Parse(FormBrowser_BrowserVersion.Text), Microsoft.Win32.RegistryValueKind.DWord);
-
-					using (var reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(RegistryPathMaster + RegistryPathGPURendering))
-						reg.SetValue(FormBrowserHost.BrowserExeName, FormBrowser_GPURendering.Checked ? 1 : 0, Microsoft.Win32.RegistryValueKind.DWord);
-
-				}
-				catch (Exception ex)
-				{
-					Utility.ErrorReporter.SendErrorReport(ex, "설정 : 레지스트리 쓰기에 실패했습니다.");
-					MessageBox.Show("레지스트리 쓰기에 실패했습니다. \r\n" + ex.Message, "에러",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-				}
-			}
-
-		}
-
-		private void FormBrowser_DeleteRegistry_Click(object sender, EventArgs e)
-		{
-
-			if (MessageBox.Show("레지스트리를 삭제합니다. \r\n＊완전히 적용하려면 프로그램의 재시작이 필요합니다.", "확인",
-				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-				== System.Windows.Forms.DialogResult.Yes)
-			{
-				try
-				{
-					using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathBrowserVersion, true))
-						reg.DeleteValue(FormBrowserHost.BrowserExeName);
-
-					using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathGPURendering, true))
-						reg.DeleteValue(FormBrowserHost.BrowserExeName);
-
-				}
-				catch (Exception ex)
-				{
-					Utility.ErrorReporter.SendErrorReport(ex, "설정 : 레지스트리 삭제에 실패했습니다.");
-					MessageBox.Show("레지스트리 삭제에 실패했습니다.\r\n" + ex.Message, "에러",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-		}
-
 
 		private void Database_LinkKCDB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{

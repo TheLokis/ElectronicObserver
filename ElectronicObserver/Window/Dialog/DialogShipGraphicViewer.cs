@@ -1,8 +1,7 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Resource;
+using ElectronicObserver.Resource.Record;
 using ElectronicObserver.Window.Support;
-using SwfExtractor;
-using SwfExtractor.Tags;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,9 +20,8 @@ namespace ElectronicObserver.Window.Dialog
 	public partial class DialogShipGraphicViewer : Form
 	{
 
-		Dictionary<string, SwfParser> Parsers;
-		List<ImageTag> ImageTags;
-		int CurrentIndex;
+        List<string> ImagePathList;
+        int CurrentIndex;
 		Bitmap CurrentImage;
 
 		Point ImageOffset = new Point();
@@ -38,19 +36,18 @@ namespace ElectronicObserver.Window.Dialog
 		private DialogShipGraphicViewer()
 		{
 			InitializeComponent();
-			Parsers = new Dictionary<string, SwfParser>();
-			ImageTags = new List<ImageTag>();
+            ImagePathList = new List<string>();
 
-			MouseWheel += DialogShipGraphicViewer_MouseWheel;
+            MouseWheel += DialogShipGraphicViewer_MouseWheel;
 
 			SetStyle(ControlStyles.ResizeRedraw, true);
 			ControlHelper.SetDoubleBuffered(DrawingPanel);
 
-			OpenSwfDialog.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath + @"\resources\swf\ships";
+            OpenSwfDialog.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath + @"kcs2\resources\ship";
 
 
-			// 背景画像生成
-			var back = new Bitmap(16, 16, PixelFormat.Format24bppRgb);
+            // 背景画像生成
+            var back = new Bitmap(16, 16, PixelFormat.Format24bppRgb);
 			using (var g = Graphics.FromImage(back))
 			{
 				g.Clear(Color.White);
@@ -65,17 +62,23 @@ namespace ElectronicObserver.Window.Dialog
 			: this()
 		{
 
-			OpenSwf(path);
-		}
+            Open(path);
+        }
 
 		public DialogShipGraphicViewer(string[] pathlist)
 			: this()
 		{
-			OpenSwf(pathlist);
-		}
+            Open(pathlist);
+        }
+
+        public DialogShipGraphicViewer(int shipID)
+    : this()
+        {
+            Open(shipID);
+        }
 
 
-		private void DialogShipGraphicViewer_Load(object sender, EventArgs e)
+        private void DialogShipGraphicViewer_Load(object sender, EventArgs e)
 		{
 
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip]);
@@ -98,8 +101,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogShipGraphicViewer_KeyDown(object sender, KeyEventArgs e)
 		{
 
-			if (ImageTags.Count == 0)
-				return;
+            if (ImagePathList.Count == 0)
+                return;
 
 			bool fileChanged = false;
 
@@ -134,15 +137,23 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (fileChanged)
 			{
-				CurrentIndex %= ImageTags.Count;
-				if (CurrentIndex < 0)
-					CurrentIndex += ImageTags.Count;
+				CurrentIndex %= ImagePathList.Count;
+                if (CurrentIndex < 0)
+					CurrentIndex += CurrentIndex += ImagePathList.Count;
 
-				if (CurrentImage != null)
-					CurrentImage.Dispose();
-				CurrentImage = ImageTags[CurrentIndex].ExtractImage();
+                try
+                {
+                    CurrentImage?.Dispose();
+                    CurrentImage = null;
+                    using (var stream = new FileStream(ImagePathList[CurrentIndex], FileMode.Open, FileAccess.Read))
+                        CurrentImage = new Bitmap(stream);
+                }
+                catch (Exception ex)
+                {
+                    Utility.Logger.Add(3, $"이미지 뷰어：이미지 로드에 에러가 발생했습니다. {ex.Message}");
+                }
 
-				ImageOffset = new Point();
+                ImageOffset = new Point();
 				ZoomRate = 1;
 			}
 
@@ -229,56 +240,47 @@ namespace ElectronicObserver.Window.Dialog
 			ZoomRate = Math.Min(Math.Max(ZoomRate, 0.1), 16);
 		}
 
-		#endregion
+        #endregion
 
 
-		#region File Control
+        #region File Control
 
-		private void OpenSwf(string path)
-		{
-			OpenSwf(new string[] { path });
-		}
+        private void Open(string path)
+        {
+            Open(new string[] { path });
+        }
 
-		private void OpenSwf(string[] pathlist)
-		{       //undone: null check at args
+        private void Open(string[] pathlist)
+        {       //undone: null check at args
 			try
 			{
-				Parsers.Clear();
 				for (int i = 0; i < pathlist.Length; i++)
 				{
-					if (File.Exists(pathlist[i]))
-					{
-						Parsers.Add(pathlist[i], new SwfParser());
-						Parsers[pathlist[i]].Parse(pathlist[i]);
-					}
+                    ImagePathList = pathlist.Where(p => File.Exists(p)).ToList();
 
-				}
+                }
 
-				ImageTags = Parsers.Values.SelectMany(p => p.FindTags<ImageTag>()).ToList();
 
-				if (ImageTags.Count == 0)
-				{
-					throw new InvalidOperationException("파일에서 이미지를 찾을 수 없습니다.");
-				}
+                if (ImagePathList.Count == 0)
+                {
+                    MessageBox.Show("이미지를 찾을 수 없습니다.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
 
-				CurrentIndex = 0;
-				if (CurrentImage != null)
-					CurrentImage.Dispose();
-				CurrentImage = ImageTags[CurrentIndex].ExtractImage();
+                CurrentIndex = 0;
+                CurrentImage?.Dispose();
+                CurrentImage = null;
+                using (var stream = new FileStream(ImagePathList[CurrentIndex], FileMode.Open, FileAccess.Read))
+                    CurrentImage = new Bitmap(stream);
 
-			}
+            }
 			catch (Exception ex)
 			{
 				MessageBox.Show(string.Join("\r\n", pathlist) + "를 열 수 없습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
-				Parsers.Clear();
-				ImageTags.Clear();
-				if (CurrentImage != null)
-				{
-					CurrentImage.Dispose();
-					CurrentImage = null;
-				}
+                ImagePathList.Clear();
+                CurrentImage?.Dispose();
+                CurrentImage = null;
 
-			}
+            }
 			finally
 			{
 				RefreshImage();
@@ -286,83 +288,61 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
+        private void Open(int shipID)
+        {
+            var ship = KCDatabase.Instance.MasterShips[shipID];
 
-		private void TopMenu_File_Open_Click(object sender, EventArgs e)
-		{
-			if (OpenSwfDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				OpenSwf(OpenSwfDialog.FileNames);
-			}
-		}
+            if (ship == null)
+                return;
 
-		private void TopMenu_File_SaveImage_Click(object sender, EventArgs e)
-		{
-			if (CurrentImage == null)
-			{
-				System.Media.SystemSounds.Exclamation.Play();
-				return;
-			}
+            var list = new LinkedList<string>();
 
-			if (SaveImageDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-				try
-				{
+            void Add(int id, bool isDamaged, string resourceType)
+            {
+                if (resourceType == KCResourceHelper.ResourceTypeShipName && isDamaged)
+                    return;
 
-					CurrentImage.Save(SaveImageDialog.FileName, ImageFormat.Png);
+                var path = KCResourceHelper.GetShipImagePath(id, isDamaged, resourceType);
+                if (path != null)
+                    list.AddLast(path);
+            }
+            void AddShip(int id)
+            {
+                Add(id, false, KCResourceHelper.ResourceTypeShipBanner);
+                Add(id, true, KCResourceHelper.ResourceTypeShipBanner);
+                Add(id, false, KCResourceHelper.ResourceTypeShipCard);
+                Add(id, true, KCResourceHelper.ResourceTypeShipCard);
+                Add(id, false, KCResourceHelper.ResourceTypeShipAlbumZoom);
+                Add(id, true, KCResourceHelper.ResourceTypeShipAlbumZoom);
+                Add(id, false, KCResourceHelper.ResourceTypeShipAlbumFull);
+                Add(id, true, KCResourceHelper.ResourceTypeShipAlbumFull);
+                Add(id, false, KCResourceHelper.ResourceTypeShipFull);
+                Add(id, true, KCResourceHelper.ResourceTypeShipFull);
+                Add(id, false, KCResourceHelper.ResourceTypeShipCutin);
+                Add(id, true, KCResourceHelper.ResourceTypeShipCutin);
+                Add(id, false, KCResourceHelper.ResourceTypeShipName);
+                Add(id, false, KCResourceHelper.ResourceTypeShipSupply);
+                Add(id, true, KCResourceHelper.ResourceTypeShipSupply);
+            }
 
-				}
-				catch (Exception ex)
-				{
+            AddShip(shipID);
+            foreach (var rec in RecordManager.Instance.ShipParameter.Record.Values.Where(r => r.OriginalCostumeShipID == shipID))
+                AddShip(rec.ShipID);
 
-					MessageBox.Show(SaveImageDialog.FileName + "\r\n의 저장에 실패했습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
+            Open(list.ToArray());
+        }
 
-				}
-			}
-		}
-
-		private void TopMenu_File_SaveAllImage_Click(object sender, EventArgs e)
-		{
-
-			if (!ImageTags.Any())
-			{
-				System.Media.SystemSounds.Exclamation.Play();
-				return;
-			}
-
-			if (SaveFolderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			{
-
-				try
-				{
-					foreach (var parser in Parsers)
-					{
-
-						string dirname = Path.GetFileNameWithoutExtension(parser.Key);
-
-						foreach (var tag in parser.Value.FindTags<ImageTag>())
-						{
-							using (var img = tag.ExtractImage())
-							{
-
-								img.Save(SaveFolderDialog.SelectedPath.TrimEnd('\\') + "\\" + dirname + "_" + tag.CharacterID + ".png", ImageFormat.Png);
-
-							}
-						}
-					}
-
-				}
-				catch (Exception ex)
-				{
-
-					MessageBox.Show(SaveFolderDialog.SelectedPath + "\r\n의 저장에 실패했습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
-				}
-
-			}
-
-		}
+        private void TopMenu_File_Open_Click(object sender, EventArgs e)
+        {
+            if (OpenSwfDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Open(OpenSwfDialog.FileNames);
+            }
+        }
 
 
-		private void TopMenu_File_CopyToClipboard_Click(object sender, EventArgs e)
+
+        private void TopMenu_File_CopyToClipboard_Click(object sender, EventArgs e)
 		{
 			if (CurrentImage == null)
 			{
@@ -394,7 +374,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogShipGraphicViewer_DragDrop(object sender, DragEventArgs e)
 		{
-			OpenSwf((string[])e.Data.GetData(DataFormats.FileDrop));
+			Open((string[])e.Data.GetData(DataFormats.FileDrop));
 		}
 
 		#endregion
@@ -423,19 +403,33 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (DrawsInformation)
 			{
-				var parentParser = Parsers.First(p => p.Value.Tags.Any(t => object.ReferenceEquals(t, ImageTags[CurrentIndex])));
-				var ship = GetShipFromPath(parentParser.Key);
+                var ship = GetShipFromPath(ImagePathList[CurrentIndex]);
 
-				e.Graphics.DrawString(
-					string.Format("{0} / {1}\r\n{2} ({3}) CID: {4}\r\nZoom {5:p1}\r\n(←/→키로 페이지 넘기기)",
-						CurrentIndex + 1, ImageTags.Count, Path.GetFileName(parentParser.Key), ship?.NameWithClass ?? "???", ImageTags[CurrentIndex].CharacterID, zoomRate),
-					Font, Brushes.DimGray, new PointF(0, 0));
+                e.Graphics.DrawString(
+                    string.Format("{0} / {1}\r\n{2} ({3})\r\nZoom {4:p1}\r\n(←/→키로 페이지 넘기기)",
+                        CurrentIndex + 1, ImagePathList.Count, Path.GetFileName(ImagePathList[CurrentIndex]), ship?.NameWithClass ?? "???", zoomRate),
+
+                    Font, Brushes.DimGray, new PointF(0, 0));
 			}
 
-			e.Graphics.DrawImage(CurrentImage, new RectangleF((panelSize.Width - imgSize.Width) / 2 + ImageOffset.X, (panelSize.Height - imgSize.Height) / 2 + ImageOffset.Y, imgSize.Width, imgSize.Height));
+            var location = new PointF((panelSize.Width - imgSize.Width) / 2 + ImageOffset.X, (panelSize.Height - imgSize.Height) / 2 + ImageOffset.Y);
+            e.Graphics.DrawImage(CurrentImage, new RectangleF(location.X, location.Y, imgSize.Width, imgSize.Height));
+            /*// face recognition test
+			{
+				var ship = GetShipFromPath(ImagePathList[CurrentIndex]);
+				if (ship != null)
+				{
+					var rect = ship.GraphicData.WeddingArea;
+					e.Graphics.DrawRectangle(Pens.Magenta,
+						(float)(panelSize.Width / 2.0 + ((double)rect.X / CurrentImage.Width - 0.5) * CurrentImage.Width * zoomRate + ImageOffset.X),
+						(float)(panelSize.Height / 2.0 + ((double)rect.Y / CurrentImage.Height - 0.5) * CurrentImage.Height * zoomRate + ImageOffset.Y),
+						(float)(rect.Width * zoomRate),
+						(float)(rect.Height * zoomRate));
+				}
+			}
+			//*/
 
-
-			if (AdvMode)
+            if (AdvMode)
 			{
 				DrawAdvMode(e.Graphics);
 			}
@@ -446,9 +440,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void DrawAdvMode(Graphics g)
 		{
 
-			var parentParser = Parsers.First(p => p.Value.Tags.Any(t => object.ReferenceEquals(t, ImageTags[CurrentIndex])));
-			var ship = GetShipFromPath(parentParser.Key);
-			if (ship == null)
+            var ship = GetShipFromPath(ImagePathList[CurrentIndex]);
+            if (ship == null)
 				return;
 
 			var panelSize = DrawingPanel.Size;
@@ -614,30 +607,20 @@ namespace ElectronicObserver.Window.Dialog
 			DrawingPanel.Refresh();
 		}
 
-		#endregion
+        #endregion
 
 
+        private ShipDataMaster GetShipFromPath(string path)
+        {
+            path = Path.GetFileNameWithoutExtension(path);
 
-		private ShipDataMaster GetShipFromPath(string path)
-		{
-			path = Path.GetFileNameWithoutExtension(path);
-			int verindex = path.LastIndexOf('_');
-			if (verindex != -1)
-				path = path.Substring(0, verindex);
+            if (path.Length >= 4 && int.TryParse(path.Substring(0, 4), out var id))
+            {
+                return KCDatabase.Instance.MasterShips[id];
+            }
 
-			var rec = Resource.Record.RecordManager.Instance.ShipParameter.Record.Values.FirstOrDefault(r => r.ResourceName != null && r.ResourceName.Contains(path));
+            return null;
+        }
 
-			if (rec != null)
-			{
-				var ship = KCDatabase.Instance.MasterShips[rec.ShipID];
-				return ship ?? KCDatabase.Instance.MasterShips[rec.OriginalCostumeShipID];
-			}
-			else
-			{
-				return null;
-			}
-		}
-
-
-	}
+    }
 }

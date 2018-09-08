@@ -384,12 +384,15 @@ namespace ElectronicObserver.Utility
                 else
                 {
                     /*
-                    if(type == TranslationType.QuestTitle)
+                    if(type == TranslationType.Operations)
                         ErrorReporter.SendErrorReport(new Exception(), jpString);
-                    else if(type == TranslationType.QuestDetail)
+
+                    if (type == TranslationType.OperationMaps)
                         ErrorReporter.SendErrorReport(new Exception(), jpString);
-                       
-                    Utility.Logger.Add(3, id + ":::" + jpChildElement + "/" + jpString + ":" + jpString.Equals(jpString));*/
+
+                    if (type == TranslationType.OperationSortie)
+                        ErrorReporter.SendErrorReport(new Exception(), jpString);
+                        */
                 }
             }
             catch (Exception e)

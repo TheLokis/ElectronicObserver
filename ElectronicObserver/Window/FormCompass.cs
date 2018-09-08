@@ -678,6 +678,7 @@ namespace ElectronicObserver.Window
 				TextDestination.ImageIndex = -1;
 				ToolTipInfo.SetToolTip(TextDestination, null);
 				TextEventKind.Text = data.api_cmt;
+
 				TextEventKind.ForeColor = getColorFromEventKind(0);
 				TextEventKind.ImageAlign = ContentAlignment.MiddleCenter;
 				TextEventKind.ImageIndex = -1;
@@ -734,14 +735,7 @@ namespace ElectronicObserver.Window
 					}
 				}
 
-                string NodeNumber = compass.Destination.ToString();
-
-                if(Utility.Configuration.Config.FormCompass.ToAlphabet)
-                {
-                    NodeNumber = compass.Destination_Name;
-                }
-
-                TextDestination.Text = string.Format("다음노드 : {0}{1}", NodeNumber, (compass.IsEndPoint ? " (마지막)" : ""));
+                TextDestination.Text = string.Format("다음노드 : {0}{1}", compass.Destination_Name, (compass.IsEndPoint ? " (마지막)" : ""));
 				if (compass.LaunchedRecon != 0)
 				{
 					TextDestination.ImageAlign = ContentAlignment.MiddleRight;
@@ -852,28 +846,28 @@ namespace ElectronicObserver.Window
 								default:
 									break;
 								case 1:
-									eventkind = "敵影を見ず";
+									eventkind = "적 발견 못함";
 									break;
 								case 2:
 									eventkind = "능동분기";
 									break;
 								case 3:
-									eventkind = "穏やかな海";
+									eventkind = "잔잔한 바다다.";
 									break;
 								case 4:
-									eventkind = "穏やかな海峡";
+									eventkind = "온화한 해협이다.";
 									break;
 								case 5:
-									eventkind = "警戒が必要";
+									eventkind = "경계 필요 구역";
 									break;
 								case 6:
-									eventkind = "静かな海";
+									eventkind = "조용한 바다다.";
 									break;
 								case 7:
-									eventkind = "対潜警戒進撃中";
+									eventkind = "대잠 경계 진격중";
 									break;
 								case 8:
-									eventkind = "敵哨戒機発見";
+									eventkind = "적 초계기 발견";
 									break;
 								case 9:
 									eventkind = "栗田艦隊進撃中";
@@ -918,7 +912,7 @@ namespace ElectronicObserver.Window
 									eventkind = "対空対潜警戒";
 									break;
 								case 23:
-									eventkind = "高速艦艇出撃";
+									eventkind = "고속 함대 출격";
 									break;
 								case 24:
 									eventkind = "機動部隊出撃";
@@ -928,7 +922,7 @@ namespace ElectronicObserver.Window
 									break;
 							}
 							if (compass.RouteChoices != null)
-								TextEventDetail.Text = string.Join("/", compass.RouteChoices);
+								TextEventDetail.Text = string.Join(" / ", compass.RouteChoices);
 							else
 								TextEventDetail.Text = "";
 

@@ -242,7 +242,7 @@ namespace ElectronicObserver.Window.Dialog
 				sb.AppendLine("장착가능함종:");
 				foreach (var stype in KCDatabase.Instance.ShipTypes.Values)
 				{
-					if (stype.EquipmentType.Contains((int)eq.CategoryType))
+                    if (stype.EquippableCategories.Contains((int)eq.CategoryType))
                         sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.TranslationType.ShipTypes));
                 }
 				ToolTipInfo.SetToolTip(EquipmentType, sb.ToString());
@@ -337,22 +337,15 @@ namespace ElectronicObserver.Window.Dialog
 
 			//装備画像を読み込んでみる
 			{
-				string path = string.Format(@"{0}\\resources\\image\\slotitem\\card\\{1:D3}.png", Utility.Configuration.Config.Connection.SaveDataPath, equipmentID);
-				if (File.Exists(path))
-				{
-					try
-					{
+                var img =
+                        KCResourceHelper.LoadEquipmentImage(equipmentID, KCResourceHelper.ResourceTypeEquipmentCard) ??
+                        KCResourceHelper.LoadEquipmentImage(equipmentID, KCResourceHelper.ResourceTypeEquipmentCardSmall);
 
-						EquipmentImage.Image = new Bitmap(path);
-
-					}
-					catch (Exception)
-					{
-						if (EquipmentImage.Image != null)
-							EquipmentImage.Image.Dispose();
-						EquipmentImage.Image = null;
-					}
-				}
+                if (img != null)
+                {
+                    EquipmentImage.Image?.Dispose();
+                    EquipmentImage.Image = img;
+                }
 				else
 				{
 					if (EquipmentImage.Image != null)

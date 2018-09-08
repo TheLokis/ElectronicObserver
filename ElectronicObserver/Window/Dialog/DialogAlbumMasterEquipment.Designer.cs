@@ -953,6 +953,7 @@
             this.EquipmentImage.Location = new System.Drawing.Point(283, 3);
             this.EquipmentImage.Name = "EquipmentImage";
             this.EquipmentImage.Size = new System.Drawing.Size(260, 260);
+            this.EquipmentImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.EquipmentImage.TabIndex = 4;
             this.EquipmentImage.TabStop = false;
             // 
@@ -981,6 +982,7 @@
             this.Name = "DialogAlbumMasterEquipment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "장비도감";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumMasterEquipment_FormClosed);
             this.Load += new System.EventHandler(this.DialogAlbumMasterEquipment_Load);
             this.menuStrip1.ResumeLayout(false);

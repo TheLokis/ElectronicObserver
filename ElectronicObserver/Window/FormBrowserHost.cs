@@ -241,7 +241,10 @@ namespace ElectronicObserver.Window
 				config.ToolMenuDockStyle = (int)c.ToolMenuDockStyle;
 				config.IsToolMenuVisible = c.IsToolMenuVisible;
 				config.ConfirmAtRefresh = c.ConfirmAtRefresh;
+                config.HardwareAccelerationEnabled = c.HardwareAccelerationEnabled;
+                config.PreserveDrawingBuffer = c.PreserveDrawingBuffer;
                 config.Theme = (uint)Utility.Configuration.Config.UI.Theme;
+                config.ForceColorProfile = c.ForceColorProfile;
                 return config;
 			}
 		}
@@ -266,9 +269,12 @@ namespace ElectronicObserver.Window
 			c.ToolMenuDockStyle = (DockStyle)config.ToolMenuDockStyle;
 			c.IsToolMenuVisible = config.IsToolMenuVisible;
 			c.ConfirmAtRefresh = config.ConfirmAtRefresh;
+            c.HardwareAccelerationEnabled = config.HardwareAccelerationEnabled;
+            c.ForceColorProfile = config.ForceColorProfile;
+            c.PreserveDrawingBuffer = config.PreserveDrawingBuffer;
 
-			// volume
-			if (Utility.Configuration.Config.BGMPlayer.SyncBrowserMute)
+            // volume
+            if (Utility.Configuration.Config.BGMPlayer.SyncBrowserMute)
 			{
 				Utility.SyncBGMPlayer.Instance.IsMute = config.IsMute;
 			}

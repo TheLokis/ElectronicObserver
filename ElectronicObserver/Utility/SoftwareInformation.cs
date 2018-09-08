@@ -19,7 +19,7 @@ namespace ElectronicObserver.Utility
         /// </summary>
         public static string SoftwareNameJapanese => "七四式電子観測儀";
 
-        public static string SoftwareNameKorean => "74식 전자관측의 KRTL";
+        public static string SoftwareNameKorean => "74식 전자관측의";
 
         /// <summary>
         /// ソフトウェア名(英語)
@@ -30,20 +30,20 @@ namespace ElectronicObserver.Utility
         /// <summary>
         /// バージョン(日本語, ソフトウェア名を含みます)
         /// </summary>
-        public static string VersionJapanese => SoftwareNameJapanese + "三一型改二";
+		public static string VersionJapanese => "試製" + SoftwareNameJapanese + "四〇型改";
 
 
         /// <summary>
         /// バージョン(英語)
         /// </summary>
-        public static string VersionEnglish => "3.1.2.1_R5";
+		public static string VersionEnglish => "4.0.1 KRTL_R7";
 
-        public static string VersionKorean => "3.1.2.1_R5";
+        public static string VersionKorean => "4.0.1 KRTL_R7";
 
         /// <summary>
         /// 更新日時
         /// </summary>
-        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/08/24 18:00:00");
+        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/09/08 21:00:00");
         public static DateTime MaintenanceTime = DateTime.Now;
 
 

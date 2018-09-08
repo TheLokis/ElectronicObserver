@@ -58,7 +58,7 @@ namespace ElectronicObserver.Utility.Data
 		/// <summary>
 		/// 艦娘レベル最大値
 		/// </summary>
-		public static int ShipMaximumLevel => 165;
+		public static int ShipMaximumLevel => 175;
 
 		/// <summary>
 		/// 提督レベル最大値

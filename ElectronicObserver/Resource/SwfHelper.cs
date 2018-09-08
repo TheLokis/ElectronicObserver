@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace ElectronicObserver.Resource
 {
 
-
-	public static class SwfHelper
+    [Obsolete("obsolete", true)]
+    public static class SwfHelper
 	{
 
 		// 各種画像リソースのサイズ

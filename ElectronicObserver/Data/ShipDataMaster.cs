@@ -417,11 +417,30 @@ namespace ElectronicObserver.Data
 			}
 		}
 
+        internal int[] specialEquippableCategory = null;
+        /// <summary>
+        /// 特殊装備カテゴリ　指定がない場合は null
+        /// </summary>
+        public IEnumerable<int> SpecialEquippableCategories => specialEquippableCategory;
+        /// <summary>
+        /// 装備可能なカテゴリ
+        /// </summary>
+        public IEnumerable<int> EquippableCategories
+        {
+            get
+            {
+                if (specialEquippableCategory != null)
+                    return SpecialEquippableCategories;
+                else
+                    return KCDatabase.Instance.ShipTypes[(int)ShipType].EquippableCategories;
+            }
+        }
 
-		/// <summary>
-		/// 建造時間(分)
-		/// </summary>
-		public int BuildingTime => !RawData.api_buildtime() ? 0 : (int)RawData.api_buildtime;
+
+        /// <summary>
+        /// 建造時間(分)
+        /// </summary>
+        public int BuildingTime => !RawData.api_buildtime() ? 0 : (int)RawData.api_buildtime;
 
 
 		/// <summary>
@@ -467,31 +486,35 @@ namespace ElectronicObserver.Data
 		public int VoiceFlag => !RawData.api_voicef() ? 0 : (int)RawData.api_voicef;
 
 
-		/// <summary>
-		/// リソースのファイル/フォルダ名
-		/// </summary>
-		public string ResourceName => GetParameterElement()?.ResourceName ?? "";
+        /// <summary>
+        /// グラフィック設定データへの参照
+        /// </summary>
+        public ShipGraphicData GraphicData => KCDatabase.Instance.ShipGraphics[ShipID];
 
+        /// <summary>
+        /// リソースのファイル/フォルダ名
+        /// </summary>
+        public string ResourceName => GraphicData?.ResourceName ?? "";
 
-		/// <summary>
-		/// 画像リソースのバージョン
-		/// </summary>
-		public string ResourceGraphicVersion => GetParameterElement()?.ResourceGraphicVersion ?? "";
+        /// <summary>
+        /// 画像リソースのバージョン
+        /// </summary>
+        public string ResourceGraphicVersion => GraphicData?.GraphicVersion ?? "";
 
-		/// <summary>
-		/// ボイスリソースのバージョン
-		/// </summary>
-		public string ResourceVoiceVersion => GetParameterElement()?.ResourceVoiceVersion ?? "";
+        /// <summary>
+        /// ボイスリソースのバージョン
+        /// </summary>
+		public string ResourceVoiceVersion => GraphicData?.VoiceVersion ?? "";
 
-		/// <summary>
-		/// 母港ボイスリソースのバージョン
-		/// </summary>
-		public string ResourcePortVoiceVersion => GetParameterElement()?.ResourcePortVoiceVersion ?? "";
+        /// <summary>
+        /// 母港ボイスリソースのバージョン
+        /// </summary>
+        public string ResourcePortVoiceVersion => GraphicData?.PortVoiceVersion ?? "";
 
-		/// <summary>
-		/// 衣替え艦：ベースとなる艦船ID
-		/// </summary>
-		public int OriginalCostumeShipID => GetParameterElement()?.OriginalCostumeShipID ?? -1;
+        /// <summary>
+        /// 衣替え艦：ベースとなる艦船ID
+        /// </summary>
+        public int OriginalCostumeShipID => GetParameterElement()?.OriginalCostumeShipID ?? -1;
 
 
 

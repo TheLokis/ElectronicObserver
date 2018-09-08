@@ -298,14 +298,21 @@ namespace ElectronicObserver.Window.Dialog
 
 			
 			ShipType.Text = ship.IsLandBase ? "육상기지" : FormMain.Instance.Translator.GetTranslation(db.ShipTypes[(int)ship.ShipType].Name, Utility.TranslationType.ShipTypes);
-            if (ship.IsAbyssalShip)
-				ToolTipInfo.SetToolTip(ShipType, $"함급ID: {ship.ShipClass}");
-			else if (Constants.GetShipClass(ship.ShipClass) == "불명")
-				ToolTipInfo.SetToolTip(ShipType, $"함급불명: {ship.ShipClass}");
-			else
-				ToolTipInfo.SetToolTip(ShipType, $"{Constants.GetShipClass(ship.ShipClass)}: {ship.ShipClass}");
+            {
+                var tip = new StringBuilder();
+                if (ship.IsAbyssalShip)
+                    tip.AppendLine($"艦型ID: {ship.ShipClass}");
+                else if (Constants.GetShipClass(ship.ShipClass) == "不明")
+                    tip.AppendLine($"艦型不明: {ship.ShipClass}");
+                else
+                    tip.AppendLine($"{Constants.GetShipClass(ship.ShipClass)}: {ship.ShipClass}");
+                tip.AppendLine();
+                tip.AppendLine("装備可能：");
+                tip.AppendLine(GetEquippableString(shipID));
+                ToolTipInfo.SetToolTip(ShipType, tip.ToString());
+            }
 
-			ShipName.Text = ship.NameWithClass;
+            ShipName.Text = ship.NameWithClass;
 			ShipName.ForeColor = ship.GetShipNameColor(true);
 
             ToolTipInfo.SetToolTip(ShipName, (!ship.IsAbyssalShip ? ship.NameReading + "\r\n" : "") + "(우클릭으로 복사)");
@@ -651,8 +658,8 @@ namespace ElectronicObserver.Window.Dialog
 			if (!ImageLoader.IsBusy)
 			{
 				loadingResourceShipID = ship.ShipID;
-				ImageLoader.RunWorkerAsync(ship.ResourceName);
-			}
+                ImageLoader.RunWorkerAsync(ship.ShipID);
+            }
 
 
 
@@ -737,8 +744,18 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
+        private string GetEquippableString(int shipID)
+        {
+            var db = KCDatabase.Instance;
+            var ship = db.MasterShips[shipID];
+            if (ship == null)
+                return "";
+            return string.Join("\r\n", ship.EquippableCategories.Select(id => db.EquipmentTypes[id].Name)
+               .Concat(db.MasterEquipments.Values.Where(eq => eq.EquippableShipsAtExpansion.Contains(shipID)).Select(eq => eq.Name + " (補強スロット)")));
+        }
 
-		private void ParameterLevel_ValueChanged(object sender, EventArgs e)
+
+        private void ParameterLevel_ValueChanged(object sender, EventArgs e)
 		{
 			if (_shipID != -1)
 			{
@@ -892,7 +909,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("함선ID,도감번호,함급,함종,이름,読み,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,결혼내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
+						sw.WriteLine("함선ID,도감번호,함급,함종,이름,음독,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,결혼내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
 
 						foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
@@ -996,7 +1013,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,読み,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,최대내구,결혼내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,対潜初期最小,対潜初期最大,최대대잠,対潜{0}最小,対潜{0}最大,回避初期最小,回避初期最大,최대회피,回避{0}最小,回避{0}最大,索敵初期最小,索敵初期最大,索敵最大,索敵{0}最小,索敵{0}最大,運初期,運最大,速力,射程,レア,スロット数,搭載機数1,搭載機数2,搭載機数3,搭載機数4,搭載機数5,初期装備1,初期装備2,初期装備3,初期装備4,初期装備5,建造時間,解体燃料,解体弾薬,解体鋼材,解体ボーキ,改修火力,改修雷装,改修対空,改修装甲,ドロップ文章,図鑑文章,搭載燃料,搭載弾薬,ボイス,リソース名,画像バージョン,ボイスバージョン,母港ボイスバージョン", ExpTable.ShipMaximumLevel));
+						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,음독,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,최대내구,결혼내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,対潜初期最小,対潜初期最大,최대대잠,対潜{0}最小,対潜{0}最大,回避初期最小,回避初期最大,최대회피,回避{0}最小,回避{0}最大,索敵初期最小,索敵初期最大,索敵最大,索敵{0}最小,索敵{0}最大,運初期,運最大,速力,射程,レア,スロット数,搭載機数1,搭載機数2,搭載機数3,搭載機数4,搭載機数5,初期装備1,初期装備2,初期装備3,初期装備4,初期装備5,建造時間,解体燃料,解体弾薬,解体鋼材,解体ボーキ,改修火力,改修雷装,改修対空,改修装甲,ドロップ文章,図鑑文章,搭載燃料,搭載弾薬,ボイス,リソース名,画像バージョン,ボイスバージョン,母港ボイスバージョン", ExpTable.ShipMaximumLevel));
 
 						foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
@@ -1173,20 +1190,9 @@ namespace ElectronicObserver.Window.Dialog
 
 			try
 			{
-
-				var img = SwfHelper.GetShipSwfImage(resourceName, SwfHelper.ShipResourceCharacterID.BannerNormal);
-
-				if (img.Size == SwfHelper.ShipBannerSize)
-				{
-					e.Result = img;
-				}
-				else
-				{
-					img.Dispose();
-					e.Result = null;
-				}
-			}
-			catch (Exception)
+                e.Result = KCResourceHelper.LoadShipImage(e.Argument as int? ?? 0, false, KCResourceHelper.ResourceTypeShipBanner);
+            }
+            catch (Exception)
 			{
 				e.Result = null;
 			}
@@ -1213,8 +1219,8 @@ namespace ElectronicObserver.Window.Dialog
 					loadingResourceShipID = _shipID;
 					var ship = KCDatabase.Instance.MasterShips[_shipID];
 					if (ship != null)
-						ImageLoader.RunWorkerAsync(ship.ResourceName);
-				}
+                        ImageLoader.RunWorkerAsync(_shipID);
+                }
 
 				return;
 			}
@@ -1551,27 +1557,8 @@ namespace ElectronicObserver.Window.Dialog
 			var ship = KCDatabase.Instance.MasterShips[_shipID];
 			if (ship != null)
 			{
-
-				var pathlist = new LinkedList<string>();
-				pathlist.AddLast(SwfHelper.GetShipResourcePath(ship.ResourceName));
-
-				foreach (var rec in RecordManager.Instance.ShipParameter.Record.Values.Where(r => r.OriginalCostumeShipID == _shipID))
-				{
-					string path = SwfHelper.GetShipResourcePath(rec.ResourceName);
-					if (path != null)
-						pathlist.AddLast(path);
-				}
-
-				var arg = pathlist.Where(p => p != null).ToArray();
-				if (arg.Length > 0)
-				{
-					new DialogShipGraphicViewer(arg).Show(Owner);
-				}
-				else
-				{
-					MessageBox.Show("이미지 리소스가 존재하지 않습니다. 이하의 방법으로 해결해보십시오. \r\n1. 설정 -> 통신 -> 통신내용을 저장 및 SWF 사용에 체크해주십시오. \r\n2. 캐시 삭제후 다시 실행. \r\n3. 칸코레 화면에 해당 함선을 표시（함선도감 등）。", "뷰어：이미지 리소스 없음", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				}
-			}
+                new DialogShipGraphicViewer(ship.ShipID).Show(Owner);
+            }
 			else
 			{
 				MessageBox.Show("대상 함선을 지정하세요.", "뷰어：대상 미지정", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

@@ -36,6 +36,7 @@ namespace ElectronicObserver.Window.Dialog
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
             this.Connection_UpstreamProxyAddress = new System.Windows.Forms.TextBox();
             this.Connection_DownstreamProxyLabel = new System.Windows.Forms.Label();
             this.Connection_DownstreamProxy = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@ namespace ElectronicObserver.Window.Dialog
             this.Connection_PanelSaveData = new System.Windows.Forms.Panel();
             this.Connection_ApplyVersion = new System.Windows.Forms.CheckBox();
             this.Connection_SaveOtherFile = new System.Windows.Forms.CheckBox();
-            this.Connection_SaveSWF = new System.Windows.Forms.CheckBox();
             this.Connection_SaveResponse = new System.Windows.Forms.CheckBox();
             this.Connection_SaveRequest = new System.Windows.Forms.CheckBox();
             this.Connection_SaveDataPathSearch = new System.Windows.Forms.Button();
@@ -157,6 +157,8 @@ namespace ElectronicObserver.Window.Dialog
             this.FormHeadquarters_Visibility = new System.Windows.Forms.CheckedListBox();
             this.FormHeadquarters_BlinkAtMaximum = new System.Windows.Forms.CheckBox();
             this.tabPage18 = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.NodeToAlphabetBox = new System.Windows.Forms.CheckBox();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.FormCompass_MaxShipNameWidth = new System.Windows.Forms.NumericUpDown();
@@ -186,6 +188,10 @@ namespace ElectronicObserver.Window.Dialog
             this.FormBattle_HideDuringBattle = new System.Windows.Forms.CheckBox();
             this.FormBattle_IsScrollable = new System.Windows.Forms.CheckBox();
             this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.FormBrowser_ForceColorProfile = new System.Windows.Forms.CheckBox();
+            this.FormBrowser_PreserveDrawingBuffer = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.FormBrowser_HardwareAccelerationEnabled = new System.Windows.Forms.CheckBox();
             this.FormBrowser_IsDMMreloadDialogDestroyable = new System.Windows.Forms.CheckBox();
             this.FormBrowser_ToolMenuDockStyle = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -207,18 +213,6 @@ namespace ElectronicObserver.Window.Dialog
             this.FormBrowser_LogInPageURL = new System.Windows.Forms.TextBox();
             this.FormBrowser_ZoomRate = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.FormBrowser_FlashWMode = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.FormBrowser_FlashQuality = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.FormBrowser_BrowserVersion = new System.Windows.Forms.ComboBox();
-            this.FormBrowser_DeleteRegistry = new System.Windows.Forms.Button();
-            this.FormBrowser_GPURendering = new System.Windows.Forms.CheckBox();
-            this.FormBrowser_ApplyRegistry = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
             this.tabPage21 = new System.Windows.Forms.TabPage();
             this.FormBaseAirCorps_ShowEventMapOnly = new System.Windows.Forms.CheckBox();
             this.SubWindow_Json = new System.Windows.Forms.TabPage();
@@ -258,7 +252,6 @@ namespace ElectronicObserver.Window.Dialog
             this.APIListBrowser = new System.Windows.Forms.OpenFileDialog();
             this.Log_PlayTime = new System.Windows.Forms.Label();
             this.PlayTimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.NodeToAlphabetBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Connection_UpstreamProxyPort)).BeginInit();
@@ -293,9 +286,6 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage12.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FormBrowser_ZoomRate)).BeginInit();
-            this.tabPage14.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.tabPage21.SuspendLayout();
             this.SubWindow_Json.SuspendLayout();
             this.SubWindow_Json_SealingPanel.SuspendLayout();
@@ -328,6 +318,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label19);
             this.tabPage1.Controls.Add(this.Connection_UpstreamProxyAddress);
             this.tabPage1.Controls.Add(this.Connection_DownstreamProxyLabel);
             this.tabPage1.Controls.Add(this.Connection_DownstreamProxy);
@@ -348,6 +339,16 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "통신";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.Color.Red;
+            this.label19.Location = new System.Drawing.Point(32, 278);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(282, 15);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "* 브라우저 통신 설정은 다시 시작할때 반영됩니다.";
             // 
             // Connection_UpstreamProxyAddress
             // 
@@ -454,7 +455,6 @@ namespace ElectronicObserver.Window.Dialog
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Connection_PanelSaveData.Controls.Add(this.Connection_ApplyVersion);
             this.Connection_PanelSaveData.Controls.Add(this.Connection_SaveOtherFile);
-            this.Connection_PanelSaveData.Controls.Add(this.Connection_SaveSWF);
             this.Connection_PanelSaveData.Controls.Add(this.Connection_SaveResponse);
             this.Connection_PanelSaveData.Controls.Add(this.Connection_SaveRequest);
             this.Connection_PanelSaveData.Controls.Add(this.Connection_SaveDataPathSearch);
@@ -468,7 +468,7 @@ namespace ElectronicObserver.Window.Dialog
             // Connection_ApplyVersion
             // 
             this.Connection_ApplyVersion.AutoSize = true;
-            this.Connection_ApplyVersion.Location = new System.Drawing.Point(296, 32);
+            this.Connection_ApplyVersion.Location = new System.Drawing.Point(237, 32);
             this.Connection_ApplyVersion.Name = "Connection_ApplyVersion";
             this.Connection_ApplyVersion.Size = new System.Drawing.Size(68, 19);
             this.Connection_ApplyVersion.TabIndex = 9;
@@ -479,24 +479,13 @@ namespace ElectronicObserver.Window.Dialog
             // Connection_SaveOtherFile
             // 
             this.Connection_SaveOtherFile.AutoSize = true;
-            this.Connection_SaveOtherFile.Location = new System.Drawing.Point(231, 32);
+            this.Connection_SaveOtherFile.Location = new System.Drawing.Point(172, 32);
             this.Connection_SaveOtherFile.Name = "Connection_SaveOtherFile";
             this.Connection_SaveOtherFile.Size = new System.Drawing.Size(59, 19);
             this.Connection_SaveOtherFile.TabIndex = 8;
             this.Connection_SaveOtherFile.Text = "Other";
             this.ToolTipInfo.SetToolTip(this.Connection_SaveOtherFile, "모든 통신 파일을 저장합니다.");
             this.Connection_SaveOtherFile.UseVisualStyleBackColor = true;
-            // 
-            // Connection_SaveSWF
-            // 
-            this.Connection_SaveSWF.AutoSize = true;
-            this.Connection_SaveSWF.Location = new System.Drawing.Point(172, 32);
-            this.Connection_SaveSWF.Name = "Connection_SaveSWF";
-            this.Connection_SaveSWF.Size = new System.Drawing.Size(53, 19);
-            this.Connection_SaveSWF.TabIndex = 7;
-            this.Connection_SaveSWF.Text = "SWF";
-            this.ToolTipInfo.SetToolTip(this.Connection_SaveSWF, "SWF파일을 저장합니다.");
-            this.Connection_SaveSWF.UseVisualStyleBackColor = true;
             // 
             // Connection_SaveResponse
             // 
@@ -1057,7 +1046,7 @@ namespace ElectronicObserver.Window.Dialog
             this.Debug_SealingPanel.Controls.Add(this.Debug_APIListPathSearch);
             this.Debug_SealingPanel.Location = new System.Drawing.Point(0, 56);
             this.Debug_SealingPanel.Name = "Debug_SealingPanel";
-            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 259);
+            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 257);
             this.Debug_SealingPanel.TabIndex = 1;
             // 
             // Debug_APIListPath
@@ -1262,7 +1251,6 @@ namespace ElectronicObserver.Window.Dialog
             this.tabControl2.Controls.Add(this.tabPage13);
             this.tabControl2.Controls.Add(this.tabPage20);
             this.tabControl2.Controls.Add(this.tabPage12);
-            this.tabControl2.Controls.Add(this.tabPage14);
             this.tabControl2.Controls.Add(this.tabPage21);
             this.tabControl2.Controls.Add(this.SubWindow_Json);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1814,6 +1802,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // tabPage18
             // 
+            this.tabPage18.Controls.Add(this.label21);
             this.tabPage18.Controls.Add(this.NodeToAlphabetBox);
             this.tabPage18.Controls.Add(this.label40);
             this.tabPage18.Controls.Add(this.label41);
@@ -1821,13 +1810,35 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage18.Controls.Add(this.FormCompass_IsScrollable);
             this.tabPage18.Controls.Add(this.FormCompass_CandidateDisplayCount);
             this.tabPage18.Controls.Add(this.label2);
-            this.tabPage18.Location = new System.Drawing.Point(4, 24);
+            this.tabPage18.Location = new System.Drawing.Point(4, 22);
             this.tabPage18.Name = "tabPage18";
             this.tabPage18.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage18.Size = new System.Drawing.Size(682, 338);
+            this.tabPage18.Size = new System.Drawing.Size(682, 340);
             this.tabPage18.TabIndex = 7;
             this.tabPage18.Text = "나침반";
             this.tabPage18.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(21, 264);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(382, 15);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "* 실험적 기능입니다. 기록부분에서는 알파벳으로 나타나지 않습니다.";
+            // 
+            // NodeToAlphabetBox
+            // 
+            this.NodeToAlphabetBox.AutoSize = true;
+            this.NodeToAlphabetBox.Location = new System.Drawing.Point(242, 10);
+            this.NodeToAlphabetBox.Name = "NodeToAlphabetBox";
+            this.NodeToAlphabetBox.Size = new System.Drawing.Size(193, 19);
+            this.NodeToAlphabetBox.TabIndex = 16;
+            this.NodeToAlphabetBox.Text = "노드 번호를 알파벳으로 표시 *";
+            this.ToolTipInfo.SetToolTip(this.NodeToAlphabetBox, "노드 번호를 알파벳으로 표시합니다. EX ) 7-1-1 -> 7-1-A");
+            this.NodeToAlphabetBox.UseVisualStyleBackColor = true;
+            this.NodeToAlphabetBox.CheckedChanged += new System.EventHandler(this.NodeToAlphabetBox_CheckedChanged);
             // 
             // label40
             // 
@@ -2099,10 +2110,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage20.Controls.Add(this.FormBattle_ShowHPBar);
             this.tabPage20.Controls.Add(this.FormBattle_HideDuringBattle);
             this.tabPage20.Controls.Add(this.FormBattle_IsScrollable);
-            this.tabPage20.Location = new System.Drawing.Point(4, 22);
+            this.tabPage20.Location = new System.Drawing.Point(4, 24);
             this.tabPage20.Name = "tabPage20";
             this.tabPage20.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage20.Size = new System.Drawing.Size(682, 340);
+            this.tabPage20.Size = new System.Drawing.Size(682, 338);
             this.tabPage20.TabIndex = 10;
             this.tabPage20.Text = "전투";
             this.tabPage20.UseVisualStyleBackColor = true;
@@ -2165,6 +2176,10 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // tabPage12
             // 
+            this.tabPage12.Controls.Add(this.FormBrowser_ForceColorProfile);
+            this.tabPage12.Controls.Add(this.FormBrowser_PreserveDrawingBuffer);
+            this.tabPage12.Controls.Add(this.label20);
+            this.tabPage12.Controls.Add(this.FormBrowser_HardwareAccelerationEnabled);
             this.tabPage12.Controls.Add(this.FormBrowser_IsDMMreloadDialogDestroyable);
             this.tabPage12.Controls.Add(this.FormBrowser_ToolMenuDockStyle);
             this.tabPage12.Controls.Add(this.label30);
@@ -2178,13 +2193,58 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage12.Controls.Add(this.FormBrowser_LogInPageURL);
             this.tabPage12.Controls.Add(this.FormBrowser_ZoomRate);
             this.tabPage12.Controls.Add(this.label15);
-            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Location = new System.Drawing.Point(4, 24);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(682, 340);
+            this.tabPage12.Size = new System.Drawing.Size(682, 338);
             this.tabPage12.TabIndex = 3;
             this.tabPage12.Text = "브라우저";
             this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // FormBrowser_ForceColorProfile
+            // 
+            this.FormBrowser_ForceColorProfile.AutoSize = true;
+            this.FormBrowser_ForceColorProfile.Location = new System.Drawing.Point(6, 249);
+            this.FormBrowser_ForceColorProfile.Name = "FormBrowser_ForceColorProfile";
+            this.FormBrowser_ForceColorProfile.Size = new System.Drawing.Size(189, 19);
+            this.FormBrowser_ForceColorProfile.TabIndex = 16;
+            this.FormBrowser_ForceColorProfile.Text = "색상 프로파일을 sRGB로 고정";
+            this.ToolTipInfo.SetToolTip(this.FormBrowser_ForceColorProfile, "브라우저의 색상이 이상한 경우, 사용하면 해결할 수 있습니다.\r\n재실행시 반영됩니다.");
+            this.FormBrowser_ForceColorProfile.UseVisualStyleBackColor = true;
+            // 
+            // FormBrowser_PreserveDrawingBuffer
+            // 
+            this.FormBrowser_PreserveDrawingBuffer.AutoSize = true;
+            this.FormBrowser_PreserveDrawingBuffer.Location = new System.Drawing.Point(436, 31);
+            this.FormBrowser_PreserveDrawingBuffer.Name = "FormBrowser_PreserveDrawingBuffer";
+            this.FormBrowser_PreserveDrawingBuffer.Size = new System.Drawing.Size(141, 19);
+            this.FormBrowser_PreserveDrawingBuffer.TabIndex = 16;
+            this.FormBrowser_PreserveDrawingBuffer.Text = "렌더링 버퍼를 유지 *";
+            this.ToolTipInfo.SetToolTip(this.FormBrowser_PreserveDrawingBuffer, "렌더링에 문제가 있을경우 사용하면 개선되는 경우가 있습니다. \r\n해제하면 성능을 향상 시킬 수 있습니다." +
+        ". * 이 변경은 재실행이후에 적용됩니다.");
+            this.FormBrowser_PreserveDrawingBuffer.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(12, 295);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(254, 15);
+            this.label20.TabIndex = 14;
+            this.label20.Text = "* 표시가 있는 설정은 재실행시에 반영됩니다.";
+            // 
+            // FormBrowser_HardwareAccelerationEnabled
+            // 
+            this.FormBrowser_HardwareAccelerationEnabled.AutoSize = true;
+            this.FormBrowser_HardwareAccelerationEnabled.Location = new System.Drawing.Point(6, 199);
+            this.FormBrowser_HardwareAccelerationEnabled.Name = "FormBrowser_HardwareAccelerationEnabled";
+            this.FormBrowser_HardwareAccelerationEnabled.Size = new System.Drawing.Size(153, 19);
+            this.FormBrowser_HardwareAccelerationEnabled.TabIndex = 13;
+            this.FormBrowser_HardwareAccelerationEnabled.Text = "하드웨어 가속을 사용 *";
+            this.ToolTipInfo.SetToolTip(this.FormBrowser_HardwareAccelerationEnabled, "렌더링에 GPU를 사용할지 여부를 지정합니다. \r\n활성화하면 성능을 향상시킬 수 있습니다. \r\n녹화,방송등의 화면이 보이지 않을 경우 해제하면 개" +
+        "선되는 경우가 있습니다.\r\n * 이 변경은 재실행 이후에 적용됩니다.");
+            this.FormBrowser_HardwareAccelerationEnabled.UseVisualStyleBackColor = true;
             // 
             // FormBrowser_IsDMMreloadDialogDestroyable
             // 
@@ -2429,157 +2489,6 @@ namespace ElectronicObserver.Window.Dialog
             this.label15.TabIndex = 1;
             this.label15.Text = "줌 배율：";
             // 
-            // tabPage14
-            // 
-            this.tabPage14.Controls.Add(this.groupBox4);
-            this.tabPage14.Controls.Add(this.groupBox3);
-            this.tabPage14.Location = new System.Drawing.Point(4, 22);
-            this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage14.Size = new System.Drawing.Size(682, 340);
-            this.tabPage14.TabIndex = 5;
-            this.tabPage14.Text = "브라우저2";
-            this.tabPage14.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.FormBrowser_FlashWMode);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Controls.Add(this.FormBrowser_FlashQuality);
-            this.groupBox4.Location = new System.Drawing.Point(6, 58);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 80);
-            this.groupBox4.TabIndex = 1;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Flash품질 설정";
-            this.groupBox4.Visible = false;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 54);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(43, 15);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "모드：";
-            // 
-            // FormBrowser_FlashWMode
-            // 
-            this.FormBrowser_FlashWMode.FormattingEnabled = true;
-            this.FormBrowser_FlashWMode.Items.AddRange(new object[] {
-            "direct",
-            "opaque"});
-            this.FormBrowser_FlashWMode.Location = new System.Drawing.Point(73, 51);
-            this.FormBrowser_FlashWMode.Name = "FormBrowser_FlashWMode";
-            this.FormBrowser_FlashWMode.Size = new System.Drawing.Size(121, 23);
-            this.FormBrowser_FlashWMode.TabIndex = 3;
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_FlashWMode, "Flash모드를 지정합니다.\r\n기본값은 opaque입니다.\r\ndirect로하면 성능이 향상됩니다.");
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 25);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(43, 15);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "品質：";
-            // 
-            // FormBrowser_FlashQuality
-            // 
-            this.FormBrowser_FlashQuality.FormattingEnabled = true;
-            this.FormBrowser_FlashQuality.Items.AddRange(new object[] {
-            "low",
-            "medium",
-            "high",
-            "best"});
-            this.FormBrowser_FlashQuality.Location = new System.Drawing.Point(73, 22);
-            this.FormBrowser_FlashQuality.Name = "FormBrowser_FlashQuality";
-            this.FormBrowser_FlashQuality.Size = new System.Drawing.Size(121, 23);
-            this.FormBrowser_FlashQuality.TabIndex = 1;
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_FlashQuality, "Flash의 품질을 설정합니다.。\r\n기본값은 high입니다.");
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.FormBrowser_BrowserVersion);
-            this.groupBox3.Controls.Add(this.FormBrowser_DeleteRegistry);
-            this.groupBox3.Controls.Add(this.FormBrowser_GPURendering);
-            this.groupBox3.Controls.Add(this.FormBrowser_ApplyRegistry);
-            this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(670, 46);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "레지스트리";
-            // 
-            // FormBrowser_BrowserVersion
-            // 
-            this.FormBrowser_BrowserVersion.FormattingEnabled = true;
-            this.FormBrowser_BrowserVersion.Items.AddRange(new object[] {
-            "7000",
-            "8000",
-            "8888",
-            "9000",
-            "9999",
-            "10000",
-            "10001",
-            "11000",
-            "11001"});
-            this.FormBrowser_BrowserVersion.Location = new System.Drawing.Point(112, 16);
-            this.FormBrowser_BrowserVersion.Name = "FormBrowser_BrowserVersion";
-            this.FormBrowser_BrowserVersion.Size = new System.Drawing.Size(60, 23);
-            this.FormBrowser_BrowserVersion.TabIndex = 1;
-            this.FormBrowser_BrowserVersion.Text = "7000";
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_BrowserVersion, "내장 브라우저의 버전을 지정합니다.\r\n7000이IE7, 8000이IE8, 11000이IE11급입니다.。\r\n버전에 따라 동작이 달라질 수 있습니다." +
-        "");
-            // 
-            // FormBrowser_DeleteRegistry
-            // 
-            this.FormBrowser_DeleteRegistry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FormBrowser_DeleteRegistry.Location = new System.Drawing.Point(614, 15);
-            this.FormBrowser_DeleteRegistry.Name = "FormBrowser_DeleteRegistry";
-            this.FormBrowser_DeleteRegistry.Size = new System.Drawing.Size(50, 23);
-            this.FormBrowser_DeleteRegistry.TabIndex = 4;
-            this.FormBrowser_DeleteRegistry.Text = "삭제";
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_DeleteRegistry, "레지스트리를 삭제합니다.");
-            this.FormBrowser_DeleteRegistry.UseVisualStyleBackColor = true;
-            this.FormBrowser_DeleteRegistry.Click += new System.EventHandler(this.FormBrowser_DeleteRegistry_Click);
-            // 
-            // FormBrowser_GPURendering
-            // 
-            this.FormBrowser_GPURendering.AutoSize = true;
-            this.FormBrowser_GPURendering.Location = new System.Drawing.Point(180, 18);
-            this.FormBrowser_GPURendering.Name = "FormBrowser_GPURendering";
-            this.FormBrowser_GPURendering.Size = new System.Drawing.Size(87, 19);
-            this.FormBrowser_GPURendering.TabIndex = 2;
-            this.FormBrowser_GPURendering.Text = "GPU렌더링";
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_GPURendering, "내장 브라우저에서 GPU 렌더링을 사용할지 여부를 설정합니다.\r\n처리속도가 빨라집니다.");
-            this.FormBrowser_GPURendering.UseVisualStyleBackColor = true;
-            // 
-            // FormBrowser_ApplyRegistry
-            // 
-            this.FormBrowser_ApplyRegistry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FormBrowser_ApplyRegistry.Location = new System.Drawing.Point(558, 15);
-            this.FormBrowser_ApplyRegistry.Name = "FormBrowser_ApplyRegistry";
-            this.FormBrowser_ApplyRegistry.Size = new System.Drawing.Size(50, 23);
-            this.FormBrowser_ApplyRegistry.TabIndex = 3;
-            this.FormBrowser_ApplyRegistry.Text = "적용";
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_ApplyRegistry, "레지스트리 설정을 적용합니다.\r\n아래의 [OK]버튼은 반영되지 않으므로 주의해주세요.");
-            this.FormBrowser_ApplyRegistry.UseVisualStyleBackColor = true;
-            this.FormBrowser_ApplyRegistry.Click += new System.EventHandler(this.FormBrowser_ApplyRegistry_Click);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 19);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(95, 15);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "브라우저 버전：";
-            // 
             // tabPage21
             // 
             this.tabPage21.Controls.Add(this.FormBaseAirCorps_ShowEventMapOnly);
@@ -2746,7 +2655,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 330);
+            this.label10.Location = new System.Drawing.Point(3, 328);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(256, 15);
             this.label10.TabIndex = 5;
@@ -2891,7 +2800,7 @@ namespace ElectronicObserver.Window.Dialog
             this.BGMPlayer_ControlGrid.RowHeadersVisible = false;
             this.BGMPlayer_ControlGrid.RowTemplate.Height = 21;
             this.BGMPlayer_ControlGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 279);
+            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 277);
             this.BGMPlayer_ControlGrid.TabIndex = 0;
             this.BGMPlayer_ControlGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BGMPlayer_ControlGrid_CellContentClick);
             this.BGMPlayer_ControlGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.BGMPlayer_ControlGrid_CellFormatting);
@@ -2989,18 +2898,6 @@ namespace ElectronicObserver.Window.Dialog
             this.PlayTimeTimer.Interval = 1000;
             this.PlayTimeTimer.Tick += new System.EventHandler(this.PlayTimeTimer_Tick);
             // 
-            // NodeToAlphabetBox
-            // 
-            this.NodeToAlphabetBox.AutoSize = true;
-            this.NodeToAlphabetBox.Location = new System.Drawing.Point(242, 10);
-            this.NodeToAlphabetBox.Name = "NodeToAlphabetBox";
-            this.NodeToAlphabetBox.Size = new System.Drawing.Size(182, 19);
-            this.NodeToAlphabetBox.TabIndex = 16;
-            this.NodeToAlphabetBox.Text = "노드 번호를 알파벳으로 표시";
-            this.ToolTipInfo.SetToolTip(this.NodeToAlphabetBox, "노드 번호를 알파벳으로 표시합니다. EX ) 7-1-1 -> 7-1-A");
-            this.NodeToAlphabetBox.UseVisualStyleBackColor = true;
-            this.NodeToAlphabetBox.CheckedChanged += new System.EventHandler(this.NodeToAlphabetBox_CheckedChanged);
-            // 
             // DialogConfiguration
             // 
             this.AcceptButton = this.ButtonOK;
@@ -3075,11 +2972,6 @@ namespace ElectronicObserver.Window.Dialog
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FormBrowser_ZoomRate)).EndInit();
-            this.tabPage14.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tabPage21.ResumeLayout(false);
             this.tabPage21.PerformLayout();
             this.SubWindow_Json.ResumeLayout(false);
@@ -3139,7 +3031,6 @@ namespace ElectronicObserver.Window.Dialog
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.CheckBox Connection_SaveOtherFile;
-		private System.Windows.Forms.CheckBox Connection_SaveSWF;
 		private System.Windows.Forms.CheckBox Connection_SaveResponse;
 		private System.Windows.Forms.CheckBox Connection_SaveRequest;
 		private System.Windows.Forms.TextBox Connection_SaveDataPath;
@@ -3201,20 +3092,8 @@ namespace ElectronicObserver.Window.Dialog
 		private System.Windows.Forms.CheckBox FormFleet_ShowNextExp;
 		private System.Windows.Forms.CheckBox FormFleet_ShortenHPBar;
 		private System.Windows.Forms.CheckBox Log_ShowSpoiler;
-		private System.Windows.Forms.GroupBox groupBox3;
-		private System.Windows.Forms.ComboBox FormBrowser_BrowserVersion;
-		private System.Windows.Forms.Button FormBrowser_DeleteRegistry;
-		private System.Windows.Forms.CheckBox FormBrowser_GPURendering;
-		private System.Windows.Forms.Button FormBrowser_ApplyRegistry;
-		private System.Windows.Forms.Label label19;
 		private System.Windows.Forms.CheckBox Life_ShowStatusBar;
 		private System.Windows.Forms.CheckBox FormBrowser_ZoomFit;
-		private System.Windows.Forms.TabPage tabPage14;
-		private System.Windows.Forms.GroupBox groupBox4;
-		private System.Windows.Forms.Label label21;
-		private System.Windows.Forms.ComboBox FormBrowser_FlashWMode;
-		private System.Windows.Forms.Label label20;
-		private System.Windows.Forms.ComboBox FormBrowser_FlashQuality;
 		private System.Windows.Forms.TabPage tabPage16;
 		private System.Windows.Forms.CheckBox FormHeadquarters_BlinkAtMaximum;
 		private System.Windows.Forms.ComboBox FormFleet_AirSuperiorityMethod;
@@ -3231,7 +3110,8 @@ namespace ElectronicObserver.Window.Dialog
 		private System.Windows.Forms.CheckBox Life_LockLayout;
 		private System.Windows.Forms.CheckBox Life_CanCloseFloatWindowInLock;
 		private System.Windows.Forms.CheckBox UI_BarColorMorphing;
-		private System.Windows.Forms.TabPage tabPage17;
+        private System.Windows.Forms.CheckBox FormBrowser_ForceColorProfile;
+        private System.Windows.Forms.TabPage tabPage17;
 		private System.Windows.Forms.CheckBox BGMPlayer_Enabled;
 		private System.Windows.Forms.DataGridView BGMPlayer_ControlGrid;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn BGMPlayer_ColumnEnabled;
@@ -3318,11 +3198,16 @@ namespace ElectronicObserver.Window.Dialog
 		private System.Windows.Forms.TabPage tabPage21;
 		private System.Windows.Forms.CheckBox FormBaseAirCorps_ShowEventMapOnly;
 		private System.Windows.Forms.CheckBox FormBattle_Display7thAsSingleLine;
+        private System.Windows.Forms.CheckBox FormBrowser_HardwareAccelerationEnabled;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label labelThemeRestartWarning;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox selectTheme;
         private System.Windows.Forms.ComboBox ExpCheckerOpList;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.CheckBox NodeToAlphabetBox;
+        private System.Windows.Forms.CheckBox FormBrowser_PreserveDrawingBuffer;
+        private System.Windows.Forms.Label label21;
     }
 }

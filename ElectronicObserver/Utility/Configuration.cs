@@ -79,7 +79,6 @@ namespace ElectronicObserver.Utility
 				/// <summary>
 				/// 通信内容保存：SWFを保存するか
 				/// </summary>
-				public bool SaveSWF { get; set; }
 
 				/// <summary>
 				/// 通信内容保存：その他ファイルを保存するか
@@ -133,7 +132,6 @@ namespace ElectronicObserver.Utility
 					SaveDataPath = @"KCAPI";
 					SaveRequest = false;
 					SaveResponse = true;
-					SaveSWF = false;
 					SaveOtherFile = false;
 					ApplyVersion = false;
 					RegisterAsSystemProxy = false;
@@ -882,15 +880,15 @@ namespace ElectronicObserver.Utility
 			public class ConfigFormBrowser : ConfigPartBase
 			{
 
-				/// <summary>
-				/// ブラウザの拡大率 10-1000(%)
-				/// </summary>
-				public int ZoomRate { get; set; }
+                /// <summary>
+                /// ブラウザの拡大率 10-1000(%)
+                /// </summary>
+                public double ZoomRate { get; set; }
 
-				/// <summary>
-				/// ブラウザをウィンドウサイズに合わせる
-				/// </summary>
-				[DataMember]
+                /// <summary>
+                /// ブラウザをウィンドウサイズに合わせる
+                /// </summary>
+                [DataMember]
 				public bool ZoomFit { get; set; }
 
 				/// <summary>
@@ -965,32 +963,39 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public string FlashWMode { get; set; }
 
-				/// <summary>
-				/// flashのパラメータ指定 'quality'
-				/// </summary>
-				public string FlashQuality { get; set; }
+                /// <summary>
+                /// flashのパラメータ指定 'quality'
+                /// </summary>
+                public bool HardwareAccelerationEnabled { get; set; }
+                /// <summary>
+                /// 描画バッファを保持するか
+                /// </summary>
+				public bool PreserveDrawingBuffer { get; set; }
+
+                public bool ForceColorProfile { get; set; }
 
 
-				public ConfigFormBrowser()
+                public ConfigFormBrowser()
 				{
-					ZoomRate = 100;
+					ZoomRate = 1;
 					ZoomFit = false;
 					LogInPageURL = @"http://www.dmm.com/netgame_s/kancolle/";
 					IsEnabled = true;
 					ScreenShotPath = "ScreenShot";
 					ScreenShotFormat = 2;
 					ScreenShotSaveMode = 1;
-					StyleSheet = "\r\nbody {\r\n	margin:0;\r\n	overflow:hidden\r\n}\r\n\r\n#game_frame {\r\n	position:fixed;\r\n	left:50%;\r\n	top:-16px;\r\n	margin-left:-450px;\r\n	z-index:1\r\n}\r\n";
-					IsScrollable = false;
+                    StyleSheet = "\r\nbody {\r\n	margin:0;\r\n	overflow:hidden\r\n}\r\n\r\n#game_frame {\r\n	position:fixed;\r\n	left:50%;\r\n	top:-16px;\r\n	margin-left:-450px;\r\n	z-index:1\r\n}\r\n";
+                    IsScrollable = false;
 					AppliesStyleSheet = true;
 					IsDMMreloadDialogDestroyable = false;
 					AvoidTwitterDeterioration = true;
 					ToolMenuDockStyle = DockStyle.Top;
 					IsToolMenuVisible = true;
 					ConfirmAtRefresh = true;
-					FlashWMode = "opaque";
-					FlashQuality = "high";
-				}
+                    HardwareAccelerationEnabled = true;
+                    PreserveDrawingBuffer = true;
+                    ForceColorProfile = false;
+                }
 			}
 			/// <summary>[ブラウザ]ウィンドウ</summary>
 			[DataMember]
@@ -1468,23 +1473,6 @@ namespace ElectronicObserver.Utility
 				MessageBox.Show(SoftwareInformation.SoftwareNameKorean + " 를 이용해주셔서 감사합니다.。\r\n설정 및 사용 방법에 대해서는 '도움말' -> '온라인 메뉴얼'을 참조해주십시오.",
 					"초기기동 메세지", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
-				// そのままだと正常に動作しなくなった(らしい)ので、ブラウザバージョンの書き込み
-				try
-				{
-					using (var reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(DialogConfiguration.RegistryPathMaster + DialogConfiguration.RegistryPathBrowserVersion))
-						reg.SetValue(Window.FormBrowserHost.BrowserExeName, DialogConfiguration.DefaultBrowserVersion, Microsoft.Win32.RegistryValueKind.DWord);
-
-					using (var reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(DialogConfiguration.RegistryPathMaster + DialogConfiguration.RegistryPathGPURendering))
-						reg.SetValue(Window.FormBrowserHost.BrowserExeName, DialogConfiguration.DefaultGPURendering ? 1 : 0, Microsoft.Win32.RegistryValueKind.DWord);
-
-					Utility.Logger.Add(2, "브라우저 버전을 레지스트리에 입력했습니다. 삭제하려면 설정 -> 하위창 -> 브라우저2 -> 삭제를 누르십시오.");
-
-				}
-				catch (Exception ex)
-				{
-					Utility.ErrorReporter.SendErrorReport(ex, "브라우저 버전을 레지스트리에 쓸 수 없습니다.");
-				}
 			}
 		}
 
@@ -1666,12 +1654,33 @@ namespace ElectronicObserver.Utility
 			if (dt <= DateTimeHelper.CSVStringToTime("2018/02/11 23:00:00"))
 				Update307_ConvertRecord();
 
+            if (dt <= DateTimeHelper.CSVStringToTime("2018/08/17 23:00:00"))
+                Update312_RemoveObsoleteRegistry();
 
-			Config.VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
+            Config.VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
 		}
 
+        private void Update312_RemoveObsoleteRegistry()
+        {
+            Config.FormBrowser.ZoomRate = 1;
 
-		private void Update282_ConvertRecord()
+            string RegistryPathMaster = @"Software\Microsoft\Internet Explorer\Main\FeatureControl\";
+            string RegistryPathBrowserVersion = @"FEATURE_BROWSER_EMULATION\";
+            string RegistryPathGPURendering = @"FEATURE_GPU_RENDERING\";
+            try
+            {
+                using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathBrowserVersion, true))
+                    reg.DeleteValue(Window.FormBrowserHost.BrowserExeName);
+                using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathGPURendering, true))
+                    reg.DeleteValue(Window.FormBrowserHost.BrowserExeName);
+            }
+            catch (Exception ex)
+            {
+                Utility.ErrorReporter.SendErrorReport(ex, "<= ver. 3.1.2 이전 프로세스 : 이전 레지스트리 삭제에 실패했습니다.");
+            }
+        }
+
+        private void Update282_ConvertRecord()
 		{
 			// 敵編成レコード：ハッシュ計算が変わり、項目が増えたため引き継ぎ不能、バックアップを取っておく
 			// ドロップ記録レコード：〃　編成IDを 0x0 で初期化する

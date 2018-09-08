@@ -44,7 +44,7 @@ namespace ElectronicObserver.Window
 			public TableFleetControl(FormFleet parent)
 			{
                 this.Parent = parent;
-				#region Initialize
+                #region Initialize
 
 				Name = new Label
 				{

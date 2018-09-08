@@ -76,12 +76,12 @@ namespace BrowserLib
 		/// ブラウザの拡大率 10-1000(%)
 		/// </summary>
 		[DataMember]
-		public int ZoomRate { get; set; }
+        public double ZoomRate { get; set; }
 
-		/// <summary>
-		/// ブラウザをウィンドウサイズに合わせる
-		/// </summary>
-		[DataMember]
+        /// <summary>
+        /// ブラウザをウィンドウサイズに合わせる
+        /// </summary>
+        [DataMember]
 		public bool ZoomFit { get; set; }
 
 		/// <summary>
@@ -177,6 +177,17 @@ namespace BrowserLib
 
         [DataMember]
         public uint Theme { get; set; } //  테마 작업 체크포인트
+
+        [DataMember]
+        public bool HardwareAccelerationEnabled { get; set; }
+
+        [DataMember]
+        public bool PreserveDrawingBuffer { get; set; }
+        /// <summary>
+		/// カラープロファイルを sRGB 固定にするか
+		/// </summary>
+		[DataMember]
+        public bool ForceColorProfile { get; set; }
 
     }
 }

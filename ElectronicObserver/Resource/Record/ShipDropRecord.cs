@@ -278,7 +278,7 @@ namespace ElectronicObserver.Resource.Record
 		}
 
 
-		public override string RecordHeader => "함선ID,함명,아이템ID,아이템이름,장비ID장비명,시간,해역,해역,노드,난이도,보스,적편성ID,랭크,사령부Lv";
+		public override string RecordHeader => "함선ID,함명,아이템ID,아이템이름,장비ID,장비명,시간,해역,해역,노드,난이도,보스,적편성ID,랭크,사령부Lv";
 
 		public override string FileName => "ShipDropRecord.csv";
 	}

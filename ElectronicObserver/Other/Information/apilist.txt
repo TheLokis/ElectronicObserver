@@ -1132,9 +1132,9 @@ api_get_member/deck		：艦隊情報 個数はそのまま保有艦隊数と同�
 
 
 Request.api_req_hensei/change		：艦隊編成変更
-	api_ship_idx		：変更場所　-1=旗艦以外全解除
-	api_id				：艦隊ID
-	api_ship_id			：艦船ID　-1=はずす, -2=旗艦以外全解除
+	api_ship_idx		：変更場所　0基点(-> n+1番艦を変更)　0=旗艦以外全解除
+	api_id				：変更する艦隊ID
+	api_ship_id			：配置する艦船ID　-1=はずす, -2=旗艦以外全解除
 
 api_req_hensei/change				：艦隊編成変更
 	api_change_count	：旗艦以外全解除時のみ存在　除隊した艦船数
@@ -3215,13 +3215,20 @@ Request.api_req_member/registration_sp		：艦これAndroid版 事前登録
 api_req_furniture/radio_play	：母港ラジオ再生
 	(情報なし)
 
+	Request.api_req_member/set_oss_condition		：???
+	api_language_type	：0
+	api_oss_items[0]	：1
+	...
+	api_oss_items[7]	：1
+ api_req_member/set_oss_condition		：???
+	(情報なし)
 
 
 
 ◇APIが呼ばれる順番
 
 《ログイン》
-api_start2
+api_start2/getData
 api_req_member/get_incentive
 api_get_member/require_info
 api_port/port

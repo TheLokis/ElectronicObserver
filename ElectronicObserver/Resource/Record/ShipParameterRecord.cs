@@ -58,11 +58,11 @@ namespace ElectronicObserver.Resource.Record
 			/// </summary>
 			public bool IsAvailable => !IsMinimumDefault && !IsMaximumDefault;
 
-
-			/// <summary>
-			/// 最小値の初期値
-			/// </summary>
-			public static int MinimumDefault => 0;
+            public bool IsDetermined => IsAvailable && MinimumEstMin == MinimumEstMax;
+            /// <summary>
+            /// 最小値の初期値
+            /// </summary>
+            public static int MinimumDefault => 0;
 
 			/// <summary>
 			/// 最大値の初期値
@@ -668,7 +668,11 @@ namespace ElectronicObserver.Resource.Record
 				Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[shipID].NameWithClass + "의 초기 장비를 기록했습니다.");
 			}
 
-			e.DefaultSlot = slot;
+            if (e.DefaultSlot == null || !e.DefaultSlot.SequenceEqual(slot))
+                Utility.Logger.Add(2, KCDatabase.Instance.MasterShips[shipID].NameWithClass + " 의 초기 장비를 기록했습니다.");
+
+
+            e.DefaultSlot = slot;
 
 			Update(e);
 		}
@@ -814,9 +818,10 @@ namespace ElectronicObserver.Resource.Record
 			foreach (ShipData ship in KCDatabase.Instance.Ships.Values)
 			{
 
-				UpdateParameter(ship);
+                if (ship.AllSlot.All(id => id <= 0))
+                    UpdateParameter(ship);
 
-			}
+            }
 
 			ParameterLoadFlag = false;      //一回限り(基本的に起動直後の1回)
 
