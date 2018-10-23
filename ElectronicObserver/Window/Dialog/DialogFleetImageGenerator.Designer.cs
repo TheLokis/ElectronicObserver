@@ -194,7 +194,7 @@
 			this.groupBox7.Size = new System.Drawing.Size(440, 136);
 			this.groupBox7.TabIndex = 9;
 			this.groupBox7.TabStop = false;
-			this.groupBox7.Text = "자유입력라";
+			this.groupBox7.Text = "자유입력란";
 			// 
 			// label2
 			// 

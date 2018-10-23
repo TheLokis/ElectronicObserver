@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -39,7 +40,7 @@ namespace Browser
                 {
                     return System.Reflection.Assembly.LoadFile(arch);
                 }
-                catch (System.IO.FileNotFoundException)
+                catch (IOException ex) when (ex is FileNotFoundException || ex is FileLoadException)
                 {
                     if (MessageBox.Show(
 $@"브라우저 구성 요소를 로드 할 수 없습니다. 실행에 필요한

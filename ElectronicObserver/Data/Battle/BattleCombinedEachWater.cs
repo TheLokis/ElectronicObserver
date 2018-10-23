@@ -27,8 +27,8 @@ namespace ElectronicObserver.Data.Battle
             OpeningTorpedo = new PhaseTorpedo(this, "선제뇌격", 0);
             Shelling1 = new PhaseShelling(this, "제1차포격전", 1, "1");
             Shelling2 = new PhaseShelling(this, "제2차포격전", 2, "2");
-            Shelling3 = new PhaseShelling(this, "제3차포격전", 4, "3");
-            Torpedo = new PhaseTorpedo(this, "뇌격전", 3);
+            Shelling3 = new PhaseShelling(this, "제3차포격전", 3, "3");
+            Torpedo = new PhaseTorpedo(this, "뇌격전", 4);
 
             foreach (var phase in GetPhases())
 				phase.EmulateBattle(_resultHPs, _attackDamages);
@@ -38,7 +38,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public override string APIName => "api_req_combined_battle/each_battle_water";
 
-		public override string BattleName => "연합함대-수상부대 대 연합함대 주간전";
+		public override string BattleName => "연합함대 - 수상부대 대 연합함대 주간전";
 
 
 

@@ -395,9 +395,10 @@ namespace ElectronicObserver.Window.Dialog
 			Life_ClockFormat.SelectedIndex = config.Life.ClockFormat;
 			Life_LockLayout.Checked = config.Life.LockLayout;
 			Life_CanCloseFloatWindowInLock.Checked = config.Life.CanCloseFloatWindowInLock;
+            Life_CanSizableFloatWindowInLock.Checked = config.Life.CanSizableFloatWindowInLock;
 
-			//[サブウィンドウ]
-			FormArsenal_ShowShipName.Checked = config.FormArsenal.ShowShipName;
+            //[サブウィンドウ]
+            FormArsenal_ShowShipName.Checked = config.FormArsenal.ShowShipName;
 			FormArsenal_BlinkAtCompletion.Checked = config.FormArsenal.BlinkAtCompletion;
 			FormArsenal_MaxShipNameWidth.Value = config.FormArsenal.MaxShipNameWidth;
 
@@ -613,9 +614,10 @@ namespace ElectronicObserver.Window.Dialog
 			config.Life.ClockFormat = Life_ClockFormat.SelectedIndex;
 			config.Life.LockLayout = Life_LockLayout.Checked;
 			config.Life.CanCloseFloatWindowInLock = Life_CanCloseFloatWindowInLock.Checked;
+            config.Life.CanSizableFloatWindowInLock = Life_CanSizableFloatWindowInLock.Checked;
 
-			//[サブウィンドウ]
-			config.FormArsenal.ShowShipName = FormArsenal_ShowShipName.Checked;
+            //[サブウィンドウ]
+            config.FormArsenal.ShowShipName = FormArsenal_ShowShipName.Checked;
 			config.FormArsenal.BlinkAtCompletion = FormArsenal_BlinkAtCompletion.Checked;
 			config.FormArsenal.MaxShipNameWidth = (int)FormArsenal_MaxShipNameWidth.Value;
 

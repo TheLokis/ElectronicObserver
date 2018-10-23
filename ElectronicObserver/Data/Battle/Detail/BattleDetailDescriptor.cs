@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectronicObserver.Utility.Data;
 
 namespace ElectronicObserver.Data.Battle.Detail
 {
@@ -140,17 +141,38 @@ namespace ElectronicObserver.Data.Battle.Detail
 						else
 							sb.AppendLine("〈아군함대〉");
 
-						if (isBaseAirRaid)
-							OutputFriendBase(sb, p.FriendInitialHPs, p.FriendMaxHPs);
-						else
-							OutputFriendData(sb, p.FriendFleet, p.FriendInitialHPs, p.FriendMaxHPs);
+                        void appendFleetInfo(FleetData fleet)
+                        {
+                            sb.Append(" 제공전력 ");
+                            sb.Append(GetRangeString(Calculator.GetAirSuperiority(fleet, false), Calculator.GetAirSuperiority(fleet, true)));
 
-						if (p.FriendFleetEscort != null)
+                            double truncate2(double value) => Math.Floor(value * 100) / 100;
+                            sb.AppendFormat(" / 색적능력 [1] {0}, [2] {1}, [3] {2}, [4] {3}",
+                                truncate2(Calculator.GetSearchingAbility_New33(fleet, 1)),
+                                truncate2(Calculator.GetSearchingAbility_New33(fleet, 2)),
+                                truncate2(Calculator.GetSearchingAbility_New33(fleet, 3)),
+                                truncate2(Calculator.GetSearchingAbility_New33(fleet, 4)));
+                        }
+
+                        if (isBaseAirRaid)
+                        {
+                            sb.AppendLine();
+                            OutputFriendBase(sb, p.FriendInitialHPs, p.FriendMaxHPs);
+                        }
+                        else
+                        {
+                            appendFleetInfo(p.FriendFleet);
+                            sb.AppendLine();
+                            OutputFriendData(sb, p.FriendFleet, p.FriendInitialHPs, p.FriendMaxHPs);
+                        }
+
+                        if (p.FriendFleetEscort != null)
 						{
 							sb.AppendLine();
-							sb.AppendLine("〈아군수반함〉");
-
-							OutputFriendData(sb, p.FriendFleetEscort, p.FriendInitialHPsEscort, p.FriendMaxHPsEscort);
+                            sb.Append("〈아군수반함〉");
+                            appendFleetInfo(p.FriendFleetEscort);
+                            sb.AppendLine();
+                            OutputFriendData(sb, p.FriendFleetEscort, p.FriendInitialHPsEscort, p.FriendMaxHPsEscort);
 						}
 
 						sb.AppendLine();
@@ -406,14 +428,16 @@ namespace ElectronicObserver.Data.Battle.Detail
 			return sbmaster.ToString();
 		}
 
+        private static string GetRangeString(int min, int max) => min != max ? $"{min} ～ {max}" : min.ToString();
 
-		private static void GetBattleDetailBaseAirCorps(StringBuilder sb, int mapAreaID)
+        private static void GetBattleDetailBaseAirCorps(StringBuilder sb, int mapAreaID)
 		{
 			foreach (var corps in KCDatabase.Instance.BaseAirCorps.Values.Where(corps => corps.MapAreaID == mapAreaID))
 			{
-				sb.AppendFormat("{0} [{1}]\r\n　{2}\r\n",
-					corps.Name, Constants.GetBaseAirCorpsActionKind(corps.ActionKind),
-					string.Join(", ", corps.Squadrons.Values
+                sb.AppendFormat("{0} [{1}] 제공전력 {2}\r\n　{3}\r\n",
+                                    corps.Name, Constants.GetBaseAirCorpsActionKind(corps.ActionKind),
+                                    GetRangeString(Calculator.GetAirSuperiority(corps, false), Calculator.GetAirSuperiority(corps, true)),
+                    string.Join(", ", corps.Squadrons.Values
 						.Where(sq => sq.State == 1 && sq.EquipmentInstance != null)
 						.Select(sq => sq.EquipmentInstance.NameWithLevel)));
 			}

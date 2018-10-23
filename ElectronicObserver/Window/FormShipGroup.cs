@@ -72,7 +72,6 @@ namespace ElectronicObserver.Window
 				column.MinimumWidth = 2;
 			}
 
-
 			#region set CellStyle
 
 			CSDefaultLeft = new DataGridViewCellStyle

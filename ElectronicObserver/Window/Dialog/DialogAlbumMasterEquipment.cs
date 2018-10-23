@@ -245,8 +245,8 @@ namespace ElectronicObserver.Window.Dialog
                     if (stype.EquippableCategories.Contains((int)eq.CategoryType))
                         sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.TranslationType.ShipTypes));
                 }
-				ToolTipInfo.SetToolTip(EquipmentType, sb.ToString());
-			}
+                ToolTipInfo.SetToolTip(EquipmentType, GetEquippableShips(equipmentID));
+            }
 			EquipmentName.Text = eq.Name;
 			ToolTipInfo.SetToolTip(EquipmentName, "(우클릭으로 복사)");
 
@@ -364,6 +364,8 @@ namespace ElectronicObserver.Window.Dialog
 		}
 
 
+
+
 		private void SetParameterText(ImageLabel label, int value)
 		{
 
@@ -385,8 +387,54 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
+        private string GetEquippableShips(int equipmentID)
+        {
+            var db = KCDatabase.Instance;
+            var sb = new StringBuilder();
+            sb.AppendLine("장착가능:");
+            var eq = db.MasterEquipments[equipmentID];
+            if (eq == null)
+                return sb.ToString();
+            int eqCategory = (int)eq.CategoryType;
+            var specialShips = new Dictionary<ShipTypes, List<string>>();
+            foreach (var ship in db.MasterShips.Values.Where(s => s.SpecialEquippableCategories != null))
+            {
+                bool usual = ship.ShipTypeInstance.EquippableCategories.Contains(eqCategory);
+                bool special = ship.SpecialEquippableCategories.Contains(eqCategory);
+                if (usual != special)
+                {
+                    if (specialShips.ContainsKey(ship.ShipType))
+                        specialShips[ship.ShipType].Add(ship.NameWithClass);
+                    else
+                        specialShips.Add(ship.ShipType, new List<string>(new[] { ship.NameWithClass }));
+                }
+            }
+            foreach (var shiptype in db.ShipTypes.Values)
+            {
+                if (shiptype.EquippableCategories.Contains(eqCategory))
+                {
+                    sb.Append(shiptype.Name);
+                    if (specialShips.ContainsKey(shiptype.Type))
+                    {
+                        sb.Append(" (").Append(string.Join(", ", specialShips[shiptype.Type])).Append("を除く)");
+                    }
+                    sb.AppendLine();
+                }
+                else
+                {
+                    if (specialShips.ContainsKey(shiptype.Type))
+                    {
+                        sb.Append("○ ").AppendLine(string.Join(", ", specialShips[shiptype.Type]));
+                    }
+                }
+            }
+            if (eq.EquippableShipsAtExpansion.Any())
+                sb.Append("[보강슬롯] ").AppendLine(string.Join(", ", eq.EquippableShipsAtExpansion.Select(id => db.MasterShips[id].NameWithClass)));
+            return sb.ToString();
+        }
 
-		private void DefaultSlots_MouseDown(object sender, MouseEventArgs e)
+
+        private void DefaultSlots_MouseDown(object sender, MouseEventArgs e)
 		{
 
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)

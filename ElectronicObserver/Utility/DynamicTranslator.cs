@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ElectronicObserver.Utility
 {
@@ -24,6 +26,10 @@ namespace ElectronicObserver.Utility
         private XDocument expeditionsdataXml;
         private XDocument ItemsXml;
         private XDocument versionManifest;
+        private JObject Akashi_Data;
+        private JObject Akashi_Day;
+        private string AkashiDataversion;
+        private string AkashiDayversion;
         private string shipsVersion;
         private string shipTypesVersion;
         private string equipmentVersion;
@@ -35,6 +41,18 @@ namespace ElectronicObserver.Utility
         private string expeditionsdataVersion;
 
         private static string hubsite = "https://thelokis.github.io/EOTranslation/Translations/";
+
+        public JObject Master_Akashi_Data { get { return Akashi_Data; } }
+
+        public JObject Master_Akashi_Day { get { return Akashi_Day; } }
+
+        #region Singleton
+
+        private static readonly DynamicTranslator instance = new DynamicTranslator();
+
+        public static DynamicTranslator Instance = instance;
+
+        #endregion
 
         internal DynamicTranslator()
         {
@@ -51,16 +69,24 @@ namespace ElectronicObserver.Utility
                     if (File.Exists("Translations\\Expeditions.xml")) this.expeditionsXml = XDocument.Load("Translations\\Expeditions.xml");
                     if (File.Exists("Translations\\Items.xml")) this.ItemsXml = XDocument.Load("Translations\\Items.xml");
                     if (File.Exists("Translations\\ExpeditionData.xml")) this.expeditionsdataXml = XDocument.Load("Translations\\ExpeditionData.xml");
+                    if (File.Exists("Translations\\akashidata.json"))
+                    {
+                        Akashi_Data = JObject.Parse(File.ReadAllText("Translations\\akashidata.json"));
+                    }
+
+                    if (File.Exists("Translations\\akashi_day.json"))
+                    {
+                        Akashi_Day = JObject.Parse(File.ReadAllText("Translations\\akashi_day.json"));
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Logger.Add(3, "Could not load translation file: " + ex.Message);
             }
+
             GetVersions();
             CheckForUpdates();
-
-            
         }
 
         private void GetVersions()
@@ -145,154 +171,219 @@ namespace ElectronicObserver.Utility
             {
                 this.expeditionsdataVersion = "0.0.0";
             }
+
+            try
+            {
+                this.AkashiDataversion = this.Akashi_Data["version"].ToString();
+            }
+            catch (NullReferenceException)
+            {
+                this.AkashiDataversion = "0.0.0";
+            }
+
+            try
+            {
+                this.AkashiDayversion = this.Akashi_Day["version"].ToString();
+            }
+            catch (NullReferenceException)
+            {
+                this.AkashiDayversion = "0.0.0";
+            }
+
         }
 
         private void CheckForUpdates()
         {
-            try
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            Directory.CreateDirectory("Translations");
+            string locale = Thread.CurrentThread.CurrentCulture.Name;
+            if (locale != "ja-JP")
             {
-                ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                Directory.CreateDirectory("Translations");
-                string locale = Thread.CurrentThread.CurrentCulture.Name;
-                if (locale != "ja-JP")
+                WebRequest rq = HttpWebRequest.Create(hubsite + "VersionManifest.xml");
+                using (WebResponse resp = rq.GetResponse())
                 {
-                    WebRequest rq = HttpWebRequest.Create(hubsite + "VersionManifest.xml");
-                    using (WebResponse resp = rq.GetResponse())
+                    Stream responseStream = resp.GetResponseStream();
+                    this.versionManifest = XDocument.Load(responseStream);
+                }
+
+                string newShipVer = versionManifest.Root.Element("Ships").Attribute("version").Value;
+                string newShipTypeVer = versionManifest.Root.Element("ShipTypes").Attribute("version").Value;
+                string newEquipVer = versionManifest.Root.Element("Equipment").Attribute("version").Value;
+                string newEquipTypeVer = versionManifest.Root.Element("EquipmentTypes").Attribute("version").Value;
+                string newOperationVer = versionManifest.Root.Element("Operations").Attribute("version").Value;
+                string newQuestVer = versionManifest.Root.Element("Quests").Attribute("version").Value;
+                string newExpedVer = versionManifest.Root.Element("Expeditions").Attribute("version").Value;
+                string newItemVer = versionManifest.Root.Element("Items").Attribute("version").Value;
+                string newExpeddataVer = versionManifest.Root.Element("ExpeditionData").Attribute("version").Value;
+                string newAkashiDayver = versionManifest.Root.Element("AkashiDay").Attribute("version").Value;
+                string newAkashiDataver = versionManifest.Root.Element("AkashiData").Attribute("version").Value;
+
+                if (newShipVer != shipsVersion)
+                {
+                    shipsXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "/Ships.xml");
+                    using (WebResponse resp = r2.GetResponse())
                     {
                         Stream responseStream = resp.GetResponseStream();
-                        this.versionManifest = XDocument.Load(responseStream);
+                        this.shipsXml = XDocument.Load(responseStream);
+                        shipsXml.Save("Translations\\Ships.xml");
                     }
-                    string newShipVer = versionManifest.Root.Element("Ships").Attribute("version").Value;
-                    string newShipTypeVer = versionManifest.Root.Element("ShipTypes").Attribute("version").Value;
-                    string newEquipVer = versionManifest.Root.Element("Equipment").Attribute("version").Value;
-                    string newEquipTypeVer = versionManifest.Root.Element("EquipmentTypes").Attribute("version").Value;
-                    string newOperationVer = versionManifest.Root.Element("Operations").Attribute("version").Value;
-                    string newQuestVer = versionManifest.Root.Element("Quests").Attribute("version").Value;
-                    string newExpedVer = versionManifest.Root.Element("Expeditions").Attribute("version").Value;
-                    string newItemVer = versionManifest.Root.Element("Items").Attribute("version").Value;
-                    string newExpeddataVer = versionManifest.Root.Element("ExpeditionData").Attribute("version").Value;
-
-                    if (newShipVer != shipsVersion)
-                    {
-                        shipsXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "/Ships.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.shipsXml = XDocument.Load(responseStream);
-                            shipsXml.Save("Translations\\Ships.xml");
-                        }
-                        Logger.Add(2, "함선 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newShipVer + ".");
-                    }
-                    if (newShipTypeVer != shipTypesVersion)
-                    {
-                        shipTypesXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "ShipTypes.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.shipTypesXml = XDocument.Load(responseStream);
-                            shipTypesXml.Save("Translations\\ShipTypes.xml");
-                        }
-                        Logger.Add(2, "함종 번역이 업데이트 되었습니다. 신규 버전 : " + newShipTypeVer + ".");
-                    }
-                    if (newEquipVer != equipmentVersion)
-                    {
-                        equipmentXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Equipment.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.equipmentXml = XDocument.Load(responseStream);
-                            equipmentXml.Save("Translations\\Equipment.xml");
-                        }
-                        Logger.Add(2, "장비 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipVer + ".");
-                    }
-                    if (newEquipTypeVer != equipTypesVersion)
-                    {
-                        equipTypesXML = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "EquipmentTypes.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.equipTypesXML = XDocument.Load(responseStream);
-                            equipTypesXML.Save("Translations\\EquipmentTypes.xml");
-                        }
-                        Logger.Add(2, "장비 종류 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipTypeVer + ".");
-                    }
-                    if (newOperationVer != operationsVersion)
-                    {
-                        operationsXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Operations.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.operationsXml = XDocument.Load(responseStream);
-                            operationsXml.Save("Translations\\Operations.xml");
-                        }
-                        Logger.Add(2, "해역 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newOperationVer + ".");
-                    }
-                    if (newQuestVer != questsVersion)
-                    {
-                        questsXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Quests.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.questsXml = XDocument.Load(responseStream);
-                            questsXml.Save("Translations\\Quests.xml");
-                        }
-                        Logger.Add(2, "임무 번역이 업데이트 되었습니다. 신규 버전 : " + newQuestVer + ".");
-                    }
-                    if (newExpedVer != expeditionsVersion)
-                    {
-                        expeditionsXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Expeditions.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.expeditionsXml = XDocument.Load(responseStream);
-                            expeditionsXml.Save("Translations\\Expeditions.xml");
-                        }
-                        Logger.Add(2, "원정 번역이 업데이트 되었습니다. 신규 버전 : " + newExpedVer + ".");
-                    }
-
-                    if (newExpeddataVer != expeditionsdataVersion)
-                    {
-                        expeditionsdataXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "ExpeditionData.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.expeditionsdataXml = XDocument.Load(responseStream);
-                            expeditionsdataXml.Save("Translations\\ExpeditionData.xml");
-                        }
-                        Logger.Add(2, "원정 데이터가 업데이트 되었습니다. 신규 버전 : " + newExpeddataVer + ".");
-                    }
-
-
-                    if (newItemVer != ItemsVersion)
-                    {
-                        ItemsXml = null;
-                        WebRequest r2 = HttpWebRequest.Create(hubsite + "Items.xml");
-                        using (WebResponse resp = r2.GetResponse())
-                        {
-                            Stream responseStream = resp.GetResponseStream();
-                            this.ItemsXml = XDocument.Load(responseStream);
-                            ItemsXml.Save("Translations\\Items.xml");
-                        }
-                        Logger.Add(2, "아이템 번역이 업데이트 되었습니다. 신규 버전 : " + newItemVer + ".");
-                    }
-
-
-                    GetVersions();
+                    Logger.Add(2, "함선 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newShipVer + ".");
                 }
+                if (newShipTypeVer != shipTypesVersion)
+                {
+                    shipTypesXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "ShipTypes.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.shipTypesXml = XDocument.Load(responseStream);
+                        shipTypesXml.Save("Translations\\ShipTypes.xml");
+                    }
+                    Logger.Add(2, "함종 번역이 업데이트 되었습니다. 신규 버전 : " + newShipTypeVer + ".");
+                }
+                if (newEquipVer != equipmentVersion)
+                {
+                    equipmentXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Equipment.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.equipmentXml = XDocument.Load(responseStream);
+                        equipmentXml.Save("Translations\\Equipment.xml");
+                    }
+                    Logger.Add(2, "장비 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipVer + ".");
+                }
+                if (newEquipTypeVer != equipTypesVersion)
+                {
+                    equipTypesXML = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "EquipmentTypes.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.equipTypesXML = XDocument.Load(responseStream);
+                        equipTypesXML.Save("Translations\\EquipmentTypes.xml");
+                    }
+                    Logger.Add(2, "장비 종류 번역이 업데이트 되었습니다. 신규 버전 : " + newEquipTypeVer + ".");
+                }
+                if (newOperationVer != operationsVersion)
+                {
+                    operationsXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Operations.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.operationsXml = XDocument.Load(responseStream);
+                        operationsXml.Save("Translations\\Operations.xml");
+                    }
+                    Logger.Add(2, "해역 이름 번역이 업데이트 되었습니다. 신규 버전 : " + newOperationVer + ".");
+                }
+                if (newQuestVer != questsVersion)
+                {
+                    questsXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Quests.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.questsXml = XDocument.Load(responseStream);
+                        questsXml.Save("Translations\\Quests.xml");
+                    }
+                    Logger.Add(2, "임무 번역이 업데이트 되었습니다. 신규 버전 : " + newQuestVer + ".");
+                }
+                if (newExpedVer != expeditionsVersion)
+                {
+                    expeditionsXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Expeditions.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.expeditionsXml = XDocument.Load(responseStream);
+                        expeditionsXml.Save("Translations\\Expeditions.xml");
+                    }
+                    Logger.Add(2, "원정 번역이 업데이트 되었습니다. 신규 버전 : " + newExpedVer + ".");
+                }
+
+                if (newExpeddataVer != expeditionsdataVersion)
+                {
+                    expeditionsdataXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "ExpeditionData.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.expeditionsdataXml = XDocument.Load(responseStream);
+                        expeditionsdataXml.Save("Translations\\ExpeditionData.xml");
+                    }
+                    Logger.Add(2, "원정 데이터가 업데이트 되었습니다. 신규 버전 : " + newExpeddataVer + ".");
+                }
+
+
+                if (newItemVer != ItemsVersion)
+                {
+                    ItemsXml = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "Items.xml");
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        Stream responseStream = resp.GetResponseStream();
+                        this.ItemsXml = XDocument.Load(responseStream);
+                        ItemsXml.Save("Translations\\Items.xml");
+                    }
+                    Logger.Add(2, "아이템 번역이 업데이트 되었습니다. 신규 버전 : " + newItemVer + ".");
+                }
+
+
+                if (newAkashiDataver != AkashiDataversion)
+                {
+                    Akashi_Data = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "akashidata.json");
+
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        using (Stream output = File.OpenWrite("Translations\\akashidata.json"))
+                        using (Stream input = resp.GetResponseStream())
+                        {
+                            byte[] buffer = new byte[8192];
+                            int bytesRead;
+                            while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                output.Write(buffer, 0, bytesRead);
+                            }
+                        }
+
+                        Akashi_Data = JObject.Parse(File.ReadAllText("Translations\\akashidata.json"));
+                    }
+
+                    Logger.Add(2, "개수공창 목록이 업데이트 되었습니다. 신규 버전 : " + newAkashiDataver + ".");
+                }
+
+
+                if (newAkashiDayver != AkashiDayversion)
+                {
+                    Akashi_Day = null;
+                    WebRequest r2 = HttpWebRequest.Create(hubsite + "akashi_day.json");
+
+                    using (WebResponse resp = r2.GetResponse())
+                    {
+                        using (Stream output = File.OpenWrite("Translations\\akashi_day.json"))
+                        using (Stream input = resp.GetResponseStream())
+                        {
+                            byte[] buffer = new byte[8192];
+                            int bytesRead;
+                            while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                output.Write(buffer, 0, bytesRead);
+                            }
+                        }
+
+                        Akashi_Data = JObject.Parse(File.ReadAllText("Translations\\akashi_day.json"));
+                    }
+
+                    Logger.Add(2, "개수공창 목록이 업데이트 되었습니다. 신규 버전 : " + newAkashiDayver + ".");
+                }
+
+                GetVersions();
             }
-            catch
-            {
-                Logger.Add(2, "해당 버전은 번역 업데이트가 중단된 버전입니다.");
-            }
+
         }
 
         private IEnumerable<XElement> GetTranslationList(TranslationType type)

@@ -1,6 +1,7 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Resource;
 using ElectronicObserver.Resource.Record;
+using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Mathematics;
 using System;
 using System.Collections.Generic;
@@ -108,10 +109,21 @@ namespace ElectronicObserver.Window.Dialog
 
                 foreach (var p in dict)
                 {
+                    int MapAreaID = p.Key / 10;
+                    int MapInfoID = p.Key % 10;
                     MapCellTable.Add(p.Key, dtbase.Clone());
                     MapCellTable[p.Key].Rows.Add(-1, MapAny);
-                    foreach (var c in p.Value.OrderBy(k => k))
-                        MapCellTable[p.Key].Rows.Add(c, c.ToString());
+
+                    if (Utility.Configuration.Config.FormCompass.ToAlphabet)
+                    {
+                        foreach (var c in p.Value.OrderBy(k => k))
+                            MapCellTable[p.Key].Rows.Add(c, c.ToString() + "(" + NodeData.GetNodeName(MapAreaID, MapInfoID, c) + ")");
+                    }
+                    else
+                    {
+                        foreach (var c in p.Value.OrderBy(k => k))
+                            MapCellTable[p.Key].Rows.Add(c, c.ToString());
+                    }
                     MapCellTable[p.Key].AcceptChanges();
                 }
             }
@@ -515,6 +527,22 @@ namespace ElectronicObserver.Window.Dialog
                 var counts = new Dictionary<string, int[]>();
                 var allcounts = new Dictionary<string, int[]>();
 
+                List<int> Same_Node = new List<int>();
+                Same_Node = NodeData.Get_Same_Node(args.MapAreaID, args.MapInfoID, args.MapCellID);
+                bool exists_other_cell = false;
+                int SameNode = -1;
+                if (Utility.Configuration.Config.FormCompass.ToAlphabet)
+                {
+                    if (Same_Node.Count > 1)
+                    {
+                        exists_other_cell = true;
+                        foreach (int Node in Same_Node)
+                        {
+                            if (args.MapCellID != Node)
+                                SameNode = Node;
+                        }
+                    }
+                }
 
                 foreach (var r in records)
                 {
@@ -535,8 +563,19 @@ namespace ElectronicObserver.Window.Dialog
                         continue;
                     if (args.MapInfoID != -1 && args.MapInfoID != r.MapInfoID)
                         continue;
-                    if (args.MapCellID != -1 && args.MapCellID != r.CellID)
-                        continue;
+
+                    if (exists_other_cell)
+                    {
+                        if (args.MapCellID != -1 && args.MapCellID != r.CellID && SameNode != r.CellID)
+                            continue;
+                    }
+                    else
+                    {
+                        if (args.MapCellID != -1 && (args.MapCellID != r.CellID))
+                            continue;
+                    }
+
+
                     switch (args.IsBossOnly)
                     {
                         case CheckState.Unchecked:
@@ -762,7 +801,7 @@ namespace ElectronicObserver.Window.Dialog
 
                 }
 
-            }
+                }
 
             e.Result = rows.ToArray();
         }

@@ -1778,5 +1778,24 @@ namespace ElectronicObserver.Data
             if (node == null) return Node.ToString();
             return node.Display;
         }
+
+
+        public static List<int> Get_Same_Node(int World, int Map, int Node)
+        {
+            List<int> Node_List = new List<int>();
+
+            var node = NodeList.FirstOrDefault(x => x.World == World && x.Map == Map && x.Node == Node);
+            if (node != null)
+            {
+                Node_List.Add(node.Node);
+
+                string NodeName = node.Display;
+                var Nodes = NodeList.FirstOrDefault(x => x.World == World && x.Map == Map && x.Node != Node && x.Display == NodeName);
+                if (Nodes != null)
+                    Node_List.Add(Nodes.Node);
+
+            }
+            return Node_List;
+        }
     }
 }

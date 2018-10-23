@@ -87,7 +87,7 @@ namespace ElectronicObserver.Window
             }
             Thread.CurrentThread.CurrentCulture = c;
             Thread.CurrentThread.CurrentUICulture = ui;
-            Translator = new DynamicTranslator();
+            Translator = DynamicTranslator.Instance;
             Instance = this;
             InitializeComponent();
             //this.Text = SoftwareInformation.VersionJapanese;
@@ -137,8 +137,8 @@ namespace ElectronicObserver.Window
 					Logger_LogAdded(data);
 				}
 			});
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
+			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameKorean + " 를 시작합니다.");
 
 
@@ -176,6 +176,7 @@ namespace ElectronicObserver.Window
 			StripMenu_Tool_ResourceChart.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart];
 			StripMenu_Tool_AlbumMasterShip.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip];
 			StripMenu_Tool_AlbumMasterEquipment.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
+            ToolStripMenuItem_AkashiList.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
             StripMenu_Tool_MasterExpedition.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
             StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
 			StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
@@ -312,14 +313,13 @@ namespace ElectronicObserver.Window
 			//StripMenu.Font = Font;
 			StripStatus.Font = Font;
 			MainDockPanel.Skin.AutoHideStripSkin.TextFont = Font;
-
             MainDockPanel.Skin.DockPaneStripSkin.TextFont = Font;
 
             if (c.Life.LockLayout)
 			{
 				MainDockPanel.AllowChangeLayout = false;
 				FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			}
+            }
 			else
 			{
 				MainDockPanel.AllowChangeLayout = true;
@@ -328,8 +328,8 @@ namespace ElectronicObserver.Window
 
 			StripMenu_File_Layout_LockLayout.Checked = c.Life.LockLayout;
 			MainDockPanel.CanCloseFloatWindowInLock = c.Life.CanCloseFloatWindowInLock;
-
-			StripMenu_File_Layout_TopMost.Checked = c.Life.TopMost;
+            MainDockPanel.CanSizableFloatWindowInLock = c.Life.CanSizableFloatWindowInLock;
+            StripMenu_File_Layout_TopMost.Checked = c.Life.TopMost;
 
 			StripMenu_File_Notification_MuteAll.Checked = Notifier.NotifierManager.Instance.GetNotifiers().All(n => n.IsSilenced);
 
@@ -1509,6 +1509,17 @@ namespace ElectronicObserver.Window
 
 			_prevPlayTimeRecorded = now;
 		}
+
+        private void StripMenu_Tool_AkashiList_Click(object sender, EventArgs e)
+        {
+            if (KCDatabase.Instance.MasterEquipments.Count == 0)
+            {
+                MessageBox.Show("장비 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            new Dialog.DialogAkashilist().Show(this);
+        }
 
         private void StripMenu_Tool_akashi_Click(object sender, EventArgs e)
         {

@@ -231,7 +231,9 @@ namespace ElectronicObserver.Window
 			AnchorageRepairingTimer.Font = Font;
 			AnchorageRepairingTimer.Visible = Utility.Configuration.Config.FormFleet.ShowAnchorageRepairingTimer;
 
-			ControlHelper.SetTableRowStyles(TableFleet, ControlHelper.GetDefaultRowStyle());
+            LayoutSubInformation();
+
+            ControlHelper.SetTableRowStyles(TableFleet, ControlHelper.GetDefaultRowStyle());
 
 			TableFleet.ResumeLayout();
 		}
@@ -291,12 +293,38 @@ namespace ElectronicObserver.Window
 				ToolTipInfo.SetToolTip(AnchorageRepairingTimer, "아카시타이머\r\n시작: " + DateTimeHelper.TimeToCSVString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer) + "\r\n회복: " + DateTimeHelper.TimeToCSVString(KCDatabase.Instance.Fleet.AnchorageRepairingTimer.AddMinutes(20)));
 			}
 
-			TableFleet.ResumeLayout();
+            LayoutSubInformation();
+
+            TableFleet.ResumeLayout();
 		}
 
+        void LayoutSubInformation()
+        {
+            if (CombinedTag.Visible && !AnchorageRepairingTimer.Visible)
+            {
+                if (TableFleet.GetPositionFromControl(AnchorageRepairingTimer).Row != 5)
+                {
+                    TableFleet.Controls.Remove(CombinedTag);
+                    TableFleet.Controls.Remove(AnchorageRepairingTimer);
+                    TableFleet.Controls.Add(CombinedTag, 1, 4);
+                    TableFleet.Controls.Add(AnchorageRepairingTimer, 1, 5);
+                }
+            }
+            else
+            {
+                if (TableFleet.GetPositionFromControl(AnchorageRepairingTimer).Row != 4)
+                {
+                    TableFleet.Controls.Remove(CombinedTag);
+                    TableFleet.Controls.Remove(AnchorageRepairingTimer);
+                    TableFleet.Controls.Add(AnchorageRepairingTimer, 1, 4);
+                    TableFleet.Controls.Add(CombinedTag, 1, 5);
+                }
+            }
+        }
 
 
-		void UpdateTimerTick()
+
+        void UpdateTimerTick()
 		{
 			for (int i = 0; i < ControlFleet.Count; i++)
 			{

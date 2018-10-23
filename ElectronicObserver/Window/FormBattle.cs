@@ -1088,8 +1088,8 @@ namespace ElectronicObserver.Window
 				{
 					ShipData ship = fleet.MembersInstance[index];
 
-					AirStage1Friend.Text = "#" + (index + 1);
-					AirStage1Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
+                    AirStage1Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
                     AirStage1Friend.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage1Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
 					ToolTipInfo.SetToolTip(AirStage1Friend, "탐조등조사: " + ship.NameWithLevel);
@@ -1105,8 +1105,8 @@ namespace ElectronicObserver.Window
 				int index = pd.SearchlightIndexEnemy;
 				if (index != -1)
 				{
-					AirStage1Enemy.Text = "#" + (index + 1);
-					AirStage1Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
+                    AirStage1Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
                     AirStage1Enemy.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage1Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
 					ToolTipInfo.SetToolTip(AirStage1Enemy, "탐조등조사: " + pd.SearchlightEnemyInstance.NameWithClass);
@@ -1153,7 +1153,7 @@ namespace ElectronicObserver.Window
 					AirStage2Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
                     AirStage2Friend.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage2Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
-					ToolTipInfo.SetToolTip(AirStage2Friend, "照明弾投射: " + pd.FlareFriendInstance.NameWithLevel);
+					ToolTipInfo.SetToolTip(AirStage2Friend, "조명탄사용: " + pd.FlareFriendInstance.NameWithLevel);
 
 				}
 				else

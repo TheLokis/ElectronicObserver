@@ -68,10 +68,15 @@ namespace ElectronicObserver.Resource.Record
 			/// </summary>
 			public int CellID { get; set; }
 
-			/// <summary>
-			/// 難易度(甲乙丙)
-			/// </summary>
-			public int Difficulty { get; set; }
+            /// <summary>
+            /// 海域セルID List
+            /// </summary>
+            public int[] CellIDs { get; set; }
+
+            /// <summary>
+            /// 難易度(甲乙丙)
+            /// </summary>
+            public int Difficulty { get; set; }
 
 			/// <summary>
 			/// ボスかどうか

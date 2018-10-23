@@ -517,7 +517,9 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public bool CanCloseFloatWindowInLock { get; set; }
 
-				public ConfigLife()
+                public bool CanSizableFloatWindowInLock { get; set; }
+
+                public ConfigLife()
 				{
 					ConfirmOnClosing = true;
 					TopMost = false;
@@ -527,7 +529,9 @@ namespace ElectronicObserver.Utility
 					ClockFormat = 0;
 					LockLayout = false;
 					CanCloseFloatWindowInLock = false;
-				}
+                    CanSizableFloatWindowInLock = false;
+
+                }
 			}
 			/// <summary>起動と終了</summary>
 			[DataMember]

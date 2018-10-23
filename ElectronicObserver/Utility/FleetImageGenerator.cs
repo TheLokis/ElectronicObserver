@@ -1990,7 +1990,7 @@ new ShipParameterData( ResourceManager.IconContent.ParameterAircraft, "제공", 
 			return ret;
 		}
 
-		public static readonly string DefaultFontFamily = "Meiryo UI";
+		public static readonly string DefaultFontFamily = "나눔고딕";
 		public static readonly float[] DefaultFontPixels = new float[] { 32, 24, 16, 12, 16, 12 };
 
 		public static Font[] GetDefaultFonts()

@@ -782,7 +782,9 @@ namespace ElectronicObserver.Data
 					return "컷인(주포/주포)";
 				case DayAttackKind.CutinAirAttack:
 					return "항모컷인";
-				case DayAttackKind.Shelling:
+                case DayAttackKind.SpecialNelson:
+                    return "넬슨터치";
+                case DayAttackKind.Shelling:
 					return "포격";
 				case DayAttackKind.AirAttack:
 					return "공습";
@@ -833,7 +835,9 @@ namespace ElectronicObserver.Data
 					return "구축컷인(주포/어뢰/전탐)";
 				case NightAttackKind.CutinTorpedoPicket:
 					return "구축컷인(어뢰/견시원/전탐)";
-				case NightAttackKind.Shelling:
+                case NightAttackKind.SpecialNelson:
+                    return "넬슨터치";
+                case NightAttackKind.Shelling:
 					return "포격";
 				case NightAttackKind.AirAttack:
 					return "공습";
@@ -922,7 +926,15 @@ namespace ElectronicObserver.Data
 					return "분진포개2/전탐<이세>";
 				case 29:
 					return "고각포/전탐<하마카제>";
-				default:
+                case 30:
+                    return "고각포x3<텐류개2,고틀랜드개>";
+                case 31:
+                    return "고각포x2<텐류개2>";
+                case 32:
+                    return "넬슨주포+로켓발사기/폼폼포<영국함,콩고급>";
+                case 33:
+                    return "고각포/기총<고틀랜드개>";
+                default:
 					return "불명";
 			}
 		}

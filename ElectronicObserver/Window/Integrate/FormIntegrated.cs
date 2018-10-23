@@ -180,6 +180,28 @@ namespace ElectronicObserver.Window.Integrate
 			Font = Utility.Configuration.Config.UI.MainFont;
 		}
 
+        private static int RunProgram(WindowInfo info)
+        {
+            Process P = new Process();
+
+            if (info.ProcessFilePath.Name.Contains("NOTEPAD"))
+            {
+                int ProgramNameIndex = info.Title.Name.LastIndexOf(".txt");
+                string ProgramName = info.Title.Name.Substring(0, ProgramNameIndex) + ".txt";
+                P.StartInfo.FileName = "NOTEPAD.EXE";
+                P.StartInfo.Arguments = ProgramName;
+                P.Start();
+                return P.StartTime.Day;
+            }
+            else
+            {
+                P.StartInfo.FileName = info.ProcessFilePath.Name;
+                P.Start();
+                return P.StartTime.Day;
+            }
+        }
+
+
 		/// <summary>
 		/// PersistStringから復元
 		/// </summary>
@@ -191,7 +213,16 @@ namespace ElectronicObserver.Window.Integrate
 			{
 				WindowData = info
 			};
-			return form;
+
+            try
+            {
+                int Run = RunProgram(info);
+            } catch (Exception e)
+            {
+                Logger.Add(3, "윈도우 캡쳐에 실패했습니다. : " + e.Message);
+            }
+
+            return form;
 		}
 
 		private static string GetMainModuleFilepath(int processId)
@@ -250,7 +281,9 @@ namespace ElectronicObserver.Window.Integrate
 		/// </summary>
 		public bool Grab()
 		{
-			if (attachingWindow != IntPtr.Zero)
+
+
+            if (attachingWindow != IntPtr.Zero)
 			{
 				// 既にアタッチ済み
 				return true;
@@ -261,7 +294,8 @@ namespace ElectronicObserver.Window.Integrate
 				Attach(hWnd, false);
 				return true;
 			}
-			infoLabel.Text = "창을 찾을 수 없습니다.";
+
+            infoLabel.Text = "창을 찾을 수 없습니다.";
 			return false;
 		}
 
@@ -282,7 +316,13 @@ namespace ElectronicObserver.Window.Integrate
 
 			info.CurrentTitle = info.Title.Name;
 
-			return info;
+            if (info.ProcessFilePath.Name.Contains("NOTEPAD"))
+            {
+                info.ProcessFilePath.MatchControl = MatchControl.Ignore;
+                info.ClassName.MatchControl = MatchControl.Ignore;
+            }
+
+                return info;
 		}
 
 		private void Attach(IntPtr hWnd, bool showFloating)

@@ -32,8 +32,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            ElectronicObserver.Window.Control.StatusBarModule statusBarModule1 = new ElectronicObserver.Window.Control.StatusBarModule();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            ElectronicObserver.Window.Control.StatusBarModule statusBarModule2 = new ElectronicObserver.Window.Control.StatusBarModule();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -100,6 +100,7 @@ namespace ElectronicObserver.Window.Dialog
             this.Debug_APIListPathSearch = new System.Windows.Forms.Button();
             this.Debug_EnableDebugMenu = new System.Windows.Forms.CheckBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.Life_CanSizableFloatWindowInLock = new System.Windows.Forms.CheckBox();
             this.Life_CanCloseFloatWindowInLock = new System.Windows.Forms.CheckBox();
             this.Life_LockLayout = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
@@ -657,12 +658,12 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.UI_RenderingTest.AutoSize = true;
             this.UI_RenderingTest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            statusBarModule1.BarColor0Begin = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            statusBarModule1.BarColor0End = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            statusBarModule1.MaximumValue = 500;
-            statusBarModule1.PrevValue = 401;
-            statusBarModule1.Value = 401;
-            this.UI_RenderingTest.HPBar = statusBarModule1;
+            statusBarModule2.BarColor0Begin = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            statusBarModule2.BarColor0End = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            statusBarModule2.MaximumValue = 500;
+            statusBarModule2.PrevValue = 401;
+            statusBarModule2.Value = 401;
+            this.UI_RenderingTest.HPBar = statusBarModule2;
             this.UI_RenderingTest.Location = new System.Drawing.Point(16, 3);
             this.UI_RenderingTest.MainFontColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.UI_RenderingTest.Margin = new System.Windows.Forms.Padding(16, 3, 16, 3);
@@ -1046,7 +1047,7 @@ namespace ElectronicObserver.Window.Dialog
             this.Debug_SealingPanel.Controls.Add(this.Debug_APIListPathSearch);
             this.Debug_SealingPanel.Location = new System.Drawing.Point(0, 56);
             this.Debug_SealingPanel.Name = "Debug_SealingPanel";
-            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 257);
+            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 253);
             this.Debug_SealingPanel.TabIndex = 1;
             // 
             // Debug_APIListPath
@@ -1096,6 +1097,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.Life_CanSizableFloatWindowInLock);
             this.tabPage6.Controls.Add(this.Life_CanCloseFloatWindowInLock);
             this.tabPage6.Controls.Add(this.Life_LockLayout);
             this.tabPage6.Controls.Add(this.label24);
@@ -1114,6 +1116,18 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "윈도우";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // Life_CanSizableFloatWindowInLock
+            // 
+            this.Life_CanSizableFloatWindowInLock.AutoSize = true;
+            this.Life_CanSizableFloatWindowInLock.Location = new System.Drawing.Point(213, 85);
+            this.Life_CanSizableFloatWindowInLock.Name = "Life_CanSizableFloatWindowInLock";
+            this.Life_CanSizableFloatWindowInLock.Size = new System.Drawing.Size(322, 19);
+            this.Life_CanSizableFloatWindowInLock.TabIndex = 11;
+            this.Life_CanSizableFloatWindowInLock.Text = "레이아웃 잠금중 플로트 윈도우 크기조정가능하게 설정";
+            this.ToolTipInfo.SetToolTip(this.Life_CanSizableFloatWindowInLock, "레이아웃이 잠금상태인 경우에도,\r\n플로트 윈도우(본체로부터 분리된 창. 이 경우 \'보기\'에서 열수있는 메뉴들이 해당됩니다.)\r\n의 크기를 조정할 " +
+        "수 있게 해줍니다.");
+            this.Life_CanSizableFloatWindowInLock.UseVisualStyleBackColor = true;
             // 
             // Life_CanCloseFloatWindowInLock
             // 
@@ -1810,10 +1824,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage18.Controls.Add(this.FormCompass_IsScrollable);
             this.tabPage18.Controls.Add(this.FormCompass_CandidateDisplayCount);
             this.tabPage18.Controls.Add(this.label2);
-            this.tabPage18.Location = new System.Drawing.Point(4, 22);
+            this.tabPage18.Location = new System.Drawing.Point(4, 24);
             this.tabPage18.Name = "tabPage18";
             this.tabPage18.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage18.Size = new System.Drawing.Size(682, 340);
+            this.tabPage18.Size = new System.Drawing.Size(682, 338);
             this.tabPage18.TabIndex = 7;
             this.tabPage18.Text = "나침반";
             this.tabPage18.UseVisualStyleBackColor = true;
@@ -1824,9 +1838,9 @@ namespace ElectronicObserver.Window.Dialog
             this.label21.ForeColor = System.Drawing.Color.Red;
             this.label21.Location = new System.Drawing.Point(21, 264);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(382, 15);
+            this.label21.Size = new System.Drawing.Size(548, 15);
             this.label21.TabIndex = 17;
-            this.label21.Text = "* 실험적 기능입니다. 기록부분에서는 알파벳으로 나타나지 않습니다.";
+            this.label21.Text = "* 기록부분에서는 숫자(알파벳) 병행표기형태이며, 검색시에는 같은 노드별 결과가 같이 검색됩니다.";
             // 
             // NodeToAlphabetBox
             // 
@@ -2110,10 +2124,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage20.Controls.Add(this.FormBattle_ShowHPBar);
             this.tabPage20.Controls.Add(this.FormBattle_HideDuringBattle);
             this.tabPage20.Controls.Add(this.FormBattle_IsScrollable);
-            this.tabPage20.Location = new System.Drawing.Point(4, 24);
+            this.tabPage20.Location = new System.Drawing.Point(4, 22);
             this.tabPage20.Name = "tabPage20";
             this.tabPage20.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage20.Size = new System.Drawing.Size(682, 338);
+            this.tabPage20.Size = new System.Drawing.Size(682, 340);
             this.tabPage20.TabIndex = 10;
             this.tabPage20.Text = "전투";
             this.tabPage20.UseVisualStyleBackColor = true;
@@ -2193,10 +2207,10 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage12.Controls.Add(this.FormBrowser_LogInPageURL);
             this.tabPage12.Controls.Add(this.FormBrowser_ZoomRate);
             this.tabPage12.Controls.Add(this.label15);
-            this.tabPage12.Location = new System.Drawing.Point(4, 24);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(682, 338);
+            this.tabPage12.Size = new System.Drawing.Size(682, 340);
             this.tabPage12.TabIndex = 3;
             this.tabPage12.Text = "브라우저";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -2220,8 +2234,8 @@ namespace ElectronicObserver.Window.Dialog
             this.FormBrowser_PreserveDrawingBuffer.Size = new System.Drawing.Size(141, 19);
             this.FormBrowser_PreserveDrawingBuffer.TabIndex = 16;
             this.FormBrowser_PreserveDrawingBuffer.Text = "렌더링 버퍼를 유지 *";
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_PreserveDrawingBuffer, "렌더링에 문제가 있을경우 사용하면 개선되는 경우가 있습니다. \r\n해제하면 성능을 향상 시킬 수 있습니다." +
-        ". * 이 변경은 재실행이후에 적용됩니다.");
+            this.ToolTipInfo.SetToolTip(this.FormBrowser_PreserveDrawingBuffer, "렌더링에 문제가 있을경우 사용하면 개선되는 경우가 있습니다. \r\n해제하면 성능을 향상 시킬 수 있습니다.. * 이 변경은 재실행이후에 적용됩니다." +
+        "");
             this.FormBrowser_PreserveDrawingBuffer.UseVisualStyleBackColor = true;
             // 
             // label20
@@ -2655,7 +2669,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 328);
+            this.label10.Location = new System.Drawing.Point(3, 324);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(256, 15);
             this.label10.TabIndex = 5;
@@ -2786,21 +2800,21 @@ namespace ElectronicObserver.Window.Dialog
             this.BGMPlayer_ColumnContent,
             this.BGMPlayer_ColumnPath,
             this.BGMPlayer_ColumnSetting});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.BGMPlayer_ControlGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BGMPlayer_ControlGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.BGMPlayer_ControlGrid.Location = new System.Drawing.Point(6, 35);
             this.BGMPlayer_ControlGrid.MultiSelect = false;
             this.BGMPlayer_ControlGrid.Name = "BGMPlayer_ControlGrid";
             this.BGMPlayer_ControlGrid.RowHeadersVisible = false;
             this.BGMPlayer_ControlGrid.RowTemplate.Height = 21;
             this.BGMPlayer_ControlGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 277);
+            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 273);
             this.BGMPlayer_ControlGrid.TabIndex = 0;
             this.BGMPlayer_ControlGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BGMPlayer_ControlGrid_CellContentClick);
             this.BGMPlayer_ControlGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.BGMPlayer_ControlGrid_CellFormatting);
@@ -3209,5 +3223,6 @@ namespace ElectronicObserver.Window.Dialog
         private System.Windows.Forms.CheckBox NodeToAlphabetBox;
         private System.Windows.Forms.CheckBox FormBrowser_PreserveDrawingBuffer;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.CheckBox Life_CanSizableFloatWindowInLock;
     }
 }

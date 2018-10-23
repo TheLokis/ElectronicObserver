@@ -301,13 +301,13 @@ namespace ElectronicObserver.Window.Dialog
             {
                 var tip = new StringBuilder();
                 if (ship.IsAbyssalShip)
-                    tip.AppendLine($"艦型ID: {ship.ShipClass}");
-                else if (Constants.GetShipClass(ship.ShipClass) == "不明")
-                    tip.AppendLine($"艦型不明: {ship.ShipClass}");
+                    tip.AppendLine($"함급ID: {ship.ShipClass}");
+                else if (Constants.GetShipClass(ship.ShipClass) == "불명")
+                    tip.AppendLine($"함급불명: {ship.ShipClass}");
                 else
                     tip.AppendLine($"{Constants.GetShipClass(ship.ShipClass)}: {ship.ShipClass}");
                 tip.AppendLine();
-                tip.AppendLine("装備可能：");
+                tip.AppendLine("장착가능：");
                 tip.AppendLine(GetEquippableString(shipID));
                 ToolTipInfo.SetToolTip(ShipType, tip.ToString());
             }
@@ -751,7 +751,7 @@ namespace ElectronicObserver.Window.Dialog
             if (ship == null)
                 return "";
             return string.Join("\r\n", ship.EquippableCategories.Select(id => db.EquipmentTypes[id].Name)
-               .Concat(db.MasterEquipments.Values.Where(eq => eq.EquippableShipsAtExpansion.Contains(shipID)).Select(eq => eq.Name + " (補強スロット)")));
+               .Concat(db.MasterEquipments.Values.Where(eq => eq.EquippableShipsAtExpansion.Contains(shipID)).Select(eq => eq.Name + " (보강슬롯)")));
         }
 
 

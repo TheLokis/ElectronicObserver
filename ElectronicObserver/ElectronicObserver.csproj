@@ -372,6 +372,12 @@
     <Compile Include="Window\Dialog\DialogAlbumMasterEquipment.Designer.cs">
       <DependentUpon>DialogAlbumMasterEquipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\Dialog\DialogAkashilist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Dialog\DialogAkashilist.Designer.cs">
+      <DependentUpon>DialogAkashilist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Dialog\DialogAlbumMasterShip.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -691,6 +697,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\DialogAlbumMasterEquipment.resx">
       <DependentUpon>DialogAlbumMasterEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Dialog\DialogAkashilist.resx">
+      <DependentUpon>DialogAkashilist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\DialogAlbumMasterShip.resx">
       <DependentUpon>DialogAlbumMasterShip.cs</DependentUpon>
