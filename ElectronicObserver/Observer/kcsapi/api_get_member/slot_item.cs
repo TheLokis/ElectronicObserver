@@ -27,7 +27,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 				eq.LoadFromResponse(APIName, elem);
 				db.Equipments.Add(eq);
 
-			}
+            }
 
 			db.Battle.LoadFromResponse(APIName, data);
 

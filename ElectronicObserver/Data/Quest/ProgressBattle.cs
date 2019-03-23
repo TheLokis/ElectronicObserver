@@ -45,10 +45,10 @@ namespace ElectronicObserver.Data.Quest
 
 
 
-		public void Increment(string rank, int areaID, bool isBoss)
-		{
+        public virtual void Increment(string rank, int areaID, bool isBoss)
+        {
 
-			if (TargetArea != null && !TargetArea.Contains(areaID))
+            if (TargetArea != null && !TargetArea.Contains(areaID))
 				return;
 
 			if (Constants.GetWinRank(rank) < LowestRank)
@@ -71,27 +71,31 @@ namespace ElectronicObserver.Data.Quest
 				sb.Append(string.Join("・", TargetArea.OrderBy(s => s).Select(s => string.Format("{0}-{1}", s / 10, s % 10))));
 			}
 			if (IsBossOnly)
-				sb.Append("보스");
+				sb.Append(" 보스 ");
 			switch (LowestRank)
 			{
-				case 1:
+                case 0:
+                    sb.Append("전투 ");
+                    break;
+                case 1:
 				default:
-					sb.Append("전투");
+					sb.Append("전투 ");
 					break;
 				case 2:
 				case 3:
-					sb.Append(Constants.GetWinRank(LowestRank) + "이상");
+					sb.Append(Constants.GetWinRank(LowestRank) + "이상 ");
 					break;
 				case 4:
-					sb.Append("승리");
+					sb.Append("승리 ");
 					break;
 				case 5:
 				case 6:
 				case 7:
-					sb.Append(Constants.GetWinRank(LowestRank) + "승리");
+					sb.Append(Constants.GetWinRank(LowestRank) + "승리 ");
 					break;
 			}
 			sb.Append(ProgressMax);
+            sb.Append(" 회");
 
 			return sb.ToString();
 		}

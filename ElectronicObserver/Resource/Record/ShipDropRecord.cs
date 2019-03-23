@@ -1,5 +1,6 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Utility.Mathematics;
+using ElectronicObserver.Utility.Storage;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -166,8 +167,8 @@ namespace ElectronicObserver.Resource.Record
 			public override void LoadLine(string line)
 			{
 
-				string[] elem = line.Split(",".ToCharArray());
-				if (elem.Length < 15) throw new ArgumentException("요소 수가 너무 적습니다.");
+				string[] elem = CsvHelper.ParseCsvLine(line).ToArray();
+                if (elem.Length < 15) throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ShipID = int.Parse(elem[0]);
 				ShipName = elem[1];
@@ -187,28 +188,28 @@ namespace ElectronicObserver.Resource.Record
 
 			}
 
-			public override string SaveLine()
-			{
+            public override string SaveLine()
+            {
 
-				return string.Format(string.Join(",", Enumerable.Range(0, 15).Select(i => "{" + i + "}")),
-					ShipID,
-					ShipName,
-					ItemID,
-					ItemName,
-					EquipmentID,
-					EquipmentName,
-					DateTimeHelper.TimeToCSVString(Date),
-					MapAreaID,
-					MapInfoID,
-					CellID,
-					Constants.GetDifficulty(Difficulty),
-					IsBossNode ? "보스" : "-",
-					EnemyFleetID.ToString("x16"),
-					Rank,
-					HQLevel);
+                return string.Join(",",
+                    ShipID,
+                    CsvHelper.EscapeCsvCell(ShipName),
+                    ItemID,
+                    CsvHelper.EscapeCsvCell(ItemName),
+                    EquipmentID,
+                    CsvHelper.EscapeCsvCell(EquipmentName),
+                    DateTimeHelper.TimeToCSVString(Date),
+                    MapAreaID,
+                    MapInfoID,
+                    CellID,
+                    Constants.GetDifficulty(Difficulty),
+                    IsBossNode ? "보스" : "-",
+                    EnemyFleetID.ToString("x16"),
+                    Rank,
+                    HQLevel);
 
-			}
-		}
+            }
+        }
 
 
 

@@ -76,9 +76,9 @@ namespace ElectronicObserver.Window.Dialog
 
             AkashiListView.Rows.Clear();
 
-            JObject Data = DynamicTranslator.Instance.Master_Akashi_Data;
+            JObject Data = DynamicDataReader.Instance.Master_Akashi_Data;
 
-            JObject Day_Data = DynamicTranslator.Instance.Master_Akashi_Day;
+            JObject Day_Data = DynamicDataReader.Instance.Master_Akashi_Day;
             KCDatabase db = KCDatabase.Instance;
 
             List<DataGridViewRow> rows = new List<DataGridViewRow>(Data.Count);
@@ -185,18 +185,24 @@ namespace ElectronicObserver.Window.Dialog
                     string materials_1 = m_before5[0] + "/" + m_before5[2] + " (" + m_before5[1] + "/" + m_before5[3] + ")";
                     string materials_2 = m_after6[0] + "/" + m_after6[2] + " (" + m_after6[1] + "/" + m_after6[3] + ")";
 
-                    bool[] can_kaisu_equipment = { true, true, true };
+                    bool[] can_kaisu_equipment = { false, false, false };
 
-                    bool[] can_kaisu_material = { true, true, true };
+                    bool[] can_kaisu_material = { false, false, false };
 
                     if (m_before5[0] <= db.Material.DevelopmentMaterial && m_before5[2] <= db.Material.ModdingMaterial)
+                    {
+                        can_kaisu_material[0] = true;
                         row.Cells[8].Style = CanKaisu;
+                    }
                     else
                         can_kaisu_material[0] = false;
 
 
                     if (m_after6[0] <= db.Material.DevelopmentMaterial && m_after6[2] <= db.Material.ModdingMaterial)
+                    {
+                        can_kaisu_material[1] = true;
                         row.Cells[10].Style = CanKaisu;
+                    }
                     else
                         can_kaisu_material[1] = false;
 
@@ -206,7 +212,10 @@ namespace ElectronicObserver.Window.Dialog
                         materials_eq1 = KCDatabase.Instance.MasterEquipments[m_before5[4]].Name + " x " + m_before5[5];
                         if (allCount.ContainsKey(m_before5[4]))
                             if (allCount[m_before5[4]] >= m_before5[5])
+                            {
+                                can_kaisu_equipment[0] = true;
                                 row.Cells[9].Style = CanKaisu;
+                            }
                             else
                                 can_kaisu_equipment[0] = false;
                     }
@@ -217,7 +226,10 @@ namespace ElectronicObserver.Window.Dialog
                         materials_eq2 = KCDatabase.Instance.MasterEquipments[m_after6[4]].Name + " x " + m_after6[5];
                         if (allCount.ContainsKey(m_after6[4]))
                             if (allCount[m_after6[4]] >= m_after6[5])
+                            {
+                                can_kaisu_equipment[1] = true;
                                 row.Cells[11].Style = CanKaisu;
+                            }
                             else
                                 can_kaisu_equipment[1] = false;
 
@@ -241,7 +253,10 @@ namespace ElectronicObserver.Window.Dialog
                             materials_eq3 = KCDatabase.Instance.MasterEquipments[m_change[4]].Name + " x " + m_change[5];
                             if (allCount.ContainsKey(m_change[4]))
                                 if (allCount[m_change[4]] >= m_change[5])
+                                {
+                                    can_kaisu_equipment[2] = true;
                                     row.Cells[13].Style = CanKaisu;
+                                }
                                 else
                                     can_kaisu_equipment[2] = false;
 
@@ -254,6 +269,7 @@ namespace ElectronicObserver.Window.Dialog
                             sb.Append(" ★" + Upgrade_Grade);
                             row.Cells[12].Style = CanKaisu;
                             row.Cells[12].ToolTipText = sb.ToString();
+                            can_kaisu_material[2] = true;
                         }
                         else
                             can_kaisu_material[2] = false;
@@ -286,7 +302,7 @@ namespace ElectronicObserver.Window.Dialog
                     {
                         if (KaisuChecked)
                         {
-                            if ((cond_resource) && ((can_kaisu_equipment[0] && can_kaisu_material[0]) || (can_kaisu_equipment[1] && can_kaisu_material[1]) || (can_kaisu_equipment[2] && can_kaisu_material[2])))
+                            if (allCount.ContainsKey(eq.ID) && (cond_resource) && ((can_kaisu_equipment[0] && can_kaisu_material[0]) || (can_kaisu_equipment[1] && can_kaisu_material[1]) || (can_kaisu_equipment[2] && can_kaisu_material[2])))
                             {
                                 row.SetValues(eq.ID, eq.IconType, eq.Name, kanmusu_list, resources[0], resources[1], resources[2], resources[3], materials_1, materials_eq1, materials_2, materials_eq2, materials_3, materials_eq3);
                                 rows.Add(row);

@@ -108,7 +108,7 @@ namespace ElectronicObserver.Window.Dialog
             {
                 Utility.Configuration.Config.Control.Rank = "S";
             }
-
+            /*
             MapSelect.SelectedItem = MapSelect.Items.OfType<String>().FirstOrDefault(x => x.Equals(Utility.Configuration.Config.Control.MapSelect));
             ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
             MVP_Check.Checked = Utility.Configuration.Config.Control.MVPCheck;
@@ -122,8 +122,10 @@ namespace ElectronicObserver.Window.Dialog
             Rank_List.Enabled = !ExpControl.Checked;
             label4.Enabled = !ExpControl.Checked;
             label5.Enabled = !ExpControl.Checked;
-
+            */
+            LabelAlert.Text = "";
             SearchInFleet_CheckedChanged(this, new EventArgs());
+            ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
 
             if (DefaultShipID != -1)
 				TextShip.SelectedItem = TextShip.Items.OfType<ComboShipData>().FirstOrDefault(f => f.Ship.MasterID == DefaultShipID);
@@ -133,19 +135,20 @@ namespace ElectronicObserver.Window.Dialog
 		}
 
 		private void DialogExpChecker_FormClosed(object sender, FormClosedEventArgs e)
-		{
+		{/*
 			Utility.Configuration.Config.Control.ExpCheckerExpUnit = (int)ExpUnit.Value;
             Utility.Configuration.Config.Control.MapSelect = (string)MapSelect.SelectedItem;
             Utility.Configuration.Config.Control.MVPCheck = MVP_Check.Checked;
             Utility.Configuration.Config.Control.FlagShipCheck = FlagShip_Check.Checked;
             Utility.Configuration.Config.Control.Rank = (string)Rank_List.SelectedItem;
-            Utility.Configuration.Config.Control.ExpManual = ExpControl.Checked;
+            Utility.Configuration.Config.Control.ExpManual = ExpControl.Checked;*/
             ResourceManager.DestroyIcon(Icon);
 		}
 
         private void UpdateProperty()
         {
             float ExpValue = (float)ExpUnit.Value;
+            /*
             ExpValue = SortieExpTable[(string)MapSelect.SelectedItem];
             if (MVP_Check.Checked) ExpValue *= 2;
             if (FlagShip_Check.Checked) { ExpValue *= 1.5f; }
@@ -167,7 +170,7 @@ namespace ElectronicObserver.Window.Dialog
                 default:
                     break;
             }
-
+            */
             ExpUnit.Value = (decimal)ExpValue;
         }
 
@@ -346,15 +349,23 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			int aswmin = selectedShip.MasterShip.ASW.Minimum;
-			int aswmax = selectedShip.MasterShip.ASW.Maximum;
-			int aswmod = (int)ASWModernization.Value;
+            var aswdata = selectedShip.MasterShip.ASW;
+            int aswmin = aswdata.Minimum;
+            int aswmax = aswdata.Maximum;
+            int aswmod = (int)ASWModernization.Value;
 			int currentlv = selectedShip.Level;
 			int minlv = ShowAllLevel.Checked ? 1 : (currentlv + 1);
 			int unitexp = Math.Max((int)ExpUnit.Value, 1);
 			var remodelLevelTable = GetRemodelLevelTable(selectedShip.MasterShip);
 
-			var rows = new DataGridViewRow[ExpTable.ShipMaximumLevel - (minlv - 1)];
+            if (!aswdata.IsAvailable)
+                LabelAlert.Text = "＊대잠 값을 알 수 없기 때문에 예측을 할 수 없습니다.";
+            else if (!aswdata.IsDetermined)
+                LabelAlert.Text = "＊대잠 값이 미확정이어서, 예측값이 정확하지 않습니다.";
+            else
+                LabelAlert.Text = "";
+
+            var rows = new DataGridViewRow[ExpTable.ShipMaximumLevel - (minlv - 1)];
 
 			for (int lv = minlv; lv <= ExpTable.ShipMaximumLevel; lv++)
 			{
@@ -368,9 +379,10 @@ namespace ElectronicObserver.Window.Dialog
 					lv,
 					Math.Max(needexp, 0),
 					Math.Max((int)Math.Ceiling((double)needexp / unitexp), 0),
-					asw,
-					ASWEquipmentPairs.Where(k => asw >= k.Key).OrderByDescending(p => p.Key).FirstOrDefault().Value ?? "-"
-					);
+!aswdata.IsAvailable ? -1 : asw,
+                    !aswdata.IsAvailable ? "-" : (ASWEquipmentPairs.Where(k => asw >= k.Key).OrderByDescending(p => p.Key).FirstOrDefault().Value ?? "-")
+
+                    );
 
 
 				if (remodelLevelTable.Contains(lv))
@@ -390,9 +402,16 @@ namespace ElectronicObserver.Window.Dialog
 			GroupExp.Text = $"{selectedShip.NameWithLevel}: Exp. {selectedShip.ExpTotal}, 대잠 {selectedShip.ASWBase} (현재개수+{selectedShip.ASWModernized})";
 		}
 
+        private void LevelView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == ColumnASW.Index)
+            {
+                e.Value = (int)e.Value == -1 ? "???" : e.Value.ToString();
+                e.FormattingApplied = true;
+            }
+        }
 
-
-		private void SearchInFleet_CheckedChanged(object sender, EventArgs e)
+        private void SearchInFleet_CheckedChanged(object sender, EventArgs e)
 		{
 			var ships = KCDatabase.Instance.Ships.Values;
 
@@ -480,7 +499,7 @@ namespace ElectronicObserver.Window.Dialog
         }
 
         private void ExpControl_CheckChanged(object sender, EventArgs e)
-        {
+        {/*
             Utility.Configuration.Config.Control.ExpManual = ExpControl.Checked;
             ExpControl.Checked = ExpControl.Checked;
             ExpUnit.ReadOnly = !ExpControl.Checked;
@@ -489,7 +508,7 @@ namespace ElectronicObserver.Window.Dialog
             FlagShip_Check.Enabled = !ExpControl.Checked;
             Rank_List.Enabled = !ExpControl.Checked;
             label4.Enabled = !ExpControl.Checked;
-            label5.Enabled = !ExpControl.Checked;
+            label5.Enabled = !ExpControl.Checked;*/
         }
 
         private void MapSelect_IndexChanged(object sender, EventArgs e)

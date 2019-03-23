@@ -27,65 +27,10 @@ namespace ElectronicObserver.Window.Dialog
         public DialogAlbumMasterExpedition()
         {
             InitializeComponent();
-            /*
-			TitleFirepower.ImageList =
-			TitleTorpedo.ImageList =
-			TitleAA.ImageList =
-			TitleArmor.ImageList =
-			TitleASW.ImageList =
-			TitleEvasion.ImageList =
-			TitleLOS.ImageList =
-			TitleAccuracy.ImageList =
-			TitleBomber.ImageList =
-			TitleSpeed.ImageList =
-			TitleRange.ImageList =
-			TitleAircraftCost.ImageList =
-			TitleAircraftDistance.ImageList =
-			Rarity.ImageList =
-			MaterialFuel.ImageList =
-			MaterialAmmo.ImageList =
-			MaterialSteel.ImageList =
-			MaterialBauxite.ImageList =
-				ResourceManager.Instance.Icons;
 
-			EquipmentType.ImageList = ResourceManager.Instance.Equipments;
-
-			TitleFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
-			TitleTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
-			TitleAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
-			TitleArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
-			TitleASW.ImageIndex = (int)ResourceManager.IconContent.ParameterASW;
-			TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
-			TitleLOS.ImageIndex = (int)ResourceManager.IconContent.ParameterLOS;
-			TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAccuracy;
-			TitleBomber.ImageIndex = (int)ResourceManager.IconContent.ParameterBomber;
-			TitleSpeed.ImageIndex = (int)ResourceManager.IconContent.ParameterSpeed;
-			TitleRange.ImageIndex = (int)ResourceManager.IconContent.ParameterRange;
-			TitleAircraftCost.ImageIndex = (int)ResourceManager.IconContent.ParameterAircraftCost;
-			TitleAircraftDistance.ImageIndex = (int)ResourceManager.IconContent.ParameterAircraftDistance;
-			MaterialFuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-			MaterialAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			MaterialSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-			MaterialBauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
-
-
-			BasePanelEquipment.Visible = false;
-
-
-			ControlHelper.SetDoubleBuffered(TableEquipmentName);
-			ControlHelper.SetDoubleBuffered(TableParameterMain);
-			ControlHelper.SetDoubleBuffered(TableParameterSub);
-			ControlHelper.SetDoubleBuffered(TableArsenal);
-
-			ControlHelper.SetDoubleBuffered(EquipmentView);
-
-            */
-            //Initialize EquipmentView
             ExpeditionView.SuspendLayout();
 
             EquipmentView_ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            //EquipmentView_Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-
 
             ExpeditionView.Rows.Clear();
 
@@ -106,7 +51,6 @@ namespace ElectronicObserver.Window.Dialog
             ExpeditionView.Rows.AddRange(rows.ToArray());
 
             EquipmentView_ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            //EquipmentView_Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
             ExpeditionView.Sort(EquipmentView_ID, ListSortDirection.Ascending);
             ExpeditionView.ResumeLayout();
@@ -293,6 +237,12 @@ namespace ElectronicObserver.Window.Dialog
                 int FleetLevel = Convert.ToInt32(el.Element("FleetLevel").Value);
                 string Desc = el.Element("Desc").Value;
                 string DrunNeed = el.Element("DrunNeed").Value;
+
+                int DrumBonus = 0;
+                if (el.Element("DrumBonus") != null)
+                    if (el.Element("DrumBonus").Value != "")
+                        DrumBonus = int.Parse(el.Element("DrumBonus").Value);
+
                 string DrunKanmusu = el.Element("DrunKanmusu").Value;
 
                 UseFuel.Text = (mis.Fuel * 100) + "%";
@@ -378,7 +328,7 @@ namespace ElectronicObserver.Window.Dialog
                 if (FleetLevel.Equals(0)) FleetLv.Text = "제한 없음";
                 if (FleetLevel.Equals(-1)) FleetLv.Text = "요검증";
 
-                DrunCount.Text = DrunNeed.ToString();
+                DrunCount.Text = DrunNeed.ToString() + "(" + DrumBonus + ")";
                 KanmusuDrum.Text = DrunKanmusu.ToString();
 
                 Description.Text = Desc;

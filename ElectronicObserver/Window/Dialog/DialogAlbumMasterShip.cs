@@ -5,6 +5,7 @@ using ElectronicObserver.Utility.Data;
 using ElectronicObserver.Utility.Mathematics;
 using ElectronicObserver.Window.Control;
 using ElectronicObserver.Window.Support;
+using ElectronicObserver.Utility.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -909,9 +910,9 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("함선ID,도감번호,함급,함종,이름,음독,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,결혼내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
+						sw.WriteLine("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,결혼내구,최대내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
 
-						foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
+                        foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
 
 							if (ship.Name == "なし") continue;
@@ -920,12 +921,13 @@ namespace ElectronicObserver.Window.Dialog
 								ship.ShipID,
 								ship.AlbumNo,
 								ship.IsAbyssalShip ? "심해서함" : Constants.GetShipClass(ship.ShipClass),
-                                FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.TranslationType.ShipTypes),
-                                ship.Name,
-								ship.NameReading,
-								ship.RemodelBeforeShipID > 0 ? ship.RemodelBeforeShip.Name : "-",
-								ship.RemodelAfterShipID > 0 ? ship.RemodelAfterShip.Name : "-",
-								ship.RemodelAfterLevel,
+                                CsvHelper.EscapeCsvCell(ship.ShipTypeName),
+                                CsvHelper.EscapeCsvCell(ship.Name),
+                                CsvHelper.EscapeCsvCell(ship.NameReading),
+                                ship.SortID,
+                                CsvHelper.EscapeCsvCell(ship.RemodelBeforeShipID > 0 ? ship.RemodelBeforeShip.Name : "-"),
+                                CsvHelper.EscapeCsvCell(ship.RemodelAfterShipID > 0 ? ship.RemodelAfterShip.Name : "-"),
+                                ship.RemodelAfterLevel,
 								ship.RemodelAmmo,
 								ship.RemodelSteel,
 								ship.NeedBlueprint > 0 ? ship.NeedBlueprint + "장" : "-",
@@ -934,7 +936,8 @@ namespace ElectronicObserver.Window.Dialog
 								ship.RemodelTier,
 								ship.HPMin,
 								ship.HPMaxMarried,
-								ship.FirepowerMin,
+                                ship.HPMaxMarriedModernized,
+                                ship.FirepowerMin,
 								ship.FirepowerMax,
 								ship.TorpedoMin,
 								ship.TorpedoMax,
@@ -964,8 +967,8 @@ namespace ElectronicObserver.Window.Dialog
 								ship.DefaultSlot != null ? (ship.DefaultSlot[2] != -1 ? KCDatabase.Instance.MasterEquipments[ship.DefaultSlot[2]].Name : (ship.SlotSize > 2 ? "(없음)" : "")) : "???",
 								ship.DefaultSlot != null ? (ship.DefaultSlot[3] != -1 ? KCDatabase.Instance.MasterEquipments[ship.DefaultSlot[3]].Name : (ship.SlotSize > 3 ? "(없음)" : "")) : "???",
 								ship.DefaultSlot != null ? (ship.DefaultSlot[4] != -1 ? KCDatabase.Instance.MasterEquipments[ship.DefaultSlot[4]].Name : (ship.SlotSize > 4 ? "(없음)" : "")) : "???",
-								DateTimeHelper.ToTimeRemainString(new TimeSpan(0, ship.BuildingTime, 0)),
-								ship.Material[0],
+                                DateTimeHelper.ToTimeRemainString(TimeSpan.FromMinutes(ship.BuildingTime)),
+                                ship.Material[0],
 								ship.Material[1],
 								ship.Material[2],
 								ship.Material[3],
@@ -973,13 +976,13 @@ namespace ElectronicObserver.Window.Dialog
 								ship.PowerUp[1],
 								ship.PowerUp[2],
 								ship.PowerUp[3],
-								ship.MessageGet.Replace("\r\n", "<br>"),
-								ship.MessageAlbum.Replace("\r\n", "<br>"),
-								ship.Fuel,
+                                CsvHelper.EscapeCsvCell(ship.MessageGet),
+                                CsvHelper.EscapeCsvCell(ship.MessageAlbum),
+                                ship.Fuel,
 								ship.Ammo,
 								Constants.GetVoiceFlag(ship.VoiceFlag),
-								ship.ResourceName,
-								ship.ResourceGraphicVersion,
+                                CsvHelper.EscapeCsvCell(ship.ResourceName),
+                                ship.ResourceGraphicVersion,
 								ship.ResourceVoiceVersion,
 								ship.ResourcePortVoiceVersion
 								));
@@ -1013,7 +1016,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,음독,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,최대내구,결혼내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,対潜初期最小,対潜初期最大,최대대잠,対潜{0}最小,対潜{0}最大,回避初期最小,回避初期最大,최대회피,回避{0}最小,回避{0}最大,索敵初期最小,索敵初期最大,索敵最大,索敵{0}最小,索敵{0}最大,運初期,運最大,速力,射程,レア,スロット数,搭載機数1,搭載機数2,搭載機数3,搭載機数4,搭載機数5,初期装備1,初期装備2,初期装備3,初期装備4,初期装備5,建造時間,解体燃料,解体弾薬,解体鋼材,解体ボーキ,改修火力,改修雷装,改修対空,改修装甲,ドロップ文章,図鑑文章,搭載燃料,搭載弾薬,ボイス,リソース名,画像バージョン,ボイスバージョン,母港ボイスバージョン", ExpTable.ShipMaximumLevel));
+						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,최대내구,결혼내구,개장내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠최소,초기대잠최대,최대대잠,대잠{0}최소,대잠{0}최대,초기회피최소,초기회피최대,최대회피,회피{0}최소,회피{0}최대,초기색적최소,초기색적최대,최대색적,색적{0}최소,색적{0}최대,초기운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개수화력,개수뇌장,개수대공,개수장갑,드롭대사,도감대사,소모연료,소모탄약,음성,리소스이름,이미지버전,음성버전,모항음성버전", ExpTable.ShipMaximumLevel));
 
 						foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
@@ -1021,11 +1024,12 @@ namespace ElectronicObserver.Window.Dialog
 							sw.WriteLine(string.Join(",",
 								ship.ShipID,
 								ship.AlbumNo,
-								ship.Name,
-								ship.NameReading,
-								(int)ship.ShipType,
+                                CsvHelper.EscapeCsvCell(ship.Name),
+                                CsvHelper.EscapeCsvCell(ship.NameReading),
+                                (int)ship.ShipType,
 								ship.ShipClass,
-								ship.RemodelBeforeShipID,
+                                ship.SortID,
+                                ship.RemodelBeforeShipID,
 								ship.RemodelAfterShipID,
 								ship.RemodelAfterLevel,
 								ship.RemodelAmmo,
@@ -1085,13 +1089,13 @@ namespace ElectronicObserver.Window.Dialog
 								ship.PowerUp[1],
 								ship.PowerUp[2],
 								ship.PowerUp[3],
-								ship.MessageGet.Replace("\r\n", "<br>"),
-								ship.MessageAlbum.Replace("\r\n", "<br>"),
-								ship.Fuel,
+                                CsvHelper.EscapeCsvCell(ship.MessageGet),
+                                CsvHelper.EscapeCsvCell(ship.MessageAlbum),
+                                ship.Fuel,
 								ship.Ammo,
 								ship.VoiceFlag,
-								ship.ResourceName,
-								ship.ResourceGraphicVersion,
+                                CsvHelper.EscapeCsvCell(ship.ResourceName),
+                                ship.ResourceGraphicVersion,
 								ship.ResourceVoiceVersion,
 								ship.ResourcePortVoiceVersion
 								));
@@ -1112,9 +1116,55 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
+        private void StripMenu_Edit_CopySpecialEquipmentTable_Click(object sender, EventArgs e)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("|대상함ID|대상함|장착가능|장착불가능|");
+            sb.AppendLine("|--:|:--|:--|:--|");
 
+            foreach (var ship in KCDatabase.Instance.MasterShips.Values)
+            {
+                if (ship.SpecialEquippableCategories == null)
+                    continue;
 
-		private void DialogAlbumMasterShip_FormClosed(object sender, FormClosedEventArgs e)
+                var add = ship.SpecialEquippableCategories.Except(ship.ShipTypeInstance.EquippableCategories);
+                var sub = ship.ShipTypeInstance.EquippableCategories.Except(ship.SpecialEquippableCategories);
+
+                sb.AppendLine($"|{ship.ShipID}|{ship.NameWithClass}|{string.Join(", ", add.Select(id => KCDatabase.Instance.EquipmentTypes[id].Name))}|{string.Join(", ", sub.Select(id => KCDatabase.Instance.EquipmentTypes[id].Name))}|");
+            }
+
+            sb.AppendLine();
+
+            {
+                var nyan = new Dictionary<int, List<int>>();
+
+                foreach (var eq in KCDatabase.Instance.MasterEquipments.Values)
+                {
+                    if (!(eq.EquippableShipsAtExpansion?.Any() ?? false))
+                        continue;
+
+                    foreach (var shipid in eq.EquippableShipsAtExpansion)
+                    {
+                        if (nyan.ContainsKey(shipid))
+                            nyan[shipid].Add(eq.EquipmentID);
+                        else
+                            nyan.Add(shipid, new List<int>() { eq.EquipmentID });
+                    }
+                }
+
+                sb.AppendLine("|대상함ID|대상함|장착가능ID|장착가능|");
+                sb.AppendLine("|--:|:--|:--|:--|");
+
+                foreach (var pair in nyan.OrderBy(p => p.Key))
+                {
+                    sb.AppendLine($"|{pair.Key}|{KCDatabase.Instance.MasterShips[pair.Key].NameWithClass}|{string.Join(", ", pair.Value)}|{string.Join(", ", pair.Value.Select(id => KCDatabase.Instance.MasterEquipments[id].Name))}|");
+                }
+
+            }
+            Clipboard.SetText(sb.ToString());
+        }
+
+        private void DialogAlbumMasterShip_FormClosed(object sender, FormClosedEventArgs e)
 		{
 
 			ResourceManager.DestroyIcon(Icon);

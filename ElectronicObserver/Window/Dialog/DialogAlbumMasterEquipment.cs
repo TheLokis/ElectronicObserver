@@ -5,6 +5,7 @@ using ElectronicObserver.Utility.Data;
 using ElectronicObserver.Utility.Mathematics;
 using ElectronicObserver.Window.Control;
 using ElectronicObserver.Window.Support;
+using ElectronicObserver.Utility.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -269,13 +270,17 @@ namespace ElectronicObserver.Window.Dialog
 			if (eq.CategoryType == EquipmentTypes.Interceptor)
 			{
 				TitleAccuracy.Text = "대폭";
-				TitleEvasion.Text = "영격";
-			}
+                TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAntiBomber;
+                TitleEvasion.Text = "영격";
+                TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterInterception;
+            }
 			else
 			{
 				TitleAccuracy.Text = "명중";
-				TitleEvasion.Text = "회피";
-			}
+                TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAccuracy;
+                TitleEvasion.Text = "회피";
+                TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
+            }
 
 			TableParameterMain.ResumeLayout();
 
@@ -499,9 +504,9 @@ namespace ElectronicObserver.Window.Dialog
 							sw.WriteLine(string.Join(",",
 								eq.EquipmentID,
 								eq.AlbumNo,
-								KCDatabase.Instance.EquipmentTypes[eq.EquipmentType[2]].Name,
-								eq.Name,
-								eq.EquipmentType[0],
+                                CsvHelper.EscapeCsvCell(eq.CategoryTypeInstance.Name),
+                                CsvHelper.EscapeCsvCell(eq.Name),
+                                eq.EquipmentType[0],
 								eq.EquipmentType[1],
 								eq.EquipmentType[2],
 								eq.EquipmentType[3],
@@ -522,8 +527,8 @@ namespace ElectronicObserver.Window.Dialog
 								eq.Material[1],
 								eq.Material[2],
 								eq.Material[3],
-								eq.Message.Replace("\r\n", "<br>"),
-								eq.AircraftDistance,
+                                CsvHelper.EscapeCsvCell(eq.Message),
+                                eq.AircraftDistance,
 								eq.AircraftCost
 								));
 
@@ -565,8 +570,8 @@ namespace ElectronicObserver.Window.Dialog
 							sw.WriteLine(string.Join(",",
 								eq.EquipmentID,
 								eq.AlbumNo,
-								eq.Name,
-								eq.EquipmentType[0],
+                                CsvHelper.EscapeCsvCell(eq.Name),
+                                eq.EquipmentType[0],
 								eq.EquipmentType[1],
 								eq.EquipmentType[2],
 								eq.EquipmentType[3],
@@ -587,8 +592,8 @@ namespace ElectronicObserver.Window.Dialog
 								eq.Material[1],
 								eq.Material[2],
 								eq.Material[3],
-								eq.Message.Replace("\r\n", "<br>"),
-								eq.AircraftDistance,
+                                CsvHelper.EscapeCsvCell(eq.Message),
+                                eq.AircraftDistance,
 								eq.AircraftCost
 								));
 

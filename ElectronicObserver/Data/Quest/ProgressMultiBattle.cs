@@ -9,7 +9,9 @@ namespace ElectronicObserver.Data.Quest
 {
 
 	[DataContract(Name = "ProgressMultiBattle")]
-	public class ProgressMultiBattle : ProgressData
+    [KnownType(typeof(ProgressBattle))]
+    [KnownType(typeof(ProgressSpecialBattle))]
+    public class ProgressMultiBattle : ProgressData
 	{
 
 		[DataMember]

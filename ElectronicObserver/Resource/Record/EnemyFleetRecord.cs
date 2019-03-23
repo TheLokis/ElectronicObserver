@@ -1,5 +1,6 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Data.Battle;
+using ElectronicObserver.Utility.Storage;
 using ElectronicObserver.Window;
 using System;
 using System.Collections.Generic;
@@ -113,8 +114,8 @@ namespace ElectronicObserver.Resource.Record
 			public override void LoadLine(string line)
 			{
 
-				string[] elem = line.Split(",".ToCharArray());
-				if (elem.Length < 44)
+				string[] elem = CsvHelper.ParseCsvLine(line).ToArray();
+                if (elem.Length < 44)
 					throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ulong id = Convert.ToUInt64(elem[0], 16);
@@ -146,16 +147,16 @@ namespace ElectronicObserver.Resource.Record
 			{
 				return string.Join(",",
 					FleetID.ToString("x16"),
-					FleetName,
-					MapAreaID,
+                    CsvHelper.EscapeCsvCell(FleetName),
+                    MapAreaID,
 					MapInfoID,
 					CellID,
 					Constants.GetDifficulty(Difficulty),
 					Constants.GetFormation(Formation),
 					ExpShip,
 					string.Join(",", FleetMember),
-					string.Join(",", FleetMember.Select(id => KCDatabase.Instance.MasterShips[id]?.NameWithClass ?? "-")),
-					string.Join(",", FleetMemberLevel)
+                    string.Join(",", FleetMember.Select(id => CsvHelper.EscapeCsvCell(KCDatabase.Instance.MasterShips[id]?.NameWithClass ?? "-"))),
+                    string.Join(",", FleetMemberLevel)
 					);
 			}
 

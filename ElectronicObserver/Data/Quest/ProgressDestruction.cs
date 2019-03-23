@@ -28,7 +28,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return "해체" + ProgressMax;
+			return "해체 " + ProgressMax;
 		}
 	}
 }

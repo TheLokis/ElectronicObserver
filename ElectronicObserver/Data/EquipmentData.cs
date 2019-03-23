@@ -70,6 +70,8 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public string Name => MasterEquipment.Name;
 
+        public string Name_JP => MasterEquipment.Name_JP;
+
 		/// <summary>
 		/// 装備名(レベルを含む)
 		/// </summary>

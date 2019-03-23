@@ -70,7 +70,7 @@ namespace ElectronicObserver.Window
 
         public static FormMain Instance;
 
-        public DynamicTranslator Translator { get; private set; }
+        public DynamicDataReader Translator { get; private set; }
 
 
         public FormMain()
@@ -87,7 +87,7 @@ namespace ElectronicObserver.Window
             }
             Thread.CurrentThread.CurrentCulture = c;
             Thread.CurrentThread.CurrentUICulture = ui;
-            Translator = DynamicTranslator.Instance;
+            Translator = DynamicDataReader.Instance;
             Instance = this;
             InitializeComponent();
             //this.Text = SoftwareInformation.VersionJapanese;

@@ -148,8 +148,11 @@ namespace ElectronicObserver.Data
 		/// <summary>局地戦闘機</summary>
 		Interceptor = 48,
 
-		/// <summary>輸送機材</summary>
-		TransportMaterial = 50,
+        /// <summary>陸上偵察機</summary>
+        LandBasedRecon = 49,
+
+        /// <summary>輸送機材</summary>
+        TransportMaterial = 50,
 
 		/// <summary>潜水艦装備</summary>
 		SubmarineEquipment = 51,

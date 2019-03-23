@@ -45,6 +45,19 @@ namespace Browser.CefOp
             }
             return base.OnBeforeResourceLoad(browserControl, browser, frame, request, callback);
         }
+
+        /// <summary>
+        /// 戻る/進む操作をブロックします。
+        /// </summary>
+        public override bool OnBeforeBrowse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
+        {
+            if ((request.TransitionType & TransitionType.ForwardBack) != 0)
+            {
+                return true;
+            }
+            return base.OnBeforeBrowse(browserControl, browser, frame, request, userGesture, isRedirect);
+        }
+
         /// <summary>
         /// 描画プロセスが何らかの理由で落ちた際の処理を行います。
         /// </summary>

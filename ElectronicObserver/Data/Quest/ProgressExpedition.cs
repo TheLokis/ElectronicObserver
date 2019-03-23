@@ -49,7 +49,7 @@ namespace ElectronicObserver.Data.Quest
 			}
 			else
 			{
-				sb.Append("원정");
+				sb.Append("원정 ");
 			}
 			sb.Append(ProgressMax);
 

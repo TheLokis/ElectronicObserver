@@ -85,10 +85,38 @@ namespace ElectronicObserver.Data
 			}
 		}
 
-		/// <summary>
-		/// 索敵に成功したか 0=失敗, 1=成功(索敵機発艦)
-		/// </summary>
-		public int LaunchedRecon
+        /// <summary>
+        /// 「気のせいだった」セルにおける特殊メッセージ表示時の演出種別　なければ -1
+        /// </summary>
+        public int FlavorTextType
+        {
+            get
+            {
+                if (RawData.api_cell_flavor())
+                    return (int)RawData.api_cell_flavor.api_type;
+                else
+                    return -1;
+            }
+        }
+
+        /// <summary>
+        /// 「気のせいだった」セルにおける特殊メッセージ　なければ null
+        /// </summary>
+        public string FlavorText
+        {
+            get
+            {
+                if (RawData.api_cell_flavor())
+                    return ((string)RawData.api_cell_flavor.api_message).Replace("<br>", "\r\n");
+                else
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// 索敵に成功したか 0=失敗, 1=成功(索敵機発艦)
+        /// </summary>
+        public int LaunchedRecon
 		{
 			get
 			{

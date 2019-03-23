@@ -136,8 +136,10 @@ namespace ElectronicObserver.Window
 			o["api_req_practice/battle"].ResponseReceived += Updated;
 			o["api_req_practice/midnight_battle"].ResponseReceived += Updated;
 			o["api_req_practice/battle_result"].ResponseReceived += Updated;
+            o["api_req_sortie/ld_shooting"].ResponseReceived += Updated;
+            o["api_req_combined_battle/ld_shooting"].ResponseReceived += Updated;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+            Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
 		}
 
@@ -179,7 +181,8 @@ namespace ElectronicObserver.Window
 				case "api_req_sortie/battle":
 				case "api_req_practice/battle":
 				case "api_req_sortie/ld_airbattle":
-					{
+                case "api_req_sortie/ld_shooting":
+                    {
 
 						SetFormation(bm);
 						SetSearchingResult(bm.BattleDay);
@@ -264,7 +267,8 @@ namespace ElectronicObserver.Window
 				case "api_req_combined_battle/ec_battle":
 				case "api_req_combined_battle/each_battle":
 				case "api_req_combined_battle/each_battle_water":
-					{
+                case "api_req_combined_battle/ld_shooting":
+                    {
 
 						SetFormation(bm);
 						SetSearchingResult(bm.BattleDay);

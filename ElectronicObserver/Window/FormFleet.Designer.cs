@@ -54,13 +54,14 @@
 			// 
 			this.TableFleet.AutoSize = true;
 			this.TableFleet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TableFleet.ColumnCount = 5;
+			this.TableFleet.ColumnCount = 6;
 			this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TableFleet.ContextMenuStrip = this.ContextMenuFleet;
+            this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TableFleet.ContextMenuStrip = this.ContextMenuFleet;
 			this.TableFleet.Location = new System.Drawing.Point(0, 0);
 			this.TableFleet.Name = "TableFleet";
 			this.TableFleet.RowCount = 1;

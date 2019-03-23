@@ -241,14 +241,14 @@ namespace ElectronicObserver.Data.Quest
 			var list = new List<DSPair>
 			{
 				new DSPair(Math.Min((double)sortieCount / sortieMax, 1.0), string.Format("출격 {0}/{1}", sortieCount, sortieMax)),
-				new DSPair(Math.Min((double)sWinCount / sWinMax, 1.0), string.Format("S승리 {0}/{1}", sWinCount, sWinMax)),
-				new DSPair(Math.Min((double)bossCount / bossMax, 1.0), string.Format("보스 {0}/{1}", bossCount, bossMax)),
-				new DSPair(Math.Min((double)bossWinCount / bossWinMax, 1.0), string.Format("보스승리 {0}/{1}", bossWinCount, bossWinMax))
+				new DSPair(Math.Min((double)sWinCount / sWinMax, 1.0), string.Format(" S승리 {0}/{1}", sWinCount, sWinMax)),
+				new DSPair(Math.Min((double)bossCount / bossMax, 1.0), string.Format(" 보스 {0}/{1}", bossCount, bossMax)),
+				new DSPair(Math.Min((double)bossWinCount / bossWinMax, 1.0), string.Format(" 보스승리 {0}/{1}", bossWinCount, bossWinMax))
 			};
 
 			var slist = list.Where(elem => elem.Key < 1.0).OrderBy(elem => elem.Key).Select(elem => elem.Value);
-			return string.Format("{0:p1} ({1})", ProgressPercentage, slist.Count() > 0 ? string.Join(", ", slist) : "달성");
-		}
+            return string.Format("{0} ({1:p1})", slist.Count() > 0 ? string.Join(", ", slist) : "달성", ProgressPercentage);
+        }
 
 		public override string GetClearCondition()
 		{

@@ -403,7 +403,11 @@ namespace ElectronicObserver.Data
 				case 85: return "히부리급";
 				case 86: return "로호잠수함";
 				case 87: return "John C.Butler급";
-				default: return "불명";
+                case 88: return "Nelson급";
+                case 89: return "Gotland급";
+                case 90: return "닛신급";
+                case 91: return "Fletcher급";
+                default: return "불명";
 			}
 		}
 
@@ -470,7 +474,9 @@ namespace ElectronicObserver.Data
 					return "공습전";
 				case 7:
 					return "주야전";       // 対連合
-				default:
+                case 8:
+                    return "레이더";
+                default:
 					return "불명";
 			}
 		}
@@ -784,6 +790,8 @@ namespace ElectronicObserver.Data
 					return "항모컷인";
                 case DayAttackKind.SpecialNelson:
                     return "넬슨터치";
+                case DayAttackKind.SpecialNagato:
+                    return "흉열";
                 case DayAttackKind.Shelling:
 					return "포격";
 				case DayAttackKind.AirAttack:
@@ -837,6 +845,8 @@ namespace ElectronicObserver.Data
 					return "구축컷인(어뢰/견시원/전탐)";
                 case NightAttackKind.SpecialNelson:
                     return "넬슨터치";
+                case NightAttackKind.SpecialNagato:
+                    return "흉열";
                 case NightAttackKind.Shelling:
 					return "포격";
 				case NightAttackKind.AirAttack:
@@ -931,9 +941,17 @@ namespace ElectronicObserver.Data
                 case 31:
                     return "고각포x2<텐류개2>";
                 case 32:
-                    return "넬슨주포+로켓발사기/폼폼포<영국함,콩고급>";
+                    return "넬슨전탐포or로켓발사기/폼폼포<영국함,콩고급개2>";
                 case 33:
                     return "고각포/기총<고틀랜드개>";
+                case 34:
+                    return "플래쳐포改+GFCSx2<존스턴>";
+                case 35:
+                    return "플래쳐포改+GFCS/플래쳐포改<존스턴>";
+                case 36:
+                    return "플래쳐포改x2/GFCS<존스턴>";
+                case 37:
+                    return "플래쳐포改x2<존스턴>";
                 default:
 					return "불명";
 			}

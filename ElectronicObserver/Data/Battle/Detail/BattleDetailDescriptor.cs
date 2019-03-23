@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ElectronicObserver.Utility.Data;
+using ElectronicObserver.Resource.Record;
 
 namespace ElectronicObserver.Data.Battle.Detail
 {
@@ -177,12 +178,42 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 						sb.AppendLine();
 
-						if (p.EnemyMembersEscort != null)
+                        void appendEnemyFleetInfo(int[] members)
+                        {
+                            int air = 0;
+                            int airbase = 0;
+                            bool indeterminate = false;
+                            for (int i = 0; i < members.Length; i++)
+                            {
+                                var param = RecordManager.Instance.ShipParameter[members[i]];
+                                if (param == null) continue;
+
+                                if (param.DefaultSlot == null || param.Aircraft == null)
+                                {
+                                    indeterminate = true;
+                                    continue;
+                                }
+
+                                for (int s = 0; s < Math.Min(param.DefaultSlot.Length, param.Aircraft.Length); s++)
+                                {
+                                    air += Calculator.GetAirSuperiority(param.DefaultSlot[s], param.Aircraft[s]);
+                                    if (KCDatabase.Instance.MasterEquipments[param.DefaultSlot[s]]?.IsAircraft ?? false)
+                                        airbase += Calculator.GetAirSuperiority(param.DefaultSlot[s], param.Aircraft[s], 0, 0, 1);
+                                }
+                            }
+                            sb.AppendFormat(" 제공전력 {0} (대기지 {1})", air, airbase);
+                            if (indeterminate)
+                                sb.Append(" (미확정)");
+                        }
+
+                        if (p.EnemyMembersEscort != null)
 							sb.Append("〈적기함〉");
 						else
 							sb.Append("〈적함대〉");
 
-						if (p.IsBossDamaged)
+                        appendEnemyFleetInfo(p.EnemyMembers);
+
+                        if (p.IsBossDamaged)
 							sb.Append(" : 장갑파괴");
 						sb.AppendLine();
 
@@ -194,7 +225,9 @@ namespace ElectronicObserver.Data.Battle.Detail
 							sb.AppendLine();
 							sb.AppendLine("〈적수반함〉");
 
-							OutputEnemyData(sb, p.EnemyMembersEscortInstance, p.EnemyLevelsEscort, p.EnemyInitialHPsEscort, p.EnemyMaxHPsEscort, p.EnemySlotsEscortInstance, p.EnemyParametersEscort);
+                            appendEnemyFleetInfo(p.EnemyMembersEscort);
+
+                            OutputEnemyData(sb, p.EnemyMembersEscortInstance, p.EnemyLevelsEscort, p.EnemyInitialHPsEscort, p.EnemyMaxHPsEscort, p.EnemySlotsEscortInstance, p.EnemyParametersEscort);
 						}
 
 						sb.AppendLine();
@@ -493,8 +526,11 @@ namespace ElectronicObserver.Data.Battle.Detail
 					fleet.EscapedShipList.Contains(ship.MasterID) ? " (대피중)" : "");
 
 				sb.Append("　");
-				sb.AppendLine(string.Join(", ", ship.AllSlotInstance.Where(eq => eq != null)));
-			}
+                sb.AppendLine(string.Join(", ", ship.AllSlotInstance.Zip(
+                                    ship.ExpansionSlot > 0 ? ship.Aircraft.Concat(new[] { 0 }) : ship.Aircraft,
+                                    (eq, aircraft) => eq == null ? null : ((eq.MasterEquipment.IsAircraft ? $"[{aircraft}] " : "") + eq.NameWithLevel)
+                                ).Where(str => str != null)));
+            }
 		}
 
 		private static void OutputFriendBase(StringBuilder sb, int[] initialHPs, int[] maxHPs)

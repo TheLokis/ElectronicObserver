@@ -733,7 +733,32 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public int FleetStateDisplayMode { get; set; }
 
-				public ConfigFormFleet()
+                /// <summary>
+                /// 出撃海域によって色分けするか
+                /// </summary>
+                public bool AppliesSallyAreaColor { get; set; }
+
+                public bool FocusModifiedFleet { get; set; }
+
+                /// <summary>
+                /// 出撃海域による色分けのテーブル
+                /// </summary>
+                public List<SerializableColor> SallyAreaColorScheme { get; set; }
+
+                [IgnoreDataMember]
+                private readonly List<SerializableColor> DefaultSallyAreaColorScheme = new List<SerializableColor>()
+                {
+                    SerializableColor.UIntToColor(0xfff0f0f0),
+                    SerializableColor.UIntToColor(0xffffdddd),
+                    SerializableColor.UIntToColor(0xffddffdd),
+                    SerializableColor.UIntToColor(0xffddddff),
+                    SerializableColor.UIntToColor(0xffffffcc),
+                    SerializableColor.UIntToColor(0xffccffff),
+                    SerializableColor.UIntToColor(0xffffccff),
+                    SerializableColor.UIntToColor(0xffffffff),
+                };
+
+                public ConfigFormFleet()
 				{
 					ShowAircraft = true;
 					SearchingAbilityMethod = 4;
@@ -754,7 +779,10 @@ namespace ElectronicObserver.Utility
 					EmphasizesSubFleetInPort = false;
 					BlinkAtDamaged = true;
 					FleetStateDisplayMode = 2;
-				}
+                    AppliesSallyAreaColor = false;
+                    FocusModifiedFleet = true;
+                    SallyAreaColorScheme = DefaultSallyAreaColorScheme.ToList();
+                }
 			}
 			/// <summary>[艦隊]ウィンドウ</summary>
 			[DataMember]
@@ -1337,8 +1365,9 @@ namespace ElectronicObserver.Utility
 				public bool DisableOverwritePrompt { get; set; }
 				public bool AutoSetFileNameToDate { get; set; }
 				public bool SyncronizeTitleAndFileName { get; set; }
+                public bool FleetImageToJapanese { get; set; }
 
-				public ConfigFleetImageGenerator()
+                public ConfigFleetImageGenerator()
 					: base()
 				{
 					Argument = FleetImageArgument.GetDefaultInstance();
@@ -1349,6 +1378,7 @@ namespace ElectronicObserver.Utility
 					DisableOverwritePrompt = false;
 					AutoSetFileNameToDate = false;
 					SyncronizeTitleAndFileName = false;
+                    FleetImageToJapanese = false;
 				}
 			}
 			[DataMember]

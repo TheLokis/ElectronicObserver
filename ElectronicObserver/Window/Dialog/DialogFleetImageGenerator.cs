@@ -97,6 +97,7 @@ namespace ElectronicObserver.Window.Dialog
 			OutputToClipboard.Checked = config.OutputType == 1;
 			OpenImageAfterOutput.Checked = config.OpenImageAfterOutput;
 			DisableOverwritePrompt.Checked = config.DisableOverwritePrompt;
+            CheckBox_ToJapanese.Checked = config.FleetImageToJapanese;
 
 			OutputPath.Text = config.LastOutputPath;
 			try
@@ -134,6 +135,7 @@ namespace ElectronicObserver.Window.Dialog
 			config.DisableOverwritePrompt = DisableOverwritePrompt.Checked;
 			config.AutoSetFileNameToDate = AutoSetFileNameToDate.Checked;
 			config.SyncronizeTitleAndFileName = SyncronizeTitleAndFileName.Checked;
+            config.FleetImageToJapanese = CheckBox_ToJapanese.Checked;
 
 			config.LastOutputPath = OutputPath.Text;
 		}
@@ -463,6 +465,22 @@ namespace ElectronicObserver.Window.Dialog
 
 		private Bitmap GenerateFleetImage(FleetImageArgument args, int mode)
 		{
+            if(CheckBox_ToJapanese.Checked)
+            {
+                switch (mode)
+                {
+                    case 0:
+                    default:
+                        return FleetImageGenerator.GenerateCardBitmap_JP(args);
+                    case 1:
+                        return FleetImageGenerator.GenerateCutinBitmap_JP(args);
+                    case 2:
+                        return FleetImageGenerator.GenerateBannerBitmap_JP(args);
+                    case 3:
+                        return FleetImageGenerator.GenerateBaseAirCorpsImage_JP(args);
+                }
+            }
+
 			switch (mode)
 			{
 				case 0:

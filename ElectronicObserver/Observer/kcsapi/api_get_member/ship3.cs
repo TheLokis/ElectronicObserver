@@ -8,34 +8,35 @@ using System.Threading.Tasks;
 namespace ElectronicObserver.Observer.kcsapi.api_get_member
 {
 
-	public class ship3 : APIBase
-	{
+    public class ship3 : APIBase
+    {
 
-		public override void OnResponseReceived(dynamic data)
-		{
+        public override void OnResponseReceived(dynamic data)
+        {
 
-			KCDatabase db = KCDatabase.Instance;
+            KCDatabase db = KCDatabase.Instance;
 
-			//api_ship_data
-			foreach (var elem in data.api_ship_data)
-			{
+            //api_ship_data
+            foreach (var elem in data.api_ship_data)
+            {
 
-				int id = (int)elem.api_id;
+                int id = (int)elem.api_id;
 
-				ShipData ship = db.Ships[id];
-				ship.LoadFromResponse(APIName, elem);
+                ShipData ship = db.Ships[id];
+                ship.LoadFromResponse(APIName, elem);
 
-				for (int i = 0; i < ship.Slot.Count; i++)
-				{
-					if (ship.Slot[i] == -1) continue;
-					if (!db.Equipments.ContainsKey(ship.Slot[i]))
-					{       //改装時に新装備を入手するが、追加される前にIDを与えられてしまうため
-						EquipmentData eq = new EquipmentData();
-						eq.LoadFromResponse(APIName, ship.Slot[i]);
-						db.Equipments.Add(eq);
-					}
-				}
+                for (int i = 0; i < ship.Slot.Count; i++)
+                {
+                    if (ship.Slot[i] == -1) continue;
+                    if (!db.Equipments.ContainsKey(ship.Slot[i]))
+                    {       //改装時に新装備を入手するが、追加される前にIDを与えられてしまうため
+                        EquipmentData eq = new EquipmentData();
+                        eq.LoadFromResponse(APIName, ship.Slot[i]);
+                        db.Equipments.Add(eq);
+                    }
+                }
 
+                // 장비 시너지 검색
                 if (ship.MasterShip.ASW.IsDetermined &&
                     ship.MasterShip.Evasion.IsDetermined &&
                     ship.MasterShip.LOS.IsDetermined)
@@ -73,9 +74,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
                        range != 0)
                     {
                         var sb = new StringBuilder();
-                        sb.AppendFormat("장비 시너지를 발견했습니다!：{0} [{1}]; ",
-                            ship.NameWithLevel,
-                            string.Join(", ", ship.AllSlotInstance.Where(eq => eq != null).Select(eq => eq.NameWithLevel)));
+                        sb.AppendFormat("장비 시너지를 발견했습니다! : ");
                         var a = new List<string>();
                         if (firepower != 0)
                             a.Add($"화력{firepower:+#;-#;0}");
@@ -96,23 +95,27 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
                         if (range != 0)
                             a.Add($"사정{range:+#;-#;0}");
                         sb.Append(string.Join(", ", a));
+
+                        sb.AppendFormat(" ; {0} [{1}]",
+                            ship.NameWithLevel,
+                            string.Join(", ", ship.AllSlotInstance.Where(eq => eq != null).Select(eq => eq.NameWithLevel)));
+
                         Utility.Logger.Add(1, sb.ToString());
                     }
                 }
 
+
             }
 
-			//api_deck_data
-			db.Fleet.LoadFromResponse(APIName, data.api_deck_data);
+            //api_deck_data
+            db.Fleet.LoadFromResponse(APIName, data.api_deck_data);
+
+            base.OnResponseReceived((object)data);
+        }
 
 
-
-			base.OnResponseReceived((object)data);
-		}
-
-
-		public override string APIName => "api_get_member/ship3";
-	}
+        public override string APIName => "api_get_member/ship3";
+    }
 
 
 }

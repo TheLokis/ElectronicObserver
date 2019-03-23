@@ -28,12 +28,14 @@ namespace ElectronicObserver.Data
 		public int AlbumNo => (int)RawData.api_sortno;
 
         /// <summary>
-        /// 名前
+        /// 名前 번역됨
         /// </summary>
         public string Name
         {
             get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment); }
         }
+
+        public string Name_JP => RawData.api_name;
 
 
         /// <summary>
@@ -189,8 +191,12 @@ namespace ElectronicObserver.Data
 			CategoryType == EquipmentTypes.MainGunLarge ||
 			CategoryType == EquipmentTypes.MainGunLarge2;
 
-		/// <summary> 副砲系かどうか </summary>
-		public bool IsSecondaryGun => CategoryType == EquipmentTypes.SecondaryGun;
+        public bool IsLargeGun =>
+            CategoryType == EquipmentTypes.MainGunLarge ||
+            CategoryType == EquipmentTypes.MainGunLarge2;
+
+        /// <summary> 副砲系かどうか </summary>
+        public bool IsSecondaryGun => CategoryType == EquipmentTypes.SecondaryGun;
 
 		/// <summary> 魚雷系かどうか </summary>
 		public bool IsTorpedo => CategoryType == EquipmentTypes.Torpedo || CategoryType == EquipmentTypes.SubmarineTorpedo;
@@ -234,7 +240,8 @@ namespace ElectronicObserver.Data
 					case EquipmentTypes.CarrierBasedRecon:
 					case EquipmentTypes.SeaplaneRecon:
 					case EquipmentTypes.FlyingBoat:
-					case EquipmentTypes.JetRecon:
+                    case EquipmentTypes.LandBasedRecon:
+                    case EquipmentTypes.JetRecon:
 						return true;
 
 					default:
@@ -280,7 +287,8 @@ namespace ElectronicObserver.Data
 					case EquipmentTypes.CarrierBasedRecon:
 					case EquipmentTypes.SeaplaneRecon:
 					case EquipmentTypes.FlyingBoat:
-					case EquipmentTypes.JetRecon:
+                    case EquipmentTypes.LandBasedRecon:
+                    case EquipmentTypes.JetRecon:
 						return true;
 
 					default:

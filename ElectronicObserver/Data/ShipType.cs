@@ -29,7 +29,7 @@ namespace ElectronicObserver.Data
 		public int SortID => (int)RawData.api_sortno;
 
         /// <summary>
-        /// 艦種名
+        /// 艦種名 번역됨
         /// </summary>
         //public string Name => RawData.api_name;
         public string Name

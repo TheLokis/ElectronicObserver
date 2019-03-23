@@ -38,6 +38,8 @@ namespace ElectronicObserver.Utility
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.MVPHighlight), Color.FromArgb(0xCC, 0xB6, 0x90));
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.RepairColor), Color.LightBlue);
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.BlackFontColor), Color.White);
+            colors.Add(Tuple.Create(Theme.Light, ThemeColors.ExtraFontColor), SystemColors.ControlText);
+            colors.Add(Tuple.Create(Theme.Dark, ThemeColors.ExtraFontColor), SystemColors.ControlText);
         }
 
         public static Color GetColor(Theme th, ThemeColors tr)
@@ -68,6 +70,7 @@ namespace ElectronicObserver.Utility
         PinkHighlight,
         MVPHighlight,
         RepairColor,
-        BlackFontColor
+        BlackFontColor,
+        ExtraFontColor
     }
 }

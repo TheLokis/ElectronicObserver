@@ -641,10 +641,10 @@ namespace ElectronicObserver.Data
 		}
 
 
-		/// <summary>
-		/// ケッコン済みかどうか
-		/// </summary>
-		public bool IsMarried => Level > 99;
+        /// <summary>
+        /// ケッコン済みかどうか
+        /// </summary>
+        public bool IsMarried => Level > 99;
 
 
 		/// <summary>
@@ -666,6 +666,8 @@ namespace ElectronicObserver.Data
 		/// 艦名
 		/// </summary>
 		public string Name => MasterShip.Name;
+
+        public string Name_JP => MasterShip.Name_JP;
 
 
 		/// <summary>
@@ -1522,10 +1524,18 @@ namespace ElectronicObserver.Data
 				if (!CanAttackSubmarine)
 					return false;
 
-				if (ShipID == 141 || ShipID == 394 || ShipID == 478 || ShipID == 681)  // 五十鈴改二, Jervis改, 龍田改二, Samuel B.Roberts改
-					return true;
+                switch (ShipID)
+                {
+                    case 141:       // 五十鈴改二
+                    case 394:       // Jervis改
+                    case 478:       // 龍田改二
+                    case 681:       // Samuel B.Roberts改
+                    case 562:       // Johnston
+                    case 689:       // Johnston改
+                        return true;
+                }
 
-				var eqs = AllSlotInstance.Where(eq => eq != null);
+                var eqs = AllSlotInstance.Where(eq => eq != null);
 
 				if (ShipID == 380 || ShipID == 529)  // 大鷹改(二)
 				{
@@ -1657,9 +1667,6 @@ namespace ElectronicObserver.Data
 					_aircraft = (int[])data.api_onslot;
 					break;
 
-				case "api_req_kaisou/slot_exchange_index":
-					Slot = Array.AsReadOnly((int[])data.api_slot);
-					break;
 			}
 
 			CalculatePowers();

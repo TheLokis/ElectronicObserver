@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ElectronicObserver.Utility;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace ElectronicObserver.Data
 {
+    
+
     public class NodeInfo
     {
         public int World { get; }
@@ -1773,10 +1778,10 @@ namespace ElectronicObserver.Data
 
         public static string GetNodeName(int World, int Map, int Node)
         {
-            var node = NodeList.FirstOrDefault(x => x.World == World && x.Map == Map && x.Node == Node);
+            var node = DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString())[1];
 
             if (node == null) return Node.ToString();
-            return node.Display;
+            return node.ToString();
         }
 
 
@@ -1784,17 +1789,32 @@ namespace ElectronicObserver.Data
         {
             List<int> Node_List = new List<int>();
 
-            var node = NodeList.FirstOrDefault(x => x.World == World && x.Map == Map && x.Node == Node);
-            if (node != null)
+            JToken Target_Map = DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map];
+            JToken Target_Node;
+
+            if (Target_Map == null)
             {
-                Node_List.Add(node.Node);
-
-                string NodeName = node.Display;
-                var Nodes = NodeList.FirstOrDefault(x => x.World == World && x.Map == Map && x.Node != Node && x.Display == NodeName);
-                if (Nodes != null)
-                    Node_List.Add(Nodes.Node);
-
+                Node_List.Add(Node);
+                return Node_List;
             }
+
+            if (DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString()) == null)
+            {
+                Node_List.Add(Node);
+                return Node_List;
+            }
+
+            Target_Node = DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString())[1];
+
+            var nodes = Target_Map.ToList<JToken>();
+
+            foreach (JToken nod in nodes)
+            {
+                JProperty jProperty = nod.ToObject<JProperty>();
+                if (Target_Node.Equals(jProperty.Value[1]))
+                    Node_List.Add(Convert.ToInt32(jProperty.Name));
+            }
+
             return Node_List;
         }
     }

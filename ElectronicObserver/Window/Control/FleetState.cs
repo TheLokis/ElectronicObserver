@@ -191,7 +191,6 @@ namespace ElectronicObserver.Window.Control
 			Color colorDanger = Color.LightCoral;
 			Color colorInPort = Color.Transparent;
 
-
 			//所属艦なし
 			if (fleet == null || fleet.Members.All(id => id == -1))
 			{

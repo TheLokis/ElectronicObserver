@@ -29,19 +29,13 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ExpControl = new System.Windows.Forms.CheckBox();
-            this.Rank_List = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.MVP_Check = new System.Windows.Forms.CheckBox();
-            this.FlagShip_Check = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.MapSelect = new System.Windows.Forms.ComboBox();
+            this.LabelAlert = new System.Windows.Forms.Label();
             this.TextShip = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SearchInFleet = new System.Windows.Forms.CheckBox();
@@ -70,13 +64,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.ExpControl);
-            this.groupBox1.Controls.Add(this.Rank_List);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.MVP_Check);
-            this.groupBox1.Controls.Add(this.FlagShip_Check);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.MapSelect);
+            this.groupBox1.Controls.Add(this.LabelAlert);
             this.groupBox1.Controls.Add(this.TextShip);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.SearchInFleet);
@@ -88,131 +76,21 @@
             this.groupBox1.Controls.Add(this.ExpUnit);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(599, 114);
+            this.groupBox1.Size = new System.Drawing.Size(599, 102);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "표시조건";
             // 
-            // ExpControl
+            // LabelAlert
             // 
-            this.ExpControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExpControl.AutoSize = true;
-            this.ExpControl.Location = new System.Drawing.Point(470, 60);
-            this.ExpControl.Name = "ExpControl";
-            this.ExpControl.Size = new System.Drawing.Size(123, 19);
-            this.ExpControl.TabIndex = 15;
-            this.ExpControl.Text = "출격Exp 수동설정";
-            this.ToolTipInfo.SetToolTip(this.ExpControl, "출격 Exp를 수동으로 설정합니다.");
-            this.ExpControl.UseVisualStyleBackColor = true;
-            this.ExpControl.CheckedChanged += new System.EventHandler(this.ExpControl_CheckChanged);
-            // 
-            // Rank_List
-            // 
-            this.Rank_List.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Rank_List.BackColor = System.Drawing.Color.White;
-            this.Rank_List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Rank_List.FormattingEnabled = true;
-            this.Rank_List.Items.AddRange(new object[] {
-            "S",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E"});
-            this.Rank_List.Location = new System.Drawing.Point(150, 86);
-            this.Rank_List.MinimumSize = new System.Drawing.Size(75, 0);
-            this.Rank_List.Name = "Rank_List";
-            this.Rank_List.Size = new System.Drawing.Size(75, 23);
-            this.Rank_List.TabIndex = 14;
-            this.ToolTipInfo.SetToolTip(this.Rank_List, "랭크를 설정합니다. 배율은 S = x1.2 / A,B = x1.0 / C = x0.8 / D = x0.6 / E = x0.5 입니다.");
-            this.Rank_List.SelectedIndexChanged += new System.EventHandler(this.Rank_IndexChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(113, 88);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 15);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "랭크";
-            // 
-            // MVP_Check
-            // 
-            this.MVP_Check.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MVP_Check.AutoSize = true;
-            this.MVP_Check.Location = new System.Drawing.Point(287, 88);
-            this.MVP_Check.Name = "MVP_Check";
-            this.MVP_Check.Size = new System.Drawing.Size(51, 19);
-            this.MVP_Check.TabIndex = 12;
-            this.MVP_Check.Text = "MVP";
-            this.ToolTipInfo.SetToolTip(this.MVP_Check, "MVP 여부를 체크합니다. 현재 설정된 경험치 값이 2배로 조정됩니다.");
-            this.MVP_Check.UseVisualStyleBackColor = true;
-            this.MVP_Check.CheckedChanged += new System.EventHandler(this.MVP_CheckChanged);
-            // 
-            // FlagShip_Check
-            // 
-            this.FlagShip_Check.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FlagShip_Check.AutoSize = true;
-            this.FlagShip_Check.Location = new System.Drawing.Point(231, 88);
-            this.FlagShip_Check.Name = "FlagShip_Check";
-            this.FlagShip_Check.Size = new System.Drawing.Size(50, 19);
-            this.FlagShip_Check.TabIndex = 11;
-            this.FlagShip_Check.Text = "기함";
-            this.ToolTipInfo.SetToolTip(this.FlagShip_Check, "기함 여부를 체크합니다. 현재 설정된 경험치 값이 1.5배로 조정됩니다.");
-            this.FlagShip_Check.UseVisualStyleBackColor = true;
-            this.FlagShip_Check.CheckedChanged += new System.EventHandler(this.FlagShip_CheckChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 15);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "해역";
-            // 
-            // MapSelect
-            // 
-            this.MapSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MapSelect.BackColor = System.Drawing.Color.White;
-            this.MapSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MapSelect.FormattingEnabled = true;
-            this.MapSelect.Items.AddRange(new object[] {
-            "1-1",
-            "1-2",
-            "1-3",
-            "1-4",
-            "1-5",
-            "2-1",
-            "2-2",
-            "2-3",
-            "2-4",
-            "2-5",
-            "3-1",
-            "3-2",
-            "3-3",
-            "3-4",
-            "3-5",
-            "4-1",
-            "4-2",
-            "4-3",
-            "4-4",
-            "4-5",
-            "5-1",
-            "5-2",
-            "5-3",
-            "5-4",
-            "5-5",
-            "6-1",
-            "6-2"});
-            this.MapSelect.Location = new System.Drawing.Point(150, 57);
-            this.MapSelect.MinimumSize = new System.Drawing.Size(150, 0);
-            this.MapSelect.Name = "MapSelect";
-            this.MapSelect.Size = new System.Drawing.Size(150, 23);
-            this.MapSelect.TabIndex = 9;
-            this.MapSelect.SelectedIndexChanged += new System.EventHandler(this.MapSelect_IndexChanged);
+            this.LabelAlert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LabelAlert.AutoSize = true;
+            this.LabelAlert.ForeColor = System.Drawing.Color.Red;
+            this.LabelAlert.Location = new System.Drawing.Point(6, 84);
+            this.LabelAlert.Name = "LabelAlert";
+            this.LabelAlert.Size = new System.Drawing.Size(19, 15);
+            this.LabelAlert.TabIndex = 9;
+            this.LabelAlert.Text = "！";
             // 
             // TextShip
             // 
@@ -254,7 +132,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(406, 89);
+            this.label1.Location = new System.Drawing.Point(410, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 15);
             this.label1.TabIndex = 7;
@@ -277,7 +155,7 @@
             // 
             this.ShowAllLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShowAllLevel.AutoSize = true;
-            this.ShowAllLevel.Location = new System.Drawing.Point(403, 24);
+            this.ShowAllLevel.Location = new System.Drawing.Point(397, 24);
             this.ShowAllLevel.Name = "ShowAllLevel";
             this.ShowAllLevel.Size = new System.Drawing.Size(74, 19);
             this.ShowAllLevel.TabIndex = 3;
@@ -290,7 +168,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 60);
+            this.label2.Location = new System.Drawing.Point(303, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 15);
             this.label2.TabIndex = 5;
@@ -299,7 +177,7 @@
             // ASWModernization
             // 
             this.ASWModernization.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ASWModernization.Location = new System.Drawing.Point(67, 56);
+            this.ASWModernization.Location = new System.Drawing.Point(364, 56);
             this.ASWModernization.Maximum = new decimal(new int[] {
             9,
             0,
@@ -315,7 +193,7 @@
             // ExpUnit
             // 
             this.ExpUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExpUnit.Location = new System.Drawing.Point(513, 85);
+            this.ExpUnit.Location = new System.Drawing.Point(517, 58);
             this.ExpUnit.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -361,14 +239,14 @@
             this.ColumnSortieCount,
             this.ColumnASW,
             this.ColumnEquipment});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.LevelView.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.LevelView.DefaultCellStyle = dataGridViewCellStyle5;
             this.LevelView.Location = new System.Drawing.Point(7, 22);
             this.LevelView.Name = "LevelView";
             this.LevelView.ReadOnly = true;
@@ -380,8 +258,8 @@
             // 
             // ColumnLevel
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColumnLevel.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColumnLevel.DefaultCellStyle = dataGridViewCellStyle1;
             this.ColumnLevel.HeaderText = "Lv";
             this.ColumnLevel.Name = "ColumnLevel";
             this.ColumnLevel.ReadOnly = true;
@@ -389,8 +267,8 @@
             // 
             // ColumnExp
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColumnExp.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColumnExp.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColumnExp.HeaderText = "필요Exp";
             this.ColumnExp.Name = "ColumnExp";
             this.ColumnExp.ReadOnly = true;
@@ -398,8 +276,8 @@
             // 
             // ColumnSortieCount
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColumnSortieCount.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColumnSortieCount.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColumnSortieCount.HeaderText = "출격회수";
             this.ColumnSortieCount.Name = "ColumnSortieCount";
             this.ColumnSortieCount.ReadOnly = true;
@@ -407,8 +285,8 @@
             // 
             // ColumnASW
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColumnASW.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColumnASW.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnASW.HeaderText = "대잠";
             this.ColumnASW.Name = "ColumnASW";
             this.ColumnASW.ReadOnly = true;
@@ -472,12 +350,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSortieCount;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnASW;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEquipment;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox MapSelect;
-        private System.Windows.Forms.ComboBox Rank_List;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox MVP_Check;
-        private System.Windows.Forms.CheckBox FlagShip_Check;
-        private System.Windows.Forms.CheckBox ExpControl;
+        private System.Windows.Forms.Label LabelAlert;
     }
 }
