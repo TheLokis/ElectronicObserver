@@ -151,7 +151,7 @@ namespace ElectronicObserver.Window
 					var sb = new StringBuilder();
 
 
-					string areaName = KCDatabase.Instance.MapArea.ContainsKey(corps.MapAreaID) ? KCDatabase.Instance.MapArea[corps.MapAreaID].Name : "バミューダ海域";
+					string areaName = KCDatabase.Instance.MapArea.ContainsKey(corps.MapAreaID) ? KCDatabase.Instance.MapArea[corps.MapAreaID].Name : "버뮤다 해역";
 
 					sb.AppendLine("소속해역: " + areaName);
 

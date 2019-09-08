@@ -614,7 +614,7 @@
             this.ExpeditionName.Size = new System.Drawing.Size(98, 23);
             this.ExpeditionName.TabIndex = 8;
             this.ExpeditionName.Text = "장거리 연습항해";
-            this.ExpeditionName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EquipmentName_MouseClick);
+            this.ExpeditionName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExpeditionName_MouseClick);
             // 
             // Difficulty
             // 
@@ -784,7 +784,7 @@
             this.Name = "DialogAlbumMasterExpedition";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "원정도감";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumMasterEquipment_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DialogAlbumMasterExpedition_FormClosed);
             this.Load += new System.EventHandler(this.DialogAlbumMasterEquipment_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

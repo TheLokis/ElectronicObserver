@@ -48,7 +48,6 @@ namespace ElectronicObserver.Data
 					if (State == 1 && ShipID != 0)
 					{
 						KCDatabase.Instance.Ships[ShipID].Repair();
-
 						State = 0;
 						ShipID = 0;
 					}

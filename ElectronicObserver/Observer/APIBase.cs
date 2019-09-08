@@ -33,6 +33,7 @@ namespace ElectronicObserver.Observer
 		/// <param name="data">処理するデータ。</param>
 		public virtual void OnRequestReceived(Dictionary<string, string> data)
 		{
+           // Utility.Logger.Add(2, APIName + ":" + data);
 			RequestReceived(APIName, data);
 		}
 
@@ -43,7 +44,8 @@ namespace ElectronicObserver.Observer
 		/// <param name="data">処理するデータ。</param>
 		public virtual void OnResponseReceived(dynamic data)
 		{
-			ResponseReceived(APIName, data);
+            //Utility.Logger.Add(2, APIName + ":" + data);
+            ResponseReceived(APIName, data);
 		}
 
 

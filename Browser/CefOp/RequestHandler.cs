@@ -43,6 +43,7 @@ namespace Browser.CefOp
             {
                 return CefReturnValue.Cancel;
             }
+
             return base.OnBeforeResourceLoad(browserControl, browser, frame, request, callback);
         }
 
@@ -55,6 +56,7 @@ namespace Browser.CefOp
             {
                 return true;
             }
+
             return base.OnBeforeBrowse(browserControl, browser, frame, request, userGesture, isRedirect);
         }
 

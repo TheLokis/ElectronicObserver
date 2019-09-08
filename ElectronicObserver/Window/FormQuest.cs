@@ -734,10 +734,10 @@ namespace ElectronicObserver.Window
 				try
 				{
 
-					// google <任務名> 艦これ
-					System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=" + Uri.EscapeDataString(quest.Name) + "+%E8%89%A6%E3%81%93%E3%82%8C");
+                    // google <任務名> 艦これ
+                    System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=%22" + Uri.EscapeDataString(quest.Name) + "%22+%E8%89%A6%E3%81%93%E3%82%8C");
 
-				}
+                }
 				catch (Exception ex)
 				{
 					Utility.ErrorReporter.SendErrorReport(ex, "임무명 구글 검색에 실패했습니다.");

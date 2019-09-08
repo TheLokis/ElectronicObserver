@@ -30,20 +30,20 @@ namespace ElectronicObserver.Utility
         /// <summary>
         /// バージョン(日本語, ソフトウェア名を含みます)
         /// </summary>
-		public static string VersionJapanese => "試製" + SoftwareNameJapanese + "四〇型改二";
+		public static string VersionJapanese => "試製" + SoftwareNameJapanese + "四二型改二";
 
 
         /// <summary>
         /// バージョン(英語)
         /// </summary>
-		public static string VersionEnglish => "4.1.2b KRTL_R16";
+		public static string VersionEnglish => "4.2.2 KRTL_R19";
 
-        public static string VersionKorean => "4.1.2b KRTL_R16";
+        public static string VersionKorean => "4.2.2 KRTL_R19";
 
         /// <summary>
         /// 更新日時
         /// </summary>
-        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2019/03/16 19:00:00");
+        public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2019/09/08 16:00:00");
         public static DateTime MaintenanceTime = DateTime.Now;
 
 

@@ -476,7 +476,7 @@ namespace ElectronicObserver.Window
 			var itemID = Utility.Configuration.Config.FormHeadquarters.DisplayUseItemID;
 			var item = db.UseItems[itemID];
 			var itemMaster = db.MasterUseItems[itemID];
-			string tail = "\r\n(설정에서 변경 가능)";
+			string tail = "\r\n(설정에서 항목 변경 가능)\r\n(우클릭으로 모든 항목 표시)";
 
 
 
@@ -506,7 +506,22 @@ namespace ElectronicObserver.Window
 			
 		}
 
-		private int RealShipCount
+        private void DisplayUseItem_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var db = KCDatabase.Instance;
+                var sb = new StringBuilder();
+                foreach (var item in db.UseItems.Values)
+                {
+                    sb.Append(item.MasterUseItem.Name).Append(" x ").Append(item.Count).AppendLine();
+                }
+
+                MessageBox.Show(sb.ToString(), "보유 아이템 목록", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private int RealShipCount
 		{
 			get
 			{

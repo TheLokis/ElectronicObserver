@@ -29,9 +29,9 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.StripMenu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu_File_OutputCSVUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +127,7 @@
             this.StripMenu_View});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(864, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -226,7 +226,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.BasePanelEquipment);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 456);
+            this.splitContainer1.Size = new System.Drawing.Size(864, 456);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -251,28 +251,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.EquipmentView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.EquipmentView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.EquipmentView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.EquipmentView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.EquipmentView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EquipmentView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EquipmentView_ID,
             this.EquipmentView_Icon,
             this.EquipmentView_Type,
             this.EquipmentView_Name});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.EquipmentView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.EquipmentView.DefaultCellStyle = dataGridViewCellStyle3;
             this.EquipmentView.Location = new System.Drawing.Point(0, 29);
             this.EquipmentView.Margin = new System.Windows.Forms.Padding(0);
             this.EquipmentView.MultiSelect = false;
@@ -291,8 +291,8 @@
             // EquipmentView_ID
             // 
             this.EquipmentView_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.EquipmentView_ID.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.EquipmentView_ID.DefaultCellStyle = dataGridViewCellStyle2;
             this.EquipmentView_ID.HeaderText = "ID";
             this.EquipmentView_ID.Name = "EquipmentView_ID";
             this.EquipmentView_ID.ReadOnly = true;
@@ -341,7 +341,7 @@
             this.BasePanelEquipment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BasePanelEquipment.Location = new System.Drawing.Point(0, 0);
             this.BasePanelEquipment.Name = "BasePanelEquipment";
-            this.BasePanelEquipment.Size = new System.Drawing.Size(546, 456);
+            this.BasePanelEquipment.Size = new System.Drawing.Size(610, 456);
             this.BasePanelEquipment.TabIndex = 0;
             // 
             // TableAircraft
@@ -447,7 +447,7 @@
             this.DefaultSlots.Location = new System.Drawing.Point(124, 74);
             this.DefaultSlots.Name = "DefaultSlots";
             this.DefaultSlots.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.DefaultSlots.Size = new System.Drawing.Size(153, 184);
+            this.DefaultSlots.Size = new System.Drawing.Size(217, 184);
             this.DefaultSlots.TabIndex = 21;
             this.DefaultSlots.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DefaultSlots_MouseDown);
             // 
@@ -461,7 +461,7 @@
             this.Description.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Description.Location = new System.Drawing.Point(9, 361);
             this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(525, 83);
+            this.Description.Size = new System.Drawing.Size(589, 83);
             this.Description.TabIndex = 20;
             this.Description.Text = "[5inch연장포]\r\n각 지의 나라에서 가장 널리 사용되는 구축함 주포, 그 연장포 버전입니다.\r\n대형함의 대공포로도 탑재되었습니다.\r\n현재는 심" +
     "해 구축함의 주력 병기로 보급되어 있습니다.て普及しています。\r\n";
@@ -950,7 +950,7 @@
             // EquipmentImage
             // 
             this.EquipmentImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.EquipmentImage.Location = new System.Drawing.Point(283, 3);
+            this.EquipmentImage.Location = new System.Drawing.Point(347, 3);
             this.EquipmentImage.Name = "EquipmentImage";
             this.EquipmentImage.Size = new System.Drawing.Size(260, 260);
             this.EquipmentImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -972,7 +972,7 @@
             // DialogAlbumMasterEquipment
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(800, 480);
+            this.ClientSize = new System.Drawing.Size(864, 480);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;

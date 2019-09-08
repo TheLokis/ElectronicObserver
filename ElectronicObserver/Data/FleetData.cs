@@ -430,24 +430,40 @@ namespace ElectronicObserver.Data
 				int battleshipCount = 0;
 				int heavyCruiserCount = 0;
 				int otherCount = 0;
+                int lightcarriercount = 0;
+                int escortcount = 0;
+                int submarineattackcount = 0;
 
-				foreach (var s in MembersInstance.Where(ss => ss != null))
+                foreach (var s in MembersInstance.Where(ss => ss != null))
 				{
 					switch (s.MasterShip.ShipType)
 					{
+                        case ShipTypes.Escort:
+                            submarineattackcount += 2;
+                            break;
+
 						case ShipTypes.Destroyer:
 							destroyerCount++;
 							break;
 
-						case ShipTypes.AircraftCarrier:
+                        case ShipTypes.LightCruiser:
+                            submarineattackcount++;
+                            break;
+
 						case ShipTypes.LightAircraftCarrier:
-						case ShipTypes.ArmoredAircraftCarrier:
+                            aircraftCarrierCount++;
+                            lightcarriercount++;
+                            break;
+
+                        case ShipTypes.AircraftCarrier:
+                        case ShipTypes.ArmoredAircraftCarrier:
 							aircraftCarrierCount++;
 							break;
 
 						case ShipTypes.SeaplaneTender:
 						case ShipTypes.AmphibiousAssaultShip:
 							aircraftAuxiliaryCount++;
+                            submarineattackcount++;
 							break;
 
 						case ShipTypes.AviationBattleship:
@@ -462,8 +478,9 @@ namespace ElectronicObserver.Data
 
 						case ShipTypes.Transport:
 							aircraftShellingCount++;
-							break;
-
+                            submarineattackcount++;
+                            break;
+                        
 						case ShipTypes.Battleship:
 						case ShipTypes.Battlecruiser:
 							shellingCount++;
@@ -488,15 +505,32 @@ namespace ElectronicObserver.Data
 
 				if (shellingCount == 0)
 				{
-					if (aircraftCarrierCount >= 1 ||
-						aircraftAuxiliaryCount >= 2 ||
-						aircraftShellingCount >= 2)
-						return 1;   // 空撃
-				}
-				if (shellingCount == 1)
+                    if (aircraftCarrierCount >= 1 ||
+                        aircraftAuxiliaryCount >= 2 ||
+                        aircraftShellingCount >= 2)
+                    {
+                        if(lightcarriercount >= 1)
+                        {
+                            if (lightcarriercount >= 2 || submarineattackcount >= 1)
+                                return 4;
+                        }
+
+                        return 1;   // 空撃
+                    }
+                }
+
+				if (shellingCount >= 1)
 				{
-					if (aircraftCarrierCount + aircraftAuxiliaryCount >= 2)
-						return 1;   // 空撃
+                    if (aircraftCarrierCount + aircraftAuxiliaryCount >= 2 || aircraftShellingCount >= 3)
+                    {
+                        if (lightcarriercount >= 1)
+                        {
+                            if (lightcarriercount >= 2 || submarineattackcount >= 1)
+                                return 4;
+                        }
+
+                        return 1;   // 空撃
+                    }
 				}
 
 				if (battleshipCount >= 2 ||

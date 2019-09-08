@@ -8,18 +8,14 @@ using ElectronicObserver.Utility.Mathematics;
 using ElectronicObserver.Window.Control;
 using ElectronicObserver.Window.Dialog;
 using ElectronicObserver.Window.Support;
-using SwfExtractor;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace ElectronicObserver.Window
@@ -208,6 +204,8 @@ namespace ElectronicObserver.Window
                             supporttype = "포격지원"; break;
                         case 3:
                             supporttype = "장거리지원뇌격"; break;
+                        case 4:
+                            supporttype = "항공(대잠)지원"; break;
                     }
 
                     double expeditionBonus = Calculator.GetExpeditionBonus(fleet);
@@ -512,12 +510,14 @@ namespace ElectronicObserver.Window
                 {
                     bool isEscaped = KCDatabase.Instance.Fleet[Parent.FleetID].EscapedShipList.Contains(shipMasterID);
 
+                    
                     if (Cached_Ship != null)
                     {
                         if (isChanged(ship) && Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
                             if (Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
                                 Parent.Show();
                     }
+                    
 
                     old_slot = "" + ship.RawData.api_slot;
                     old_ex_slot = (int) ship.RawData.api_slot_ex;
@@ -958,7 +958,8 @@ namespace ElectronicObserver.Window
 
             APIObserver o = APIObserver.Instance;
 
-            o["api_req_nyukyo/start"].RequestReceived += Updated;
+            // 작업 보류체크
+            //o["api_req_nyukyo/start"].RequestReceived += Updated;
             o["api_req_nyukyo/speedchange"].RequestReceived += Updated;
             o["api_req_hensei/change"].RequestReceived += Updated;
             o["api_req_kousyou/destroyship"].RequestReceived += Updated;
@@ -984,14 +985,13 @@ namespace ElectronicObserver.Window
             o["api_req_kaisou/slot_exchange_index"].ResponseReceived += Updated;
             o["api_get_member/require_info"].ResponseReceived += Updated;
             o["api_req_kaisou/slot_deprive"].ResponseReceived += Updated;
+            o["api_req_kaisou/marriage"].ResponseReceived += Updated;
 
 
             //追加するときは FormFleetOverview にも同様に追加してください
 
             Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
         }
-
-        FleetData Cached_Fleet;
 
         void Updated(string apiname, dynamic data)
         {

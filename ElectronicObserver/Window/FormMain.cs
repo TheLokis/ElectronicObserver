@@ -182,8 +182,9 @@ namespace ElectronicObserver.Window
 			StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
 			StripMenu_Tool_BaseAirCorpsSimulation.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
 			StripMenu_Tool_ExpChecker.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker];
+            StripMenu_Tool_ExpeditionCheck.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpeditionCheck];
 
-			StripMenu_Help_Version.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.AppIcon];
+            StripMenu_Help_Version.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.AppIcon];
 			#endregion
 
 
@@ -1440,12 +1441,15 @@ namespace ElectronicObserver.Window
 
 		private void StripMenu_Tool_BaseAirCorpsSimulation_Click(object sender, EventArgs e)
 		{
-
 			new Dialog.DialogBaseAirCorpsSimulation().Show(this);
 		}
 
+        private void StripMenu_Tool_ExpeditionCheck_Click(object sender, EventArgs e)
+        {
+            new Dialog.DialogExpeditionCheck().Show(this);
+        }
 
-		private void StripMenu_File_Layout_LockLayout_Click(object sender, EventArgs e)
+        private void StripMenu_File_Layout_LockLayout_Click(object sender, EventArgs e)
 		{
 
 			Utility.Configuration.Config.Life.LockLayout = StripMenu_File_Layout_LockLayout.Checked;
@@ -1534,6 +1538,11 @@ namespace ElectronicObserver.Window
         private void StripMenu_Tool_wikia_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://ja.kancolle.wikia.com/wiki/%E3%83%9C%E3%83%BC%E3%83%89:%E3%80%90%E6%A4%9C%E8%A8%BC%E3%80%91");
+        }
+
+        private void StripMenu_Tool_enwikia_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kancolle.fandom.com/");
         }
 
         private void StripMenu_Tool_namu_Click(object sender, EventArgs e)
@@ -1662,12 +1671,7 @@ namespace ElectronicObserver.Window
 		{
 			ShowForm(fJson);
 		}
-
-
-
-
-
-
+        
         #endregion
 
         private void StripMenu_Help_Click(object sender, EventArgs e)

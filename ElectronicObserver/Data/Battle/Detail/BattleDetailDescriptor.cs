@@ -213,6 +213,8 @@ namespace ElectronicObserver.Data.Battle.Detail
 
                         appendEnemyFleetInfo(p.EnemyMembers);
 
+                        sb.AppendLine();
+
                         if (p.IsBossDamaged)
 							sb.Append(" : 장갑파괴");
 						sb.AppendLine();

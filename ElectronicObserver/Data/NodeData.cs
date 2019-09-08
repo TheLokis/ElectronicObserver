@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ElectronicObserver.Data
 {
-    
+
 
     public class NodeInfo
     {
@@ -1778,10 +1778,12 @@ namespace ElectronicObserver.Data
 
         public static string GetNodeName(int World, int Map, int Node)
         {
-            var node = DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString())[1];
+            if (DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map] == null)
+            {
+                return Node.ToString();
+            }
 
-            if (node == null) return Node.ToString();
-            return node.ToString();
+            return DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString())[1].ToString();
         }
 
 

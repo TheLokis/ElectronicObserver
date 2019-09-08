@@ -96,6 +96,7 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItem_SiteList = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuItem_poidb = new System.Windows.Forms.ToolStripMenuItem();
+            this.StripMenuItem_enwikia = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuItem_wikia = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuItem_namu = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuItem_jwiki = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,6 +120,7 @@
             this.StripStatus_Clock = new System.Windows.Forms.ToolStripStatusLabel();
             this.UIUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.MainDockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.StripMenu_Tool_ExpeditionCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu.SuspendLayout();
             this.StripStatus.SuspendLayout();
             this.SuspendLayout();
@@ -257,7 +259,7 @@
             this.StripMenu_File_Notification_MuteAll.CheckOnClick = true;
             this.StripMenu_File_Notification_MuteAll.Name = "StripMenu_File_Notification_MuteAll";
             this.StripMenu_File_Notification_MuteAll.Size = new System.Drawing.Size(185, 22);
-            this.StripMenu_File_Notification_MuteAll.Text = "모든 알림 음소거(&M)";
+            this.StripMenu_File_Notification_MuteAll.Text = "모든 알림 무시(&M)";
             this.StripMenu_File_Notification_MuteAll.Click += new System.EventHandler(this.StripMenu_File_Notification_MuteAll_Click);
             // 
             // toolStripSeparator6
@@ -318,7 +320,7 @@
             this.StripMenu_View_Fleet_3,
             this.StripMenu_View_Fleet_4});
             this.StripMenu_View_Fleet.Name = "StripMenu_View_Fleet";
-            this.StripMenu_View_Fleet.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Fleet.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Fleet.Text = "함대(&F)";
             // 
             // StripMenu_View_Fleet_1
@@ -352,104 +354,104 @@
             // StripMenu_View_FleetOverview
             // 
             this.StripMenu_View_FleetOverview.Name = "StripMenu_View_FleetOverview";
-            this.StripMenu_View_FleetOverview.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_FleetOverview.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_FleetOverview.Text = "함대목록(&O)";
             this.StripMenu_View_FleetOverview.Click += new System.EventHandler(this.StripMenu_View_FleetOverview_Click);
             // 
             // StripMenu_View_ShipGroup
             // 
             this.StripMenu_View_ShipGroup.Name = "StripMenu_View_ShipGroup";
-            this.StripMenu_View_ShipGroup.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_ShipGroup.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_ShipGroup.Text = "함선그룹(&G)";
             this.StripMenu_View_ShipGroup.Click += new System.EventHandler(this.StripMenu_View_ShipGroup_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // StripMenu_View_Dock
             // 
             this.StripMenu_View_Dock.Name = "StripMenu_View_Dock";
-            this.StripMenu_View_Dock.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Dock.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Dock.Text = "입거(&D)";
             this.StripMenu_View_Dock.Click += new System.EventHandler(this.StripMenu_View_Dock_Click);
             // 
             // StripMenu_View_Arsenal
             // 
             this.StripMenu_View_Arsenal.Name = "StripMenu_View_Arsenal";
-            this.StripMenu_View_Arsenal.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Arsenal.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Arsenal.Text = "공창(&A)";
             this.StripMenu_View_Arsenal.Click += new System.EventHandler(this.StripMenu_View_Arsenal_Click);
             // 
             // StripMenu_View_BaseAirCorps
             // 
             this.StripMenu_View_BaseAirCorps.Name = "StripMenu_View_BaseAirCorps";
-            this.StripMenu_View_BaseAirCorps.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_BaseAirCorps.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_BaseAirCorps.Text = "기지항공대(&S)";
             this.StripMenu_View_BaseAirCorps.Click += new System.EventHandler(this.StripMenu_View_BaseAirCorps_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // StripMenu_View_Headquarters
             // 
             this.StripMenu_View_Headquarters.Name = "StripMenu_View_Headquarters";
-            this.StripMenu_View_Headquarters.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Headquarters.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Headquarters.Text = "사령부(&H)";
             this.StripMenu_View_Headquarters.Click += new System.EventHandler(this.StripMenu_View_Headquarters_Click);
             // 
             // StripMenu_View_Quest
             // 
             this.StripMenu_View_Quest.Name = "StripMenu_View_Quest";
-            this.StripMenu_View_Quest.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Quest.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Quest.Text = "임무(&Q)";
             this.StripMenu_View_Quest.Click += new System.EventHandler(this.StripMenu_View_Quest_Click);
             // 
             // StripMenu_View_Information
             // 
             this.StripMenu_View_Information.Name = "StripMenu_View_Information";
-            this.StripMenu_View_Information.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Information.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Information.Text = "정보(&I)";
             this.StripMenu_View_Information.Click += new System.EventHandler(this.StripMenu_View_Information_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // StripMenu_View_Compass
             // 
             this.StripMenu_View_Compass.Name = "StripMenu_View_Compass";
-            this.StripMenu_View_Compass.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Compass.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Compass.Text = "나침반(&C)";
             this.StripMenu_View_Compass.Click += new System.EventHandler(this.StripMenu_View_Compass_Click);
             // 
             // StripMenu_View_Battle
             // 
             this.StripMenu_View_Battle.Name = "StripMenu_View_Battle";
-            this.StripMenu_View_Battle.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Battle.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Battle.Text = "전투(&B)";
             this.StripMenu_View_Battle.Click += new System.EventHandler(this.StripMenu_View_Battle_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // StripMenu_View_Browser
             // 
             this.StripMenu_View_Browser.Name = "StripMenu_View_Browser";
-            this.StripMenu_View_Browser.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Browser.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Browser.Text = "브라우저(&M)";
             this.StripMenu_View_Browser.Click += new System.EventHandler(this.StripMenu_View_Browser_Click);
             // 
             // StripMenu_View_Log
             // 
             this.StripMenu_View_Log.Name = "StripMenu_View_Log";
-            this.StripMenu_View_Log.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Log.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Log.Text = "로그(&L)";
             this.StripMenu_View_Log.Click += new System.EventHandler(this.StripMenu_View_Log_Click);
             // 
@@ -460,7 +462,7 @@
             this.StripMenu_WindowCapture_AttachAll,
             this.StripMenu_WindowCapture_DetachAll});
             this.StripMenu_WindowCapture.Name = "StripMenu_WindowCapture";
-            this.StripMenu_WindowCapture.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_WindowCapture.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_WindowCapture.Text = "창 캡쳐(&W)";
             // 
             // StripMenu_WindowCapture_SubWindow
@@ -487,7 +489,7 @@
             // StripMenu_View_Json
             // 
             this.StripMenu_View_Json.Name = "StripMenu_View_Json";
-            this.StripMenu_View_Json.Size = new System.Drawing.Size(149, 22);
+            this.StripMenu_View_Json.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Json.Text = "JSON(&J)";
             this.StripMenu_View_Json.Click += new System.EventHandler(this.StripMenu_View_Json_Click);
             // 
@@ -510,6 +512,7 @@
             this.StripMenu_Tool_FleetImageGenerator,
             this.StripMenu_Tool_BaseAirCorpsSimulation,
             this.StripMenu_Tool_ExpChecker,
+            this.StripMenu_Tool_ExpeditionCheck,
             this.toolStripSeparator12,
             this.ToolStripMenuItem_SiteList});
             this.StripMenu_Tool.Name = "StripMenu_Tool";
@@ -631,6 +634,7 @@
             // 
             this.ToolStripMenuItem_SiteList.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StripMenuItem_poidb,
+            this.StripMenuItem_enwikia,
             this.StripMenuItem_wikia,
             this.StripMenuItem_namu,
             this.StripMenuItem_jwiki,
@@ -647,6 +651,13 @@
             this.StripMenuItem_poidb.Size = new System.Drawing.Size(178, 22);
             this.StripMenuItem_poidb.Text = "POI DB";
             this.StripMenuItem_poidb.Click += new System.EventHandler(this.StripMenu_Tool_poidb_Click);
+            // 
+            // StripMenuItem_enwikia
+            // 
+            this.StripMenuItem_enwikia.Name = "StripMenuItem_enwikia";
+            this.StripMenuItem_enwikia.Size = new System.Drawing.Size(178, 22);
+            this.StripMenuItem_enwikia.Text = "영어 위키아";
+            this.StripMenuItem_enwikia.Click += new System.EventHandler(this.StripMenu_Tool_enwikia_Click);
             // 
             // StripMenuItem_wikia
             // 
@@ -828,6 +839,13 @@
             this.MainDockPanel.Size = new System.Drawing.Size(640, 434);
             this.MainDockPanel.TabIndex = 0;
             // 
+            // StripMenu_Tool_ExpeditionCheck
+            // 
+            this.StripMenu_Tool_ExpeditionCheck.Name = "StripMenu_Tool_ExpeditionCheck";
+            this.StripMenu_Tool_ExpeditionCheck.Size = new System.Drawing.Size(180, 22);
+            this.StripMenu_Tool_ExpeditionCheck.Text = "원정조건확인(&M)";
+            this.StripMenu_Tool_ExpeditionCheck.Click += new System.EventHandler(this.StripMenu_Tool_ExpeditionCheck_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -945,5 +963,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuOyodo;
         private System.Windows.Forms.ToolStripMenuItem ToopStripMenu_DeckB;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_AkashiList;
+        private System.Windows.Forms.ToolStripMenuItem StripMenuItem_enwikia;
+        private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_ExpeditionCheck;
     }
 }

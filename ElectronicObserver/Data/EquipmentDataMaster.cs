@@ -32,7 +32,8 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment); }
+            get {
+                return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment); }
         }
 
         public string Name_JP => RawData.api_name;
@@ -115,16 +116,14 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public ReadOnlyCollection<int> Material => Array.AsReadOnly((int[])RawData.api_broken);
 
-		/// <summary>
-		/// 図鑑説明
-		/// </summary>
-		public string Message => ((string)RawData.api_info).Replace("<br>", "\r\n");
-
-
-		/// <summary>
-		/// 基地航空隊：配置コスト
-		/// </summary>
-		public int AircraftCost => RawData.api_cost() ? (int)RawData.api_cost : 0;
+        /// <summary>
+        /// 図鑑説明
+        /// </summary>
+        public string Message => RawData.api_info() ? ((string)RawData.api_info).Replace("<br>", "\r\n") : "";
+        /// <summary>
+        /// 基地航空隊：配置コスト
+        /// </summary>
+        public int AircraftCost => RawData.api_cost() ? (int)RawData.api_cost : 0;
 
 
 		/// <summary>
@@ -341,11 +340,10 @@ namespace ElectronicObserver.Data
 		public bool IsAirRadar => IsRadar && AA >= 2;
 
 		/// <summary> 水上電探かどうか </summary>
-		public bool IsSurfaceRadar => IsRadar && Accuracy >= 3;
+		public bool IsSurfaceRadar => IsRadar && LOS >= 5;
 
-
-		/// <summary> ソナーかどうか </summary>
-		public bool IsSonar => CategoryType == EquipmentTypes.Sonar || CategoryType == EquipmentTypes.SonarLarge;
+        /// <summary> ソナーかどうか </summary>
+        public bool IsSonar => CategoryType == EquipmentTypes.Sonar || CategoryType == EquipmentTypes.SonarLarge;
 
 		/// <summary> 爆雷かどうか(投射機は含まない) </summary>
 		public bool IsDepthCharge =>

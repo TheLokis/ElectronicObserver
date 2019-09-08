@@ -193,9 +193,7 @@ namespace Browser
 			HeartbeatTimer.Interval = 2000; // 2秒ごと　
 			HeartbeatTimer.Start();
 
-
 			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.GetIconResource());
-
 
 			InitializeBrowser();
 		}
@@ -223,7 +221,7 @@ namespace Browser
 				CachePath = BrowserCachePath,
 				Locale = "ja",
 				AcceptLanguageList = "ja,en-US,en",        // todo: いる？
-                LogSeverity = LogSeverity.Error,
+                LogSeverity = Configuration.SavesBrowserLog ? LogSeverity.Error : LogSeverity.Disable,
                 LogFile = "BrowserLog.log",
             };
 
@@ -234,11 +232,10 @@ namespace Browser
             if (Configuration.ForceColorProfile)
                 settings.CefCommandLineArgs.Add("force-color-profile", "srgb");
             CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
-			Cef.Initialize(settings, false, null);
+            Cef.Initialize(settings, false, (IBrowserProcessHandler)null);
 
             var requestHandler = new RequestHandler(pixiSettingEnabled: Configuration.PreserveDrawingBuffer);
             requestHandler.RenderProcessTerminated += (mes) => AddLog(3, mes);
-
 
             Browser = new ChromiumWebBrowser(@"about:blank")
 			{
@@ -249,11 +246,13 @@ namespace Browser
 				KeyboardHandler = new KeyboardHandler(),
 				DragHandler = new DragHandler(),
 			};
+
             Browser.AddressChanged += Browser_AddressChanged;
 
             Browser.LoadingStateChanged += Browser_LoadingStateChanged;
-			SizeAdjuster.Controls.Add(Browser);
+            Browser.IsBrowserInitializedChanged += Browser_IsBrowserInitializedChanged;
 
+            SizeAdjuster.Controls.Add(Browser);
 
             if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"CefEOBrowser"))) {
                 Directory.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"CefEOBrowser"), true);
@@ -487,9 +486,6 @@ namespace Browser
 			return frames.FirstOrDefault(f => f?.Url?.Contains(@"/kcs2/index.php") ?? false);
 		}
 
-
-
-
 		/// <summary>
 		/// スタイルシートを適用します。
 		/// </summary>
@@ -557,15 +553,33 @@ namespace Browser
 
 		}
 
-		/// <summary>
-		/// 指定した URL のページを開きます。
-		/// </summary>
-		public void Navigate(string url)
+        private string navigateCache = null;
+        private void Browser_IsBrowserInitializedChanged(object sender, IsBrowserInitializedChangedEventArgs e)
+        {
+            if (IsBrowserInitialized && navigateCache != null)
+            {
+                // ロードが完了したので再試行
+                string url = navigateCache;            // 非同期コールするのでコピーを取っておく必要がある
+                BeginInvoke((Action)(() => Navigate(url)));
+                navigateCache = null;
+            }
+        }
+
+        /// <summary>
+        /// 指定した URL のページを開きます。
+        /// </summary>
+        public void Navigate(string url)
 		{
-			if (url != Configuration.LogInPageURL || !Configuration.AppliesStyleSheet)
-				StyleSheetApplied = false;
-			Browser.Load(url);
-		}
+            if (url != Configuration.LogInPageURL || !Configuration.AppliesStyleSheet)
+                StyleSheetApplied = false;
+            Browser.Load(url);
+
+            if (!IsBrowserInitialized)
+            {
+                // 大方ロードできないのであとで再試行する
+                navigateCache = url;
+            }
+        }
 
 		/// <summary>
 		/// ブラウザを再読み込みします。
@@ -1264,8 +1278,25 @@ namespace Browser
 			Browser.GetBrowser().ShowDevTools();
 		}
 
+        private void ToolMenu_CacheClear_Click(object sender, EventArgs e)
+        {
+            if (!IsBrowserInitialized)
+                return;
 
-		protected override void WndProc(ref Message m)
+            if (MessageBox.Show("브라우저의 캐시를 삭제합니다.\r\n캐시의 용량에 따라 브라우저의 작동이 길게는 수 분 정지될 수 있습니다.\r\n진행하시겠습니까?", "확인",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                == DialogResult.OK)
+            {
+                AddLog(2, "캐시 삭제 작동 확인");
+            }
+        }
+
+        private void Cache_Clear()
+        {
+            
+        }
+
+        protected override void WndProc(ref Message m)
 		{
 
 			if (m.Msg == WM_ERASEBKGND)

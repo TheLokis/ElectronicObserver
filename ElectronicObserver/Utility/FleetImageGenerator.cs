@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SwfExtractor;
 using System.Windows.Forms;
 using ElectronicObserver.Data;
 using ElectronicObserver.Utility.Data;
@@ -1745,9 +1744,9 @@ namespace ElectronicObserver.Utility
             new ShipParameterData( ResourceManager.IconContent.ParameterAA, "対空", ship => ship.AATotal.ToString() ),
             new ShipParameterData( ResourceManager.IconContent.ParameterAircraft, "制空", ship => Calculator.GetAirSuperiority(ship).ToString() ),
             new ShipParameterData( ResourceManager.IconContent.ParameterASW, "対潜", ship => ship.ASWTotal.ToString() ),
-            new ShipParameterData( ResourceManager.IconContent.ParameterSpeed, "速力", ship => Constants.GetSpeed( ship.Speed ), true ),
+            new ShipParameterData( ResourceManager.IconContent.ParameterSpeed, "速力", ship => Constants.GetSpeed_JP( ship.Speed ), true ),
             new ShipParameterData( ResourceManager.IconContent.ParameterLOS, "索敵", ship => ship.LOSTotal.ToString() ),
-            new ShipParameterData( ResourceManager.IconContent.ParameterRange, "射程", ship => Constants.GetRange( ship.Range ), true ),
+            new ShipParameterData( ResourceManager.IconContent.ParameterRange, "射程", ship => Constants.GetRange_JP( ship.Range ), true ),
             new ShipParameterData( ResourceManager.IconContent.ParameterLuck, "運", ship => ship.LuckTotal.ToString() ),
         };
 

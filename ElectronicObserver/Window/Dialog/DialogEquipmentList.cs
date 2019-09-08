@@ -498,7 +498,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("고유ID,장비ID,장비명,개장Lv,함재기Lv,잠금,장비함ID,장비함");
+						sw.WriteLine("고유ID,장비ID,장비명,개수Lv,함재기Lv,잠금,장비함ID,장비함");
 						string arg = string.Format("{{{0}}}", string.Join("},{", Enumerable.Range(0, 8)));
 
 						foreach (var eq in KCDatabase.Instance.Equipments.Values)
@@ -535,10 +535,20 @@ namespace ElectronicObserver.Window.Dialog
 
 			}
 
-
 		}
 
-		private void DialogEquipmentList_FormClosed(object sender, FormClosedEventArgs e)
+        /// <summary>
+        /// 「艦隊分析」装備情報反映用
+        /// https://kancolle-fleetanalysis.firebaseapp.com/
+        /// </summary>
+        private void TopMenu_File_CopyToFleetAnalysis_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(
+                "[" + string.Join(",", KCDatabase.Instance.Equipments.Values.Where(eq => eq?.IsLocked ?? false)
+                .Select(eq => $"{{\"api_slotitem_id\":{eq.EquipmentID},\"api_level\":{eq.Level}}}")) + "]");
+        }
+
+        private void DialogEquipmentList_FormClosed(object sender, FormClosedEventArgs e)
 		{
 
 			ResourceManager.DestroyIcon(Icon);

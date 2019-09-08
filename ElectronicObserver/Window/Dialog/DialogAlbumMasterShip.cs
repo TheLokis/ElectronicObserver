@@ -1628,10 +1628,10 @@ namespace ElectronicObserver.Window.Dialog
 			try
 			{
 
-				// google <艦船名> 艦これ
-				System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=" + Uri.EscapeDataString(ship.NameWithClass) + "+%E8%89%A6%E3%81%93%E3%82%8C");
+                // google <艦船名> 艦これ
+                System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=%22" + Uri.EscapeDataString(ship.NameWithClass) + "%22+%E8%89%A6%E3%81%93%E3%82%8C");
 
-			}
+            }
 			catch (Exception ex)
 			{
 				Utility.ErrorReporter.SendErrorReport(ex, "함선명의 구글 검색에 실패했습니다.");

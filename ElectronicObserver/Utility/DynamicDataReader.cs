@@ -455,7 +455,6 @@ namespace ElectronicObserver.Utility
                 Logger.Add(2, "주포 피트정보가 업데이트 되었습니다. 신규 버전 : " + newFitDataver + ".");
             }
 
-
             GetVersions();
         }
 
@@ -705,7 +704,6 @@ namespace ElectronicObserver.Utility
                     if (Weights.Contains(Master_Itemid))
                     {
                         Weight_Type = WeightClass.Key;
-
                         break;
                     }
                 }
@@ -713,15 +711,16 @@ namespace ElectronicObserver.Utility
                 if (Weight_Type.Equals("unknown"))
                 {
                     Window.FormMain.Instance.fInformation.Show_FitInfo(Master_Shipid, Master_Itemid);
-                    return;
                 }
+                else
+                {
+                    int[] Fit_Bonus = new int[] { Accuracy_Data[Weight_Type]["day"].ToObject<int>(), Accuracy_Data[Weight_Type]["night"].ToObject<int>() };
+                    float Marry_Data = 0;
+                    if (Accuracy_Data[Weight_Type]["married"] != null)
+                        Marry_Data = Accuracy_Data[Weight_Type]["married"].ToObject<float>();
 
-                int[] Fit_Bonus = new int[] { Accuracy_Data[Weight_Type]["day"].ToObject<int>(), Accuracy_Data[Weight_Type]["night"].ToObject<int>() };
-                float Marry_Data = 0;
-                if (Accuracy_Data[Weight_Type]["married"] != null)
-                    Marry_Data = Accuracy_Data[Weight_Type]["married"].ToObject<float>();
-
-                Window.FormMain.Instance.fInformation.Show_FitInfo(db.Ships[Shipid].Name, db.MasterEquipments[Master_Itemid].Name, Fit_Bonus, Marry_Data, Married);
+                    Window.FormMain.Instance.fInformation.Show_FitInfo(db.Ships[Shipid].Name, db.MasterEquipments[Master_Itemid].Name, Fit_Bonus, Marry_Data, Married);
+                }
             }
         }
 

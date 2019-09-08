@@ -57,6 +57,7 @@ namespace ElectronicObserver.Window
             o["api_req_map/next"].ResponseReceived += Updated;
             o["api_req_practice/battle"].ResponseReceived += Updated;
             o["api_get_member/sortie_conditions"].ResponseReceived += Updated;
+            o["api_req_mission/start"].RequestReceived += Updated;
 
             Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
         }
@@ -319,6 +320,7 @@ namespace ElectronicObserver.Window
                 }
                 else
                 {
+                    Utility.Logger.Add(2, data.ToString());
                     //装備図鑑
                     const int bound = 70;       // 図鑑1ページあたりの装備数
                     int startIndex = (((int)data.api_list[0].api_index_no - 1) / bound) * bound + 1;
@@ -442,7 +444,7 @@ namespace ElectronicObserver.Window
 
         private string CheckGimmickUpdated(dynamic data)
         {
-            if (data.api_m1() && data.api_m1 == 1)
+            if ((data.api_m1() && data.api_m1 != 0) || (data.api_m2() && data.api_m2 != 0))
             {
                 Utility.Logger.Add(2, "해역의 변화를 확인하였습니다!");
                 return "\r\n＊기믹 해제＊\r\n";
@@ -599,11 +601,25 @@ namespace ElectronicObserver.Window
 
             StringBuilder sb = new StringBuilder();
             sb.Append("[피트정보]\r\n");
-            sb.Append(string.Format("[{0}]\r\n", db.Ships[Shipid].Name));
+            sb.Append(string.Format("[{0}]\r\n", db.MasterShips[Shipid].Name));
             sb.Append(string.Format("[{0}]\r\n", db.MasterEquipments[Equipmentid].Name));
             sb.Append("정보 없음");
 
             TextInformation.Text = sb.ToString();
+        }
+
+        private void CheckExpedition(int missionID, int fleetID)
+        {
+            var fleet = KCDatabase.Instance.Fleet[fleetID];
+            var result = MissionClearCondition.Check(missionID, fleet);
+
+            if (!result.IsSuceeded)
+            {
+                var mission = KCDatabase.Instance.Mission[missionID];
+                MessageBox.Show(
+                    $"#{fleet.FleetID} {fleet.Name} 함대는 {mission.DisplayID}:{mission.Name} 의 조건에 미달되는것같습니다. \r\n실패할 수 있습니다. .\r\n\r\n{string.Join("\r\n", result.FailureReason)}\r\n\r\n（이 경고는 설정->실행에서 비활성화 할 수 있습니다.）",
+                    "원정 실패 경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         public void Check_Expedition(int fleetID, int MissionId)

@@ -34,14 +34,15 @@ namespace ElectronicObserver.Data.Quest
             // 邪悪
             var bm = KCDatabase.Instance.Battle;
 
-            if (bm.FirstBattle == null)
+            var fleet = KCDatabase.Instance.Fleet.Fleets.Values.FirstOrDefault(f => f.IsInSortie);
+
+            if (fleet == null)
             {
                 // 戦闘中ではない - たぶん UI 操作経由のコール?
                 base.Increment(rank, areaID, isBoss);
                 return;
             }
 
-            var fleet = bm.FirstBattle.Initial.FriendFleet;
             var members = fleet.MembersWithoutEscaped;
             var memberstype = members.Select(s => s?.MasterShip?.ShipType ?? Empty).ToArray();
 
@@ -133,6 +134,11 @@ namespace ElectronicObserver.Data.Quest
                         memberstype.Count(t => t == ShipTypes.HeavyCruiser) == 1 &&
                         memberstype.Count(t => t == ShipTypes.LightCruiser) == 1 &&
                         memberstype.Count(t => t == ShipTypes.Destroyer) == 4;
+                    break;
+                case 280:
+                    isAccepted =
+                        memberstype.Any(t => t == ShipTypes.LightAircraftCarrier || t == ShipTypes.LightCruiser || t == ShipTypes.TorpedoCruiser || t == ShipTypes.TrainingCruiser) &&
+                        memberstype.Count(t => t == ShipTypes.Destroyer || t == ShipTypes.Escort) >= 3;
                     break;
 
                 // |861|季|強行輸送艦隊、抜錨！|1-6終点到達2|要(航空戦艦or補給艦)2

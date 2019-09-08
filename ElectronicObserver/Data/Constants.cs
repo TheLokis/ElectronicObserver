@@ -35,10 +35,29 @@ namespace ElectronicObserver.Data
 			}
 		}
 
-		/// <summary>
-		/// 射程を表す文字列を取得します。
-		/// </summary>
-		public static string GetRange(int value)
+        public static string GetSpeed_JP(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    return "陸上";
+                case 5:
+                    return "低速";
+                case 10:
+                    return "高速";
+                case 15:
+                    return "高速+";
+                case 20:
+                    return "最速";
+                default:
+                    return "不明";
+            }
+        }
+
+        /// <summary>
+        /// 射程を表す文字列を取得します。
+        /// </summary>
+        public static string GetRange(int value)
 		{
 			switch (value)
 			{
@@ -59,10 +78,31 @@ namespace ElectronicObserver.Data
 			}
 		}
 
-		/// <summary>
-		/// 艦船のレアリティを表す文字列を取得します。
-		/// </summary>
-		public static string GetShipRarity(int value)
+        public static string GetRange_JP(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    return "無";
+                case 1:
+                    return "短";
+                case 2:
+                    return "中";
+                case 3:
+                    return "長";
+                case 4:
+                    return "超長";
+                case 5:
+                    return "超長+";
+                default:
+                    return "不明";
+            }
+        }
+
+        /// <summary>
+        /// 艦船のレアリティを表す文字列を取得します。
+        /// </summary>
+        public static string GetShipRarity(int value)
 		{
 			switch (value)
 			{
@@ -138,7 +178,9 @@ namespace ElectronicObserver.Data
 					return "SS홀로'";
 				case 6:
 					return "SS홀로+";
-				default:
+                case 7:
+                    return "SS++";
+                default:
 					return "불명";
 			}
 		}
@@ -153,17 +195,17 @@ namespace ElectronicObserver.Data
 				case 0:
 					return 1;
 				case 1:
-					return 3;
+					return 2;
 				case 2:
-					return 4;
+					return 3;
 				case 3:
-					return 5;
+					return 4;
 				case 4:
-					return 6;
+					return 5;
 				case 5:
-					return 7;
+					return 6;
 				case 6:
-					return 8;
+					return 7;
 				default:
 					return 0;
 			}
@@ -791,9 +833,15 @@ namespace ElectronicObserver.Data
                 case DayAttackKind.SpecialNelson:
                     return "넬슨터치";
                 case DayAttackKind.SpecialNagato:
-                    return "흉열";
+                    return "흉열(나가토)";
+                case DayAttackKind.SpecialMutsu:
+                    return "흉열(무츠)";
+                case DayAttackKind.ZuiunMultiAngle:
+                    return "즈이운입체공격";
+                case DayAttackKind.SeaAirMultiAngle:
+                    return "해공입체공격";
                 case DayAttackKind.Shelling:
-					return "포격";
+                    return "포격";
 				case DayAttackKind.AirAttack:
 					return "공습";
 				case DayAttackKind.DepthCharge:
@@ -813,7 +861,7 @@ namespace ElectronicObserver.Data
 				case DayAttackKind.LandingTokuDaihatsuTank:
 					return "기지공격(특대발전차)";
 				default:
-					return "불명";
+					return "불명(" + (int)id + ")";
 			}
 		}
 
@@ -846,9 +894,11 @@ namespace ElectronicObserver.Data
                 case NightAttackKind.SpecialNelson:
                     return "넬슨터치";
                 case NightAttackKind.SpecialNagato:
-                    return "흉열";
+                    return "흉열(나가토)";
+                case NightAttackKind.SpecialMutsu:
+                    return "흉열(무츠)";
                 case NightAttackKind.Shelling:
-					return "포격";
+                    return "포격";
 				case NightAttackKind.AirAttack:
 					return "공습";
 				case NightAttackKind.DepthCharge:
@@ -868,7 +918,7 @@ namespace ElectronicObserver.Data
                 case NightAttackKind.LandingTokuDaihatsuTank:
                     return "기지공격(특대발전차)";
                 default:
-                    return "불명";
+                    return "불명(" + (int)id + ")";
             }
 		}
 
@@ -953,7 +1003,7 @@ namespace ElectronicObserver.Data
                 case 37:
                     return "플래쳐포改x2<존스턴>";
                 default:
-					return "불명";
+					return "불명(" + id + ")";
 			}
 		}
 

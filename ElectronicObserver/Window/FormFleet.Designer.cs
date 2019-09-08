@@ -102,7 +102,7 @@
 			// 
 			this.ContextMenuFleet_CopyKanmusuList.Name = "ContextMenuFleet_CopyKanmusuList";
 			this.ContextMenuFleet_CopyKanmusuList.Size = new System.Drawing.Size(227, 22);
-			this.ContextMenuFleet_CopyKanmusuList.Text = "함대 노출 페이지에 복사(&R)";
+			this.ContextMenuFleet_CopyKanmusuList.Text = "함대 분석용 코드 복사(&R)";
 			this.ContextMenuFleet_CopyKanmusuList.Click += new System.EventHandler(this.ContextMenuFleet_CopyKanmusuList_Click);
 			// 
 			// toolStripSeparator1

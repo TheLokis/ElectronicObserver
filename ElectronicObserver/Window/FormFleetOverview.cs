@@ -208,9 +208,10 @@ namespace ElectronicObserver.Window
 			o.APIList["api_req_kaisou/slot_exchange_index"].ResponseReceived += Updated;
 			o.APIList["api_get_member/require_info"].ResponseReceived += Updated;
 			o.APIList["api_req_kaisou/slot_deprive"].ResponseReceived += Updated;
+            o["api_req_kaisou/marriage"].ResponseReceived += Updated;
 
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+            Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 		}
 
 		void ConfigurationChanged()

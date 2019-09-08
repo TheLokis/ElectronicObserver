@@ -14,15 +14,19 @@ namespace ElectronicObserver.Data
 	public class MissionData : APIWrapper, IIdentifiable
 	{
 
-		/// <summary>
-		/// 任務ID
-		/// </summary>
-		public int MissionID => (int)RawData.api_id;
+        /// 遠征ID
+        /// </summary>
+        public int MissionID => (int)RawData.api_id;
 
-		/// <summary>
-		/// 海域カテゴリID
-		/// </summary>
-		public int MapAreaID => (int)RawData.api_maparea_id;
+        /// <summary>
+        /// 表示される遠征ID
+        /// </summary>
+        public string DisplayID => RawData.api_disp_no;
+
+        /// <summary>
+        /// 海域カテゴリID
+        /// </summary>
+        public int MapAreaID => (int)RawData.api_maparea_id;
 
 		/// <summary>
 		/// 遠征名 번역됨

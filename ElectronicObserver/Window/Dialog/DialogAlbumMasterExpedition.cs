@@ -381,10 +381,6 @@ namespace ElectronicObserver.Window.Dialog
         private void TableParameterMain_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {
             e.Graphics.DrawLine(Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
-            /*/
-			if ( e.Column == 0 )
-				e.Graphics.DrawLine( Pens.Silver, e.CellBounds.Right - 1, e.CellBounds.Y, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1 );
-			//*/
         }
 
         private void TableParameterSub_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
@@ -440,17 +436,14 @@ namespace ElectronicObserver.Window.Dialog
             }
         }
 
-
-
-
-        private void DialogAlbumMasterEquipment_FormClosed(object sender, FormClosedEventArgs e)
+        private void DialogAlbumMasterExpedition_FormClosed(object sender, FormClosedEventArgs e)
         {
 
             ResourceManager.DestroyIcon(Icon);
 
         }
 
-        private void StripMenu_Edit_CopyEquipmentName_Click(object sender, EventArgs e)
+        private void StripMenu_Edit_CopyExpedition_Click(object sender, EventArgs e)
         {
             var eq = KCDatabase.Instance.MasterEquipments[ExpeditionID.Tag as int? ?? -1];
             if (eq != null)
@@ -459,13 +452,13 @@ namespace ElectronicObserver.Window.Dialog
                 System.Media.SystemSounds.Exclamation.Play();
         }
 
-        private void EquipmentName_MouseClick(object sender, MouseEventArgs e)
+        private void ExpeditionName_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                var eq = KCDatabase.Instance.MasterEquipments[ExpeditionID.Tag as int? ?? -1];
-                if (eq != null)
-                    Clipboard.SetText(eq.Name);
+                var mi = KCDatabase.Instance.Mission[ExpeditionID.Tag as int? ?? -1];
+                if (mi != null)
+                    Clipboard.SetText(mi.Name);
                 else
                     System.Media.SystemSounds.Exclamation.Play();
             }
@@ -502,51 +495,6 @@ namespace ElectronicObserver.Window.Dialog
             }
 
             return sb.ToString();
-        }
-
-        private void StripMenu_View_ShowAppearingArea_Click(object sender, EventArgs e)
-        {
-
-            int eqID = ExpeditionID.Tag as int? ?? -1;
-            var eq = KCDatabase.Instance.MasterEquipments[eqID];
-
-            if (eq == null)
-            {
-                System.Media.SystemSounds.Exclamation.Play();
-                return;
-            }
-
-            string result = GetAppearingArea(eqID);
-
-            if (string.IsNullOrWhiteSpace(result))
-            {
-                result = eq.Name + " 의 초기장비함 ・ 개발 레시피를 알수없습니다.";
-            }
-
-            MessageBox.Show(result, "입수방법보기", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-
-        private void StripMenu_Edit_GoogleEquipmentName_Click(object sender, EventArgs e)
-        {
-            var eq = KCDatabase.Instance.MasterEquipments[ExpeditionID.Tag as int? ?? -1];
-            if (eq == null)
-            {
-                System.Media.SystemSounds.Exclamation.Play();
-                return;
-            }
-
-            try
-            {
-
-                // google <装備名> 艦これ
-                System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=" + Uri.EscapeDataString(eq.Name) + "+%E8%89%A6%E3%81%93%E3%82%8C");
-
-            }
-            catch (Exception ex)
-            {
-                Utility.ErrorReporter.SendErrorReport(ex, "함선명의 구글 검색에 실패했습니다.");
-            }
         }
 
         private void TableParameterMain_Paint(object sender, PaintEventArgs e)

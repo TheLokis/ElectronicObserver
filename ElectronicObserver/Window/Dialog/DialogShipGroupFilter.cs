@@ -915,27 +915,16 @@ namespace ElectronicObserver.Window.Dialog
 		private void ExpressionView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
 		{
 
-			if (ExpressionView.Columns[ExpressionView.CurrentCellAddress.X] is DataGridViewCheckBoxColumn)
-			{
-				if (ExpressionView.IsCurrentCellDirty)
-				{
-					ExpressionView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-				}
-			}
+            if (ExpressionView.IsCurrentCellDirty)
+                ExpressionView.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
-		}
+        }
 
 		private void ExpressionDetailView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
 		{
-
-			if (ExpressionDetailView.Columns[ExpressionDetailView.CurrentCellAddress.X] is DataGridViewCheckBoxColumn)
-			{
-				if (ExpressionDetailView.IsCurrentCellDirty)
-				{
-					ExpressionDetailView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-				}
-			}
-		}
+            if (ExpressionDetailView.IsCurrentCellDirty)
+                ExpressionDetailView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
 
 
 		// UI 操作(チェックボックス/コンボボックス)の反映

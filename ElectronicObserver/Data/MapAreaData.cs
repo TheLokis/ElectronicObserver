@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectronicObserver.Window;
 
 namespace ElectronicObserver.Data
 {
@@ -18,7 +19,10 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 海域カテゴリ名
 		/// </summary>
-		public string Name => RawData.api_name;
+		public string Name
+        {
+            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.OperationMaps); }
+        }
 
 		/// <summary>
 		/// 海域タイプ　0=通常, 1=イベント

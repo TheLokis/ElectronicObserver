@@ -245,6 +245,7 @@ namespace ElectronicObserver.Window
                 config.PreserveDrawingBuffer = c.PreserveDrawingBuffer;
                 config.Theme = (uint)Utility.Configuration.Config.UI.Theme;
                 config.ForceColorProfile = c.ForceColorProfile;
+                config.SavesBrowserLog = c.SavesBrowserLog;
                 return config;
 			}
 		}
