@@ -46,7 +46,6 @@ namespace ElectronicObserver.Window
             o["api_port/port"].ResponseReceived += Updated;
             o["api_req_member/get_practice_enemyinfo"].ResponseReceived += Updated;
             o["api_get_member/picture_book"].ResponseReceived += Updated;
-            o["api_req_kousyou/createitem"].ResponseReceived += Updated;
             o["api_get_member/mapinfo"].ResponseReceived += Updated;
             o["api_req_mission/result"].ResponseReceived += Updated;
             o["api_req_practice/battle_result"].ResponseReceived += Updated;
@@ -62,7 +61,6 @@ namespace ElectronicObserver.Window
             Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
         }
 
-
         void ConfigurationChanged()
         {
 
@@ -74,7 +72,6 @@ namespace ElectronicObserver.Window
             TextInformation.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
 
         }
-
 
         void Updated(string apiname, dynamic data)
         {
@@ -113,10 +110,6 @@ namespace ElectronicObserver.Window
                     TextInformation.Text = GetAlbumInfo(data);
                     break;
 
-                case "api_req_kousyou/createitem":
-                    TextInformation.Text = GetCreateItemInfo(data);
-                    break;
-
                 case "api_get_member/mapinfo":
                     TextInformation.Text = GetMapGauge(data);
                     break;
@@ -134,6 +127,11 @@ namespace ElectronicObserver.Window
 
                 case "api_req_hokyu/charge":
                     TextInformation.Text = GetSupplyInformation(data);
+                    break;
+
+                case "api_req_mission/start":
+                    if (Utility.Configuration.Config.Control.ShowExpeditionAlertDialog)
+                        CheckExpedition(int.Parse(data["api_mission_id"]), int.Parse(data["api_deck_id"]));
                     break;
 
                 case "api_get_member/sortie_conditions":
@@ -158,7 +156,6 @@ namespace ElectronicObserver.Window
                             if (!string.IsNullOrWhiteSpace(str))
                                 TextInformation.Text = str;
                         }
-
                     }
                     break;
 
@@ -167,13 +164,10 @@ namespace ElectronicObserver.Window
                     break;
 
             }
-
         }
-
 
         private string GetPracticeEnemyInfo(dynamic data)
         {
-
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("[연습정보]");
             sb.AppendLine("적제독명 : " + data.api_nickname);
@@ -258,7 +252,7 @@ namespace ElectronicObserver.Window
                         }
                     }
 
-                    sb.AppendFormat("(연순강화: {0} / S승리: {1})\r\n", (int)(expbase * bonus), (int)((int)(expbase * 1.2) * bonus));
+                    sb.AppendFormat("(연순보정: {0} / S승리: {1})\r\n", (int)(expbase * bonus), (int)((int)(expbase * 1.2) * bonus));
 
 
                 }
@@ -266,7 +260,6 @@ namespace ElectronicObserver.Window
 
             return sb.ToString();
         }
-
 
         private string GetAlbumInfo(dynamic data)
         {
@@ -320,7 +313,6 @@ namespace ElectronicObserver.Window
                 }
                 else
                 {
-                    Utility.Logger.Add(2, data.ToString());
                     //装備図鑑
                     const int bound = 70;       // 図鑑1ページあたりの装備数
                     int startIndex = (((int)data.api_list[0].api_index_no - 1) / bound) * bound + 1;
@@ -335,7 +327,7 @@ namespace ElectronicObserver.Window
                     sb.AppendLine("[미보유장비]");
                     for (int i = 0; i < bound; i++)
                     {
-                        if (!flags[i])
+                        if (flags[i] == false)
                         {
                             EquipmentDataMaster eq = KCDatabase.Instance.MasterEquipments.Values.FirstOrDefault(s => s.AlbumNo == startIndex + i);
                             if (eq != null)
@@ -349,30 +341,6 @@ namespace ElectronicObserver.Window
 
             return sb.ToString();
         }
-
-
-        private string GetCreateItemInfo(dynamic data)
-        {
-
-            if ((int)data.api_create_flag == 0)
-            {
-
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("[개발실패]");
-                sb.AppendLine(data.api_fdata);
-
-                EquipmentDataMaster eqm = KCDatabase.Instance.MasterEquipments[int.Parse(((string)data.api_fdata).Split(",".ToCharArray())[1])];
-                if (eqm != null)
-                    sb.AppendLine(eqm.Name);
-
-
-                return sb.ToString();
-
-            }
-            else
-                return "";
-        }
-
 
         private string GetMapGauge(dynamic data)
         {
@@ -414,7 +382,6 @@ namespace ElectronicObserver.Window
             return sb.ToString();
         }
 
-
         private string GetExpeditionResult(dynamic data)
         {
             StringBuilder sb = new StringBuilder();
@@ -426,7 +393,6 @@ namespace ElectronicObserver.Window
             sb.AppendFormat("함선경험치: +{0}\r\n", ((int[])data.api_get_ship_exp).Min());
             return sb.ToString();
         }
-
 
         private string GetBattleResult(dynamic data)
         {
@@ -453,7 +419,6 @@ namespace ElectronicObserver.Window
             return "";
         }
 
-
         private string GetSupplyInformation(dynamic data)
         {
 
@@ -465,19 +430,16 @@ namespace ElectronicObserver.Window
             return sb.ToString();
         }
 
-
         private string GetConsumptionResource(dynamic data)
         {
 
             StringBuilder sb = new StringBuilder();
             var material = KCDatabase.Instance.Material;
 
-
             int fuel_diff = material.Fuel - _prevResource[0],
                 ammo_diff = material.Ammo - _prevResource[1],
                 steel_diff = material.Steel - _prevResource[2],
                 bauxite_diff = material.Bauxite - _prevResource[3];
-
 
             var ships = KCDatabase.Instance.Fleet.Fleets.Values
                 .Where(f => _inSortie.Contains(f.FleetID))
@@ -490,7 +452,6 @@ namespace ElectronicObserver.Window
 
             int fuel_repair = ships.Sum(s => s.RepairFuel);
             int steel = ships.Sum(s => s.RepairSteel);
-
 
             sb.AppendLine("[함대귀환]");
             sb.AppendFormat("연료: {0:+0;-0} ( 자연회복 {1:+0;-0} - 보급 {2} - 입거 {3} )\r\n탄약: {4:+0;-0} ( 자연회복 {5:+0;-0} - 보급 {6} )\r\n강재: {7:+0;-0} ( 자연회복 {8:+0;-0} - 입거 {9} )\r\n보키: {10:+0;-0} ( 자연회복 {11:+0;-0} - 보급 {12} ( {13} 기 ) )",

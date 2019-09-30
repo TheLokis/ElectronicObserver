@@ -89,11 +89,16 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public IDDictionary<DockData> Docks { get; private set; }
 
+        /// <summary>
+        /// 開発データ
+        /// </summary>
+        public DevelopmentData Development { get; private set; }
 
-		/// <summary>
-		/// 艦隊データ
-		/// </summary>
-		public FleetManager Fleet { get; private set; }
+
+        /// <summary>
+        /// 艦隊データ
+        /// </summary>
+        public FleetManager Fleet { get; private set; }
 
 
 		/// <summary>
@@ -167,7 +172,8 @@ namespace ElectronicObserver.Data
 			UseItems = new IDDictionary<UseItem>();
 			Arsenals = new IDDictionary<ArsenalData>();
 			Docks = new IDDictionary<DockData>();
-			Fleet = new FleetManager();
+            Development = new DevelopmentData();
+            Fleet = new FleetManager();
 			Material = new MaterialData();
 			Quest = new QuestManager();
 			QuestProgress = new QuestProgressManager();

@@ -168,17 +168,12 @@ namespace ElectronicObserver.Resource.Record
 		public DevelopmentRecord()
 		{
 			Record = new List<DevelopmentElement>();
-			tempElement = null;
-
 		}
 
 		public override void RegisterEvents()
 		{
-			APIObserver ao = APIObserver.Instance;
-
-			ao.APIList["api_req_kousyou/createitem"].RequestReceived += DevelopmentStart;
-			ao.APIList["api_req_kousyou/createitem"].ResponseReceived += DevelopmentEnd;
-		}
+            APIObserver.Instance["api_req_kousyou/createitem"].ResponseReceived += DevelopmentEnd;
+        }
 
 
 		public DevelopmentElement this[int i]
@@ -188,43 +183,30 @@ namespace ElectronicObserver.Resource.Record
 		}
 
 
-		private void DevelopmentStart(string apiname, dynamic data)
-		{
-
-			tempElement = new DevelopmentElement
-			{
-				Fuel = int.Parse(data["api_item1"]),
-				Ammo = int.Parse(data["api_item2"]),
-				Steel = int.Parse(data["api_item3"]),
-				Bauxite = int.Parse(data["api_item4"])
-			};
-
-		}
-
 		private void DevelopmentEnd(string apiname, dynamic data)
 		{
+            var dev = KCDatabase.Instance.Development;
+            var flagshipID = KCDatabase.Instance.Fleet[1].MembersInstance[0].ShipID;
+            var hqLevel = KCDatabase.Instance.Admiral.Level;
 
-			if (tempElement == null) return;
+            foreach (var result in dev.Results)
+            {
+                var element = new DevelopmentElement
+                {
+                    Fuel = dev.Fuel,
+                    Ammo = dev.Ammo,
+                    Steel = dev.Steel,
+                    Bauxite = dev.Bauxite,
 
-			if ((int)data.api_create_flag == 0)
-			{
-				tempElement.EquipmentID = -1;
-			}
-			else
-			{
-				tempElement.EquipmentID = (int)data.api_slot_item.api_slotitem_id;
-			}
+                    EquipmentID = result.EquipmentID,
+                    FlagshipID = flagshipID,
+                    HQLevel = hqLevel,
+                };
 
-			ShipData flagship = KCDatabase.Instance.Fleet[1].MembersInstance[0];
-			tempElement.FlagshipID = flagship.ShipID;
-			tempElement.HQLevel = KCDatabase.Instance.Admiral.Level;
-
-			tempElement.SetSubParameters();
-
-			Record.Add(tempElement);
-
-			tempElement = null;
-		}
+                element.SetSubParameters();
+                Record.Add(element);
+            }
+        }
 
 
 

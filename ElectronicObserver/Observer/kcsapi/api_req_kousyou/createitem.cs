@@ -8,74 +8,67 @@ using System.Threading.Tasks;
 namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 {
 
-	public class createitem : APIBase
-	{
+    public class createitem : APIBase
+    {
 
-		private int[] materials;
+        private int[] materials;
 
-		public createitem()
-			: base()
-		{
+        public createitem()
+            : base()
+        {
 
-			materials = new int[4];
-		}
+            materials = new int[4];
+        }
 
-		public override void OnRequestReceived(Dictionary<string, string> data)
-		{
+        public override void OnRequestReceived(Dictionary<string, string> data)
+        {
 
-			for (int i = 0; i < 4; i++)
-			{
-				materials[i] = int.Parse(data["api_item" + (i + 1)]);
-			}
+            for (int i = 0; i < 4; i++)
+            {
+                materials[i] = int.Parse(data["api_item" + (i + 1)]);
+            }
 
-			base.OnRequestReceived(data);
-		}
+            base.OnRequestReceived(data);
+        }
 
-		public override void OnResponseReceived(dynamic data)
-		{
+        public override void OnResponseReceived(dynamic data)
+        {
+            var db = KCDatabase.Instance;
+            var dev = db.Development;
+            //装備の追加　データが不十分のため、自力で構築しなければならない
 
-			KCDatabase db = KCDatabase.Instance;
+            dev.LoadFromResponse(APIName, data);
 
-			//装備の追加　データが不十分のため、自力で構築しなければならない
-			if ((int)data.api_create_flag != 0)
-			{
-				var eq = new EquipmentData();
-				eq.LoadFromResponse(APIName, data.api_slot_item);
-				db.Equipments.Add(eq);
-			}
+            if (Utility.Configuration.Config.Log.ShowSpoiler)
+            {
 
-			db.Material.LoadFromResponse(APIName, data.api_material);
+                foreach (var result in dev.Results)
+                {
+                    if (result.IsSucceeded)
+                    {
+                        Utility.Logger.Add(2, string.Format("{0}「{1}」의 개발에 성공했습니다. ({2}/{3}/{4}/{5} 비서함: {6})",
+                            result.MasterEquipment.CategoryTypeInstance.Name,
+                            result.MasterEquipment.Name,
+                            dev.Fuel, dev.Ammo, dev.Steel, dev.Bauxite,
+                            db.Fleet[1].MembersInstance[0].NameWithLevel));
+                    }
+                    else
+                    {
+                        Utility.Logger.Add(2, string.Format("개발에 실패했습니다. ({0}/{1}/{2}/{3} 비서함: {4})",
+                            dev.Fuel, dev.Ammo, dev.Steel, dev.Bauxite,
+                            db.Fleet[1].MembersInstance[0].NameWithLevel));
+                    }
+                }
+            }
 
-			//logging
-			if (Utility.Configuration.Config.Log.ShowSpoiler)
-			{
-				if ((int)data.api_create_flag != 0)
-				{
+            base.OnResponseReceived((object)data);
+        }
 
-					int eqid = (int)data.api_slot_item.api_slotitem_id;
+        public override bool IsRequestSupported => true;
+        public override bool IsResponseSupported => true;
 
-					Utility.Logger.Add(2, string.Format("{0}「{1}」의 개발에 성공했습니다. ({2}/{3}/{4}/{5} 비서함: {6})",
-						db.MasterEquipments[eqid].CategoryTypeInstance.Name,
-						db.MasterEquipments[eqid].Name,
-						materials[0], materials[1], materials[2], materials[3],
-						db.Fleet[1].MembersInstance[0].NameWithLevel));
-				}
-				else
-				{
-					Utility.Logger.Add(2, string.Format("개발에 실패했습니다. ({0}/{1}/{2}/{3} 비서함: {4})",
-						materials[0], materials[1], materials[2], materials[3],
-						db.Fleet[1].MembersInstance[0].NameWithLevel));
-				}
-			}
-
-			base.OnResponseReceived((object)data);
-		}
-
-		public override bool IsRequestSupported => true;
-		public override bool IsResponseSupported => true;
-
-		public override string APIName => "api_req_kousyou/createitem";
-	}
+        public override string APIName => "api_req_kousyou/createitem";
+    }
 
 
 }

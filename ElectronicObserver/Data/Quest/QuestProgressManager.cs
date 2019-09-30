@@ -729,9 +729,13 @@ namespace ElectronicObserver.Data.Quest
 
         void EquipmentDeveloped(string apiname, dynamic data)
         {
+            int trials = KCDatabase.Instance.Development.DevelopmentTrials;
+
             foreach (var p in Progresses.Values.OfType<ProgressDevelopment>())
             {
                 p.Increment();
+                for (int i = 0; i < trials; i++)
+                    p.Increment();
             }
 
             OnProgressChanged();

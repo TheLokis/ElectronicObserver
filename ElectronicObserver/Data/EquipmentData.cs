@@ -103,7 +103,6 @@ namespace ElectronicObserver.Data
 
 		public override void LoadFromResponse(string apiname, dynamic data)
 		{
-
 			switch (apiname)
 			{
 				case "api_req_kousyou/createitem":      //不足パラメータの追加

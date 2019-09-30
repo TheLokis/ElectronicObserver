@@ -67,8 +67,6 @@ namespace ElectronicObserver.Data
         /// </summary>
         public int Progress => (int)RawData.api_progress_flag;
 
-
-
 		public int ID => QuestID;
 		public override string ToString() => $"[{QuestID}] {Name}";
 	}
