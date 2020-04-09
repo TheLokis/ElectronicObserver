@@ -16,7 +16,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_map
 
 			var mapinfo = KCDatabase.Instance.MapInfo[int.Parse(data["api_maparea_id"]) * 10 + int.Parse(data["api_map_no"])];
 			if (mapinfo != null)
-				mapinfo.LoadFromRequest(APIName, data);
+				mapinfo.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

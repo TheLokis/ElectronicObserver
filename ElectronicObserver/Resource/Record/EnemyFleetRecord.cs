@@ -77,7 +77,7 @@ namespace ElectronicObserver.Resource.Record
 			/// <summary>
 			/// 連合艦隊かどうか
 			/// </summary>
-			public bool IsCombined => Formation >= 10;
+			public bool IsCombined => this.Formation >= 10;
 
 
 
@@ -87,27 +87,27 @@ namespace ElectronicObserver.Resource.Record
 			public EnemyFleetElement(string line)
 				: this()
 			{
-				LoadLine(line);
+                this.LoadLine(line);
 			}
 
 			public EnemyFleetElement(string fleetName, int mapAreaID, int mapInfoID, int cellID, int difficulty, int formation, int[] fleetMember, int[] fleetMemberLevel, int expShip)
 				: base()
 			{
-				FleetName = FormMain.Instance.Translator.GetTranslation(fleetName, Utility.TranslationType.OperationSortie);
-                MapAreaID = mapAreaID;
-				MapInfoID = mapInfoID;
-				CellID = cellID;
-				Difficulty = difficulty;
-				Formation = formation;
+                this.FleetName = FormMain.Instance.Translator.GetTranslation(fleetName, Utility.DataType.OperationSortie);
+                this.MapAreaID = mapAreaID;
+                this.MapInfoID = mapInfoID;
+                this.CellID = cellID;
+                this.Difficulty = difficulty;
+                this.Formation = formation;
 
 				int[] To12Array(int[] a) => a.Length < 12 ? a.Concat(Enumerable.Repeat(-1, 12 - a.Length)).ToArray() : a.Take(12).ToArray();
 
-				FleetMember = To12Array(fleetMember);
-				FleetMemberLevel = To12Array(fleetMemberLevel);
-				ExpShip = expShip;
+                this.FleetMember = To12Array(fleetMember);
+                this.FleetMemberLevel = To12Array(fleetMemberLevel);
+                this.ExpShip = expShip;
 
 
-				FleetID = ComputeHash();
+                this.FleetID = this.ComputeHash();
 			}
 
 
@@ -119,44 +119,44 @@ namespace ElectronicObserver.Resource.Record
 					throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ulong id = Convert.ToUInt64(elem[0], 16);
-				FleetName = FormMain.Instance.Translator.GetTranslation(elem[1], Utility.TranslationType.OperationSortie);
-                    //elem[1];
-                    MapAreaID = int.Parse(elem[2]);
-				MapInfoID = int.Parse(elem[3]);
-				CellID = int.Parse(elem[4]);
-				Difficulty = Constants.GetDifficulty(elem[5]);
-				Formation = Constants.GetFormation(elem[6]);
-				ExpShip = int.Parse(elem[7]);
+                this.FleetName = FormMain.Instance.Translator.GetTranslation(elem[1], Utility.DataType.OperationSortie);
+                //elem[1];
+                this.MapAreaID = int.Parse(elem[2]);
+                this.MapInfoID = int.Parse(elem[3]);
+                this.CellID = int.Parse(elem[4]);
+                this.Difficulty = Constants.GetDifficulty(elem[5]);
+                this.Formation = Constants.GetFormation(elem[6]);
+                this.ExpShip = int.Parse(elem[7]);
 
-				FleetMember = new int[12];
-				for (int i = 0; i < FleetMember.Length; i++)
-					FleetMember[i] = int.Parse(elem[8 + i]);
+                this.FleetMember = new int[12];
+				for (int i = 0; i < this.FleetMember.Length; i++)
+                    this.FleetMember[i] = int.Parse(elem[8 + i]);
 
-				FleetMemberLevel = new int[12];
-				for (int i = 0; i < FleetMember.Length; i++)
-					FleetMemberLevel[i] = int.Parse(elem[32 + i]);
+                this.FleetMemberLevel = new int[12];
+				for (int i = 0; i < this.FleetMember.Length; i++)
+                    this.FleetMemberLevel[i] = int.Parse(elem[32 + i]);
 
 
-				FleetID = ComputeHash();
+                this.FleetID = this.ComputeHash();
 
-				if (FleetID != id)
-					Utility.Logger.Add(1, $"EnemyFleetRecord: 적 편성 ID에 오류가 있습니다. (기록된 ID {id:x16} -> 현재 ID {FleetID:x16})");
+				if (this.FleetID != id)
+					Utility.Logger.Add(1, $"EnemyFleetRecord: 적 편성 ID에 오류가 있습니다. (기록된 ID {id:x16} -> 현재 ID {this.FleetID:x16})");
 			}
 
 			public override string SaveLine()
 			{
 				return string.Join(",",
-					FleetID.ToString("x16"),
-                    CsvHelper.EscapeCsvCell(FleetName),
-                    MapAreaID,
-					MapInfoID,
-					CellID,
-					Constants.GetDifficulty(Difficulty),
-					Constants.GetFormation(Formation),
-					ExpShip,
-					string.Join(",", FleetMember),
-                    string.Join(",", FleetMember.Select(id => CsvHelper.EscapeCsvCell(KCDatabase.Instance.MasterShips[id]?.NameWithClass ?? "-"))),
-                    string.Join(",", FleetMemberLevel)
+                    this.FleetID.ToString("x16"),
+                    CsvHelper.EscapeCsvCell(this.FleetName),
+                    this.MapAreaID,
+                    this.MapInfoID,
+                    this.CellID,
+					Constants.GetDifficulty(this.Difficulty),
+					Constants.GetFormation(this.Formation),
+                    this.ExpShip,
+					string.Join(",", this.FleetMember),
+                    string.Join(",", this.FleetMember.Select(id => CsvHelper.EscapeCsvCell(KCDatabase.Instance.MasterShips[id]?.NameWithClass ?? "-"))),
+                    string.Join(",", this.FleetMemberLevel)
 					);
 			}
 
@@ -167,7 +167,7 @@ namespace ElectronicObserver.Resource.Record
 			/// <returns></returns>
 			private ulong ComputeHash()
 			{
-				string key = string.Join(",", MapAreaID, MapInfoID, CellID, Difficulty, Formation, string.Join(",", FleetMember), string.Join(",", FleetMemberLevel));
+				string key = string.Join(",", this.MapAreaID, this.MapInfoID, this.CellID, this.Difficulty, this.Formation, string.Join(",", this.FleetMember), string.Join(",", this.FleetMemberLevel));
 				return BitConverter.ToUInt64(Utility.Data.RecordHash.ComputeHash(key), 0);
 			}
 
@@ -200,7 +200,7 @@ namespace ElectronicObserver.Resource.Record
 
 			}
 
-			public override string ToString() => $"[{FleetID:x16}] {MapAreaID}-{MapInfoID}-{CellID} {FleetName}";
+			public override string ToString() => $"[{this.FleetID:x16}] {this.MapAreaID}-{this.MapInfoID}-{this.CellID} {this.FleetName}";
 		}
 
 
@@ -212,8 +212,8 @@ namespace ElectronicObserver.Resource.Record
 		public EnemyFleetRecord()
 			: base()
 		{
-			Record = new Dictionary<ulong, EnemyFleetElement>();
-			_changed = false;
+            this.Record = new Dictionary<ulong, EnemyFleetElement>();
+            this._changed = false;
 		}
 
 		public override void RegisterEvents()
@@ -226,19 +226,19 @@ namespace ElectronicObserver.Resource.Record
 		{
 			get
 			{
-				return Record.ContainsKey(i) ? Record[i] : null;
+				return this.Record.ContainsKey(i) ? this.Record[i] : null;
 			}
 			set
 			{
-				if (!Record.ContainsKey(i))
+				if (!this.Record.ContainsKey(i))
 				{
-					Record.Add(i, value);
+                    this.Record.Add(i, value);
 				}
 				else
 				{
-					Record[i] = value;
+                    this.Record[i] = value;
 				}
-				_changed = true;
+                this._changed = true;
 			}
 		}
 
@@ -251,14 +251,14 @@ namespace ElectronicObserver.Resource.Record
 
 		protected override void LoadLine(string line)
 		{
-			Update(new EnemyFleetElement(line));
+            this.Update(new EnemyFleetElement(line));
 		}
 
 		protected override string SaveLinesAll()
 		{
 			var sb = new StringBuilder();
 
-			var rs = Record.Values
+			var rs = this.Record.Values
 				.OrderBy(r => r.MapAreaID)
 				.ThenBy(r => r.MapInfoID)
 				.ThenBy(r => r.CellID)
@@ -288,16 +288,16 @@ namespace ElectronicObserver.Resource.Record
 
 		protected override void UpdateLastSavedIndex()
 		{
-			_changed = false;
+            this._changed = false;
 		}
 
-		public override bool NeedToSave => _changed;
+		public override bool NeedToSave => this._changed;
 
 		public override bool SupportsPartialSave => false;
 
 		protected override void ClearRecord()
 		{
-			Record.Clear();
+            this.Record.Clear();
 		}
 
 

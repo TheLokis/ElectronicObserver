@@ -14,52 +14,52 @@ namespace ElectronicObserver.Window.Dialog
 	public partial class DialogTextSelect : Form
 	{
 
-		public int SelectedIndex => TextSelect.SelectedIndex;
+		public int SelectedIndex => this.TextSelect.SelectedIndex;
 
-		public object SelectedItem => TextSelect.SelectedItem;
+		public object SelectedItem => this.TextSelect.SelectedItem;
 
 		public DialogTextSelect()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			ControlHelper.SetDoubleBuffered(tableLayoutPanel1);
+			ControlHelper.SetDoubleBuffered(this.tableLayoutPanel1);
 		}
 
 		public DialogTextSelect(string title, string description, object[] items)
 			: this()
 		{
 
-			Initialize(title, description, items);
+            this.Initialize(title, description, items);
 		}
 
 		public void Initialize(string title, string description, object[] items)
 		{
 			this.Text = title;
 
-			tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
 
-			Description.Text = description;
+            this.Description.Text = description;
 
-			TextSelect.BeginUpdate();
-			TextSelect.Items.Clear();
-			TextSelect.Items.AddRange(items);
-			if (TextSelect.Items.Count > 0)
-				TextSelect.SelectedIndex = 0;
-			TextSelect.EndUpdate();
+            this.TextSelect.BeginUpdate();
+            this.TextSelect.Items.Clear();
+            this.TextSelect.Items.AddRange(items);
+			if (this.TextSelect.Items.Count > 0)
+                this.TextSelect.SelectedIndex = 0;
+            this.TextSelect.EndUpdate();
 
-			tableLayoutPanel1.ResumeLayout();
+            this.tableLayoutPanel1.ResumeLayout();
 
 		}
 
 
 		private void ButtonOK_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 	}

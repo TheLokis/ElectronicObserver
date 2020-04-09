@@ -18,7 +18,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 			: base(data, title) { }
 
 
-		public override bool IsAvailable => RawData.api_search() && RawData.api_formation();
+		public override bool IsAvailable => this.RawData.api_search() && this.RawData.api_formation();
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
@@ -28,13 +28,13 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 自軍索敵結果
 		/// </summary>
-		public int SearchingFriend => !RawData.api_search() ? -1 : (int)RawData.api_search[0];
+		public int SearchingFriend => !this.RawData.api_search() ? -1 : (int)this.RawData.api_search[0];
 
 
 		/// <summary>
 		/// 敵軍索敵結果
 		/// </summary>
-		public int SearchingEnemy => !RawData.api_search() ? -1 : (int)RawData.api_search[1];
+		public int SearchingEnemy => !this.RawData.api_search() ? -1 : (int)this.RawData.api_search[1];
 
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				dynamic form = RawData.api_formation[0];
+				dynamic form = this.RawData.api_formation[0];
 				return form is string ? int.Parse((string)form) : (int)form;
 			}
 		}
@@ -52,12 +52,12 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 敵軍陣形
 		/// </summary>
-		public int FormationEnemy => (int)RawData.api_formation[1];
+		public int FormationEnemy => (int)this.RawData.api_formation[1];
 
 		/// <summary>
 		/// 交戦形態
 		/// </summary>
-		public int EngagementForm => (int)RawData.api_formation[2];
+		public int EngagementForm => (int)this.RawData.api_formation[2];
 	}
 }
 

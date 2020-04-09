@@ -21,28 +21,28 @@ namespace ElectronicObserver.Notifier
 		public NotifierCondition()
 			: base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public NotifierCondition(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 			: base(config)
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 
 		private void Initialize()
 		{
-			DialogData.Title = "피로회복";
-			_processedFlags = new Dictionary<int, bool>();
+            this.DialogData.Title = "피로회복";
+            this._processedFlags = new Dictionary<int, bool>();
 
 			for (int i = 1; i <= 4; i++)
-				_processedFlags.Add(i, false);
+                this._processedFlags.Add(i, false);
 
 
 			APIObserver o = APIObserver.Instance;
 
-			o["api_port/port"].ResponseReceived += ClearFlags;
+			o["api_port/port"].ResponseReceived += this.ClearFlags;
 
 		}
 
@@ -50,9 +50,9 @@ namespace ElectronicObserver.Notifier
 		private void ClearFlags(string apiname, dynamic data)
 		{
 
-			foreach (int key in _processedFlags.Keys.ToArray())
+			foreach (int key in this._processedFlags.Keys.ToArray())
 			{       //列挙中の変更によるエラーを防ぐため
-				_processedFlags[key] = false;
+                this._processedFlags[key] = false;
 			}
 		}
 
@@ -65,18 +65,18 @@ namespace ElectronicObserver.Notifier
 
 				if (fleet.ExpeditionState > 0 || fleet.IsInSortie) continue;
 
-				if (_processedFlags[fleet.FleetID])
+				if (this._processedFlags[fleet.FleetID])
 					continue;
 
 
 				if (fleet.ConditionTime != null && !fleet.IsInSortie)
 				{
 
-					if (((DateTime)fleet.ConditionTime - DateTime.Now).TotalMilliseconds <= AccelInterval)
+					if (((DateTime)fleet.ConditionTime - DateTime.Now).TotalMilliseconds <= this.AccelInterval)
 					{
 
-						Notify(fleet.FleetID);
-						_processedFlags[fleet.FleetID] = true;
+                        this.Notify(fleet.FleetID);
+                        this._processedFlags[fleet.FleetID] = true;
 					}
 				}
 			}
@@ -86,7 +86,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int fleetID)
 		{
 
-			DialogData.Message = string.Format("#{0} 「{1}」의 피로도 회복이 완료되었습니다!",
+            this.DialogData.Message = string.Format("#{0} 「{1}」의 피로도 회복이 완료되었습니다!",
 				fleetID, KCDatabase.Instance.Fleet[fleetID].Name);
 
 			base.Notify();

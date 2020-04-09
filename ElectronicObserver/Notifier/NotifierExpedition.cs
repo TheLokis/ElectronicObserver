@@ -22,20 +22,20 @@ namespace ElectronicObserver.Notifier
 		public NotifierExpedition()
 			: base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public NotifierExpedition(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 			: base(config)
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 
 		private void Initialize()
 		{
-			DialogData.Title = "원정귀환";
-			processedFlags = new Dictionary<int, bool>();
+            this.DialogData.Title = "원정귀환";
+            this.processedFlags = new Dictionary<int, bool>();
 		}
 
 
@@ -45,23 +45,23 @@ namespace ElectronicObserver.Notifier
 			foreach (var fleet in KCDatabase.Instance.Fleet.Fleets.Values)
 			{
 
-				if (!processedFlags.ContainsKey(fleet.FleetID))
-					processedFlags.Add(fleet.FleetID, false);
+				if (!this.processedFlags.ContainsKey(fleet.FleetID))
+                    this.processedFlags.Add(fleet.FleetID, false);
 
 				if (fleet.ExpeditionState != 0)
 				{
-					if (!processedFlags[fleet.FleetID] && (int)(fleet.ExpeditionTime - DateTime.Now).TotalMilliseconds <= AccelInterval)
+					if (!this.processedFlags[fleet.FleetID] && (int)(fleet.ExpeditionTime - DateTime.Now).TotalMilliseconds <= this.AccelInterval)
 					{
 
-						processedFlags[fleet.FleetID] = true;
-						Notify(fleet.FleetID, fleet.ExpeditionDestination);
+                        this.processedFlags[fleet.FleetID] = true;
+                        this.Notify(fleet.FleetID, fleet.ExpeditionDestination);
 
 					}
 
 				}
 				else
 				{
-					processedFlags[fleet.FleetID] = false;
+                    this.processedFlags[fleet.FleetID] = false;
 				}
 
 			}
@@ -71,7 +71,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int fleetID, int destination)
 		{
 
-			DialogData.Message = string.Format("#{0} 「{1}」가「{2}: {3}」에서 귀환했습니다.",
+            this.DialogData.Message = string.Format("#{0} 「{1}」가「{2} : {3}」에서 귀환했습니다.",
 				fleetID, KCDatabase.Instance.Fleet[fleetID].Name, destination, KCDatabase.Instance.Mission[destination].Name);
 
 			base.Notify();

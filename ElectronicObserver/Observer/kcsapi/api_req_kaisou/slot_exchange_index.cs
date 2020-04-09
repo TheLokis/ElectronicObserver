@@ -19,7 +19,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 
             var ship = KCDatabase.Instance.Ships[shipID];
             if (ship != null)
-                ship.LoadFromResponse(APIName, data.api_ship_data);
+                ship.LoadFromResponse(this.APIName, data.api_ship_data);
 
             base.OnResponseReceived((object)data);
         }

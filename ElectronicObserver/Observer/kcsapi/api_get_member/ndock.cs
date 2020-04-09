@@ -25,18 +25,18 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 				if (!db.Docks.ContainsKey(id))
 				{
 					var d = new DockData();
-					d.LoadFromResponse(APIName, dock);
+					d.LoadFromResponse(this.APIName, dock);
 					db.Docks.Add(d);
 
 				}
 				else
 				{
-					db.Docks[id].LoadFromResponse(APIName, dock);
+					db.Docks[id].LoadFromResponse(this.APIName, dock);
 				}
 			}
 
 
-			db.Fleet.LoadFromResponse(APIName, data);
+			db.Fleet.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}

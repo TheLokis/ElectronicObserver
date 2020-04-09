@@ -31,18 +31,18 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 				var ship = db.Ships[id];
 
 				if (ship != null)
-					ship.LoadFromResponse(APIName, elem);
+					ship.LoadFromResponse(this.APIName, elem);
 				else
 				{
 					var a = new ShipData();
-					a.LoadFromResponse(APIName, elem);
+					a.LoadFromResponse(this.APIName, elem);
 					db.Ships.Add(a);
 				}
 			}
 
 
 			//api_data_deck
-			db.Fleet.LoadFromResponse(APIName, data.api_data_deck);
+			db.Fleet.LoadFromResponse(this.APIName, data.api_data_deck);
 
 			base.OnResponseReceived((object)data);
 		}

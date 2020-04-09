@@ -27,10 +27,10 @@ namespace Browser.CefOp
         /// </summary>
         public override IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
 		{
-			if (pixiSettingEnabled && request.Url.Contains(@"/kcs2/index.php"))
+			if (this.pixiSettingEnabled && request.Url.Contains(@"/kcs2/index.php"))
 				return new ResponseFilterPixiSetting();
 
-			return base.GetResourceResponseFilter(browserControl, browser, frame, request, response);
+            return base.GetResourceResponseFilter(browserControl, browser, frame, request, response);
 		}
 
         /// <summary>
@@ -43,6 +43,9 @@ namespace Browser.CefOp
             {
                 return CefReturnValue.Cancel;
             }
+
+            request.Url = request.Url.Replace("203.104.209.7/gadget_html5", "luckyjervis.com/gadget_html5");
+            request.Url = request.Url.Replace("203.104.209.7/html", "luckyjervis.com/html");
 
             return base.OnBeforeResourceLoad(browserControl, browser, frame, request, callback);
         }

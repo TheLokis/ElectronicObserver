@@ -20,20 +20,20 @@ namespace ElectronicObserver.Notifier
 		public NotifierRepair()
 			: base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public NotifierRepair(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 			: base(config)
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 
 		private void Initialize()
 		{
-			DialogData.Title = "수리완료";
-			processedFlags = new Dictionary<int, bool>();
+            this.DialogData.Title = "수리완료";
+            this.processedFlags = new Dictionary<int, bool>();
 		}
 
 
@@ -43,23 +43,23 @@ namespace ElectronicObserver.Notifier
 			foreach (var dock in KCDatabase.Instance.Docks.Values)
 			{
 
-				if (!processedFlags.ContainsKey(dock.DockID))
-					processedFlags.Add(dock.DockID, false);
+				if (!this.processedFlags.ContainsKey(dock.DockID))
+                    this.processedFlags.Add(dock.DockID, false);
 
 				if (dock.State > 0)
 				{
-					if (!processedFlags[dock.DockID] && (int)(dock.CompletionTime - DateTime.Now).TotalMilliseconds <= AccelInterval)
+					if (!this.processedFlags[dock.DockID] && (int)(dock.CompletionTime - DateTime.Now).TotalMilliseconds <= this.AccelInterval)
 					{
 
-						processedFlags[dock.DockID] = true;
-						Notify(dock.DockID, dock.ShipID);
+                        this.processedFlags[dock.DockID] = true;
+                        this.Notify(dock.DockID, dock.ShipID);
 
 					}
 
 				}
 				else
 				{
-					processedFlags[dock.DockID] = false;
+                    this.processedFlags[dock.DockID] = false;
 				}
 
 			}
@@ -69,7 +69,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int dockID, int shipID)
 		{
 
-			DialogData.Message = string.Format("입거독 #{0}「{1}」의 수리가 완료되었습니다.",
+            this.DialogData.Message = string.Format("입거독 #{0}「{1}」의 수리가 완료되었습니다.",
 				dockID, KCDatabase.Instance.Ships[shipID].NameWithLevel);
 
 			base.Notify();

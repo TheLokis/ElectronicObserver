@@ -16,7 +16,7 @@ namespace ElectronicObserver.Data.Battle
 		public PhaseSupport NightSupport { get; protected set; }
 		public PhaseNightBattle NightBattle2 { get; protected set; }
 
-		public bool NextToDay => (int)RawData.api_day_flag != 0;
+		public bool NextToDay => (int)this.RawData.api_day_flag != 0;
 
 		public PhaseJetBaseAirAttack JetBaseAirAttack { get; protected set; }
 		public PhaseJetAirBattle JetAirBattle { get; protected set; }

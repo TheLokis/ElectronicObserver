@@ -15,14 +15,14 @@ namespace ElectronicObserver.Utility.Storage
 
 		public SerializableKeyValuePair(TKey key, TValue value)
 		{
-			Key = key;
-			Value = value;
+            this.Key = key;
+            this.Value = value;
 		}
 
 		public SerializableKeyValuePair(KeyValuePair<TKey, TValue> value)
 		{
-			Key = value.Key;
-			Value = value.Value;
+            this.Key = value.Key;
+            this.Value = value.Value;
 		}
 
 

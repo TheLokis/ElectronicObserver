@@ -22,12 +22,12 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 自軍艦隊
 		/// </summary>
-		public FleetData FriendFleet => KCDatabase.Instance.Fleet[FriendFleetID];
+		public FleetData FriendFleet => KCDatabase.Instance.Fleet[this.FriendFleetID];
 
 		/// <summary>
 		/// 自軍随伴艦隊
 		/// </summary>
-		public FleetData FriendFleetEscort => IsFriendCombined ? KCDatabase.Instance.Fleet[2] : null;
+		public FleetData FriendFleetEscort => this.IsFriendCombined ? KCDatabase.Instance.Fleet[2] : null;
 
 
 		/// <summary>
@@ -111,7 +111,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 装甲破壊されているか
 		/// </summary>
-		public bool IsBossDamaged => RawData.api_xal01() && (int)RawData.api_xal01 > 0;
+		public bool IsBossDamaged => this.RawData.api_xal01() && (int)this.RawData.api_xal01 > 0;
 
 
 		/// <summary>
@@ -120,8 +120,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 		public int[] RationIndexes { get; private set; }
 
 
-		public bool IsFriendCombined => FriendInitialHPsEscort != null;
-		public bool IsEnemyCombined => EnemyInitialHPsEscort != null;
+		public bool IsFriendCombined => this.FriendInitialHPsEscort != null;
+		public bool IsEnemyCombined => this.EnemyInitialHPsEscort != null;
 
 
 
@@ -129,22 +129,22 @@ namespace ElectronicObserver.Data.Battle.Phase
 			: base(data, title)
 		{
 			{
-				dynamic id = RawData.api_dock_id() ? RawData.api_dock_id :
-					RawData.api_deck_id() ? RawData.api_deck_id : 1;
-				FriendFleetID = id is string ? int.Parse((string)id) : (int)id;
+				dynamic id = this.RawData.api_dock_id() ? this.RawData.api_dock_id :
+                    this.RawData.api_deck_id() ? this.RawData.api_deck_id : 1;
+                this.FriendFleetID = id is string ? int.Parse((string)id) : (int)id;
 			}
-			if (FriendFleetID <= 0)
-				FriendFleetID = 1;
+			if (this.FriendFleetID <= 0)
+                this.FriendFleetID = 1;
 
 
-			int[] GetArrayOrDefault(string objectName, int length) => !RawData.IsDefined(objectName) ? null : FixedArray((int[])RawData[objectName], length);
+			int[] GetArrayOrDefault(string objectName, int length) => !this.RawData.IsDefined(objectName) ? null : FixedArray((int[])this.RawData[objectName], length);
 			int[][] GetArraysOrDefault(string objectName, int topLength, int bottomLength)
 			{
-				if (!RawData.IsDefined(objectName))
+				if (!this.RawData.IsDefined(objectName))
 					return null;
 
 				int[][] ret = new int[topLength][];
-				dynamic[] raw = (dynamic[])RawData[objectName];
+				dynamic[] raw = (dynamic[])this.RawData[objectName];
 				for (int i = 0; i < ret.Length; i++)
 				{
 					if (i < raw.Length)
@@ -158,46 +158,46 @@ namespace ElectronicObserver.Data.Battle.Phase
 			int mainMemberCount = 7;
 			int escortMemberCount = 6;
 
-			EnemyMembers = GetArrayOrDefault("api_ship_ke", mainMemberCount);
-			EnemyMembersInstance = EnemyMembers.Select(id => KCDatabase.Instance.MasterShips[id]).ToArray();
+            this.EnemyMembers = GetArrayOrDefault("api_ship_ke", mainMemberCount);
+            this.EnemyMembersInstance = this.EnemyMembers.Select(id => KCDatabase.Instance.MasterShips[id]).ToArray();
 
-			EnemyMembersEscort = GetArrayOrDefault("api_ship_ke_combined", escortMemberCount);
-			EnemyMembersEscortInstance = EnemyMembersEscort?.Select(id => KCDatabase.Instance.MasterShips[id]).ToArray();
+            this.EnemyMembersEscort = GetArrayOrDefault("api_ship_ke_combined", escortMemberCount);
+            this.EnemyMembersEscortInstance = this.EnemyMembersEscort?.Select(id => KCDatabase.Instance.MasterShips[id]).ToArray();
 
-			EnemyLevels = GetArrayOrDefault("api_ship_lv", mainMemberCount);
-			EnemyLevelsEscort = GetArrayOrDefault("api_ship_lv_combined", escortMemberCount);
+            this.EnemyLevels = GetArrayOrDefault("api_ship_lv", mainMemberCount);
+            this.EnemyLevelsEscort = GetArrayOrDefault("api_ship_lv_combined", escortMemberCount);
 
-			FriendInitialHPs = GetArrayOrDefault("api_f_nowhps", mainMemberCount);
-			FriendInitialHPsEscort = GetArrayOrDefault("api_f_nowhps_combined", escortMemberCount);
-			EnemyInitialHPs = GetArrayOrDefault("api_e_nowhps", mainMemberCount);
-			EnemyInitialHPsEscort = GetArrayOrDefault("api_e_nowhps_combined", escortMemberCount);
+            this.FriendInitialHPs = GetArrayOrDefault("api_f_nowhps", mainMemberCount);
+            this.FriendInitialHPsEscort = GetArrayOrDefault("api_f_nowhps_combined", escortMemberCount);
+            this.EnemyInitialHPs = GetArrayOrDefault("api_e_nowhps", mainMemberCount);
+            this.EnemyInitialHPsEscort = GetArrayOrDefault("api_e_nowhps_combined", escortMemberCount);
 
-			FriendMaxHPs = GetArrayOrDefault("api_f_maxhps", mainMemberCount);
-			FriendMaxHPsEscort = GetArrayOrDefault("api_f_maxhps_combined", escortMemberCount);
-			EnemyMaxHPs = GetArrayOrDefault("api_e_maxhps", mainMemberCount);
-			EnemyMaxHPsEscort = GetArrayOrDefault("api_e_maxhps_combined",escortMemberCount);
+            this.FriendMaxHPs = GetArrayOrDefault("api_f_maxhps", mainMemberCount);
+            this.FriendMaxHPsEscort = GetArrayOrDefault("api_f_maxhps_combined", escortMemberCount);
+            this.EnemyMaxHPs = GetArrayOrDefault("api_e_maxhps", mainMemberCount);
+            this.EnemyMaxHPsEscort = GetArrayOrDefault("api_e_maxhps_combined",escortMemberCount);
 
 
-			EnemySlots = GetArraysOrDefault("api_eSlot", mainMemberCount, 5);
-			EnemySlotsInstance = EnemySlots.Select(part => part.Select(id => KCDatabase.Instance.MasterEquipments[id]).ToArray()).ToArray();
+            this.EnemySlots = GetArraysOrDefault("api_eSlot", mainMemberCount, 5);
+            this.EnemySlotsInstance = this.EnemySlots.Select(part => part.Select(id => KCDatabase.Instance.MasterEquipments[id]).ToArray()).ToArray();
 
-			EnemySlotsEscort = GetArraysOrDefault("api_eSlot_combined", escortMemberCount, 5);
-			EnemySlotsEscortInstance = EnemySlotsEscort?.Select(part => part.Select(id => KCDatabase.Instance.MasterEquipments[id]).ToArray()).ToArray();
+            this.EnemySlotsEscort = GetArraysOrDefault("api_eSlot_combined", escortMemberCount, 5);
+            this.EnemySlotsEscortInstance = this.EnemySlotsEscort?.Select(part => part.Select(id => KCDatabase.Instance.MasterEquipments[id]).ToArray()).ToArray();
 
-			EnemyParameters = GetArraysOrDefault("api_eParam", mainMemberCount, 4);
-			EnemyParametersEscort = GetArraysOrDefault("api_eParam_combined", escortMemberCount, 4);
+            this.EnemyParameters = GetArraysOrDefault("api_eParam", mainMemberCount, 4);
+            this.EnemyParametersEscort = GetArraysOrDefault("api_eParam_combined", escortMemberCount, 4);
 
 			{
 				var rations = new List<int>();
-				if (RawData.api_combat_ration())
+				if (this.RawData.api_combat_ration())
 				{
-					rations.AddRange(((int[])RawData.api_combat_ration).Select(i => FriendFleet.Members.IndexOf(i)));
+					rations.AddRange(((int[])this.RawData.api_combat_ration).Select(i => this.FriendFleet.Members.IndexOf(i)));
 				}
-				if (RawData.api_combat_ration_combined())
+				if (this.RawData.api_combat_ration_combined())
 				{
-					rations.AddRange(((int[])RawData.api_combat_ration_combined).Select(i => FriendFleetEscort.Members.IndexOf(i) + 6));
+					rations.AddRange(((int[])this.RawData.api_combat_ration_combined).Select(i => this.FriendFleetEscort.Members.IndexOf(i) + 6));
 				}
-				RationIndexes = rations.ToArray();
+                this.RationIndexes = rations.ToArray();
 			}
 		}
 
@@ -208,10 +208,10 @@ namespace ElectronicObserver.Data.Battle.Phase
 			if (index < 0 || index >= 12)
 				return null;
 
-			if (index < FriendFleet.Members.Count)
-				return FriendFleet.MembersInstance[index];
-			else if (index >= 6 && FriendFleetEscort != null)
-				return FriendFleetEscort.MembersInstance[index - 6];
+			if (index < this.FriendFleet.Members.Count)
+				return this.FriendFleet.MembersInstance[index];
+			else if (index >= 6 && this.FriendFleetEscort != null)
+				return this.FriendFleetEscort.MembersInstance[index - 6];
 			else
 				return null;
 		}
@@ -232,7 +232,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 
 
-		public override bool IsAvailable => RawData != null;
+		public override bool IsAvailable => this.RawData != null;
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{

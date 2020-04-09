@@ -52,15 +52,15 @@ namespace ElectronicObserver.Window.Dialog
 
         public DialogDropRecordViewer()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            _record = RecordManager.Instance.ShipDrop;
+            this._record = RecordManager.Instance.ShipDrop;
         }
 
         private void DialogDropRecordViewer_Load(object sender, EventArgs e)
         {
 
-            var includedShipNames = _record.Record
+            var includedShipNames = this._record.Record
                 .Select(r => r.ShipName)
                 .Distinct()
                 .Except(new[] { NameNotExist, NameFullPort });
@@ -72,7 +72,7 @@ namespace ElectronicObserver.Window.Dialog
             var removedShipNames = includedShipNames.Except(includedShipObjects.Select(s => s.NameWithClass));
 
 
-            var includedItemNames = _record.Record
+            var includedItemNames = this._record.Record
                 .Select(r => r.ItemName)
                 .Distinct()
                 .Except(new[] { NameNotExist });
@@ -91,11 +91,11 @@ namespace ElectronicObserver.Window.Dialog
 
 
 
-            MapCellTable = new Dictionary<int, DataTable>();
+            this.MapCellTable = new Dictionary<int, DataTable>();
             {
                 var dict = new Dictionary<int, HashSet<int>>();
 
-                foreach (var r in _record.Record)
+                foreach (var r in this._record.Record)
                 {
                     int id = r.MapAreaID * 10 + r.MapInfoID;
 
@@ -111,83 +111,83 @@ namespace ElectronicObserver.Window.Dialog
                 {
                     int MapAreaID = p.Key / 10;
                     int MapInfoID = p.Key % 10;
-                    MapCellTable.Add(p.Key, dtbase.Clone());
-                    MapCellTable[p.Key].Rows.Add(-1, MapAny);
+                    this.MapCellTable.Add(p.Key, dtbase.Clone());
+                    this.MapCellTable[p.Key].Rows.Add(-1, MapAny);
 
                     if (Utility.Configuration.Config.FormCompass.ToAlphabet)
                     {
                         foreach (var c in p.Value.OrderBy(k => k))
-                            MapCellTable[p.Key].Rows.Add(c, c.ToString() + "(" + NodeData.GetNodeName(MapAreaID, MapInfoID, c) + ")");
+                            this.MapCellTable[p.Key].Rows.Add(c, c.ToString() + "(" + NodeData.GetNodeName(MapAreaID, MapInfoID, c) + ")");
                     }
                     else
                     {
                         foreach (var c in p.Value.OrderBy(k => k))
-                            MapCellTable[p.Key].Rows.Add(c, c.ToString());
+                            this.MapCellTable[p.Key].Rows.Add(c, c.ToString());
                     }
-                    MapCellTable[p.Key].AcceptChanges();
+                    this.MapCellTable[p.Key].AcceptChanges();
                 }
             }
 
 
 
-            ShipName.Items.Add(NameAny);
-            ShipName.Items.Add(NameExist);
-            ShipName.Items.Add(NameNotExist);
-            ShipName.Items.Add(NameFullPort);
-            ShipName.Items.AddRange(includedShipObjects
+            this.ShipName.Items.Add(NameAny);
+            this.ShipName.Items.Add(NameExist);
+            this.ShipName.Items.Add(NameNotExist);
+            this.ShipName.Items.Add(NameFullPort);
+            this.ShipName.Items.AddRange(includedShipObjects
                 .OrderBy(s => s.NameReading)
                 .OrderBy(s => s.ShipType)
                 .Select(s => s.NameWithClass)
                 .Union(removedShipNames.OrderBy(s => s))
                 .ToArray()
                 );
-            ShipName.SelectedIndex = 0;
+            this.ShipName.SelectedIndex = 0;
 
-            ItemName.Items.Add(NameAny);
-            ItemName.Items.Add(NameExist);
-            ItemName.Items.Add(NameNotExist);
-            ItemName.Items.AddRange(includedItemObjects
+            this.ItemName.Items.Add(NameAny);
+            this.ItemName.Items.Add(NameExist);
+            this.ItemName.Items.Add(NameNotExist);
+            this.ItemName.Items.AddRange(includedItemObjects
                 .OrderBy(i => i.ItemID)
                 .Select(i => i.Name)
                 .Union(removedItemNames.OrderBy(i => i))
                 .ToArray()
                 );
-            ItemName.SelectedIndex = 0;
+            this.ItemName.SelectedIndex = 0;
 
             // not implemented: eq
 
 
-            DateBegin.Value = DateBegin.MinDate = DateEnd.MinDate = _record.Record.First().Date.Date;
-            DateEnd.Value = DateBegin.MaxDate = DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
+            this.DateBegin.Value = this.DateBegin.MinDate = this.DateEnd.MinDate = this._record.Record.First().Date.Date;
+            this.DateEnd.Value = this.DateBegin.MaxDate = this.DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
 
             {
                 DataTable dt = dtbase.Clone();
                 dt.Rows.Add(-1, MapAny);
-                foreach (var i in _record.Record
+                foreach (var i in this._record.Record
                     .Select(r => r.MapAreaID)
                     .Distinct()
                     .OrderBy(i => i))
                     dt.Rows.Add(i, i.ToString());
                 dt.AcceptChanges();
-                MapAreaID.DisplayMember = "Display";
-                MapAreaID.ValueMember = "Value";
-                MapAreaID.DataSource = dt;
-                MapAreaID.SelectedIndex = 0;
+                this.MapAreaID.DisplayMember = "Display";
+                this.MapAreaID.ValueMember = "Value";
+                this.MapAreaID.DataSource = dt;
+                this.MapAreaID.SelectedIndex = 0;
             }
 
             {
                 DataTable dt = dtbase.Clone();
                 dt.Rows.Add(-1, MapAny);
-                foreach (var i in _record.Record
+                foreach (var i in this._record.Record
                     .Select(r => r.MapInfoID)
                     .Distinct()
                     .OrderBy(i => i))
                     dt.Rows.Add(i, i.ToString());
                 dt.AcceptChanges();
-                MapInfoID.DisplayMember = "Display";
-                MapInfoID.ValueMember = "Value";
-                MapInfoID.DataSource = dt;
-                MapInfoID.SelectedIndex = 0;
+                this.MapInfoID.DisplayMember = "Display";
+                this.MapInfoID.ValueMember = "Value";
+                this.MapInfoID.DataSource = dt;
+                this.MapInfoID.SelectedIndex = 0;
             }
 
             {
@@ -195,45 +195,45 @@ namespace ElectronicObserver.Window.Dialog
                 dt.Rows.Add(-1, MapAny);
                 // 残りは都度生成する
                 dt.AcceptChanges();
-                MapCellID.DisplayMember = "Display";
-                MapCellID.ValueMember = "Value";
-                MapCellID.DataSource = dt;
-                MapCellID.SelectedIndex = 0;
+                this.MapCellID.DisplayMember = "Display";
+                this.MapCellID.ValueMember = "Value";
+                this.MapCellID.DataSource = dt;
+                this.MapCellID.SelectedIndex = 0;
             }
 
             {
                 DataTable dt = dtbase.Clone();
                 dt.Rows.Add(0, MapAny);
-                foreach (var diff in _record.Record
+                foreach (var diff in this._record.Record
                     .Select(r => r.Difficulty)
                     .Distinct()
                     .Except(new[] { 0 })
                     .OrderBy(i => i))
                     dt.Rows.Add(diff, Constants.GetDifficulty(diff));
                 dt.AcceptChanges();
-                MapDifficulty.DisplayMember = "Display";
-                MapDifficulty.ValueMember = "Value";
-                MapDifficulty.DataSource = dt;
-                MapDifficulty.SelectedIndex = 0;
+                this.MapDifficulty.DisplayMember = "Display";
+                this.MapDifficulty.ValueMember = "Value";
+                this.MapDifficulty.DataSource = dt;
+                this.MapDifficulty.SelectedIndex = 0;
             }
 
 
-            foreach (DataGridViewColumn column in RecordView.Columns)
+            foreach (DataGridViewColumn column in this.RecordView.Columns)
                 column.Width = 20;
 
-            LabelShipName.ImageList = ResourceManager.Instance.Icons;
-            LabelShipName.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
-            LabelItemName.ImageList = ResourceManager.Instance.Icons;
-            LabelItemName.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
-            LabelEquipmentName.ImageList = ResourceManager.Instance.Equipments;
-            LabelEquipmentName.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
+            this.LabelShipName.ImageList = ResourceManager.Instance.Icons;
+            this.LabelShipName.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
+            this.LabelItemName.ImageList = ResourceManager.Instance.Icons;
+            this.LabelItemName.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
+            this.LabelEquipmentName.ImageList = ResourceManager.Instance.Equipments;
+            this.LabelEquipmentName.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
 
-            Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.ItemPresentBox]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.ItemPresentBox]);
         }
 
         private void DialogDropRecordViewer_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ResourceManager.DestroyIcon(Icon);
+            ResourceManager.DestroyIcon(this.Icon);
         }
 
 
@@ -378,7 +378,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private string GetMapString(int serialID, bool insertEnemyFleetName = true)
         {
-            return GetMapString(serialID >> 24 & 0xFF, serialID >> 16 & 0xFF, serialID >> 8 & 0xFF, (serialID & 1) != 0, (sbyte)((serialID >> 1 & 0x7F) << 1) >> 1, insertEnemyFleetName);
+            return this.GetMapString(serialID >> 24 & 0xFF, serialID >> 16 & 0xFF, serialID >> 8 & 0xFF, (serialID & 1) != 0, (sbyte)((serialID >> 1 & 0x7F) << 1) >> 1, insertEnemyFleetName);
         }
 
         private int GetMapSerialID(int maparea, int mapinfo, int cell, bool isboss, int difficulty = -1)
@@ -390,28 +390,28 @@ namespace ElectronicObserver.Window.Dialog
         private void MapAreaID_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            int maparea = (int)(MapAreaID.SelectedValue ?? -1);
-            int mapinfo = (int)(MapInfoID.SelectedValue ?? -1);
+            int maparea = (int)(this.MapAreaID.SelectedValue ?? -1);
+            int mapinfo = (int)(this.MapInfoID.SelectedValue ?? -1);
 
             if (maparea == -1 || mapinfo == -1)
             {
-                MapCellID.Enabled = false;
-                if (MapCellID.Items.Count > 0)
-                    MapCellID.SelectedIndex = 0;
+                this.MapCellID.Enabled = false;
+                if (this.MapCellID.Items.Count > 0)
+                    this.MapCellID.SelectedIndex = 0;
 
             }
             else
             {
-                MapCellID.Enabled = true;
-                if (MapCellTable.ContainsKey(maparea * 10 + mapinfo))
+                this.MapCellID.Enabled = true;
+                if (this.MapCellTable.ContainsKey(maparea * 10 + mapinfo))
                 {
-                    MapCellID.DataSource = MapCellTable[maparea * 10 + mapinfo];
+                    this.MapCellID.DataSource = this.MapCellTable[maparea * 10 + mapinfo];
                 }
                 else
                 {
-                    MapCellID.Enabled = false;
+                    this.MapCellID.Enabled = false;
                 }
-                MapCellID.SelectedIndex = 0;
+                this.MapCellID.SelectedIndex = 0;
             }
         }
 
@@ -419,87 +419,87 @@ namespace ElectronicObserver.Window.Dialog
         private void ButtonRun_Click(object sender, EventArgs e)
         {
 
-            if (Searcher.IsBusy)
+            if (this.Searcher.IsBusy)
             {
                 if (MessageBox.Show("검색을 취소하시겠습니까?", "검색중입니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
                     == System.Windows.Forms.DialogResult.Yes)
                 {
-                    Searcher.CancelAsync();
+                    this.Searcher.CancelAsync();
                 }
                 return;
             }
 
-            RecordView.Rows.Clear();
+            this.RecordView.Rows.Clear();
 
             var row = new DataGridViewRow();
-            row.CreateCells(RecordView);
+            row.CreateCells(this.RecordView);
 
             var args = new SearchArgument
             {
-                ShipName = ShipName.Text,
-                ItemName = (string)ItemName.SelectedItem,
-                EquipmentName = (string)EquipmentName.SelectedItem,
-                DateBegin = DateBegin.Value,
-                DateEnd = DateEnd.Value,
-                MapAreaID = (int)MapAreaID.SelectedValue,
-                MapInfoID = (int)MapInfoID.SelectedValue,
-                MapCellID = (int)MapCellID.SelectedValue,
-                MapDifficulty = (int)MapDifficulty.SelectedValue,
-                IsBossOnly = IsBossOnly.CheckState,
-                RankS = RankS.Checked,
-                RankA = RankA.Checked,
-                RankB = RankB.Checked,
-                RankX = RankX.Checked,
-                MergeRows = MergeRows.Checked,
+                ShipName = this.ShipName.Text,
+                ItemName = (string)this.ItemName.SelectedItem,
+                EquipmentName = (string)this.EquipmentName.SelectedItem,
+                DateBegin = this.DateBegin.Value,
+                DateEnd = this.DateEnd.Value,
+                MapAreaID = (int)this.MapAreaID.SelectedValue,
+                MapInfoID = (int)this.MapInfoID.SelectedValue,
+                MapCellID = (int)this.MapCellID.SelectedValue,
+                MapDifficulty = (int)this.MapDifficulty.SelectedValue,
+                IsBossOnly = this.IsBossOnly.CheckState,
+                RankS = this.RankS.Checked,
+                RankA = this.RankA.Checked,
+                RankB = this.RankB.Checked,
+                RankX = this.RankX.Checked,
+                MergeRows = this.MergeRows.Checked,
                 BaseRow = row
             };
 
-            RecordView.Tag = args;
+            this.RecordView.Tag = args;
 
 
             // column initialize
-            if (MergeRows.Checked)
+            if (this.MergeRows.Checked)
             {
-                RecordView_Name.DisplayIndex = 0;
-                RecordView_Header.HeaderText = "회수";
-                RecordView_Header.Width = 100;
-                RecordView_Header.DisplayIndex = 1;
-                RecordView_RankS.Width = 100;
-                RecordView_RankS.Visible = true;
-                RecordView_RankA.Width = 100;
-                RecordView_RankA.Visible = true;
-                RecordView_RankB.Width = 100;
-                RecordView_RankB.Visible = true;
+                this.RecordView_Name.DisplayIndex = 0;
+                this.RecordView_Header.HeaderText = "회수";
+                this.RecordView_Header.Width = 100;
+                this.RecordView_Header.DisplayIndex = 1;
+                this.RecordView_RankS.Width = 100;
+                this.RecordView_RankS.Visible = true;
+                this.RecordView_RankA.Width = 100;
+                this.RecordView_RankA.Visible = true;
+                this.RecordView_RankB.Width = 100;
+                this.RecordView_RankB.Visible = true;
 
-                RecordView_Date.Visible = false;
-                RecordView_Map.Visible = false;
-                RecordView_Rank.Visible = false;
+                this.RecordView_Date.Visible = false;
+                this.RecordView_Map.Visible = false;
+                this.RecordView_Rank.Visible = false;
 
             }
             else
             {
-                RecordView_Header.HeaderText = "";
-                RecordView_Header.Width = 50;
-                RecordView_Header.DisplayIndex = 0;
-                RecordView_Date.Width = 150;
-                RecordView_Date.Visible = true;
-                RecordView_Map.Width = 240;
-                RecordView_Map.Visible = true;
-                RecordView_Rank.Width = 40;
-                RecordView_Rank.Visible = true;
+                this.RecordView_Header.HeaderText = "";
+                this.RecordView_Header.Width = 50;
+                this.RecordView_Header.DisplayIndex = 0;
+                this.RecordView_Date.Width = 150;
+                this.RecordView_Date.Visible = true;
+                this.RecordView_Map.Width = 240;
+                this.RecordView_Map.Visible = true;
+                this.RecordView_Rank.Width = 40;
+                this.RecordView_Rank.Visible = true;
 
-                RecordView_RankS.Visible = false;
-                RecordView_RankA.Visible = false;
-                RecordView_RankB.Visible = false;
+                this.RecordView_RankS.Visible = false;
+                this.RecordView_RankA.Visible = false;
+                this.RecordView_RankB.Visible = false;
 
             }
-            RecordView.ColumnHeadersVisible = true;
+            this.RecordView.ColumnHeadersVisible = true;
 
 
-            StatusInfo.Text = "검색중입니다...";
-            StatusInfo.Tag = DateTime.Now;
+            this.StatusInfo.Text = "검색중입니다...";
+            this.StatusInfo.Tag = DateTime.Now;
 
-            Searcher.RunWorkerAsync(args);
+            this.Searcher.RunWorkerAsync(args);
         }
 
 
@@ -598,12 +598,12 @@ namespace ElectronicObserver.Window.Dialog
 
                         if (priorityContent == 2)
                         {
-                            key = GetMapSerialID(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, args.MapDifficulty == 0 ? -1 : r.Difficulty).ToString("X8");
+                            key = this.GetMapSerialID(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, args.MapDifficulty == 0 ? -1 : r.Difficulty).ToString("X8");
 
                         }
                         else
                         {
-                            key = GetContentString(r, priorityShip < priorityItem && priorityShip < 2, priorityShip >= priorityItem && priorityItem < 2);
+                            key = this.GetContentString(r, priorityShip < priorityItem && priorityShip < 2, priorityShip >= priorityItem && priorityItem < 2);
                         }
 
 
@@ -679,17 +679,17 @@ namespace ElectronicObserver.Window.Dialog
 
                         row.SetValues(
                             i + 1,
-                            GetContentString(r),
+                            this.GetContentString(r),
                             r.Date,
-                            GetMapString(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, r.Difficulty),
+                            this.GetMapString(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, r.Difficulty),
                             Constants.GetWinRank(r.Rank),
                             null,
                             null,
                             null
                             );
 
-                        row.Cells[1].Tag = GetContentStringForSorting(r);
-                        row.Cells[3].Tag = GetMapSerialID(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, r.Difficulty);
+                        row.Cells[1].Tag = this.GetContentStringForSorting(r);
+                        row.Cells[3].Tag = this.GetMapSerialID(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, r.Difficulty);
 
                         rows.AddLast(row);
 
@@ -703,12 +703,12 @@ namespace ElectronicObserver.Window.Dialog
 
                         if (priorityContent == 2)
                         {
-                            key = GetMapSerialID(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, args.MapDifficulty == 0 ? -1 : r.Difficulty).ToString("X8");
+                            key = this.GetMapSerialID(r.MapAreaID, r.MapInfoID, r.CellID, r.IsBossNode, args.MapDifficulty == 0 ? -1 : r.Difficulty).ToString("X8");
 
                         }
                         else
                         {
-                            key = GetContentStringForSorting(r, priorityShip < priorityItem && priorityShip < 2, priorityShip >= priorityItem && priorityItem < 2);
+                            key = this.GetContentStringForSorting(r, priorityShip < priorityItem && priorityShip < 2, priorityShip >= priorityItem && priorityItem < 2);
                         }
 
 
@@ -736,7 +736,7 @@ namespace ElectronicObserver.Window.Dialog
 
 
 
-                    if (Searcher.CancellationPending)
+                    if (this.Searcher.CancellationPending)
                         break;
 
                     i++;
@@ -755,13 +755,13 @@ namespace ElectronicObserver.Window.Dialog
                         string name = c.Key;
 
                         if (int.TryParse(name, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int serialID))
-                            name = GetMapString(serialID);
+                            name = this.GetMapString(serialID);
 
                         // fixme: name != map だった時にソートキーが入れられない
 
                         row.SetValues(
                             c.Value[0],
-                            serialID != 0 ? name : ConvertContentString(name),
+                            serialID != 0 ? name : this.ConvertContentString(name),
                             null,
                             null,
                             null,
@@ -815,18 +815,18 @@ namespace ElectronicObserver.Window.Dialog
             {
                 var rows = (DataGridViewRow[])e.Result;
 
-                RecordView.Rows.AddRange(rows);
+                this.RecordView.Rows.AddRange(rows);
 
-                RecordView.Sort(RecordView.SortedColumn ?? RecordView_Header,
-                    RecordView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
+                this.RecordView.Sort(this.RecordView.SortedColumn ?? this.RecordView_Header,
+                    this.RecordView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
-                StatusInfo.Text = "검색이 완료되었습니다. (" + (int)(DateTime.Now - (DateTime)StatusInfo.Tag).TotalMilliseconds + " ms)";
+                this.StatusInfo.Text = "검색이 완료되었습니다. (" + (int)(DateTime.Now - (DateTime)this.StatusInfo.Tag).TotalMilliseconds + " ms)";
 
             }
             else
             {
 
-                StatusInfo.Text = "검색이 취소되었습니다. ";
+                this.StatusInfo.Text = "검색이 취소되었습니다. ";
             }
 
         }
@@ -835,8 +835,8 @@ namespace ElectronicObserver.Window.Dialog
         private void RecordView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
 
-            object tag1 = RecordView[e.Column.Index, e.RowIndex1].Tag;
-            object tag2 = RecordView[e.Column.Index, e.RowIndex2].Tag;
+            object tag1 = this.RecordView[e.Column.Index, e.RowIndex1].Tag;
+            object tag2 = this.RecordView[e.Column.Index, e.RowIndex2].Tag;
 
             if (tag1 != null && (tag1 is double || tag1 is int) && e.CellValue1 is int)
             {
@@ -883,7 +883,7 @@ namespace ElectronicObserver.Window.Dialog
 
             if (e.SortResult == 0)
             {
-                e.SortResult = (int)(RecordView.Rows[e.RowIndex1].Tag ?? 0) - (int)(RecordView.Rows[e.RowIndex2].Tag ?? 0);
+                e.SortResult = (int)(this.RecordView.Rows[e.RowIndex1].Tag ?? 0) - (int)(this.RecordView.Rows[e.RowIndex2].Tag ?? 0);
             }
 
         }
@@ -891,9 +891,9 @@ namespace ElectronicObserver.Window.Dialog
         private void RecordView_Sorted(object sender, EventArgs e)
         {
 
-            for (int i = 0; i < RecordView.Rows.Count; i++)
+            for (int i = 0; i < this.RecordView.Rows.Count; i++)
             {
-                RecordView.Rows[i].Tag = i;
+                this.RecordView.Rows[i].Tag = i;
             }
 
         }
@@ -902,25 +902,25 @@ namespace ElectronicObserver.Window.Dialog
         private void RecordView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
 
-            SearchArgument args = (SearchArgument)RecordView.Tag;
+            SearchArgument args = (SearchArgument)this.RecordView.Tag;
 
             if (args.MergeRows)
             {
                 // merged
 
-                if (e.ColumnIndex == RecordView_Header.Index ||
-                     e.ColumnIndex == RecordView_RankS.Index ||
-                     e.ColumnIndex == RecordView_RankA.Index ||
-                     e.ColumnIndex == RecordView_RankB.Index)
+                if (e.ColumnIndex == this.RecordView_Header.Index ||
+                     e.ColumnIndex == this.RecordView_RankS.Index ||
+                     e.ColumnIndex == this.RecordView_RankA.Index ||
+                     e.ColumnIndex == this.RecordView_RankB.Index)
                 {
 
-                    if (RecordView[e.ColumnIndex, e.RowIndex].Tag is double)
+                    if (this.RecordView[e.ColumnIndex, e.RowIndex].Tag is double)
                     {
-                        e.Value = string.Format("{0} ({1:p1})", e.Value, (double)RecordView[e.ColumnIndex, e.RowIndex].Tag);
+                        e.Value = string.Format("{0} ({1:p1})", e.Value, (double)this.RecordView[e.ColumnIndex, e.RowIndex].Tag);
                     }
                     else
                     {
-                        int max = (int)RecordView[e.ColumnIndex, e.RowIndex].Tag;
+                        int max = (int)this.RecordView[e.ColumnIndex, e.RowIndex].Tag;
                         e.Value = string.Format("{0}/{1} ({2:p1})", e.Value, max, (double)((int)e.Value) / Math.Max(max, 1));
                     }
                     e.FormattingApplied = true;
@@ -931,13 +931,13 @@ namespace ElectronicObserver.Window.Dialog
             {
                 //not merged
 
-                if (e.ColumnIndex == RecordView_Date.Index)
+                if (e.ColumnIndex == this.RecordView_Date.Index)
                 {
                     e.Value = DateTimeHelper.TimeToCSVString((DateTime)e.Value);
                     e.FormattingApplied = true;
 
                 }
-                else if (e.ColumnIndex == RecordView_Rank.Index)
+                else if (e.ColumnIndex == this.RecordView_Rank.Index)
                 {
                     e.Value = Constants.GetWinRank((int)e.Value);
                     e.FormattingApplied = true;
@@ -950,23 +950,23 @@ namespace ElectronicObserver.Window.Dialog
         private void RecordView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            SearchArgument args = (SearchArgument)RecordView.Tag;
+            SearchArgument args = (SearchArgument)this.RecordView.Tag;
             if (args == null || args.MergeRows)
                 return;
 
             try
             {
 
-                DateTime time = Convert.ToDateTime(RecordView[RecordView_Date.Index, e.RowIndex].Value);
+                DateTime time = Convert.ToDateTime(this.RecordView[this.RecordView_Date.Index, e.RowIndex].Value);
 
 
                 if (!Directory.Exists(Data.Battle.BattleManager.BattleLogPath))
                 {
-                    StatusInfo.Text = "전투 로그를 찾을 수 없습니다.";
+                    this.StatusInfo.Text = "전투 로그를 찾을 수 없습니다.";
                     return;
                 }
 
-                StatusInfo.Text = "전투 로그를 검색하고 있습니다...";
+                this.StatusInfo.Text = "전투 로그를 검색하고 있습니다...";
                 string battleLogFile = Directory.EnumerateFiles(Data.Battle.BattleManager.BattleLogPath,
                     time.ToString("yyyyMMdd_HHmmss", System.Globalization.CultureInfo.InvariantCulture) + "*.txt",
                     SearchOption.TopDirectoryOnly)
@@ -974,45 +974,45 @@ namespace ElectronicObserver.Window.Dialog
 
                 if (battleLogFile == null)
                 {
-                    StatusInfo.Text = "전투 로그를 찾을 수 없습니다.";
+                    this.StatusInfo.Text = "전투 로그를 찾을 수 없습니다.";
                     return;
                 }
 
-                StatusInfo.Text = string.Format("전투 로그 {0} 를 엽니다.", Path.GetFileName(battleLogFile));
+                this.StatusInfo.Text = string.Format("전투 로그 {0} 를 엽니다.", Path.GetFileName(battleLogFile));
                 System.Diagnostics.Process.Start(battleLogFile);
 
 
             }
             catch (Exception)
             {
-                StatusInfo.Text = "전투 로그를 열 수 없습니다.";
+                this.StatusInfo.Text = "전투 로그를 열 수 없습니다.";
             }
 
         }
 
         private void RecordView_SelectionChanged(object sender, EventArgs e)
         {
-            var args = RecordView.Tag as SearchArgument;
+            var args = this.RecordView.Tag as SearchArgument;
             if (args == null)
                 return;
 
-            int selectedCount = RecordView.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            int selectedCount = this.RecordView.Rows.GetRowCount(DataGridViewElementStates.Selected);
 
             if (selectedCount == 0)
                 return;
 
             if (args.MergeRows)
             {
-                int count = RecordView.SelectedRows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
-                int allcount = RecordView.Rows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
+                int count = this.RecordView.SelectedRows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[this.RecordView_Header.Index].Value).Sum();
+                int allcount = this.RecordView.Rows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[this.RecordView_Header.Index].Value).Sum();
 
-                StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
+                this.StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
                     count, allcount, (double)count / allcount);
             }
             else
             {
-                int allcount = RecordView.RowCount;
-                StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
+                int allcount = this.RecordView.RowCount;
+                this.StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
                     selectedCount, allcount, (double)selectedCount / allcount);
             }
         }

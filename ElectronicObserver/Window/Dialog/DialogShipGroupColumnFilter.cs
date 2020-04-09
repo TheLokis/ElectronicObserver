@@ -20,39 +20,39 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogShipGroupColumnFilter(DataGridView target, ShipGroupData group)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
 
 			var rows = new LinkedList<DataGridViewRow>();
 			var row = new DataGridViewRow();
 
-			row.CreateCells(ColumnView);
+			row.CreateCells(this.ColumnView);
 			row.SetValues("(전부)", null, null, "-");
-			row.Cells[ColumnView_Width.Index].ReadOnly = true;
+			row.Cells[this.ColumnView_Width.Index].ReadOnly = true;
 			rows.AddLast(row);
 
 			foreach (var c in group.ViewColumns.Values.OrderBy(c => c.DisplayIndex))
 			{
 				row = new DataGridViewRow();
-				row.CreateCells(ColumnView);
+				row.CreateCells(this.ColumnView);
 				row.SetValues(target.Columns[c.Name].HeaderText, c.Visible, c.AutoSize, c.Width);
-				row.Cells[ColumnView_Width.Index].ValueType = typeof(int);
+				row.Cells[this.ColumnView_Width.Index].ValueType = typeof(int);
 				row.Tag = c.Name;
 				rows.AddLast(row);
 			}
 
-			ColumnView.Rows.AddRange(rows.ToArray());
+            this.ColumnView.Rows.AddRange(rows.ToArray());
 
 
-			ScrLkColumnCount.Minimum = 0;
-			ScrLkColumnCount.Maximum = group.ViewColumns.Count;
-			ScrLkColumnCount.Value = group.ScrollLockColumnCount;
+            this.ScrLkColumnCount.Minimum = 0;
+            this.ScrLkColumnCount.Maximum = group.ViewColumns.Count;
+            this.ScrLkColumnCount.Value = group.ScrollLockColumnCount;
 		}
 
 		private void DialogShipGroupColumnFilter_Load(object sender, EventArgs e)
 		{
-			if (Owner != null)
-				Icon = Owner.Icon;
+			if (this.Owner != null)
+                this.Icon = this.Owner.Icon;
 		}
 
 
@@ -64,21 +64,21 @@ namespace ElectronicObserver.Window.Dialog
 			if (e.RowIndex == 0)
 			{
 
-				if (e.ColumnIndex == ColumnView_Visible.Index)
+				if (e.ColumnIndex == this.ColumnView_Visible.Index)
 				{
-					for (int i = 1; i < ColumnView.Rows.Count; i++)
+					for (int i = 1; i < this.ColumnView.Rows.Count; i++)
 					{
-						ColumnView.Rows[i].Cells[ColumnView_Visible.Index].Value =
-							ColumnView.Rows[0].Cells[ColumnView_Visible.Index].Value;
+                        this.ColumnView.Rows[i].Cells[this.ColumnView_Visible.Index].Value =
+                            this.ColumnView.Rows[0].Cells[this.ColumnView_Visible.Index].Value;
 					}
 				}
 
-				if (e.ColumnIndex == ColumnView_AutoSize.Index)
+				if (e.ColumnIndex == this.ColumnView_AutoSize.Index)
 				{
-					for (int i = 1; i < ColumnView.Rows.Count; i++)
+					for (int i = 1; i < this.ColumnView.Rows.Count; i++)
 					{
-						ColumnView.Rows[i].Cells[ColumnView_AutoSize.Index].Value =
-							ColumnView.Rows[0].Cells[ColumnView_AutoSize.Index].Value;
+                        this.ColumnView.Rows[i].Cells[this.ColumnView_AutoSize.Index].Value =
+                            this.ColumnView.Rows[0].Cells[this.ColumnView_AutoSize.Index].Value;
 					}
 				}
 			}
@@ -90,32 +90,32 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (e.RowIndex < 1) return;
 
-			if (e.ColumnIndex == ColumnView_Up.Index && e.RowIndex > 1)
+			if (e.ColumnIndex == this.ColumnView_Up.Index && e.RowIndex > 1)
 			{
-				ControlHelper.RowMoveUp(ColumnView, e.RowIndex);
+				ControlHelper.RowMoveUp(this.ColumnView, e.RowIndex);
 
 			}
-			else if (e.ColumnIndex == ColumnView_Down.Index && e.RowIndex < ColumnView.RowCount - 1)
+			else if (e.ColumnIndex == this.ColumnView_Down.Index && e.RowIndex < this.ColumnView.RowCount - 1)
 			{
-				ControlHelper.RowMoveDown(ColumnView, e.RowIndex);
+				ControlHelper.RowMoveDown(this.ColumnView, e.RowIndex);
 			}
 		}
 
         private void ButtonSelectedUp_Click(object sender, EventArgs e)
         {
-            var selectedCell = ColumnView.SelectedCells.OfType<DataGridViewCell>().FirstOrDefault();
+            var selectedCell = this.ColumnView.SelectedCells.OfType<DataGridViewCell>().FirstOrDefault();
             if (selectedCell != null && selectedCell.RowIndex > 1)
             {
-                ControlHelper.RowMoveUp(ColumnView, selectedCell.RowIndex);
+                ControlHelper.RowMoveUp(this.ColumnView, selectedCell.RowIndex);
             }
         }
 
         private void ButtonSelectedDown_Click(object sender, EventArgs e)
         {
-            var selectedCell = ColumnView.SelectedCells.OfType<DataGridViewCell>().FirstOrDefault();
-            if (selectedCell != null && selectedCell.RowIndex > 0 && selectedCell.RowIndex < ColumnView.RowCount - 1)
+            var selectedCell = this.ColumnView.SelectedCells.OfType<DataGridViewCell>().FirstOrDefault();
+            if (selectedCell != null && selectedCell.RowIndex > 0 && selectedCell.RowIndex < this.ColumnView.RowCount - 1)
             {
-                ControlHelper.RowMoveDown(ColumnView, selectedCell.RowIndex);
+                ControlHelper.RowMoveDown(this.ColumnView, selectedCell.RowIndex);
             }
         }
 
@@ -124,11 +124,11 @@ namespace ElectronicObserver.Window.Dialog
         private void ColumnView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
 		{
 
-			if (ColumnView.Columns[ColumnView.CurrentCellAddress.X] is DataGridViewCheckBoxColumn)
+			if (this.ColumnView.Columns[this.ColumnView.CurrentCellAddress.X] is DataGridViewCheckBoxColumn)
 			{
-				if (ColumnView.IsCurrentCellDirty)
+				if (this.ColumnView.IsCurrentCellDirty)
 				{
-					ColumnView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                    this.ColumnView.CommitEdit(DataGridViewDataErrorContexts.Commit);
 				}
 			}
 		}
@@ -143,12 +143,12 @@ namespace ElectronicObserver.Window.Dialog
 		private void ColumnView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
 		{
 
-			if (e.ColumnIndex == ColumnView_Width.Index)
+			if (e.ColumnIndex == this.ColumnView_Width.Index)
 			{
 
 				if (!int.TryParse(e.FormattedValue.ToString(), out int value))
 				{
-					ColumnView.CancelEdit();
+                    this.ColumnView.CancelEdit();
 				}
 
 			}
@@ -159,31 +159,31 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonOK_Click(object sender, EventArgs e)
 		{
 
-			Result = new List<ShipGroupData.ViewColumnData>(ColumnView.Rows.Count - 1);
+            this.Result = new List<ShipGroupData.ViewColumnData>(this.ColumnView.Rows.Count - 1);
 
-			for (int i = 1; i < ColumnView.Rows.Count; i++)
+			for (int i = 1; i < this.ColumnView.Rows.Count; i++)
 			{
 
-				var row = ColumnView.Rows[i];
+				var row = this.ColumnView.Rows[i];
 				var r = new ShipGroupData.ViewColumnData((string)row.Tag)
 				{
 					DisplayIndex = row.Index - 1,
-					Visible = (bool)row.Cells[ColumnView_Visible.Index].Value,
-					AutoSize = (bool)row.Cells[ColumnView_AutoSize.Index].Value,
-					Width = Convert.ToInt32(row.Cells[ColumnView_Width.Index].Value)
+					Visible = (bool)row.Cells[this.ColumnView_Visible.Index].Value,
+					AutoSize = (bool)row.Cells[this.ColumnView_AutoSize.Index].Value,
+					Width = Convert.ToInt32(row.Cells[this.ColumnView_Width.Index].Value)
 				};
 
-				Result.Add(r);
+                this.Result.Add(r);
 			}
 
-			ScrollLockColumnCount = (int)ScrLkColumnCount.Value;
+            this.ScrollLockColumnCount = (int)this.ScrLkColumnCount.Value;
 
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 
@@ -207,33 +207,33 @@ namespace ElectronicObserver.Window.Dialog
 		private void CheckRow()
 		{
 
-			var rows = ColumnView.Rows.Cast<DataGridViewRow>();
-			var allrow = ColumnView.Rows[0];
+			var rows = this.ColumnView.Rows.Cast<DataGridViewRow>();
+			var allrow = this.ColumnView.Rows[0];
 
-			if (rows.All(r => r.Cells[ColumnView_Visible.Index].Value as bool? ?? false == true))
+			if (rows.All(r => r.Cells[this.ColumnView_Visible.Index].Value as bool? ?? false == true))
 			{
-				allrow.Cells[ColumnView_Visible.Index].Value = true;
+				allrow.Cells[this.ColumnView_Visible.Index].Value = true;
 			}
-			else if (rows.All(r => r.Cells[ColumnView_Visible.Index].Value as bool? ?? true == false))
+			else if (rows.All(r => r.Cells[this.ColumnView_Visible.Index].Value as bool? ?? true == false))
 			{
-				allrow.Cells[ColumnView_Visible.Index].Value = false;
+				allrow.Cells[this.ColumnView_Visible.Index].Value = false;
 			}
 			else
 			{
-				allrow.Cells[ColumnView_Visible.Index].Value = null;
+				allrow.Cells[this.ColumnView_Visible.Index].Value = null;
 			}
 
-			if (rows.All(r => r.Cells[ColumnView_AutoSize.Index].Value as bool? ?? false == true))
+			if (rows.All(r => r.Cells[this.ColumnView_AutoSize.Index].Value as bool? ?? false == true))
 			{
-				allrow.Cells[ColumnView_AutoSize.Index].Value = true;
+				allrow.Cells[this.ColumnView_AutoSize.Index].Value = true;
 			}
-			else if (rows.All(r => r.Cells[ColumnView_AutoSize.Index].Value as bool? ?? true == false))
+			else if (rows.All(r => r.Cells[this.ColumnView_AutoSize.Index].Value as bool? ?? true == false))
 			{
-				allrow.Cells[ColumnView_AutoSize.Index].Value = false;
+				allrow.Cells[this.ColumnView_AutoSize.Index].Value = false;
 			}
 			else
 			{
-				allrow.Cells[ColumnView_AutoSize.Index].Value = null;
+				allrow.Cells[this.ColumnView_AutoSize.Index].Value = null;
 			}
 
 

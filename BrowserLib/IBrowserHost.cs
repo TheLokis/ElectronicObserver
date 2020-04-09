@@ -63,7 +63,10 @@ namespace BrowserLib
 
 		[OperationContract]
 		void SetProxyCompleted();
-	}
+
+        [OperationContract]
+        void ClearCache();
+    }
 
 	/// <summary>
 	/// ブラウザ側で必要な設定をまとめた
@@ -193,5 +196,8 @@ namespace BrowserLib
         /// </summary>
         [DataMember]
         public bool SavesBrowserLog { get; set; }
+
+        [DataMember]
+        public bool EnableDebugMenu { get; set; }
     }
 }

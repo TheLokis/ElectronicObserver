@@ -26,32 +26,32 @@ namespace ElectronicObserver.Data.Quest
 			: base(quest, maxCount)
 		{
 
-			TargetArea = targetArea == null ? null : new HashSet<int>(targetArea);
+            this.TargetArea = targetArea == null ? null : new HashSet<int>(targetArea);
 		}
 
 
 		public void Increment(int areaID)
 		{
 
-			if (TargetArea != null && !TargetArea.Contains(areaID))
+			if (this.TargetArea != null && !this.TargetArea.Contains(areaID))
 				return;
 
-			Increment();
+            this.Increment();
 		}
 
 
 		public override string GetClearCondition()
 		{
 			StringBuilder sb = new StringBuilder();
-			if (TargetArea != null)
+			if (this.TargetArea != null)
 			{
-				sb.Append(string.Join("・", TargetArea.OrderBy(s => s).Select(s => KCDatabase.Instance.Mission[s].Name)));
+				sb.Append(string.Join("・", this.TargetArea.OrderBy(s => s).Select(s => KCDatabase.Instance.Mission[s].Name)));
 			}
 			else
 			{
 				sb.Append("원정 ");
 			}
-			sb.Append(ProgressMax);
+			sb.Append(this.ProgressMax);
 
 			return sb.ToString();
 		}

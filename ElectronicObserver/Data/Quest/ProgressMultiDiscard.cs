@@ -17,20 +17,20 @@ namespace ElectronicObserver.Data.Quest
 		public ProgressMultiDiscard(QuestData quest, IEnumerable<ProgressDiscard> progressList)
 			: base(quest, 1)
 		{
-			ProgressList = progressList.ToArray();
-			foreach (var p in ProgressList)
+            this.ProgressList = progressList.ToArray();
+			foreach (var p in this.ProgressList)
 				p.IgnoreCheckProgress = true;
 
-			ProgressMax = progressList.Sum(p => p.ProgressMax);
+            this.ProgressMax = progressList.Sum(p => p.ProgressMax);
 		}
 
 
 		public void Increment(IEnumerable<int> equipments)
 		{
-			foreach (var p in ProgressList)
+			foreach (var p in this.ProgressList)
 				p.Increment(equipments);
 
-			Progress = ProgressList.Sum(p => p.Progress);
+            this.Progress = this.ProgressList.Sum(p => p.Progress);
 		}
 
 
@@ -53,16 +53,16 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string ToString()
 		{
-			if (ProgressList.All(p => p.IsCleared))
-				return "달성！";
-			else
-				return string.Join(", ", ProgressList.Where(p => !p.IsCleared).Select(p => p.GetClearCondition() + ": " + p.ToString()));
+			if (this.ProgressList.All(p => p.IsCleared))
+                return "100%";
+            else
+				return string.Join(", ", this.ProgressList.Where(p => !p.IsCleared).Select(p => p.GetClearCondition() + ": " + p.ToString()));
 		}
 
 
 		public override string GetClearCondition()
 		{
-			return string.Join(", ", ProgressList.Select(p => p.GetClearCondition()));
+			return string.Join(", ", this.ProgressList.Select(p => p.GetClearCondition()));
 		}
 	}
 }

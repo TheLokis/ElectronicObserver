@@ -160,30 +160,30 @@ namespace ElectronicObserver.Data
 		private KCDatabase()
 		{
 
-			MasterShips = new IDDictionary<ShipDataMaster>();
-			ShipTypes = new IDDictionary<ShipType>();
-            ShipGraphics = new IDDictionary<ShipGraphicData>();
-            MasterEquipments = new IDDictionary<EquipmentDataMaster>();
-			EquipmentTypes = new IDDictionary<EquipmentType>();
-			Ships = new IDDictionary<ShipData>();
-			Equipments = new IDDictionary<EquipmentData>();
-			Admiral = new AdmiralData();
-			MasterUseItems = new IDDictionary<UseItemMaster>();
-			UseItems = new IDDictionary<UseItem>();
-			Arsenals = new IDDictionary<ArsenalData>();
-			Docks = new IDDictionary<DockData>();
-            Development = new DevelopmentData();
-            Fleet = new FleetManager();
-			Material = new MaterialData();
-			Quest = new QuestManager();
-			QuestProgress = new QuestProgressManager();
-			Battle = new BattleManager();
-			MapArea = new IDDictionary<MapAreaData>();
-			MapInfo = new IDDictionary<MapInfoData>();
-			Mission = new IDDictionary<MissionData>();
-			ShipGroup = new ShipGroupManager();
-			BaseAirCorps = new IDDictionary<BaseAirCorpsData>();
-			RelocatedEquipments = new IDDictionary<RelocationData>();
+            this.MasterShips = new IDDictionary<ShipDataMaster>();
+            this.ShipTypes = new IDDictionary<ShipType>();
+            this.ShipGraphics = new IDDictionary<ShipGraphicData>();
+            this.MasterEquipments = new IDDictionary<EquipmentDataMaster>();
+            this.EquipmentTypes = new IDDictionary<EquipmentType>();
+            this.Ships = new IDDictionary<ShipData>();
+            this.Equipments = new IDDictionary<EquipmentData>();
+            this.Admiral = new AdmiralData();
+            this.MasterUseItems = new IDDictionary<UseItemMaster>();
+            this.UseItems = new IDDictionary<UseItem>();
+            this.Arsenals = new IDDictionary<ArsenalData>();
+            this.Docks = new IDDictionary<DockData>();
+            this.Development = new DevelopmentData();
+            this.Fleet = new FleetManager();
+            this.Material = new MaterialData();
+            this.Quest = new QuestManager();
+            this.QuestProgress = new QuestProgressManager();
+            this.Battle = new BattleManager();
+            this.MapArea = new IDDictionary<MapAreaData>();
+            this.MapInfo = new IDDictionary<MapInfoData>();
+            this.Mission = new IDDictionary<MissionData>();
+            this.ShipGroup = new ShipGroupManager();
+            this.BaseAirCorps = new IDDictionary<BaseAirCorpsData>();
+            this.RelocatedEquipments = new IDDictionary<RelocationData>();
 		}
 
 
@@ -191,17 +191,17 @@ namespace ElectronicObserver.Data
 		{
 
 			{
-				var temp = (ShipGroupManager)ShipGroup.Load();
+				var temp = (ShipGroupManager)this.ShipGroup.Load();
 				if (temp != null)
-					ShipGroup = temp;
+                    this.ShipGroup = temp;
 			}
 			{
-				var temp = QuestProgress.Load();
+				var temp = this.QuestProgress.Load();
 				if (temp != null)
 				{
-					if (QuestProgress != null)
-						QuestProgress.RemoveEvents();
-					QuestProgress = temp;
+					if (this.QuestProgress != null)
+                        this.QuestProgress.RemoveEvents();
+                    this.QuestProgress = temp;
 				}
 			}
 
@@ -209,8 +209,8 @@ namespace ElectronicObserver.Data
 
 		public void Save()
 		{
-			ShipGroup.Save();
-			QuestProgress.Save();
+            this.ShipGroup.Save();
+            this.QuestProgress.Save();
 		}
 
 	}

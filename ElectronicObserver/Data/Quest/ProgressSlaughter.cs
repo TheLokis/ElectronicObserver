@@ -26,28 +26,28 @@ namespace ElectronicObserver.Data.Quest
 			: base(quest, maxCount)
 		{
 
-			TargetShipType = targetShipType == null ? null : new HashSet<int>(targetShipType);
+            this.TargetShipType = targetShipType == null ? null : new HashSet<int>(targetShipType);
 
 		}
 
 
 		public void Increment(ShipTypes shipType)
 		{
-			if (TargetShipType.Contains((int)shipType))
-				Increment();
+			if (this.TargetShipType.Contains((int)shipType))
+                this.Increment();
 		}
 
 
 		public override string GetClearCondition()
 		{
 			StringBuilder sb = new StringBuilder();
-			if (TargetShipType != null)
+			if (this.TargetShipType != null)
 			{
-				sb.Append(string.Join("・", TargetShipType.OrderBy(s => s).Select(s => KCDatabase.Instance.ShipTypes[s].Name)));
+				sb.Append(string.Join("・", this.TargetShipType.OrderBy(s => s).Select(s => KCDatabase.Instance.ShipTypes[s].Name)));
 			}
 
 			sb.Append("격침 ");
-			sb.Append(ProgressMax);
+			sb.Append(this.ProgressMax);
             sb.Append("회");
 
 			return sb.ToString();

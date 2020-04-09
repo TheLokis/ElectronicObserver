@@ -25,7 +25,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 艦隊ID
 		/// </summary>
-		public int FleetID => (int)RawData.api_id;
+		public int FleetID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 艦隊名
@@ -53,7 +53,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 艦隊メンバー(艦船ID)
 		/// </summary>
-		public ReadOnlyCollection<int> Members => Array.AsReadOnly(_members);
+		public ReadOnlyCollection<int> Members => Array.AsReadOnly(this._members);
 
 		/// <summary>
 		/// 艦隊メンバー(艦船データ)
@@ -62,12 +62,12 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (_members == null) return null;
+				if (this._members == null) return null;
 
-				ShipData[] ships = new ShipData[_members.Length];
+				ShipData[] ships = new ShipData[this._members.Length];
 				for (int i = 0; i < ships.Length; i++)
 				{
-					ships[i] = KCDatabase.Instance.Ships[_members[i]];
+					ships[i] = KCDatabase.Instance.Ships[this._members[i]];
 				}
 
 				return Array.AsReadOnly(ships);
@@ -81,12 +81,12 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (_members == null) return null;
+				if (this._members == null) return null;
 
-				ShipData[] ships = new ShipData[_members.Length];
+				ShipData[] ships = new ShipData[this._members.Length];
 				for (int i = 0; i < ships.Length; i++)
 				{
-					ships[i] = _escapedShipList.Contains(_members[i]) ? null : KCDatabase.Instance.Ships[_members[i]];
+					ships[i] = this._escapedShipList.Contains(this._members[i]) ? null : KCDatabase.Instance.Ships[this._members[i]];
 				}
 
 				return Array.AsReadOnly(ships);
@@ -94,7 +94,7 @@ namespace ElectronicObserver.Data
 		}
 
 
-		public int this[int i] => _members[i];
+		public int this[int i] => this._members[i];
 
 
 
@@ -102,7 +102,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 退避艦のIDリスト
 		/// </summary>
-		public ReadOnlyCollection<int> EscapedShipList => _escapedShipList.AsReadOnly();
+		public ReadOnlyCollection<int> EscapedShipList => this._escapedShipList.AsReadOnly();
 
 		/// <summary>
 		/// 出撃中かどうか
@@ -112,7 +112,7 @@ namespace ElectronicObserver.Data
 
 
 
-		public int ID => FleetID;
+		public int ID => this.FleetID;
 
 
 
@@ -131,18 +131,18 @@ namespace ElectronicObserver.Data
 				case "api_port/port":
 					base.LoadFromResponse(apiname, (object)data);
 
-					Name = (string)RawData.api_name;
-					_members = (int[])RawData.api_ship;
-					ExpeditionState = (int)RawData.api_mission[0];
-					ExpeditionDestination = (int)RawData.api_mission[1];
-					ExpeditionTime = DateTimeHelper.FromAPITime((long)RawData.api_mission[2]);
+                    this.Name = (string)this.RawData.api_name;
+                    this._members = (int[])this.RawData.api_ship;
+                    this.ExpeditionState = (int)this.RawData.api_mission[0];
+                    this.ExpeditionDestination = (int)this.RawData.api_mission[1];
+                    this.ExpeditionTime = DateTimeHelper.FromAPITime((long)this.RawData.api_mission[2]);
 
-					_escapedShipList.Clear();
-					if (IsInSortie)
+                    this._escapedShipList.Clear();
+					if (this.IsInSortie)
 					{
-						Utility.Logger.Add(2, string.Format("#{0}「{1}」이 귀환했습니다.", FleetID, Name));
+						Utility.Logger.Add(2, string.Format("#{0}「{1}」이 귀환했습니다.", this.FleetID, this.Name));
 					}
-					IsInSortie = false;
+                    this.IsInSortie = false;
 
 					break;
 
@@ -155,11 +155,11 @@ namespace ElectronicObserver.Data
 				default:    //checkme
 					base.LoadFromResponse(apiname, (object)data);
 
-					Name = (string)RawData.api_name;
-					_members = (int[])RawData.api_ship;
-					ExpeditionState = (int)RawData.api_mission[0];
-					ExpeditionDestination = (int)RawData.api_mission[1];
-					ExpeditionTime = DateTimeHelper.FromAPITime((long)RawData.api_mission[2]);
+                    this.Name = (string)this.RawData.api_name;
+                    this._members = (int[])this.RawData.api_ship;
+                    this.ExpeditionState = (int)this.RawData.api_mission[0];
+                    this.ExpeditionDestination = (int)this.RawData.api_mission[1];
+                    this.ExpeditionTime = DateTimeHelper.FromAPITime((long)this.RawData.api_mission[2]);
 					break;
 
 			}
@@ -180,21 +180,21 @@ namespace ElectronicObserver.Data
 						int index = int.Parse(data["api_ship_idx"]);
 						int shipID = int.Parse(data["api_ship_id"]);
 						int replacedID = data.ContainsKey("replaced_id") ? int.Parse(data["replaced_id"]) : -1;
-						int flagshipID = _members[0];
+						int flagshipID = this._members[0];
 
-						if (FleetID == fleetID)
+						if (this.FleetID == fleetID)
 						{
 							if (shipID == -2)
 							{
 								//旗艦以外全解除
-								for (int i = 1; i < _members.Length; i++)
-									_members[i] = -1;
+								for (int i = 1; i < this._members.Length; i++)
+                                    this._members[i] = -1;
 
 							}
 							else if (shipID == -1)
 							{
-								//はずす
-								RemoveShip(index);
+                                //はずす
+                                this.RemoveShip(index);
 
 							}
 							else
@@ -203,25 +203,25 @@ namespace ElectronicObserver.Data
 
 								for (int y = index - 1; y >= 0; y--)
 								{       // 変更位置よりも前に空欄があれば位置をずらす
-									if (_members[y] != -1)
+									if (this._members[y] != -1)
 									{
 										index = y + 1;
 										break;
 									}
 								}
 
-								_members[index] = shipID;
+                                this._members[index] = shipID;
 
 								//入れ替え
-								for (int i = 0; i < _members.Length; i++)
+								for (int i = 0; i < this._members.Length; i++)
 								{
-									if (i != index && _members[i] == shipID)
+									if (i != index && this._members[i] == shipID)
 									{
 
 										if (replacedID != -1)
-											_members[i] = replacedID;
+                                            this._members[i] = replacedID;
 										else
-											RemoveShip(i);
+                                            this.RemoveShip(i);
 
 										break;
 									}
@@ -230,7 +230,7 @@ namespace ElectronicObserver.Data
 							}
 
 
-							if (shipID != -2 && IsFlagshipRepairShip)        //随伴艦一括解除を除く
+							if (shipID != -2 && this.IsFlagshipRepairShip)        //随伴艦一括解除を除く
 								KCDatabase.Instance.Fleet.StartAnchorageRepairingTimer();
 
 						}
@@ -240,17 +240,17 @@ namespace ElectronicObserver.Data
 							if (index != -1 && shipID != -1)
 							{
 								//入れ替え
-								for (int i = 0; i < _members.Length; i++)
+								for (int i = 0; i < this._members.Length; i++)
 								{
-									if (_members[i] == shipID)
+									if (this._members[i] == shipID)
 									{
 
 										if (replacedID != -1)
-											_members[i] = replacedID;
+                                            this._members[i] = replacedID;
 										else
-											RemoveShip(i);
+                                            this.RemoveShip(i);
 
-										if (IsFlagshipRepairShip)
+										if (this.IsFlagshipRepairShip)
 											KCDatabase.Instance.Fleet.StartAnchorageRepairingTimer();
 
 										break;
@@ -270,11 +270,11 @@ namespace ElectronicObserver.Data
 					{
 						foreach (int id in data["api_ship_id"].Split(",".ToCharArray()).Select(s => int.Parse(s)))
 						{
-							for (int i = 0; i < _members.Length; i++)
+							for (int i = 0; i < this._members.Length; i++)
 							{
-								if (_members[i] == id)
+								if (this._members[i] == id)
 								{
-									RemoveShip(i);
+                                    this.RemoveShip(i);
 									break;
 								}
 							}
@@ -286,11 +286,11 @@ namespace ElectronicObserver.Data
 					{
 						foreach (int id in data["api_id_items"].Split(",".ToCharArray()).Select(s => int.Parse(s)))
 						{
-							for (int i = 0; i < _members.Length; i++)
+							for (int i = 0; i < this._members.Length; i++)
 							{
-								if (_members[i] == id)
+								if (this._members[i] == id)
 								{
-									RemoveShip(i);
+                                    this.RemoveShip(i);
 									break;
 								}
 							}
@@ -299,15 +299,15 @@ namespace ElectronicObserver.Data
 					break;
 
 				case "api_req_mission/start":
-					ExpeditionState = 1;
-					ExpeditionDestination = int.Parse(data["api_mission_id"]);
-					ExpeditionTime = DateTime.Now;  //暫定処理。実際の更新はResponseで行う
+                    this.ExpeditionState = 1;
+                    this.ExpeditionDestination = int.Parse(data["api_mission_id"]);
+                    this.ExpeditionTime = DateTime.Now;  //暫定処理。実際の更新はResponseで行う
 
 					break;
 
 
 				case "api_req_member/updatedeckname":
-					Name = data["api_name"];
+                    this.Name = data["api_name"];
 					break;
 
 			}
@@ -322,10 +322,10 @@ namespace ElectronicObserver.Data
 		private void RemoveShip(int index)
 		{
 
-			for (int i = index + 1; i < _members.Length; i++)
-				_members[i - 1] = _members[i];
+			for (int i = index + 1; i < this._members.Length; i++)
+                this._members[i - 1] = this._members[i];
 
-			_members[_members.Length - 1] = -1;
+            this._members[this._members.Length - 1] = -1;
 
 		}
 
@@ -337,7 +337,7 @@ namespace ElectronicObserver.Data
 		/// <param name="index">対象艦の艦隊内でのインデックス。[0-6]</param>
 		public void Escape(int index)
 		{
-			_escapedShipList.Add(_members[index]);
+            this._escapedShipList.Add(this._members[index]);
 		}
 
 
@@ -434,7 +434,7 @@ namespace ElectronicObserver.Data
                 int escortcount = 0;
                 int submarineattackcount = 0;
 
-                foreach (var s in MembersInstance.Where(ss => ss != null))
+                foreach (var s in this.MembersInstance.Where(ss => ss != null))
 				{
 					switch (s.MasterShip.ShipType)
 					{
@@ -550,7 +550,7 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				ShipData flagship = KCDatabase.Instance.Ships[_members[0]];
+				ShipData flagship = KCDatabase.Instance.Ships[this._members[0]];
 				return flagship != null && flagship.MasterShip.ShipType == ShipTypes.RepairShip;
 			}
 		}
@@ -563,13 +563,13 @@ namespace ElectronicObserver.Data
 			get
 			{
 				// 流石に資源チェックまではしない
-				var flagship = KCDatabase.Instance.Ships[_members[0]];
+				var flagship = KCDatabase.Instance.Ships[this._members[0]];
 
-				return IsFlagshipRepairShip &&
+				return this.IsFlagshipRepairShip &&
 					flagship.HPRate > 0.5 &&
 					flagship.RepairingDockID == -1 &&
-					ExpeditionState == 0 &&
-					MembersInstance.Take(2 + flagship.SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility))
+                    this.ExpeditionState == 0 &&
+                    this.MembersInstance.Take(2 + flagship.SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility))
 					.Any(ship => ship != null && 0.5 < ship.HPRate && ship.HPRate < 1.0 && ship.RepairingDockID == -1);
 			}
 		}
@@ -582,20 +582,20 @@ namespace ElectronicObserver.Data
 
 		public void UpdateConditionTime()
 		{
-			var ships = MembersInstance.Where(ship => ship != null && ship.Condition < Utility.Configuration.Config.Control.ConditionBorder);
+			var ships = this.MembersInstance.Where(ship => ship != null && ship.Condition < Utility.Configuration.Config.Control.ConditionBorder);
 			if (!ships.Any())
 			{
-				ConditionTime = null;
+                this.ConditionTime = null;
 
 			}
 			else
 			{
-				ConditionTime = KCDatabase.Instance.Fleet.CalculateConditionHealingEstimation(Utility.Configuration.Config.Control.ConditionBorder - ships.Min(ship => ship.Condition));
+                this.ConditionTime = KCDatabase.Instance.Fleet.CalculateConditionHealingEstimation(Utility.Configuration.Config.Control.ConditionBorder - ships.Min(ship => ship.Condition));
 			}
 		}
 
 
-		public override string ToString() => $"[{FleetID}] {Name}";
+		public override string ToString() => $"[{this.FleetID}] {this.Name}";
 
 	}
 

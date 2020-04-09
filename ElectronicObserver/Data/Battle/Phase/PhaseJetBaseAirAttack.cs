@@ -27,39 +27,39 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 				if (index == -1)
 				{
-					AirAttackIndex = 0;
-					AirBattleData = data.RawData.api_air_base_injection;
+                    this.AirAttackIndex = 0;
+                    this.AirBattleData = data.RawData.api_air_base_injection;
 				}
 				else
 				{
-					AirAttackIndex = index;
-					AirBattleData = data.RawData.api_air_base_injection[index];
+                    this.AirAttackIndex = index;
+                    this.AirBattleData = data.RawData.api_air_base_injection[index];
 				}
 
-				if (AirBattleData != null)
+				if (this.AirBattleData != null)
 				{
-					StageFlag = new int[] {
-						AirBattleData.api_stage1() ? 1 : 0,
-						AirBattleData.api_stage2() ? 1 : 0,
-						AirBattleData.api_stage3() ? 1 : 0,
+                    this.StageFlag = new int[] {
+                        this.AirBattleData.api_stage1() ? 1 : 0,
+                        this.AirBattleData.api_stage2() ? 1 : 0,
+                        this.AirBattleData.api_stage3() ? 1 : 0,
 					};
 				}
 
-				_squadrons = GetSquadrons().ToArray();
+                this._squadrons = this.GetSquadrons().ToArray();
 
-				TorpedoFlags = ConcatStage3Array<int>("api_frai_flag", "api_erai_flag");
-				BomberFlags = ConcatStage3Array<int>("api_fbak_flag", "api_ebak_flag");
-				Criticals = ConcatStage3Array<int>("api_fcl_flag", "api_ecl_flag");
-				Damages = ConcatStage3Array<double>("api_fdam", "api_edam");
+                this.TorpedoFlags = this.ConcatStage3Array<int>("api_frai_flag", "api_erai_flag");
+                this.BomberFlags = this.ConcatStage3Array<int>("api_fbak_flag", "api_ebak_flag");
+                this.Criticals = this.ConcatStage3Array<int>("api_fcl_flag", "api_ecl_flag");
+                this.Damages = this.ConcatStage3Array<double>("api_fdam", "api_edam");
 			}
 
 
 			public override void EmulateBattle(int[] hps, int[] damages)
 			{
 
-				if (!IsAvailable) return;
+				if (!this.IsAvailable) return;
 
-				CalculateAttack(AirAttackIndex + 1, hps);
+                this.CalculateAttack(this.AirAttackIndex + 1, hps);
 			}
 
 
@@ -73,11 +73,11 @@ namespace ElectronicObserver.Data.Battle.Phase
 			/// <summary>
 			/// 参加した航空中隊データ
 			/// </summary>
-			public ReadOnlyCollection<BattleBaseAirCorpsSquadron> Squadrons => Array.AsReadOnly(_squadrons);
+			public ReadOnlyCollection<BattleBaseAirCorpsSquadron> Squadrons => Array.AsReadOnly(this._squadrons);
 
 			private IEnumerable<BattleBaseAirCorpsSquadron> GetSquadrons()
 			{
-				foreach (dynamic d in AirBattleData.api_air_base_data)
+				foreach (dynamic d in this.AirBattleData.api_air_base_data)
 					yield return new BattleBaseAirCorpsSquadron(d);
 			}
 
@@ -89,26 +89,26 @@ namespace ElectronicObserver.Data.Battle.Phase
 			: base(data, title)
 		{
 
-			AirAttackUnits = new List<PhaseJetBaseAirAttackUnit>();
+            this.AirAttackUnits = new List<PhaseJetBaseAirAttackUnit>();
 
-			if (!IsAvailable)
+			if (!this.IsAvailable)
 				return;
 
 
-			dynamic attackData = RawData.api_air_base_injection;
+			dynamic attackData = this.RawData.api_air_base_injection;
 			if (attackData.IsArray)
 			{
 				int i = 0;
-				foreach (var unit in RawData.api_air_base_injection)
+				foreach (var unit in this.RawData.api_air_base_injection)
 				{
-					AirAttackUnits.Add(new PhaseJetBaseAirAttackUnit(data, title, i));
+                    this.AirAttackUnits.Add(new PhaseJetBaseAirAttackUnit(data, title, i));
 					i++;
 				}
 
 			}
 			else if (attackData.IsObject)
 			{
-				AirAttackUnits.Add(new PhaseJetBaseAirAttackUnit(data, title, -1));
+                this.AirAttackUnits.Add(new PhaseJetBaseAirAttackUnit(data, title, -1));
 			}
 		}
 
@@ -120,16 +120,16 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 
 
-		public override bool IsAvailable => RawData.api_air_base_injection();
+		public override bool IsAvailable => this.RawData.api_air_base_injection();
 
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
 
-			if (!IsAvailable)
+			if (!this.IsAvailable)
 				return;
 
-			foreach (var a in AirAttackUnits)
+			foreach (var a in this.AirAttackUnits)
 			{
 
 				a.EmulateBattle(hps, damages);
@@ -139,7 +139,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		protected override IEnumerable<BattleDetail> SearchBattleDetails(int index)
 		{
-			return AirAttackUnits.SelectMany(p => p.BattleDetails).Where(d => d.DefenderIndex == index);
+			return this.AirAttackUnits.SelectMany(p => p.BattleDetails).Where(d => d.DefenderIndex == index);
 		}
 	}
 }

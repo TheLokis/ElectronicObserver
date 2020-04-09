@@ -17,17 +17,17 @@ namespace Browser.CefOp
         public ScreenShotPacket() : this("ss_" + Guid.NewGuid().ToString("N")) { }
         public ScreenShotPacket(string id)
         {
-            ID = id;
-            TaskSource = new TaskCompletionSource<ScreenShotPacket>();
+            this.ID = id;
+            this.TaskSource = new TaskCompletionSource<ScreenShotPacket>();
         }
 
         public void Complete(string dataurl)
         {
-            DataUrl = dataurl;
-            TaskSource.SetResult(this);
+            this.DataUrl = dataurl;
+            this.TaskSource.SetResult(this);
         }
 
-        public Bitmap GetImage() => ConvertToImage(DataUrl);
+        public Bitmap GetImage() => ConvertToImage(this.DataUrl);
 
 
         public static Bitmap ConvertToImage(string dataurl)

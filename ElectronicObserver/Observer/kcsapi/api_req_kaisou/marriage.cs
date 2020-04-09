@@ -21,11 +21,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
             var ship = db.Ships[id];
 
             if (ship != null)
-                ship.LoadFromResponse(APIName, data);
+                ship.LoadFromResponse(this.APIName, data);
             else
             {
                 var a = new ShipData();
-                a.LoadFromResponse(APIName, data);
+                a.LoadFromResponse(this.APIName, data);
                 db.Ships.Add(a);
             }
 

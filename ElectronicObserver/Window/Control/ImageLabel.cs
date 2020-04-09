@@ -25,16 +25,16 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				if (Image != null)
-					return Image.Size;
+				if (this.Image != null)
+					return this.Image.Size;
 				else
-					return _imageSize;
+					return this._imageSize;
 			}
 			set
 			{
-				_imageSize = value;
-				AdjustSize();
-				Invalidate();
+                this._imageSize = value;
+                this.AdjustSize();
+                this.Invalidate();
 			}
 		}
 
@@ -43,12 +43,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("イメージとラベルの間のスペースを指定します。")]
 		public int ImageMargin
 		{
-			get { return _imageMargin; }
+			get { return this._imageMargin; }
 			set
 			{
-				_imageMargin = value;
-				AdjustSize();
-				Invalidate();
+                this._imageMargin = value;
+                this.AdjustSize();
+                this.Invalidate();
 			}
 		}
 
@@ -57,12 +57,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("幅を超えるテキストを折り返すかを指定します。")]
 		public bool AutoWrap
 		{
-			get { return _autoWrap; }
+			get { return this._autoWrap; }
 			set
 			{
-				_autoWrap = value;
-				_measureTextCache = null;
-				Invalidate();
+                this._autoWrap = value;
+                this._measureTextCache = null;
+                this.Invalidate();
 			}
 		}
 
@@ -72,7 +72,7 @@ namespace ElectronicObserver.Window.Control
 			get { return base.AutoEllipsis; }
 			set
 			{
-				_measureTextCache = null;
+                this._measureTextCache = null;
 				base.AutoEllipsis = value;
 			}
 		}
@@ -83,7 +83,7 @@ namespace ElectronicObserver.Window.Control
 			get { return base.TextAlign; }
 			set
 			{
-				_measureTextCache = null;
+                this._measureTextCache = null;
 				base.TextAlign = value;
 			}
 		}
@@ -95,7 +95,7 @@ namespace ElectronicObserver.Window.Control
 			set
 			{
 				base.ImageAlign = value;
-				AdjustSize();
+                this.AdjustSize();
 			}
 		}
 
@@ -105,9 +105,9 @@ namespace ElectronicObserver.Window.Control
 			get { return base.UseMnemonic; }
 			set
 			{
-				_measureTextCache = null;
+                this._measureTextCache = null;
 				base.UseMnemonic = value;
-				AdjustSize();
+                this.AdjustSize();
 			}
 		}
 
@@ -118,7 +118,7 @@ namespace ElectronicObserver.Window.Control
 			set
 			{
 				base.Image = value;
-				AdjustSize();
+                this.AdjustSize();
 			}
 		}
 
@@ -131,7 +131,7 @@ namespace ElectronicObserver.Window.Control
 				bool checkon = !base.AutoSize && value;
 				base.AutoSize = value;
 				if (checkon)
-					AdjustSize();
+                    this.AdjustSize();
 			}
 		}
 
@@ -148,7 +148,7 @@ namespace ElectronicObserver.Window.Control
 			set
 			{
 				base.BorderStyle = value;
-				AdjustSize();
+                this.AdjustSize();
 			}
 		}
 
@@ -158,7 +158,7 @@ namespace ElectronicObserver.Window.Control
 			set
 			{
 				base.MinimumSize = value;
-				AdjustSize();
+                this.AdjustSize();
 			}
 		}
 
@@ -168,49 +168,49 @@ namespace ElectronicObserver.Window.Control
 			set
 			{
 				base.MaximumSize = value;
-				AdjustSize();
+                this.AdjustSize();
 			}
 		}
 
 
 
 		private Size? _measureTextCache = null;
-		private Size MeasureTextCache => _measureTextCache ?? (Size)(_measureTextCache = TextRenderer.MeasureText(Text, Font, new Size(int.MaxValue, int.MaxValue), GetTextFormat()));
+		private Size MeasureTextCache => this._measureTextCache ?? (Size)(this._measureTextCache = TextRenderer.MeasureText(this.Text, this.Font, new Size(int.MaxValue, int.MaxValue), this.GetTextFormat()));
 
 
 		private Size? _preferredSizeCache = null;
-		private Size PreferredSizeCache => _preferredSizeCache ?? (Size)(_preferredSizeCache = GetPreferredSize(Size));
+		private Size PreferredSizeCache => this._preferredSizeCache ?? (Size)(this._preferredSizeCache = this.GetPreferredSize(this.Size));
 
 
 
 		public ImageLabel()
 			: base()
 		{
-			TextAlign = ContentAlignment.MiddleLeft;
-			ImageAlign = ContentAlignment.MiddleLeft;
-			UseMnemonic = false;
-			AutoSize = true;
-			Margin = new Padding(3);
+            this.TextAlign = ContentAlignment.MiddleLeft;
+            this.ImageAlign = ContentAlignment.MiddleLeft;
+            this.UseMnemonic = false;
+            this.AutoSize = true;
+            this.Margin = new Padding(3);
 		}
 
 
 		protected override void OnTextChanged(EventArgs e)
 		{
-			_measureTextCache = null;
-			AdjustSize();
+            this._measureTextCache = null;
+            this.AdjustSize();
 			base.OnTextChanged(e);
 		}
 
 		protected override void OnFontChanged(EventArgs e)
 		{
-			_measureTextCache = null;
-			AdjustSize();
+            this._measureTextCache = null;
+            this.AdjustSize();
 			base.OnFontChanged(e);
 		}
 
 		protected override void OnPaddingChanged(EventArgs e)
 		{
-			AdjustSize();
+            this.AdjustSize();
 			base.OnPaddingChanged(e);
 		}
 
@@ -218,28 +218,28 @@ namespace ElectronicObserver.Window.Control
 
 		public void AdjustSize()
 		{
-			if (AutoSize)
+			if (this.AutoSize)
 			{
-				_preferredSizeCache = null;
-				Size = PreferredSizeCache;
+                this._preferredSizeCache = null;
+                this.Size = this.PreferredSizeCache;
 			}
 		}
 
 		public Size GetPreferredSize()
 		{
 
-			if (_preferredSizeCache != null)
-				return (Size)PreferredSizeCache;
+			if (this._preferredSizeCache != null)
+				return (Size)this.PreferredSizeCache;
 
 			// size - clientsize は border の調整用
-			Size ret = new Size(Padding.Horizontal, Padding.Vertical) + (Size - ClientSize);
+			Size ret = new Size(this.Padding.Horizontal, this.Padding.Vertical) + (this.Size - this.ClientSize);
 
-			Size sz_text = MeasureTextCache;
+			Size sz_text = this.MeasureTextCache;
 
-			if (!string.IsNullOrEmpty(Text))
-				sz_text.Width -= (int)(Font.Size / 2);
+			if (!string.IsNullOrEmpty(this.Text))
+				sz_text.Width -= (int)(this.Font.Size / 2);
 
-			switch (ImageAlign)
+			switch (this.ImageAlign)
 			{
 				case ContentAlignment.TopLeft:
 				case ContentAlignment.MiddleLeft:
@@ -247,19 +247,19 @@ namespace ElectronicObserver.Window.Control
 				case ContentAlignment.TopRight:
 				case ContentAlignment.MiddleRight:
 				case ContentAlignment.BottomRight:
-					ret.Width += ImageSize.Width + ImageMargin + sz_text.Width;
-					ret.Height += Math.Max(ImageSize.Height, sz_text.Height);
+					ret.Width += this.ImageSize.Width + this.ImageMargin + sz_text.Width;
+					ret.Height += Math.Max(this.ImageSize.Height, sz_text.Height);
 					break;
 
 				case ContentAlignment.TopCenter:
 				case ContentAlignment.BottomCenter:
-					ret.Width += Math.Max(ImageSize.Width, sz_text.Width);
-					ret.Height += ImageSize.Height + ImageMargin + sz_text.Height;
+					ret.Width += Math.Max(this.ImageSize.Width, sz_text.Width);
+					ret.Height += this.ImageSize.Height + this.ImageMargin + sz_text.Height;
 					break;
 
 				case ContentAlignment.MiddleCenter:
-					ret.Width += Math.Max(ImageSize.Width, sz_text.Width);
-					ret.Height += Math.Max(ImageSize.Height, sz_text.Height);
+					ret.Width += Math.Max(this.ImageSize.Width, sz_text.Width);
+					ret.Height += Math.Max(this.ImageSize.Height, sz_text.Height);
 					break;
 
 			}
@@ -269,16 +269,16 @@ namespace ElectronicObserver.Window.Control
 
 		public override Size GetPreferredSize(Size proposedSize)
 		{
-			var size = GetPreferredSize();
-			if (!MaximumSize.IsEmpty)
+			var size = this.GetPreferredSize();
+			if (!this.MaximumSize.IsEmpty)
 			{
-				size.Width = Math.Min(MaximumSize.Width, size.Width);
-				size.Height = Math.Min(MaximumSize.Height, size.Height);
+				size.Width = Math.Min(this.MaximumSize.Width, size.Width);
+				size.Height = Math.Min(this.MaximumSize.Height, size.Height);
 			}
-			if (!MinimumSize.IsEmpty)
+			if (!this.MinimumSize.IsEmpty)
 			{
-				size.Width = Math.Max(MinimumSize.Width, size.Width);
-				size.Height = Math.Max(MinimumSize.Height, size.Height);
+				size.Width = Math.Max(this.MinimumSize.Width, size.Width);
+				size.Height = Math.Max(this.MinimumSize.Height, size.Height);
 			}
 			return size;
 		}
@@ -289,14 +289,14 @@ namespace ElectronicObserver.Window.Control
 
 			TextFormatFlags textformat = TextFormatFlags.NoPadding;
 
-			if (AutoWrap)
+			if (this.AutoWrap)
 				textformat |= TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak;
-			if (AutoEllipsis)
+			if (this.AutoEllipsis)
 				textformat |= TextFormatFlags.EndEllipsis;
-			if (!UseMnemonic)
+			if (!this.UseMnemonic)
 				textformat |= TextFormatFlags.NoPrefix;
 
-			switch (TextAlign)
+			switch (this.TextAlign)
 			{
 				case ContentAlignment.TopLeft:
 					textformat |= TextFormatFlags.Top | TextFormatFlags.Left; break;
@@ -325,27 +325,27 @@ namespace ElectronicObserver.Window.Control
 		private Rectangle GetTextArea(Rectangle area)
 		{
 
-			switch (ImageAlign)
+			switch (this.ImageAlign)
 			{
 				case ContentAlignment.TopLeft:
 				case ContentAlignment.MiddleLeft:
 				case ContentAlignment.BottomLeft:
-					area.X += ImageSize.Width + ImageMargin;
-					area.Width -= ImageSize.Width + ImageMargin;
+					area.X += this.ImageSize.Width + this.ImageMargin;
+					area.Width -= this.ImageSize.Width + this.ImageMargin;
 					break;
 
 				case ContentAlignment.TopRight:
 				case ContentAlignment.MiddleRight:
 				case ContentAlignment.BottomRight:
-					area.Width -= ImageSize.Width + ImageMargin;
+					area.Width -= this.ImageSize.Width + this.ImageMargin;
 					break;
 
 				case ContentAlignment.TopCenter:
-					area.Y += ImageSize.Height + ImageMargin;
-					area.Height -= ImageSize.Height + ImageMargin;
+					area.Y += this.ImageSize.Height + this.ImageMargin;
+					area.Height -= this.ImageSize.Height + this.ImageMargin;
 					break;
 				case ContentAlignment.BottomCenter:
-					area.Height -= ImageSize.Height + ImageMargin;
+					area.Height -= this.ImageSize.Height + this.ImageMargin;
 					break;
 
 				case ContentAlignment.MiddleCenter:
@@ -358,12 +358,12 @@ namespace ElectronicObserver.Window.Control
 		protected override void OnPaint(PaintEventArgs e)
 		{
 
-			Rectangle basearea = new Rectangle(Padding.Left, Padding.Top, ClientSize.Width - Padding.Horizontal, ClientSize.Height - Padding.Vertical);
+			Rectangle basearea = new Rectangle(this.Padding.Left, this.Padding.Top, this.ClientSize.Width - this.Padding.Horizontal, this.ClientSize.Height - this.Padding.Vertical);
 			//e.Graphics.DrawRectangle( Pens.Magenta, basearea.X, basearea.Y, basearea.Width - 1, basearea.Height - 1 );
 
-			Rectangle imagearea = new Rectangle(basearea.X, basearea.Y, ImageSize.Width, ImageSize.Height);
+			Rectangle imagearea = new Rectangle(basearea.X, basearea.Y, this.ImageSize.Width, this.ImageSize.Height);
 
-			switch (ImageAlign)
+			switch (this.ImageAlign)
 			{
 				case ContentAlignment.TopLeft:
 					break;
@@ -400,33 +400,33 @@ namespace ElectronicObserver.Window.Control
 			}
 
 
-			if (Image != null)
+			if (this.Image != null)
 			{
-				if (Enabled)
-					e.Graphics.DrawImage(Image, imagearea);
+				if (this.Enabled)
+					e.Graphics.DrawImage(this.Image, imagearea);
 				else
-					ControlPaint.DrawImageDisabled(e.Graphics, Image, imagearea.X, imagearea.Y, BackColor);
+					ControlPaint.DrawImageDisabled(e.Graphics, this.Image, imagearea.X, imagearea.Y, this.BackColor);
 
 				//e.Graphics.DrawRectangle( Pens.Orange, imagearea.X, imagearea.Y, imagearea.Width - 1, imagearea.Height - 1 );
 			}
 
 
 			Color textcolor;
-			if (Enabled)
+			if (this.Enabled)
 			{
-				textcolor = ForeColor;
+				textcolor = this.ForeColor;
 			}
 			else
 			{
-				if (BackColor.GetBrightness() < SystemColors.Control.GetBrightness())
-					textcolor = ControlPaint.Dark(BackColor);
+				if (this.BackColor.GetBrightness() < SystemColors.Control.GetBrightness())
+					textcolor = ControlPaint.Dark(this.BackColor);
 				else
 					textcolor = SystemColors.ControlDark;
 			}
 
-			var textarea = GetTextArea(basearea);
+			var textarea = this.GetTextArea(basearea);
 			//e.Graphics.DrawRectangle( Pens.Orange, textrect.X, textrect.Y, textrect.Width - 1, textrect.Height - 1 );
-			TextRenderer.DrawText(e.Graphics, Text, Font, textarea, textcolor, GetTextFormat());
+			TextRenderer.DrawText(e.Graphics, this.Text, this.Font, textarea, textcolor, this.GetTextFormat());
 
 			//base.OnPaint( e );
 		}

@@ -19,7 +19,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_air_corps
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			_aircorpsID = BaseAirCorpsData.GetID(data);
+            this._aircorpsID = BaseAirCorpsData.GetID(data);
 
 			base.OnRequestReceived(data);
 		}
@@ -29,11 +29,17 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_air_corps
 
 			var corps = KCDatabase.Instance.BaseAirCorps;
 
-			if (corps.ContainsKey(_aircorpsID))
-				corps[_aircorpsID].LoadFromResponse(APIName, data);
+			if (corps.ContainsKey(this._aircorpsID))
+				corps[this._aircorpsID].LoadFromResponse(this.APIName, data);
 
+            if (data.api_after_bauxite())
+            {
+                var db = KCDatabase.Instance;
+                int consumed = db.Material.Bauxite - (int)data.api_after_bauxite;
+                Utility.Logger.Add(2, $"기지 항공대 편성 비용으로 보크사이트 {consumed} 를 소비했습니다.");
+            }
 
-			KCDatabase.Instance.Material.LoadFromResponse(APIName, data);
+            KCDatabase.Instance.Material.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}

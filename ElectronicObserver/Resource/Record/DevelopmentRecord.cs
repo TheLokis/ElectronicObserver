@@ -82,27 +82,27 @@ namespace ElectronicObserver.Resource.Record
 
 			public DevelopmentElement()
 			{
-				EquipmentID = -1;
-				Date = DateTime.Now;
+                this.EquipmentID = -1;
+                this.Date = DateTime.Now;
 			}
 
 			public DevelopmentElement(string line)
 				: this()
 			{
-				LoadLine(line);
+                this.LoadLine(line);
 			}
 
 			public DevelopmentElement(int equipmentID, int fuel, int ammo, int steel, int bauxite, int flagshipID, int hqLevel)
 			{
-				EquipmentID = equipmentID;
-				Fuel = fuel;
-				Ammo = ammo;
-				Steel = steel;
-				Bauxite = bauxite;
-				FlagshipID = flagshipID;
-				HQLevel = hqLevel;
+                this.EquipmentID = equipmentID;
+                this.Fuel = fuel;
+                this.Ammo = ammo;
+                this.Steel = steel;
+                this.Bauxite = bauxite;
+                this.FlagshipID = flagshipID;
+                this.HQLevel = hqLevel;
 
-				SetSubParameters();
+                this.SetSubParameters();
 			}
 
 
@@ -112,17 +112,17 @@ namespace ElectronicObserver.Resource.Record
 				string[] elem = CsvHelper.ParseCsvLine(line).ToArray();
                 if (elem.Length < 11) throw new ArgumentException("요소 수가 너무 적습니다.");
 
-				EquipmentID = int.Parse(elem[0]);
-				EquipmentName = elem[1];
-				Date = DateTimeHelper.CSVStringToTime(elem[2]);
-				Fuel = int.Parse(elem[3]);
-				Ammo = int.Parse(elem[4]);
-				Steel = int.Parse(elem[5]);
-				Bauxite = int.Parse(elem[6]);
-				FlagshipID = int.Parse(elem[7]);
-				FlagshipName = elem[8];
-				FlagshipType = int.Parse(elem[9]);
-				HQLevel = int.Parse(elem[10]);
+                this.EquipmentID = int.Parse(elem[0]);
+                this.EquipmentName = elem[1];
+                this.Date = DateTimeHelper.CSVStringToTime(elem[2]);
+                this.Fuel = int.Parse(elem[3]);
+                this.Ammo = int.Parse(elem[4]);
+                this.Steel = int.Parse(elem[5]);
+                this.Bauxite = int.Parse(elem[6]);
+                this.FlagshipID = int.Parse(elem[7]);
+                this.FlagshipName = elem[8];
+                this.FlagshipType = int.Parse(elem[9]);
+                this.HQLevel = int.Parse(elem[10]);
 
 			}
 
@@ -130,17 +130,17 @@ namespace ElectronicObserver.Resource.Record
 			{
 
 				return string.Join(",",
-					EquipmentID,
-                    CsvHelper.EscapeCsvCell(EquipmentName),
-                    DateTimeHelper.TimeToCSVString(Date),
-					Fuel,
-					Ammo,
-					Steel,
-					Bauxite,
-					FlagshipID,
-                    CsvHelper.EscapeCsvCell(FlagshipName),
-                    FlagshipType,
-					HQLevel);
+                    this.EquipmentID,
+                    CsvHelper.EscapeCsvCell(this.EquipmentName),
+                    DateTimeHelper.TimeToCSVString(this.Date),
+                    this.Fuel,
+                    this.Ammo,
+                    this.Steel,
+                    this.Bauxite,
+                    this.FlagshipID,
+                    CsvHelper.EscapeCsvCell(this.FlagshipName),
+                    this.FlagshipType,
+                    this.HQLevel);
 			}
 
 			/// <summary>
@@ -148,13 +148,13 @@ namespace ElectronicObserver.Resource.Record
 			/// </summary>
 			public void SetSubParameters()
 			{
-				var eq = KCDatabase.Instance.MasterEquipments[EquipmentID];
-				var flagship = KCDatabase.Instance.MasterShips[FlagshipID];
+				var eq = KCDatabase.Instance.MasterEquipments[this.EquipmentID];
+				var flagship = KCDatabase.Instance.MasterShips[this.FlagshipID];
 
-				EquipmentName = EquipmentID == -1 ? "(실패)" :
+                this.EquipmentName = this.EquipmentID == -1 ? "(실패)" :
 					eq?.Name ?? "???";
-				FlagshipName = flagship?.NameWithClass ?? "???";
-				FlagshipType = (int?)flagship?.ShipType ?? -1;
+                this.FlagshipName = flagship?.NameWithClass ?? "???";
+                this.FlagshipType = (int?)flagship?.ShipType ?? -1;
 			}
 		}
 
@@ -167,19 +167,19 @@ namespace ElectronicObserver.Resource.Record
 
 		public DevelopmentRecord()
 		{
-			Record = new List<DevelopmentElement>();
+            this.Record = new List<DevelopmentElement>();
 		}
 
 		public override void RegisterEvents()
 		{
-            APIObserver.Instance["api_req_kousyou/createitem"].ResponseReceived += DevelopmentEnd;
+            APIObserver.Instance["api_req_kousyou/createitem"].ResponseReceived += this.DevelopmentEnd;
         }
 
 
 		public DevelopmentElement this[int i]
 		{
-			get { return Record[i]; }
-			set { Record[i] = value; }
+			get { return this.Record[i]; }
+			set { this.Record[i] = value; }
 		}
 
 
@@ -204,7 +204,7 @@ namespace ElectronicObserver.Resource.Record
                 };
 
                 element.SetSubParameters();
-                Record.Add(element);
+                this.Record.Add(element);
             }
         }
 
@@ -212,13 +212,13 @@ namespace ElectronicObserver.Resource.Record
 
 		protected override void LoadLine(string line)
 		{
-			Record.Add(new DevelopmentElement(line));
+            this.Record.Add(new DevelopmentElement(line));
 		}
 
 		protected override string SaveLinesAll()
 		{
 			var sb = new StringBuilder();
-			foreach (var elem in Record.OrderBy(r => r.Date))
+			foreach (var elem in this.Record.OrderBy(r => r.Date))
 			{
 				sb.AppendLine(elem.SaveLine());
 			}
@@ -228,7 +228,7 @@ namespace ElectronicObserver.Resource.Record
 		protected override string SaveLinesPartial()
 		{
 			var sb = new StringBuilder();
-			foreach (var elem in Record.Skip(LastSavedCount).OrderBy(r => r.Date))
+			foreach (var elem in this.Record.Skip(this.LastSavedCount).OrderBy(r => r.Date))
 			{
 				sb.AppendLine(elem.SaveLine());
 			}
@@ -237,17 +237,17 @@ namespace ElectronicObserver.Resource.Record
 
 		protected override void UpdateLastSavedIndex()
 		{
-			LastSavedCount = Record.Count;
+            this.LastSavedCount = this.Record.Count;
 		}
 
-		public override bool NeedToSave => LastSavedCount < Record.Count;
+		public override bool NeedToSave => this.LastSavedCount < this.Record.Count;
 
 		public override bool SupportsPartialSave => true;
 
 		protected override void ClearRecord()
 		{
-			Record.Clear();
-			LastSavedCount = 0;
+            this.Record.Clear();
+            this.LastSavedCount = 0;
 		}
 
 

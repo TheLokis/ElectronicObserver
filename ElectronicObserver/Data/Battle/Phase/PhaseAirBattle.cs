@@ -18,26 +18,26 @@ namespace ElectronicObserver.Data.Battle.Phase
 			: base(data, title)
 		{
 
-			AirBattleData = RawData.IsDefined("api_kouku" + suffix) ? RawData["api_kouku" + suffix] : null;
-			StageFlag = RawData.IsDefined("api_stage_flag" + suffix) ? (int[])RawData["api_stage_flag" + suffix] : null;
+            this.AirBattleData = this.RawData.IsDefined("api_kouku" + suffix) ? this.RawData["api_kouku" + suffix] : null;
+            this.StageFlag = this.RawData.IsDefined("api_stage_flag" + suffix) ? (int[])this.RawData["api_stage_flag" + suffix] : null;
 
-			LaunchedShipIndexFriend = GetLaunchedShipIndex(0);
-			LaunchedShipIndexEnemy = GetLaunchedShipIndex(1);
+            this.LaunchedShipIndexFriend = this.GetLaunchedShipIndex(0);
+            this.LaunchedShipIndexEnemy = this.GetLaunchedShipIndex(1);
 
-			TorpedoFlags = ConcatStage3Array<int>("api_frai_flag", "api_erai_flag");
-			BomberFlags = ConcatStage3Array<int>("api_fbak_flag", "api_ebak_flag");
-			Criticals = ConcatStage3Array<int>("api_fcl_flag", "api_ecl_flag");
-			Damages = ConcatStage3Array<double>("api_fdam", "api_edam");
+            this.TorpedoFlags = this.ConcatStage3Array<int>("api_frai_flag", "api_erai_flag");
+            this.BomberFlags = this.ConcatStage3Array<int>("api_fbak_flag", "api_ebak_flag");
+            this.Criticals = this.ConcatStage3Array<int>("api_fcl_flag", "api_ecl_flag");
+            this.Damages = this.ConcatStage3Array<double>("api_fdam", "api_edam");
 		}
 
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
 
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			CalculateAttack(0, hps);
-			CalculateAttackDamage(damages);
+            this.CalculateAttack(0, hps);
+            this.CalculateAttackDamage(damages);
 		}
 
 
@@ -52,11 +52,11 @@ namespace ElectronicObserver.Data.Battle.Phase
 			// 仮想火力を求め、それに従って合計ダメージを分配
 
 			var firepower = new int[12];
-			var launchedIndex = LaunchedShipIndexFriend;
+			var launchedIndex = this.LaunchedShipIndexFriend;
 			
 			foreach (int i in launchedIndex)
 			{
-				var ship = Battle.Initial.GetFriendShip(i);
+				var ship = this.Battle.Initial.GetFriendShip(i);
 
 				if (ship == null)
 					continue;
@@ -96,7 +96,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 			}
 
 			int totalFirepower = firepower.Sum();
-			int totalDamage = Damages.Select(dmg => (int)dmg).Skip(12).Take(12).Sum();
+			int totalDamage = this.Damages.Select(dmg => (int)dmg).Skip(12).Take(12).Sum();
 
 			for (int i = 0; i < firepower.Length; i++)
 			{
@@ -106,7 +106,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		protected override IEnumerable<BattleDetail> SearchBattleDetails(int index)
 		{
-			return BattleDetails.Where(d => d.DefenderIndex == index);
+			return this.BattleDetails.Where(d => d.DefenderIndex == index);
 		}
 
 	}

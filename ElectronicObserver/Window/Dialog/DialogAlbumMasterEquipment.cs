@@ -25,69 +25,69 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogAlbumMasterEquipment()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			TitleFirepower.ImageList =
-			TitleTorpedo.ImageList =
-			TitleAA.ImageList =
-			TitleArmor.ImageList =
-			TitleASW.ImageList =
-			TitleEvasion.ImageList =
-			TitleLOS.ImageList =
-			TitleAccuracy.ImageList =
-			TitleBomber.ImageList =
-			TitleSpeed.ImageList =
-			TitleRange.ImageList =
-			TitleAircraftCost.ImageList =
-			TitleAircraftDistance.ImageList =
-			Rarity.ImageList =
-			MaterialFuel.ImageList =
-			MaterialAmmo.ImageList =
-			MaterialSteel.ImageList =
-			MaterialBauxite.ImageList =
+            this.TitleFirepower.ImageList =
+            this.TitleTorpedo.ImageList =
+            this.TitleAA.ImageList =
+            this.TitleArmor.ImageList =
+            this.TitleASW.ImageList =
+            this.TitleEvasion.ImageList =
+            this.TitleLOS.ImageList =
+            this.TitleAccuracy.ImageList =
+            this.TitleBomber.ImageList =
+            this.TitleSpeed.ImageList =
+            this.TitleRange.ImageList =
+            this.TitleAircraftCost.ImageList =
+            this.TitleAircraftDistance.ImageList =
+            this.Rarity.ImageList =
+            this.MaterialFuel.ImageList =
+            this.MaterialAmmo.ImageList =
+            this.MaterialSteel.ImageList =
+            this.MaterialBauxite.ImageList =
 				ResourceManager.Instance.Icons;
 
-			EquipmentType.ImageList = ResourceManager.Instance.Equipments;
+            this.EquipmentType.ImageList = ResourceManager.Instance.Equipments;
 
-			TitleFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
-			TitleTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
-			TitleAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
-			TitleArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
-			TitleASW.ImageIndex = (int)ResourceManager.IconContent.ParameterASW;
-			TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
-			TitleLOS.ImageIndex = (int)ResourceManager.IconContent.ParameterLOS;
-			TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAccuracy;
-			TitleBomber.ImageIndex = (int)ResourceManager.IconContent.ParameterBomber;
-			TitleSpeed.ImageIndex = (int)ResourceManager.IconContent.ParameterSpeed;
-			TitleRange.ImageIndex = (int)ResourceManager.IconContent.ParameterRange;
-			TitleAircraftCost.ImageIndex = (int)ResourceManager.IconContent.ParameterAircraftCost;
-			TitleAircraftDistance.ImageIndex = (int)ResourceManager.IconContent.ParameterAircraftDistance;
-			MaterialFuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-			MaterialAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			MaterialSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-			MaterialBauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
-
-
-			BasePanelEquipment.Visible = false;
+            this.TitleFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
+            this.TitleTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
+            this.TitleAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
+            this.TitleArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
+            this.TitleASW.ImageIndex = (int)ResourceManager.IconContent.ParameterASW;
+            this.TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
+            this.TitleLOS.ImageIndex = (int)ResourceManager.IconContent.ParameterLOS;
+            this.TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAccuracy;
+            this.TitleBomber.ImageIndex = (int)ResourceManager.IconContent.ParameterBomber;
+            this.TitleSpeed.ImageIndex = (int)ResourceManager.IconContent.ParameterSpeed;
+            this.TitleRange.ImageIndex = (int)ResourceManager.IconContent.ParameterRange;
+            this.TitleAircraftCost.ImageIndex = (int)ResourceManager.IconContent.ParameterAircraftCost;
+            this.TitleAircraftDistance.ImageIndex = (int)ResourceManager.IconContent.ParameterAircraftDistance;
+            this.MaterialFuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
+            this.MaterialAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
+            this.MaterialSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
+            this.MaterialBauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
 
 
-			ControlHelper.SetDoubleBuffered(TableEquipmentName);
-			ControlHelper.SetDoubleBuffered(TableParameterMain);
-			ControlHelper.SetDoubleBuffered(TableParameterSub);
-			ControlHelper.SetDoubleBuffered(TableArsenal);
-
-			ControlHelper.SetDoubleBuffered(EquipmentView);
+            this.BasePanelEquipment.Visible = false;
 
 
-			//Initialize EquipmentView
-			EquipmentView.SuspendLayout();
+			ControlHelper.SetDoubleBuffered(this.TableEquipmentName);
+			ControlHelper.SetDoubleBuffered(this.TableParameterMain);
+			ControlHelper.SetDoubleBuffered(this.TableParameterSub);
+			ControlHelper.SetDoubleBuffered(this.TableArsenal);
 
-			EquipmentView_ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-			EquipmentView_Icon.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-			//EquipmentView_Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+			ControlHelper.SetDoubleBuffered(this.EquipmentView);
 
 
-			EquipmentView.Rows.Clear();
+            //Initialize EquipmentView
+            this.EquipmentView.SuspendLayout();
+
+            this.EquipmentView_ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.EquipmentView_Icon.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            //EquipmentView_Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+
+            this.EquipmentView.Rows.Clear();
 
 			List<DataGridViewRow> rows = new List<DataGridViewRow>(KCDatabase.Instance.MasterEquipments.Values.Count(s => s.Name != "なし"));
 
@@ -97,19 +97,19 @@ namespace ElectronicObserver.Window.Dialog
 				if (eq.Name == "なし") continue;
 
 				DataGridViewRow row = new DataGridViewRow();
-				row.CreateCells(EquipmentView);
-				row.SetValues(eq.EquipmentID, eq.IconType, FormMain.Instance.Translator.GetTranslation(eq.CategoryTypeInstance.Name, Utility.TranslationType.EquipmentType), eq.Name);
+				row.CreateCells(this.EquipmentView);
+				row.SetValues(eq.EquipmentID, eq.IconType, FormMain.Instance.Translator.GetTranslation(eq.CategoryTypeInstance.Name, Utility.DataType.EquipmentType), eq.Name);
 				rows.Add(row);
 
 			}
-			EquipmentView.Rows.AddRange(rows.ToArray());
+            this.EquipmentView.Rows.AddRange(rows.ToArray());
 
-			EquipmentView_ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-			EquipmentView_Icon.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-			//EquipmentView_Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.EquipmentView_ID.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.EquipmentView_Icon.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            //EquipmentView_Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
-			EquipmentView.Sort(EquipmentView_ID, ListSortDirection.Ascending);
-			EquipmentView.ResumeLayout();
+            this.EquipmentView.Sort(this.EquipmentView_ID, ListSortDirection.Ascending);
+            this.EquipmentView.ResumeLayout();
 
 		}
 
@@ -117,14 +117,14 @@ namespace ElectronicObserver.Window.Dialog
 			: this()
 		{
 
-			UpdateAlbumPage(equipmentID);
+            this.UpdateAlbumPage(equipmentID);
 
 
 			if (KCDatabase.Instance.MasterEquipments.ContainsKey(equipmentID))
 			{
-				var row = EquipmentView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[EquipmentView_ID.Index].Value == equipmentID);
+				var row = this.EquipmentView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[this.EquipmentView_ID.Index].Value == equipmentID);
 				if (row != null)
-					EquipmentView.FirstDisplayedScrollingRowIndex = row.Index;
+                    this.EquipmentView.FirstDisplayedScrollingRowIndex = row.Index;
 			}
 		}
 
@@ -143,11 +143,11 @@ namespace ElectronicObserver.Window.Dialog
 		private void EquipmentView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
 		{
 
-			if (e.Column.Name == EquipmentView_Type.Name)
+			if (e.Column.Name == this.EquipmentView_Type.Name)
 			{
 				e.SortResult =
-					KCDatabase.Instance.MasterEquipments[(int)EquipmentView.Rows[e.RowIndex1].Cells[0].Value].EquipmentType[2] -
-					KCDatabase.Instance.MasterEquipments[(int)EquipmentView.Rows[e.RowIndex2].Cells[0].Value].EquipmentType[2];
+					KCDatabase.Instance.MasterEquipments[(int)this.EquipmentView.Rows[e.RowIndex1].Cells[0].Value].EquipmentType[2] -
+					KCDatabase.Instance.MasterEquipments[(int)this.EquipmentView.Rows[e.RowIndex2].Cells[0].Value].EquipmentType[2];
 			}
 			else
 			{
@@ -156,7 +156,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.SortResult == 0)
 			{
-				e.SortResult = (int)(EquipmentView.Rows[e.RowIndex1].Tag ?? 0) - (int)(EquipmentView.Rows[e.RowIndex2].Tag ?? 0);
+				e.SortResult = (int)(this.EquipmentView.Rows[e.RowIndex1].Tag ?? 0) - (int)(this.EquipmentView.Rows[e.RowIndex2].Tag ?? 0);
 			}
 
 			e.Handled = true;
@@ -165,9 +165,9 @@ namespace ElectronicObserver.Window.Dialog
 		private void EquipmentView_Sorted(object sender, EventArgs e)
 		{
 
-			for (int i = 0; i < EquipmentView.Rows.Count; i++)
+			for (int i = 0; i < this.EquipmentView.Rows.Count; i++)
 			{
-				EquipmentView.Rows[i].Tag = i;
+                this.EquipmentView.Rows[i].Tag = i;
 			}
 		}
 
@@ -175,7 +175,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void EquipmentView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 
-			if (e.ColumnIndex == EquipmentView_Icon.Index)
+			if (e.ColumnIndex == this.EquipmentView_Icon.Index)
 			{
 				e.Value = ResourceManager.GetEquipmentImage((int)e.Value);
 				e.FormattingApplied = true;
@@ -190,18 +190,18 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.RowIndex >= 0)
 			{
-				int equipmentID = (int)EquipmentView.Rows[e.RowIndex].Cells[0].Value;
+				int equipmentID = (int)this.EquipmentView.Rows[e.RowIndex].Cells[0].Value;
 
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
 				{
-					Cursor = Cursors.AppStarting;
-					new DialogAlbumMasterEquipment(equipmentID).Show(Owner);
-					Cursor = Cursors.Default;
+                    this.Cursor = Cursors.AppStarting;
+					new DialogAlbumMasterEquipment(equipmentID).Show(this.Owner);
+                    this.Cursor = Cursors.Default;
 
 				}
 				else if ((e.Button & System.Windows.Forms.MouseButtons.Left) != 0)
 				{
-					UpdateAlbumPage(equipmentID);
+                    this.UpdateAlbumPage(equipmentID);
 				}
 			}
 
@@ -219,124 +219,124 @@ namespace ElectronicObserver.Window.Dialog
 			if (eq == null) return;
 
 
-			BasePanelEquipment.SuspendLayout();
+            this.BasePanelEquipment.SuspendLayout();
 
 
-			//header
-			EquipmentID.Tag = equipmentID;
-			EquipmentID.Text = eq.EquipmentID.ToString();
-			ToolTipInfo.SetToolTip(EquipmentID, string.Format("Type: [ {0} ]", string.Join(", ", eq.EquipmentType)));
-			AlbumNo.Text = eq.AlbumNo.ToString();
+            //header
+            this.EquipmentID.Tag = equipmentID;
+            this.EquipmentID.Text = eq.EquipmentID.ToString();
+            this.ToolTipInfo.SetToolTip(this.EquipmentID, string.Format("Type: [ {0} ]", string.Join(", ", eq.EquipmentType)));
+            this.AlbumNo.Text = eq.AlbumNo.ToString();
 
 
-			TableEquipmentName.SuspendLayout();
+            this.TableEquipmentName.SuspendLayout();
 
-            EquipmentType.Text = FormMain.Instance.Translator.GetTranslation(db.EquipmentTypes[eq.EquipmentType[2]].Name, Utility.TranslationType.EquipmentType);
+            this.EquipmentType.Text = FormMain.Instance.Translator.GetTranslation(db.EquipmentTypes[eq.EquipmentType[2]].Name, Utility.DataType.EquipmentType);
 
             {
 				int eqicon = eq.IconType;
 				if (eqicon >= (int)ResourceManager.EquipmentContent.Locked)
 					eqicon = (int)ResourceManager.EquipmentContent.Unknown;
-				EquipmentType.ImageIndex = eqicon;
+                this.EquipmentType.ImageIndex = eqicon;
 
 				StringBuilder sb = new StringBuilder();
 				sb.AppendLine("장착가능함종:");
 				foreach (var stype in KCDatabase.Instance.ShipTypes.Values)
 				{
                     if (stype.EquippableCategories.Contains((int)eq.CategoryType))
-                        sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.TranslationType.ShipTypes));
+                        sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.DataType.ShipType));
                 }
-                ToolTipInfo.SetToolTip(EquipmentType, GetEquippableShips(equipmentID));
+                this.ToolTipInfo.SetToolTip(this.EquipmentType, this.GetEquippableShips(equipmentID));
             }
-			EquipmentName.Text = eq.Name;
-			ToolTipInfo.SetToolTip(EquipmentName, "(우클릭으로 복사)");
+            this.EquipmentName.Text = eq.Name;
+            this.ToolTipInfo.SetToolTip(this.EquipmentName, "(우클릭으로 복사)");
 
-			TableEquipmentName.ResumeLayout();
+            this.TableEquipmentName.ResumeLayout();
 
 
-			//main parameter
-			TableParameterMain.SuspendLayout();
+            //main parameter
+            this.TableParameterMain.SuspendLayout();
 
-			SetParameterText(Firepower, eq.Firepower);
-			SetParameterText(Torpedo, eq.Torpedo);
-			SetParameterText(AA, eq.AA);
-			SetParameterText(Armor, eq.Armor);
-			SetParameterText(ASW, eq.ASW);
-			SetParameterText(Evasion, eq.Evasion);
-			SetParameterText(LOS, eq.LOS);
-			SetParameterText(Accuracy, eq.Accuracy);
-			SetParameterText(Bomber, eq.Bomber);
+            this.SetParameterText(this.Firepower, eq.Firepower);
+            this.SetParameterText(this.Torpedo, eq.Torpedo);
+            this.SetParameterText(this.AA, eq.AA);
+            this.SetParameterText(this.Armor, eq.Armor);
+            this.SetParameterText(this.ASW, eq.ASW);
+            this.SetParameterText(this.Evasion, eq.Evasion);
+            this.SetParameterText(this.LOS, eq.LOS);
+            this.SetParameterText(this.Accuracy, eq.Accuracy);
+            this.SetParameterText(this.Bomber, eq.Bomber);
 
 			if (eq.CategoryType == EquipmentTypes.Interceptor)
 			{
-				TitleAccuracy.Text = "대폭";
-                TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAntiBomber;
-                TitleEvasion.Text = "영격";
-                TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterInterception;
+                this.TitleAccuracy.Text = "대폭";
+                this.TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAntiBomber;
+                this.TitleEvasion.Text = "영격";
+                this.TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterInterception;
             }
 			else
 			{
-				TitleAccuracy.Text = "명중";
-                TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAccuracy;
-                TitleEvasion.Text = "회피";
-                TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
+                this.TitleAccuracy.Text = "명중";
+                this.TitleAccuracy.ImageIndex = (int)ResourceManager.IconContent.ParameterAccuracy;
+                this.TitleEvasion.Text = "회피";
+                this.TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
             }
 
-			TableParameterMain.ResumeLayout();
+            this.TableParameterMain.ResumeLayout();
 
 
-			//sub parameter
-			TableParameterSub.SuspendLayout();
+            //sub parameter
+            this.TableParameterSub.SuspendLayout();
 
-			Speed.Text = "없음"; //Constants.GetSpeed( eq.Speed );
-			Range.Text = Constants.GetRange(eq.Range);
-			Rarity.Text = Constants.GetEquipmentRarity(eq.Rarity);
-			Rarity.ImageIndex = (int)ResourceManager.IconContent.RarityRed + Constants.GetEquipmentRarityID(eq.Rarity);     //checkme
+            this.Speed.Text = "없음"; //Constants.GetSpeed( eq.Speed );
+            this.Range.Text = Constants.GetRange(eq.Range);
+            this.Rarity.Text = Constants.GetEquipmentRarity(eq.Rarity);
+            this.Rarity.ImageIndex = (int)ResourceManager.IconContent.RarityRed + Constants.GetEquipmentRarityID(eq.Rarity);     //checkme
 
-			TableParameterSub.ResumeLayout();
+            this.TableParameterSub.ResumeLayout();
 
 
 			// aircraft
 			if (eq.IsAircraft)
 			{
-				TableAircraft.SuspendLayout();
-				AircraftCost.Text = eq.AircraftCost.ToString();
-				ToolTipInfo.SetToolTip(AircraftCost, "배치시 보키소비：" + ((eq.IsCombatAircraft ? 18 : 4) * eq.AircraftCost));
-				AircraftDistance.Text = eq.AircraftDistance.ToString();
-				TableAircraft.ResumeLayout();
-				TableAircraft.Visible = true;
+                this.TableAircraft.SuspendLayout();
+                this.AircraftCost.Text = eq.AircraftCost.ToString();
+                this.ToolTipInfo.SetToolTip(this.AircraftCost, "배치시 보키소비：" + ((eq.IsCombatAircraft ? 18 : 4) * eq.AircraftCost));
+                this.AircraftDistance.Text = eq.AircraftDistance.ToString();
+                this.TableAircraft.ResumeLayout();
+                this.TableAircraft.Visible = true;
 			}
 			else
 			{
-				TableAircraft.Visible = false;
+                this.TableAircraft.Visible = false;
 			}
 
 
-			//default equipment
-			DefaultSlots.BeginUpdate();
-			DefaultSlots.Items.Clear();
+            //default equipment
+            this.DefaultSlots.BeginUpdate();
+            this.DefaultSlots.Items.Clear();
 			foreach (var ship in KCDatabase.Instance.MasterShips.Values)
 			{
 				if (ship.DefaultSlot != null && ship.DefaultSlot.Contains(equipmentID))
 				{
-					DefaultSlots.Items.Add(ship);
+                    this.DefaultSlots.Items.Add(ship);
 				}
 			}
-			DefaultSlots.EndUpdate();
+            this.DefaultSlots.EndUpdate();
 
 
-			Description.Text = eq.Message;
+            this.Description.Text = eq.Message;
 
 
-			//arsenal
-			TableArsenal.SuspendLayout();
+            //arsenal
+            this.TableArsenal.SuspendLayout();
 
-			MaterialFuel.Text = eq.Material[0].ToString();
-			MaterialAmmo.Text = eq.Material[1].ToString();
-			MaterialSteel.Text = eq.Material[2].ToString();
-			MaterialBauxite.Text = eq.Material[3].ToString();
+            this.MaterialFuel.Text = eq.Material[0].ToString();
+            this.MaterialAmmo.Text = eq.Material[1].ToString();
+            this.MaterialSteel.Text = eq.Material[2].ToString();
+            this.MaterialBauxite.Text = eq.Material[3].ToString();
 
-			TableArsenal.ResumeLayout();
+            this.TableArsenal.ResumeLayout();
 
 
 
@@ -348,20 +348,20 @@ namespace ElectronicObserver.Window.Dialog
 
                 if (img != null)
                 {
-                    EquipmentImage.Image?.Dispose();
-                    EquipmentImage.Image = img;
+                    this.EquipmentImage.Image?.Dispose();
+                    this.EquipmentImage.Image = img;
                 }
 				else
 				{
-					if (EquipmentImage.Image != null)
-						EquipmentImage.Image.Dispose();
-					EquipmentImage.Image = null;
+					if (this.EquipmentImage.Image != null)
+                        this.EquipmentImage.Image.Dispose();
+                    this.EquipmentImage.Image = null;
 				}
 			}
 
 
-			BasePanelEquipment.ResumeLayout();
-			BasePanelEquipment.Visible = true;
+            this.BasePanelEquipment.ResumeLayout();
+            this.BasePanelEquipment.Visible = true;
 
 
 			this.Text = "장비도감 - " + eq.Name;
@@ -444,12 +444,12 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-				int index = DefaultSlots.IndexFromPoint(e.Location);
+				int index = this.DefaultSlots.IndexFromPoint(e.Location);
 				if (index >= 0)
 				{
-					Cursor = Cursors.AppStarting;
-					new DialogAlbumMasterShip(((ShipDataMaster)DefaultSlots.Items[index]).ShipID).Show(Owner);
-					Cursor = Cursors.Default;
+                    this.Cursor = Cursors.AppStarting;
+					new DialogAlbumMasterShip(((ShipDataMaster)this.DefaultSlots.Items[index]).ShipID).Show(this.Owner);
+                    this.Cursor = Cursors.Default;
 				}
 			}
 		}
@@ -487,13 +487,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void StripMenu_File_OutputCSVUser_Click(object sender, EventArgs e)
 		{
 
-			if (SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
 				try
 				{
 
-					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
+					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
 						sw.WriteLine("장비ID,도감번호,장비종류,장비명,대분류,도감카테고리ID,카테고리ID,아이콘ID,항공기그래픽ID,화력,뇌장,대공,장갑,대잠,회피,색적,운,명중,폭장,사정,레어도,해체시연료,해체시탄약,해체시강재,해체시보키,도감글,행동반경,배치비용");
@@ -553,13 +553,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void StripMenu_File_OutputCSVData_Click(object sender, EventArgs e)
 		{
 
-			if (SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
 				try
 				{
 
-					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
+					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
 						sw.WriteLine("장비ID,도감번호,장비명,장비종1,장비종2,장비종3,장비종4,장비종5,화력,뇌장,대공,장갑,대잠,회피,색적,운,명중,폭장,사정,레어도,해체시연료,해체시탄약,해체시강재,해체시보키,도감글,행동반경,배치비용");
@@ -616,35 +616,35 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void TextSearch_TextChanged(object sender, EventArgs e)
 		{
-			if (string.IsNullOrWhiteSpace(TextSearch.Text))
+			if (string.IsNullOrWhiteSpace(this.TextSearch.Text))
 				return;
 
 
 			bool Search(string searchWord)
 			{
 				var target =
-					EquipmentView.Rows.OfType<DataGridViewRow>()
-					.Select(r => KCDatabase.Instance.MasterEquipments[(int)r.Cells[EquipmentView_ID.Index].Value])
+                    this.EquipmentView.Rows.OfType<DataGridViewRow>()
+					.Select(r => KCDatabase.Instance.MasterEquipments[(int)r.Cells[this.EquipmentView_ID.Index].Value])
 					.FirstOrDefault(
 						eq => Calculator.ToHiragana(eq.Name.ToLower()).Contains(searchWord));
 
 				if (target != null)
 				{
-					EquipmentView.FirstDisplayedScrollingRowIndex = EquipmentView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[EquipmentView_ID.Index].Value == target.EquipmentID).Index;
+                    this.EquipmentView.FirstDisplayedScrollingRowIndex = this.EquipmentView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[this.EquipmentView_ID.Index].Value == target.EquipmentID).Index;
 					return true;
 				}
 				return false;
 			}
 
-			if (!Search(Calculator.ToHiragana(TextSearch.Text.ToLower())))
-				Search(Calculator.RomaToHira(TextSearch.Text));
+			if (!Search(Calculator.ToHiragana(this.TextSearch.Text.ToLower())))
+				Search(Calculator.RomaToHira(this.TextSearch.Text));
 		}
 
 		private void TextSearch_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
-				TextSearch_TextChanged(sender, e);
+                this.TextSearch_TextChanged(sender, e);
 				e.SuppressKeyPress = true;
 				e.Handled = true;
 			}
@@ -656,13 +656,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogAlbumMasterEquipment_FormClosed(object sender, FormClosedEventArgs e)
 		{
 
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 
 		}
 
 		private void StripMenu_Edit_CopyEquipmentName_Click(object sender, EventArgs e)
 		{
-			var eq = KCDatabase.Instance.MasterEquipments[EquipmentID.Tag as int? ?? -1];
+			var eq = KCDatabase.Instance.MasterEquipments[this.EquipmentID.Tag as int? ?? -1];
 			if (eq != null)
 				Clipboard.SetText(eq.Name);
 			else
@@ -673,7 +673,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-				var eq = KCDatabase.Instance.MasterEquipments[EquipmentID.Tag as int? ?? -1];
+				var eq = KCDatabase.Instance.MasterEquipments[this.EquipmentID.Tag as int? ?? -1];
 				if (eq != null)
 					Clipboard.SetText(eq.Name);
 				else
@@ -683,7 +683,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void StripMenu_Edit_CopyEquipmentData_Click(object sender, EventArgs e)
 		{
-			var eq = KCDatabase.Instance.MasterEquipments[EquipmentID.Tag as int? ?? -1];
+			var eq = KCDatabase.Instance.MasterEquipments[this.EquipmentID.Tag as int? ?? -1];
 			if (eq == null)
 			{
 				System.Media.SystemSounds.Exclamation.Play();
@@ -739,7 +739,7 @@ namespace ElectronicObserver.Window.Dialog
 			sb.AppendLine();
 
 			sb.AppendLine("초기장비/개발:");
-			string result = GetAppearingArea(eq.EquipmentID);
+			string result = this.GetAppearingArea(eq.EquipmentID);
 			if (string.IsNullOrWhiteSpace(result))
 				result = "(불명)\r\n";
 			sb.AppendLine(result);
@@ -785,7 +785,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void StripMenu_View_ShowAppearingArea_Click(object sender, EventArgs e)
 		{
 
-			int eqID = EquipmentID.Tag as int? ?? -1;
+			int eqID = this.EquipmentID.Tag as int? ?? -1;
 			var eq = KCDatabase.Instance.MasterEquipments[eqID];
 
 			if (eq == null)
@@ -794,7 +794,7 @@ namespace ElectronicObserver.Window.Dialog
 				return;
 			}
 
-			string result = GetAppearingArea(eqID);
+			string result = this.GetAppearingArea(eqID);
 
 			if (string.IsNullOrWhiteSpace(result))
 			{
@@ -807,7 +807,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void StripMenu_Edit_GoogleEquipmentName_Click(object sender, EventArgs e)
 		{
-			var eq = KCDatabase.Instance.MasterEquipments[EquipmentID.Tag as int? ?? -1];
+			var eq = KCDatabase.Instance.MasterEquipments[this.EquipmentID.Tag as int? ?? -1];
 			if (eq == null)
 			{
 				System.Media.SystemSounds.Exclamation.Play();

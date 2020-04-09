@@ -26,13 +26,13 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 
 				if (ship != null)
 				{
-					ship.LoadFromResponse(APIName, elem);
+					ship.LoadFromResponse(this.APIName, elem);
 
 				}
 				else
 				{   //ないとは思うけど
 					var a = new ShipData();
-					a.LoadFromResponse(APIName, elem);
+					a.LoadFromResponse(this.APIName, elem);
 					db.Ships.Add(a);
 
 				}
@@ -41,7 +41,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 
 
 			//api_deck_data
-			db.Fleet.LoadFromResponse(APIName, data.api_deck_data);
+			db.Fleet.LoadFromResponse(this.APIName, data.api_deck_data);
 
 			base.OnResponseReceived((object)data);
 		}

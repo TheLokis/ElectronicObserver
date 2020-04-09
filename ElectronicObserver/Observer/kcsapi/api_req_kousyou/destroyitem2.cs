@@ -10,26 +10,24 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 
 	public class destroyitem2 : APIBase
 	{
-
-
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
 			KCDatabase db = KCDatabase.Instance;
 
 			// 削除処理が終わってからだと装備データが取れないため
-			db.QuestProgress.EquipmentDiscarded(APIName, data);
+			db.QuestProgress.EquipmentDiscarded(this.APIName, data);
 
 			Dictionary<string, int> itemsDestroyed = new Dictionary<string, int>();
 
 			foreach (int id in data["api_slotitem_ids"].Split(",".ToCharArray()).Select(str => int.Parse(str)))
 			{
-				string name = KCDatabase.Instance.Equipments[id].NameWithLevel;
-				itemsDestroyed.TryGetValue(name, out int amount);
-				itemsDestroyed[name] = amount + 1;
+                string name = KCDatabase.Instance.Equipments[id].NameWithLevel;
+                itemsDestroyed.TryGetValue(name, out int amount);
+                itemsDestroyed[name] = amount + 1;
 
-				db.Equipments.Remove(id);
-			}
+                db.Equipments.Remove(id);
+            }
 
 			foreach (var item in itemsDestroyed)
 			{
@@ -39,11 +37,10 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 			base.OnRequestReceived(data);
 		}
 
-
 		public override void OnResponseReceived(dynamic data)
 		{
 
-			KCDatabase.Instance.Material.LoadFromResponse(APIName, data);
+			KCDatabase.Instance.Material.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}
@@ -54,5 +51,4 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 
 		public override string APIName => "api_req_kousyou/destroyitem2";
 	}
-
 }

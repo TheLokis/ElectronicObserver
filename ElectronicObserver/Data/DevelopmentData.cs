@@ -41,20 +41,15 @@ namespace ElectronicObserver.Data
             public readonly int MasterID;
             public readonly int EquipmentID;
 
-            public bool IsSucceeded => MasterID != -1;
-            public EquipmentData Equipment => KCDatabase.Instance.Equipments[MasterID];
-            public EquipmentDataMaster MasterEquipment => Equipment?.MasterEquipment;
+            public bool IsSucceeded => this.MasterID != -1;
+            public EquipmentData Equipment => KCDatabase.Instance.Equipments[this.MasterID];
+            public EquipmentDataMaster MasterEquipment => this.Equipment?.MasterEquipment;
 
             public DevelopmentResult() : this(null) { }
             public DevelopmentResult(dynamic data)
             {
-                MasterID = (int?)data?.api_id ?? -1;
-                EquipmentID = (int?)data?.api_slotitem_id ?? -1;
-            }
-
-            public override string ToString()
-            {
-                return IsSucceeded ? $"{MasterEquipment.CategoryTypeInstance.Name}「{MasterEquipment.Name}」" : "失敗";
+                this.MasterID = (int?)data?.api_id ?? -1;
+                this.EquipmentID = (int?)data?.api_slotitem_id ?? -1;
             }
         }
         /// <summary> 開発結果 </summary>
@@ -65,28 +60,28 @@ namespace ElectronicObserver.Data
         {
             base.LoadFromRequest(apiname, data);
 
-            Fuel = int.Parse(data["api_item1"]);
-            Ammo = int.Parse(data["api_item2"]);
-            Steel = int.Parse(data["api_item3"]);
-            Bauxite = int.Parse(data["api_item4"]);
+            this.Fuel = int.Parse(data["api_item1"]);
+            this.Ammo = int.Parse(data["api_item2"]);
+            this.Steel = int.Parse(data["api_item3"]);
+            this.Bauxite = int.Parse(data["api_item4"]);
 
             if (data.ContainsKey("api_multiple_flag"))
-                DevelopmentTrials = int.Parse(data["api_multiple_flag"]) != 0 ? 3 : 1;
+                this.DevelopmentTrials = int.Parse(data["api_multiple_flag"]) != 0 ? 3 : 1;
             else
-                DevelopmentTrials = 1;
+                this.DevelopmentTrials = 1;
 
 
-            IsSucceeded = false;
-            Materials = null;
-            Results = null;
+            this.IsSucceeded = false;
+            this.Materials = null;
+            this.Results = null;
         }
 
         public override void LoadFromResponse(string apiname, dynamic data)
         {
             base.LoadFromResponse(apiname, (object)data);
 
-            IsSucceeded = (int)data.api_create_flag != 0;
-            Materials = Array.AsReadOnly((int[])data.api_material);
+            this.IsSucceeded = (int)data.api_create_flag != 0;
+            this.Materials = Array.AsReadOnly((int[])data.api_material);
 
 
             void AddToDatabase(dynamic equipmentData)
@@ -102,13 +97,13 @@ namespace ElectronicObserver.Data
             if (isOldAPI)
             {
                 // 旧 API フォーマット (-2019/09/30 12:00)
-                Results = Array.AsReadOnly(new[] {
-                    IsSucceeded ?
+                this.Results = Array.AsReadOnly(new[] {
+                    this.IsSucceeded ?
                     new DevelopmentResult(data.api_slot_item) :
                     new DevelopmentResult()
                 });
 
-                if (IsSucceeded)
+                if (this.IsSucceeded)
                     AddToDatabase(data.api_slot_item);
             }
             else
@@ -125,13 +120,12 @@ namespace ElectronicObserver.Data
                         AddToDatabase(elems[i]);
                 }
 
-                Results = Array.AsReadOnly(results);
+                this.Results = Array.AsReadOnly(results);
             }
 
             KCDatabase.Instance.Material.LoadFromResponse(apiname, data.api_material);
 
         }
-
 
     }
 }

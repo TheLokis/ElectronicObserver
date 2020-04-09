@@ -27,7 +27,7 @@ namespace ElectronicObserver.Resource.Record
             /// <summary>
             /// 初期値(推測値)
             /// </summary>
-            public int Minimum => (MinimumEstMin + MinimumEstMax) / 2;
+            public int Minimum => (this.MinimumEstMin + this.MinimumEstMax) / 2;
 
             /// <summary>
             /// 最大値
@@ -48,22 +48,22 @@ namespace ElectronicObserver.Resource.Record
             /// <summary>
             /// 初期値がデフォルト状態かどうか
             /// </summary>
-            public bool IsMinimumDefault => MinimumEstMin == MinimumDefault && MinimumEstMax == MaximumDefault;
+            public bool IsMinimumDefault => this.MinimumEstMin == MinimumDefault && this.MinimumEstMax == MaximumDefault;
 
             /// <summary>
             /// 最大値がデフォルト状態かどうか
             /// </summary>
-            public bool IsMaximumDefault => Maximum == MaximumDefault;
+            public bool IsMaximumDefault => this.Maximum == MaximumDefault;
 
             /// <summary>
             /// 有効なデータか
             /// </summary>
-            public bool IsAvailable => !IsMinimumDefault && !IsMaximumDefault;
+            public bool IsAvailable => !this.IsMinimumDefault && !this.IsMaximumDefault;
 
             /// <summary>
             /// 値が特定されているか
             /// </summary>
-            public bool IsDetermined => IsAvailable && MinimumEstMin == MinimumEstMax;
+            public bool IsDetermined => this.IsAvailable && this.MinimumEstMin == this.MinimumEstMax;
 
             /// <summary>
             /// 最小値の初期値
@@ -78,9 +78,9 @@ namespace ElectronicObserver.Resource.Record
 
             public Parameter()
             {
-                MinimumEstMin = MinimumDefault;
-                MinimumEstMax = MaximumDefault;
-                Maximum = MaximumDefault;
+                this.MinimumEstMin = MinimumDefault;
+                this.MinimumEstMax = MaximumDefault;
+                this.Maximum = MaximumDefault;
             }
 
 
@@ -98,11 +98,11 @@ namespace ElectronicObserver.Resource.Record
 
 
                 if (max != MaximumDefault)
-                    Maximum = max;
+                    this.Maximum = max;
 
                 if (level == 1)
                 {
-                    MinimumEstMin = MinimumEstMax = current;
+                    this.MinimumEstMin = this.MinimumEstMax = current;
                 }
                 else if (level != 99)
                 {
@@ -112,16 +112,16 @@ namespace ElectronicObserver.Resource.Record
                     int emin = clamp((int)(emind < emaxd ? Math.Ceiling(emind) : Math.Floor(emaxd + 1.0)), 0, max);
                     int emax = clamp((int)(emind < emaxd ? Math.Ceiling(emaxd - 1.0) : Math.Floor(emind)), 0, max);
 
-                    if (emax < MinimumEstMin || MinimumEstMax < emin)
+                    if (emax < this.MinimumEstMin || this.MinimumEstMax < emin)
                     {       //明らかに範囲から外れた場合
-                        MinimumEstMin = emin;
-                        MinimumEstMax = emax;
+                        this.MinimumEstMin = emin;
+                        this.MinimumEstMax = emax;
                         return true;
                     }
                     else
                     {
-                        MinimumEstMin = Math.Max(MinimumEstMin, emin);
-                        MinimumEstMax = Math.Min(MinimumEstMax, emax);
+                        this.MinimumEstMin = Math.Max(this.MinimumEstMin, emin);
+                        this.MinimumEstMax = Math.Min(this.MinimumEstMax, emax);
                     }
                 }
 
@@ -133,21 +133,21 @@ namespace ElectronicObserver.Resource.Record
             // level > 99 のとき、最小値と最大値が反転するため
             public int GetEstParameterMin(int level)
             {
-                int min = CalculateParameter(level, MinimumEstMin, Maximum);
-                int max = CalculateParameter(level, MinimumEstMax, Maximum);
+                int min = this.CalculateParameter(level, this.MinimumEstMin, this.Maximum);
+                int max = this.CalculateParameter(level, this.MinimumEstMax, this.Maximum);
                 return Math.Min(min, max);
             }
 
             public int GetEstParameterMax(int level)
             {
-                int min = CalculateParameter(level, MinimumEstMin, Maximum);
-                int max = CalculateParameter(level, MinimumEstMax, Maximum);
+                int min = this.CalculateParameter(level, this.MinimumEstMin, this.Maximum);
+                int max = this.CalculateParameter(level, this.MinimumEstMax, this.Maximum);
                 return Math.Max(min, max);
             }
 
             public int GetParameter(int level)
             {
-                return CalculateParameter(level, Minimum, Maximum);
+                return this.CalculateParameter(level, this.Minimum, this.Maximum);
             }
 
             private int CalculateParameter(int level, int min, int max)
@@ -175,7 +175,7 @@ namespace ElectronicObserver.Resource.Record
             /// 艦船名
             /// 可読性向上のために存在します。
             /// </summary>
-            public string ShipName => KCDatabase.Instance.MasterShips[ShipID]?.NameWithClass;
+            public string ShipName => KCDatabase.Instance.MasterShips[this.ShipID]?.NameWithClass;
 
 
             /// <summary>
@@ -312,22 +312,22 @@ namespace ElectronicObserver.Resource.Record
 
             public ShipParameterElement() : base()
             {
-                ASW = new Parameter();
-                Evasion = new Parameter();
-                LOS = new Parameter();
+                this.ASW = new Parameter();
+                this.Evasion = new Parameter();
+                this.LOS = new Parameter();
 
-                Aircraft = null;
-                DefaultSlot = null;
+                this.Aircraft = null;
+                this.DefaultSlot = null;
 
-                MessageGet = null;
-                MessageAlbum = null;
+                this.MessageGet = null;
+                this.MessageAlbum = null;
 
-                OriginalCostumeShipID = -1;
+                this.OriginalCostumeShipID = -1;
             }
 
             public ShipParameterElement(string line) : this()
             {
-                LoadLine(line);
+                this.LoadLine(line);
             }
 
 
@@ -336,86 +336,86 @@ namespace ElectronicObserver.Resource.Record
                 string[] elem = CsvHelper.ParseCsvLine(line).ToArray();
                 if (elem.Length < 36) throw new ArgumentException("요소 수가 너무 적습니다.");
 
-                ShipID = int.Parse(elem[0]);
+                this.ShipID = int.Parse(elem[0]);
 
                 //ShipName=elem[1]は読み飛ばす
 
-                HPMin = int.Parse(elem[2]);
-                HPMax = int.Parse(elem[3]);
+                this.HPMin = int.Parse(elem[2]);
+                this.HPMax = int.Parse(elem[3]);
 
-                FirepowerMin = int.Parse(elem[4]);
-                FirepowerMax = int.Parse(elem[5]);
+                this.FirepowerMin = int.Parse(elem[4]);
+                this.FirepowerMax = int.Parse(elem[5]);
 
-                TorpedoMin = int.Parse(elem[6]);
-                TorpedoMax = int.Parse(elem[7]);
+                this.TorpedoMin = int.Parse(elem[6]);
+                this.TorpedoMax = int.Parse(elem[7]);
 
-                AAMin = int.Parse(elem[8]);
-                AAMax = int.Parse(elem[9]);
+                this.AAMin = int.Parse(elem[8]);
+                this.AAMax = int.Parse(elem[9]);
 
-                ArmorMin = int.Parse(elem[10]);
-                ArmorMax = int.Parse(elem[11]);
-
-
-                ASW.MinimumEstMin = int.Parse(elem[12]);
-                ASW.MinimumEstMax = int.Parse(elem[13]);
-                ASW.Maximum = int.Parse(elem[14]);
-
-                Evasion.MinimumEstMin = int.Parse(elem[15]);
-                Evasion.MinimumEstMax = int.Parse(elem[16]);
-                Evasion.Maximum = int.Parse(elem[17]);
-
-                LOS.MinimumEstMin = int.Parse(elem[18]);
-                LOS.MinimumEstMax = int.Parse(elem[19]);
-                LOS.Maximum = int.Parse(elem[20]);
+                this.ArmorMin = int.Parse(elem[10]);
+                this.ArmorMax = int.Parse(elem[11]);
 
 
-                LuckMin = int.Parse(elem[21]);
-                LuckMax = int.Parse(elem[22]);
+                this.ASW.MinimumEstMin = int.Parse(elem[12]);
+                this.ASW.MinimumEstMax = int.Parse(elem[13]);
+                this.ASW.Maximum = int.Parse(elem[14]);
+
+                this.Evasion.MinimumEstMin = int.Parse(elem[15]);
+                this.Evasion.MinimumEstMax = int.Parse(elem[16]);
+                this.Evasion.Maximum = int.Parse(elem[17]);
+
+                this.LOS.MinimumEstMin = int.Parse(elem[18]);
+                this.LOS.MinimumEstMax = int.Parse(elem[19]);
+                this.LOS.Maximum = int.Parse(elem[20]);
 
 
-                Range = int.Parse(elem[23]);
+                this.LuckMin = int.Parse(elem[21]);
+                this.LuckMax = int.Parse(elem[22]);
+
+
+                this.Range = int.Parse(elem[23]);
 
 
                 if (elem[24].ToLower() == "null")
                 {
-                    DefaultSlot = null;
+                    this.DefaultSlot = null;
                 }
                 else
                 {
-                    DefaultSlot = new int[5];
+                    this.DefaultSlot = new int[5];
 
-                    for (int i = 0; i < DefaultSlot.Length; i++)
+                    for (int i = 0; i < this.DefaultSlot.Length; i++)
                     {
-                        DefaultSlot[i] = elem[i + 24] == "null" ? -1 : int.Parse(elem[i + 24]);
+                        this.DefaultSlot[i] = elem[i + 24] == "null" ? -1 : int.Parse(elem[i + 24]);
                     }
                 }
 
                 if (elem[29].ToLower() == "null")
                 {
-                    Aircraft = null;
+                    this.Aircraft = null;
                 }
                 else
                 {
-                    Aircraft = new int[5];
+                    this.Aircraft = new int[5];
 
-                    for (int i = 0; i < Aircraft.Length; i++)
+                    for (int i = 0; i < this.Aircraft.Length; i++)
                     {
-                        Aircraft[i] = elem[i + 29] == "null" ? 0 : int.Parse(elem[i + 29]);
+                        this.Aircraft[i] = elem[i + 29] == "null" ? 0 : int.Parse(elem[i + 29]);
                     }
                 }
 
 
-                MessageGet = elem[34].ToLower() == "null" ? null : elem[34];
-                MessageAlbum = elem[35].ToLower() == "null" ? null : elem[35];
+                this.MessageGet = elem[34].ToLower() == "null" ? null : elem[34];
+                this.MessageAlbum = elem[35].ToLower() == "null" ? null : elem[35];
 
 
                 if (elem.Length >= 41)
                 {
-                    ResourceName = elem[36].ToLower() == "null" ? null : elem[36];
-                    ResourceGraphicVersion = elem[37].ToLower() == "null" ? null : elem[37];
-                    ResourceVoiceVersion = elem[38].ToLower() == "null" ? null : elem[38];
-                    ResourcePortVoiceVersion = elem[39].ToLower() == "null" ? null : elem[39];
-                    OriginalCostumeShipID = int.Parse(elem[40]);
+                    this.ResourceName = elem[36].ToLower() == "null" ? null : elem[36];
+                    this.ResourceGraphicVersion = elem[37].ToLower() == "null" ? null : elem[37];
+                    this.ResourceVoiceVersion = elem[38].ToLower() == "null" ? null : elem[38];
+                    this.ResourcePortVoiceVersion = elem[39].ToLower() == "null" ? null : elem[39];
+                    this.OriginalCostumeShipID = int.Parse(elem[40]);
                 }
 
             }
@@ -426,58 +426,58 @@ namespace ElectronicObserver.Resource.Record
                 StringBuilder sb = new StringBuilder();
 
                 sb.Append(string.Join(",",
-                    ShipID,
-                    CsvHelper.EscapeCsvCell(ShipName),
-                    HPMin,
-                    HPMax,
-                    FirepowerMin,
-                    FirepowerMax,
-                    TorpedoMin,
-                    TorpedoMax,
-                    AAMin,
-                    AAMax,
-                    ArmorMin,
-                    ArmorMax,
-                    ASW.MinimumEstMin,
-                    ASW.MinimumEstMax,
-                    ASW.Maximum,
-                    Evasion.MinimumEstMin,
-                    Evasion.MinimumEstMax,
-                    Evasion.Maximum,
-                    LOS.MinimumEstMin,
-                    LOS.MinimumEstMax,
-                    LOS.Maximum,
-                    LuckMin,
-                    LuckMax,
-                    Range));
+                    this.ShipID,
+                    CsvHelper.EscapeCsvCell(this.ShipName),
+                    this.HPMin,
+                    this.HPMax,
+                    this.FirepowerMin,
+                    this.FirepowerMax,
+                    this.TorpedoMin,
+                    this.TorpedoMax,
+                    this.AAMin,
+                    this.AAMax,
+                    this.ArmorMin,
+                    this.ArmorMax,
+                    this.ASW.MinimumEstMin,
+                    this.ASW.MinimumEstMax,
+                    this.ASW.Maximum,
+                    this.Evasion.MinimumEstMin,
+                    this.Evasion.MinimumEstMax,
+                    this.Evasion.Maximum,
+                    this.LOS.MinimumEstMin,
+                    this.LOS.MinimumEstMax,
+                    this.LOS.Maximum,
+                    this.LuckMin,
+                    this.LuckMax,
+                    this.Range));
 
-                if (DefaultSlot == null)
+                if (this.DefaultSlot == null)
                 {
                     sb.Append(",null,null,null,null,null");
                 }
                 else
                 {
-                    sb.Append(",").Append(string.Join(",", DefaultSlot));
+                    sb.Append(",").Append(string.Join(",", this.DefaultSlot));
                 }
 
-                if (Aircraft == null)
+                if (this.Aircraft == null)
                 {
                     sb.Append(",null,null,null,null,null");
                 }
                 else
                 {
-                    sb.Append(",").Append(string.Join(",", Aircraft));
+                    sb.Append(",").Append(string.Join(",", this.Aircraft));
 
                 }
 
                 sb.Append(",").Append(string.Join(",",
-                    CsvHelper.EscapeCsvCell(MessageGet),
-                    CsvHelper.EscapeCsvCell(MessageAlbum),
-                    CsvHelper.EscapeCsvCell(ResourceName),
-                    ResourceGraphicVersion ?? "null",
-                    ResourceVoiceVersion ?? "null",
-                    ResourcePortVoiceVersion ?? "null",
-                    OriginalCostumeShipID
+                    CsvHelper.EscapeCsvCell(this.MessageGet),
+                    CsvHelper.EscapeCsvCell(this.MessageAlbum),
+                    CsvHelper.EscapeCsvCell(this.ResourceName),
+                    this.ResourceGraphicVersion ?? "null",
+                    this.ResourceVoiceVersion ?? "null",
+                    this.ResourcePortVoiceVersion ?? "null",
+                    this.OriginalCostumeShipID
                     ));
 
                 return sb.ToString();
@@ -496,56 +496,56 @@ namespace ElectronicObserver.Resource.Record
 
         public ShipParameterRecord() : base()
         {
-            Record = new Dictionary<int, ShipParameterElement>();
-            newShipIDBorder = -1;
-            remodelingShipID = -1;
-            questRewardShipID = -1;
-            changed = false;
-            ParameterLoadFlag = true;
+            this.Record = new Dictionary<int, ShipParameterElement>();
+            this.newShipIDBorder = -1;
+            this.remodelingShipID = -1;
+            this.questRewardShipID = -1;
+            this.changed = false;
+            this.ParameterLoadFlag = true;
         }
 
         public override void RegisterEvents()
         {
             APIObserver ao = APIObserver.Instance;
 
-            ao["api_start2/getData"].ResponseReceived += GameStart;
+            ao["api_start2/getData"].ResponseReceived += this.GameStart;
 
-            ao["api_port/port"].ResponseReceived += ParameterLoaded;
+            ao["api_port/port"].ResponseReceived += this.ParameterLoaded;
 
-            ao["api_get_member/ship3"].ResponseReceived += EquipmentChanged;
+            ao["api_get_member/ship3"].ResponseReceived += this.EquipmentChanged;
 
-            ao["api_get_member/picture_book"].ResponseReceived += AlbumOpened;
+            ao["api_get_member/picture_book"].ResponseReceived += this.AlbumOpened;
 
             //戦闘系：最初のフェーズのみ要るから夜戦(≠開幕)は不要
-            ao["api_req_sortie/battle"].ResponseReceived += BattleStart;
-            ao["api_req_battle_midnight/sp_midnight"].ResponseReceived += BattleStart;
-            ao["api_req_sortie/airbattle"].ResponseReceived += BattleStart;
-            ao["api_req_sortie/ld_airbattle"].ResponseReceived += BattleStart;
-            ao["api_req_sortie/night_to_day"].ResponseReceived += BattleStart;
-            ao["api_req_sortie/ld_shooting"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/battle"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/sp_midnight"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/airbattle"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/battle_water"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/ld_airbattle"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/ec_battle"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/ec_night_to_day"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/each_battle"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/each_battle_water"].ResponseReceived += BattleStart;
-            ao["api_req_combined_battle/ld_shooting"].ResponseReceived += BattleStart;
+            ao["api_req_sortie/battle"].ResponseReceived += this.BattleStart;
+            ao["api_req_battle_midnight/sp_midnight"].ResponseReceived += this.BattleStart;
+            ao["api_req_sortie/airbattle"].ResponseReceived += this.BattleStart;
+            ao["api_req_sortie/ld_airbattle"].ResponseReceived += this.BattleStart;
+            ao["api_req_sortie/night_to_day"].ResponseReceived += this.BattleStart;
+            ao["api_req_sortie/ld_shooting"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/battle"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/sp_midnight"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/airbattle"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/battle_water"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/ld_airbattle"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/ec_battle"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/ec_night_to_day"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/each_battle"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/each_battle_water"].ResponseReceived += this.BattleStart;
+            ao["api_req_combined_battle/ld_shooting"].ResponseReceived += this.BattleStart;
 
-            ao["api_req_map/next"].ResponseReceived += SortieNext;
+            ao["api_req_map/next"].ResponseReceived += this.SortieNext;
 
-            ao["api_req_map/start"].ResponseReceived += SortieStart;
-            ao["api_get_member/slot_item"].ResponseReceived += SortieEnd;
+            ao["api_req_map/start"].ResponseReceived += this.SortieStart;
+            ao["api_get_member/slot_item"].ResponseReceived += this.SortieEnd;
 
-            ao["api_req_kousyou/getship"].ResponseReceived += ConstructionReceived;
+            ao["api_req_kousyou/getship"].ResponseReceived += this.ConstructionReceived;
 
-            ao["api_req_kaisou/remodeling"].RequestReceived += RemodelingStart;
-            ao["api_get_member/slot_item"].ResponseReceived += RemodelingEnd;
+            ao["api_req_kaisou/remodeling"].RequestReceived += this.RemodelingStart;
+            ao["api_get_member/slot_item"].ResponseReceived += this.RemodelingEnd;
 
-            ao["api_req_quest/clearitemget"].ResponseReceived += QuestRewardReceived;
-            ao["api_get_member/ship2"].ResponseReceived += QuestRewardReceivedEnd;
+            ao["api_req_quest/clearitemget"].ResponseReceived += this.QuestRewardReceived;
+            ao["api_get_member/ship2"].ResponseReceived += this.QuestRewardReceivedEnd;
         }
 
 
@@ -553,19 +553,19 @@ namespace ElectronicObserver.Resource.Record
         {
             get
             {
-                return Record.ContainsKey(i) ? Record[i] : null;
+                return this.Record.ContainsKey(i) ? this.Record[i] : null;
             }
             set
             {
-                if (!Record.ContainsKey(i))
+                if (!this.Record.ContainsKey(i))
                 {
-                    Record.Add(i, value);
+                    this.Record.Add(i, value);
                 }
                 else
                 {
-                    Record[i] = value;
+                    this.Record[i] = value;
                 }
-                changed = true;
+                this.changed = true;
             }
         }
 
@@ -586,7 +586,7 @@ namespace ElectronicObserver.Resource.Record
         /// <param name="ship">対象の艦船。</param>
         public void UpdateParameter(ShipData ship)
         {
-            UpdateParameter(ship.ShipID, ship.Level, ship.ASWBase - ship.ASWModernized, ship.ASWMax, ship.EvasionBase, ship.EvasionMax, ship.LOSBase, ship.LOSMax);
+            this.UpdateParameter(ship.ShipID, ship.Level, ship.ASWBase - ship.ASWModernized, ship.ASWMax, ship.EvasionBase, ship.EvasionMax, ship.LOSBase, ship.LOSMax);
         }
 
 
@@ -615,7 +615,7 @@ namespace ElectronicObserver.Resource.Record
                     KCDatabase.Instance.MasterShips[e.ShipID].NameWithClass, e.LOS.MinimumEstMin, e.LOS.MinimumEstMax, e.LOS.Maximum));
 
 
-            Update(e);
+            this.Update(e);
         }
 
 
@@ -636,7 +636,7 @@ namespace ElectronicObserver.Resource.Record
             e.LOS.Maximum = ship.LOSMax;
 
 
-            Update(e);
+            this.Update(e);
         }
 
 
@@ -646,7 +646,7 @@ namespace ElectronicObserver.Resource.Record
         /// <param name="ship">対象の艦船。入手直後・改装直後のものに限ります。</param>
         public void UpdateDefaultSlot(ShipData ship)
         {
-            UpdateDefaultSlot(ship.ShipID, ship.SlotMaster.ToArray());
+            this.UpdateDefaultSlot(ship.ShipID, ship.SlotMaster.ToArray());
         }
 
         /// <summary>
@@ -667,7 +667,7 @@ namespace ElectronicObserver.Resource.Record
 
             e.DefaultSlot = slot;
 
-            Update(e);
+            this.Update(e);
         }
 
 
@@ -680,7 +680,7 @@ namespace ElectronicObserver.Resource.Record
         /// </summary>
         private void GameStart(string apiname, dynamic data)
         {
-            ParameterLoadFlag = true;
+            this.ParameterLoadFlag = true;
 
 
             foreach (var elem in data.api_mst_ship)
@@ -742,7 +742,7 @@ namespace ElectronicObserver.Resource.Record
                         param.MessageGet = mes;
                 }
 
-                Update(param);
+                this.Update(param);
             }
 
             foreach (var elem in data.api_mst_shipgraph)
@@ -765,11 +765,11 @@ namespace ElectronicObserver.Resource.Record
                     param.ResourcePortVoiceVersion = values[2];
                 }
 
-                Update(param);
+                this.Update(param);
             }
 
             // validation
-            foreach (var record in Record.Values)
+            foreach (var record in this.Record.Values)
             {
                 // 無効な装備を持っていた場合、"なし" に置換する
                 if (record.DefaultSlot != null)
@@ -798,9 +798,9 @@ namespace ElectronicObserver.Resource.Record
             {
                 // 非武装時のみ詳細にステータスを更新
                 if (ship.AllSlot.All(id => id <= 0))
-                    UpdateParameter(ship);
+                    this.UpdateParameter(ship);
                 else
-                    UpdateMaxParameter(ship);
+                    this.UpdateMaxParameter(ship);
             }
 
             //ParameterLoadFlag = false;      //一回限り(基本的に起動直後の1回)
@@ -816,9 +816,9 @@ namespace ElectronicObserver.Resource.Record
 
                 // 非武装時のみ詳細にステータスを更新
                 if (ship.AllSlot.All(id => id <= 0))
-                    UpdateParameter(ship);
+                    this.UpdateParameter(ship);
                 else
-                    UpdateMaxParameter(ship);
+                    this.UpdateMaxParameter(ship);
             }
         }
 
@@ -875,7 +875,7 @@ namespace ElectronicObserver.Resource.Record
                             break;
 
                         e2.MessageAlbum = e.MessageAlbum;
-                        Update(e2);
+                        this.Update(e2);
 
                     }
                 }
@@ -894,12 +894,12 @@ namespace ElectronicObserver.Resource.Record
                         }
 
                         e2.OriginalCostumeShipID = shipID;
-                        Update(e2);
+                        this.Update(e2);
                     }
                 }
 
 
-                Update(e);
+                this.Update(e);
             }
         }
 
@@ -932,7 +932,7 @@ namespace ElectronicObserver.Resource.Record
 
                 param.DefaultSlot = slot;
 
-                Update(param);
+                this.Update(param);
             }
 
 
@@ -1059,7 +1059,7 @@ namespace ElectronicObserver.Resource.Record
                             var aircraft = new int[5];
                             aircraft[Array.FindIndex(unknownShipEquipment, id => isAircraft(db.MasterEquipments[id]))] = estimatedAircraftCount;
                             p.Aircraft = aircraft;
-                            Update(p);
+                            this.Update(p);
                             Utility.Logger.Add(1, $"탑재 체크：ID{unknownShipID} {db.MasterShips[unknownShipID].NameWithClass} 의 탑재수를 [{string.Join(", ", aircraft)}] 로 추정했습니다.");
                         }
                     }
@@ -1101,7 +1101,7 @@ namespace ElectronicObserver.Resource.Record
         /// </summary>
         private void SortieStart(string apiname, dynamic data)
         {
-            newShipIDBorder = KCDatabase.Instance.Ships.Keys.Max();
+            this.newShipIDBorder = KCDatabase.Instance.Ships.Keys.Max();
 
 
             if (KCDatabase.Instance.Battle.Compass.HasAirRaid)
@@ -1115,17 +1115,17 @@ namespace ElectronicObserver.Resource.Record
         private void SortieEnd(string apiname, dynamic data)
         {
 
-            if (newShipIDBorder == -1) return;
+            if (this.newShipIDBorder == -1) return;
 
-            foreach (ShipData s in KCDatabase.Instance.Ships.Values.Where(s => s.MasterID > newShipIDBorder))
+            foreach (ShipData s in KCDatabase.Instance.Ships.Values.Where(s => s.MasterID > this.newShipIDBorder))
             {
                 // note: 初期装備がシナジー装備であることがあるので、記録しない　要再確認
                 //UpdateParameter(s);
-                UpdateDefaultSlot(s);
+                this.UpdateDefaultSlot(s);
 
             }
 
-            newShipIDBorder = -1;
+            this.newShipIDBorder = -1;
         }
 
 
@@ -1142,7 +1142,7 @@ namespace ElectronicObserver.Resource.Record
             {
                 // note: 初期装備がシナジー装備であることがあるので、記録しない　要再確認
                 //UpdateParameter(ship);
-                UpdateDefaultSlot(ship);
+                this.UpdateDefaultSlot(ship);
             }
 
         }
@@ -1154,7 +1154,7 @@ namespace ElectronicObserver.Resource.Record
         void RemodelingStart(string apiname, dynamic data)
         {
 
-            remodelingShipID = int.Parse(data["api_id"]);
+            this.remodelingShipID = int.Parse(data["api_id"]);
 
         }
 
@@ -1164,26 +1164,26 @@ namespace ElectronicObserver.Resource.Record
         void RemodelingEnd(string apiname, dynamic data)
         {
 
-            if (remodelingShipID == -1)
+            if (this.remodelingShipID == -1)
                 return;
 
-            ShipData ship = KCDatabase.Instance.Ships[remodelingShipID];
+            ShipData ship = KCDatabase.Instance.Ships[this.remodelingShipID];
 
             if (ship != null)
             {
                 // note: 初期装備がシナジー装備であることがあるので、記録しない　要再確認
                 //UpdateParameter(ship);
-                UpdateDefaultSlot(ship);
+                this.UpdateDefaultSlot(ship);
             }
 
-            remodelingShipID = -1;
+            this.remodelingShipID = -1;
         }
 
 
 
         void QuestRewardReceived(string apiname, dynamic data)
         {
-            questRewardShipID = -1;
+            this.questRewardShipID = -1;
 
             if (data.api_bounus())
             {
@@ -1193,7 +1193,7 @@ namespace ElectronicObserver.Resource.Record
                     {
                         if (b.api_item.api_ship_id())
                         {
-                            questRewardShipID = (int)b.api_item.api_ship_id;
+                            this.questRewardShipID = (int)b.api_item.api_ship_id;
 
                         }
                     }
@@ -1203,15 +1203,15 @@ namespace ElectronicObserver.Resource.Record
 
         void QuestRewardReceivedEnd(string apiname, dynamic data)
         {
-            if (questRewardShipID == -1)
+            if (this.questRewardShipID == -1)
                 return;
 
             var ship = KCDatabase.Instance.Ships.OrderBy(p => p.Key).Last().Value;
 
-            if (ship.ShipID == questRewardShipID)
+            if (ship.ShipID == this.questRewardShipID)
             {
                 // 装備データがまだ送られてきていないので、remodeling と同様 slot_item が来た時点で処理する
-                remodelingShipID = ship.MasterID;
+                this.remodelingShipID = ship.MasterID;
             }
         }
 
@@ -1222,13 +1222,13 @@ namespace ElectronicObserver.Resource.Record
 
         protected override void LoadLine(string line)
         {
-            Update(new ShipParameterElement(line));
+            this.Update(new ShipParameterElement(line));
         }
 
         protected override string SaveLinesAll()
         {
             var sb = new StringBuilder();
-            foreach (var elem in Record.Values.OrderBy(r => r.ShipID))
+            foreach (var elem in this.Record.Values.OrderBy(r => r.ShipID))
             {
                 sb.AppendLine(elem.SaveLine());
             }
@@ -1242,17 +1242,17 @@ namespace ElectronicObserver.Resource.Record
 
         protected override void UpdateLastSavedIndex()
         {
-            changed = false;
+            this.changed = false;
         }
 
-        public override bool NeedToSave => changed;
+        public override bool NeedToSave => this.changed;
 
         public override bool SupportsPartialSave => false;
 
 
         protected override void ClearRecord()
         {
-            Record.Clear();
+            this.Record.Clear();
         }
 
 

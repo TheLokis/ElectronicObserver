@@ -90,50 +90,49 @@ namespace ElectronicObserver.Window.Dialog
 			public DialogBaseAirCorpsSimulation Parent;
 			public ToolTip ToolTipInternal;
 
-
-			public event EventHandler Updated = delegate { };
+            public event EventHandler Updated = delegate { };
 
 
 			public SquadronUI(int baseAirCorpsID, int squadronID, DialogBaseAirCorpsSimulation parent)
 			{
 
-				BaseAirCorpsID = baseAirCorpsID;
-				SquadronID = squadronID;
+                this.BaseAirCorpsID = baseAirCorpsID;
+                this.SquadronID = squadronID;
 
-				AircraftCategory = new ComboBox();
-				AircraftCategory.Size = new Size(160, AircraftCategory.Height);
-				AircraftCategory.Anchor = AnchorStyles.None;
-				AircraftCategory.Margin = new Padding(2, 0, 2, 0);
-				AircraftCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-				AircraftCategory.Items.AddRange(ComboBoxCategory.GetAllCategories().ToArray());
-				AircraftCategory.SelectedValueChanged += AircraftCategory_SelectedValueChanged;
+                this.AircraftCategory = new ComboBox();
+                this.AircraftCategory.Size = new Size(160, this.AircraftCategory.Height);
+                this.AircraftCategory.Anchor = AnchorStyles.None;
+                this.AircraftCategory.Margin = new Padding(2, 0, 2, 0);
+                this.AircraftCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.AircraftCategory.Items.AddRange(ComboBoxCategory.GetAllCategories().ToArray());
+                this.AircraftCategory.SelectedValueChanged += this.AircraftCategory_SelectedValueChanged;
 
-				Aircraft = new ComboBox();
-				Aircraft.Size = new Size(240, Aircraft.Height);
-				Aircraft.Anchor = AnchorStyles.None;
-				Aircraft.Margin = new Padding(2, 0, 2, 0);
-				Aircraft.DropDownStyle = ComboBoxStyle.DropDownList;
-				Aircraft.SelectedValueChanged += Aircraft_SelectedValueChanged;
+                this.Aircraft = new ComboBox();
+                this.Aircraft.Size = new Size(240, this.Aircraft.Height);
+                this.Aircraft.Anchor = AnchorStyles.None;
+                this.Aircraft.Margin = new Padding(2, 0, 2, 0);
+                this.Aircraft.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.Aircraft.SelectedValueChanged += this.Aircraft_SelectedValueChanged;
 
-				AircraftCount = new NumericUpDown();
-				AircraftCount.Size = new Size(60, AircraftCount.Height);
-				AircraftCount.Anchor = AnchorStyles.None;
-				AircraftCount.Maximum = AircraftCount.Minimum = 0;
-				AircraftCount.TextAlign = HorizontalAlignment.Right;
-				AircraftCount.Margin = new Padding(2, 0, 2, 0);
-				AircraftCount.ValueChanged += AircraftCount_ValueChanged;
+                this.AircraftCount = new NumericUpDown();
+                this.AircraftCount.Size = new Size(60, this.AircraftCount.Height);
+                this.AircraftCount.Anchor = AnchorStyles.None;
+                this.AircraftCount.Maximum = this.AircraftCount.Minimum = 0;
+                this.AircraftCount.TextAlign = HorizontalAlignment.Right;
+                this.AircraftCount.Margin = new Padding(2, 0, 2, 0);
+                this.AircraftCount.ValueChanged += this.AircraftCount_ValueChanged;
 
-				AirSuperioritySortie = NewLabel();
-				AirSuperiorityAirDefense = NewLabel();
-				Distance = NewLabel();
-				Bomber = NewLabel();
-				Torpedo = NewLabel();
-				OrganizationCost = NewLabel();
+                this.AirSuperioritySortie = this.NewLabel();
+                this.AirSuperiorityAirDefense = this.NewLabel();
+                this.Distance = this.NewLabel();
+                this.Bomber = this.NewLabel();
+                this.Torpedo = this.NewLabel();
+                this.OrganizationCost = this.NewLabel();
 
-				Parent = parent;
-				ToolTipInternal = parent.ToolTipInfo;
+                this.Parent = parent;
+                this.ToolTipInternal = parent.ToolTipInfo;
 
-				Update();
+                this.Update();
 			}
 
 
@@ -152,15 +151,15 @@ namespace ElectronicObserver.Window.Dialog
 
 			public void AddToTable(TableLayoutPanel table, int row)
 			{
-				table.Controls.Add(AircraftCategory, 0, row);
-				table.Controls.Add(Aircraft, 1, row);
-				table.Controls.Add(AircraftCount, 2, row);
-				table.Controls.Add(AirSuperioritySortie, 3, row);
-				table.Controls.Add(AirSuperiorityAirDefense, 4, row);
-				table.Controls.Add(Distance, 5, row);
-				table.Controls.Add(Bomber, 6, row);
-				table.Controls.Add(Torpedo, 7, row);
-				table.Controls.Add(OrganizationCost, 8, row);
+				table.Controls.Add(this.AircraftCategory, 0, row);
+				table.Controls.Add(this.Aircraft, 1, row);
+				table.Controls.Add(this.AircraftCount, 2, row);
+				table.Controls.Add(this.AirSuperioritySortie, 3, row);
+				table.Controls.Add(this.AirSuperiorityAirDefense, 4, row);
+				table.Controls.Add(this.Distance, 5, row);
+				table.Controls.Add(this.Bomber, 6, row);
+				table.Controls.Add(this.Torpedo, 7, row);
+				table.Controls.Add(this.OrganizationCost, 8, row);
 			}
 
 			void AircraftCategory_SelectedValueChanged(object sender, EventArgs e)
@@ -168,7 +167,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				// 指定されたカテゴリにおいて、利用可能な装備を列挙する
 
-				var category = AircraftCategory.SelectedItem as ComboBoxCategory;
+				var category = this.AircraftCategory.SelectedItem as ComboBoxCategory;
 
 				IEnumerable<ComboBoxEquipment> list = new[] { new ComboBoxEquipment() };
 
@@ -182,38 +181,38 @@ namespace ElectronicObserver.Window.Dialog
 						.Select(eq => new ComboBoxEquipment(eq)));
 				}
 
-				Aircraft.Items.Clear();
-				Aircraft.Items.AddRange(list.ToArray());
-				Aircraft.SelectedIndex = 0;
+                this.Aircraft.Items.Clear();
+                this.Aircraft.Items.AddRange(list.ToArray());
+                this.Aircraft.SelectedIndex = 0;
 
 			}
 
 			void Aircraft_SelectedValueChanged(object sender, EventArgs e)
 			{
 
-				var equipment = Aircraft.SelectedItem as ComboBoxEquipment;
+				var equipment = this.Aircraft.SelectedItem as ComboBoxEquipment;
 
 				if (equipment == null || equipment.EquipmentID == -1)
 				{
-					AircraftCount.Maximum = 0;
+                    this.AircraftCount.Maximum = 0;
 
-					ToolTipInternal.SetToolTip(Aircraft, null);
+                    this.ToolTipInternal.SetToolTip(this.Aircraft, null);
 				}
 				else
 				{
 					int aircraftCount = equipment.EquipmentInstance.IsCombatAircraft ? 18 : 4;
-					AircraftCount.Value = AircraftCount.Maximum = aircraftCount;
+                    this.AircraftCount.Value = this.AircraftCount.Maximum = aircraftCount;
 
-					ToolTipInternal.SetToolTip(Aircraft, GetAircraftParameters(equipment.EquipmentInstance));
+                    this.ToolTipInternal.SetToolTip(this.Aircraft, GetAircraftParameters(equipment.EquipmentInstance));
 				}
 
-				Update();
+                this.Update();
 
 			}
 
 			void AircraftCount_ValueChanged(object sender, EventArgs e)
 			{
-				Update();
+                this.Update();
 			}
 
 			private static string GetAircraftParameters(EquipmentDataMaster eq)
@@ -255,47 +254,47 @@ namespace ElectronicObserver.Window.Dialog
 
 			private void Update()
 			{
-                var equipment = Aircraft.SelectedItem as ComboBoxEquipment;
+                var equipment = this.Aircraft.SelectedItem as ComboBoxEquipment;
 
                 if (equipment == null || equipment.EquipmentID == -1)
                 {
-                    AirSuperioritySortie.Text = "0";
-                    AirSuperioritySortie.Tag = 0;
-                    AirSuperiorityAirDefense.Text = "0";
-                    AirSuperiorityAirDefense.Tag = 0;
-                    Distance.Text = "0";
-                    Bomber.Text = "0";
-                    Torpedo.Text = "0";
-                    OrganizationCost.Text = "0";
-                    OrganizationCost.Tag = 0;
+                    this.AirSuperioritySortie.Text = "0";
+                    this.AirSuperioritySortie.Tag = 0;
+                    this.AirSuperiorityAirDefense.Text = "0";
+                    this.AirSuperiorityAirDefense.Tag = 0;
+                    this.Distance.Text = "0";
+                    this.Bomber.Text = "0";
+                    this.Torpedo.Text = "0";
+                    this.OrganizationCost.Text = "0";
+                    this.OrganizationCost.Tag = 0;
 
                 }
                 else
                 {
 
                     var eq = equipment.EquipmentInstance;
-                    int aircraftCount = (int)AircraftCount.Value;
+                    int aircraftCount = (int)this.AircraftCount.Value;
 
                     var isranged = Utility.Configuration.Config.FormFleet.ShowAirSuperiorityRange;
 
                     int airSuperioritySortie = Calculator.GetAirSuperiority(equipment.EquipmentID, aircraftCount, equipment.AircraftLevel, equipment.Level, 1);
                     int airSuperioritySortieMax = Calculator.GetAirSuperiority(equipment.EquipmentID, aircraftCount, equipment.AircraftLevel, equipment.Level, 1, true);
-                    AirSuperioritySortie.Text = isranged ? RangeString(airSuperioritySortie, airSuperioritySortieMax) : airSuperioritySortie.ToString();
-                    AirSuperioritySortie.Tag = airSuperioritySortie;
+                    this.AirSuperioritySortie.Text = isranged ? RangeString(airSuperioritySortie, airSuperioritySortieMax) : airSuperioritySortie.ToString();
+                    this.AirSuperioritySortie.Tag = airSuperioritySortie;
 
                     int airSuperiorityAirDefense = Calculator.GetAirSuperiority(equipment.EquipmentID, aircraftCount, equipment.AircraftLevel, equipment.Level, 2);
                     int airSuperiorityAirDefenseMax = Calculator.GetAirSuperiority(equipment.EquipmentID, aircraftCount, equipment.AircraftLevel, equipment.Level, 2, true);
-                    AirSuperiorityAirDefense.Text = isranged ? RangeString(airSuperiorityAirDefense, airSuperiorityAirDefenseMax) : airSuperiorityAirDefense.ToString();
-                    AirSuperiorityAirDefense.Tag = airSuperiorityAirDefense;
+                    this.AirSuperiorityAirDefense.Text = isranged ? RangeString(airSuperiorityAirDefense, airSuperiorityAirDefenseMax) : airSuperiorityAirDefense.ToString();
+                    this.AirSuperiorityAirDefense.Tag = airSuperiorityAirDefense;
 
-                    Distance.Text = eq.AircraftDistance.ToString();
+                    this.Distance.Text = eq.AircraftDistance.ToString();
 
-                    Torpedo.Text = eq.Torpedo.ToString();
-                    Bomber.Text = eq.Bomber.ToString();
+                    this.Torpedo.Text = eq.Torpedo.ToString();
+                    this.Bomber.Text = eq.Bomber.ToString();
 
                     int organizationCost = aircraftCount * eq.AircraftCost;
-                    OrganizationCost.Text = organizationCost.ToString();
-                    OrganizationCost.Tag = organizationCost;
+                    this.OrganizationCost.Text = organizationCost.ToString();
+                    this.OrganizationCost.Tag = organizationCost;
 
                 }
 
@@ -305,17 +304,17 @@ namespace ElectronicObserver.Window.Dialog
 
 			public void Dispose()
 			{
-				AircraftCategory.Dispose();
-				Aircraft.Dispose();
+                this.AircraftCategory.Dispose();
+                this.Aircraft.Dispose();
 
-				AircraftCount.Dispose();
+                this.AircraftCount.Dispose();
 
-				AirSuperioritySortie.Dispose();
-				AirSuperiorityAirDefense.Dispose();
-				Distance.Dispose();
-				Bomber.Dispose();
-				Torpedo.Dispose();
-				OrganizationCost.Dispose();
+                this.AirSuperioritySortie.Dispose();
+                this.AirSuperiorityAirDefense.Dispose();
+                this.Distance.Dispose();
+                this.Bomber.Dispose();
+                this.Torpedo.Dispose();
+                this.OrganizationCost.Dispose();
 			}
 		}
 
@@ -354,106 +353,108 @@ namespace ElectronicObserver.Window.Dialog
 
 			public DialogBaseAirCorpsSimulation Parent;
 			public ToolTip ToolTipInternal;
+            public bool IsHighAltitude => this.Parent.TopMenu_Settings_HighAltitude.Checked;
 
-			public event EventHandler Updated = delegate { };
+            public event EventHandler Updated = delegate { };
 
 
 			public BaseAirCorpsUI(int baseAirCorpsID, DialogBaseAirCorpsSimulation parent)
 			{
 
-				BaseAirCorpsID = baseAirCorpsID;
+                this.BaseAirCorpsID = baseAirCorpsID;
 
-				TitleAircraftCategory = NewTitleLabel();
-				TitleAircraft = NewTitleLabel();
-				TitleAircraftCount = NewTitleLabel();
-				TitleAirSuperioritySortie = NewTitleLabel();
-				TitleAirSuperiorityAirDefense = NewTitleLabel();
-				TitleDistance = NewTitleLabel();
-				TitleBomber = NewTitleLabel();
-				TitleTorpedo = NewTitleLabel();
-				TitleOrganizationCost = NewTitleLabel();
-				TitleAutoAirSuperiority = NewTitleLabel();
-				TitleAutoDistance = NewTitleLabel();
+                this.TitleAircraftCategory = this.NewTitleLabel();
+                this.TitleAircraft = this.NewTitleLabel();
+                this.TitleAircraftCount = this.NewTitleLabel();
+                this.TitleAirSuperioritySortie = this.NewTitleLabel();
+                this.TitleAirSuperiorityAirDefense = this.NewTitleLabel();
+                this.TitleDistance = this.NewTitleLabel();
+                this.TitleBomber = this.NewTitleLabel();
+                this.TitleTorpedo = this.NewTitleLabel();
+                this.TitleOrganizationCost = this.NewTitleLabel();
+                this.TitleAutoAirSuperiority = this.NewTitleLabel();
+                this.TitleAutoDistance = this.NewTitleLabel();
 
-				TitleAircraftCategory.Text = "카테고리";
-				TitleAircraft.Text = "배치기";
-				TitleAircraftCount.Text = "수";
-				TitleAirSuperioritySortie.Text = "출격제공";
-				TitleAirSuperiorityAirDefense.Text = "방공제공";
-				TitleDistance.Text = "행동반경";
-				TitleBomber.Text = "폭장";
-				TitleTorpedo.Text = "뇌장";
-				TitleOrganizationCost.Text = "배치코스트";
-				TitleAutoAirSuperiority.Text = "목표제공";
-				TitleAutoDistance.Text = "목표반경";
+                this.TitleAircraftCategory.Text = "카테고리";
+                this.TitleAircraft.Text = "배치기";
+                this.TitleAircraftCount.Text = "수";
+                this.TitleAirSuperioritySortie.Text = "출격제공";
+                this.TitleAirSuperiorityAirDefense.Text = "방공제공";
+                this.TitleDistance.Text = "행동반경";
+                this.TitleBomber.Text = "폭장";
+                this.TitleTorpedo.Text = "뇌장";
+                this.TitleOrganizationCost.Text = "배치코스트";
+                this.TitleAutoAirSuperiority.Text = "목표제공";
+                this.TitleAutoDistance.Text = "목표반경";
 
-				AutoAirSuperiority = new NumericUpDown();
-				AutoAirSuperiority.Size = new Size(60, AutoAirSuperiority.Height);
-				AutoAirSuperiority.Anchor = AnchorStyles.None;
-				AutoAirSuperiority.Maximum = 9999;
-				AutoAirSuperiority.TextAlign = HorizontalAlignment.Right;
-				AutoAirSuperiority.Margin = new Padding(2, 0, 2, 0);
+                this.AutoAirSuperiority = new NumericUpDown();
+                this.AutoAirSuperiority.Size = new Size(60, this.AutoAirSuperiority.Height);
+                this.AutoAirSuperiority.Anchor = AnchorStyles.None;
+                this.AutoAirSuperiority.Maximum = 9999;
+                this.AutoAirSuperiority.TextAlign = HorizontalAlignment.Right;
+                this.AutoAirSuperiority.Margin = new Padding(2, 0, 2, 0);
 
-				AutoDistance = new NumericUpDown();
-				AutoDistance.Size = new Size(60, AutoDistance.Height);
-				AutoDistance.Anchor = AnchorStyles.None;
-				AutoDistance.Maximum = 20;
-				AutoDistance.TextAlign = HorizontalAlignment.Right;
-				AutoDistance.Margin = new Padding(2, 0, 2, 0);
+                this.AutoDistance = new NumericUpDown();
+                this.AutoDistance.Size = new Size(60, this.AutoDistance.Height);
+                this.AutoDistance.Anchor = AnchorStyles.None;
+                this.AutoDistance.Maximum = 20;
+                this.AutoDistance.TextAlign = HorizontalAlignment.Right;
+                this.AutoDistance.Margin = new Padding(2, 0, 2, 0);
 
-				AutoAirSuperiorityMode = new ComboBox();
-				AutoAirSuperiorityMode.Size = new Size(160, AutoAirSuperiorityMode.Height);
-				AutoAirSuperiorityMode.Anchor = AnchorStyles.None;
-				AutoAirSuperiorityMode.Margin = new Padding(2, 0, 2, 0);
-				AutoAirSuperiorityMode.DropDownStyle = ComboBoxStyle.DropDownList;
-				AutoAirSuperiorityMode.Items.Add(-1);
-				AutoAirSuperiorityMode.Items.Add(1);
-				AutoAirSuperiorityMode.Items.Add(2);
-				AutoAirSuperiorityMode.Items.Add(0);
-				AutoAirSuperiorityMode.Items.Add(3);
-				AutoAirSuperiorityMode.Items.Add(4);
-				AutoAirSuperiorityMode.FormattingEnabled = true;
-				AutoAirSuperiorityMode.Format += AutoAirSuperiorityMode_Format;
-				AutoAirSuperiorityMode.SelectedIndex = 0;
+                this.AutoAirSuperiorityMode = new ComboBox();
+                this.AutoAirSuperiorityMode.Size = new Size(160, this.AutoAirSuperiorityMode.Height);
+                this.AutoAirSuperiorityMode.Anchor = AnchorStyles.None;
+                this.AutoAirSuperiorityMode.Margin = new Padding(2, 0, 2, 0);
+                this.AutoAirSuperiorityMode.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.AutoAirSuperiorityMode.Items.Add(-1);
+                this.AutoAirSuperiorityMode.Items.Add(1);
+                this.AutoAirSuperiorityMode.Items.Add(2);
+                this.AutoAirSuperiorityMode.Items.Add(0);
+                this.AutoAirSuperiorityMode.Items.Add(3);
+                this.AutoAirSuperiorityMode.Items.Add(4);
+                this.AutoAirSuperiorityMode.FormattingEnabled = true;
+                this.AutoAirSuperiorityMode.Format += this.AutoAirSuperiorityMode_Format;
+                this.AutoAirSuperiorityMode.SelectedIndex = 0;
 
-				AutoOrganizeSortie = new Button();
-				AutoOrganizeSortie.Size = new Size(60, AutoOrganizeSortie.Height);
-				AutoOrganizeSortie.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-				AutoOrganizeSortie.Margin = new Padding(2, 0, 2, 0);
-				AutoOrganizeSortie.Text = "출격편성";
-				AutoOrganizeSortie.Click += AutoOrganize_Click;
+                this.AutoOrganizeSortie = new Button();
+                this.AutoOrganizeSortie.Size = new Size(60, this.AutoOrganizeSortie.Height);
+                this.AutoOrganizeSortie.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                this.AutoOrganizeSortie.Margin = new Padding(2, 0, 2, 0);
+                this.AutoOrganizeSortie.Text = "출격편성";
+                this.AutoOrganizeSortie.Click += this.AutoOrganize_Click;
 
-				AutoOrganizeAirDefense = new Button
+                this.AutoOrganizeAirDefense = new Button
 				{
-					Size = new Size(60, AutoOrganizeSortie.Height),
+					Size = new Size(60, this.AutoOrganizeSortie.Height),
 					Anchor = AnchorStyles.Left | AnchorStyles.Right,
 					Margin = new Padding(2, 0, 2, 0),
 					Text = "방공편성"
 				};
-				AutoOrganizeAirDefense.Click += AutoOrganize_Click;
+                this.AutoOrganizeAirDefense.Click += this.AutoOrganize_Click;
 
-				Squadrons = new SquadronUI[4];
-				for (int i = 0; i < Squadrons.Length; i++)
+                this.Squadrons = new SquadronUI[4];
+				for (int i = 0; i < this.Squadrons.Length; i++)
 				{
-					Squadrons[i] = new SquadronUI(baseAirCorpsID, i + 1, parent);
-					Squadrons[i].Updated += BaseAirCorpsUI_Updated;
+                    this.Squadrons[i] = new SquadronUI(baseAirCorpsID, i + 1, parent);
+                    this.Squadrons[i].Updated += this.BaseAirCorpsUI_Updated;
 				}
 
-				TitleTotal = NewTitleLabel();
-				DuplicateCheck = NewTitleLabel();
-				TotalAirSuperioritySortie = NewTotalLabel();
-				TotalAirSuperiorityAirDefense = NewTotalLabel();
-				TotalDistance = NewTotalLabel();
-				TotalOrganizationCost = NewTotalLabel();
+                this.TitleTotal = this.NewTitleLabel();
+                this.DuplicateCheck = this.NewTitleLabel();
+                this.TotalAirSuperioritySortie = this.NewTotalLabel();
+                this.TotalAirSuperiorityAirDefense = this.NewTotalLabel();
+                this.TotalDistance = this.NewTotalLabel();
+                this.TotalOrganizationCost = this.NewTotalLabel();
 
-				TitleTotal.Text = "합계";
-				DuplicateCheck.TextAlign = ContentAlignment.MiddleLeft;
-				DuplicateCheck.ForeColor = Color.Red;
+                this.TitleTotal.Text = "합계";
+                this.DuplicateCheck.TextAlign = ContentAlignment.MiddleLeft;
+                this.DuplicateCheck.ForeColor = Color.Red;
 
-				Parent = parent;
-				ToolTipInternal = parent.ToolTipInfo;
+                this.Parent = parent;
+                this.ToolTipInternal = parent.ToolTipInfo;
+                this.Parent.TopMenu_Settings_HighAltitude.CheckedChanged += this.BaseAirCorpsUI_Updated;
 
-				BaseAirCorpsUI_Updated(null, new EventArgs());
+                this.BaseAirCorpsUI_Updated(null, new EventArgs());
 			}
 
 			private Label NewTitleLabel()
@@ -485,53 +486,53 @@ namespace ElectronicObserver.Window.Dialog
 			public void AddToTable(TableLayoutPanel table)
 			{
 
-				table.Controls.Add(TitleAircraftCategory, 0, 0);
-				table.Controls.Add(TitleAircraft, 1, 0);
-				table.Controls.Add(TitleAircraftCount, 2, 0);
-				table.Controls.Add(TitleAirSuperioritySortie, 3, 0);
-				table.Controls.Add(TitleAirSuperiorityAirDefense, 4, 0);
-				table.Controls.Add(TitleDistance, 5, 0);
-				table.Controls.Add(TitleBomber, 6, 0);
-				table.Controls.Add(TitleTorpedo, 7, 0);
-				table.Controls.Add(TitleOrganizationCost, 8, 0);
+				table.Controls.Add(this.TitleAircraftCategory, 0, 0);
+				table.Controls.Add(this.TitleAircraft, 1, 0);
+				table.Controls.Add(this.TitleAircraftCount, 2, 0);
+				table.Controls.Add(this.TitleAirSuperioritySortie, 3, 0);
+				table.Controls.Add(this.TitleAirSuperiorityAirDefense, 4, 0);
+				table.Controls.Add(this.TitleDistance, 5, 0);
+				table.Controls.Add(this.TitleBomber, 6, 0);
+				table.Controls.Add(this.TitleTorpedo, 7, 0);
+				table.Controls.Add(this.TitleOrganizationCost, 8, 0);
 
-				for (int i = 0; i < Squadrons.Length; i++)
+				for (int i = 0; i < this.Squadrons.Length; i++)
 				{
-					Squadrons[i].AddToTable(table, i + 1);
+                    this.Squadrons[i].AddToTable(table, i + 1);
 				}
 
-				table.Controls.Add(TitleTotal, 0, Squadrons.Length + 1);
-				table.Controls.Add(DuplicateCheck, 1, Squadrons.Length + 1);
-				table.Controls.Add(TotalAirSuperioritySortie, 3, Squadrons.Length + 1);
-				table.Controls.Add(TotalAirSuperiorityAirDefense, 4, Squadrons.Length + 1);
-				table.Controls.Add(TotalDistance, 5, Squadrons.Length + 1);
-				table.Controls.Add(TotalOrganizationCost, 8, Squadrons.Length + 1);
+				table.Controls.Add(this.TitleTotal, 0, this.Squadrons.Length + 1);
+				table.Controls.Add(this.DuplicateCheck, 1, this.Squadrons.Length + 1);
+				table.Controls.Add(this.TotalAirSuperioritySortie, 3, this.Squadrons.Length + 1);
+				table.Controls.Add(this.TotalAirSuperiorityAirDefense, 4, this.Squadrons.Length + 1);
+				table.Controls.Add(this.TotalDistance, 5, this.Squadrons.Length + 1);
+				table.Controls.Add(this.TotalOrganizationCost, 8, this.Squadrons.Length + 1);
 
 				int autocolumn = 9;
-				table.Controls.Add(TitleAutoAirSuperiority, autocolumn + 0, 0);
-				table.Controls.Add(TitleAutoDistance, autocolumn + 1, 0);
-				table.Controls.Add(AutoAirSuperiority, autocolumn + 0, 1);
-				table.Controls.Add(AutoDistance, autocolumn + 1, 1);
-				table.Controls.Add(AutoAirSuperiorityMode, autocolumn + 0, 2);
-				table.Controls.Add(AutoOrganizeSortie, autocolumn + 0, 5);
-				table.Controls.Add(AutoOrganizeAirDefense, autocolumn + 1, 5);
+				table.Controls.Add(this.TitleAutoAirSuperiority, autocolumn + 0, 0);
+				table.Controls.Add(this.TitleAutoDistance, autocolumn + 1, 0);
+				table.Controls.Add(this.AutoAirSuperiority, autocolumn + 0, 1);
+				table.Controls.Add(this.AutoDistance, autocolumn + 1, 1);
+				table.Controls.Add(this.AutoAirSuperiorityMode, autocolumn + 0, 2);
+				table.Controls.Add(this.AutoOrganizeSortie, autocolumn + 0, 5);
+				table.Controls.Add(this.AutoOrganizeAirDefense, autocolumn + 1, 5);
 
-				table.SetColumnSpan(AutoAirSuperiorityMode, 2);
+				table.SetColumnSpan(this.AutoAirSuperiorityMode, 2);
 			}
 
 
 			void BaseAirCorpsUI_Updated(object sender, EventArgs e)
 			{
 
-				var squadrons = Squadrons.Select(sq => sq.Aircraft.SelectedItem as ComboBoxEquipment)
-					.Where(eq => eq != null && eq.EquipmentInstance != null);
+				var squadrons = this.Squadrons.Select(sq => sq.Aircraft.SelectedItem as ComboBoxEquipment)
+                    .Where(eq => eq?.EquipmentInstance != null);
 
 
-				int airSortie = Squadrons.Select(sq => sq.AirSuperioritySortie.Tag as int? ?? 0).Sum();
+                int airSortie = this.Squadrons.Select(sq => sq.AirSuperioritySortie.Tag as int? ?? 0).Sum();
                 airSortie = (int)(airSortie * squadrons.Select(eq => Calculator.GetAirSuperioritySortieReconBonus(eq.EquipmentID)).DefaultIfEmpty(1).Max());
 
-                TotalAirSuperioritySortie.Text = airSortie.ToString();
-				ToolTipInternal.SetToolTip(TotalAirSuperioritySortie,
+                this.TotalAirSuperioritySortie.Text = airSortie.ToString();
+                this.ToolTipInternal.SetToolTip(this.TotalAirSuperioritySortie,
 					string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
 						(int)(airSortie / 3.0),
 						(int)(airSortie / 1.5),
@@ -539,12 +540,16 @@ namespace ElectronicObserver.Window.Dialog
 						Math.Max((int)(airSortie * 3.0 - 1), 0)));
 
 
-				int airDefense = Squadrons.Select(sq => sq.AirSuperiorityAirDefense.Tag as int? ?? 0).Sum();
+				int airDefense = this.Squadrons.Select(sq => sq.AirSuperiorityAirDefense.Tag as int? ?? 0).Sum();
 
                 airDefense = (int)(airDefense * squadrons.Select(eq => Calculator.GetAirSuperiorityAirDefenseReconBonus(eq.EquipmentID)).DefaultIfEmpty(1).Max());
 
-                TotalAirSuperiorityAirDefense.Text = airDefense.ToString();
-				ToolTipInternal.SetToolTip(TotalAirSuperiorityAirDefense,
+                double highAltitude = this.IsHighAltitude ? Math.Min(0.5 + squadrons.Count(eq => eq.EquipmentInstance.IsHightAltitudeFighter) * 0.3, 1.2) : 1.0;
+                airDefense = (int)(airDefense * squadrons.Select(eq => Calculator.GetAirSuperiorityAirDefenseReconBonus(eq.EquipmentID)).DefaultIfEmpty(1).Max() * highAltitude);
+
+
+                this.TotalAirSuperiorityAirDefense.Text = airDefense.ToString();
+                this.ToolTipInternal.SetToolTip(this.TotalAirSuperiorityAirDefense,
                     string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
                         (int)(airDefense / 3.0),
 						(int)(airDefense / 1.5),
@@ -569,10 +574,10 @@ namespace ElectronicObserver.Window.Dialog
 					if (maxReconDistance > minDistance)
 						distance += Math.Min((int)Math.Round(Math.Sqrt(maxReconDistance - minDistance)), 3);
 
-					TotalDistance.Text = distance.ToString();
+                    this.TotalDistance.Text = distance.ToString();
 				}
 
-				TotalOrganizationCost.Text = Squadrons.Select(sq => sq.OrganizationCost.Tag as int? ?? 0).Sum().ToString();
+                this.TotalOrganizationCost.Text = this.Squadrons.Select(sq => sq.OrganizationCost.Tag as int? ?? 0).Sum().ToString();
 
 
 				Updated(this, new EventArgs());
@@ -595,9 +600,9 @@ namespace ElectronicObserver.Window.Dialog
 			void AutoOrganize_Click(object sender, EventArgs e)
 			{
 
-				bool isAirDefense = sender == AutoOrganizeAirDefense;
-				int airSuperiority = (int)AutoAirSuperiority.Value;
-				switch (AutoAirSuperiorityMode.SelectedItem as int? ?? 0)
+				bool isAirDefense = sender == this.AutoOrganizeAirDefense;
+				int airSuperiority = (int)this.AutoAirSuperiority.Value;
+				switch (this.AutoAirSuperiorityMode.SelectedItem as int? ?? 0)
 				{
 					case -1:
 					default:
@@ -618,12 +623,12 @@ namespace ElectronicObserver.Window.Dialog
 						airSuperiority = 0;
 						break;
 				}
-				int distance = (int)AutoDistance.Value;
+				int distance = (int)this.AutoDistance.Value;
 
 
 				// 装備済み・ほかの航空隊に配備されている機体以外で編成
 				var orgs = AutoOrganize(isAirDefense, airSuperiority, distance,
-					Parent.GetUsingEquipments(new int[] { BaseAirCorpsID - 1 }).Concat(KCDatabase.Instance.Ships.Values.SelectMany(s => s.AllSlot)));
+                    this.Parent.GetUsingEquipments(new int[] { this.BaseAirCorpsID - 1 }).Concat(KCDatabase.Instance.Ships.Values.SelectMany(s => s.AllSlot)));
 
 				if (orgs == null || orgs.All(o => o == null))
 				{
@@ -632,9 +637,9 @@ namespace ElectronicObserver.Window.Dialog
 					return;
 				}
 
-				for (int i = 0; i < Squadrons.Length; i++)
+				for (int i = 0; i < this.Squadrons.Length; i++)
 				{
-					var squi = Squadrons[i];
+					var squi = this.Squadrons[i];
 
 					squi.AircraftCategory.SelectedItem = squi.AircraftCategory.Items.OfType<ComboBoxCategory>().FirstOrDefault(c => c == (orgs[i]?.MasterEquipment?.CategoryType ?? (EquipmentTypes)(-1)));
 					squi.Aircraft.SelectedItem = squi.Aircraft.Items.OfType<ComboBoxEquipment>().FirstOrDefault(q => q.UniqueID == (orgs[i]?.MasterID ?? -1));
@@ -645,33 +650,33 @@ namespace ElectronicObserver.Window.Dialog
 
 			public void Dispose()
 			{
-				TitleAircraftCategory.Dispose();
-				TitleAircraft.Dispose();
-				TitleAircraftCount.Dispose();
-				TitleAirSuperioritySortie.Dispose();
-				TitleAirSuperiorityAirDefense.Dispose();
-				TitleDistance.Dispose();
-				TitleBomber.Dispose();
-				TitleTorpedo.Dispose();
-				TitleOrganizationCost.Dispose();
+                this.TitleAircraftCategory.Dispose();
+                this.TitleAircraft.Dispose();
+                this.TitleAircraftCount.Dispose();
+                this.TitleAirSuperioritySortie.Dispose();
+                this.TitleAirSuperiorityAirDefense.Dispose();
+                this.TitleDistance.Dispose();
+                this.TitleBomber.Dispose();
+                this.TitleTorpedo.Dispose();
+                this.TitleOrganizationCost.Dispose();
 
-				foreach (var sq in Squadrons)
+				foreach (var sq in this.Squadrons)
 					sq.Dispose();
 
-				TitleTotal.Dispose();
-				DuplicateCheck.Dispose();
-				TotalAirSuperioritySortie.Dispose();
-				TotalAirSuperiorityAirDefense.Dispose();
-				TotalDistance.Dispose();
-				TotalOrganizationCost.Dispose();
+                this.TitleTotal.Dispose();
+                this.DuplicateCheck.Dispose();
+                this.TotalAirSuperioritySortie.Dispose();
+                this.TotalAirSuperiorityAirDefense.Dispose();
+                this.TotalDistance.Dispose();
+                this.TotalOrganizationCost.Dispose();
 
-				TitleAutoAirSuperiority.Dispose();
-				TitleAutoDistance.Dispose();
-				AutoAirSuperiorityMode.Dispose();
-				AutoAirSuperiority.Dispose();
-				AutoDistance.Dispose();
-				AutoOrganizeSortie.Dispose();
-				AutoOrganizeAirDefense.Dispose();
+                this.TitleAutoAirSuperiority.Dispose();
+                this.TitleAutoDistance.Dispose();
+                this.AutoAirSuperiorityMode.Dispose();
+                this.AutoAirSuperiority.Dispose();
+                this.AutoDistance.Dispose();
+                this.AutoOrganizeSortie.Dispose();
+                this.AutoOrganizeAirDefense.Dispose();
 			}
 		}
 
@@ -684,16 +689,16 @@ namespace ElectronicObserver.Window.Dialog
 
 			public ComboBoxCategory(EquipmentTypes id)
 			{
-				ID = id;
-				EquipmentType = KCDatabase.Instance.EquipmentTypes[(int)id];
+                this.ID = id;
+                this.EquipmentType = KCDatabase.Instance.EquipmentTypes[(int)id];
 			}
 
 			public override string ToString()
 			{
-				if (EquipmentType == null)
+				if (this.EquipmentType == null)
 					return "(불명)";
 				else
-					return EquipmentType.Name;
+					return this.EquipmentType.Name;
 			}
 
 
@@ -741,47 +746,47 @@ namespace ElectronicObserver.Window.Dialog
 
 			public ComboBoxEquipment(int equipmentID, int level, int aircraftLevel)
 			{
-				EquipmentID = equipmentID;
-				Level = level;
-				AircraftLevel = aircraftLevel;
-				EquipmentInstance = KCDatabase.Instance.MasterEquipments[equipmentID];
-				UniqueID = -1;
+                this.EquipmentID = equipmentID;
+                this.Level = level;
+                this.AircraftLevel = aircraftLevel;
+                this.EquipmentInstance = KCDatabase.Instance.MasterEquipments[equipmentID];
+                this.UniqueID = -1;
 			}
 
 			public ComboBoxEquipment(EquipmentData equipment)
 			{
 				if (equipment == null)
 				{
-					EquipmentID = -1;
-					Level = 0;
-					AircraftLevel = 0;
-					EquipmentInstance = null;
-					UniqueID = -1;
+                    this.EquipmentID = -1;
+                    this.Level = 0;
+                    this.AircraftLevel = 0;
+                    this.EquipmentInstance = null;
+                    this.UniqueID = -1;
 
 				}
 				else
 				{
-					EquipmentID = equipment.EquipmentID;
-					Level = equipment.Level;
-					AircraftLevel = equipment.AircraftLevel;
-					EquipmentInstance = KCDatabase.Instance.MasterEquipments[equipment.EquipmentID];
-					UniqueID = equipment.MasterID;
+                    this.EquipmentID = equipment.EquipmentID;
+                    this.Level = equipment.Level;
+                    this.AircraftLevel = equipment.AircraftLevel;
+                    this.EquipmentInstance = KCDatabase.Instance.MasterEquipments[equipment.EquipmentID];
+                    this.UniqueID = equipment.MasterID;
 				}
 			}
 
 			public override string ToString()
 			{
-				if (EquipmentInstance != null)
+				if (this.EquipmentInstance != null)
 				{
 
-					var sb = new StringBuilder(EquipmentInstance.Name);
+					var sb = new StringBuilder(this.EquipmentInstance.Name);
 
-					if (Level > 0)
-						sb.Append("+").Append(Level);
-					if (AircraftLevel > 0)
-						sb.Append(" ").Append(EquipmentData.AircraftLevelString[AircraftLevel]);
+					if (this.Level > 0)
+						sb.Append("+").Append(this.Level);
+					if (this.AircraftLevel > 0)
+						sb.Append(" ").Append(EquipmentData.AircraftLevelString[this.AircraftLevel]);
 
-					sb.Append(" :").Append(EquipmentInstance.AircraftDistance);
+					sb.Append(" :").Append(this.EquipmentInstance.AircraftDistance);
 					return sb.ToString();
 
 				}
@@ -797,35 +802,35 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogBaseAirCorpsSimulation()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			TableBaseAirCorpsList = new[] {
-				TableBaseAirCorps1,
-				TableBaseAirCorps2,
-				TableBaseAirCorps3,
+            this.TableBaseAirCorpsList = new[] {
+                this.TableBaseAirCorps1,
+                this.TableBaseAirCorps2,
+                this.TableBaseAirCorps3,
 			};
 
 
-			BaseAirCorpsUIList = new BaseAirCorpsUI[TableBaseAirCorpsList.Length];
-			for (int i = 0; i < BaseAirCorpsUIList.Length; i++)
+            this.BaseAirCorpsUIList = new BaseAirCorpsUI[this.TableBaseAirCorpsList.Length];
+			for (int i = 0; i < this.BaseAirCorpsUIList.Length; i++)
 			{
-				BaseAirCorpsUIList[i] = new BaseAirCorpsUI(i + 1, this);
+                this.BaseAirCorpsUIList[i] = new BaseAirCorpsUI(i + 1, this);
 
-				TableBaseAirCorpsList[i].SuspendLayout();
+                this.TableBaseAirCorpsList[i].SuspendLayout();
 
-				BaseAirCorpsUIList[i].AddToTable(TableBaseAirCorpsList[i]);
-				BaseAirCorpsUIList[i].Updated += BaseAirCorpsUIList_Updated;
+                this.BaseAirCorpsUIList[i].AddToTable(this.TableBaseAirCorpsList[i]);
+                this.BaseAirCorpsUIList[i].Updated += this.BaseAirCorpsUIList_Updated;
 
-				TableBaseAirCorpsList[i].CellPaint += TableBaseAirCorps_CellPaint;
-				ControlHelper.SetTableRowStyles(TableBaseAirCorpsList[i], new RowStyle(SizeType.Absolute, 32));
-				ControlHelper.SetTableColumnStyles(TableBaseAirCorpsList[i], new ColumnStyle(SizeType.Absolute, 72));
+                this.TableBaseAirCorpsList[i].CellPaint += this.TableBaseAirCorps_CellPaint;
+				ControlHelper.SetTableRowStyles(this.TableBaseAirCorpsList[i], new RowStyle(SizeType.Absolute, 32));
+				ControlHelper.SetTableColumnStyles(this.TableBaseAirCorpsList[i], new ColumnStyle(SizeType.Absolute, 72));
 
-				ControlHelper.SetTableColumnStyle(TableBaseAirCorpsList[i], 0, new ColumnStyle(SizeType.Absolute, 164));
-				ControlHelper.SetTableColumnStyle(TableBaseAirCorpsList[i], 1, new ColumnStyle(SizeType.Absolute, 244));
+				ControlHelper.SetTableColumnStyle(this.TableBaseAirCorpsList[i], 0, new ColumnStyle(SizeType.Absolute, 164));
+				ControlHelper.SetTableColumnStyle(this.TableBaseAirCorpsList[i], 1, new ColumnStyle(SizeType.Absolute, 244));
 
-				ControlHelper.SetDoubleBuffered(TableBaseAirCorpsList[i]);
+				ControlHelper.SetDoubleBuffered(this.TableBaseAirCorpsList[i]);
 
-				TableBaseAirCorpsList[i].ResumeLayout();
+                this.TableBaseAirCorpsList[i].ResumeLayout();
 			}
 
 		}
@@ -837,7 +842,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				MessageBox.Show("기지항공대 데이터가 없습니다.\r\n출격화면으로 한번 이동해주세요.", "기지 항공대 데이터 없음",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Close();
+                this.Close();
 			}
 
 
@@ -859,17 +864,17 @@ namespace ElectronicObserver.Window.Dialog
 						name = "이벤트해역";
 
 					var tool = new ToolStripMenuItem(string.Format("#{0} {1}", mapAreaID, name), null,
-						new EventHandler((ssender, ee) => TopMenu_Edit_MapArea_Click(mapAreaID)));
+						new EventHandler((ssender, ee) => this.TopMenu_Edit_MapArea_Click(mapAreaID)));
 
-					TopMenu_Edit_ImportOrganization.DropDownItems.Add(tool);
+                    this.TopMenu_Edit_ImportOrganization.DropDownItems.Add(tool);
 				}
 			}
 
 			// 表示部初期化
-			for (int i = 0; i < BaseAirCorpsUIList.Length; i++)
+			for (int i = 0; i < this.BaseAirCorpsUIList.Length; i++)
 			{
-				var ui = BaseAirCorpsUIList[i];
-				var table = TableBaseAirCorpsList[i];
+				var ui = this.BaseAirCorpsUIList[i];
+				var table = this.TableBaseAirCorpsList[i];
 
 				table.SuspendLayout();
 				foreach (var squi in ui.Squadrons)
@@ -879,7 +884,7 @@ namespace ElectronicObserver.Window.Dialog
 				table.ResumeLayout();
 			}
 
-			ClientSize = tableLayoutPanel2.PreferredSize;
+            this.ClientSize = this.tableLayoutPanel2.PreferredSize;
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps]);
 
 		}
@@ -888,14 +893,14 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			// 重複check	
 
-			var sqs = BaseAirCorpsUIList.SelectMany(ui => ui.Squadrons.Select(squi => squi.Aircraft.SelectedItem).OfType<ComboBoxEquipment>());
+			var sqs = this.BaseAirCorpsUIList.SelectMany(ui => ui.Squadrons.Select(squi => squi.Aircraft.SelectedItem).OfType<ComboBoxEquipment>());
 
 			var sqids = sqs.Where(sq => sq != null && sq.UniqueID > 0);
 			var dupes = sqids.GroupBy(sq => sq.UniqueID).Where(g => g.Count() > 1).Select(g => g.Key);
 
-			for (int i = 0; i < BaseAirCorpsUIList.Length; i++)
+			for (int i = 0; i < this.BaseAirCorpsUIList.Length; i++)
 			{
-				var ui = BaseAirCorpsUIList[i];
+				var ui = this.BaseAirCorpsUIList[i];
 				var dupelist = new List<int>();
 
 				for (int x = 0; x < ui.Squadrons.Length; x++)
@@ -929,10 +934,10 @@ namespace ElectronicObserver.Window.Dialog
 		private void TopMenu_Edit_MapArea_Click(int mapAreaID)
 		{
 
-			for (int i = 0; i < BaseAirCorpsUIList.Length; i++)
+			for (int i = 0; i < this.BaseAirCorpsUIList.Length; i++)
 			{
 
-				var ui = BaseAirCorpsUIList[i];
+				var ui = this.BaseAirCorpsUIList[i];
 
 				int id = mapAreaID * 10 + i + 1;
 				var baseAirCorps = KCDatabase.Instance.BaseAirCorps[id];
@@ -973,10 +978,10 @@ namespace ElectronicObserver.Window.Dialog
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 
-				for (int i = 0; i < BaseAirCorpsUIList.Length; i++)
+				for (int i = 0; i < this.BaseAirCorpsUIList.Length; i++)
 				{
-					var ui = BaseAirCorpsUIList[i];
-					var table = TableBaseAirCorpsList[i];
+					var ui = this.BaseAirCorpsUIList[i];
+					var table = this.TableBaseAirCorpsList[i];
 
 					table.SuspendLayout();
 					foreach (var squi in ui.Squadrons)
@@ -991,7 +996,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogBaseAirCorpsSimulation_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 		}
 
 
@@ -1177,7 +1182,7 @@ namespace ElectronicObserver.Window.Dialog
 		private IEnumerable<int> GetUsingEquipments(IEnumerable<int> except)
 		{
 
-			foreach (var corpsui in BaseAirCorpsUIList.Where((b, i) => !except.Contains(i)))
+			foreach (var corpsui in this.BaseAirCorpsUIList.Where((b, i) => !except.Contains(i)))
 			{
 				foreach (var squi in corpsui.Squadrons)
 				{
@@ -1191,6 +1196,14 @@ namespace ElectronicObserver.Window.Dialog
 			}
 		}
 
+        private void TopMenu_Settings_HighAltitude_Click(object sender, EventArgs e)
+        {
 
-	}
+        }
+
+        private void 대고고도폭격ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

@@ -68,21 +68,21 @@ namespace ElectronicObserver.Data
 
 			public ViewColumnData(string name)
 			{
-				Name = name;
+                this.Name = name;
 			}
 
 			public ViewColumnData(string name, int width, int displayIndex, bool visible, bool autoSize)
 			{
-				Name = name;
-				Width = width;
-				DisplayIndex = displayIndex;
-				Visible = visible;
-				AutoSize = autoSize;
+                this.Name = name;
+                this.Width = width;
+                this.DisplayIndex = displayIndex;
+                this.Visible = visible;
+                this.AutoSize = autoSize;
 			}
 
 			public ViewColumnData(DataGridViewColumn column)
 			{
-				FromColumn(column);
+                this.FromColumn(column);
 			}
 
 
@@ -92,14 +92,14 @@ namespace ElectronicObserver.Data
 			/// <param name="column">対象となる列。</param>
 			public void ToColumn(DataGridViewColumn column)
 			{
-				if (column.Name != Name)
+				if (column.Name != this.Name)
 					throw new ArgumentException("설정 열과 이름이 다릅니다.");
 
 				column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;      //width 変更のためいったん戻す
-				column.Width = Width;
-				column.DisplayIndex = DisplayIndex;
-				column.Visible = Visible;
-				column.AutoSizeMode = AutoSize ? DataGridViewAutoSizeColumnMode.AllCellsExceptHeader : DataGridViewAutoSizeColumnMode.NotSet;
+				column.Width = this.Width;
+				column.DisplayIndex = this.DisplayIndex;
+				column.Visible = this.Visible;
+				column.AutoSizeMode = this.AutoSize ? DataGridViewAutoSizeColumnMode.AllCellsExceptHeader : DataGridViewAutoSizeColumnMode.NotSet;
 
 			}
 
@@ -110,23 +110,23 @@ namespace ElectronicObserver.Data
 			/// <returns>このインスタンス自身を返します。</returns>
 			public ViewColumnData FromColumn(DataGridViewColumn column)
 			{
-				Name = column.Name;
-				Width = column.Width;
-				DisplayIndex = column.DisplayIndex;
-				Visible = column.Visible;
-				AutoSize = column.AutoSizeMode == DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+                this.Name = column.Name;
+                this.Width = column.Width;
+                this.DisplayIndex = column.DisplayIndex;
+                this.Visible = column.Visible;
+                this.AutoSize = column.AutoSizeMode == DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 				return this;
 			}
 
 
 			public ViewColumnData Clone()
 			{
-				return (ViewColumnData)MemberwiseClone();
+				return (ViewColumnData)this.MemberwiseClone();
 			}
 
 			object ICloneable.Clone()
 			{
-				return Clone();
+				return this.Clone();
 			}
 		}
 
@@ -156,8 +156,8 @@ namespace ElectronicObserver.Data
 		[DataMember]
 		private IEnumerable<ViewColumnData> ViewColumnsSerializer
 		{
-			get { return ViewColumns.Values; }
-			set { ViewColumns = value.ToDictionary(v => v.Name); }
+			get { return this.ViewColumns.Values; }
+			set { this.ViewColumns = value.ToDictionary(v => v.Name); }
 		}
 
 
@@ -177,8 +177,8 @@ namespace ElectronicObserver.Data
 		[DataMember]
 		private List<SerializableKeyValuePair<string, ListSortDirection>> SortOrderSerializer
 		{
-			get { return SortOrder?.Select(s => new SerializableKeyValuePair<string, ListSortDirection>(s)).ToList(); }
-			set { SortOrder = value?.Select(s => new KeyValuePair<string, ListSortDirection>(s.Key, s.Value)).ToList(); }
+			get { return this.SortOrder?.Select(s => new SerializableKeyValuePair<string, ListSortDirection>(s)).ToList(); }
+			set { this.SortOrder = value?.Select(s => new KeyValuePair<string, ListSortDirection>(s.Key, s.Value)).ToList(); }
 		}
 
 
@@ -205,8 +205,8 @@ namespace ElectronicObserver.Data
 		[DataMember]
 		private SerializableList<int> InclusionFilterSerializer
 		{
-			get { return InclusionFilter; }
-			set { InclusionFilter = value; }
+			get { return this.InclusionFilter; }
+			set { this.InclusionFilter = value; }
 		}
 
 		/// <summary>
@@ -218,8 +218,8 @@ namespace ElectronicObserver.Data
 		[DataMember]
 		private SerializableList<int> ExclusionFilterSerializer
 		{
-			get { return ExclusionFilter; }
-			set { ExclusionFilter = value; }
+			get { return this.ExclusionFilter; }
+			set { this.ExclusionFilter = value; }
 		}
 
 
@@ -234,14 +234,14 @@ namespace ElectronicObserver.Data
 		/// 艦船リスト
 		/// </summary>
 		[IgnoreDataMember]
-		public IEnumerable<ShipData> MembersInstance => Members.Select(id => KCDatabase.Instance.Ships[id]);
+		public IEnumerable<ShipData> MembersInstance => this.Members.Select(id => KCDatabase.Instance.Ships[id]);
 
 
 		[DataMember]
 		private SerializableList<int> MembersSerializer
 		{
-			get { return Members; }
-			set { Members = value; }
+			get { return this.Members; }
+			set { this.Members = value; }
 		}
 
 
@@ -249,22 +249,22 @@ namespace ElectronicObserver.Data
 		public ShipGroupData(int groupID)
 			: base()
 		{
-			Initialize();
-			GroupID = groupID;
+            this.Initialize();
+            this.GroupID = groupID;
 		}
 
 		public override void Initialize()
 		{
-			GroupID = -1;
-			ViewColumns = new Dictionary<string, ViewColumnData>();
-			Name = "no title";
-			ScrollLockColumnCount = 0;
-			AutoSortEnabled = true;
-			SortOrder = new List<KeyValuePair<string, ListSortDirection>>();
-			Expressions = new ExpressionManager();
-			InclusionFilter = new List<int>();
-			ExclusionFilter = new List<int>();
-			Members = new List<int>();
+            this.GroupID = -1;
+            this.ViewColumns = new Dictionary<string, ViewColumnData>();
+            this.Name = "no title";
+            this.ScrollLockColumnCount = 0;
+            this.AutoSortEnabled = true;
+            this.SortOrder = new List<KeyValuePair<string, ListSortDirection>>();
+            this.Expressions = new ExpressionManager();
+            this.InclusionFilter = new List<int>();
+            this.ExclusionFilter = new List<int>();
+            this.Members = new List<int>();
 		}
 
 
@@ -275,40 +275,40 @@ namespace ElectronicObserver.Data
 		public void UpdateMembers(IEnumerable<int> previousOrder = null)
 		{
 
-			if (Expressions == null)
-				Expressions = new ExpressionManager();
+			if (this.Expressions == null)
+                this.Expressions = new ExpressionManager();
 
-			if (InclusionFilter == null)
-				InclusionFilter = new List<int>();
+			if (this.InclusionFilter == null)
+                this.InclusionFilter = new List<int>();
 
-			if (ExclusionFilter == null)
-				ExclusionFilter = new List<int>();
+			if (this.ExclusionFilter == null)
+                this.ExclusionFilter = new List<int>();
 
-			ValidateFilter();
+            this.ValidateFilter();
 
 
-			if (!Expressions.IsAvailable)
-				Expressions.Compile();
+			if (!this.Expressions.IsAvailable)
+                this.Expressions.Compile();
 
-			var newdata = Expressions.GetResult(KCDatabase.Instance.Ships.Values).Select(s => s.MasterID).Union(InclusionFilter).Except(ExclusionFilter);
+			var newdata = this.Expressions.GetResult(KCDatabase.Instance.Ships.Values).Select(s => s.MasterID).Union(this.InclusionFilter).Except(this.ExclusionFilter);
 
-			IEnumerable<int> prev = (previousOrder != null && previousOrder.Count() > 0) ? previousOrder : (Members ?? new List<int>());
+			IEnumerable<int> prev = (previousOrder != null && previousOrder.Count() > 0) ? previousOrder : (this.Members ?? new List<int>());
 
-			// ソート順序を維持するため
-			Members = prev.Except(prev.Except(newdata)).Union(newdata).ToList();
+            // ソート順序を維持するため
+            this.Members = prev.Except(prev.Except(newdata)).Union(newdata).ToList();
 		}
 
 
 		public void AddInclusionFilter(IEnumerable<int> list)
 		{
-			InclusionFilter = InclusionFilter.Union(list).ToList();
-			ExclusionFilter = ExclusionFilter.Except(list).ToList();
+            this.InclusionFilter = this.InclusionFilter.Union(list).ToList();
+            this.ExclusionFilter = this.ExclusionFilter.Except(list).ToList();
 		}
 
 		public void AddExclusionFilter(IEnumerable<int> list)
 		{
-			InclusionFilter = InclusionFilter.Except(list).ToList();
-			ExclusionFilter = ExclusionFilter.Union(list).ToList();
+            this.InclusionFilter = this.InclusionFilter.Except(list).ToList();
+            this.ExclusionFilter = this.ExclusionFilter.Union(list).ToList();
 		}
 
 		public void ValidateFilter()
@@ -316,16 +316,16 @@ namespace ElectronicObserver.Data
 			if (KCDatabase.Instance.Ships.Count > 0)
 			{
 				var ships = KCDatabase.Instance.Ships.Keys;
-				InclusionFilter = InclusionFilter.Intersect(ships).Distinct().ToList();
-				ExclusionFilter = ExclusionFilter.Intersect(ships).Distinct().ToList();
+                this.InclusionFilter = this.InclusionFilter.Intersect(ships).Distinct().ToList();
+                this.ExclusionFilter = this.ExclusionFilter.Intersect(ships).Distinct().ToList();
 			}
 		}
 
 
-		public int ID => GroupID;
+		public int ID => this.GroupID;
 
 
-		public override string ToString() => Name;
+		public override string ToString() => this.Name;
 
 
 
@@ -336,21 +336,21 @@ namespace ElectronicObserver.Data
 		/// <remarks>複製したオブジェクトのIDは必ず -1 になります。適宜再設定してください。</remarks>
 		public ShipGroupData Clone()
 		{
-			var clone = (ShipGroupData)MemberwiseClone();
+			var clone = (ShipGroupData)this.MemberwiseClone();
 			clone.GroupID = -1;
-			clone.ViewColumns = ViewColumns.Select(p => p.Value.Clone()).ToDictionary(p => p.Name);
-			clone.SortOrder = new List<KeyValuePair<string, ListSortDirection>>(SortOrder);
-			clone.Expressions = Expressions.Clone();
-			clone.InclusionFilter = new List<int>(InclusionFilter);
-			clone.ExclusionFilter = new List<int>(ExclusionFilter);
-			clone.Members = new List<int>(Members);
+			clone.ViewColumns = this.ViewColumns.Select(p => p.Value.Clone()).ToDictionary(p => p.Name);
+			clone.SortOrder = new List<KeyValuePair<string, ListSortDirection>>(this.SortOrder);
+			clone.Expressions = this.Expressions.Clone();
+			clone.InclusionFilter = new List<int>(this.InclusionFilter);
+			clone.ExclusionFilter = new List<int>(this.ExclusionFilter);
+			clone.Members = new List<int>(this.Members);
 
 			return clone;
 		}
 
 		object ICloneable.Clone()
 		{
-			return Clone();
+			return this.Clone();
 		}
 
 

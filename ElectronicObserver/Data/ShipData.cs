@@ -23,32 +23,32 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 艦娘を一意に識別するID
         /// </summary>
-        public int MasterID => (int)RawData.api_id;
+        public int MasterID => (int)this.RawData.api_id;
 
         /// <summary>
         /// 並べ替えの順番
         /// </summary>
-        public int SortID => (int)RawData.api_sortno;
+        public int SortID => (int)this.RawData.api_sortno;
 
         /// <summary>
         /// 艦船ID
         /// </summary>
-        public int ShipID => (int)RawData.api_ship_id;
+        public int ShipID => (int)this.RawData.api_ship_id;
 
         /// <summary>
         /// レベル
         /// </summary>
-        public int Level => (int)RawData.api_lv;
+        public int Level => (int)this.RawData.api_lv;
 
         /// <summary>
         /// 累積経験値
         /// </summary>
-        public int ExpTotal => (int)RawData.api_exp[0];
+        public int ExpTotal => (int)this.RawData.api_exp[0];
 
         /// <summary>
         /// 次のレベルに達するために必要な経験値
         /// </summary>
-        public int ExpNext => (int)RawData.api_exp[1];
+        public int ExpNext => (int)this.RawData.api_exp[1];
 
 
         /// <summary>
@@ -59,18 +59,18 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 耐久最大値
         /// </summary>
-        public int HPMax => (int)RawData.api_maxhp;
+        public int HPMax => (int)this.RawData.api_maxhp;
 
 
         /// <summary>
         /// 速力
         /// </summary>
-        public int Speed => RawData.api_soku() ? (int)RawData.api_soku : MasterShip.Speed;
+        public int Speed => this.RawData.api_soku() ? (int)this.RawData.api_soku : this.MasterShip.Speed;
 
         /// <summary>
         /// 射程
         /// </summary>
-        public int Range => (int)RawData.api_leng;
+        public int Range => (int)this.RawData.api_leng;
 
 
         /// <summary>
@@ -82,17 +82,17 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 装備スロット(マスターID)
         /// </summary>
-        public ReadOnlyCollection<int> SlotMaster => Array.AsReadOnly(Slot.Select(id => KCDatabase.Instance.Equipments[id]?.EquipmentID ?? -1).ToArray());
+        public ReadOnlyCollection<int> SlotMaster => Array.AsReadOnly(this.Slot.Select(id => KCDatabase.Instance.Equipments[id]?.EquipmentID ?? -1).ToArray());
 
         /// <summary>
         /// 装備スロット(装備データ)
         /// </summary>
-        public ReadOnlyCollection<EquipmentData> SlotInstance => Array.AsReadOnly(Slot.Select(id => KCDatabase.Instance.Equipments[id]).ToArray());
+        public ReadOnlyCollection<EquipmentData> SlotInstance => Array.AsReadOnly(this.Slot.Select(id => KCDatabase.Instance.Equipments[id]).ToArray());
 
         /// <summary>
         /// 装備スロット(装備マスターデータ)
         /// </summary>
-        public ReadOnlyCollection<EquipmentDataMaster> SlotInstanceMaster => Array.AsReadOnly(Slot.Select(id => KCDatabase.Instance.Equipments[id]?.MasterEquipment).ToArray());
+        public ReadOnlyCollection<EquipmentDataMaster> SlotInstanceMaster => Array.AsReadOnly(this.Slot.Select(id => KCDatabase.Instance.Equipments[id]?.MasterEquipment).ToArray());
 
 
         /// <summary>
@@ -104,38 +104,38 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 補強装備スロット(マスターID)
         /// </summary>
-        public int ExpansionSlotMaster => ExpansionSlot == 0 ? 0 : (KCDatabase.Instance.Equipments[ExpansionSlot]?.EquipmentID ?? -1);
+        public int ExpansionSlotMaster => this.ExpansionSlot == 0 ? 0 : (KCDatabase.Instance.Equipments[this.ExpansionSlot]?.EquipmentID ?? -1);
 
         /// <summary>
         /// 補強装備スロット(装備データ)
         /// </summary>
-        public EquipmentData ExpansionSlotInstance => KCDatabase.Instance.Equipments[ExpansionSlot];
+        public EquipmentData ExpansionSlotInstance => KCDatabase.Instance.Equipments[this.ExpansionSlot];
 
         /// <summary>
         /// 補強装備スロット(装備マスターデータ)
         /// </summary>
-        public EquipmentDataMaster ExpansionSlotInstanceMaster => KCDatabase.Instance.Equipments[ExpansionSlot]?.MasterEquipment;
+        public EquipmentDataMaster ExpansionSlotInstanceMaster => KCDatabase.Instance.Equipments[this.ExpansionSlot]?.MasterEquipment;
 
 
         /// <summary>
         /// 全てのスロット(ID)
         /// </summary>
-        public ReadOnlyCollection<int> AllSlot => Array.AsReadOnly(Slot.Concat(new[] { ExpansionSlot }).ToArray());
+        public ReadOnlyCollection<int> AllSlot => Array.AsReadOnly(this.Slot.Concat(new[] { this.ExpansionSlot }).ToArray());
 
         /// <summary>
         /// 全てのスロット(マスターID)
         /// </summary>
-        public ReadOnlyCollection<int> AllSlotMaster => Array.AsReadOnly(AllSlot.Select(id => KCDatabase.Instance.Equipments[id]?.EquipmentID ?? -1).ToArray());
+        public ReadOnlyCollection<int> AllSlotMaster => Array.AsReadOnly(this.AllSlot.Select(id => KCDatabase.Instance.Equipments[id]?.EquipmentID ?? -1).ToArray());
 
         /// <summary>
         /// 全てのスロット(装備データ)
         /// </summary>
-        public ReadOnlyCollection<EquipmentData> AllSlotInstance => Array.AsReadOnly(AllSlot.Select(id => KCDatabase.Instance.Equipments[id]).ToArray());
+        public ReadOnlyCollection<EquipmentData> AllSlotInstance => Array.AsReadOnly(this.AllSlot.Select(id => KCDatabase.Instance.Equipments[id]).ToArray());
 
         /// <summary>
         /// 全てのスロット(装備マスターデータ)
         /// </summary>
-        public ReadOnlyCollection<EquipmentDataMaster> AllSlotInstanceMaster => Array.AsReadOnly(AllSlot.Select(id => KCDatabase.Instance.Equipments[id]?.MasterEquipment).ToArray());
+        public ReadOnlyCollection<EquipmentDataMaster> AllSlotInstanceMaster => Array.AsReadOnly(this.AllSlot.Select(id => KCDatabase.Instance.Equipments[id]?.MasterEquipment).ToArray());
 
 
 
@@ -143,13 +143,13 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 各スロットの航空機搭載量
         /// </summary>
-        public ReadOnlyCollection<int> Aircraft => Array.AsReadOnly(_aircraft);
+        public ReadOnlyCollection<int> Aircraft => Array.AsReadOnly(this._aircraft);
 
 
         /// <summary>
         /// 現在の航空機搭載量
         /// </summary>
-        public int AircraftTotal => _aircraft.Sum(a => Math.Max(a, 0));
+        public int AircraftTotal => this._aircraft.Sum(a => Math.Max(a, 0));
 
 
         /// <summary>
@@ -166,22 +166,22 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// スロットのサイズ
         /// </summary>
-        public int SlotSize => !RawData.api_slotnum() ? 0 : (int)RawData.api_slotnum;
+        public int SlotSize => !this.RawData.api_slotnum() ? 0 : (int)this.RawData.api_slotnum;
 
         /// <summary>
         /// 入渠にかかる時間(ミリ秒)
         /// </summary>
-        public int RepairTime => (int)RawData.api_ndock_time;
+        public int RepairTime => (int)this.RawData.api_ndock_time;
 
         /// <summary>
         /// 入渠にかかる鋼材
         /// </summary>
-        public int RepairSteel => (int)RawData.api_ndock_item[1];
+        public int RepairSteel => (int)this.RawData.api_ndock_item[1];
 
         /// <summary>
         /// 入渠にかかる燃料
         /// </summary>
-        public int RepairFuel => (int)RawData.api_ndock_item[0];
+        public int RepairFuel => (int)this.RawData.api_ndock_item[0];
 
         /// <summary>
         /// コンディション
@@ -201,79 +201,79 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 火力強化値
         /// </summary>
-        public int FirepowerModernized => _modernized.Length >= 5 ? _modernized[0] : 0;
+        public int FirepowerModernized => this._modernized.Length >= 5 ? this._modernized[0] : 0;
 
         /// <summary>
         /// 雷装強化値
         /// </summary>
-        public int TorpedoModernized => _modernized.Length >= 5 ? _modernized[1] : 0;
+        public int TorpedoModernized => this._modernized.Length >= 5 ? this._modernized[1] : 0;
 
         /// <summary>
         /// 対空強化値
         /// </summary>
-        public int AAModernized => _modernized.Length >= 5 ? _modernized[2] : 0;
+        public int AAModernized => this._modernized.Length >= 5 ? this._modernized[2] : 0;
 
         /// <summary>
         /// 装甲強化値
         /// </summary>
-        public int ArmorModernized => _modernized.Length >= 5 ? _modernized[3] : 0;
+        public int ArmorModernized => this._modernized.Length >= 5 ? this._modernized[3] : 0;
 
         /// <summary>
         /// 運強化値
         /// </summary>
-        public int LuckModernized => _modernized.Length >= 5 ? _modernized[4] : 0;
+        public int LuckModernized => this._modernized.Length >= 5 ? this._modernized[4] : 0;
 
         /// <summary>
         /// 耐久強化値
         /// </summary>
-        public int HPMaxModernized => _modernized.Length >= 7 ? _modernized[5] : 0;
+        public int HPMaxModernized => this._modernized.Length >= 7 ? this._modernized[5] : 0;
 
         /// <summary>
         /// 対潜強化値
         /// </summary>
-        public int ASWModernized => _modernized.Length >= 7 ? _modernized[6] : 0;
+        public int ASWModernized => this._modernized.Length >= 7 ? this._modernized[6] : 0;
 
 
         /// <summary>
         /// 火力改修残り
         /// </summary>
-        public int FirepowerRemain => (MasterShip.FirepowerMax - MasterShip.FirepowerMin) - FirepowerModernized;
+        public int FirepowerRemain => (this.MasterShip.FirepowerMax - this.MasterShip.FirepowerMin) - this.FirepowerModernized;
 
         /// <summary>
         /// 雷装改修残り
         /// </summary>
-        public int TorpedoRemain => (MasterShip.TorpedoMax - MasterShip.TorpedoMin) - TorpedoModernized;
+        public int TorpedoRemain => (this.MasterShip.TorpedoMax - this.MasterShip.TorpedoMin) - this.TorpedoModernized;
 
         /// <summary>
         /// 対空改修残り
         /// </summary>
-        public int AARemain => (MasterShip.AAMax - MasterShip.AAMin) - AAModernized;
+        public int AARemain => (this.MasterShip.AAMax - this.MasterShip.AAMin) - this.AAModernized;
 
         /// <summary>
         /// 装甲改修残り
         /// </summary>
-        public int ArmorRemain => (MasterShip.ArmorMax - MasterShip.ArmorMin) - ArmorModernized;
+        public int ArmorRemain => (this.MasterShip.ArmorMax - this.MasterShip.ArmorMin) - this.ArmorModernized;
 
         /// <summary>
         /// 運改修残り
         /// </summary>
-        public int LuckRemain => (MasterShip.LuckMax - MasterShip.LuckMin) - LuckModernized;
+        public int LuckRemain => (this.MasterShip.LuckMax - this.MasterShip.LuckMin) - this.LuckModernized;
 
         /// <summary>
         /// 耐久改修残り
         /// </summary>
-        public int HPMaxRemain => (IsMarried ? MasterShip.HPMaxMarriedModernizable : MasterShip.HPMaxModernizable) - HPMaxModernized;
+        public int HPMaxRemain => (this.IsMarried ? this.MasterShip.HPMaxMarriedModernizable : this.MasterShip.HPMaxModernizable) - this.HPMaxModernized;
 
         /// <summary>
         /// 対潜改修残り
         /// </summary>
-        public int ASWRemain => ASWMax <= 0 ? 0 : MasterShip.ASWModernizable - ASWModernized;
+        public int ASWRemain => this.ASWMax <= 0 ? 0 : this.MasterShip.ASWModernizable - this.ASWModernized;
 
 
         /// <summary>
         /// 火力総合値
         /// </summary>
-        public int FirepowerTotal => (int)RawData.api_karyoku[0];
+        public int FirepowerTotal => (int)this.RawData.api_karyoku[0];
 
         /// <summary>
         /// 화뇌합
@@ -283,71 +283,71 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 雷装総合値
         /// </summary>
-        public int TorpedoTotal => (int)RawData.api_raisou[0];
+        public int TorpedoTotal => (int)this.RawData.api_raisou[0];
 
         /// <summary>
         /// 対空総合値
         /// </summary>
-        public int AATotal => (int)RawData.api_taiku[0];
+        public int AATotal => (int)this.RawData.api_taiku[0];
 
         /// <summary>
         /// 装甲総合値
         /// </summary>
-        public int ArmorTotal => (int)RawData.api_soukou[0];
+        public int ArmorTotal => (int)this.RawData.api_soukou[0];
 
         /// <summary>
         /// 回避総合値
         /// </summary>
-        public int EvasionTotal => (int)RawData.api_kaihi[0];
+        public int EvasionTotal => (int)this.RawData.api_kaihi[0];
 
         /// <summary>
         /// 対潜総合値
         /// </summary>
-        public int ASWTotal => (int)RawData.api_taisen[0];
+        public int ASWTotal => (int)this.RawData.api_taisen[0];
 
         /// <summary>
         /// 索敵総合値
         /// </summary>
-        public int LOSTotal => (int)RawData.api_sakuteki[0];
+        public int LOSTotal => (int)this.RawData.api_sakuteki[0];
 
         /// <summary>
         /// 運総合値
         /// </summary>
-        public int LuckTotal => (int)RawData.api_lucky[0];
+        public int LuckTotal => (int)this.RawData.api_lucky[0];
 
         /// <summary>
         /// 爆装総合値
         /// </summary>
-        public int BomberTotal => AllSlotInstanceMaster.Sum(eq => eq?.Bomber ?? 0);
+        public int BomberTotal => this.AllSlotInstanceMaster.Sum(eq => eq?.Bomber ?? 0);
 
         /// <summary>
         /// 命中総合値
         /// </summary>
-        public int AccuracyTotal => AllSlotInstanceMaster.Sum(eq => eq?.Accuracy ?? 0);
+        public int AccuracyTotal => this.AllSlotInstanceMaster.Sum(eq => eq?.Accuracy ?? 0);
 
 
         /// <summary>
         /// 火力基本値
         /// </summary>
-        public int FirepowerBase => MasterShip.FirepowerMin + FirepowerModernized;
+        public int FirepowerBase => this.MasterShip.FirepowerMin + this.FirepowerModernized;
 
 
         /// <summary>
         /// 雷装基本値
         /// </summary>
-        public int TorpedoBase => MasterShip.TorpedoMin + TorpedoModernized;
+        public int TorpedoBase => this.MasterShip.TorpedoMin + this.TorpedoModernized;
 
 
         /// <summary>
         /// 対空基本値
         /// </summary>
-        public int AABase => MasterShip.AAMin + AAModernized;
+        public int AABase => this.MasterShip.AAMin + this.AAModernized;
 
 
         /// <summary>
         /// 装甲基本値
         /// </summary>
-        public int ArmorBase => MasterShip.ArmorMin + ArmorModernized;
+        public int ArmorBase => this.MasterShip.ArmorMin + this.ArmorModernized;
 
 
         /// <summary>
@@ -357,12 +357,12 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                if (MasterShip.Evasion.IsDetermined)
-                    return MasterShip.Evasion.GetParameter(Level);
+                if (this.MasterShip.Evasion.IsDetermined)
+                    return this.MasterShip.Evasion.GetParameter(this.Level);
 
                 // パラメータ上限下限が分かっていれば上ので確実に取れる
                 // 不明な場合は以下で擬似計算（装備分を引くだけ）　装備シナジーによって上昇している場合誤差が発生します
-                return EvasionTotal - AllSlotInstance.Sum(eq => eq?.MasterEquipment?.Evasion ?? 0);
+                return this.EvasionTotal - this.AllSlotInstance.Sum(eq => eq?.MasterEquipment?.Evasion ?? 0);
             }
         }
 
@@ -373,10 +373,10 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                if (MasterShip.ASW.IsDetermined)
-                    return MasterShip.ASW.GetParameter(Level) + ASWModernized;
+                if (this.MasterShip.ASW.IsDetermined)
+                    return this.MasterShip.ASW.GetParameter(this.Level) + this.ASWModernized;
 
-                return ASWTotal - AllSlotInstance.Sum(eq => eq?.MasterEquipment?.ASW ?? 0);
+                return this.ASWTotal - this.AllSlotInstance.Sum(eq => eq?.MasterEquipment?.ASW ?? 0);
             }
         }
 
@@ -387,34 +387,34 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                if (MasterShip.LOS.IsDetermined)
-                    return MasterShip.LOS.GetParameter(Level);
+                if (this.MasterShip.LOS.IsDetermined)
+                    return this.MasterShip.LOS.GetParameter(this.Level);
 
-                return LOSTotal - AllSlotInstance.Sum(eq => eq?.MasterEquipment?.LOS ?? 0);
+                return this.LOSTotal - this.AllSlotInstance.Sum(eq => eq?.MasterEquipment?.LOS ?? 0);
             }
         }
 
         /// <summary>
         /// 運基本値
         /// </summary>
-        public int LuckBase => MasterShip.LuckMin + LuckModernized;
+        public int LuckBase => this.MasterShip.LuckMin + this.LuckModernized;
 
 
 
         /// <summary>
         /// 回避最大値
         /// </summary>
-        public int EvasionMax => (int)RawData.api_kaihi[1];
+        public int EvasionMax => (int)this.RawData.api_kaihi[1];
 
         /// <summary>
         /// 対潜最大値
         /// </summary>
-        public int ASWMax => (int)RawData.api_taisen[1];
+        public int ASWMax => (int)this.RawData.api_taisen[1];
 
         /// <summary>
         /// 索敵最大値
         /// </summary>
-        public int LOSMax => (int)RawData.api_sakuteki[1];
+        public int LOSMax => (int)this.RawData.api_sakuteki[1];
 
         #endregion
 
@@ -422,37 +422,37 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 保護ロックの有無
         /// </summary>
-        public bool IsLocked => (int)RawData.api_locked != 0;
+        public bool IsLocked => (int)this.RawData.api_locked != 0;
 
         /// <summary>
         /// 装備による保護ロックの有無
         /// </summary>
-        public bool IsLockedByEquipment => (int)RawData.api_locked_equip != 0;
+        public bool IsLockedByEquipment => (int)this.RawData.api_locked_equip != 0;
 
 
         /// <summary>
         /// 出撃海域
         /// </summary>
-        public int SallyArea => RawData.api_sally_area() ? (int)RawData.api_sally_area : -1;
+        public int SallyArea => this.RawData.api_sally_area() ? (int)this.RawData.api_sally_area : -1;
 
 
 
         /// <summary>
         /// 艦船のマスターデータへの参照
         /// </summary>
-        public ShipDataMaster MasterShip => KCDatabase.Instance.MasterShips[ShipID];
+        public ShipDataMaster MasterShip => KCDatabase.Instance.MasterShips[this.ShipID];
 
 
         /// <summary>
         /// 入渠中のドックID　非入渠時は-1
         /// </summary>
-        public int RepairingDockID => KCDatabase.Instance.Docks.Values.FirstOrDefault(dock => dock.ShipID == MasterID)?.DockID ?? -1;
+        public int RepairingDockID => KCDatabase.Instance.Docks.Values.FirstOrDefault(dock => dock.ShipID == this.MasterID)?.DockID ?? -1;
 
 
         /// <summary>
         /// 所属艦隊　-1=なし
         /// </summary>
-        public int Fleet => KCDatabase.Instance.Fleet.Fleets.Values.FirstOrDefault(f => f.Members.Contains(MasterID))?.FleetID ?? -1;
+        public int Fleet => KCDatabase.Instance.Fleet.Fleets.Values.FirstOrDefault(f => f.Members.Contains(this.MasterID))?.FleetID ?? -1;
 
 
 
@@ -468,7 +468,7 @@ namespace ElectronicObserver.Data
                 FleetManager fm = KCDatabase.Instance.Fleet;
                 foreach (var f in fm.Fleets.Values)
                 {
-                    int index = f.Members.IndexOf(MasterID);
+                    int index = f.Members.IndexOf(this.MasterID);
                     if (index != -1)
                     {
                         return $"{f.FleetID}-{index + 1}";
@@ -483,7 +483,7 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// ケッコン済みかどうか
         /// </summary>
-        public bool IsMarried => Level > 99;
+        public bool IsMarried => this.Level > 99;
 
 
         /// <summary>
@@ -493,10 +493,10 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                ShipDataMaster master = MasterShip;
+                ShipDataMaster master = this.MasterShip;
                 if (master.RemodelAfterShipID <= 0)
                     return 0;
-                return Math.Max(ExpTable.ShipExp[master.RemodelAfterLevel].Total - ExpTotal, 0);
+                return Math.Max(ExpTable.ShipExp[master.RemodelAfterLevel].Total - this.ExpTotal, 0);
             }
         }
 
@@ -504,54 +504,54 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 艦名
         /// </summary>
-        public string Name => MasterShip.Name;
+        public string Name => this.MasterShip.Name;
 
-        public string Name_JP => MasterShip.Name_JP;
+        public string Name_JP => this.MasterShip.Name_JP;
 
         /// <summary>
         /// 艦名(レベルを含む)
         /// </summary>
-        public string NameWithLevel => $"{MasterShip.Name} Lv. {Level}";
+        public string NameWithLevel => $"{this.MasterShip.Name} Lv. {this.Level}";
 
 
         /// <summary>
         /// HP/HPmax
         /// </summary>
-        public double HPRate => HPMax > 0 ? (double)HPCurrent / HPMax : 0;
+        public double HPRate => this.HPMax > 0 ? (double)this.HPCurrent / this.HPMax : 0;
 
 
 
         /// <summary>
         /// 最大搭載燃料
         /// </summary>
-        public int FuelMax => MasterShip.Fuel;
+        public int FuelMax => this.MasterShip.Fuel;
 
         /// <summary>
         /// 最大搭載弾薬
         /// </summary>
-        public int AmmoMax => MasterShip.Ammo;
+        public int AmmoMax => this.MasterShip.Ammo;
 
 
         /// <summary>
         /// 燃料残量割合
         /// </summary>
-        public double FuelRate => (double)Fuel / Math.Max(FuelMax, 1);
+        public double FuelRate => (double)this.Fuel / Math.Max(this.FuelMax, 1);
 
         /// <summary>
         /// 弾薬残量割合
         /// </summary>
-        public double AmmoRate => (double)Ammo / Math.Max(AmmoMax, 1);
+        public double AmmoRate => (double)this.Ammo / Math.Max(this.AmmoMax, 1);
 
 
         /// <summary>
         /// 補給で消費する燃料
         /// </summary>
-        public int SupplyFuel => (FuelMax - Fuel) == 0 ? 0 : Math.Max((int)Math.Floor((FuelMax - Fuel) * (IsMarried ? 0.85 : 1)), 1);
+        public int SupplyFuel => (this.FuelMax - this.Fuel) == 0 ? 0 : Math.Max((int)Math.Floor((this.FuelMax - this.Fuel) * (this.IsMarried ? 0.85 : 1)), 1);
 
         /// <summary>
         /// 補給で消費する弾薬
         /// </summary>
-        public int SupplyAmmo => (AmmoMax - Ammo) == 0 ? 0 : Math.Max((int)Math.Floor((AmmoMax - Ammo) * (IsMarried ? 0.85 : 1)), 1);
+        public int SupplyAmmo => (this.AmmoMax - this.Ammo) == 0 ? 0 : Math.Max((int)Math.Floor((this.AmmoMax - this.Ammo) * (this.IsMarried ? 0.85 : 1)), 1);
 
 
         /// <summary>
@@ -561,12 +561,12 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                double[] airs = new double[_aircraft.Length];
-                var airmax = MasterShip.Aircraft;
+                double[] airs = new double[this._aircraft.Length];
+                var airmax = this.MasterShip.Aircraft;
 
                 for (int i = 0; i < airs.Length; i++)
                 {
-                    airs[i] = (double)_aircraft[i] / Math.Max(airmax[i], 1);
+                    airs[i] = (double)this._aircraft[i] / Math.Max(airmax[i], 1);
                 }
 
                 return Array.AsReadOnly(airs);
@@ -576,14 +576,14 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 搭載機残量割合
         /// </summary>
-        public double AircraftTotalRate => (double)AircraftTotal / Math.Max(MasterShip.AircraftTotal, 1);
+        public double AircraftTotalRate => (double)this.AircraftTotal / Math.Max(this.MasterShip.AircraftTotal, 1);
 
 
 
         /// <summary>
         /// 補強装備スロットが使用可能か
         /// </summary>
-        public bool IsExpansionSlotAvailable => ExpansionSlot != 0;
+        public bool IsExpansionSlotAvailable => this.ExpansionSlot != 0;
 
 
 
@@ -593,13 +593,13 @@ namespace ElectronicObserver.Data
         /// 航空戦威力
         /// 本来スロットごとのものであるが、ここでは最大火力を採用する
         /// </summary>
-        public int AirBattlePower => _airbattlePowers.Max();
+        public int AirBattlePower => this._airbattlePowers.Max();
 
         private int[] _airbattlePowers;
         /// <summary>
         /// 各スロットの航空戦威力
         /// </summary>
-        public ReadOnlyCollection<int> AirBattlePowers => Array.AsReadOnly(_airbattlePowers);
+        public ReadOnlyCollection<int> AirBattlePowers => Array.AsReadOnly(this._airbattlePowers);
 
         /// <summary>
         /// 砲撃威力
@@ -636,7 +636,7 @@ namespace ElectronicObserver.Data
         {
 
             double basepower = 0;
-            foreach (var slot in AllSlotInstance)
+            foreach (var slot in this.AllSlotInstance)
             {
                 if (slot == null)
                     continue;
@@ -704,7 +704,7 @@ namespace ElectronicObserver.Data
         private double GetTorpedoEquipmentLevelBonus()
         {
             double basepower = 0;
-            foreach (var slot in AllSlotInstance)
+            foreach (var slot in this.AllSlotInstance)
             {
                 if (slot == null)
                     continue;
@@ -727,7 +727,7 @@ namespace ElectronicObserver.Data
         private double GetAntiSubmarineEquipmentLevelBonus()
         {
             double basepower = 0;
-            foreach (var slot in AllSlotInstance)
+            foreach (var slot in this.AllSlotInstance)
             {
                 if (slot == null)
                     continue;
@@ -749,7 +749,7 @@ namespace ElectronicObserver.Data
         private double GetNightBattleEquipmentLevelBonus()
         {
             double basepower = 0;
-            foreach (var slot in AllSlotInstance)
+            foreach (var slot in this.AllSlotInstance)
             {
                 if (slot == null)
                     continue;
@@ -801,9 +801,9 @@ namespace ElectronicObserver.Data
         /// </summary>
         private double GetHPDamageBonus()
         {
-            if (HPRate <= 0.25)
+            if (this.HPRate <= 0.25)
                 return 0.4;
-            else if (HPRate <= 0.5)
+            else if (this.HPRate <= 0.5)
                 return 0.7;
             else
                 return 1.0;
@@ -815,9 +815,9 @@ namespace ElectronicObserver.Data
         /// <returns></returns>
         private double GetTorpedoHPDamageBonus()
         {
-            if (HPRate <= 0.25)
+            if (this.HPRate <= 0.25)
                 return 0.0;
-            else if (HPRate <= 0.5)
+            else if (this.HPRate <= 0.5)
                 return 0.8;
             else
                 return 1.0;
@@ -847,7 +847,7 @@ namespace ElectronicObserver.Data
         /// <returns></returns>
         private double GetAmmoDamageRate()
         {
-            return Math.Min(Math.Floor(AmmoRate * 100) / 50.0, 1.0);
+            return Math.Min(Math.Floor(this.AmmoRate * 100) / 50.0, 1.0);
         }
 
         /// <summary>
@@ -855,7 +855,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         private double GetCombinedFleetShellingDamageBonus()
         {
-            int fleet = Fleet;
+            int fleet = this.Fleet;
             if (fleet == -1 || fleet > 2)
                 return 0;
 
@@ -889,7 +889,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         private double GetCombinedFleetTorpedoDamageBonus()
         {
-            int fleet = Fleet;
+            int fleet = this.Fleet;
             if (fleet == -1 || fleet > 2)
                 return 0;
 
@@ -904,15 +904,15 @@ namespace ElectronicObserver.Data
         /// </summary>
         private double GetLightCruiserDamageBonus()
         {
-            if (MasterShip.ShipType == ShipTypes.LightCruiser ||
-                MasterShip.ShipType == ShipTypes.TorpedoCruiser ||
-                MasterShip.ShipType == ShipTypes.TrainingCruiser)
+            if (this.MasterShip.ShipType == ShipTypes.LightCruiser ||
+                this.MasterShip.ShipType == ShipTypes.TorpedoCruiser ||
+                this.MasterShip.ShipType == ShipTypes.TrainingCruiser)
             {
 
                 int single = 0;
                 int twin = 0;
 
-                foreach (var slot in AllSlotMaster)
+                foreach (var slot in this.AllSlotMaster)
                 {
                     if (slot == -1) continue;
 
@@ -942,14 +942,14 @@ namespace ElectronicObserver.Data
         /// <returns></returns>
         private double GetItalianDamageBonus()
         {
-            switch (ShipID)
+            switch (this.ShipID)
             {
                 case 448:       // Zara
                 case 358:       // 改
                 case 496:       // due
                 case 449:       // Pola
                 case 361:       // 改
-                    return Math.Sqrt(AllSlotMaster.Count(id => id == 162));     // √( 203mm/53 連装砲 装備数 )
+                    return Math.Sqrt(this.AllSlotMaster.Count(id => id == 162));     // √( 203mm/53 連装砲 装備数 )
 
                 default:
                     return 0;
@@ -972,11 +972,11 @@ namespace ElectronicObserver.Data
         private int CalculateAirBattlePower(int slotIndex)
         {
             double basepower = 0;
-            var slots = AllSlotInstance;
+            var slots = this.AllSlotInstance;
 
-            var eq = SlotInstance[slotIndex];
+            var eq = this.SlotInstance[slotIndex];
 
-            if (eq == null || _aircraft[slotIndex] == 0)
+            if (eq == null || this._aircraft[slotIndex] == 0)
                 return 0;
 
             switch (eq.MasterEquipment.CategoryType)
@@ -984,21 +984,21 @@ namespace ElectronicObserver.Data
                 case EquipmentTypes.CarrierBasedBomber:
                 case EquipmentTypes.SeaplaneBomber:
                 case EquipmentTypes.JetBomber:              // 通常航空戦においては /√2 されるが、とりあえず考えない
-                    basepower = eq.MasterEquipment.Bomber * Math.Sqrt(_aircraft[slotIndex]) + 25;
+                    basepower = eq.MasterEquipment.Bomber * Math.Sqrt(this._aircraft[slotIndex]) + 25;
                     break;
                 case EquipmentTypes.CarrierBasedTorpedo:
                 case EquipmentTypes.JetTorpedo:
                     // 150% 補正を引いたとする
-                    basepower = (eq.MasterEquipment.Torpedo * Math.Sqrt(_aircraft[slotIndex]) + 25) * 1.5;
+                    basepower = (eq.MasterEquipment.Torpedo * Math.Sqrt(this._aircraft[slotIndex]) + 25) * 1.5;
                     break;
                 default:
                     return 0;
             }
 
             //キャップ
-            basepower = Math.Floor(CapDamage(basepower, 150));
+            basepower = Math.Floor(this.CapDamage(basepower, 150));
 
-            return (int)(basepower * GetAmmoDamageRate());
+            return (int)(basepower * this.GetAmmoDamageRate());
         }
 
         /// <summary>
@@ -1007,19 +1007,19 @@ namespace ElectronicObserver.Data
         /// <param name="engagementForm">交戦形態。既定値は 1 (同航戦) です。</param>
         private int CalculateShellingPower(int engagementForm = 1)
         {
-            var attackKind = Calculator.GetDayAttackKind(AllSlotMaster.ToArray(), ShipID, -1);
+            var attackKind = Calculator.GetDayAttackKind(this.AllSlotMaster.ToArray(), this.ShipID, -1);
             if (attackKind == DayAttackKind.AirAttack || attackKind == DayAttackKind.CutinAirAttack)
                 return 0;
 
 
-            double basepower = FirepowerTotal + GetDayBattleEquipmentLevelBonus() + GetCombinedFleetShellingDamageBonus() + 5;
+            double basepower = this.FirepowerTotal + this.GetDayBattleEquipmentLevelBonus() + this.GetCombinedFleetShellingDamageBonus() + 5;
 
-            basepower *= GetHPDamageBonus() * GetEngagementFormDamageRate(engagementForm);
+            basepower *= this.GetHPDamageBonus() * this.GetEngagementFormDamageRate(engagementForm);
 
-            basepower += GetLightCruiserDamageBonus() + GetItalianDamageBonus();
+            basepower += this.GetLightCruiserDamageBonus() + this.GetItalianDamageBonus();
 
             // キャップ
-            basepower = Math.Floor(CapDamage(basepower, 180));
+            basepower = Math.Floor(this.CapDamage(basepower, 180));
 
             // 弾着観測射撃
             switch (attackKind)
@@ -1037,9 +1037,15 @@ namespace ElectronicObserver.Data
                 case DayAttackKind.CutinMainMain:
                     basepower *= 1.5;
                     break;
+                case DayAttackKind.ZuiunMultiAngle:
+                    basepower *= 1.35;
+                    break;
+                case DayAttackKind.SeaAirMultiAngle:
+                    basepower *= 1.3;
+                    break;
             }
 
-            return (int)(basepower * GetAmmoDamageRate());
+            return (int)(basepower * this.GetAmmoDamageRate());
         }
 
         /// <summary>
@@ -1048,22 +1054,22 @@ namespace ElectronicObserver.Data
         /// <param name="engagementForm">交戦形態。既定値は 1 (同航戦) です。</param>
         private int CalculateAircraftPower(int engagementForm = 1)
         {
-            var attackKind = Calculator.GetDayAttackKind(AllSlotMaster.ToArray(), ShipID, -1);
+            var attackKind = Calculator.GetDayAttackKind(this.AllSlotMaster.ToArray(), this.ShipID, -1);
             if (attackKind != DayAttackKind.AirAttack && attackKind != DayAttackKind.CutinAirAttack)
                 return 0;
 
-            double basepower = Math.Floor((FirepowerTotal + TorpedoTotal + Math.Floor(BomberTotal * 1.3) + GetDayBattleEquipmentLevelBonus() + GetCombinedFleetShellingDamageBonus()) * 1.5) + 55;
+            double basepower = Math.Floor((this.FirepowerTotal + this.TorpedoTotal + Math.Floor(this.BomberTotal * 1.3) + this.GetDayBattleEquipmentLevelBonus() + this.GetCombinedFleetShellingDamageBonus()) * 1.5) + 55;
 
-            basepower *= GetHPDamageBonus() * GetEngagementFormDamageRate(engagementForm);
+            basepower *= this.GetHPDamageBonus() * this.GetEngagementFormDamageRate(engagementForm);
 
             // キャップ
-            basepower = Math.Floor(CapDamage(basepower, 180));
+            basepower = Math.Floor(this.CapDamage(basepower, 180));
 
 
             // 空母カットイン
             if (attackKind == DayAttackKind.CutinAirAttack)
             {
-                var kind = Calculator.GetDayAirAttackCutinKind(SlotInstanceMaster);
+                var kind = Calculator.GetDayAirAttackCutinKind(this.SlotInstanceMaster);
                 switch (kind)
                 {
                     case DayAirAttackCutinKind.FighterBomberAttacker:
@@ -1080,7 +1086,7 @@ namespace ElectronicObserver.Data
                 }
             }
 
-            return (int)(basepower * GetAmmoDamageRate());
+            return (int)(basepower * this.GetAmmoDamageRate());
         }
 
         /// <summary>
@@ -1089,11 +1095,11 @@ namespace ElectronicObserver.Data
         /// <param name="engagementForm">交戦形態。既定値は 1 (同航戦) です。</param>
         private int CalculateAntiSubmarinePower(int engagementForm = 1)
         {
-            if (!CanAttackSubmarine)
+            if (!this.CanAttackSubmarine)
                 return 0;
 
             double eqpower = 0;
-            foreach (var slot in AllSlotInstance)
+            foreach (var slot in this.AllSlotInstance)
             {
                 if (slot == null)
                     continue;
@@ -1113,8 +1119,8 @@ namespace ElectronicObserver.Data
                 }
             }
 
-            double basepower = Math.Sqrt(ASWBase) * 2 + eqpower * 1.5 + GetAntiSubmarineEquipmentLevelBonus();
-            if (Calculator.GetDayAttackKind(AllSlotMaster.ToArray(), ShipID, 126, false) == DayAttackKind.AirAttack)
+            double basepower = Math.Sqrt(this.ASWBase) * 2 + eqpower * 1.5 + this.GetAntiSubmarineEquipmentLevelBonus();
+            if (Calculator.GetDayAttackKind(this.AllSlotMaster.ToArray(), this.ShipID, 126, false) == DayAttackKind.AirAttack)
             {       //126=伊168; 対潜攻撃が空撃なら
                 basepower += 8;
             }
@@ -1124,7 +1130,7 @@ namespace ElectronicObserver.Data
             }
 
 
-            basepower *= GetHPDamageBonus() * GetEngagementFormDamageRate(engagementForm);
+            basepower *= this.GetHPDamageBonus() * this.GetEngagementFormDamageRate(engagementForm);
 
 
             //対潜シナジー
@@ -1134,7 +1140,7 @@ namespace ElectronicObserver.Data
             int sonarCount = 0;         // ソナーと大型ソナーの合算
             int largeSonarCount = 0;
 
-            foreach (var slot in AllSlotInstanceMaster)
+            foreach (var slot in this.AllSlotInstanceMaster)
             {
                 if (slot == null)
                     continue;
@@ -1165,9 +1171,9 @@ namespace ElectronicObserver.Data
 
 
             //キャップ
-            basepower = Math.Floor(CapDamage(basepower, 150));
+            basepower = Math.Floor(this.CapDamage(basepower, 150));
 
-            return (int)(basepower * GetAmmoDamageRate());
+            return (int)(basepower * this.GetAmmoDamageRate());
         }
 
         /// <summary>
@@ -1176,18 +1182,18 @@ namespace ElectronicObserver.Data
         /// <param name="engagementForm">交戦形態。既定値は 1 (同航戦) です。</param>
         private int CalculateTorpedoPower(int engagementForm = 1)
         {
-            if (TorpedoBase == 0)
+            if (this.TorpedoBase == 0)
                 return 0;       //雷撃不能艦は除外
 
-            double basepower = TorpedoTotal + GetTorpedoEquipmentLevelBonus() + GetCombinedFleetTorpedoDamageBonus() + 5;
+            double basepower = this.TorpedoTotal + this.GetTorpedoEquipmentLevelBonus() + this.GetCombinedFleetTorpedoDamageBonus() + 5;
 
-            basepower *= GetTorpedoHPDamageBonus() * GetEngagementFormDamageRate(engagementForm);
+            basepower *= this.GetTorpedoHPDamageBonus() * this.GetEngagementFormDamageRate(engagementForm);
 
             //キャップ
-            basepower = Math.Floor(CapDamage(basepower, 150));
+            basepower = Math.Floor(this.CapDamage(basepower, 150));
 
 
-            return (int)(basepower * GetAmmoDamageRate());
+            return (int)(basepower * this.GetAmmoDamageRate());
         }
 
         /// <summary>
@@ -1195,14 +1201,14 @@ namespace ElectronicObserver.Data
         /// </summary>
         private int CalculateNightBattlePower()
         {
-            var kind = Calculator.GetNightAttackKind(AllSlotMaster.ToArray(), ShipID, -1);
+            var kind = Calculator.GetNightAttackKind(this.AllSlotMaster.ToArray(), this.ShipID, -1);
             double basepower = 0;
 
             if (kind == NightAttackKind.CutinAirAttack)
             {
-                var airs = SlotInstance.Zip(Aircraft, (eq, count) => new { eq, master = eq?.MasterEquipment, count }).Where(a => a.eq != null);
+                var airs = this.SlotInstance.Zip(this.Aircraft, (eq, count) => new { eq, master = eq?.MasterEquipment, count }).Where(a => a.eq != null);
 
-                basepower = FirepowerBase +
+                basepower = this.FirepowerBase +
                     airs.Where(p => p.master.IsNightAircraft)
                         .Sum(p => p.master.Firepower + p.master.Torpedo + p.master.Bomber +
                             3 * p.count +
@@ -1212,21 +1218,21 @@ namespace ElectronicObserver.Data
                             0.3 * (p.master.Firepower + p.master.Torpedo + p.master.Bomber + p.master.ASW) * Math.Sqrt(p.count) + Math.Sqrt(p.eq.Level));
 
             }
-            else if (ShipID == 515 || ShipID == 393)
+            else if (this.ShipID == 515 || this.ShipID == 393)
             {       // Ark Royal (改)
-                basepower = FirepowerBase + SlotInstanceMaster.Where(eq => eq?.IsSwordfish ?? false).Sum(eq => eq.Firepower + eq.Torpedo);
+                basepower = this.FirepowerBase + this.SlotInstanceMaster.Where(eq => eq?.IsSwordfish ?? false).Sum(eq => eq.Firepower + eq.Torpedo);
             }
-            else if (ShipID == 353 || ShipID == 432 || ShipID == 433)
+            else if (this.ShipID == 353 || this.ShipID == 432 || this.ShipID == 433)
             {       // Graf Zeppelin(改), Saratoga
-                basepower = FirepowerBase + SlotInstanceMaster.Where(eq => eq?.IsSwordfish ?? false).Sum(eq => eq.Firepower + eq.Torpedo);
+                basepower = this.FirepowerBase + this.SlotInstanceMaster.Where(eq => eq?.IsSwordfish ?? false).Sum(eq => eq.Firepower + eq.Torpedo);
             }
             else
             {
-                basepower = FirepowerTotal + TorpedoTotal + GetNightBattleEquipmentLevelBonus();
+                basepower = this.FirepowerTotal + this.TorpedoTotal + this.GetNightBattleEquipmentLevelBonus();
             }
 
 
-            basepower *= GetHPDamageBonus();
+            basepower *= this.GetHPDamageBonus();
 
             switch (kind)
             {
@@ -1240,7 +1246,7 @@ namespace ElectronicObserver.Data
 
                 case NightAttackKind.CutinTorpedoTorpedo:
                     {
-                        switch (Calculator.GetNightTorpedoCutinKind(AllSlotInstanceMaster, ShipID, -1))
+                        switch (Calculator.GetNightTorpedoCutinKind(this.AllSlotInstanceMaster, this.ShipID, -1))
                         {
                             case NightTorpedoCutinKind.LateModelTorpedoSubmarineEquipment:
                                 basepower *= 1.75;
@@ -1265,9 +1271,9 @@ namespace ElectronicObserver.Data
 
                 case NightAttackKind.CutinAirAttack:
                     {
-                        int nightFighter = SlotInstanceMaster.Count(eq => eq?.IsNightFighter ?? false);
-                        int nightAttacker = SlotInstanceMaster.Count(eq => eq?.IsNightAttacker ?? false);
-                        int nightBomber = SlotInstanceMaster.Count(eq => eq?.EquipmentID == 320);     // 彗星一二型(三一号光電管爆弾搭載機)
+                        int nightFighter = this.SlotInstanceMaster.Count(eq => eq?.IsNightFighter ?? false);
+                        int nightAttacker = this.SlotInstanceMaster.Count(eq => eq?.IsNightAttacker ?? false);
+                        int nightBomber = this.SlotInstanceMaster.Count(eq => eq?.EquipmentID == 320);     // 彗星一二型(三一号光電管爆弾搭載機)
 
                         if (nightFighter >= 2 && nightAttacker >= 1)
                             basepower *= 1.25;
@@ -1281,7 +1287,7 @@ namespace ElectronicObserver.Data
                     break;
 
                 case NightAttackKind.CutinTorpedoRadar:
-                    if (ShipID == 543 && AllSlotInstanceMaster.Any(eq => eq?.EquipmentID == 267))     // 長波改二 + 12.7cm連装砲D型改二
+                    if (this.ShipID == 543 && this.AllSlotInstanceMaster.Any(eq => eq?.EquipmentID == 267))     // 長波改二 + 12.7cm連装砲D型改二
                         basepower *= 1.625;
                     else
                         basepower *= 1.3;
@@ -1292,13 +1298,13 @@ namespace ElectronicObserver.Data
                     break;
             }
 
-            basepower += GetLightCruiserDamageBonus() + GetItalianDamageBonus();
+            basepower += this.GetLightCruiserDamageBonus() + this.GetItalianDamageBonus();
 
             //キャップ
-            basepower = Math.Floor(CapDamage(basepower, 300));
+            basepower = Math.Floor(this.CapDamage(basepower, 300));
 
 
-            return (int)(basepower * GetAmmoDamageRate());
+            return (int)(basepower * this.GetAmmoDamageRate());
         }
 
 
@@ -1310,12 +1316,12 @@ namespace ElectronicObserver.Data
 
             int form = Utility.Configuration.Config.Control.PowerEngagementForm;
 
-            _airbattlePowers = Slot.Select((_, i) => CalculateAirBattlePower(i)).ToArray();
-            ShellingPower = CalculateShellingPower(form);
-            AircraftPower = CalculateAircraftPower(form);
-            AntiSubmarinePower = CalculateAntiSubmarinePower(form);
-            TorpedoPower = CalculateTorpedoPower(form);
-            NightBattlePower = CalculateNightBattlePower();
+            this._airbattlePowers = this.Slot.Select((_, i) => this.CalculateAirBattlePower(i)).ToArray();
+            this.ShellingPower = this.CalculateShellingPower(form);
+            this.AircraftPower = this.CalculateAircraftPower(form);
+            this.AntiSubmarinePower = this.CalculateAntiSubmarinePower(form);
+            this.TorpedoPower = this.CalculateTorpedoPower(form);
+            this.NightBattlePower = this.CalculateNightBattlePower();
 
         }
 
@@ -1331,7 +1337,7 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                switch (MasterShip.ShipType)
+                switch (this.MasterShip.ShipType)
                 {
                     case ShipTypes.Escort:
                     case ShipTypes.Destroyer:
@@ -1339,14 +1345,14 @@ namespace ElectronicObserver.Data
                     case ShipTypes.TorpedoCruiser:
                     case ShipTypes.TrainingCruiser:
                     case ShipTypes.FleetOiler:
-                        return ASWBase > 0;
+                        return this.ASWBase > 0;
 
                     case ShipTypes.AviationCruiser:
                     case ShipTypes.LightAircraftCarrier:
                     case ShipTypes.AviationBattleship:
                     case ShipTypes.SeaplaneTender:
                     case ShipTypes.AmphibiousAssaultShip:
-                        return AllSlotInstanceMaster.Any(eq => eq != null && eq.IsAntiSubmarineAircraft);
+                        return this.AllSlotInstanceMaster.Any(eq => eq != null && eq.IsAntiSubmarineAircraft);
 
                     default:
                         return false;
@@ -1361,10 +1367,10 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                if (!CanAttackSubmarine)
+                if (!this.CanAttackSubmarine)
                     return false;
 
-                switch (ShipID)
+                switch (this.ShipID)
                 {
                     case 141:       // 五十鈴改二
                     case 394:       // Jervis改
@@ -1374,12 +1380,13 @@ namespace ElectronicObserver.Data
                     case 689:       // Johnston改
                     case 596:       // Fletcher
                     case 692:       // Fletcher改
+                    case 893:       // Janus改
                         return true;
                 }
 
-                var eqs = AllSlotInstance.Where(eq => eq != null);
+                var eqs = this.AllSlotInstance.Where(eq => eq != null);
 
-                switch (ShipID)
+                switch (this.ShipID)
                 {
                     case 380:   // 大鷹改
                     case 529:   // 大鷹改二
@@ -1389,42 +1396,42 @@ namespace ElectronicObserver.Data
 
                     case 554:   // 日向改二
                         // カ号観測機, オ号観測機改, オ号観測機改二
-                        if (eqs.Any(eq => eq.EquipmentID == 69 || eq.EquipmentID == 324 || eq.EquipmentID == 325))
+                        if (eqs.Count(eq => eq.EquipmentID == 69 || eq.EquipmentID == 324 || eq.EquipmentID == 325) >= 2)
                             return true;
                         // S-51J, S-51J改
-                        if (eqs.Count(eq => eq.EquipmentID == 326) >= 2 || eqs.Count(eq => eq.EquipmentID == 327) >= 2)
+                        if (eqs.Any(eq => eq.EquipmentID == 326 || eq.EquipmentID == 327))
                             return true;
 
                         return false;
                 }
 
-                if (MasterShip.ShipType == ShipTypes.LightAircraftCarrier && ASWBase > 0)      // 護衛空母
+                if (this.MasterShip.ShipType == ShipTypes.LightAircraftCarrier && this.ASWBase > 0)      // 護衛空母
                 {
                     bool hasASWAircraft = eqs.Any(eq =>
                         (eq.MasterEquipment.CategoryType == EquipmentTypes.CarrierBasedTorpedo && eq.MasterEquipment.ASW >= 7) ||
                         eq.MasterEquipment.CategoryType == EquipmentTypes.ASPatrol ||
                         eq.MasterEquipment.CategoryType == EquipmentTypes.Autogyro);
 
-                    if (hasASWAircraft && ASWTotal >= 65)
+                    if (hasASWAircraft && this.ASWTotal >= 65)
                         return true;
 
-                    if (hasASWAircraft && ASWTotal >= 50 && eqs.Any(eq => eq.MasterEquipment.CategoryType == EquipmentTypes.SonarLarge))
+                    if (hasASWAircraft && this.ASWTotal >= 50 && eqs.Any(eq => eq.MasterEquipment.CategoryType == EquipmentTypes.SonarLarge))
                         return true;
                 }
 
                 bool hasSonar = eqs.Any(eq => eq.MasterEquipment.IsSonar);
                 bool needSonar = !(
-                    MasterShip.ShipType == ShipTypes.Escort &&
-                    ASWTotal >= 75 &&
-                    (ASWTotal - ASWBase) >= 4);
+                    this.MasterShip.ShipType == ShipTypes.Escort &&
+                    this.ASWTotal >= 75 &&
+                    (this.ASWTotal - this.ASWBase) >= 4);
 
                 if (needSonar && !hasSonar)
                     return false;
 
-                if (MasterShip.ShipType == ShipTypes.Escort)
-                    return ASWTotal >= 60;
+                if (this.MasterShip.ShipType == ShipTypes.Escort)
+                    return this.ASWTotal >= 60;
                 else
-                    return ASWTotal >= 100;
+                    return this.ASWTotal >= 100;
             }
         }
 
@@ -1436,9 +1443,9 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                var master = MasterShip;
+                var master = this.MasterShip;
 
-                if (HPRate <= 0.25)
+                if (this.HPRate <= 0.25)
                     return false;
 
                 if (master.FirepowerMin + master.TorpedoMin > 0)
@@ -1447,21 +1454,21 @@ namespace ElectronicObserver.Data
                 // Ark Royal(改)
                 if (master.ShipID == 515 || master.ShipID == 393)
                 {
-                    if (AllSlotInstanceMaster.Any(eq => eq != null && eq.IsSwordfish))
+                    if (this.AllSlotInstanceMaster.Any(eq => eq != null && eq.IsSwordfish))
                         return true;
                 }
 
                 if (master.IsAircraftCarrier)
                 {
                     // 装甲空母ではなく、中破以上の被ダメージ
-                    if (master.ShipType != ShipTypes.ArmoredAircraftCarrier && HPRate <= 0.5)
+                    if (master.ShipType != ShipTypes.ArmoredAircraftCarrier && this.HPRate <= 0.5)
                         return false;
 
                     // Saratoga Mk.II は不要
                     bool hasNightPersonnel = master.ShipID == 545 || master.ShipID == 599 ||
-                        AllSlotInstanceMaster.Any(eq => eq != null && eq.IsNightAviationPersonnel);
+                        this.AllSlotInstanceMaster.Any(eq => eq != null && eq.IsNightAviationPersonnel);
 
-                    bool hasNightAircraft = AllSlotInstanceMaster.Any(eq => eq != null && eq.IsNightAircraft);
+                    bool hasNightAircraft = this.AllSlotInstanceMaster.Any(eq => eq != null && eq.IsNightAircraft);
 
                     if (hasNightPersonnel && hasNightAircraft)
                         return true;
@@ -1479,10 +1486,10 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                if (ExpansionSlotMaster == 42 || ExpansionSlotMaster == 43)
-                    return ExpansionSlotMaster;
+                if (this.ExpansionSlotMaster == 42 || this.ExpansionSlotMaster == 43)
+                    return this.ExpansionSlotMaster;
 
-                foreach (var eq in SlotMaster)
+                foreach (var eq in this.SlotMaster)
                 {
                     if (eq == 42 || eq == 43)
                         return eq;
@@ -1494,8 +1501,8 @@ namespace ElectronicObserver.Data
 
 
 
-        public int ID => MasterID;
-        public override string ToString() => $"[{MasterID}] {NameWithLevel}";
+        public int ID => this.MasterID;
+        public override string ToString() => $"[{this.MasterID}] {this.NameWithLevel}";
 
 
         public override void LoadFromResponse(string apiname, dynamic data)
@@ -1506,24 +1513,24 @@ namespace ElectronicObserver.Data
                 default:
                     base.LoadFromResponse(apiname, (object)data);
 
-                    HPCurrent = (int)RawData.api_nowhp;
-                    Fuel = (int)RawData.api_fuel;
-                    Ammo = (int)RawData.api_bull;
-                    Condition = (int)RawData.api_cond;
-                    Slot = Array.AsReadOnly((int[])RawData.api_slot);
-                    ExpansionSlot = (int)RawData.api_slot_ex;
-                    _aircraft = (int[])RawData.api_onslot;
-                    _modernized = (int[])RawData.api_kyouka;
+                    this.HPCurrent = (int)this.RawData.api_nowhp;
+                    this.Fuel = (int)this.RawData.api_fuel;
+                    this.Ammo = (int)this.RawData.api_bull;
+                    this.Condition = (int)this.RawData.api_cond;
+                    this.Slot = Array.AsReadOnly((int[])this.RawData.api_slot);
+                    this.ExpansionSlot = (int)this.RawData.api_slot_ex;
+                    this._aircraft = (int[])this.RawData.api_onslot;
+                    this._modernized = (int[])this.RawData.api_kyouka;
                     break;
 
                 case "api_req_hokyu/charge":
-                    Fuel = (int)data.api_fuel;
-                    Ammo = (int)data.api_bull;
-                    _aircraft = (int[])data.api_onslot;
+                    this.Fuel = (int)data.api_fuel;
+                    this.Ammo = (int)data.api_bull;
+                    this._aircraft = (int[])data.api_onslot;
                     break;
             }
 
-            CalculatePowers();
+            this.CalculatePowers();
         }
 
 
@@ -1537,18 +1544,18 @@ namespace ElectronicObserver.Data
             {
                 case "api_req_kousyou/destroyship":
                     {
-                        for (int i = 0; i < Slot.Count; i++)
+                        for (int i = 0; i < this.Slot.Count; i++)
                         {
-                            if (Slot[i] == -1)
+                            if (this.Slot[i] == -1)
                                 continue;
 
-                            db.Equipments.Remove(Slot[i]);
+                            db.Equipments.Remove(this.Slot[i]);
                         }
                     }
                     break;
 
                 case "api_req_kaisou/open_exslot":
-                    ExpansionSlot = -1;
+                    this.ExpansionSlot = -1;
                     break;
             }
         }
@@ -1560,12 +1567,12 @@ namespace ElectronicObserver.Data
         internal void Repair()
         {
 
-            HPCurrent = HPMax;
-            Condition = Math.Max(Condition, 40);
+            this.HPCurrent = this.HPMax;
+            this.Condition = Math.Max(this.Condition, 40);
 
-            RawData.api_ndock_time = 0;
-            RawData.api_ndock_item[0] = 0;
-            RawData.api_ndock_item[1] = 0;
+            this.RawData.api_ndock_time = 0;
+            this.RawData.api_ndock_item[0] = 0;
+            this.RawData.api_ndock_item[1] = 0;
 
         }
 

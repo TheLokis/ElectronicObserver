@@ -26,23 +26,23 @@ namespace ElectronicObserver.Data.Quest
 			: base(quest, maxCount)
 		{
 
-			WinOnly = winOnly;
+            this.WinOnly = winOnly;
 		}
 
 
 		public void Increment(string rank)
 		{
 
-			if (WinOnly && Constants.GetWinRank(rank) < Constants.GetWinRank("B"))
+			if (this.WinOnly && Constants.GetWinRank(rank) < Constants.GetWinRank("B"))
 				return;
 
-			Increment();
+            this.Increment();
 		}
 
 
 		public override string GetClearCondition()
 		{
-			return "연습" + (WinOnly ? "승리" : "") + ProgressMax + " 회";
+			return "연습" + (this.WinOnly ? "승리" : "") + this.ProgressMax + " 회";
 		}
 	}
 }

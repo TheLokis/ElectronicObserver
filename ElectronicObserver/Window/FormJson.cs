@@ -30,12 +30,12 @@ namespace ElectronicObserver.Window
 
 		public FormJson(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormJson]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormJson]);
 		}
 
 		private void FormJson_Load(object sender, EventArgs e)
@@ -43,20 +43,20 @@ namespace ElectronicObserver.Window
 
 			var o = APIObserver.Instance;
 
-			o.RequestReceived += RequestReceived;
-			o.ResponseReceived += ResponseReceived;
+			o.RequestReceived += this.RequestReceived;
+			o.ResponseReceived += this.ResponseReceived;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 		}
 
 
 		void RequestReceived(string apiname, dynamic data)
 		{
 
-			if (!AutoUpdate.Checked)
+			if (!this.AutoUpdate.Checked)
 				return;
 
-			if (_apiPattern != null && !_apiPattern.Match(apiname).Success)
+			if (this._apiPattern != null && !this._apiPattern.Match(apiname).Success)
 				return;
 
 
@@ -66,10 +66,10 @@ namespace ElectronicObserver.Window
 		void ResponseReceived(string apiname, dynamic data)
 		{
 
-			if (!AutoUpdate.Checked)
+			if (!this.AutoUpdate.Checked)
 				return;
 
-			if (_apiPattern != null && !_apiPattern.Match(apiname).Success)
+			if (this._apiPattern != null && !this._apiPattern.Match(apiname).Success)
 				return;
 
 
@@ -81,18 +81,18 @@ namespace ElectronicObserver.Window
 		private void LoadRequest(string apiname, Dictionary<string, string> data)
 		{
 
-			JsonRawData.Text = apiname + " : Request\r\n" + string.Join("\r\n", data.Select(p => p.Key + "=" + p.Value));
+            this.JsonRawData.Text = apiname + " : Request\r\n" + string.Join("\r\n", data.Select(p => p.Key + "=" + p.Value));
 
 
-			if (!UpdatesTree.Checked)
+			if (!this.UpdatesTree.Checked)
 				return;
 
 
-			JsonTreeView.BeginUpdate();
+            this.JsonTreeView.BeginUpdate();
 
 
-			JsonTreeView.Nodes.Clear();
-			JsonTreeView.Nodes.Add(apiname);
+            this.JsonTreeView.Nodes.Clear();
+            this.JsonTreeView.Nodes.Add(apiname);
 
 			TreeNode root = new TreeNode("<Request> : {" + data.Count + "}")
 			{
@@ -100,39 +100,39 @@ namespace ElectronicObserver.Window
 			};
 			root.Nodes.AddRange(data.Select(e => new TreeNode(e.Key + " : " + e.Value)).ToArray());
 
-			JsonTreeView.Nodes.Add(root);
+            this.JsonTreeView.Nodes.Add(root);
 
 
-			JsonTreeView.EndUpdate();
-			_currentAPIPath = apiname;
+            this.JsonTreeView.EndUpdate();
+            this._currentAPIPath = apiname;
 		}
 
 		private void LoadResponse(string apiname, dynamic data)
 		{
 
 
-			JsonRawData.Text = (_currentAPIPath == apiname ? JsonRawData.Text + "\r\n\r\n" : "") + apiname + " : Response\r\n" + (data == null ? "" : data.ToString());
+            this.JsonRawData.Text = (this._currentAPIPath == apiname ? this.JsonRawData.Text + "\r\n\r\n" : "") + apiname + " : Response\r\n" + (data == null ? "" : data.ToString());
 
-			if (!UpdatesTree.Checked)
+			if (!this.UpdatesTree.Checked)
 				return;
 
 
-			JsonTreeView.BeginUpdate();
+            this.JsonTreeView.BeginUpdate();
 
 
-			if (JsonTreeView.Nodes.Count == 0 || JsonTreeView.Nodes[0].Text != apiname)
+			if (this.JsonTreeView.Nodes.Count == 0 || this.JsonTreeView.Nodes[0].Text != apiname)
 			{
-				JsonTreeView.Nodes.Clear();
-				JsonTreeView.Nodes.Add(apiname);
+                this.JsonTreeView.Nodes.Clear();
+                this.JsonTreeView.Nodes.Add(apiname);
 			}
 
 			var node = CreateNode("<Response>", data);
 			CreateChildNode(node);
-			JsonTreeView.Nodes.Add(node);
+            this.JsonTreeView.Nodes.Add(node);
 
 
-			JsonTreeView.EndUpdate();
-			_currentAPIPath = apiname;
+            this.JsonTreeView.EndUpdate();
+            this._currentAPIPath = apiname;
 		}
 
 
@@ -170,7 +170,7 @@ namespace ElectronicObserver.Window
 								parsedData.Add(pair[0], pair[1]);
 							}
 
-							LoadRequest(match.Groups[2].Value.Replace('@', '/'), parsedData);
+                            this.LoadRequest(match.Groups[2].Value.Replace('@', '/'), parsedData);
 
 
 						}
@@ -288,7 +288,7 @@ namespace ElectronicObserver.Window
 
 			foreach (TreeNode child in e.Node.Nodes)
 			{
-				CreateChildNode(child);
+                this.CreateChildNode(child);
 			}
 
 			e.Node.Checked = true;
@@ -301,31 +301,31 @@ namespace ElectronicObserver.Window
 
 			var c = Utility.Configuration.Config;
 
-			Font = tabControl1.Font = c.UI.MainFont;
+            this.Font = this.tabControl1.Font = c.UI.MainFont;
 
-			AutoUpdate.Checked = c.FormJson.AutoUpdate;
-			UpdatesTree.Checked = c.FormJson.UpdatesTree;
-			AutoUpdateFilter.Text = c.FormJson.AutoUpdateFilter;
+            this.AutoUpdate.Checked = c.FormJson.AutoUpdate;
+            this.UpdatesTree.Checked = c.FormJson.UpdatesTree;
+            this.AutoUpdateFilter.Text = c.FormJson.AutoUpdateFilter;
 
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-            JsonTreeView.Nodes.Clear();
+            this.JsonTreeView.Nodes.Clear();
 
-			if (!AutoUpdate.Checked || !UpdatesTree.Checked)
-				JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);
+			if (!this.AutoUpdate.Checked || !this.UpdatesTree.Checked)
+                this.JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);
 
 
 			try
 			{
-				_apiPattern = new Regex(c.FormJson.AutoUpdateFilter);
-				AutoUpdateFilter.BackColor = SystemColors.Window;
+                this._apiPattern = new Regex(c.FormJson.AutoUpdateFilter);
+                this.AutoUpdateFilter.BackColor = SystemColors.Window;
 
 			}
 			catch (Exception)
 			{
-				AutoUpdateFilter.BackColor = Color.MistyRose;
-				_apiPattern = null;
+                this.AutoUpdateFilter.BackColor = Color.MistyRose;
+                this._apiPattern = null;
 			}
 		}
 
@@ -344,7 +344,7 @@ namespace ElectronicObserver.Window
 		{
 
 			foreach (string path in ((string[])e.Data.GetData(DataFormats.FileDrop)).OrderBy(s => s))
-				LoadFromFile(path);
+                this.LoadFromFile(path);
 
 		}
 
@@ -352,58 +352,58 @@ namespace ElectronicObserver.Window
 		private void UpdatesTree_CheckedChanged(object sender, EventArgs e)
 		{
 
-			JsonTreeView.Nodes.Clear();
+            this.JsonTreeView.Nodes.Clear();
 
-			if (!AutoUpdate.Checked || !UpdatesTree.Checked)
-				JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);
+			if (!this.AutoUpdate.Checked || !this.UpdatesTree.Checked)
+                this.JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);
 
 
-			Utility.Configuration.Config.FormJson.UpdatesTree = UpdatesTree.Checked;
+			Utility.Configuration.Config.FormJson.UpdatesTree = this.UpdatesTree.Checked;
 		}
 
 		private void AutoUpdate_CheckedChanged(object sender, EventArgs e)
 		{
 
-			JsonTreeView.Nodes.Clear();
+            this.JsonTreeView.Nodes.Clear();
 
-			if (!AutoUpdate.Checked || !UpdatesTree.Checked)
-				JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);
+			if (!this.AutoUpdate.Checked || !this.UpdatesTree.Checked)
+                this.JsonTreeView.Nodes.Add(AutoUpdateDisabledMessage);
 
 
-			Utility.Configuration.Config.FormJson.AutoUpdate = AutoUpdate.Checked;
+			Utility.Configuration.Config.FormJson.AutoUpdate = this.AutoUpdate.Checked;
 		}
 
 
 		private void AutoUpdateFilter_Validated(object sender, EventArgs e)
 		{
 			var c = Utility.Configuration.Config.FormJson;
-			c.AutoUpdateFilter = AutoUpdateFilter.Text;
+			c.AutoUpdateFilter = this.AutoUpdateFilter.Text;
 
 			try
 			{
-				_apiPattern = new Regex(c.AutoUpdateFilter);
-				AutoUpdateFilter.BackColor = SystemColors.Window;
+                this._apiPattern = new Regex(c.AutoUpdateFilter);
+                this.AutoUpdateFilter.BackColor = SystemColors.Window;
 
 			}
 			catch (Exception)
 			{
-				AutoUpdateFilter.BackColor = Color.MistyRose;
-				_apiPattern = null;
+                this.AutoUpdateFilter.BackColor = Color.MistyRose;
+                this._apiPattern = null;
 			}
 		}
 
 
 		private void TreeContextMenu_Expand_Click(object sender, EventArgs e)
 		{
-			JsonTreeView.SelectedNode.ExpandAll();
+            this.JsonTreeView.SelectedNode.ExpandAll();
 		}
 		private void TreeContextMenu_Shrink_Click(object sender, EventArgs e)
 		{
-			JsonTreeView.SelectedNode.Collapse();
+            this.JsonTreeView.SelectedNode.Collapse();
 		}
 		private void TreeContextMenu_ShrinkParent_Click(object sender, EventArgs e)
 		{
-			var node = JsonTreeView.SelectedNode.Parent;
+			var node = this.JsonTreeView.SelectedNode.Parent;
 			if (node != null)
 				node.Collapse();
 		}
@@ -412,7 +412,7 @@ namespace ElectronicObserver.Window
 		private void TreeContextMenu_Opening(object sender, CancelEventArgs e)
 		{
 
-			var root = JsonTreeView.SelectedNode;
+			var root = this.JsonTreeView.SelectedNode;
 			dynamic json = root.Tag;
 
 			// root is array, children > 0, root[0](=child) is object or array
@@ -421,12 +421,12 @@ namespace ElectronicObserver.Window
 				json != null && json is Codeplex.Data.DynamicJson && json.IsArray &&
 				root.FirstNode.Tag != null && root.FirstNode.Tag is Codeplex.Data.DynamicJson && (((dynamic)root.FirstNode.Tag).IsArray || ((dynamic)root.FirstNode.Tag).IsObject))
 			{
-				TreeContextMenu_OutputCSV.Enabled = true;
+                this.TreeContextMenu_OutputCSV.Enabled = true;
 
 			}
 			else
 			{
-				TreeContextMenu_OutputCSV.Enabled = false;
+                this.TreeContextMenu_OutputCSV.Enabled = false;
 			}
 
 		}
@@ -434,16 +434,16 @@ namespace ElectronicObserver.Window
 		private void TreeContextMenu_OutputCSV_Click(object sender, EventArgs e)
 		{
 
-			if (CSVSaver.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.CSVSaver.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
 				try
 				{
 
-					using (var sw = new StreamWriter(CSVSaver.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
+					using (var sw = new StreamWriter(this.CSVSaver.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						var root = JsonTreeView.SelectedNode;
+						var root = this.JsonTreeView.SelectedNode;
 
 						sw.WriteLine(BuildCSVHeader(new StringBuilder(), "", ((dynamic)root.Tag)[0]).ToString());
 
@@ -532,9 +532,9 @@ namespace ElectronicObserver.Window
 
 		private void TreeContextMenu_CopyToClipboard_Click(object sender, EventArgs e)
 		{
-			if (JsonTreeView.SelectedNode != null && JsonTreeView.SelectedNode.Tag != null)
+			if (this.JsonTreeView.SelectedNode != null && this.JsonTreeView.SelectedNode.Tag != null)
 			{
-				Clipboard.SetData(DataFormats.StringFormat, JsonTreeView.SelectedNode.Tag.ToString());
+				Clipboard.SetData(DataFormats.StringFormat, this.JsonTreeView.SelectedNode.Tag.ToString());
 			}
 			else
 			{
@@ -590,9 +590,9 @@ namespace ElectronicObserver.Window
 
 		private void TreeContextMenu_CopyAsDocument_Click(object sender, EventArgs e)
 		{
-			if (JsonTreeView.SelectedNode != null && JsonTreeView.SelectedNode.Tag != null)
+			if (this.JsonTreeView.SelectedNode != null && this.JsonTreeView.SelectedNode.Tag != null)
 			{
-				Clipboard.SetData(DataFormats.StringFormat, BuildDocument(JsonTreeView.SelectedNode.Tag));
+				Clipboard.SetData(DataFormats.StringFormat, this.BuildDocument(this.JsonTreeView.SelectedNode.Tag));
 			}
 			else
 			{
@@ -605,10 +605,10 @@ namespace ElectronicObserver.Window
 		// 右クリックでも選択するように
 		private void JsonTreeView_MouseClick(object sender, MouseEventArgs e)
 		{
-			var node = JsonTreeView.GetNodeAt(e.Location);
+			var node = this.JsonTreeView.GetNodeAt(e.Location);
 			if (node != null)
 			{
-				JsonTreeView.SelectedNode = node;
+                this.JsonTreeView.SelectedNode = node;
 			}
 		}
 

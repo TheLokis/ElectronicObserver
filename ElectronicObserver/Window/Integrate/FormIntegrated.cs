@@ -50,20 +50,20 @@ namespace ElectronicObserver.Window.Integrate
 
 			public MatchString(String name, MatchControl match)
 			{
-				Name = name;
-				MatchControl = match;
+                this.Name = name;
+                this.MatchControl = match;
 			}
 
 			public bool Match(String name)
 			{
-				switch (MatchControl)
+				switch (this.MatchControl)
 				{
 					case FormIntegrate.MatchControl.Exact:
-						return (name == Name);
+						return (name == this.Name);
 					case FormIntegrate.MatchControl.Contains:
-						return name.Contains(Name);
+						return name.Contains(this.Name);
 					case FormIntegrate.MatchControl.StartEnd:
-						return name.StartsWith(Name) || name.EndsWith(Name);
+						return name.StartsWith(this.Name) || name.EndsWith(this.Name);
 					case FormIntegrate.MatchControl.Ignore:
 						return true;
 				}
@@ -90,7 +90,7 @@ namespace ElectronicObserver.Window.Integrate
 
 			public WindowInfo()
 			{
-				Initialize();
+                this.Initialize();
 			}
 
 			public override void Initialize()
@@ -99,9 +99,9 @@ namespace ElectronicObserver.Window.Integrate
 
 			public bool Match(String title, String className, String filePath)
 			{
-				return Title.Match(title) &&
-					ClassName.Match(className) &&
-					ProcessFilePath.Match(filePath);
+				return this.Title.Match(title) &&
+                    this.ClassName.Match(className) &&
+                    this.ProcessFilePath.Match(filePath);
 			}
 		}
 
@@ -124,26 +124,26 @@ namespace ElectronicObserver.Window.Integrate
 				WindowInfo info = new WindowInfo
 				{
 					CurrentTitle = Text,
-					Title = new MatchString(titleTextBox.Text,
-					(MatchControl)titleComboBox.SelectedIndex),
-					ClassName = new MatchString(classNameTextBox.Text,
-					(MatchControl)classNameComboBox.SelectedIndex),
-					ProcessFilePath = new MatchString(fileNameTextBox.Text,
-					(MatchControl)fileNameComboBox.SelectedIndex)
+					Title = new MatchString(this.titleTextBox.Text,
+					(MatchControl)this.titleComboBox.SelectedIndex),
+					ClassName = new MatchString(this.classNameTextBox.Text,
+					(MatchControl)this.classNameComboBox.SelectedIndex),
+					ProcessFilePath = new MatchString(this.fileNameTextBox.Text,
+					(MatchControl)this.fileNameComboBox.SelectedIndex)
 				};
 
 				return info;
 			}
 			set
 			{
-				Text = value.CurrentTitle;
-				//TabText = value.CurrentTitle.Length > 16 ? value.CurrentTitle.Substring( 0, 16 ) + "..." : value.CurrentTitle;
-				titleTextBox.Text = value.Title.Name;
-				titleComboBox.SelectedIndex = (int)value.Title.MatchControl;
-				classNameTextBox.Text = value.ClassName.Name;
-				classNameComboBox.SelectedIndex = (int)value.ClassName.MatchControl;
-				fileNameTextBox.Text = value.ProcessFilePath.Name;
-				fileNameComboBox.SelectedIndex = (int)value.ProcessFilePath.MatchControl;
+                this.Text = value.CurrentTitle;
+                //TabText = value.CurrentTitle.Length > 16 ? value.CurrentTitle.Substring( 0, 16 ) + "..." : value.CurrentTitle;
+                this.titleTextBox.Text = value.Title.Name;
+                this.titleComboBox.SelectedIndex = (int)value.Title.MatchControl;
+                this.classNameTextBox.Text = value.ClassName.Name;
+                this.classNameComboBox.SelectedIndex = (int)value.ClassName.MatchControl;
+                this.fileNameTextBox.Text = value.ProcessFilePath.Name;
+                this.fileNameComboBox.SelectedIndex = (int)value.ProcessFilePath.MatchControl;
 			}
 		}
 
@@ -157,27 +157,27 @@ namespace ElectronicObserver.Window.Integrate
 
 		public FormIntegrate(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
 			this.parent = parent;
 
-			windowCaptureButton.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture];
+            this.windowCaptureButton.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture];
 
-			titleComboBox.Items.AddRange(MATCH_COMBO_ITEMS);
-			classNameComboBox.Items.AddRange(MATCH_COMBO_ITEMS);
-			fileNameComboBox.Items.AddRange(MATCH_COMBO_ITEMS);
+            this.titleComboBox.Items.AddRange(MATCH_COMBO_ITEMS);
+            this.classNameComboBox.Items.AddRange(MATCH_COMBO_ITEMS);
+            this.fileNameComboBox.Items.AddRange(MATCH_COMBO_ITEMS);
 
-			TabPageContextMenuStrip = tabContextMenu;
+            this.TabPageContextMenuStrip = this.tabContextMenu;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
-			ConfigurationChanged();
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
+            this.ConfigurationChanged();
 
 			parent.WindowCapture.AddCapturedWindow(this);
 		}
 
 		void ConfigurationChanged()
 		{
-			Font = Utility.Configuration.Config.UI.MainFont;
+            this.Font = Utility.Configuration.Config.UI.MainFont;
 		}
 
         private static int RunProgram(WindowInfo info)
@@ -251,7 +251,7 @@ namespace ElectronicObserver.Window.Integrate
 			StringBuilder windowText = new StringBuilder(256);
 			IntPtr result = IntPtr.Zero;
 			int currentProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
-			WindowInfo info = WindowData;
+			WindowInfo info = this.WindowData;
 
 			WinAPI.EnumWindows((WinAPI.EnumWindowsDelegate)((hWnd, lparam) =>
 			{
@@ -283,19 +283,19 @@ namespace ElectronicObserver.Window.Integrate
 		{
 
 
-            if (attachingWindow != IntPtr.Zero)
+            if (this.attachingWindow != IntPtr.Zero)
 			{
 				// 既にアタッチ済み
 				return true;
 			}
-			IntPtr hWnd = FindWindow();
+			IntPtr hWnd = this.FindWindow();
 			if (hWnd != IntPtr.Zero)
 			{
-				Attach(hWnd, false);
+                this.Attach(hWnd, false);
 				return true;
 			}
 
-            infoLabel.Text = "창을 찾을 수 없습니다.";
+            this.infoLabel.Text = "창을 찾을 수 없습니다.";
 			return false;
 		}
 
@@ -328,35 +328,35 @@ namespace ElectronicObserver.Window.Integrate
 		private void Attach(IntPtr hWnd, bool showFloating)
 		{
 
-			if (attachingWindow != IntPtr.Zero)
+			if (this.attachingWindow != IntPtr.Zero)
 			{
-				if (attachingWindow == hWnd)
+				if (this.attachingWindow == hWnd)
 				{
 					// 既にアタッチ済み
 					return;
 				}
-				Detach();
+                this.Detach();
 			}
 			else
 			{
-				settingPanel.Visible = false;
-				StripMenu_Detach.Enabled = true;
+                this.settingPanel.Visible = false;
+                this.StripMenu_Detach.Enabled = true;
 			}
 
-			origStyle = unchecked((uint)(long)WinAPI.GetWindowLong(hWnd, WinAPI.GWL_STYLE));
-			origOwner = WinAPI.GetWindowLong(hWnd, WinAPI.GWL_HWNDPARENT);
+            this.origStyle = unchecked((uint)(long)WinAPI.GetWindowLong(hWnd, WinAPI.GWL_STYLE));
+            this.origOwner = WinAPI.GetWindowLong(hWnd, WinAPI.GWL_HWNDPARENT);
 
 			// ターゲットが最大化されていたら戻す
-			if ((origStyle & WinAPI.WS_MAXIMIZE) != 0)
+			if ((this.origStyle & WinAPI.WS_MAXIMIZE) != 0)
 			{
-				origStyle &= unchecked((uint)~WinAPI.WS_MAXIMIZE);
-				WinAPI.SetWindowLong(hWnd, WinAPI.GWL_STYLE, new IntPtr(unchecked((int)origStyle)));
+                this.origStyle &= unchecked((uint)~WinAPI.WS_MAXIMIZE);
+				WinAPI.SetWindowLong(hWnd, WinAPI.GWL_STYLE, new IntPtr(unchecked((int)this.origStyle)));
 			}
 
 			// キャプションを設定
 			StringBuilder stringBuilder = new StringBuilder(32);
 			WinAPI.GetWindowText(hWnd, stringBuilder, stringBuilder.Capacity);
-			Text = stringBuilder.ToString();
+            this.Text = stringBuilder.ToString();
 
 			// アイコンを設定
 			IntPtr hicon = WinAPI.SendMessage(hWnd, WinAPI.WM_GETICON, (IntPtr)WinAPI.ICON_SMALL, IntPtr.Zero);
@@ -369,23 +369,23 @@ namespace ElectronicObserver.Window.Integrate
 				this.Icon = Icon.FromHandle(hicon);
 			}
 
-			// メニューを取得
-			origMenu = WinAPI.GetMenu(hWnd);
+            // メニューを取得
+            this.origMenu = WinAPI.GetMenu(hWnd);
 
-			WinAPI.GetWindowRect(hWnd, out origWindowRect);
+			WinAPI.GetWindowRect(hWnd, out this.origWindowRect);
 
 			if (showFloating)
 			{
-				// このウィンドウの大きさ・位置を設定
-				Show(parent.MainPanel, new Rectangle(
-					origWindowRect.left,
-					origWindowRect.top,
-					origWindowRect.right - origWindowRect.left,
-					origWindowRect.bottom - origWindowRect.top));
+                // このウィンドウの大きさ・位置を設定
+                this.Show(this.parent.MainPanel, new Rectangle(
+                    this.origWindowRect.left,
+                    this.origWindowRect.top,
+                    this.origWindowRect.right - this.origWindowRect.left,
+                    this.origWindowRect.bottom - this.origWindowRect.top));
 			}
 
 			// ターゲットを子ウィンドウに設定
-			uint newStyle = origStyle;
+			uint newStyle = this.origStyle;
 			newStyle &= unchecked((uint)~(WinAPI.WS_POPUP |
 				WinAPI.WS_CAPTION |
 				WinAPI.WS_BORDER |
@@ -402,16 +402,16 @@ namespace ElectronicObserver.Window.Integrate
 
 		private void InternalDetach()
 		{
-			if (attachingWindow != IntPtr.Zero)
+			if (this.attachingWindow != IntPtr.Zero)
 			{
-				WinAPI.SetParent(attachingWindow, IntPtr.Zero);
-				WinAPI.SetWindowLong(attachingWindow, WinAPI.GWL_STYLE, new IntPtr(unchecked((int)origStyle)));
-				WinAPI.SetWindowLong(attachingWindow, WinAPI.GWL_HWNDPARENT, origOwner);
-				WinAPI.SetMenu(attachingWindow, origMenu);
-				WinAPI.MoveWindow(attachingWindow, origWindowRect.left, origWindowRect.top,
-					origWindowRect.right - origWindowRect.left,
-					origWindowRect.bottom - origWindowRect.top, true);
-				attachingWindow = IntPtr.Zero;
+				WinAPI.SetParent(this.attachingWindow, IntPtr.Zero);
+				WinAPI.SetWindowLong(this.attachingWindow, WinAPI.GWL_STYLE, new IntPtr(unchecked((int)this.origStyle)));
+				WinAPI.SetWindowLong(this.attachingWindow, WinAPI.GWL_HWNDPARENT, this.origOwner);
+				WinAPI.SetMenu(this.attachingWindow, this.origMenu);
+				WinAPI.MoveWindow(this.attachingWindow, this.origWindowRect.left, this.origWindowRect.top,
+                    this.origWindowRect.right - this.origWindowRect.left,
+                    this.origWindowRect.bottom - this.origWindowRect.top, true);
+                this.attachingWindow = IntPtr.Zero;
 
 			}
 		}
@@ -421,12 +421,12 @@ namespace ElectronicObserver.Window.Integrate
 		/// </summary>
 		public void Detach()
 		{
-			if (attachingWindow != IntPtr.Zero)
+			if (this.attachingWindow != IntPtr.Zero)
 			{
-				InternalDetach();
-				settingPanel.Visible = true;
-				StripMenu_Detach.Enabled = false;
-				infoLabel.Text = "창을 개방 했습니다.";
+                this.InternalDetach();
+                this.settingPanel.Visible = true;
+                this.StripMenu_Detach.Enabled = false;
+                this.infoLabel.Text = "창을 개방 했습니다.";
 			}
 		}
 
@@ -435,35 +435,35 @@ namespace ElectronicObserver.Window.Integrate
 		/// </summary>
 		public void Show(IntPtr hWnd)
 		{
-			Attach(hWnd, true);
-			WindowData = WindowInfoFromHandle(hWnd);
+            this.Attach(hWnd, true);
+            this.WindowData = WindowInfoFromHandle(hWnd);
 		}
 
 		private void FormIntegrated_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			InternalDetach();
-			Utility.Configuration.Instance.ConfigurationChanged -= ConfigurationChanged;
+            this.InternalDetach();
+			Utility.Configuration.Instance.ConfigurationChanged -= this.ConfigurationChanged;
 		}
 
 		private void FormIntegrated_Resize(object sender, EventArgs e)
 		{
-			if (attachingWindow != IntPtr.Zero)
+			if (this.attachingWindow != IntPtr.Zero)
 			{
-				Size size = ClientSize;
-				WinAPI.MoveWindow(attachingWindow, 0, 0, size.Width, size.Height, true);
+				Size size = this.ClientSize;
+				WinAPI.MoveWindow(this.attachingWindow, 0, 0, size.Width, size.Height, true);
 			}
 		}
 
 		protected override string GetPersistString()
 		{
 			StringBuilder stringBuilder = new StringBuilder();
-			WindowData.Save(stringBuilder);
+            this.WindowData.Save(stringBuilder);
 			return PREFIX + stringBuilder.ToString();
 		}
 
 		private void integrateButton_Click(object sender, EventArgs e)
 		{
-			Grab();
+            this.Grab();
 		}
 
 		private void windowCaptureButton_WindowCaptured(IntPtr hWnd)
@@ -478,14 +478,14 @@ namespace ElectronicObserver.Window.Integrate
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 
-				Attach(hWnd, false);
-				WindowData = WindowInfoFromHandle(hWnd);
+                this.Attach(hWnd, false);
+                this.WindowData = WindowInfoFromHandle(hWnd);
 			}
 		}
 
 		private void StripMenu_Detach_Click(object sender, EventArgs e)
 		{
-			Detach();
+            this.Detach();
 		}
 
 

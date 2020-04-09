@@ -25,13 +25,13 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 				if (!db.Arsenals.ContainsKey(id))
 				{
 					var a = new ArsenalData();
-					a.LoadFromResponse(APIName, ars);
+					a.LoadFromResponse(this.APIName, ars);
 					db.Arsenals.Add(a);
 
 				}
 				else
 				{
-					db.Arsenals[id].LoadFromResponse(APIName, ars);
+					db.Arsenals[id].LoadFromResponse(this.APIName, ars);
 				}
 			}
 

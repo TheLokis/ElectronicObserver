@@ -22,25 +22,25 @@ namespace ElectronicObserver.Utility.Storage
 
 		public SerializableList()
 		{
-			List = null;
+            this.List = null;
 		}
 
 		public SerializableList(List<T> list)
 		{
-			List = list;
+            this.List = list;
 		}
 
 		public SerializableList(string serial)
 		{
-			SerializedList = serial;
+            this.SerializedList = serial;
 		}
 
 
 		[DataMember]
 		public string SerializedList
 		{
-			get { return ListToString(List); }
-			set { List = StringToList(value); }
+			get { return ListToString(this.List); }
+			set { this.List = StringToList(value); }
 		}
 
 

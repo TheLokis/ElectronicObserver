@@ -12,21 +12,21 @@ namespace ElectronicObserver.Utility.Mathematics
 		public int Current { get; set; }
 		public int Max { get; set; }
 
-		public double Rate => (double)Current / Math.Max(Max, 1);
+		public double Rate => (double)this.Current / Math.Max(this.Max, 1);
 
 
 		public Fraction()
 		{
-			Current = Max = 0;
+            this.Current = this.Max = 0;
 		}
 
 		public Fraction(int current, int max)
 		{
-			Current = current;
-			Max = max;
+            this.Current = current;
+            this.Max = max;
 		}
 
-		public override string ToString() => $"{Current}/{Max}";
+		public override string ToString() => $"{this.Current}/{this.Max}";
 
 	}
 

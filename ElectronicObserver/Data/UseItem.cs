@@ -17,19 +17,19 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// アイテムID
 		/// </summary>
-		public int ItemID => (int)RawData.api_id;
+		public int ItemID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 個数
 		/// </summary>
-		public int Count => (int)RawData.api_count;
+		public int Count => (int)this.RawData.api_count;
 
 
-		public UseItemMaster MasterUseItem => KCDatabase.Instance.MasterUseItems[ItemID];
+		public UseItemMaster MasterUseItem => KCDatabase.Instance.MasterUseItems[this.ItemID];
 
 
-		public int ID => ItemID;
-		public override string ToString() => $"[{ItemID}] {MasterUseItem.Name} x {Count}";
+		public int ID => this.ItemID;
+		public override string ToString() => $"[{this.ItemID}] {this.MasterUseItem.Name} x {this.Count}";
 	}
 
 }

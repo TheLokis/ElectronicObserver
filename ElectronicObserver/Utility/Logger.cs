@@ -52,13 +52,13 @@ namespace ElectronicObserver.Utility
 
 			public LogData(DateTime time, int priority, string message)
 			{
-				Time = time;
-				Priority = priority;
-				Message = message;
+                this.Time = time;
+                this.Priority = priority;
+                this.Message = message;
 			}
 
 
-			public override string ToString() => $"[{DateTimeHelper.TimeToCSVString(Time)}][{Priority}] : {Message}";
+			public override string ToString() => $"[{DateTimeHelper.TimeToCSVString(this.Time)}][{this.Priority}] : {this.Message}";
 
 
 		}
@@ -72,9 +72,9 @@ namespace ElectronicObserver.Utility
 
 		private Logger()
 		{
-			log = new List<LogData>();
-			toDebugConsole = true;
-			lastSavedCount = 0;
+            this.log = new List<LogData>();
+            this.toDebugConsole = true;
+            this.lastSavedCount = 0;
 		}
 
 

@@ -39,10 +39,10 @@ namespace ElectronicObserver.Window.Dialog
 
 			public ComboShipData(ShipData ship)
 			{
-				Ship = ship;
+                this.Ship = ship;
 			}
 
-			public override string ToString() => $"{Ship.MasterShip.ShipTypeName} {Ship.NameWithLevel}";
+			public override string ToString() => $"{this.Ship.MasterShip.ShipTypeName} {this.Ship.NameWithLevel}";
 		}
 
 		private class ASWEquipmentData
@@ -53,7 +53,7 @@ namespace ElectronicObserver.Window.Dialog
 			public bool IsSonar;
 			public int Count;
 
-			public override string ToString() => Name;
+			public override string ToString() => this.Name;
 		}
 
 
@@ -63,18 +63,18 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogExpChecker()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			CellStyleModernized = new DataGridViewCellStyle(ColumnLevel.DefaultCellStyle);
-			CellStyleModernized.BackColor = 
-            CellStyleModernized.SelectionBackColor = Color.LightGreen;
+            this.CellStyleModernized = new DataGridViewCellStyle(this.ColumnLevel.DefaultCellStyle);
+            this.CellStyleModernized.BackColor =
+            this.CellStyleModernized.SelectionBackColor = Color.LightGreen;
 
 		}
 
 		public DialogExpChecker(int shipID) : this()
 		{
-			DefaultShipID = shipID;
-			Text = DefaultTitle;
+            this.DefaultShipID = shipID;
+            this.Text = DefaultTitle;
 		}
 
 		private void DialogExpChecker_Load(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace ElectronicObserver.Window.Dialog
 			if (!ships.Any())
 			{
 				MessageBox.Show("함선 데이터가 존재하지 않습니다.\r\n모항화면으로 한번 이동해주세요.", "함선 데이터 없음", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Close();
+                this.Close();
 				return;
 			}
             try
@@ -123,12 +123,12 @@ namespace ElectronicObserver.Window.Dialog
             label4.Enabled = !ExpControl.Checked;
             label5.Enabled = !ExpControl.Checked;
             */
-            LabelAlert.Text = "";
-            SearchInFleet_CheckedChanged(this, new EventArgs());
-            ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
+            this.LabelAlert.Text = "";
+            this.SearchInFleet_CheckedChanged(this, new EventArgs());
+            this.ExpUnit.Value = Utility.Configuration.Config.Control.ExpCheckerExpUnit;
 
-            if (DefaultShipID != -1)
-				TextShip.SelectedItem = TextShip.Items.OfType<ComboShipData>().FirstOrDefault(f => f.Ship.MasterID == DefaultShipID);
+            if (this.DefaultShipID != -1)
+                this.TextShip.SelectedItem = this.TextShip.Items.OfType<ComboShipData>().FirstOrDefault(f => f.Ship.MasterID == this.DefaultShipID);
 
 
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker]);
@@ -142,12 +142,12 @@ namespace ElectronicObserver.Window.Dialog
             Utility.Configuration.Config.Control.FlagShipCheck = FlagShip_Check.Checked;
             Utility.Configuration.Config.Control.Rank = (string)Rank_List.SelectedItem;
             Utility.Configuration.Config.Control.ExpManual = ExpControl.Checked;*/
-            ResourceManager.DestroyIcon(Icon);
+            ResourceManager.DestroyIcon(this.Icon);
 		}
 
         private void UpdateProperty()
         {
-            float ExpValue = (float)ExpUnit.Value;
+            float ExpValue = (float)this.ExpUnit.Value;
             /*
             ExpValue = SortieExpTable[(string)MapSelect.SelectedItem];
             if (MVP_Check.Checked) ExpValue *= 2;
@@ -171,12 +171,12 @@ namespace ElectronicObserver.Window.Dialog
                     break;
             }
             */
-            ExpUnit.Value = (decimal)ExpValue;
+            this.ExpUnit.Value = (decimal)ExpValue;
         }
 
 		private void UpdateLevelView()
 		{
-            var selectedShip = (TextShip.SelectedItem as ComboShipData)?.Ship;
+            var selectedShip = (this.TextShip.SelectedItem as ComboShipData)?.Ship;
 
 			if (selectedShip == null)
 			{
@@ -185,16 +185,16 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			LevelView.SuspendLayout();
+            this.LevelView.SuspendLayout();
 
-			LevelView.Rows.Clear();
+            this.LevelView.Rows.Clear();
 
 
 			// 空母系は面倒なので省略
 			int openingASWborder = selectedShip.MasterShip.ShipType == ShipTypes.Escort ? 60 : 100;
 
 			var ASWEquipmentPairs = new Dictionary<int, string>();
-			if (ShowAllASWEquipments.Checked)
+			if (this.ShowAllASWEquipments.Checked)
 			{
 
 				var had = KCDatabase.Instance.Equipments.Values
@@ -352,18 +352,18 @@ namespace ElectronicObserver.Window.Dialog
             var aswdata = selectedShip.MasterShip.ASW;
             int aswmin = aswdata.Minimum;
             int aswmax = aswdata.Maximum;
-            int aswmod = (int)ASWModernization.Value;
+            int aswmod = (int)this.ASWModernization.Value;
 			int currentlv = selectedShip.Level;
-			int minlv = ShowAllLevel.Checked ? 1 : (currentlv + 1);
-			int unitexp = Math.Max((int)ExpUnit.Value, 1);
-			var remodelLevelTable = GetRemodelLevelTable(selectedShip.MasterShip);
+			int minlv = this.ShowAllLevel.Checked ? 1 : (currentlv + 1);
+			int unitexp = Math.Max((int)this.ExpUnit.Value, 1);
+			var remodelLevelTable = this.GetRemodelLevelTable(selectedShip.MasterShip);
 
             if (!aswdata.IsAvailable)
-                LabelAlert.Text = "＊대잠 값을 알 수 없기 때문에 예측을 할 수 없습니다.";
+                this.LabelAlert.Text = "＊대잠 값을 알 수 없기 때문에 예측을 할 수 없습니다.";
             else if (!aswdata.IsDetermined)
-                LabelAlert.Text = "＊대잠 값이 미확정이어서, 예측값이 정확하지 않습니다.";
+                this.LabelAlert.Text = "＊대잠 값이 미확정이어서, 예측값이 정확하지 않습니다.";
             else
-                LabelAlert.Text = "";
+                this.LabelAlert.Text = "";
 
             var rows = new DataGridViewRow[ExpTable.ShipMaximumLevel - (minlv - 1)];
 
@@ -374,7 +374,7 @@ namespace ElectronicObserver.Window.Dialog
 				int needexp = ExpTable.ShipExp[lv].Total - selectedShip.ExpTotal;
 
 				var row = new DataGridViewRow();
-				row.CreateCells(LevelView);
+				row.CreateCells(this.LevelView);
 				row.SetValues(
 					lv,
 					Math.Max(needexp, 0),
@@ -387,24 +387,24 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (remodelLevelTable.Contains(lv))
 				{
-					row.Cells[ColumnLevel.Index].Style = CellStyleModernized;
+					row.Cells[this.ColumnLevel.Index].Style = this.CellStyleModernized;
 				}
 
 				rows[lv - minlv] = row;
 			}
 
-			LevelView.Rows.AddRange(rows);
+            this.LevelView.Rows.AddRange(rows);
 
-			LevelView.ResumeLayout();
+            this.LevelView.ResumeLayout();
 
 
-			Text = DefaultTitle + " - " + selectedShip.NameWithLevel;
-			GroupExp.Text = $"{selectedShip.NameWithLevel}: Exp. {selectedShip.ExpTotal}, 대잠 {selectedShip.ASWBase} (현재개수+{selectedShip.ASWModernized})";
+            this.Text = DefaultTitle + " - " + selectedShip.NameWithLevel;
+            this.GroupExp.Text = $"{selectedShip.NameWithLevel}: Exp. {selectedShip.ExpTotal}, 대잠 {selectedShip.ASWBase} (현재개수+{selectedShip.ASWModernized})";
 		}
 
         private void LevelView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == ColumnASW.Index)
+            if (e.ColumnIndex == this.ColumnASW.Index)
             {
                 e.Value = (int)e.Value == -1 ? "???" : e.Value.ToString();
                 e.FormattingApplied = true;
@@ -415,13 +415,13 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			var ships = KCDatabase.Instance.Ships.Values;
 
-			TextShip.Items.Clear();
+            this.TextShip.Items.Clear();
 
             //작업 체크용 1
 
-			if (SearchInFleet.Checked)
+			if (this.SearchInFleet.Checked)
 			{
-				TextShip.Items.AddRange(ships
+                this.TextShip.Items.AddRange(ships
 					.Where(s => s.Fleet != -1)
 					.OrderBy(s => s.FleetWithIndex)
 					.Select(s => new ComboShipData(s))
@@ -431,14 +431,14 @@ namespace ElectronicObserver.Window.Dialog
 			{
                 if(Utility.Configuration.Config.FormFleet.ExpCheckerOption == 1)
                 {
-                    TextShip.Items.AddRange(ships
+                    this.TextShip.Items.AddRange(ships
     .OrderBy(s => s.MasterShip.ShipType)
     .ThenByDescending(s => s.Level)
     .Select(s => new ComboShipData(s))
     .ToArray());
                 } else
                 {
-                    TextShip.Items.AddRange(ships
+                    this.TextShip.Items.AddRange(ships
     .OrderByDescending(s => s.Level)
     .Select(s => new ComboShipData(s))
     .ToArray());
@@ -447,55 +447,55 @@ namespace ElectronicObserver.Window.Dialog
 
 			}
 
-			TextShip.SelectedIndex = 0;
+            this.TextShip.SelectedIndex = 0;
 		}
 
 		private void TextShip_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			var selectedShip = (TextShip.SelectedItem as ComboShipData)?.Ship;
+			var selectedShip = (this.TextShip.SelectedItem as ComboShipData)?.Ship;
 
 			if (selectedShip == null)
 				return;
 
-			ASWModernization.Value = selectedShip.ASWModernized;
+            this.ASWModernization.Value = selectedShip.ASWModernized;
 
-			UpdateLevelView();
+            this.UpdateLevelView();
 		}
 
 		private void ShowAllLevel_CheckedChanged(object sender, EventArgs e)
 		{
-			UpdateLevelView();
+            this.UpdateLevelView();
 		}
 
 		private void ShowAllASWEquipments_CheckedChanged(object sender, EventArgs e)
 		{
-			UpdateLevelView();
+            this.UpdateLevelView();
 		}
 
 		private void ExpUnit_ValueChanged(object sender, EventArgs e)
 		{
-			UpdateLevelView();
+            this.UpdateLevelView();
 		}
 
 		private void ASWModernization_ValueChanged(object sender, EventArgs e)
 		{
-			UpdateLevelView();
+            this.UpdateLevelView();
 		}
 
         // 작업 체크용 3
         private void FlagShip_CheckChanged(object sender, EventArgs e)
         {
-            UpdateProperty();
+            this.UpdateProperty();
         }
 
         private void MVP_CheckChanged(object sender, EventArgs e)
         {
-            UpdateProperty();
+            this.UpdateProperty();
         }
 
         private void Rank_IndexChanged(object sender, EventArgs e)
         {
-            UpdateProperty();
+            this.UpdateProperty();
         }
 
         private void ExpControl_CheckChanged(object sender, EventArgs e)
@@ -513,7 +513,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private void MapSelect_IndexChanged(object sender, EventArgs e)
         {
-            UpdateProperty();
+            this.UpdateProperty();
         }
 
         private int[] GetRemodelLevelTable(ShipDataMaster ship)

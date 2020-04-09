@@ -10,6 +10,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.ServiceModel;
@@ -64,19 +65,19 @@ namespace ElectronicObserver.Window
 		private InitializationStageFlag _initializationStage = 0;
 		private InitializationStageFlag InitializationStage
 		{
-			get { return _initializationStage; }
+			get { return this._initializationStage; }
 			set
 			{
 				//AddLog( 1, _initializationStage + " -> " + value );
-				if (_initializationStage != InitializationStageFlag.Completed && value == InitializationStageFlag.Completed)
+				if (this._initializationStage != InitializationStageFlag.Completed && value == InitializationStageFlag.Completed)
 				{
 					if (Utility.Configuration.Config.FormBrowser.IsEnabled)
 					{
-						NavigateToLogInPage();
+                        this.NavigateToLogInPage();
 					}
 				}
 
-				_initializationStage = value;
+                this._initializationStage = value;
 			}
 		}
 
@@ -84,39 +85,39 @@ namespace ElectronicObserver.Window
 
 		public FormBrowserHost(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser]);
 		}
 
 		public void InitializeApiCompleted()
 		{
-			InitializationStage |= InitializationStageFlag.InitialAPILoaded;
+            this.InitializationStage |= InitializationStageFlag.InitialAPILoaded;
 		}
 
 		private void FormBrowser_Load(object sender, EventArgs e)
 		{
-			LaunchBrowserProcess();
+            this.LaunchBrowserProcess();
 		}
 
 
 		private void LaunchBrowserProcess()
 		{
-			// 通信サーバ起動
-			Browser = new PipeCommunicator<IBrowser>(
-				this, typeof(IBrowserHost), ServerUri, "BrowserHost");
+            // 通信サーバ起動
+            this.Browser = new PipeCommunicator<IBrowser>(
+				this, typeof(IBrowserHost), this.ServerUri, "BrowserHost");
 
 			try
 			{
 				// プロセス起動
 
 				if (System.IO.File.Exists(BrowserExeName))
-					BrowserProcess = Process.Start(BrowserExeName, ServerUri);
+                    this.BrowserProcess = Process.Start(BrowserExeName, this.ServerUri);
 
 				else    //デバッグ環境用 作業フォルダにかかわらず自分と同じフォルダのを参照する
-					BrowserProcess = Process.Start(
+                    this.BrowserProcess = Process.Start(
 						System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + BrowserExeName,
-						ServerUri);
+                        this.ServerUri);
 
 				// 残りはサーバに接続してきたブラウザプロセスがドライブする
 
@@ -131,22 +132,22 @@ namespace ElectronicObserver.Window
 
 		internal void ConfigurationChanged()
 		{
-			Font = Utility.Configuration.Config.UI.MainFont;
-            Configuration.Theme = (uint)Utility.Configuration.Config.UI.Theme;
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
-            Browser.AsyncRemoteRun(() => Browser.Proxy.ConfigurationChanged(Configuration));
+            this.Font = Utility.Configuration.Config.UI.MainFont;
+            this.Configuration.Theme = (uint)Utility.Configuration.Config.UI.Theme;
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.ConfigurationChanged(this.Configuration));
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.ConfigurationChanged(this.Configuration));
         }
 
 
 		//ロード直後の適用ではレイアウトがなぜか崩れるのでこのタイミングでも適用
 		void InitialAPIReceived(string apiname, dynamic data)
 		{
-			if (InitializationStage != InitializationStageFlag.Completed)       // 初期化が終わってから
+			if (this.InitializationStage != InitializationStageFlag.Completed)       // 初期化が終わってから
 				return;
 
-			Browser.AsyncRemoteRun(() => Browser.Proxy.InitialAPIReceived());
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.InitialAPIReceived());
 		}
 
 
@@ -155,7 +156,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void Navigate(string url)
 		{
-			Browser.AsyncRemoteRun(() => Browser.Proxy.Navigate(url));
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.Navigate(url));
 		}
 
 		/// <summary>
@@ -163,7 +164,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void NavigateToLogInPage()
 		{
-			Navigate(Utility.Configuration.Config.FormBrowser.LogInPageURL);
+            this.Navigate(Utility.Configuration.Config.FormBrowser.LogInPageURL);
 		}
 
 		/// <summary>
@@ -171,7 +172,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void RefreshBrowser()
 		{
-			Browser.AsyncRemoteRun(() => Browser.Proxy.RefreshBrowser());
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.RefreshBrowser());
 		}
 
 		/// <summary>
@@ -179,7 +180,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void ApplyZoom()
 		{
-			Browser.AsyncRemoteRun(() => Browser.Proxy.ApplyZoom());
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.ApplyZoom());
 		}
 
 		/// <summary>
@@ -187,7 +188,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void ApplyStyleSheet()
 		{
-			Browser.AsyncRemoteRun(() => Browser.Proxy.ApplyStyleSheet());
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.ApplyStyleSheet());
 		}
 
 		/// <summary>
@@ -195,7 +196,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void DestroyDMMreloadDialog()
 		{
-			Browser.AsyncRemoteRun(() => Browser.Proxy.DestroyDMMreloadDialog());
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.DestroyDMMreloadDialog());
 		}
 
 
@@ -204,7 +205,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void SaveScreenShot()
 		{
-			Browser.AsyncRemoteRun(() => Browser.Proxy.SaveScreenShot());
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.SaveScreenShot());
 		}
 
 
@@ -246,6 +247,8 @@ namespace ElectronicObserver.Window
                 config.Theme = (uint)Utility.Configuration.Config.UI.Theme;
                 config.ForceColorProfile = c.ForceColorProfile;
                 config.SavesBrowserLog = c.SavesBrowserLog;
+
+                config.EnableDebugMenu = Utility.Configuration.Config.Debug.EnableDebugMenu;
                 return config;
 			}
 		}
@@ -273,6 +276,7 @@ namespace ElectronicObserver.Window
             c.HardwareAccelerationEnabled = config.HardwareAccelerationEnabled;
             c.ForceColorProfile = config.ForceColorProfile;
             c.PreserveDrawingBuffer = config.PreserveDrawingBuffer;
+            //Utility.Configuration.Config.Debug.EnableDebugMenu = config.EnableDebugMenu;
 
             // volume
             if (Utility.Configuration.Config.BGMPlayer.SyncBrowserMute)
@@ -315,7 +319,7 @@ namespace ElectronicObserver.Window
 				}
 			}
 
-			Browser.AsyncRemoteRun(() => Browser.Proxy.SetIconResource(canvas));
+            this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.SetIconResource(canvas));
 
 		}
 
@@ -330,46 +334,125 @@ namespace ElectronicObserver.Window
 				if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 				{
 
-					Navigate(dialog.InputtedText);
+                    this.Navigate(dialog.InputtedText);
 				}
 			}
 
 		}
 
+        public async void ClearCache()
+        {
+            Utility.Logger.Add(2, "캐시 삭제를 위해 브라우저를 종료합니다.");
 
-		public void ConnectToBrowser(IntPtr hwnd)
+            try
+            {
+                if (!this.Browser?.Closed ?? false)
+                {
+                    this.Browser.Proxy?.CloseBrowser();
+
+                    await this.Browser.CloseAsync(this);
+
+                    this.TerminateBrowserProcess();
+                }
+            }
+            catch (Exception) { }
+
+
+            await this.ClearCacheAsync().ContinueWith(task =>
+            {
+                Utility.Logger.Add(2, "캐시 삭제가 완료되었습니다. 브라우저를 재시작합니다.");
+
+                this._initializationStage = InitializationStageFlag.InitialAPILoaded;
+                try
+                {
+                    this.LaunchBrowserProcess();
+                }
+                catch (Exception ex)
+                {
+                    Utility.ErrorReporter.SendErrorReport(ex, "브라우저 재시작에 실패했습니다.");
+                    MessageBox.Show("브라우저 프로세스 재시작에 실패했습니다. \r\n 74식 전자관측의를 재시작해주세요.", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private async Task ClearCacheAsync()
+        {
+            int trial;
+            Exception lastException = null;
+            var dir = new DirectoryInfo("BrowserCache");
+
+            for (trial = 0; trial < 4; trial++)
+            {
+                try
+                {
+                    dir.Refresh();
+
+                    if (dir.Exists)
+                        dir.Delete(true);
+                    else
+                        break;
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        dir.Refresh();
+                        if (dir.Exists)
+                        {
+                            await Task.Delay(50);
+                        }
+                        else break;
+                    }
+                    if (!dir.Exists)
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                    await Task.Delay(500);
+                }
+            }
+            if (trial == 4)
+            {
+                Utility.ErrorReporter.SendErrorReport(lastException, "캐시 삭제를 실패했습니다.");
+            }
+        }
+
+        public void ConnectToBrowser(IntPtr hwnd)
 		{
-			BrowserWnd = hwnd;
+            this.BrowserWnd = hwnd;
 
 			// 子ウィンドウに設定
-			SetParent(BrowserWnd, this.Handle);
-			MoveWindow(BrowserWnd, 0, 0, this.Width, this.Height, true);
+			SetParent(this.BrowserWnd, this.Handle);
+			MoveWindow(this.BrowserWnd, 0, 0, this.Width, this.Height, true);
 
 			//キー入力をブラウザに投げる
-			Application.AddMessageFilter(new KeyMessageGrabber(BrowserWnd));
+			Application.AddMessageFilter(new KeyMessageGrabber(this.BrowserWnd));
 
-			// デッドロックするので非同期で処理
-			BeginInvoke((Action)(() =>
+            // デッドロックするので非同期で処理
+            this.BeginInvoke((Action)(() =>
 			{
-				// ブラウザプロセスに接続
-				Browser.Connect(ServerUri + "Browser/Browser");
-				Browser.Faulted += Browser_Faulted;
+                // ブラウザプロセスに接続
+                this.Browser.Connect(this.ServerUri + "Browser/Browser");
+                this.Browser.Faulted += this.Browser_Faulted;
 
-				ConfigurationChanged();
+                this.ConfigurationChanged();
 
-				Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+				Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 
 				APIObserver.Instance.APIList["api_start2/getData"].ResponseReceived +=
 					(string apiname, dynamic data) => InitialAPIReceived(apiname, data);
 
-				// プロキシをセット
-				Browser.AsyncRemoteRun(() => Browser.Proxy.SetProxy(BuildDownstreamProxy()));
+                // プロキシをセット
+                this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.SetProxy(this.BuildDownstreamProxy()));
 				APIObserver.Instance.ProxyStarted += () =>
 				{
-					Browser.AsyncRemoteRun(() => Browser.Proxy.SetProxy(BuildDownstreamProxy()));
+                    this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.SetProxy(this.BuildDownstreamProxy()));
 				};
 
-				InitializationStage |= InitializationStageFlag.BrowserConnected;
+                this.InitializationStage |= InitializationStageFlag.BrowserConnected;
 
 			}));
 		}
@@ -405,13 +488,13 @@ namespace ElectronicObserver.Window
 
 		public void SetProxyCompleted()
 		{
-			InitializationStage |= InitializationStageFlag.SetProxyCompleted;
+            this.InitializationStage |= InitializationStageFlag.SetProxyCompleted;
 		}
 
 
 		void Browser_Faulted(Exception e)
 		{
-			if (Browser.Proxy == null)
+			if (this.Browser.Proxy == null)
 			{
 				Utility.Logger.Add(3, "브라우저가 예기치 않게 종료되었습니다.");
 			}
@@ -424,19 +507,19 @@ namespace ElectronicObserver.Window
 
 		private void TerminateBrowserProcess()
 		{
-			if (!BrowserProcess.WaitForExit(2000))
+			if (!this.BrowserProcess.WaitForExit(2000))
 			{
 				try
 				{
-					// 2秒待って終了しなかったらKill
-					BrowserProcess.Kill();
+                    // 2秒待って終了しなかったらKill
+                    this.BrowserProcess.Kill();
 				}
 				catch (Exception)
 				{
 					// プロセスが既に終了してた場合などに例外が出る
 				}
 			}
-			BrowserWnd = IntPtr.Zero;
+            this.BrowserWnd = IntPtr.Zero;
 		}
 
 		public void CloseBrowser()
@@ -445,20 +528,20 @@ namespace ElectronicObserver.Window
 			try
 			{
 
-				if (Browser == null)
+				if (this.Browser == null)
 				{
 					// ブラウザを開いていない場合はnullなので
 					return;
 				}
-				if (!Browser.Closed)
+				if (!this.Browser.Closed)
 				{
 					// ブラウザプロセスが異常終了した場合などはnullになる
-					if (Browser.Proxy != null)
+					if (this.Browser.Proxy != null)
 					{
-						Browser.Proxy.CloseBrowser();
+                        this.Browser.Proxy.CloseBrowser();
 					}
-					Browser.Close();
-					TerminateBrowserProcess();
+                    this.Browser.Close();
+                    this.TerminateBrowserProcess();
 				}
 
 			}
@@ -472,9 +555,9 @@ namespace ElectronicObserver.Window
 
 		private void FormBrowserHost_Resize(object sender, EventArgs e)
 		{
-			if (BrowserWnd != IntPtr.Zero)
+			if (this.BrowserWnd != IntPtr.Zero)
 			{
-				MoveWindow(BrowserWnd, 0, 0, this.Width, this.Height, true);
+				MoveWindow(this.BrowserWnd, 0, 0, this.Width, this.Height, true);
 			}
 		}
 
@@ -521,7 +604,7 @@ namespace ElectronicObserver.Window
 
 		public KeyMessageGrabber(IntPtr targetWnd)
 		{
-			TargetWnd = targetWnd;
+            this.TargetWnd = targetWnd;
 		}
 
 		public bool PreFilterMessage(ref Message m)
@@ -532,7 +615,7 @@ namespace ElectronicObserver.Window
 				case WM_KEYUP:
 				case WM_SYSKEYDOWN:
 				case WM_SYSKEYUP:
-					PostMessage(TargetWnd, m.Msg, m.WParam, m.LParam);
+					PostMessage(this.TargetWnd, m.Msg, m.WParam, m.LParam);
 					break;
 			}
 			return false;

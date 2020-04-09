@@ -20,74 +20,74 @@ namespace ElectronicObserver.Observer
 
 		public APIDictionary(IEnumerable<APIBase> source)
 		{
-			dict = source.ToDictionary(x => x.APIName);
+            this.dict = source.ToDictionary(x => x.APIName);
 		}
 
 
 		internal void Add(APIBase data)
 		{
-			dict.Add(data.APIName, data);
+            this.dict.Add(data.APIName, data);
 		}
 
 		internal void Remove(APIBase data)
 		{
-			dict.Remove(data.APIName);
+            this.dict.Remove(data.APIName);
 		}
 
 		internal void Remove(string apiname)
 		{
-			dict.Remove(apiname);
+            this.dict.Remove(apiname);
 		}
 
 		internal void Clear()
 		{
-			dict.Clear();
+            this.dict.Clear();
 		}
 
 
 		public void OnRequestReceived(string apiname, Dictionary<string, string> data)
 		{
-			if (dict.ContainsKey(apiname) && dict[apiname].IsRequestSupported)
+			if (this.dict.ContainsKey(apiname) && this.dict[apiname].IsRequestSupported)
 			{
-				dict[apiname].OnRequestReceived(data);
+                this.dict[apiname].OnRequestReceived(data);
 			}
 		}
 
 		public void OnResponseReceived(string apiname, dynamic data)
 		{
-			if (dict.ContainsKey(apiname) && dict[apiname].IsResponseSupported)
+			if (this.dict.ContainsKey(apiname) && this.dict[apiname].IsResponseSupported)
 			{
-				dict[apiname].OnResponseReceived(data);
+                this.dict[apiname].OnResponseReceived(data);
 			}
 		}
 
 
 		public bool ContainsKey(string key)
 		{
-			return dict.ContainsKey(key);
+			return this.dict.ContainsKey(key);
 		}
 
-		public IEnumerable<string> Keys => dict.Keys;
+		public IEnumerable<string> Keys => this.dict.Keys;
 
 		public bool TryGetValue(string key, out APIBase value)
 		{
-			return dict.TryGetValue(key, out value);
+			return this.dict.TryGetValue(key, out value);
 		}
 
-		public IEnumerable<APIBase> Values => dict.Values;
+		public IEnumerable<APIBase> Values => this.dict.Values;
 
-		public APIBase this[string key] => dict.ContainsKey(key) ? dict[key] : null;
+		public APIBase this[string key] => this.dict.ContainsKey(key) ? this.dict[key] : null;
 
-		public int Count => dict.Count;
+		public int Count => this.dict.Count;
 
 		public IEnumerator<KeyValuePair<string, APIBase>> GetEnumerator()
 		{
-			return dict.GetEnumerator();
+			return this.dict.GetEnumerator();
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return dict.GetEnumerator();
+			return this.dict.GetEnumerator();
 		}
 	}
 

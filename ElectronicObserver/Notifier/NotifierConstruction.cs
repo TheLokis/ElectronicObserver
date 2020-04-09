@@ -20,20 +20,20 @@ namespace ElectronicObserver.Notifier
 		public NotifierConstruction()
 			: base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public NotifierConstruction(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 			: base(config)
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 
 		private void Initialize()
 		{
-			DialogData.Title = "건조완료";
-			processedFlags = new Dictionary<int, bool>();
+            this.DialogData.Title = "건조완료";
+            this.processedFlags = new Dictionary<int, bool>();
 		}
 
 
@@ -43,24 +43,24 @@ namespace ElectronicObserver.Notifier
 			foreach (var arsenal in KCDatabase.Instance.Arsenals.Values)
 			{
 
-				if (!processedFlags.ContainsKey(arsenal.ArsenalID))
-					processedFlags.Add(arsenal.ArsenalID, false);
+				if (!this.processedFlags.ContainsKey(arsenal.ArsenalID))
+                    this.processedFlags.Add(arsenal.ArsenalID, false);
 
 				if (arsenal.State > 0)
 				{
-					if (!processedFlags[arsenal.ArsenalID] && (
-						(int)(arsenal.CompletionTime - DateTime.Now).TotalMilliseconds <= AccelInterval ||
+					if (!this.processedFlags[arsenal.ArsenalID] && (
+						(int)(arsenal.CompletionTime - DateTime.Now).TotalMilliseconds <= this.AccelInterval ||
 						arsenal.State == 3))
 					{
 
-						processedFlags[arsenal.ArsenalID] = true;
-						Notify(arsenal.ArsenalID, arsenal.ShipID);
+                        this.processedFlags[arsenal.ArsenalID] = true;
+                        this.Notify(arsenal.ArsenalID, arsenal.ShipID);
 					}
 
 				}
 				else
 				{
-					processedFlags[arsenal.ArsenalID] = false;
+                    this.processedFlags[arsenal.ArsenalID] = false;
 				}
 
 			}
@@ -70,7 +70,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(int arsenalID, int shipID)
 		{
 
-			DialogData.Message = string.Format("공창 도크 #{0} 에서「{1}」의 건조가 완료되었습니다.",
+            this.DialogData.Message = string.Format("공창 도크 #{0} 에서「{1}」의 건조가 완료되었습니다.",
 				arsenalID, Utility.Configuration.Config.FormArsenal.ShowShipName ? KCDatabase.Instance.MasterShips[shipID].NameWithClass : "칸무스");
 
 			base.Notify();

@@ -32,52 +32,52 @@ namespace ElectronicObserver.Window.Control
 			private string _text;
 			public string Text
 			{
-				get { return _text; }
+				get { return this._text; }
 				set
 				{
-					_text = value;
-					UpdateText();
+                    this._text = value;
+                    this.UpdateText();
 				}
 			}
 			private string _shortenedText;
 			public string ShortenedText
 			{
-				get { return _shortenedText; }
+				get { return this._shortenedText; }
 				set
 				{
-					_shortenedText = value;
-					UpdateText();
+                    this._shortenedText = value;
+                    this.UpdateText();
 				}
 			}
 			private bool _autoShorten;
 			public bool AutoShorten
 			{
-				get { return _autoShorten; }
+				get { return this._autoShorten; }
 				set
 				{
-					_autoShorten = value;
-					UpdateText();
+                    this._autoShorten = value;
+                    this.UpdateText();
 				}
 			}
 
 			private bool _enabled;
 			public bool Enabled
 			{
-				get { return _enabled; }
+				get { return this._enabled; }
 				set
 				{
-					_enabled = value;
-					Label.Visible = value;
+                    this._enabled = value;
+                    this.Label.Visible = value;
 				}
 			}
 
 
 			public StateLabel()
 			{
-				Label = GetDefaultLabel();
-				Label.MouseEnter += Label_MouseEnter;
-				Label.MouseLeave += Label_MouseLeave;
-				Enabled = false;
+                this.Label = GetDefaultLabel();
+                this.Label.MouseEnter += this.Label_MouseEnter;
+                this.Label.MouseLeave += this.Label_MouseLeave;
+                this.Enabled = false;
 			}
 
 			public static ImageLabel GetDefaultLabel()
@@ -95,35 +95,35 @@ namespace ElectronicObserver.Window.Control
 
 			public void SetInformation(FleetStates state, string text, string shortenedText, int imageIndex, Color backColor)
 			{
-				State = state;
-				Text = text;
-				ShortenedText = shortenedText;
-				UpdateText();
-				Label.ImageIndex = imageIndex;
-				Label.BackColor = backColor;
+                this.State = state;
+                this.Text = text;
+                this.ShortenedText = shortenedText;
+                this.UpdateText();
+                this.Label.ImageIndex = imageIndex;
+                this.Label.BackColor = backColor;
 			}
 
 			public void SetInformation(FleetStates state, string text, string shortenedText, int imageIndex)
 			{
-				SetInformation(state, text, shortenedText, imageIndex, Color.Transparent);
+                this.SetInformation(state, text, shortenedText, imageIndex, Color.Transparent);
 			}
 
 			public void UpdateText()
 			{
-				Label.Text = (!AutoShorten || _onmouse) ? Text : ShortenedText;
+                this.Label.Text = (!this.AutoShorten || this._onmouse) ? this.Text : this.ShortenedText;
 			}
 
 
 			void Label_MouseEnter(object sender, EventArgs e)
 			{
-				_onmouse = true;
-				UpdateText();
+                this._onmouse = true;
+                this.UpdateText();
 			}
 
 			void Label_MouseLeave(object sender, EventArgs e)
 			{
-				_onmouse = false;
-				UpdateText();
+                this._onmouse = false;
+                this.UpdateText();
 			}
 
 		}
@@ -138,7 +138,7 @@ namespace ElectronicObserver.Window.Control
 			set
 			{
 				base.Font = value;
-				foreach (var state in StateLabels)
+				foreach (var state in this.StateLabels)
 					state.Label.Font = value;
 			}
 		}
@@ -149,29 +149,29 @@ namespace ElectronicObserver.Window.Control
 
 		public FleetState()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			StateLabels = new List<StateLabel>();
+            this.StateLabels = new List<StateLabel>();
 		}
 
 
 		private StateLabel AddStateLabel()
 		{
-			StateLabels.Add(new StateLabel());
-			var ret = StateLabels.Last();
-			LayoutBase.Controls.Add(ret.Label);
+            this.StateLabels.Add(new StateLabel());
+			var ret = this.StateLabels.Last();
+            this.LayoutBase.Controls.Add(ret.Label);
 			return ret;
 		}
 
 		private StateLabel GetStateLabel(int index)
 		{
-			if (index >= StateLabels.Count)
+			if (index >= this.StateLabels.Count)
 			{
-				for (int i = StateLabels.Count; i <= index; i++)
-					AddStateLabel();
+				for (int i = this.StateLabels.Count; i <= index; i++)
+                    this.AddStateLabel();
 			}
-			StateLabels[index].Enabled = true;
-			return StateLabels[index];
+            this.StateLabels[index].Enabled = true;
+			return this.StateLabels[index];
 		}
 
 
@@ -194,7 +194,7 @@ namespace ElectronicObserver.Window.Control
 			//所属艦なし
 			if (fleet == null || fleet.Members.All(id => id == -1))
 			{
-				var state = GetStateLabel(index);
+				var state = this.GetStateLabel(index);
 
 				state.SetInformation(FleetStates.NoShip, "소속함없음", "", (int)ResourceManager.IconContent.FleetNoShip);
 				tooltip.SetToolTip(state.Label, null);
@@ -212,7 +212,7 @@ namespace ElectronicObserver.Window.Control
 					//大破出撃中
 					if (fleet.MembersWithoutEscaped.Any(s => s != null && s.HPRate <= 0.25))
 					{
-						var state = GetStateLabel(index);
+						var state = this.GetStateLabel(index);
 
 						state.SetInformation(FleetStates.SortieDamaged, "！！대파진격중！！", "！！대파진격중！！", (int)ResourceManager.IconContent.FleetSortieDamaged, colorDanger);
 						tooltip.SetToolTip(state.Label, null);
@@ -222,7 +222,7 @@ namespace ElectronicObserver.Window.Control
 					}
 					else
 					{   //出撃中
-						var state = GetStateLabel(index);
+						var state = this.GetStateLabel(index);
 
 						state.SetInformation(FleetStates.Sortie, "출격중", "", (int)ResourceManager.IconContent.FleetSortie);
 						tooltip.SetToolTip(state.Label, null);
@@ -236,7 +236,7 @@ namespace ElectronicObserver.Window.Control
 				//遠征中
 				if (fleet.ExpeditionState != 0)
 				{
-					var state = GetStateLabel(index);
+					var state = this.GetStateLabel(index);
 
 					state.Timer = fleet.ExpeditionTime;
 					state.SetInformation(FleetStates.Expedition,
@@ -256,7 +256,7 @@ namespace ElectronicObserver.Window.Control
 				//大破艦あり
 				if (!fleet.IsInSortie && fleet.MembersWithoutEscaped.Any(s => s != null && s.HPRate <= 0.25 && s.RepairingDockID == -1))
 				{
-					var state = GetStateLabel(index);
+					var state = this.GetStateLabel(index);
 
 					state.SetInformation(FleetStates.Damaged, "대파함있음！", "대파함있음！", (int)ResourceManager.IconContent.FleetDamaged, colorDanger);
 					tooltip.SetToolTip(state.Label, null);
@@ -268,7 +268,7 @@ namespace ElectronicObserver.Window.Control
 				//泊地修理中
 				if (fleet.CanAnchorageRepair)
 				{
-					var state = GetStateLabel(index);
+					var state = this.GetStateLabel(index);
 
 					state.Timer = db.Fleet.AnchorageRepairingTimer;
 					state.SetInformation(FleetStates.AnchorageRepairing,
@@ -313,7 +313,7 @@ namespace ElectronicObserver.Window.Control
 
 					if (ntime > 0)
 					{   //入渠中
-						var state = GetStateLabel(index);
+						var state = this.GetStateLabel(index);
 
 						state.Timer = new DateTime(ntime);
 						state.SetInformation(FleetStates.Docking,
@@ -340,7 +340,7 @@ namespace ElectronicObserver.Window.Control
 
 					if (fuel > 0 || ammo > 0 || bauxite > 0)
 					{
-						var state = GetStateLabel(index);
+						var state = this.GetStateLabel(index);
 
 						state.SetInformation(FleetStates.NotReplenished, "미보급", "", (int)ResourceManager.IconContent.FleetNotReplenished, colorInPort);
 						tooltip.SetToolTip(state.Label, string.Format("연료 : {0}\r\n탄약 : {1}\r\n보키 : {2} ({3}기)", fuel, ammo, bauxite, aircraft));
@@ -355,7 +355,7 @@ namespace ElectronicObserver.Window.Control
 
 					if (cond < Utility.Configuration.Config.Control.ConditionBorder && fleet.ConditionTime != null && fleet.ExpeditionState == 0)
 					{
-						var state = GetStateLabel(index);
+						var state = this.GetStateLabel(index);
 
 						int iconIndex;
 						if (cond < 20)
@@ -380,7 +380,7 @@ namespace ElectronicObserver.Window.Control
 					}
 					else if (cond >= 50)
 					{       //戦意高揚
-						var state = GetStateLabel(index);
+						var state = this.GetStateLabel(index);
 
 						state.SetInformation(FleetStates.Sparkled, "피로도 좋음！", "", (int)ResourceManager.IconContent.ConditionSparkle, colorInPort);
 						tooltip.SetToolTip(state.Label, string.Format("최소cond: {0}\r\n, {1} 회 원정가능", cond, Math.Ceiling((cond - 49) / 3.0)));
@@ -393,7 +393,7 @@ namespace ElectronicObserver.Window.Control
 				//出撃可能！
 				if (index == 0)
 				{
-					var state = GetStateLabel(index);
+					var state = this.GetStateLabel(index);
 
 					state.SetInformation(FleetStates.Ready, "출격가능！", "", (int)ResourceManager.IconContent.FleetReady, colorInPort);
 					tooltip.SetToolTip(state.Label, null);
@@ -408,14 +408,14 @@ namespace ElectronicObserver.Window.Control
 			{
 				for (int i = 0; i < index; i++)
 				{
-					if (StateLabels[i].Label.BackColor == Color.Transparent)
-						StateLabels[i].Label.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
+					if (this.StateLabels[i].Label.BackColor == Color.Transparent)
+                        this.StateLabels[i].Label.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
 				}
 			}
 
 
-			for (int i = displayMode == FleetStateDisplayModes.Single ? 1 : index; i < StateLabels.Count; i++)
-				StateLabels[i].Enabled = false;
+			for (int i = displayMode == FleetStateDisplayModes.Single ? 1 : index; i < this.StateLabels.Count; i++)
+                this.StateLabels[i].Enabled = false;
 
 
 			switch (displayMode)
@@ -423,25 +423,25 @@ namespace ElectronicObserver.Window.Control
 
 				case FleetStateDisplayModes.AllCollapsed:
 					for (int i = 0; i < index; i++)
-						StateLabels[i].AutoShorten = true;
+                        this.StateLabels[i].AutoShorten = true;
 					break;
 
 				case FleetStateDisplayModes.MultiCollapsed:
 					if (index == 1)
 					{
-						StateLabels[0].AutoShorten = false;
+                        this.StateLabels[0].AutoShorten = false;
 					}
 					else
 					{
 						for (int i = 0; i < index; i++)
-							StateLabels[i].AutoShorten = true;
+                            this.StateLabels[i].AutoShorten = true;
 					}
 					break;
 
 				case FleetStateDisplayModes.Single:
 				case FleetStateDisplayModes.AllExpanded:
 					for (int i = 0; i < index; i++)
-						StateLabels[i].AutoShorten = false;
+                        this.StateLabels[i].AutoShorten = false;
 					break;
 			}
 
@@ -451,7 +451,7 @@ namespace ElectronicObserver.Window.Control
 		public void RefreshFleetState()
 		{
 
-			foreach (var state in StateLabels)
+			foreach (var state in this.StateLabels)
 			{
 
 				if (!state.Enabled)
@@ -507,7 +507,7 @@ namespace ElectronicObserver.Window.Control
 
 		public int GetIconIndex()
 		{
-			var first = StateLabels.Where(s => s.Enabled).OrderBy(s => s.State).FirstOrDefault();
+			var first = this.StateLabels.Where(s => s.Enabled).OrderBy(s => s.State).FirstOrDefault();
 			return first == null ? (int)ResourceManager.IconContent.FormFleet : first.Label.ImageIndex;
 		}
 

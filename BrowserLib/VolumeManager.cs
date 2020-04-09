@@ -18,7 +18,7 @@ namespace BrowserLib
 
 		public VolumeManager(uint processID)
 		{
-			ProcessID = processID;
+            this.ProcessID = processID;
 		}
 
 
@@ -181,14 +181,14 @@ namespace BrowserLib
 
 		public float Volume
 		{
-			get { return GetApplicationVolume(ProcessID); }
-			set { SetApplicationVolume(ProcessID, value); }
+			get { return GetApplicationVolume(this.ProcessID); }
+			set { SetApplicationVolume(this.ProcessID, value); }
 		}
 
 		public bool IsMute
 		{
-			get { return GetApplicationMute(ProcessID); }
-			set { SetApplicationMute(ProcessID, value); }
+			get { return GetApplicationMute(this.ProcessID); }
+			set { SetApplicationMute(this.ProcessID, value); }
 		}
 
 		/// <summary>
@@ -197,7 +197,7 @@ namespace BrowserLib
 		/// <returns>トグル後のミュート状態。</returns>
 		public bool ToggleMute()
 		{
-			return ToggleMute(ProcessID);
+			return ToggleMute(this.ProcessID);
 		}
 
 

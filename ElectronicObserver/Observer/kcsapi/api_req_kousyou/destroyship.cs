@@ -26,7 +26,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 			var ships = shipIDs.Select(id => db.Ships[id]);
 
 
-			db.Fleet.LoadFromRequest(APIName, data);
+			db.Fleet.LoadFromRequest(this.APIName, data);
 
 
 			foreach (var ship in ships)
@@ -53,7 +53,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 
 		public override void OnResponseReceived(dynamic data)
 		{
-			KCDatabase.Instance.Material.LoadFromResponse(APIName, data.api_material);
+			KCDatabase.Instance.Material.LoadFromResponse(this.APIName, data.api_material);
 
 			base.OnResponseReceived((object)data);
 		}

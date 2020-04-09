@@ -30,12 +30,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.MasterShips[id] == null)
 				{
 					var ship = new ShipDataMaster();
-					ship.LoadFromResponse(APIName, elem);
+					ship.LoadFromResponse(this.APIName, elem);
 					db.MasterShips.Add(ship);
 				}
 				else
 				{
-					db.MasterShips[id].LoadFromResponse(APIName, elem);
+					db.MasterShips[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -58,12 +58,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.EquipmentTypes[id] == null)
 				{
 					var eqt = new EquipmentType();
-					eqt.LoadFromResponse(APIName, elem);
+					eqt.LoadFromResponse(this.APIName, elem);
 					db.EquipmentTypes.Add(eqt);
 				}
 				else
 				{
-					db.EquipmentTypes[id].LoadFromResponse(APIName, elem);
+					db.EquipmentTypes[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -76,12 +76,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.ShipTypes[id] == null)
 				{
 					var spt = new ShipType();
-					spt.LoadFromResponse(APIName, elem);
+					spt.LoadFromResponse(this.APIName, elem);
 					db.ShipTypes.Add(spt);
 				}
 				else
 				{
-					db.ShipTypes[id].LoadFromResponse(APIName, elem);
+					db.ShipTypes[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -94,12 +94,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.MasterEquipments[id] == null)
 				{
 					var eq = new EquipmentDataMaster();
-					eq.LoadFromResponse(APIName, elem);
+					eq.LoadFromResponse(this.APIName, elem);
 					db.MasterEquipments.Add(eq);
 				}
 				else
 				{
-					db.MasterEquipments[id].LoadFromResponse(APIName, elem);
+					db.MasterEquipments[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -123,12 +123,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.MasterUseItems[id] == null)
 				{
 					var item = new UseItemMaster();
-					item.LoadFromResponse(APIName, elem);
+					item.LoadFromResponse(this.APIName, elem);
 					db.MasterUseItems.Add(item);
 				}
 				else
 				{
-					db.MasterUseItems[id].LoadFromResponse(APIName, elem);
+					db.MasterUseItems[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -139,12 +139,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.MapArea[id] == null)
 				{
 					var item = new MapAreaData();
-					item.LoadFromResponse(APIName, elem);
+					item.LoadFromResponse(this.APIName, elem);
 					db.MapArea.Add(item);
 				}
 				else
 				{
-					db.MapArea[id].LoadFromResponse(APIName, elem);
+					db.MapArea[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -156,12 +156,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.MapInfo[id] == null)
 				{
 					var item = new MapInfoData();
-					item.LoadFromResponse(APIName, elem);
+					item.LoadFromResponse(this.APIName, elem);
 					db.MapInfo.Add(item);
 				}
 				else
 				{
-					db.MapInfo[id].LoadFromResponse(APIName, elem);
+					db.MapInfo[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -174,12 +174,12 @@ namespace ElectronicObserver.Observer.kcsapi
 				if (db.Mission[id] == null)
 				{
 					var item = new MissionData();
-					item.LoadFromResponse(APIName, elem);
+					item.LoadFromResponse(this.APIName, elem);
 					db.Mission.Add(item);
 				}
 				else
 				{
-					db.Mission[id].LoadFromResponse(APIName, elem);
+					db.Mission[id].LoadFromResponse(this.APIName, elem);
 				}
 
 			}

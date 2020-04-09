@@ -57,7 +57,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_nyukyo
 			}
 
 
-			db.Fleet.LoadFromRequest(APIName, data);
+			db.Fleet.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

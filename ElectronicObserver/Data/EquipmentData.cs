@@ -34,43 +34,43 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 装備を一意に識別するID
 		/// </summary>
-		public int MasterID => (int)RawData.api_id;
+		public int MasterID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 装備ID
 		/// </summary>
-		public int EquipmentID => (int)RawData.api_slotitem_id;
+		public int EquipmentID => (int)this.RawData.api_slotitem_id;
 
 
 		/// <summary>
 		/// 保護ロック
 		/// </summary>
-		public bool IsLocked => (int)RawData.api_locked != 0;
+		public bool IsLocked => (int)this.RawData.api_locked != 0;
 
 		/// <summary>
 		/// 改修Level
 		/// </summary>
-		public int Level => (int)RawData.api_level;
+		public int Level => (int)this.RawData.api_level;
 
 
 		/// <summary>
 		/// 艦載機熟練度
 		/// </summary>
-		public int AircraftLevel => RawData.api_alv() ? (int)RawData.api_alv : 0;
+		public int AircraftLevel => this.RawData.api_alv() ? (int)this.RawData.api_alv : 0;
 
 
 
 		/// <summary>
 		/// 装備のマスターデータへの参照
 		/// </summary>
-		public EquipmentDataMaster MasterEquipment => KCDatabase.Instance.MasterEquipments[EquipmentID];
+		public EquipmentDataMaster MasterEquipment => KCDatabase.Instance.MasterEquipments[this.EquipmentID];
 
 		/// <summary>
 		/// 装備名
 		/// </summary>
-		public string Name => MasterEquipment.Name;
+		public string Name => this.MasterEquipment.Name;
 
-        public string Name_JP => MasterEquipment.Name_JP;
+        public string Name_JP => this.MasterEquipment.Name_JP;
 
 		/// <summary>
 		/// 装備名(レベルを含む)
@@ -79,12 +79,12 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				var sb = new StringBuilder(Name);
+				var sb = new StringBuilder(this.Name);
 
-				if (Level > 0)
-					sb.Append("+").Append(Level);
-				if (AircraftLevel > 0)
-					sb.Append(" ").Append(AircraftLevelString[AircraftLevel]);
+				if (this.Level > 0)
+					sb.Append("+").Append(this.Level);
+				if (this.AircraftLevel > 0)
+					sb.Append(" ").Append(AircraftLevelString[this.AircraftLevel]);
 
 				return sb.ToString();
 			}
@@ -94,11 +94,11 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 配置転換中かどうか
 		/// </summary>
-		public bool IsRelocated => KCDatabase.Instance.RelocatedEquipments.Keys.Contains(MasterID);
+		public bool IsRelocated => KCDatabase.Instance.RelocatedEquipments.Keys.Contains(this.MasterID);
 
 
 
-		public int ID => MasterID;
+		public int ID => this.MasterID;
 
 
 		public override void LoadFromResponse(string apiname, dynamic data)
@@ -131,7 +131,7 @@ namespace ElectronicObserver.Data
 		}
 
 
-		public override string ToString() => NameWithLevel;
+		public override string ToString() => this.NameWithLevel;
 
 
 	}

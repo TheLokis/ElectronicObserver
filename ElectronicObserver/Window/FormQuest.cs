@@ -26,35 +26,35 @@ namespace ElectronicObserver.Window
 
 		public FormQuest(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-            ControlHelper.SetDoubleBuffered(QuestView);
+            ControlHelper.SetDoubleBuffered(this.QuestView);
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
 
-			#region set cellstyle
+            #region set cellstyle
 
-			CSDefaultLeft = new DataGridViewCellStyle
+            this.CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft
 			};
 
-			CSDefaultLeft.BackColor =
-            CSDefaultLeft.SelectionBackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            CSDefaultLeft.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            CSDefaultLeft.SelectionForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            CSDefaultLeft.WrapMode = DataGridViewTriState.False;
+            this.CSDefaultLeft.BackColor =
+            this.CSDefaultLeft.SelectionBackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.CSDefaultLeft.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.CSDefaultLeft.SelectionForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.CSDefaultLeft.WrapMode = DataGridViewTriState.False;
 
 
-            CSDefaultCenter = new DataGridViewCellStyle(CSDefaultLeft)
+            this.CSDefaultCenter = new DataGridViewCellStyle(this.CSDefaultLeft)
             {
                 Alignment = DataGridViewContentAlignment.MiddleCenter,
             };
-            CSCategories = new DataGridViewCellStyle[9];
-			for (int i = 0; i < CSCategories.Length; i++)
+            this.CSCategories = new DataGridViewCellStyle[9];
+			for (int i = 0; i < this.CSCategories.Length; i++)
 			{
-				CSCategories[i] = new DataGridViewCellStyle(CSDefaultCenter);
+                this.CSCategories[i] = new DataGridViewCellStyle(this.CSDefaultCenter);
 
                 Color c;
 				switch (i + 1)
@@ -85,30 +85,30 @@ namespace ElectronicObserver.Window
 						break;
 					case 9:     //その他
 					default:
-						c = CSDefaultCenter.BackColor;
+						c = this.CSDefaultCenter.BackColor;
 						break;
 				}
 
-                CSCategories[i].ForeColor =
-                CSCategories[i].SelectionForeColor = SystemColors.ControlText;
-                CSCategories[i].BackColor =
-				CSCategories[i].SelectionBackColor = c;
+                this.CSCategories[i].ForeColor =
+                this.CSCategories[i].SelectionForeColor = SystemColors.ControlText;
+                this.CSCategories[i].BackColor =
+                this.CSCategories[i].SelectionBackColor = c;
             }
 
-            for (int i = 0; i < CSCategories.Length; i++)
+            for (int i = 0; i < this.CSCategories.Length; i++)
             {
 
             }
 
-                QuestView.DefaultCellStyle = CSDefaultCenter;
-			QuestView_Category.DefaultCellStyle = CSCategories[CSCategories.Length - 1];
-			QuestView_Name.DefaultCellStyle = CSDefaultLeft;
-			QuestView_Progress.DefaultCellStyle = CSDefaultLeft;
+            this.QuestView.DefaultCellStyle = this.CSDefaultCenter;
+            this.QuestView_Category.DefaultCellStyle = this.CSCategories[this.CSCategories.Length - 1];
+            this.QuestView_Name.DefaultCellStyle = this.CSDefaultLeft;
+            this.QuestView_Progress.DefaultCellStyle = this.CSDefaultLeft;
 
 			#endregion
 
 
-			SystemEvents.SystemShuttingDown += SystemEvents_SystemShuttingDown;
+			SystemEvents.SystemShuttingDown += this.SystemEvents_SystemShuttingDown;
 		}
 
 
@@ -126,30 +126,30 @@ namespace ElectronicObserver.Window
 			o.APIList["api_get_member/questlist"].ResponseReceived += rec;
 			//*/
 
-			KCDatabase.Instance.Quest.QuestUpdated += Updated;
+			KCDatabase.Instance.Quest.QuestUpdated += this.Updated;
 
 
-			ClearQuestView();
+            this.ClearQuestView();
 
 			try
 			{
 				int sort = Utility.Configuration.Config.FormQuest.SortParameter;
 
-				QuestView.Sort(QuestView.Columns[sort >> 1], (sort & 1) == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending);
+                this.QuestView.Sort(this.QuestView.Columns[sort >> 1], (sort & 1) == 0 ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
 			}
 			catch (Exception)
 			{
 
-				QuestView.Sort(QuestView_Name, ListSortDirection.Ascending);
+                this.QuestView.Sort(this.QuestView_Name, ListSortDirection.Ascending);
 			}
 
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormQuest]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormQuest]);
 
-			IsLoaded = true;
+            this.IsLoaded = true;
 		}
 
 
@@ -158,61 +158,61 @@ namespace ElectronicObserver.Window
 
 			var c = Utility.Configuration.Config;
 
-			QuestView.Font = Font = c.UI.MainFont;
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            QuestView.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            QuestView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.QuestView.Font = this.Font = c.UI.MainFont;
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.QuestView.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.QuestView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-            MenuMain_ShowRunningOnly.Checked = c.FormQuest.ShowRunningOnly;
-			MenuMain_ShowOnce.Checked = c.FormQuest.ShowOnce;
-			MenuMain_ShowDaily.Checked = c.FormQuest.ShowDaily;
-			MenuMain_ShowWeekly.Checked = c.FormQuest.ShowWeekly;
-			MenuMain_ShowMonthly.Checked = c.FormQuest.ShowMonthly;
-			MenuMain_ShowOther.Checked = c.FormQuest.ShowOther;
+            this.MenuMain_ShowRunningOnly.Checked = c.FormQuest.ShowRunningOnly;
+            this.MenuMain_ShowOnce.Checked = c.FormQuest.ShowOnce;
+            this.MenuMain_ShowDaily.Checked = c.FormQuest.ShowDaily;
+            this.MenuMain_ShowWeekly.Checked = c.FormQuest.ShowWeekly;
+            this.MenuMain_ShowMonthly.Checked = c.FormQuest.ShowMonthly;
+            this.MenuMain_ShowOther.Checked = c.FormQuest.ShowOther;
 
-			if (c.FormQuest.ColumnFilter == null || ((List<bool>)c.FormQuest.ColumnFilter).Count != QuestView.Columns.Count)
+			if (c.FormQuest.ColumnFilter == null || ((List<bool>)c.FormQuest.ColumnFilter).Count != this.QuestView.Columns.Count)
 			{
-				c.FormQuest.ColumnFilter = Enumerable.Repeat(true, QuestView.Columns.Count).ToList();
+				c.FormQuest.ColumnFilter = Enumerable.Repeat(true, this.QuestView.Columns.Count).ToList();
 			}
-			if (c.FormQuest.ColumnWidth == null || ((List<int>)c.FormQuest.ColumnWidth).Count != QuestView.Columns.Count)
+			if (c.FormQuest.ColumnWidth == null || ((List<int>)c.FormQuest.ColumnWidth).Count != this.QuestView.Columns.Count)
 			{
-				c.FormQuest.ColumnWidth = QuestView.Columns.Cast<DataGridViewColumn>().Select(column => column.Width).ToList();
+				c.FormQuest.ColumnWidth = this.QuestView.Columns.Cast<DataGridViewColumn>().Select(column => column.Width).ToList();
 			}
 			{
 				List<bool> list = c.FormQuest.ColumnFilter;
 				List<int> width = c.FormQuest.ColumnWidth;
 
-				for (int i = 0; i < QuestView.Columns.Count; i++)
+				for (int i = 0; i < this.QuestView.Columns.Count; i++)
 				{
-					QuestView.Columns[i].Visible =
-					((ToolStripMenuItem)MenuMain_ColumnFilter.DropDownItems[i]).Checked = list[i];
-					QuestView.Columns[i].Width = width[i];
+                    this.QuestView.Columns[i].Visible =
+					((ToolStripMenuItem)this.MenuMain_ColumnFilter.DropDownItems[i]).Checked = list[i];
+                    this.QuestView.Columns[i].Width = width[i];
 				}
 			}
 
-			foreach (DataGridViewColumn column in QuestView.Columns)
+			foreach (DataGridViewColumn column in this.QuestView.Columns)
 			{
 				column.SortMode = c.FormQuest.AllowUserToSortRows ? DataGridViewColumnSortMode.Automatic : DataGridViewColumnSortMode.NotSortable;
 			}
 
 			if (c.UI.IsLayoutFixed)
 			{
-				QuestView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-				QuestView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                this.QuestView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                this.QuestView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			}
 			else
 			{
-				QuestView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-				QuestView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                this.QuestView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                this.QuestView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			}
 
-			foreach (DataGridViewRow row in QuestView.Rows)
+			foreach (DataGridViewRow row in this.QuestView.Rows)
 			{
 				row.Height = 21;
 			}
 
-			Updated();
+            this.Updated();
 
 		}
 
@@ -223,10 +223,10 @@ namespace ElectronicObserver.Window
 			try
 			{
 
-				if (QuestView.SortedColumn != null)
-					Utility.Configuration.Config.FormQuest.SortParameter = QuestView.SortedColumn.Index << 1 | (QuestView.SortOrder == SortOrder.Ascending ? 0 : 1);
+				if (this.QuestView.SortedColumn != null)
+					Utility.Configuration.Config.FormQuest.SortParameter = this.QuestView.SortedColumn.Index << 1 | (this.QuestView.SortOrder == SortOrder.Ascending ? 0 : 1);
 
-				Utility.Configuration.Config.FormQuest.ColumnWidth = QuestView.Columns.Cast<DataGridViewColumn>().Select(c => c.Width).ToList();
+				Utility.Configuration.Config.FormQuest.ColumnWidth = this.QuestView.Columns.Cast<DataGridViewColumn>().Select(c => c.Width).ToList();
 
 			}
 			catch (Exception)
@@ -242,55 +242,55 @@ namespace ElectronicObserver.Window
 
 			if (!KCDatabase.Instance.Quest.IsLoaded) return;
 
-			QuestView.SuspendLayout();
+            this.QuestView.SuspendLayout();
 
-			QuestView.Rows.Clear();
+            this.QuestView.Rows.Clear();
 
 			foreach (var q in KCDatabase.Instance.Quest.Quests.Values)
 			{
 
-				if (MenuMain_ShowRunningOnly.Checked && !(q.State == 2 || q.State == 3))
+				if (this.MenuMain_ShowRunningOnly.Checked && !(q.State == 2 || q.State == 3))
 					continue;
 
 				switch (q.Type)
 				{
 					case 1:
-						if (!MenuMain_ShowDaily.Checked) continue;
+						if (!this.MenuMain_ShowDaily.Checked) continue;
 						break;
 					case 2:
-						if (!MenuMain_ShowWeekly.Checked) continue;
+						if (!this.MenuMain_ShowWeekly.Checked) continue;
 						break;
 					case 3:
-						if (!MenuMain_ShowMonthly.Checked) continue;
+						if (!this.MenuMain_ShowMonthly.Checked) continue;
 						break;
 					case 4:
 					default:
-						if (!MenuMain_ShowOnce.Checked) continue;
+						if (!this.MenuMain_ShowOnce.Checked) continue;
 						break;
 					case 5:
 						if (q.QuestID == 211 || q.QuestID == 212)
 						{   // 空母3か輸送5
-							if (!MenuMain_ShowDaily.Checked) continue;
+							if (!this.MenuMain_ShowDaily.Checked) continue;
 						}
 						else
 						{
-							if (!MenuMain_ShowOther.Checked) continue;
+							if (!this.MenuMain_ShowOther.Checked) continue;
 						}
 						break;
 				}
 
 
 				DataGridViewRow row = new DataGridViewRow();
-				row.CreateCells(QuestView);
+				row.CreateCells(this.QuestView);
 				row.Height = 21;
-				row.Cells[QuestView_State.Index].Value = (q.State == 3) ? ((bool?)null) : (q.State == 2);
-				row.Cells[QuestView_Type.Index].Value = q.Type;
-				row.Cells[QuestView_Category.Index].Value = q.Category;
-				row.Cells[QuestView_Category.Index].Style = CSCategories[Math.Min(q.Category - 1, 8 - 1)]; //아마도이거
-				row.Cells[QuestView_Name.Index].Value = q.QuestID;
+				row.Cells[this.QuestView_State.Index].Value = (q.State == 3) ? ((bool?)null) : (q.State == 2);
+				row.Cells[this.QuestView_Type.Index].Value = q.Type;
+				row.Cells[this.QuestView_Category.Index].Value = q.Category;
+				row.Cells[this.QuestView_Category.Index].Style = this.CSCategories[Math.Min(q.Category - 1, 8 - 1)]; //아마도이거
+				row.Cells[this.QuestView_Name.Index].Value = q.QuestID;
 				{
 					var progress = KCDatabase.Instance.QuestProgress[q.QuestID];
-					row.Cells[QuestView_Name.Index].ToolTipText = $"{q.QuestID} : {q.Name}\r\n{q.Description}\r\n{progress?.GetClearCondition() ?? ""}";
+					row.Cells[this.QuestView_Name.Index].ToolTipText = $"{q.QuestID} : {q.Name}\r\n{q.Description}\r\n{progress?.GetClearCondition() ?? ""}";
 				}
 				{
 					string value;
@@ -338,34 +338,34 @@ namespace ElectronicObserver.Window
 						}
 					}
 
-					row.Cells[QuestView_Progress.Index].Value = value;
-					row.Cells[QuestView_Progress.Index].Tag = tag;
+					row.Cells[this.QuestView_Progress.Index].Value = value;
+					row.Cells[this.QuestView_Progress.Index].Tag = tag;
 				}
 
-				QuestView.Rows.Add(row);
+                this.QuestView.Rows.Add(row);
 			}
 
 
 			if (KCDatabase.Instance.Quest.Quests.Count < KCDatabase.Instance.Quest.Count)
 			{
-				int index = QuestView.Rows.Add();
-				QuestView.Rows[index].Cells[QuestView_State.Index].Value = null;
-				QuestView.Rows[index].Cells[QuestView_Name.Index].Value = string.Format("(받지않은임무 x {0})", (KCDatabase.Instance.Quest.Count - KCDatabase.Instance.Quest.Quests.Count));
+				int index = this.QuestView.Rows.Add();
+                this.QuestView.Rows[index].Cells[this.QuestView_State.Index].Value = null;
+                this.QuestView.Rows[index].Cells[this.QuestView_Name.Index].Value = string.Format("(받지않은임무 x {0})", (KCDatabase.Instance.Quest.Count - KCDatabase.Instance.Quest.Quests.Count));
 			}
 
 			if (KCDatabase.Instance.Quest.Quests.Count == 0)
 			{
-				int index = QuestView.Rows.Add();
-				QuestView.Rows[index].Cells[QuestView_State.Index].Value = null;
-				QuestView.Rows[index].Cells[QuestView_Name.Index].Value = "(임무완수!)";
+				int index = this.QuestView.Rows.Add();
+                this.QuestView.Rows[index].Cells[this.QuestView_State.Index].Value = null;
+                this.QuestView.Rows[index].Cells[this.QuestView_Name.Index].Value = "(임무완수!)";
 			}
 
 			//更新時にソートする
-			if (QuestView.SortedColumn != null)
-				QuestView.Sort(QuestView.SortedColumn, QuestView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
+			if (this.QuestView.SortedColumn != null)
+                this.QuestView.Sort(this.QuestView.SortedColumn, this.QuestView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
 
-			QuestView.ResumeLayout();
+            this.QuestView.ResumeLayout();
 		}
 
 
@@ -374,19 +374,19 @@ namespace ElectronicObserver.Window
 
 			if (e.Value is int)
 			{
-				if (e.ColumnIndex == QuestView_Type.Index)
+				if (e.ColumnIndex == this.QuestView_Type.Index)
 				{
 					e.Value = Constants.GetQuestType((int)e.Value);
 					e.FormattingApplied = true;
 
 				}
-				else if (e.ColumnIndex == QuestView_Category.Index)
+				else if (e.ColumnIndex == this.QuestView_Category.Index)
 				{
 					e.Value = Constants.GetQuestCategory((int)e.Value);
 					e.FormattingApplied = true;
 
 				}
-				else if (e.ColumnIndex == QuestView_Name.Index)
+				else if (e.ColumnIndex == this.QuestView_Name.Index)
 				{
 					var quest = KCDatabase.Instance.Quest[(int)e.Value];
 					e.Value = quest != null ? quest.Name : "???";
@@ -402,7 +402,7 @@ namespace ElectronicObserver.Window
 
 		private void QuestView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
 		{
-			if (e.Column.Index == QuestView_State.Index)
+			if (e.Column.Index == this.QuestView_State.Index)
 			{
 				e.SortResult = (e.CellValue1 == null ? 2 : ((bool)e.CellValue1 ? 1 : 0)) -
 					(e.CellValue2 == null ? 2 : ((bool)e.CellValue2 ? 1 : 0));
@@ -414,7 +414,7 @@ namespace ElectronicObserver.Window
 
 			if (e.SortResult == 0)
 			{
-				e.SortResult = (QuestView.Rows[e.RowIndex1].Tag as int? ?? 0) - (QuestView.Rows[e.RowIndex2].Tag as int? ?? 0);
+				e.SortResult = (this.QuestView.Rows[e.RowIndex1].Tag as int? ?? 0) - (this.QuestView.Rows[e.RowIndex2].Tag as int? ?? 0);
 			}
 
 			e.Handled = true;
@@ -423,9 +423,9 @@ namespace ElectronicObserver.Window
 		private void QuestView_Sorted(object sender, EventArgs e)
 		{
 
-			for (int i = 0; i < QuestView.Rows.Count; i++)
+			for (int i = 0; i < this.QuestView.Rows.Count; i++)
 			{
-				QuestView.Rows[i].Tag = i;
+                this.QuestView.Rows[i].Tag = i;
 			}
 
 		}
@@ -434,7 +434,7 @@ namespace ElectronicObserver.Window
 		private void QuestView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
 
-			if (e.ColumnIndex != QuestView_Progress.Index ||
+			if (e.ColumnIndex != this.QuestView_Progress.Index ||
 				e.RowIndex < 0 ||
 				(e.PaintParts & DataGridViewPaintParts.Background) == 0)
 				return;
@@ -444,7 +444,7 @@ namespace ElectronicObserver.Window
 			{
 
 				Color col;
-				double rate = QuestView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag as double? ?? 0.0;
+				double rate = this.QuestView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag as double? ?? 0.0;
 
 				if (rate < 0.5)
 				{
@@ -486,39 +486,39 @@ namespace ElectronicObserver.Window
 
 		private void MenuMain_ShowRunningOnly_Click(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormQuest.ShowRunningOnly = MenuMain_ShowRunningOnly.Checked;
-			Updated();
+			Utility.Configuration.Config.FormQuest.ShowRunningOnly = this.MenuMain_ShowRunningOnly.Checked;
+            this.Updated();
 		}
 
 
 		private void MenuMain_ShowOnce_Click(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormQuest.ShowOnce = MenuMain_ShowOnce.Checked;
-			Updated();
+			Utility.Configuration.Config.FormQuest.ShowOnce = this.MenuMain_ShowOnce.Checked;
+            this.Updated();
 		}
 
 		private void MenuMain_ShowDaily_Click(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormQuest.ShowDaily = MenuMain_ShowDaily.Checked;
-			Updated();
+			Utility.Configuration.Config.FormQuest.ShowDaily = this.MenuMain_ShowDaily.Checked;
+            this.Updated();
 		}
 
 		private void MenuMain_ShowWeekly_Click(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormQuest.ShowWeekly = MenuMain_ShowWeekly.Checked;
-			Updated();
+			Utility.Configuration.Config.FormQuest.ShowWeekly = this.MenuMain_ShowWeekly.Checked;
+            this.Updated();
 		}
 
 		private void MenuMain_ShowMonthly_Click(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormQuest.ShowMonthly = MenuMain_ShowMonthly.Checked;
-			Updated();
+			Utility.Configuration.Config.FormQuest.ShowMonthly = this.MenuMain_ShowMonthly.Checked;
+            this.Updated();
 		}
 
 		private void MenuMain_ShowOther_Click(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormQuest.ShowOther = MenuMain_ShowOther.Checked;
-			Updated();
+			Utility.Configuration.Config.FormQuest.ShowOther = this.MenuMain_ShowOther.Checked;
+            this.Updated();
 		}
 
 
@@ -532,7 +532,7 @@ namespace ElectronicObserver.Window
 
 				KCDatabase.Instance.Quest.Clear();
 				KCDatabase.Instance.QuestProgress.Clear();
-				ClearQuestView();
+                this.ClearQuestView();
 			}
 
 		}
@@ -541,13 +541,13 @@ namespace ElectronicObserver.Window
 		private void ClearQuestView()
 		{
 
-			QuestView.Rows.Clear();
+            this.QuestView.Rows.Clear();
 
 			{
 				DataGridViewRow row = new DataGridViewRow();
-				row.CreateCells(QuestView);
+				row.CreateCells(this.QuestView);
 				row.SetValues(null, null, null, "(미취득)", null);
-                QuestView.Rows.Add(row);
+                this.QuestView.Rows.Add(row);
             }
 
 		}
@@ -560,9 +560,9 @@ namespace ElectronicObserver.Window
 			if (menu == null) return;
 
 			int index = -1;
-			for (int i = 0; i < MenuMain_ColumnFilter.DropDownItems.Count; i++)
+			for (int i = 0; i < this.MenuMain_ColumnFilter.DropDownItems.Count; i++)
 			{
-				if (sender == MenuMain_ColumnFilter.DropDownItems[i])
+				if (sender == this.MenuMain_ColumnFilter.DropDownItems[i])
 				{
 					index = i;
 					break;
@@ -571,7 +571,7 @@ namespace ElectronicObserver.Window
 
 			if (index == -1) return;
 
-			QuestView.Columns[index].Visible =
+            this.QuestView.Columns[index].Visible =
 			Utility.Configuration.Config.FormQuest.ColumnFilter.List[index] = menu.Checked;
 		}
 
@@ -579,8 +579,8 @@ namespace ElectronicObserver.Window
 		private void QuestView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
 		{
 
-			if (IsLoaded)
-				Utility.Configuration.Config.FormQuest.ColumnWidth = QuestView.Columns.Cast<DataGridViewColumn>().Select(c => c.Width).ToList();
+			if (this.IsLoaded)
+				Utility.Configuration.Config.FormQuest.ColumnWidth = this.QuestView.Columns.Cast<DataGridViewColumn>().Select(c => c.Width).ToList();
 
 		}
 
@@ -592,8 +592,8 @@ namespace ElectronicObserver.Window
 
 			if (e.Button == System.Windows.Forms.MouseButtons.Right && e.RowIndex >= 0)
 			{
-				QuestView.ClearSelection();
-				QuestView.Rows[e.RowIndex].Selected = true;
+                this.QuestView.ClearSelection();
+                this.QuestView.Rows[e.RowIndex].Selected = true;
 			}
 
 		}
@@ -601,7 +601,7 @@ namespace ElectronicObserver.Window
 		private void MenuProgress_Increment_Click(object sender, EventArgs e)
 		{
 
-			int id = GetSelectedRowQuestID();
+			int id = this.GetSelectedRowQuestID();
 
 			var quest = KCDatabase.Instance.Quest[id];
 			var progress = KCDatabase.Instance.QuestProgress[id];
@@ -612,7 +612,7 @@ namespace ElectronicObserver.Window
 				try
 				{
 					progress.Increment();
-					Updated();
+                    this.Updated();
 
 				}
 				catch (Exception)
@@ -626,7 +626,7 @@ namespace ElectronicObserver.Window
 		private void MenuProgress_Decrement_Click(object sender, EventArgs e)
 		{
 
-			int id = GetSelectedRowQuestID();
+			int id = this.GetSelectedRowQuestID();
 			var quest = KCDatabase.Instance.Quest[id];
 			var progress = KCDatabase.Instance.QuestProgress[id];
 
@@ -636,7 +636,7 @@ namespace ElectronicObserver.Window
 				try
 				{
 					progress.Decrement();
-					Updated();
+                    this.Updated();
 
 				}
 				catch (Exception)
@@ -650,7 +650,7 @@ namespace ElectronicObserver.Window
 		private void MenuProgress_Reset_Click(object sender, EventArgs e)
 		{
 
-			int id = GetSelectedRowQuestID();
+			int id = this.GetSelectedRowQuestID();
 
 			var quest = KCDatabase.Instance.Quest[id];
 			var progress = KCDatabase.Instance.QuestProgress[id];
@@ -668,7 +668,7 @@ namespace ElectronicObserver.Window
 					if (progress != null)
 						KCDatabase.Instance.QuestProgress.Progresses.Remove(progress);
 
-					Updated();
+                    this.Updated();
 				}
 			}
 
@@ -679,55 +679,55 @@ namespace ElectronicObserver.Window
 		private void QuestView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
 		{
 
-			if (e.RowIndex < 0 || e.ColumnIndex < 0 || e.RowIndex >= QuestView.RowCount || e.ColumnIndex >= QuestView.ColumnCount)
+			if (e.RowIndex < 0 || e.ColumnIndex < 0 || e.RowIndex >= this.QuestView.RowCount || e.ColumnIndex >= this.QuestView.ColumnCount)
 			{
-				ToolTipInfo.SetToolTip(QuestView, null);
+                this.ToolTipInfo.SetToolTip(this.QuestView, null);
 				return;
 			}
 
-			if (!string.IsNullOrWhiteSpace(QuestView[e.ColumnIndex, e.RowIndex].ToolTipText))
+			if (!string.IsNullOrWhiteSpace(this.QuestView[e.ColumnIndex, e.RowIndex].ToolTipText))
 			{
-				ToolTipInfo.SetToolTip(QuestView, QuestView[e.ColumnIndex, e.RowIndex].ToolTipText);
+                this.ToolTipInfo.SetToolTip(this.QuestView, this.QuestView[e.ColumnIndex, e.RowIndex].ToolTipText);
 
 			}
-			else if (e.ColumnIndex == QuestView_Progress.Index && QuestView[e.ColumnIndex, e.RowIndex].Value != null)
+			else if (e.ColumnIndex == this.QuestView_Progress.Index && this.QuestView[e.ColumnIndex, e.RowIndex].Value != null)
 			{
-				ToolTipInfo.SetToolTip(QuestView, QuestView[e.ColumnIndex, e.RowIndex].Value.ToString());
+                this.ToolTipInfo.SetToolTip(this.QuestView, this.QuestView[e.ColumnIndex, e.RowIndex].Value.ToString());
 
 			}
 			else
 			{
-				ToolTipInfo.SetToolTip(QuestView, null);
+                this.ToolTipInfo.SetToolTip(this.QuestView, null);
 			}
 
 		}
 
 		private void QuestView_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
 		{
-			ToolTipInfo.SetToolTip(QuestView, null);
+            this.ToolTipInfo.SetToolTip(this.QuestView, null);
 		}
 
 
 		private void MenuMain_Opening(object sender, CancelEventArgs e)
 		{
 
-			var quest = KCDatabase.Instance.Quest[GetSelectedRowQuestID()];
+			var quest = KCDatabase.Instance.Quest[this.GetSelectedRowQuestID()];
 
 			if (quest != null)
 			{
-				MenuMain_GoogleQuest.Enabled = true;
-				MenuMain_GoogleQuest.Text = string.Format("『{0}』으로 구글 검색(&G)", quest.Name);
+                this.MenuMain_GoogleQuest.Enabled = true;
+                this.MenuMain_GoogleQuest.Text = string.Format("『{0}』으로 구글 검색(&G)", quest.Name);
 			}
 			else
 			{
-				MenuMain_GoogleQuest.Enabled = false;
-				MenuMain_GoogleQuest.Text = "임무명으로 구글검색(&G)";
+                this.MenuMain_GoogleQuest.Enabled = false;
+                this.MenuMain_GoogleQuest.Text = "임무명으로 구글검색(&G)";
 			}
 		}
 
 		private void MenuMain_GoogleQuest_Click(object sender, EventArgs e)
 		{
-			var quest = KCDatabase.Instance.Quest[GetSelectedRowQuestID()];
+			var quest = KCDatabase.Instance.Quest[this.GetSelectedRowQuestID()];
 
 			if (quest != null)
 			{
@@ -748,12 +748,12 @@ namespace ElectronicObserver.Window
 
 		private int GetSelectedRowQuestID()
 		{
-			var rows = QuestView.SelectedRows;
+			var rows = this.QuestView.SelectedRows;
 
 			if (rows != null && rows.Count > 0 && rows[0].Index != -1)
 			{
 
-				return rows[0].Cells[QuestView_Name.Index].Value as int? ?? -1;
+				return rows[0].Cells[this.QuestView_Name.Index].Value as int? ?? -1;
 			}
 
 			return -1;

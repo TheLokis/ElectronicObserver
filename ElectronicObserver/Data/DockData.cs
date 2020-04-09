@@ -17,7 +17,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// ドックID
 		/// </summary>
-		public int DockID => (int)RawData.api_id;
+		public int DockID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 入渠状態
@@ -36,7 +36,7 @@ namespace ElectronicObserver.Data
 		public DateTime CompletionTime { get; internal set; }
 
 
-		public int ID => DockID;
+		public int ID => this.DockID;
 
 
 		public override void LoadFromResponse(string apiname, dynamic data)
@@ -45,11 +45,11 @@ namespace ElectronicObserver.Data
 			switch (apiname)
 			{
 				case "api_req_nyukyo/speedchange":
-					if (State == 1 && ShipID != 0)
+					if (this.State == 1 && this.ShipID != 0)
 					{
-						KCDatabase.Instance.Ships[ShipID].Repair();
-						State = 0;
-						ShipID = 0;
+						KCDatabase.Instance.Ships[this.ShipID].Repair();
+                        this.State = 0;
+                        this.ShipID = 0;
 					}
 					break;
 
@@ -57,16 +57,16 @@ namespace ElectronicObserver.Data
 					{
 						base.LoadFromResponse(apiname, (object)data);
 
-						int newstate = (int)RawData.api_state;
+						int newstate = (int)this.RawData.api_state;
 
-						if (State == 1 && newstate == 0 && ShipID != 0)
+						if (this.State == 1 && newstate == 0 && this.ShipID != 0)
 						{
-							KCDatabase.Instance.Ships[ShipID].Repair();
+							KCDatabase.Instance.Ships[this.ShipID].Repair();
 						}
 
-						State = newstate;
-						ShipID = (int)RawData.api_ship_id;
-						CompletionTime = DateTimeHelper.FromAPITime((long)RawData.api_complete_time);
+                        this.State = newstate;
+                        this.ShipID = (int)this.RawData.api_ship_id;
+                        this.CompletionTime = DateTimeHelper.FromAPITime((long)this.RawData.api_complete_time);
 					}
 					break;
 			}
@@ -78,15 +78,15 @@ namespace ElectronicObserver.Data
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.Append("[" + ID.ToString() + "] : ");
-			switch (State)
+			sb.Append("[" + this.ID.ToString() + "] : ");
+			switch (this.State)
 			{
 				case -1:
 					sb.Append("<Locked>"); break;
 				case 0:
 					sb.Append("<Empty>"); break;
 				case 1:
-					sb.Append(KCDatabase.Instance.Ships[ShipID].MasterShip.Name + ", at " + CompletionTime.ToString()); break;
+					sb.Append(KCDatabase.Instance.Ships[this.ShipID].MasterShip.Name + ", at " + this.CompletionTime.ToString()); break;
 			}
 
 			return sb.ToString();

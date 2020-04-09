@@ -1778,12 +1778,12 @@ namespace ElectronicObserver.Data
 
         public static string GetNodeName(int World, int Map, int Node)
         {
-            if (DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map] == null)
+            if (DynamicDataReader.Instance.GetData(DataType.NodeData)["World " + World + "-" + Map] == null)
             {
                 return Node.ToString();
             }
 
-            return DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString())[1].ToString();
+            return DynamicDataReader.Instance.GetData(DataType.NodeData)["World " + World + "-" + Map].SelectToken(Node.ToString())[1].ToString();
         }
 
 
@@ -1791,7 +1791,7 @@ namespace ElectronicObserver.Data
         {
             List<int> Node_List = new List<int>();
 
-            JToken Target_Map = DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map];
+            JToken Target_Map = DynamicDataReader.Instance.GetData(DataType.NodeData)["World " + World + "-" + Map];
             JToken Target_Node;
 
             if (Target_Map == null)
@@ -1800,13 +1800,13 @@ namespace ElectronicObserver.Data
                 return Node_List;
             }
 
-            if (DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString()) == null)
+            if (Target_Map.SelectToken(Node.ToString()) == null)
             {
                 Node_List.Add(Node);
                 return Node_List;
             }
 
-            Target_Node = DynamicDataReader.Instance.Master_Node_Data["World " + World + "-" + Map].SelectToken(Node.ToString())[1];
+            Target_Node = Target_Map.SelectToken(Node.ToString())[1];
 
             var nodes = Target_Map.ToList<JToken>();
 

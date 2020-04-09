@@ -19,77 +19,77 @@ namespace ElectronicObserver.Data.Battle.Phase
 		public PhaseSupport(BattleData data, string title, bool isNight = false)
 			: base(data, title)
 		{
-			IsNight = isNight;
+            this.IsNight = isNight;
 
-			switch (SupportFlag)
+			switch (this.SupportFlag)
 			{
 				case 1:     // 空撃
 				case 4:     // 対潜
 					{
-						if ((int)SupportData.api_support_airatack.api_stage_flag[2] != 0)
+						if ((int)this.SupportData.api_support_airatack.api_stage_flag[2] != 0)
 						{
-							// 敵連合でも api_stage3_combined は存在しない？
+                            // 敵連合でも api_stage3_combined は存在しない？
 
-							Damages = ((double[])SupportData.api_support_airatack.api_stage3.api_edam).ToArray();
-							Criticals = ((int[])SupportData.api_support_airatack.api_stage3.api_ecl_flag).ToArray();
+                            this.Damages = ((double[])this.SupportData.api_support_airatack.api_stage3.api_edam).ToArray();
+                            this.Criticals = ((int[])this.SupportData.api_support_airatack.api_stage3.api_ecl_flag).ToArray();
 
 							// 航空戦なので crit フラグが違う
-							for (int i = 0; i < Criticals.Length; i++)
-								Criticals[i]++;
+							for (int i = 0; i < this.Criticals.Length; i++)
+                                this.Criticals[i]++;
 						}
 						else
 						{
-							Damages = new double[12];
-							Criticals = new int[12];
+                            this.Damages = new double[12];
+                            this.Criticals = new int[12];
 						}
 					}
 					break;
 				case 2:     // 砲撃
 				case 3:     // 雷撃
 					{
-						var dmg = (double[])SupportData.api_support_hourai.api_damage;
-						var cl = (int[])SupportData.api_support_hourai.api_cl_list;
+						var dmg = (double[])this.SupportData.api_support_hourai.api_damage;
+						var cl = (int[])this.SupportData.api_support_hourai.api_cl_list;
 
-						Damages = new double[12];
-						Array.Copy(dmg, Damages, dmg.Length);
+                        this.Damages = new double[12];
+						Array.Copy(dmg, this.Damages, dmg.Length);
 
-						Criticals = new int[12];
-						Array.Copy(cl, Criticals, cl.Length);
+                        this.Criticals = new int[12];
+						Array.Copy(cl, this.Criticals, cl.Length);
 					}
 					break;
 				default:
-					Damages = new double[12];
-					Criticals = new int[12];
+                    this.Damages = new double[12];
+                    this.Criticals = new int[12];
 					break;
 			}
 		}
 
 
-		public override bool IsAvailable => SupportFlag != 0;
+		public override bool IsAvailable => this.SupportFlag != 0;
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
 
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			for (int i = 0; i < Battle.Initial.EnemyMembers.Length; i++)
+			for (int i = 0; i < this.Battle.Initial.EnemyMembers.Length; i++)
 			{
-				if (Battle.Initial.EnemyMembers[i] > 0)
+				if (this.Battle.Initial.EnemyMembers[i] > 0)
 				{
 					var index = new BattleIndex(BattleSides.EnemyMain, i);
-					BattleDetails.Add(new BattleSupportDetail(Battle, index, Damages[i], Criticals[i], SupportFlag, hps[index]));
-					AddDamage(hps, index, (int)Damages[i]);
+                    this.BattleDetails.Add(new BattleSupportDetail(this.Battle, index, this.Damages[i], this.Criticals[i], this.SupportFlag, hps[index]));
+                    this.AddDamage(hps, index, (int)this.Damages[i]);
 				}
 			}
-			if (Battle.IsEnemyCombined)
+			if (this.Battle.IsEnemyCombined)
 			{
-				for (int i = 0; i < Battle.Initial.EnemyMembersEscort.Length; i++)
+				for (int i = 0; i < this.Battle.Initial.EnemyMembersEscort.Length; i++)
 				{
-					if (Battle.Initial.EnemyMembersEscort[i] > 0)
+					if (this.Battle.Initial.EnemyMembersEscort[i] > 0)
 					{
 						var index = new BattleIndex(BattleSides.EnemyEscort, i);
-						BattleDetails.Add(new BattleSupportDetail(Battle, index, Damages[i + 6], Criticals[i + 6], SupportFlag, hps[index]));
-						AddDamage(hps, index, (int)Damages[i + 6]);
+                        this.BattleDetails.Add(new BattleSupportDetail(this.Battle, index, this.Damages[i + 6], this.Criticals[i + 6], this.SupportFlag, hps[index]));
+                        this.AddDamage(hps, index, (int)this.Damages[i + 6]);
 					}
 				}
 			}
@@ -97,7 +97,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		protected override IEnumerable<BattleDetail> SearchBattleDetails(int index)
 		{
-			return BattleDetails.Where(d => d.DefenderIndex == index);
+			return this.BattleDetails.Where(d => d.DefenderIndex == index);
 		}
 
 
@@ -108,14 +108,14 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				if (IsNight)
-					return RawData.api_n_support_flag() ? (int)RawData.api_n_support_flag : 0;
+				if (this.IsNight)
+					return this.RawData.api_n_support_flag() ? (int)this.RawData.api_n_support_flag : 0;
 				else
-					return RawData.api_support_flag() ? (int)RawData.api_support_flag : 0;
+					return this.RawData.api_support_flag() ? (int)this.RawData.api_support_flag : 0;
 			}
 		}
 
-		public dynamic SupportData => IsNight ? RawData.api_n_support_info : RawData.api_support_info;
+		public dynamic SupportData => this.IsNight ? this.RawData.api_n_support_info : this.RawData.api_support_info;
 
 		/// <summary>
 		/// 支援艦隊ID
@@ -124,15 +124,15 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				switch (SupportFlag)
+				switch (this.SupportFlag)
 				{
 					case 1:
 					case 4:
-						return (int)SupportData.api_support_airatack.api_deck_id;
+						return (int)this.SupportData.api_support_airatack.api_deck_id;
 
 					case 2:
 					case 3:
-						return (int)SupportData.api_support_hourai.api_deck_id;
+						return (int)this.SupportData.api_support_hourai.api_deck_id;
 
 					default:
 						return -1;
@@ -148,7 +148,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int id = SupportFleetID;
+				int id = this.SupportFleetID;
 				if (id != -1)
 					return KCDatabase.Instance.Fleet[id];
 				else

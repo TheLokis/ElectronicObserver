@@ -31,9 +31,9 @@ namespace ElectronicObserver.Window
 			public TableDockControl(FormDock parent)
 			{
 
-				#region Initialize
+                #region Initialize
 
-				ShipName = new ImageLabel
+                this.ShipName = new ImageLabel
 				{
 					Text = "???",
 					Anchor = AnchorStyles.Left,
@@ -48,7 +48,7 @@ namespace ElectronicObserver.Window
 					Visible = true
 				};
 
-				RepairTime = new Label
+                this.RepairTime = new Label
 				{
 					Text = "",
 					Anchor = AnchorStyles.Left,
@@ -62,9 +62,9 @@ namespace ElectronicObserver.Window
 					Visible = true
 				};
 
-				ConfigurationChanged(parent);
+                this.ConfigurationChanged(parent);
 
-				ToolTipInfo = parent.ToolTipInfo;
+                this.ToolTipInfo = parent.ToolTipInfo;
 
 				#endregion
 
@@ -75,14 +75,14 @@ namespace ElectronicObserver.Window
 				: this(parent)
 			{
 
-				AddToTable(table, row);
+                this.AddToTable(table, row);
 			}
 
 			public void AddToTable(TableLayoutPanel table, int row)
 			{
 
-				table.Controls.Add(ShipName, 0, row);
-				table.Controls.Add(RepairTime, 1, row);
+				table.Controls.Add(this.ShipName, 0, row);
+				table.Controls.Add(this.RepairTime, 1, row);
 
 			}
 
@@ -95,34 +95,34 @@ namespace ElectronicObserver.Window
 
 				DockData dock = db.Docks[dockID];
 
-				RepairTime.BackColor = Color.Transparent;
-				ToolTipInfo.SetToolTip(ShipName, null);
-				ToolTipInfo.SetToolTip(RepairTime, null);
+                this.RepairTime.BackColor = Color.Transparent;
+                this.ToolTipInfo.SetToolTip(this.ShipName, null);
+                this.ToolTipInfo.SetToolTip(this.RepairTime, null);
 
 				if (dock == null || dock.State == -1)
 				{
-					//locked
-					ShipName.Text = "";
-					RepairTime.Text = "";
-					RepairTime.Tag = null;
+                    //locked
+                    this.ShipName.Text = "";
+                    this.RepairTime.Text = "";
+                    this.RepairTime.Tag = null;
 
 				}
 				else if (dock.State == 0)
 				{
-					//empty
-					ShipName.Text = "----";
-					RepairTime.Text = "";
-					RepairTime.Tag = null;
+                    //empty
+                    this.ShipName.Text = "----";
+                    this.RepairTime.Text = "";
+                    this.RepairTime.Tag = null;
 
 				}
 				else
 				{
-					//repairing
-					ShipName.Text = db.Ships[dock.ShipID].Name;
-					ToolTipInfo.SetToolTip(ShipName, db.Ships[dock.ShipID].NameWithLevel);
-					RepairTime.Text = DateTimeHelper.ToTimeRemainString(dock.CompletionTime);
-					RepairTime.Tag = dock.CompletionTime;
-					ToolTipInfo.SetToolTip(RepairTime, "完了日時 : " + DateTimeHelper.TimeToCSVString(dock.CompletionTime));
+                    //repairing
+                    this.ShipName.Text = db.Ships[dock.ShipID].Name;
+                    this.ToolTipInfo.SetToolTip(this.ShipName, db.Ships[dock.ShipID].NameWithLevel);
+                    this.RepairTime.Text = DateTimeHelper.ToTimeRemainString(dock.CompletionTime);
+                    this.RepairTime.Tag = dock.CompletionTime;
+                    this.ToolTipInfo.SetToolTip(this.RepairTime, "完了日時 : " + DateTimeHelper.TimeToCSVString(dock.CompletionTime));
 
 				}
 
@@ -132,16 +132,16 @@ namespace ElectronicObserver.Window
 			public void Refresh(int dockID)
 			{
 
-				if (RepairTime.Tag != null)
+				if (this.RepairTime.Tag != null)
 				{
 
-					var time = (DateTime)RepairTime.Tag;
+					var time = (DateTime)this.RepairTime.Tag;
 
-					RepairTime.Text = DateTimeHelper.ToTimeRemainString(time);
+                    this.RepairTime.Text = DateTimeHelper.ToTimeRemainString(time);
 
 					if (Utility.Configuration.Config.FormDock.BlinkAtCompletion && (time - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierRepair.AccelInterval)
 					{
-						RepairTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
+                        this.RepairTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 					}
 				}
 			}
@@ -152,20 +152,20 @@ namespace ElectronicObserver.Window
 
 				var config = Utility.Configuration.Config.FormDock;
 
-				ShipName.Font = parent.Font;
-				RepairTime.Font = parent.Font;
-				RepairTime.BackColor = Color.Transparent;
-                ShipName.ForeColor = parent.ForeColor;
-                RepairTime.ForeColor = parent.ForeColor;
+                this.ShipName.Font = parent.Font;
+                this.RepairTime.Font = parent.Font;
+                this.RepairTime.BackColor = Color.Transparent;
+                this.ShipName.ForeColor = parent.ForeColor;
+                this.RepairTime.ForeColor = parent.ForeColor;
 
 
-                ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
+                this.ShipName.MaximumSize = new Size(config.MaxShipNameWidth, this.ShipName.MaximumSize.Height);
 			}
 
 			public void Dispose()
 			{
-				ShipName.Dispose();
-				RepairTime.Dispose();
+                this.ShipName.Dispose();
+                this.RepairTime.Dispose();
 			}
 		}
 
@@ -178,26 +178,26 @@ namespace ElectronicObserver.Window
 
 		public FormDock(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			Utility.SystemEvents.UpdateTimerTick += UpdateTimerTick;
-
-
-			ControlHelper.SetDoubleBuffered(TableDock);
+			Utility.SystemEvents.UpdateTimerTick += this.UpdateTimerTick;
 
 
-			TableDock.SuspendLayout();
-			ControlDock = new TableDockControl[4];
-			for (int i = 0; i < ControlDock.Length; i++)
+			ControlHelper.SetDoubleBuffered(this.TableDock);
+
+
+            this.TableDock.SuspendLayout();
+            this.ControlDock = new TableDockControl[4];
+			for (int i = 0; i < this.ControlDock.Length; i++)
 			{
-				ControlDock[i] = new TableDockControl(this, TableDock, i);
+                this.ControlDock[i] = new TableDockControl(this, this.TableDock, i);
 			}
-			TableDock.ResumeLayout();
+            this.TableDock.ResumeLayout();
 
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDock]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDock]);
 
 		}
 
@@ -207,13 +207,13 @@ namespace ElectronicObserver.Window
 
 			APIObserver o = APIObserver.Instance;
 
-			o.APIList["api_req_nyukyo/start"].RequestReceived += Updated;
-			o.APIList["api_req_nyukyo/speedchange"].RequestReceived += Updated;
+			o.APIList["api_req_nyukyo/start"].RequestReceived += this.Updated;
+			o.APIList["api_req_nyukyo/speedchange"].RequestReceived += this.Updated;
 
-			o.APIList["api_port/port"].ResponseReceived += Updated;
-			o.APIList["api_get_member/ndock"].ResponseReceived += Updated;
+			o.APIList["api_port/port"].ResponseReceived += this.Updated;
+			o.APIList["api_get_member/ndock"].ResponseReceived += this.Updated;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 		}
 
 
@@ -221,11 +221,11 @@ namespace ElectronicObserver.Window
 		void Updated(string apiname, dynamic data)
 		{
 
-			TableDock.SuspendLayout();
-			TableDock.RowCount = KCDatabase.Instance.Docks.Values.Count(d => d.State != -1);
-			for (int i = 0; i < ControlDock.Length; i++)
-				ControlDock[i].Update(i + 1);
-			TableDock.ResumeLayout();
+            this.TableDock.SuspendLayout();
+            this.TableDock.RowCount = KCDatabase.Instance.Docks.Values.Count(d => d.State != -1);
+			for (int i = 0; i < this.ControlDock.Length; i++)
+                this.ControlDock[i].Update(i + 1);
+            this.TableDock.ResumeLayout();
 
 		}
 
@@ -233,10 +233,10 @@ namespace ElectronicObserver.Window
 		void UpdateTimerTick()
 		{
 
-			TableDock.SuspendLayout();
-			for (int i = 0; i < ControlDock.Length; i++)
-				ControlDock[i].Refresh(i + 1);
-			TableDock.ResumeLayout();
+            this.TableDock.SuspendLayout();
+			for (int i = 0; i < this.ControlDock.Length; i++)
+                this.ControlDock[i].Refresh(i + 1);
+            this.TableDock.ResumeLayout();
 
 		}
 
@@ -251,20 +251,20 @@ namespace ElectronicObserver.Window
 		void ConfigurationChanged()
 		{
 
-			Font = Utility.Configuration.Config.UI.MainFont;
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.Font = Utility.Configuration.Config.UI.MainFont;
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-            if (ControlDock != null)
+            if (this.ControlDock != null)
 			{
-				TableDock.SuspendLayout();
+                this.TableDock.SuspendLayout();
 
-				foreach (var c in ControlDock)
+				foreach (var c in this.ControlDock)
 					c.ConfigurationChanged(this);
 
-				ControlHelper.SetTableRowStyles(TableDock, ControlHelper.GetDefaultRowStyle());
+				ControlHelper.SetTableRowStyles(this.TableDock, ControlHelper.GetDefaultRowStyle());
 
-				TableDock.ResumeLayout();
+                this.TableDock.ResumeLayout();
 			}
 		}
 

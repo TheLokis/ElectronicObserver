@@ -32,40 +32,40 @@ namespace ElectronicObserver.Data
 		[DataMember]
 		private IEnumerable<ShipGroupData> ShipGroupsSerializer
 		{
-			get { return ShipGroups.Values.OrderBy(g => g.ID); }
-			set { ShipGroups = new IDDictionary<ShipGroupData>(value); }
+			get { return this.ShipGroups.Values.OrderBy(g => g.ID); }
+			set { this.ShipGroups = new IDDictionary<ShipGroupData>(value); }
 		}
 
 		public ShipGroupManager()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 
 		public override void Initialize()
 		{
-			ShipGroups = new IDDictionary<ShipGroupData>();
+            this.ShipGroups = new IDDictionary<ShipGroupData>();
 		}
 
 
 
-		public ShipGroupData this[int index] => ShipGroups[index];
+		public ShipGroupData this[int index] => this.ShipGroups[index];
 
 
 
 		public ShipGroupData Add()
 		{
 
-			int key = GetUniqueID();
+			int key = this.GetUniqueID();
 			var group = new ShipGroupData(key);
-			ShipGroups.Add(group);
+            this.ShipGroups.Add(group);
 			return group;
 
 		}
 
 		public int GetUniqueID()
 		{
-			return ShipGroups.Count > 0 ? ShipGroups.Keys.Max() + 1 : 1;
+			return this.ShipGroups.Count > 0 ? this.ShipGroups.Keys.Max() + 1 : 1;
 		}
 
 
@@ -74,12 +74,12 @@ namespace ElectronicObserver.Data
 
 			ResourceManager.CopyFromArchive(DefaultFilePath.Replace("\\", "/"), DefaultFilePath, true, false);
 
-			return (ShipGroupManager)Load(DefaultFilePath);
+			return (ShipGroupManager)this.Load(DefaultFilePath);
 		}
 
 		public void Save()
 		{
-			Save(DefaultFilePath);
+            this.Save(DefaultFilePath);
 		}
 
 	}

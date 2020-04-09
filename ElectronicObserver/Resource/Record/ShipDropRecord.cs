@@ -102,65 +102,65 @@ namespace ElectronicObserver.Resource.Record
 
 			public ShipDropElement()
 			{
-				ShipID = -1;
-				Date = DateTime.Now;
+                this.ShipID = -1;
+                this.Date = DateTime.Now;
 			}
 
 			public ShipDropElement(string line)
 				: this()
 			{
-				LoadLine(line);
+                this.LoadLine(line);
 			}
 
 			public ShipDropElement(int shipID, int itemID, int equipmentID, int mapAreaID, int mapInfoID, int cellID, int difficulty, bool isBossNode, ulong enemyFleetID, string rank, int hqLevel)
 			{
-				ShipID = shipID;
+                this.ShipID = shipID;
 				if (shipID == -1)
-					ShipName = "(없음)";
+                    this.ShipName = "(없음)";
 				else if (shipID == -2)
-					ShipName = "(여유공간X)";
+                    this.ShipName = "(여유공간X)";
 				else
 				{
 					var ship = KCDatabase.Instance.MasterShips[shipID];
 					if (ship != null)
-						ShipName = ship.NameWithClass;
+                        this.ShipName = ship.NameWithClass;
 					else
-						ShipName = "???";
+                        this.ShipName = "???";
 				}
 
-				ItemID = itemID;
+                this.ItemID = itemID;
 				if (itemID == -1)
-					ItemName = "(없음)";
+                    this.ItemName = "(없음)";
 				else
 				{
 					var item = KCDatabase.Instance.MasterUseItems[itemID];
 					if (item != null)
-						ItemName = item.Name;
+                        this.ItemName = item.Name;
 					else
-						ItemName = "???";
+                        this.ItemName = "???";
 				}
 
-				EquipmentID = equipmentID;
+                this.EquipmentID = equipmentID;
 				if (equipmentID == -1)
-					EquipmentName = "(없음)";
+                    this.EquipmentName = "(없음)";
 				else
 				{
 					var eq = KCDatabase.Instance.MasterEquipments[equipmentID];
 					if (eq != null)
-						EquipmentName = eq.Name;
+                        this.EquipmentName = eq.Name;
 					else
-						EquipmentName = "???";
+                        this.EquipmentName = "???";
 				}
 
-				Date = DateTime.Now;
-				MapAreaID = mapAreaID;
-				MapInfoID = mapInfoID;
-				CellID = cellID;
-				Difficulty = difficulty;
-				IsBossNode = isBossNode;
-				EnemyFleetID = enemyFleetID;
-				Rank = rank;
-				HQLevel = hqLevel;
+                this.Date = DateTime.Now;
+                this.MapAreaID = mapAreaID;
+                this.MapInfoID = mapInfoID;
+                this.CellID = cellID;
+                this.Difficulty = difficulty;
+                this.IsBossNode = isBossNode;
+                this.EnemyFleetID = enemyFleetID;
+                this.Rank = rank;
+                this.HQLevel = hqLevel;
 			}
 
 
@@ -170,21 +170,21 @@ namespace ElectronicObserver.Resource.Record
 				string[] elem = CsvHelper.ParseCsvLine(line).ToArray();
                 if (elem.Length < 15) throw new ArgumentException("요소 수가 너무 적습니다.");
 
-				ShipID = int.Parse(elem[0]);
-				ShipName = elem[1];
-				ItemID = int.Parse(elem[2]);
-				ItemName = elem[3];
-				EquipmentID = int.Parse(elem[4]);
-				EquipmentName = elem[5];
-				Date = DateTimeHelper.CSVStringToTime(elem[6]);
-				MapAreaID = int.Parse(elem[7]);
-				MapInfoID = int.Parse(elem[8]);
-				CellID = int.Parse(elem[9]);
-				Difficulty = Constants.GetDifficulty(elem[10]);
-				IsBossNode = string.Compare(elem[11], "보스") == 0;
-				EnemyFleetID = Convert.ToUInt64(elem[12], 16);
-				Rank = elem[13];
-				HQLevel = int.Parse(elem[14]);
+                this.ShipID = int.Parse(elem[0]);
+                this.ShipName = elem[1];
+                this.ItemID = int.Parse(elem[2]);
+                this.ItemName = elem[3];
+                this.EquipmentID = int.Parse(elem[4]);
+                this.EquipmentName = elem[5];
+                this.Date = DateTimeHelper.CSVStringToTime(elem[6]);
+                this.MapAreaID = int.Parse(elem[7]);
+                this.MapInfoID = int.Parse(elem[8]);
+                this.CellID = int.Parse(elem[9]);
+                this.Difficulty = Constants.GetDifficulty(elem[10]);
+                this.IsBossNode = string.Compare(elem[11], "보스") == 0;
+                this.EnemyFleetID = Convert.ToUInt64(elem[12], 16);
+                this.Rank = elem[13];
+                this.HQLevel = int.Parse(elem[14]);
 
 			}
 
@@ -192,21 +192,21 @@ namespace ElectronicObserver.Resource.Record
             {
 
                 return string.Join(",",
-                    ShipID,
-                    CsvHelper.EscapeCsvCell(ShipName),
-                    ItemID,
-                    CsvHelper.EscapeCsvCell(ItemName),
-                    EquipmentID,
-                    CsvHelper.EscapeCsvCell(EquipmentName),
-                    DateTimeHelper.TimeToCSVString(Date),
-                    MapAreaID,
-                    MapInfoID,
-                    CellID,
-                    Constants.GetDifficulty(Difficulty),
-                    IsBossNode ? "보스" : "-",
-                    EnemyFleetID.ToString("x16"),
-                    Rank,
-                    HQLevel);
+                    this.ShipID,
+                    CsvHelper.EscapeCsvCell(this.ShipName),
+                    this.ItemID,
+                    CsvHelper.EscapeCsvCell(this.ItemName),
+                    this.EquipmentID,
+                    CsvHelper.EscapeCsvCell(this.EquipmentName),
+                    DateTimeHelper.TimeToCSVString(this.Date),
+                    this.MapAreaID,
+                    this.MapInfoID,
+                    this.CellID,
+                    Constants.GetDifficulty(this.Difficulty),
+                    this.IsBossNode ? "보스" : "-",
+                    this.EnemyFleetID.ToString("x16"),
+                    this.Rank,
+                    this.HQLevel);
 
             }
         }
@@ -220,7 +220,7 @@ namespace ElectronicObserver.Resource.Record
 		public ShipDropRecord()
 			: base()
 		{
-			Record = new List<ShipDropElement>();
+            this.Record = new List<ShipDropElement>();
 		}
 
 		public override void RegisterEvents()
@@ -231,26 +231,26 @@ namespace ElectronicObserver.Resource.Record
 
 		public ShipDropElement this[int i]
 		{
-			get { return Record[i]; }
-			set { Record[i] = value; }
+			get { return this.Record[i]; }
+			set { this.Record[i] = value; }
 		}
 
 		public void Add(int shipID, int itemID, int equipmentID, int mapAreaID, int mapInfoID, int cellID, int difficulty, bool isBossNode, ulong enemyFleetID, string rank, int hqLevel)
 		{
 
-			Record.Add(new ShipDropElement(shipID, itemID, equipmentID, mapAreaID, mapInfoID, cellID, difficulty, isBossNode, enemyFleetID, rank, hqLevel));
+            this.Record.Add(new ShipDropElement(shipID, itemID, equipmentID, mapAreaID, mapInfoID, cellID, difficulty, isBossNode, enemyFleetID, rank, hqLevel));
 		}
 
 
 		protected override void LoadLine(string line)
 		{
-			Record.Add(new ShipDropElement(line));
+            this.Record.Add(new ShipDropElement(line));
 		}
 
 		protected override string SaveLinesAll()
 		{
 			var sb = new StringBuilder();
-			foreach (var elem in Record.OrderBy(r => r.Date))
+			foreach (var elem in this.Record.OrderBy(r => r.Date))
 			{
 				sb.AppendLine(elem.SaveLine());
 			}
@@ -260,7 +260,7 @@ namespace ElectronicObserver.Resource.Record
 		protected override string SaveLinesPartial()
 		{
 			var sb = new StringBuilder();
-			foreach (var elem in Record.Skip(LastSavedCount).OrderBy(r => r.Date))
+			foreach (var elem in this.Record.Skip(this.LastSavedCount).OrderBy(r => r.Date))
 			{
 				sb.AppendLine(elem.SaveLine());
 			}
@@ -269,18 +269,18 @@ namespace ElectronicObserver.Resource.Record
 
 		protected override void UpdateLastSavedIndex()
 		{
-			LastSavedCount = Record.Count;
+            this.LastSavedCount = this.Record.Count;
 		}
 
-		public override bool NeedToSave => LastSavedCount < Record.Count;
+		public override bool NeedToSave => this.LastSavedCount < this.Record.Count;
 
 		public override bool SupportsPartialSave => true;
 
 
 		protected override void ClearRecord()
 		{
-			Record.Clear();
-			LastSavedCount = 0;
+            this.Record.Clear();
+            this.LastSavedCount = 0;
 		}
 
 

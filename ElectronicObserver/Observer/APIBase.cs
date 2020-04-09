@@ -34,7 +34,7 @@ namespace ElectronicObserver.Observer
 		public virtual void OnRequestReceived(Dictionary<string, string> data)
 		{
            // Utility.Logger.Add(2, APIName + ":" + data);
-			RequestReceived(APIName, data);
+			RequestReceived(this.APIName, data);
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace ElectronicObserver.Observer
 		public virtual void OnResponseReceived(dynamic data)
 		{
             //Utility.Logger.Add(2, APIName + ":" + data);
-            ResponseReceived(APIName, data);
+            ResponseReceived(this.APIName, data);
 		}
 
 

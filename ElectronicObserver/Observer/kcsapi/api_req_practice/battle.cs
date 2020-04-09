@@ -15,7 +15,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_practice
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			KCDatabase.Instance.Fleet.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Fleet.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}
@@ -24,7 +24,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_practice
 		public override void OnResponseReceived(dynamic data)
 		{
 
-			KCDatabase.Instance.Battle.LoadFromResponse(APIName, data);
+			KCDatabase.Instance.Battle.LoadFromResponse(this.APIName, data);
 
 
 			base.OnResponseReceived((object)data);

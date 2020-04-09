@@ -34,48 +34,48 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogWhitecap()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			birthRule = Utility.Configuration.Config.Whitecap.BirthRule;
-			aliveRule = Utility.Configuration.Config.Whitecap.AliveRule;
+            this.birthRule = Utility.Configuration.Config.Whitecap.BirthRule;
+            this.aliveRule = Utility.Configuration.Config.Whitecap.AliveRule;
 
-			zoomrate = Utility.Configuration.Config.Whitecap.ZoomRate;
+            this.zoomrate = Utility.Configuration.Config.Whitecap.ZoomRate;
 
-			colortheme = Utility.Configuration.Config.Whitecap.ColorTheme;
-			imagebuf = null;
+            this.colortheme = Utility.Configuration.Config.Whitecap.ColorTheme;
+            this.imagebuf = null;
 
-			rand = new Random();
+            this.rand = new Random();
 
-			SetSize(Utility.Configuration.Config.Whitecap.BoardWidth, Utility.Configuration.Config.Whitecap.BoardHeight);
-			ShowInTaskbar = Utility.Configuration.Config.Whitecap.ShowInTaskbar;
-			TopMost = Utility.Configuration.Config.Whitecap.TopMost;
+            this.SetSize(Utility.Configuration.Config.Whitecap.BoardWidth, Utility.Configuration.Config.Whitecap.BoardHeight);
+            this.ShowInTaskbar = Utility.Configuration.Config.Whitecap.ShowInTaskbar;
+            this.TopMost = Utility.Configuration.Config.Whitecap.TopMost;
 		}
 
 		private void DialogWhitecap_Load(object sender, EventArgs e)
 		{
 
-			UpdateTimer.Interval = Utility.Configuration.Config.Whitecap.UpdateInterval;
+            this.UpdateTimer.Interval = Utility.Configuration.Config.Whitecap.UpdateInterval;
 
-			Start();
+            this.Start();
 		}
 
 		private void Start()
 		{
 
-			InitBoard();
+            this.InitBoard();
 
-			ClientSize = new Size(boardSize.Width * zoomrate, boardSize.Height * zoomrate);
-			imagebuf?.Dispose();
-			imagebuf = new Bitmap(boardSize.Width, boardSize.Height, PixelFormat.Format24bppRgb);
+            this.ClientSize = new Size(this.boardSize.Width * this.zoomrate, this.boardSize.Height * this.zoomrate);
+            this.imagebuf?.Dispose();
+            this.imagebuf = new Bitmap(this.boardSize.Width, this.boardSize.Height, PixelFormat.Format24bppRgb);
 
-			clock = 0;
-			UpdateTimer.Start();
+            this.clock = 0;
+            this.UpdateTimer.Start();
 		}
 
 		private void SetSize(int width, int height)
 		{
-			boardSize = new Size(width, height);
-			board = new int[2, height, width];
+            this.boardSize = new Size(width, height);
+            this.board = new int[2, height, width];
 		}
 
 		private void InitBoard(bool isRand = true)
@@ -83,40 +83,40 @@ namespace ElectronicObserver.Window.Dialog
 
 			for (int dim = 0; dim < 2; dim++)
 			{
-				for (int y = 0; y < boardSize.Height; y++)
+				for (int y = 0; y < this.boardSize.Height; y++)
 				{
-					for (int x = 0; x < boardSize.Width; x++)
+					for (int x = 0; x < this.boardSize.Width; x++)
 					{
-						board[dim, y, x] = isRand ? rand.Next(2) : 0;
+                        this.board[dim, y, x] = isRand ? this.rand.Next(2) : 0;
 					}
 				}
 			}
 
-			currentDim = 0;
+            this.currentDim = 0;
 		}
 
 		private void SetCell(int dim, int x, int y, int value)
 		{
 
-			x = x % boardSize.Width;
-			if (x < 0) x += boardSize.Width;
+			x = x % this.boardSize.Width;
+			if (x < 0) x += this.boardSize.Width;
 
-			y = y % boardSize.Height;
-			if (y < 0) y += boardSize.Height;
+			y = y % this.boardSize.Height;
+			if (y < 0) y += this.boardSize.Height;
 
-			board[dim, y, x] = value;
+            this.board[dim, y, x] = value;
 		}
 
 		private int GetCell(int dim, int x, int y)
 		{
 
-			x = x % boardSize.Width;
-			if (x < 0) x += boardSize.Width;
+			x = x % this.boardSize.Width;
+			if (x < 0) x += this.boardSize.Width;
 
-			y = y % boardSize.Height;
-			if (y < 0) y += boardSize.Height;
+			y = y % this.boardSize.Height;
+			if (y < 0) y += this.boardSize.Height;
 
-			return board[dim, y, x];
+			return this.board[dim, y, x];
 		}
 
 
@@ -124,9 +124,9 @@ namespace ElectronicObserver.Window.Dialog
 		private void UpdateTimer_Tick(object sender, EventArgs e)
 		{
 
-			for (int y = 0; y < boardSize.Height; y++)
+			for (int y = 0; y < this.boardSize.Height; y++)
 			{
-				for (int x = 0; x < boardSize.Width; x++)
+				for (int x = 0; x < this.boardSize.Width; x++)
 				{
 
 					int alive = 0;
@@ -135,29 +135,29 @@ namespace ElectronicObserver.Window.Dialog
 					{
 						for (int dx = -1; dx <= 1; dx++)
 						{
-							if ((dx != 0 || dy != 0) && GetCell(currentDim, x + dx, y + dy) != 0)
+							if ((dx != 0 || dy != 0) && this.GetCell(this.currentDim, x + dx, y + dy) != 0)
 								alive++;
 						}
 					}
 
-					if (GetCell(currentDim, x, y) != 0)
+					if (this.GetCell(this.currentDim, x, y) != 0)
 					{
-						SetCell(1 - currentDim, x, y, ((1 << alive) & aliveRule) != 0 ? 1 : 0);
+                        this.SetCell(1 - this.currentDim, x, y, ((1 << alive) & this.aliveRule) != 0 ? 1 : 0);
 
 					}
 					else
 					{
 
-						SetCell(1 - currentDim, x, y, ((1 << alive) & birthRule) != 0 ? 1 : 0);
+                        this.SetCell(1 - this.currentDim, x, y, ((1 << alive) & this.birthRule) != 0 ? 1 : 0);
 
 					}
 				}
 			}
 
-			currentDim = 1 - currentDim;
-			clock++;
+            this.currentDim = 1 - this.currentDim;
+            this.clock++;
 
-			Refresh();
+            this.Refresh();
 		}
 
 
@@ -169,36 +169,36 @@ namespace ElectronicObserver.Window.Dialog
 
 			e.Graphics.Clear(Color.Black);
 
-			BitmapData bmpdata = imagebuf.LockBits(new Rectangle(0, 0, imagebuf.Width, imagebuf.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			byte[] canvas = new byte[imagebuf.Width * imagebuf.Height * 3];
+			BitmapData bmpdata = this.imagebuf.LockBits(new Rectangle(0, 0, this.imagebuf.Width, this.imagebuf.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+			byte[] canvas = new byte[this.imagebuf.Width * this.imagebuf.Height * 3];
 			Marshal.Copy(bmpdata.Scan0, canvas, 0, canvas.Length);
 
-			for (int y = 0; y < boardSize.Height; y++)
+			for (int y = 0; y < this.boardSize.Height; y++)
 			{
-				for (int x = 0; x < boardSize.Width; x++)
+				for (int x = 0; x < this.boardSize.Width; x++)
 				{
 
 					Color col;
 					Color prev = Color.FromArgb(
-						canvas[((y * boardSize.Width + x) * 3 + 2)],
-						canvas[((y * boardSize.Width + x) * 3 + 1)],
-						canvas[((y * boardSize.Width + x) * 3 + 0)]);
-					int value = GetCell(currentDim, x, y);
+						canvas[((y * this.boardSize.Width + x) * 3 + 2)],
+						canvas[((y * this.boardSize.Width + x) * 3 + 1)],
+						canvas[((y * this.boardSize.Width + x) * 3 + 0)]);
+					int value = this.GetCell(this.currentDim, x, y);
 
 
-					switch (colortheme)
+					switch (this.colortheme)
 					{
 
 						case 1:
 							col = value != 0 ?
-								BlendColor(FromRgb(0x000000), FromRgb(0xFF0000), (double)y / boardSize.Height) :
-								BlendColor(FromRgb(0xFF0000), FromRgb(0xFFFF00), (double)y / boardSize.Height);
+                                this.BlendColor(this.FromRgb(0x000000), this.FromRgb(0xFF0000), (double)y / this.boardSize.Height) :
+                                this.BlendColor(this.FromRgb(0xFF0000), this.FromRgb(0xFFFF00), (double)y / this.boardSize.Height);
 							break;
 
 						case 2:
 							col = value != 0 ?
-								BlendColor(FromRgb(0xFFFFFF), FromRgb(0x00FFFF), (double)y / boardSize.Height) :
-								BlendColor(FromRgb(0x0044FF), FromRgb(0x000000), (double)y / boardSize.Height);
+                                this.BlendColor(this.FromRgb(0xFFFFFF), this.FromRgb(0x00FFFF), (double)y / this.boardSize.Height) :
+                                this.BlendColor(this.FromRgb(0x0044FF), this.FromRgb(0x000000), (double)y / this.boardSize.Height);
 							break;
 
 						case 3:
@@ -207,110 +207,110 @@ namespace ElectronicObserver.Window.Dialog
 								BlendColor( FromRgb( 0xFFFFFF ), FromRgb( 0xFFDDBB ), (double)y / boardSize.Height ) :
 								BlendColor( FromRgb( 0x00FFFF ), FromRgb( 0xFFDDBB ), (double)y / boardSize.Height );
 							*/
-							col = BlendColor(GetCell(currentDim, x, y + (int)((Math.Sin(clock / 100.0 * 2.0 * Math.PI) + 1) * boardSize.Height / 8.0)) != 0 ?
-								BlendColor(FromRgb(0xFFFFFF), FromRgb(0xFFDDBB), Math.Max(Math.Min((y + ((Math.Sin(clock / 100.0 * 2.0 * Math.PI)) * boardSize.Height / 8.0)) / boardSize.Height, 1.0), 0.0)) :
-								BlendColor(FromRgb(0x00FFFF), FromRgb(0xFFDDBB), Math.Min((y + ((Math.Sin(clock / 100.0 * 2.0 * Math.PI) + 1) * boardSize.Height / 8.0)) / boardSize.Height, 1.0)),
+							col = this.BlendColor(this.GetCell(this.currentDim, x, y + (int)((Math.Sin(this.clock / 100.0 * 2.0 * Math.PI) + 1) * this.boardSize.Height / 8.0)) != 0 ?
+                                this.BlendColor(this.FromRgb(0xFFFFFF), this.FromRgb(0xFFDDBB), Math.Max(Math.Min((y + ((Math.Sin(this.clock / 100.0 * 2.0 * Math.PI)) * this.boardSize.Height / 8.0)) / this.boardSize.Height, 1.0), 0.0)) :
+                                this.BlendColor(this.FromRgb(0x00FFFF), this.FromRgb(0xFFDDBB), Math.Min((y + ((Math.Sin(this.clock / 100.0 * 2.0 * Math.PI) + 1) * this.boardSize.Height / 8.0)) / this.boardSize.Height, 1.0)),
 								prev, 0.8);
 							break;
 
 						case 4:
 							col = value != 0 ?
-								BlendColor(FromRgb(0xFFFFFF), FromRgb(0xCCCCFF), (double)y / boardSize.Height) :
-								BlendColor(FromRgb(0x000000), FromRgb(0x000088), (double)y / boardSize.Height);
+                                this.BlendColor(this.FromRgb(0xFFFFFF), this.FromRgb(0xCCCCFF), (double)y / this.boardSize.Height) :
+                                this.BlendColor(this.FromRgb(0x000000), this.FromRgb(0x000088), (double)y / this.boardSize.Height);
 							break;
 
 						case 5:
 							col = value != 0 ?
-								BlendColor(FromRgb(0xDDDDDD), FromRgb(0xFFFFFF), (double)(x + y) / (boardSize.Width + boardSize.Height)) :
-								BlendColor(FromRgb(0x778888), FromRgb(0x99AAAA), (double)(x + y) / (boardSize.Width + boardSize.Height));
+                                this.BlendColor(this.FromRgb(0xDDDDDD), this.FromRgb(0xFFFFFF), (double)(x + y) / (this.boardSize.Width + this.boardSize.Height)) :
+                                this.BlendColor(this.FromRgb(0x778888), this.FromRgb(0x99AAAA), (double)(x + y) / (this.boardSize.Width + this.boardSize.Height));
 							break;
 
 						case 6:
 							col = value != 0 ?
-								BlendColor(FromRgb(0xFF66FF), FromRgb(0xFFAAFF), Math.Pow(x + y, 2) / Math.Pow(boardSize.Width + boardSize.Height, 2)) :
-								BlendColor(FromRgb(0xFFCCCC), FromRgb(0xFFFFFF), Math.Pow(x + y, 2) / Math.Pow(boardSize.Width + boardSize.Height, 2));
+                                this.BlendColor(this.FromRgb(0xFF66FF), this.FromRgb(0xFFAAFF), Math.Pow(x + y, 2) / Math.Pow(this.boardSize.Width + this.boardSize.Height, 2)) :
+                                this.BlendColor(this.FromRgb(0xFFCCCC), this.FromRgb(0xFFFFFF), Math.Pow(x + y, 2) / Math.Pow(this.boardSize.Width + this.boardSize.Height, 2));
 							break;
 
 						case 7:
 							col = value != 0 ?
-								BlendColor(FromRgb(0x008800), FromRgb(0x44FF44), Math.Pow(x + y, 2) / Math.Pow(boardSize.Width + boardSize.Height, 2)) :
-								BlendColor(FromRgb(0x88FF88), FromRgb(0xCCFF88), Math.Pow(x + y, 2) / Math.Pow(boardSize.Width + boardSize.Height, 2));
+                                this.BlendColor(this.FromRgb(0x008800), this.FromRgb(0x44FF44), Math.Pow(x + y, 2) / Math.Pow(this.boardSize.Width + this.boardSize.Height, 2)) :
+                                this.BlendColor(this.FromRgb(0x88FF88), this.FromRgb(0xCCFF88), Math.Pow(x + y, 2) / Math.Pow(this.boardSize.Width + this.boardSize.Height, 2));
 							break;
 
 						case 8:
 							col = value != 0 ?
-								FromRgb(0xFFFFFF) :
-								BlendColor(FromRgb(0x000000), prev, 0.5);
+                                this.FromRgb(0xFFFFFF) :
+                                this.BlendColor(this.FromRgb(0x000000), prev, 0.5);
 							break;
 
 						case 9:
 							col = value != 0 ?
-								FromHsv(x + y + clock * 3, 1.0, 1.0) :
-								FromRgb(0x000000);
+                                this.FromHsv(x + y + this.clock * 3, 1.0, 1.0) :
+                                this.FromRgb(0x000000);
 							break;
 
 						case 10:
-							col = GetCell(currentDim, x, y + clock) != 0 ?
-								BlendColor(FromRgb(0xFFFFFF), FromRgb(0x00FFFF), (double)y / boardSize.Height) :
-								BlendColor(prev, BlendColor(FromRgb(0x0044FF), FromRgb(0x000000), (double)y / boardSize.Height), 0.2);
+							col = this.GetCell(this.currentDim, x, y + this.clock) != 0 ?
+                                this.BlendColor(this.FromRgb(0xFFFFFF), this.FromRgb(0x00FFFF), (double)y / this.boardSize.Height) :
+                                this.BlendColor(prev, this.BlendColor(this.FromRgb(0x0044FF), this.FromRgb(0x000000), (double)y / this.boardSize.Height), 0.2);
 							break;
 
 						case 11:
-							col = value != 0 ? FromRgb(0x00FF00) : FromRgb(0x111111);
+							col = value != 0 ? this.FromRgb(0x00FF00) : this.FromRgb(0x111111);
 							break;
 
 						case 12:
 							col = value != 0 ?
-								FromRgb(0x0044FF) :
-								BlendColor(FromRgb(0xFFFFFF), prev, 0.9);
+                                this.FromRgb(0x0044FF) :
+                                this.BlendColor(this.FromRgb(0xFFFFFF), prev, 0.9);
 							break;
 
 						case 13:
 							col = value != 0 ?
-								FromRgb(0xFF0000) :
-								AddColor(prev, FromRgb(0xFF4422), 0.1);
+                                this.FromRgb(0xFF0000) :
+                                this.AddColor(prev, this.FromRgb(0xFF4422), 0.1);
 							break;
 
 						case 14:
-							col = GetCell(currentDim, x, y + clock) != 0 ?
-								BlendColor(FromRgb(0xFFFFFF), FromRgb(0xFFFFCC), (double)y / boardSize.Height) :
-								BlendColor(prev, BlendColor(FromRgb(0x88FFFF), FromRgb(0x0000FF), (double)y / boardSize.Height), 0.05);
+							col = this.GetCell(this.currentDim, x, y + this.clock) != 0 ?
+                                this.BlendColor(this.FromRgb(0xFFFFFF), this.FromRgb(0xFFFFCC), (double)y / this.boardSize.Height) :
+                                this.BlendColor(prev, this.BlendColor(this.FromRgb(0x88FFFF), this.FromRgb(0x0000FF), (double)y / this.boardSize.Height), 0.05);
 							break;
 
 						case 15:
-							col = FromHsv(x * x + 2 * x * y + y * y + 98 * x + 168 * y, value != 0 ? 1.0 : 0.2, value != 0 ? 1.0 : 1.0);
+							col = this.FromHsv(x * x + 2 * x * y + y * y + 98 * x + 168 * y, value != 0 ? 1.0 : 0.2, value != 0 ? 1.0 : 1.0);
 							break;
 
 						case 16:
-							col = value != 0 ? FromRgb(0x000000) : FromRgb(0xFFFFFF);
+							col = value != 0 ? this.FromRgb(0x000000) : this.FromRgb(0xFFFFFF);
 							break;
 
 						case 17:
-							col = BlendColor(prev, GetCell(currentDim, x + clock / 4, y) != 0 ?
-								FromRgb(0xFFFFFF) : BlendColor(FromRgb(0x0088FF), FromRgb(0x88FFFF), (double)y / boardSize.Height),
+							col = this.BlendColor(prev, this.GetCell(this.currentDim, x + this.clock / 4, y) != 0 ?
+                                this.FromRgb(0xFFFFFF) : this.BlendColor(this.FromRgb(0x0088FF), this.FromRgb(0x88FFFF), (double)y / this.boardSize.Height),
 								0.08);
 							break;
 
 						case 18:
-							col = AddColor(value != 0 ? FromRgb(0xFF0000) : FromRgb(0x000000),
-								AddColor(GetCell(currentDim, x, boardSize.Height - 1 - y) != 0 ? FromRgb(0x00FF00) : FromRgb(0x000000),
-								GetCell(currentDim, boardSize.Width - 1 - x, y) != 0 ? FromRgb(0x0000FF) : FromRgb(0x000000)));
+							col = this.AddColor(value != 0 ? this.FromRgb(0xFF0000) : this.FromRgb(0x000000),
+                                this.AddColor(this.GetCell(this.currentDim, x, this.boardSize.Height - 1 - y) != 0 ? this.FromRgb(0x00FF00) : this.FromRgb(0x000000),
+                                this.GetCell(this.currentDim, this.boardSize.Width - 1 - x, y) != 0 ? this.FromRgb(0x0000FF) : this.FromRgb(0x000000)));
 							break;
 
 						case 19:
 							//*/
 							if (value != 0 ||
-								GetCell(currentDim, x + 1, y) != 0 ||
-								GetCell(currentDim, x, y + 1) != 0 ||
-								GetCell(currentDim, x + 1, y + 1) != 0)
-								col = FromRgb(0xFFFFFF);
+                                this.GetCell(this.currentDim, x + 1, y) != 0 ||
+                                this.GetCell(this.currentDim, x, y + 1) != 0 ||
+                                this.GetCell(this.currentDim, x + 1, y + 1) != 0)
+								col = this.FromRgb(0xFFFFFF);
 							else if (
-								GetCell(currentDim, x - 1, y) != 0 ||
-								GetCell(currentDim, x, y - 1) != 0 ||
-								GetCell(currentDim, x - 1, y - 1) != 0)
-								col = FromRgb(0x888888);
+                                this.GetCell(this.currentDim, x - 1, y) != 0 ||
+                                this.GetCell(this.currentDim, x, y - 1) != 0 ||
+                                this.GetCell(this.currentDim, x - 1, y - 1) != 0)
+								col = this.FromRgb(0x888888);
 							else
-								col = FromRgb(0x000000);
+								col = this.FromRgb(0x000000);
 							/*/
 							if ( value != 0 )
 								col = FromRgb( 0xFFFFFF );
@@ -337,11 +337,11 @@ namespace ElectronicObserver.Window.Dialog
 						case 21:
 							if (value != 0)
 							{
-								col = BlendColor(prev, FromRgb(0x000000), 0.2);
+								col = this.BlendColor(prev, this.FromRgb(0x000000), 0.2);
 							}
 							else
 							{
-								col = BlendColor(prev, BlendColor(FromRgb(0x111188), FromRgb(0x111111), (double)y / boardSize.Height), 0.2);
+								col = this.BlendColor(prev, this.BlendColor(this.FromRgb(0x111188), this.FromRgb(0x111111), (double)y / this.boardSize.Height), 0.2);
 							}
 
 							if (value != 0)
@@ -352,9 +352,9 @@ namespace ElectronicObserver.Window.Dialog
 								int ux = (int)(x / blocksize) * blocksize;
 								int uy = (int)(y / blocksize) * blocksize;
 
-								int seedx = clock / frequency * 16829 + ux / blocksize * 81953 + uy / blocksize * 40123;
-								int seedy = clock / frequency * 81041 + ux / blocksize * 11471 + uy / blocksize * 51419;
-								int seedz = clock / frequency * 39503 + ux / blocksize * 46133 + uy / blocksize * 15241;
+								int seedx = this.clock / frequency * 16829 + ux / blocksize * 81953 + uy / blocksize * 40123;
+								int seedy = this.clock / frequency * 81041 + ux / blocksize * 11471 + uy / blocksize * 51419;
+								int seedz = this.clock / frequency * 39503 + ux / blocksize * 46133 + uy / blocksize * 15241;
 
 
 								int rx = (seedx >> 4) % blocksize;
@@ -365,14 +365,14 @@ namespace ElectronicObserver.Window.Dialog
 								{
 									Color eye;
 									if (rz < 160)
-										eye = FromRgb(0x00FFFF);
+										eye = this.FromRgb(0x00FFFF);
 									else if (rz < 224)
-										eye = FromRgb(0xFF0000);
+										eye = this.FromRgb(0xFF0000);
 									else
-										eye = FromRgb(0xFFCC00);
+										eye = this.FromRgb(0xFFCC00);
 
 
-									col = BlendColor(col, eye, (double)y / boardSize.Height);
+									col = this.BlendColor(col, eye, (double)y / this.boardSize.Height);
 								}
 
 							}
@@ -381,63 +381,63 @@ namespace ElectronicObserver.Window.Dialog
 
 						case 22:
 							if (value == 0)
-								col = FromRgb(0x000000);
+								col = this.FromRgb(0x000000);
 							else
 							{
-								if (GetCell(1 - currentDim, x, y) != 0)
+								if (this.GetCell(1 - this.currentDim, x, y) != 0)
 								{
 									col = prev;
 								}
 								else
 								{
-									col = FromHsv((int)(rand.NextDouble() * 12) * 30, 0.75, 1);
+									col = this.FromHsv((int)(this.rand.NextDouble() * 12) * 30, 0.75, 1);
 								}
 							}
 							break;
 
 						case 23:
 							if (value != 0)
-								col = FromHsv(0, 0, rand.NextDouble() * 0.5 + 0.5);
+								col = this.FromHsv(0, 0, this.rand.NextDouble() * 0.5 + 0.5);
 							else
-								col = FromHsv(0, 0, rand.NextDouble() * 0.5);
+								col = this.FromHsv(0, 0, this.rand.NextDouble() * 0.5);
 							break;
 
 						case 24:
 							{
-								int prevcell = GetCell(1 - currentDim, x, y);
+								int prevcell = this.GetCell(1 - this.currentDim, x, y);
 								if (value != 0)
 								{
 									if (prevcell != 0)
-										col = FromRgb(0xFFFFFF);
+										col = this.FromRgb(0xFFFFFF);
 									else
-										col = FromRgb(0x00FF00);
+										col = this.FromRgb(0x00FF00);
 								}
 								else
 								{
 									if (prevcell != 0)
-										col = FromRgb(0xFF0000);
+										col = this.FromRgb(0xFF0000);
 									else
-										col = FromRgb(0x000000);
+										col = this.FromRgb(0x000000);
 								}
 							}
 							break;
 
 						case 25:
 							{
-								int prevcell = GetCell(1 - currentDim, x, y);
+								int prevcell = this.GetCell(1 - this.currentDim, x, y);
 								if (value != 0)
 								{
 									if (prevcell != 0)
-										col = FromRgb(0x222222);
+										col = this.FromRgb(0x222222);
 									else
-										col = FromRgb(0x00FF00);
+										col = this.FromRgb(0x00FF00);
 								}
 								else
 								{
 									if (prevcell != 0)
-										col = FromRgb(0xFF0000);
+										col = this.FromRgb(0xFF0000);
 									else
-										col = FromRgb(0x000000);
+										col = this.FromRgb(0x000000);
 								}
 							}
 							break;
@@ -446,20 +446,20 @@ namespace ElectronicObserver.Window.Dialog
 							{
 								if (value != 0)
 								{
-									col = FromRgb(0x334433);
+									col = this.FromRgb(0x334433);
 								}
 								else
 								{
-									if (GetCell(currentDim, x - 1, y) != 0 ||
-										GetCell(currentDim, x + 1, y) != 0 ||
-										GetCell(currentDim, x, y - 1) != 0 ||
-										GetCell(currentDim, x, y + 1) != 0)
+									if (this.GetCell(this.currentDim, x - 1, y) != 0 ||
+                                        this.GetCell(this.currentDim, x + 1, y) != 0 ||
+                                        this.GetCell(this.currentDim, x, y - 1) != 0 ||
+                                        this.GetCell(this.currentDim, x, y + 1) != 0)
 									{
-										col = FromRgb(0xEEFFEE);
+										col = this.FromRgb(0xEEFFEE);
 									}
 									else
 									{
-										col = FromRgb(0x889988);
+										col = this.FromRgb(0x889988);
 									}
 								}
 							}
@@ -467,40 +467,40 @@ namespace ElectronicObserver.Window.Dialog
 
 						case 27:
 							{
-								int prevcell = GetCell(1 - currentDim, x, y);
+								int prevcell = this.GetCell(1 - this.currentDim, x, y);
 
 								if (value != 0)
 								{
 									if (prevcell != 0)
-										col = FromRgb(0xFFFF44);
+										col = this.FromRgb(0xFFFF44);
 									else
-										col = FromRgb(0x444422);
+										col = this.FromRgb(0x444422);
 								}
 								else
 								{
-									col = FromRgb(0x000022);
+									col = this.FromRgb(0x000022);
 								}
 							}
 							break;
 
 						default:
-							col = value != 0 ? FromRgb(0xFFFFFF) : FromRgb(0x000000);
+							col = value != 0 ? this.FromRgb(0xFFFFFF) : this.FromRgb(0x000000);
 							break;
 
 					}
 
 
-					canvas[((y * boardSize.Width + x) * 3 + 0)] = col.B;
-					canvas[((y * boardSize.Width + x) * 3 + 1)] = col.G;
-					canvas[((y * boardSize.Width + x) * 3 + 2)] = col.R;
+					canvas[((y * this.boardSize.Width + x) * 3 + 0)] = col.B;
+					canvas[((y * this.boardSize.Width + x) * 3 + 1)] = col.G;
+					canvas[((y * this.boardSize.Width + x) * 3 + 2)] = col.R;
 
 				}
 			}
 
 			Marshal.Copy(canvas, 0, bmpdata.Scan0, canvas.Length);
-			imagebuf.UnlockBits(bmpdata);
+            this.imagebuf.UnlockBits(bmpdata);
 
-			e.Graphics.DrawImage(imagebuf, 0, 0, imagebuf.Width * zoomrate, imagebuf.Height * zoomrate);
+			e.Graphics.DrawImage(this.imagebuf, 0, 0, this.imagebuf.Width * this.zoomrate, this.imagebuf.Height * this.zoomrate);
 
 		}
 
@@ -580,19 +580,19 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-				UpdateTimer.Stop();
-				InitBoard();
-				UpdateTimer.Start();
+                this.UpdateTimer.Stop();
+                this.InitBoard();
+                this.UpdateTimer.Start();
 
 			}
 			else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
 			{
 
-				UpdateTimer.Stop();
+                this.UpdateTimer.Stop();
 
 				try
 				{
-					imagebuf.Save(string.Format("SS@{0}.png", DateTimeHelper.GetTimeStamp()), ImageFormat.Png);
+                    this.imagebuf.Save(string.Format("SS@{0}.png", DateTimeHelper.GetTimeStamp()), ImageFormat.Png);
 
 				}
 				catch (Exception)
@@ -602,7 +602,7 @@ namespace ElectronicObserver.Window.Dialog
 				}
 				finally
 				{
-					UpdateTimer.Start();
+                    this.UpdateTimer.Start();
 				}
 			}
 
@@ -612,10 +612,10 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-				UpdateTimer.Stop();
-				colortheme = rand.Next(64);
-				//colortheme = 27;
-				Start();
+                this.UpdateTimer.Stop();
+                this.colortheme = this.rand.Next(64);
+                //colortheme = 27;
+                this.Start();
 			}
 		}
 
@@ -627,14 +627,14 @@ namespace ElectronicObserver.Window.Dialog
 		protected override void Dispose(bool disposing)
 		{
 			// imagebuf?.Dispose() とするとコード分析に引っかかるので :(
-			if (imagebuf != null)
-				imagebuf.Dispose();
+			if (this.imagebuf != null)
+                this.imagebuf.Dispose();
 
 
 			// --- auto generated ---
-			if (disposing && (components != null))
+			if (disposing && (this.components != null))
 			{
-				components.Dispose();
+                this.components.Dispose();
 			}
 			base.Dispose(disposing);
 		}

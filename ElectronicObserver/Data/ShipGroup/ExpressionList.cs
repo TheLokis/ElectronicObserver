@@ -23,8 +23,8 @@ namespace ElectronicObserver.Data.ShipGroup
 		[IgnoreDataMember]
 		public bool InternalOr
 		{
-			get { return !InternalAnd; }
-			set { InternalAnd = !value; }
+			get { return !this.InternalAnd; }
+			set { this.InternalAnd = !value; }
 		}
 
 
@@ -34,8 +34,8 @@ namespace ElectronicObserver.Data.ShipGroup
 		[IgnoreDataMember]
 		public bool ExternalOr
 		{
-			get { return !ExternalAnd; }
-			set { ExternalAnd = !value; }
+			get { return !this.ExternalAnd; }
+			set { this.ExternalAnd = !value; }
 		}
 
 
@@ -48,27 +48,27 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public ExpressionList()
 		{
-			Expressions = new List<ExpressionData>();
-			InternalAnd = true;
-			ExternalOr = true;
-			Inverse = false;
-			Enabled = true;
+            this.Expressions = new List<ExpressionData>();
+            this.InternalAnd = true;
+            this.ExternalOr = true;
+            this.Inverse = false;
+            this.Enabled = true;
 		}
 
 		public ExpressionList(bool isInternalAnd, bool isExternalAnd, bool inverse)
 		{
-			Expressions = new List<ExpressionData>();
-			InternalAnd = isInternalAnd;
-			ExternalAnd = isExternalAnd;
-			Inverse = inverse;
-			Enabled = true;
+            this.Expressions = new List<ExpressionData>();
+            this.InternalAnd = isInternalAnd;
+            this.ExternalAnd = isExternalAnd;
+            this.Inverse = inverse;
+            this.Enabled = true;
 		}
 
 
 		public ExpressionData this[int index]
 		{
-			get { return Expressions[index]; }
-			set { Expressions[index] = value; }
+			get { return this.Expressions[index]; }
+			set { this.Expressions[index] = value; }
 		}
 
 
@@ -76,7 +76,7 @@ namespace ElectronicObserver.Data.ShipGroup
 		{
 			Expression ex = null;
 
-			foreach (var exdata in Expressions)
+			foreach (var exdata in this.Expressions)
 			{
 				if (!exdata.Enabled)
 					continue;
@@ -88,7 +88,7 @@ namespace ElectronicObserver.Data.ShipGroup
 				}
 				else
 				{
-					if (InternalAnd)
+					if (this.InternalAnd)
 					{
 						ex = Expression.AndAlso(ex, exdata.Compile(paramex));
 					}
@@ -102,7 +102,7 @@ namespace ElectronicObserver.Data.ShipGroup
 			if (ex == null)
 				ex = Expression.Constant(true);
 
-			if (Inverse)
+			if (this.Inverse)
 				ex = Expression.Not(ex);
 
 			return ex;
@@ -111,22 +111,22 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public override string ToString()
 		{
-			var exp = Expressions.Where(p => p.Enabled);
-			return string.Format("({0}){1}", exp.Count() == 0 ? "없음" : string.Join(InternalAnd ? " 하고 " : " 또는 ", exp), Inverse ? " 을 충족하지 않음" : "");
+			var exp = this.Expressions.Where(p => p.Enabled);
+			return string.Format("({0}){1}", exp.Count() == 0 ? "없음" : string.Join(this.InternalAnd ? " 하고 " : " 또는 ", exp), this.Inverse ? " 을 충족하지 않음" : "");
 		}
 
 
 
 		public ExpressionList Clone()
 		{
-			var clone = (ExpressionList)MemberwiseClone();
-			clone.Expressions = Expressions?.Select(e => e.Clone()).ToList();
+			var clone = (ExpressionList)this.MemberwiseClone();
+			clone.Expressions = this.Expressions?.Select(e => e.Clone()).ToList();
 			return clone;
 		}
 
 		object ICloneable.Clone()
 		{
-			return Clone();
+			return this.Clone();
 		}
 	}
 }

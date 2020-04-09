@@ -19,7 +19,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			_fleetID = int.Parse(data["api_deck_id"]);
+            this._fleetID = int.Parse(data["api_deck_id"]);
 
 			base.OnRequestReceived(data);
 		}
@@ -27,11 +27,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 		public override void OnResponseReceived(dynamic data)
 		{
 
-			var fleet = KCDatabase.Instance.Fleet[_fleetID];
+			var fleet = KCDatabase.Instance.Fleet[this._fleetID];
 
-
-			Utility.Logger.Add(2, string.Format("#{0}「{1}」가 원정「{2}: {3}」에서 귀환했습니다.", fleet.FleetID, fleet.Name, fleet.ExpeditionDestination, Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.TranslationType.ExpeditionTitle)));
-
+			Utility.Logger.Add(2, string.Format("#{0}「{1}」가 원정「{2}: {3}」에서 귀환했습니다.",
+				fleet.FleetID, fleet.Name, fleet.ExpeditionDestination, 
+				Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.DataType.ExpeditionTitle, fleet.ExpeditionDestination)));
 
 			// 獲得資源表示
 			if (Utility.Configuration.Config.Log.ShowSpoiler)

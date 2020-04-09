@@ -37,70 +37,70 @@ namespace ElectronicObserver.Window
 
 		public FormBattle(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			ControlHelper.SetDoubleBuffered(TableTop);
-			ControlHelper.SetDoubleBuffered(TableBottom);
-
-
-			HPBars = new List<ShipStatusHP>(24);
+			ControlHelper.SetDoubleBuffered(this.TableTop);
+			ControlHelper.SetDoubleBuffered(this.TableBottom);
 
 
-			TableBottom.SuspendLayout();
+            this.HPBars = new List<ShipStatusHP>(24);
+
+
+            this.TableBottom.SuspendLayout();
 			for (int i = 0; i < 24; i++)
 			{
-				HPBars.Add(new ShipStatusHP());
-				HPBars[i].Size = DefaultBarSize;
-				HPBars[i].AutoSize = false;
-				HPBars[i].AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-				HPBars[i].Margin = new Padding(2, 0, 2, 0);
-				HPBars[i].Anchor = AnchorStyles.Left | AnchorStyles.Right;
-				HPBars[i].MainFont = MainFont;
-                HPBars[i].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                HPBars[i].SubFont = SubFont;
-                HPBars[i].SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
-                HPBars[i].UsePrevValue = true;
-				HPBars[i].ShowDifference = true;
-				HPBars[i].MaximumDigit = 9999;
+                this.HPBars.Add(new ShipStatusHP());
+                this.HPBars[i].Size = this.DefaultBarSize;
+                this.HPBars[i].AutoSize = false;
+                this.HPBars[i].AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                this.HPBars[i].Margin = new Padding(2, 0, 2, 0);
+                this.HPBars[i].Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                this.HPBars[i].MainFont = this.MainFont;
+                this.HPBars[i].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                this.HPBars[i].SubFont = this.SubFont;
+                this.HPBars[i].SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+                this.HPBars[i].UsePrevValue = true;
+                this.HPBars[i].ShowDifference = true;
+                this.HPBars[i].MaximumDigit = 9999;
 
 				if (i < 6)
 				{
-					TableBottom.Controls.Add(HPBars[i], 0, i + 1);
+                    this.TableBottom.Controls.Add(this.HPBars[i], 0, i + 1);
 				}
 				else if (i < 12)
 				{
-					TableBottom.Controls.Add(HPBars[i], 1, i - 5);
+                    this.TableBottom.Controls.Add(this.HPBars[i], 1, i - 5);
 				}
 				else if (i < 18)
 				{
-					TableBottom.Controls.Add(HPBars[i], 3, i - 11);
+                    this.TableBottom.Controls.Add(this.HPBars[i], 3, i - 11);
 				}
 				else
 				{
-					TableBottom.Controls.Add(HPBars[i], 2, i - 17);
+                    this.TableBottom.Controls.Add(this.HPBars[i], 2, i - 17);
 				}
 			}
-			TableBottom.ResumeLayout();
+            this.TableBottom.ResumeLayout();
 
 
-			Searching.ImageList =
-			SearchingFriend.ImageList =
-			SearchingEnemy.ImageList =
-			AACutin.ImageList =
-			AirStage1Friend.ImageList =
-			AirStage1Enemy.ImageList =
-			AirStage2Friend.ImageList =
-			AirStage2Enemy.ImageList =
-			FleetFriend.ImageList =
+            this.Searching.ImageList =
+            this.SearchingFriend.ImageList =
+            this.SearchingEnemy.ImageList =
+            this.AACutin.ImageList =
+            this.AirStage1Friend.ImageList =
+            this.AirStage1Enemy.ImageList =
+            this.AirStage2Friend.ImageList =
+            this.AirStage2Enemy.ImageList =
+            this.FleetFriend.ImageList =
 				ResourceManager.Instance.Equipments;
 
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
-			BaseLayoutPanel.Visible = false;
+            this.BaseLayoutPanel.Visible = false;
 
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBattle]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBattle]);
 
 		}
 
@@ -111,35 +111,35 @@ namespace ElectronicObserver.Window
 
 			APIObserver o = APIObserver.Instance;
 
-			o["api_port/port"].ResponseReceived += Updated;
-			o["api_req_map/start"].ResponseReceived += Updated;
-			o["api_req_map/next"].ResponseReceived += Updated;
-			o["api_req_sortie/battle"].ResponseReceived += Updated;
-			o["api_req_sortie/battleresult"].ResponseReceived += Updated;
-			o["api_req_battle_midnight/battle"].ResponseReceived += Updated;
-			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += Updated;
-			o["api_req_sortie/airbattle"].ResponseReceived += Updated;
-			o["api_req_sortie/ld_airbattle"].ResponseReceived += Updated;
-			o["api_req_sortie/night_to_day"].ResponseReceived += Updated;
-			o["api_req_combined_battle/battle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/midnight_battle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/sp_midnight"].ResponseReceived += Updated;
-			o["api_req_combined_battle/airbattle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/battle_water"].ResponseReceived += Updated;
-			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/ec_battle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/ec_midnight_battle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += Updated;
-			o["api_req_combined_battle/each_battle"].ResponseReceived += Updated;
-			o["api_req_combined_battle/each_battle_water"].ResponseReceived += Updated;
-			o["api_req_combined_battle/battleresult"].ResponseReceived += Updated;
-			o["api_req_practice/battle"].ResponseReceived += Updated;
-			o["api_req_practice/midnight_battle"].ResponseReceived += Updated;
-			o["api_req_practice/battle_result"].ResponseReceived += Updated;
-            o["api_req_sortie/ld_shooting"].ResponseReceived += Updated;
-            o["api_req_combined_battle/ld_shooting"].ResponseReceived += Updated;
+			o["api_port/port"].ResponseReceived += this.Updated;
+			o["api_req_map/start"].ResponseReceived += this.Updated;
+			o["api_req_map/next"].ResponseReceived += this.Updated;
+			o["api_req_sortie/battle"].ResponseReceived += this.Updated;
+			o["api_req_sortie/battleresult"].ResponseReceived += this.Updated;
+			o["api_req_battle_midnight/battle"].ResponseReceived += this.Updated;
+			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += this.Updated;
+			o["api_req_sortie/airbattle"].ResponseReceived += this.Updated;
+			o["api_req_sortie/ld_airbattle"].ResponseReceived += this.Updated;
+			o["api_req_sortie/night_to_day"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/battle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/midnight_battle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/sp_midnight"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/airbattle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/battle_water"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/ec_battle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/ec_midnight_battle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/each_battle"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/each_battle_water"].ResponseReceived += this.Updated;
+			o["api_req_combined_battle/battleresult"].ResponseReceived += this.Updated;
+			o["api_req_practice/battle"].ResponseReceived += this.Updated;
+			o["api_req_practice/midnight_battle"].ResponseReceived += this.Updated;
+			o["api_req_practice/battle_result"].ResponseReceived += this.Updated;
+            o["api_req_sortie/ld_shooting"].ResponseReceived += this.Updated;
+            o["api_req_combined_battle/ld_shooting"].ResponseReceived += this.Updated;
 
-            Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+            Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 
 		}
 
@@ -151,15 +151,15 @@ namespace ElectronicObserver.Window
 			BattleManager bm = db.Battle;
 			bool hideDuringBattle = Utility.Configuration.Config.FormBattle.HideDuringBattle;
 
-			BaseLayoutPanel.SuspendLayout();
-			TableTop.SuspendLayout();
-			TableBottom.SuspendLayout();
+            this.BaseLayoutPanel.SuspendLayout();
+            this.TableTop.SuspendLayout();
+            this.TableBottom.SuspendLayout();
 			switch (apiname)
 			{
 
 				case "api_port/port":
-					BaseLayoutPanel.Visible = false;
-					ToolTipInfo.RemoveAll();
+                    this.BaseLayoutPanel.Visible = false;
+                    this.ToolTipInfo.RemoveAll();
 					break;
 
 				case "api_req_map/start":
@@ -167,14 +167,14 @@ namespace ElectronicObserver.Window
 					if (!bm.Compass.HasAirRaid)
 						goto case "api_port/port";
 
-					SetFormation(bm);
-					ClearSearchingResult();
-					ClearBaseAirAttack();
-					SetAerialWarfare(null, ((BattleBaseAirRaid)bm.BattleDay).BaseAirRaid);
-					SetHPBar(bm.BattleDay);
-					SetDamageRate(bm);
+                    this.SetFormation(bm);
+                    this.ClearSearchingResult();
+                    this.ClearBaseAirAttack();
+                    this.SetAerialWarfare(null, ((BattleBaseAirRaid)bm.BattleDay).BaseAirRaid);
+                    this.SetHPBar(bm.BattleDay);
+                    this.SetDamageRate(bm);
 
-					BaseLayoutPanel.Visible = !hideDuringBattle;
+                    this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					break;
 
 
@@ -184,14 +184,14 @@ namespace ElectronicObserver.Window
                 case "api_req_sortie/ld_shooting":
                     {
 
-						SetFormation(bm);
-						SetSearchingResult(bm.BattleDay);
-						SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
-						SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle);
-						SetHPBar(bm.BattleDay);
-						SetDamageRate(bm);
+                        this.SetFormation(bm);
+                        this.SetSearchingResult(bm.BattleDay);
+                        this.SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
+                        this.SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle);
+                        this.SetHPBar(bm.BattleDay);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
@@ -199,40 +199,40 @@ namespace ElectronicObserver.Window
 				case "api_req_practice/midnight_battle":
 					{
 
-						SetNightBattleEvent(bm.BattleNight.NightInitial);
-						SetHPBar(bm.BattleNight);
-						SetDamageRate(bm);
+                        this.SetNightBattleEvent(bm.BattleNight.NightInitial);
+                        this.SetHPBar(bm.BattleNight);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
 				case "api_req_battle_midnight/sp_midnight":
 					{
 
-						SetFormation(bm);
-						ClearBaseAirAttack();
-						ClearAerialWarfare();
-						ClearSearchingResult();
-						SetNightBattleEvent(bm.BattleNight.NightInitial);
-						SetHPBar(bm.BattleNight);
-						SetDamageRate(bm);
+                        this.SetFormation(bm);
+                        this.ClearBaseAirAttack();
+                        this.ClearAerialWarfare();
+                        this.ClearSearchingResult();
+                        this.SetNightBattleEvent(bm.BattleNight.NightInitial);
+                        this.SetHPBar(bm.BattleNight);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
 				case "api_req_sortie/airbattle":
 					{
 
-						SetFormation(bm);
-						SetSearchingResult(bm.BattleDay);
-						SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
-						SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle, ((BattleAirBattle)bm.BattleDay).AirBattle2);
-						SetHPBar(bm.BattleDay);
-						SetDamageRate(bm);
+                        this.SetFormation(bm);
+                        this.SetSearchingResult(bm.BattleDay);
+                        this.SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
+                        this.SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle, ((BattleAirBattle)bm.BattleDay).AirBattle2);
+                        this.SetHPBar(bm.BattleDay);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
@@ -241,23 +241,23 @@ namespace ElectronicObserver.Window
 						// 暫定
 						var battle = bm.BattleNight as BattleDayFromNight;
 
-						SetFormation(bm);
-						ClearAerialWarfare();
-						ClearSearchingResult();
-						ClearBaseAirAttack();
-						SetNightBattleEvent(battle.NightInitial);
+                        this.SetFormation(bm);
+                        this.ClearAerialWarfare();
+                        this.ClearSearchingResult();
+                        this.ClearBaseAirAttack();
+                        this.SetNightBattleEvent(battle.NightInitial);
 
 						if (battle.NextToDay)
 						{
-							SetSearchingResult(battle);
-							SetBaseAirAttack(battle.BaseAirAttack);
-							SetAerialWarfare(battle.JetAirBattle, battle.AirBattle);
+                            this.SetSearchingResult(battle);
+                            this.SetBaseAirAttack(battle.BaseAirAttack);
+                            this.SetAerialWarfare(battle.JetAirBattle, battle.AirBattle);
 						}
 
-						SetHPBar(bm.BattleDay);
-						SetDamageRate(bm);
+                        this.SetHPBar(bm.BattleDay);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
@@ -270,28 +270,28 @@ namespace ElectronicObserver.Window
                 case "api_req_combined_battle/ld_shooting":
                     {
 
-						SetFormation(bm);
-						SetSearchingResult(bm.BattleDay);
-						SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
-						SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle);
-						SetHPBar(bm.BattleDay);
-						SetDamageRate(bm);
+                        this.SetFormation(bm);
+                        this.SetSearchingResult(bm.BattleDay);
+                        this.SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
+                        this.SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle);
+                        this.SetHPBar(bm.BattleDay);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
 				case "api_req_combined_battle/airbattle":
 					{
 
-						SetFormation(bm);
-						SetSearchingResult(bm.BattleDay);
-						SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
-						SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle, ((BattleCombinedAirBattle)bm.BattleDay).AirBattle2);
-						SetHPBar(bm.BattleDay);
-						SetDamageRate(bm);
+                        this.SetFormation(bm);
+                        this.SetSearchingResult(bm.BattleDay);
+                        this.SetBaseAirAttack(bm.BattleDay.BaseAirAttack);
+                        this.SetAerialWarfare(bm.BattleDay.JetAirBattle, bm.BattleDay.AirBattle, ((BattleCombinedAirBattle)bm.BattleDay).AirBattle2);
+                        this.SetHPBar(bm.BattleDay);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
@@ -299,26 +299,26 @@ namespace ElectronicObserver.Window
 				case "api_req_combined_battle/ec_midnight_battle":
 					{
 
-						SetNightBattleEvent(bm.BattleNight.NightInitial);
-						SetHPBar(bm.BattleNight);
-						SetDamageRate(bm);
+                        this.SetNightBattleEvent(bm.BattleNight.NightInitial);
+                        this.SetHPBar(bm.BattleNight);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
 				case "api_req_combined_battle/sp_midnight":
 					{
 
-						SetFormation(bm);
-						ClearAerialWarfare();
-						ClearSearchingResult();
-						ClearBaseAirAttack();
-						SetNightBattleEvent(bm.BattleNight.NightInitial);
-						SetHPBar(bm.BattleNight);
-						SetDamageRate(bm);
+                        this.SetFormation(bm);
+                        this.ClearAerialWarfare();
+                        this.ClearSearchingResult();
+                        this.ClearBaseAirAttack();
+                        this.SetNightBattleEvent(bm.BattleNight.NightInitial);
+                        this.SetHPBar(bm.BattleNight);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
@@ -326,23 +326,23 @@ namespace ElectronicObserver.Window
 					{
 						var battle = bm.BattleNight as BattleDayFromNight;
 
-						SetFormation(bm);
-						ClearAerialWarfare();
-						ClearSearchingResult();
-						ClearBaseAirAttack();
-						SetNightBattleEvent(battle.NightInitial);
+                        this.SetFormation(bm);
+                        this.ClearAerialWarfare();
+                        this.ClearSearchingResult();
+                        this.ClearBaseAirAttack();
+                        this.SetNightBattleEvent(battle.NightInitial);
 
 						if (battle.NextToDay)
 						{
-							SetSearchingResult(battle);
-							SetBaseAirAttack(battle.BaseAirAttack);
-							SetAerialWarfare(battle.JetAirBattle, battle.AirBattle);
+                            this.SetSearchingResult(battle);
+                            this.SetBaseAirAttack(battle.BaseAirAttack);
+                            this.SetAerialWarfare(battle.JetAirBattle, battle.AirBattle);
 						}
 
-						SetHPBar(battle);
-						SetDamageRate(bm);
+                        this.SetHPBar(battle);
+                        this.SetDamageRate(bm);
 
-						BaseLayoutPanel.Visible = !hideDuringBattle;
+                        this.BaseLayoutPanel.Visible = !hideDuringBattle;
 					}
 					break;
 
@@ -351,25 +351,25 @@ namespace ElectronicObserver.Window
 				case "api_req_practice/battle_result":
 					{
 
-						SetMVPShip(bm);
+                        this.SetMVPShip(bm);
 
-						BaseLayoutPanel.Visible = true;
+                        this.BaseLayoutPanel.Visible = true;
 					}
 					break;
 
 			}
 
-			TableTop.ResumeLayout();
-			TableBottom.ResumeLayout();
+            this.TableTop.ResumeLayout();
+            this.TableBottom.ResumeLayout();
 
-			BaseLayoutPanel.ResumeLayout();
+            this.BaseLayoutPanel.ResumeLayout();
 
 
 			if (Utility.Configuration.Config.UI.IsLayoutFixed)
-				TableTop.Width = TableTop.GetPreferredSize(BaseLayoutPanel.Size).Width;
+                this.TableTop.Width = this.TableTop.GetPreferredSize(this.BaseLayoutPanel.Size).Width;
 			else
-				TableTop.Width = TableBottom.ClientSize.Width;
-			TableTop.Height = TableTop.GetPreferredSize(BaseLayoutPanel.Size).Height;
+                this.TableTop.Width = this.TableBottom.ClientSize.Width;
+            this.TableTop.Height = this.TableTop.GetPreferredSize(this.BaseLayoutPanel.Size).Height;
 
 		}
 
@@ -379,14 +379,31 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		private void SetFormation(BattleManager bm)
 		{
-			FormationFriend.Text = Constants.GetFormationShort(bm.FirstBattle.Searching.FormationFriend);
-			FormationEnemy.Text = Constants.GetFormationShort(bm.FirstBattle.Searching.FormationEnemy);
-			Formation.Text = Constants.GetEngagementForm(bm.FirstBattle.Searching.EngagementForm);
+            this.FormationFriend.Text = Constants.GetFormationShort(bm.FirstBattle.Searching.FormationFriend);
+            this.FormationEnemy.Text = Constants.GetFormationShort(bm.FirstBattle.Searching.FormationEnemy);
+            this.Formation.Text = Constants.GetEngagementForm(bm.FirstBattle.Searching.EngagementForm);
 
 			if (bm.Compass != null && bm.Compass.EventID == 5)
-				FleetEnemy.ForeColor = Color.Red;
+                this.FleetEnemy.ForeColor = Color.Red;
 			else
-				FleetEnemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                this.FleetEnemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+
+            if (bm.IsEnemyCombined && bm.StartsFromDayBattle)
+            {
+                bool willMain = bm.WillNightBattleWithMainFleet();
+                this.FleetEnemy.BackColor = willMain ? 
+                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.WiilMainColor) : 
+                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+
+                this.FleetEnemyEscort.BackColor = willMain ?
+                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor) :
+                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.WiilMainColor); 
+            }
+            else
+            {
+                this.FleetEnemy.BackColor =
+                this.FleetEnemyEscort.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            }
         }
 
 		/// <summary>
@@ -399,11 +416,11 @@ namespace ElectronicObserver.Window
 				label.Text = Constants.GetSearchingResultShort(search);
 				label.ImageAlign = search > 0 ? ContentAlignment.MiddleLeft : ContentAlignment.MiddleCenter;
 				label.ImageIndex = search > 0 ? (int)(search < 4 ? ResourceManager.EquipmentContent.Seaplane : ResourceManager.EquipmentContent.Radar) : -1;
-				ToolTipInfo.SetToolTip(label, null);
+                this.ToolTipInfo.SetToolTip(label, null);
 			}
 
-			SetResult(SearchingFriend, bd.Searching.SearchingFriend);
-			SetResult(SearchingEnemy, bd.Searching.SearchingEnemy);
+			SetResult(this.SearchingFriend, bd.Searching.SearchingFriend);
+			SetResult(this.SearchingEnemy, bd.Searching.SearchingEnemy);
 		}
 
 		/// <summary>
@@ -417,11 +434,11 @@ namespace ElectronicObserver.Window
 				label.Text = "-";
 				label.ImageAlign = ContentAlignment.MiddleCenter;
 				label.ImageIndex = -1;
-				ToolTipInfo.SetToolTip(label, null);
+                this.ToolTipInfo.SetToolTip(label, null);
 			}
 
-			ClearResult(SearchingFriend);
-			ClearResult(SearchingEnemy);
+			ClearResult(this.SearchingFriend);
+			ClearResult(this.SearchingEnemy);
 		}
 
 		/// <summary>
@@ -432,9 +449,9 @@ namespace ElectronicObserver.Window
 			if (pd != null && pd.IsAvailable)
 			{
 
-				Searching.Text = "기지항공대";
-				Searching.ImageAlign = ContentAlignment.MiddleLeft;
-				Searching.ImageIndex = (int)ResourceManager.EquipmentContent.LandAttacker;
+                this.Searching.Text = "기지항공대";
+                this.Searching.ImageAlign = ContentAlignment.MiddleLeft;
+                this.Searching.ImageIndex = (int)ResourceManager.EquipmentContent.LandAttacker;
 
 				var sb = new StringBuilder();
 				int index = 1;
@@ -462,13 +479,13 @@ namespace ElectronicObserver.Window
 					index++;
 				}
 
-				ToolTipInfo.SetToolTip(Searching, sb.ToString());
+                this.ToolTipInfo.SetToolTip(this.Searching, sb.ToString());
 
 
 			}
 			else
 			{
-				ClearBaseAirAttack();
+                this.ClearBaseAirAttack();
 			}
 
 		}
@@ -478,10 +495,10 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		private void ClearBaseAirAttack()
 		{
-			Searching.Text = "색적";
-			Searching.ImageAlign = ContentAlignment.MiddleCenter;
-			Searching.ImageIndex = -1;
-			ToolTipInfo.SetToolTip(Searching, null);
+            this.Searching.Text = "색적";
+            this.Searching.ImageAlign = ContentAlignment.MiddleCenter;
+            this.Searching.ImageIndex = -1;
+            this.ToolTipInfo.SetToolTip(this.Searching, null);
 		}
 
 
@@ -496,20 +513,20 @@ namespace ElectronicObserver.Window
 
 			public AerialWarfareFormatter(PhaseAirBattleBase air, string phaseName)
 			{
-				Air = air;
-				PhaseName = phaseName;
+                this.Air = air;
+                this.PhaseName = phaseName;
 			}
 
-			public bool Enabled => Air != null && Air.IsAvailable;
-			public bool Stage1Enabled => Enabled && Air.IsStage1Available;
-			public bool Stage2Enabled => Enabled && Air.IsStage2Available;
+			public bool Enabled => this.Air != null && this.Air.IsAvailable;
+			public bool Stage1Enabled => this.Enabled && this.Air.IsStage1Available;
+			public bool Stage2Enabled => this.Enabled && this.Air.IsStage2Available;
 
 			public bool GetEnabled(int stage)
 			{
 				if (stage == 1)
-					return Stage1Enabled;
+					return this.Stage1Enabled;
 				else if (stage == 2)
-					return Stage2Enabled;
+					return this.Stage2Enabled;
 				else
 					throw new ArgumentOutOfRangeException();
 			}
@@ -517,9 +534,9 @@ namespace ElectronicObserver.Window
 			public int GetAircraftLost(int stage, bool isFriend)
 			{
 				if (stage == 1)
-					return isFriend ? Air.AircraftLostStage1Friend : Air.AircraftLostStage1Enemy;
+					return isFriend ? this.Air.AircraftLostStage1Friend : this.Air.AircraftLostStage1Enemy;
 				else if (stage == 2)
-					return isFriend ? Air.AircraftLostStage2Friend : Air.AircraftLostStage2Enemy;
+					return isFriend ? this.Air.AircraftLostStage2Friend : this.Air.AircraftLostStage2Enemy;
 				else
 					throw new ArgumentOutOfRangeException();
 			}
@@ -527,14 +544,14 @@ namespace ElectronicObserver.Window
 			public int GetAircraftTotal(int stage, bool isFriend)
 			{
 				if (stage == 1)
-					return isFriend ? Air.AircraftTotalStage1Friend : Air.AircraftTotalStage1Enemy;
+					return isFriend ? this.Air.AircraftTotalStage1Friend : this.Air.AircraftTotalStage1Enemy;
 				else if (stage == 2)
-					return isFriend ? Air.AircraftTotalStage2Friend : Air.AircraftTotalStage2Enemy;
+					return isFriend ? this.Air.AircraftTotalStage2Friend : this.Air.AircraftTotalStage2Enemy;
 				else
 					throw new ArgumentOutOfRangeException();
 			}
 
-			public int GetTouchAircraft(bool isFriend) => isFriend ? Air.TouchAircraftFriend : Air.TouchAircraftEnemy;
+			public int GetTouchAircraft(bool isFriend) => isFriend ? this.Air.TouchAircraftFriend : this.Air.TouchAircraftEnemy;
 
 		}
 
@@ -544,12 +561,12 @@ namespace ElectronicObserver.Window
 			label.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
             label.ImageAlign = ContentAlignment.MiddleCenter;
 			label.ImageIndex = -1;
-			ToolTipInfo.SetToolTip(label, null);
+            this.ToolTipInfo.SetToolTip(label, null);
 		}
 
 
 		
-		private void SetAerialWarfare(PhaseAirBattleBase phaseJet, PhaseAirBattleBase phase1) => SetAerialWarfare(phaseJet, phase1, null);
+		private void SetAerialWarfare(PhaseAirBattleBase phaseJet, PhaseAirBattleBase phase1) => this.SetAerialWarfare(phaseJet, phase1, null);
 
 		/// <summary>
 		/// 航空戦情報を設定します。
@@ -576,12 +593,12 @@ namespace ElectronicObserver.Window
 				if (needAppendInfo)
 				{
 					label.Text = string.Join(",", phasesEnabled.Select(p => "-" + p.GetAircraftLost(stage, isFriend)));
-					ToolTipInfo.SetToolTip(label, string.Join("", phasesEnabled.Select(p => $"{p.PhaseName}-{p.GetAircraftLost(stage, isFriend)}/{p.GetAircraftTotal(stage, isFriend)}\r\n")));
+                    this.ToolTipInfo.SetToolTip(label, string.Join("", phasesEnabled.Select(p => $"{p.PhaseName}-{p.GetAircraftLost(stage, isFriend)}/{p.GetAircraftTotal(stage, isFriend)}\r\n")));
 				}
 				else
 				{
 					label.Text = $"-{phases[1].GetAircraftLost(stage, isFriend)}/{phases[1].GetAircraftTotal(stage, isFriend)}";
-					ToolTipInfo.SetToolTip(label, null);
+                    this.ToolTipInfo.SetToolTip(label, null);
 				}
 
 				if (phasesEnabled.Any(p => p.GetAircraftTotal(stage, isFriend) > 0 && p.GetAircraftLost(stage, isFriend) == p.GetAircraftTotal(stage, isFriend)))
@@ -595,10 +612,10 @@ namespace ElectronicObserver.Window
 
 			void ClearAACutinLabel()
 			{
-				AACutin.Text = "대공포화";
-				AACutin.ImageAlign = ContentAlignment.MiddleCenter;
-				AACutin.ImageIndex = -1;
-				ToolTipInfo.SetToolTip(AACutin, null);
+                this.AACutin.Text = "대공포화";
+                this.AACutin.ImageAlign = ContentAlignment.MiddleCenter;
+                this.AACutin.ImageIndex = -1;
+                this.ToolTipInfo.SetToolTip(this.AACutin, null);
 			}
 
 
@@ -608,14 +625,14 @@ namespace ElectronicObserver.Window
 				bool needAppendInfo = phases[0].Stage1Enabled || phases[2].Stage1Enabled;
 				var phases1 = phases.Where(p => p.Stage1Enabled);
 
-				AirSuperiority.Text = Constants.GetAirSuperiority(phases[1].Air.AirSuperiority);
+                this.AirSuperiority.Text = Constants.GetAirSuperiority(phases[1].Air.AirSuperiority);
 
-				ToolTipInfo.SetToolTip(AirSuperiority,
+                this.ToolTipInfo.SetToolTip(this.AirSuperiority,
 					needAppendInfo ? string.Join("", phases1.Select(p => $"{p.PhaseName}{Constants.GetAirSuperiority(p.Air.AirSuperiority)}\r\n")) : null);
 
 
-				SetShootdown(AirStage1Friend, 1, true, needAppendInfo);
-				SetShootdown(AirStage1Enemy, 1, false, needAppendInfo);
+				SetShootdown(this.AirStage1Friend, 1, true, needAppendInfo);
+				SetShootdown(this.AirStage1Enemy, 1, false, needAppendInfo);
 
 				void SetTouch(ImageLabel label, bool isFriend)
 				{
@@ -624,7 +641,7 @@ namespace ElectronicObserver.Window
 						label.ImageAlign = ContentAlignment.MiddleLeft;
 						label.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
 
-						ToolTipInfo.SetToolTip(label, ToolTipInfo.GetToolTip(label) +
+                        this.ToolTipInfo.SetToolTip(label, this.ToolTipInfo.GetToolTip(label) +
 							"촉접중\r\n" + string.Join("\r\n", phases1.Select(p => $"{p.PhaseName}{(KCDatabase.Instance.MasterEquipments[p.GetTouchAircraft(isFriend)]?.Name ?? "(없음)")}")));
 					}
 					else
@@ -633,16 +650,16 @@ namespace ElectronicObserver.Window
 						label.ImageIndex = -1;
 					}
 				}
-				SetTouch(AirStage1Friend, true);
-				SetTouch(AirStage1Enemy, false);
+				SetTouch(this.AirStage1Friend, true);
+				SetTouch(this.AirStage1Enemy, false);
 			}
 			else
 			{
-				AirSuperiority.Text = Constants.GetAirSuperiority(-1);
-				ToolTipInfo.SetToolTip(AirSuperiority, null);
+                this.AirSuperiority.Text = Constants.GetAirSuperiority(-1);
+                this.ToolTipInfo.SetToolTip(this.AirSuperiority, null);
 
-				ClearAircraftLabel(AirStage1Friend);
-				ClearAircraftLabel(AirStage1Enemy);
+                this.ClearAircraftLabel(this.AirStage1Friend);
+                this.ClearAircraftLabel(this.AirStage1Enemy);
 			}
 
 
@@ -651,17 +668,17 @@ namespace ElectronicObserver.Window
 				bool needAppendInfo = phases[0].Stage2Enabled || phases[2].Stage2Enabled;
 				var phases2 = phases.Where(p => p.Stage2Enabled);
 
-				SetShootdown(AirStage2Friend, 2, true, needAppendInfo);
-				SetShootdown(AirStage2Enemy, 2, false, needAppendInfo);
+				SetShootdown(this.AirStage2Friend, 2, true, needAppendInfo);
+				SetShootdown(this.AirStage2Enemy, 2, false, needAppendInfo);
 
 
 				if (phases2.Any(p => p.Air.IsAACutinAvailable))
 				{
-					AACutin.Text = "#" + string.Join("/", phases2.Select(p => p.Air.IsAACutinAvailable ? (p.Air.AACutInIndex + 1).ToString() : "-"));
-					AACutin.ImageAlign = ContentAlignment.MiddleLeft;
-					AACutin.ImageIndex = (int)ResourceManager.EquipmentContent.HighAngleGun;
+                    this.AACutin.Text = "#" + string.Join("/", phases2.Select(p => p.Air.IsAACutinAvailable ? (p.Air.AACutInIndex + 1).ToString() : "-"));
+                    this.AACutin.ImageAlign = ContentAlignment.MiddleLeft;
+                    this.AACutin.ImageIndex = (int)ResourceManager.EquipmentContent.HighAngleGun;
 
-					ToolTipInfo.SetToolTip(AACutin, "대공컷인\r\n" +
+                    this.ToolTipInfo.SetToolTip(this.AACutin, "대공컷인\r\n" +
 						string.Join("\r\n", phases2.Select(p => p.PhaseName + (p.Air.IsAACutinAvailable ? $"{p.Air.AACutInShip.NameWithLevel}\r\n컷인종류: {p.Air.AACutInKind} ({Constants.GetAACutinKind(p.Air.AACutInKind)})" : "(발동안함)"))));
 				}
 				else
@@ -671,26 +688,26 @@ namespace ElectronicObserver.Window
 			}
 			else
 			{
-				ClearAircraftLabel(AirStage2Friend);
-				ClearAircraftLabel(AirStage2Enemy);
+                this.ClearAircraftLabel(this.AirStage2Friend);
+                this.ClearAircraftLabel(this.AirStage2Enemy);
 				ClearAACutinLabel();
 			}
 		}
 
 		private void ClearAerialWarfare()
 		{
-			AirSuperiority.Text = "-";
-			ToolTipInfo.SetToolTip(AirSuperiority, null);
+            this.AirSuperiority.Text = "-";
+            this.ToolTipInfo.SetToolTip(this.AirSuperiority, null);
 
-			ClearAircraftLabel(AirStage1Friend);
-			ClearAircraftLabel(AirStage1Enemy);
-			ClearAircraftLabel(AirStage2Friend);
-			ClearAircraftLabel(AirStage2Enemy);
+            this.ClearAircraftLabel(this.AirStage1Friend);
+            this.ClearAircraftLabel(this.AirStage1Enemy);
+            this.ClearAircraftLabel(this.AirStage2Friend);
+            this.ClearAircraftLabel(this.AirStage2Enemy);
 
-			AACutin.Text = "-";
-			AACutin.ImageAlign = ContentAlignment.MiddleCenter;
-			AACutin.ImageIndex = -1;
-			ToolTipInfo.SetToolTip(AACutin, null);
+            this.AACutin.Text = "-";
+            this.AACutin.ImageAlign = ContentAlignment.MiddleCenter;
+            this.AACutin.ImageIndex = -1;
+            this.ToolTipInfo.SetToolTip(this.AACutin, null);
 		}
 
 
@@ -713,23 +730,23 @@ namespace ElectronicObserver.Window
 			var attackDamages = bd.AttackDamages;
 
 
-			foreach (var bar in HPBars)
+			foreach (var bar in this.HPBars)
 				bar.SuspendUpdate();
 
 
 			void EnableHPBar(int index, int initialHP, int resultHP, int maxHP)
 			{
-				HPBars[index].Value = resultHP;
-				HPBars[index].PrevValue = initialHP;
-				HPBars[index].MaximumValue = maxHP;
-				HPBars[index].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-                HPBars[index].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                HPBars[index].Visible = true;
+                this.HPBars[index].Value = resultHP;
+                this.HPBars[index].PrevValue = initialHP;
+                this.HPBars[index].MaximumValue = maxHP;
+                this.HPBars[index].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                this.HPBars[index].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                this.HPBars[index].Visible = true;
 			}
 
 			void DisableHPBar(int index)
 			{
-				HPBars[index].Visible = false;
+                this.HPBars[index].Visible = false;
 			}
 
 
@@ -747,7 +764,7 @@ namespace ElectronicObserver.Window
 					bool isEscaped;
 					bool isLandBase;
 
-					var bar = HPBars[refindex];
+					var bar = this.HPBars[refindex];
 
 					if (isBaseAirRaid)
 					{
@@ -766,7 +783,7 @@ namespace ElectronicObserver.Window
 						bar.Text = Constants.GetShipClassClassification(ship.MasterShip.ShipType);
 					}
 
-					ToolTipInfo.SetToolTip(bar, string.Format
+                    this.ToolTipInfo.SetToolTip(bar, string.Format
 						("{0}\r\nHP: ({1} → {2})/{3} ({4}) [{5}]\r\n데미지: {6}\r\n\r\n{7}",
 						name,
 						Math.Max(bar.PrevValue, 0),
@@ -798,10 +815,10 @@ namespace ElectronicObserver.Window
 					EnableHPBar(refindex, initial.EnemyInitialHPs[i], resultHPs[refindex], initial.EnemyMaxHPs[i]);
 					ShipDataMaster ship = bd.Initial.EnemyMembersInstance[i];
 
-					var bar = HPBars[refindex];
+					var bar = this.HPBars[refindex];
 					bar.Text = Constants.GetShipClassClassification(ship.ShipType);
 
-					ToolTipInfo.SetToolTip(bar,
+                    this.ToolTipInfo.SetToolTip(bar,
 						string.Format("{0} Lv. {1}\r\nHP: ({2} → {3})/{4} ({5}) [{6}]\r\n\r\n{7}",
 							ship.NameWithClass,
 							initial.EnemyLevels[i],
@@ -824,7 +841,7 @@ namespace ElectronicObserver.Window
 			// friend escort
 			if (isFriendCombined)
 			{
-				FleetFriendEscort.Visible = true;
+                this.FleetFriendEscort.Visible = true;
 
 				for (int i = 0; i < initial.FriendInitialHPsEscort.Length; i++)
 				{
@@ -837,10 +854,10 @@ namespace ElectronicObserver.Window
 						ShipData ship = bd.Initial.FriendFleetEscort.MembersInstance[i];
 						bool isEscaped = bd.Initial.FriendFleetEscort.EscapedShipList.Contains(ship.MasterID);
 
-						var bar = HPBars[refindex];
+						var bar = this.HPBars[refindex];
 						bar.Text = Constants.GetShipClassClassification(ship.MasterShip.ShipType);
 
-						ToolTipInfo.SetToolTip(bar, string.Format(
+                        this.ToolTipInfo.SetToolTip(bar, string.Format(
 							"{0} Lv. {1}\r\nHP: ({2} → {3})/{4} ({5}) [{6}]\r\n데미지: {7}\r\n\r\n{8}",
 							ship.MasterShip.NameWithClass,
 							ship.Level,
@@ -865,20 +882,20 @@ namespace ElectronicObserver.Window
 			}
 			else
 			{
-				FleetFriendEscort.Visible = false;
+                this.FleetFriendEscort.Visible = false;
 
 				foreach (var i in BattleIndex.FriendEscort.Skip(Math.Max(bd.Initial.FriendFleet.Members.Count - 6, 0)))
 					DisableHPBar(i);
 			}
 
-			MoveHPBar(hasFriend7thShip);
+            this.MoveHPBar(hasFriend7thShip);
 
 
 
 			// enemy escort
 			if (isEnemyCombined)
 			{
-				FleetEnemyEscort.Visible = true;
+                this.FleetEnemyEscort.Visible = true;
 
 				for (int i = 0; i < 6; i++)
 				{
@@ -890,10 +907,10 @@ namespace ElectronicObserver.Window
 
 						ShipDataMaster ship = bd.Initial.EnemyMembersEscortInstance[i];
 
-						var bar = HPBars[refindex];
+						var bar = this.HPBars[refindex];
 						bar.Text = Constants.GetShipClassClassification(ship.ShipType);
 
-						ToolTipInfo.SetToolTip(bar,
+                        this.ToolTipInfo.SetToolTip(bar,
 							string.Format("{0} Lv. {1}\r\nHP: ({2} → {3})/{4} ({5}) [{6}]\r\n\r\n{7}",
 								ship.NameWithClass,
 								bd.Initial.EnemyLevelsEscort[i],
@@ -915,7 +932,7 @@ namespace ElectronicObserver.Window
 			}
 			else
 			{
-				FleetEnemyEscort.Visible = false;
+                this.FleetEnemyEscort.Visible = false;
 
 				foreach (var i in BattleIndex.EnemyEscort)
 					DisableHPBar(i);
@@ -926,9 +943,9 @@ namespace ElectronicObserver.Window
 
 			if ((isFriendCombined || (hasFriend7thShip && !Utility.Configuration.Config.FormBattle.Display7thAsSingleLine)) && isEnemyCombined)
 			{
-				foreach (var bar in HPBars)
+				foreach (var bar in this.HPBars)
 				{
-					bar.Size = SmallBarSize;
+					bar.Size = this.SmallBarSize;
 					bar.Text = null;
 				}
 			}
@@ -936,9 +953,9 @@ namespace ElectronicObserver.Window
 			{
 				bool showShipType = Utility.Configuration.Config.FormBattle.ShowShipTypeInHPBar;
 
-				foreach (var bar in HPBars)
+				foreach (var bar in this.HPBars)
 				{
-					bar.Size = DefaultBarSize;
+					bar.Size = this.DefaultBarSize;
 
 					if (!showShipType)
 						bar.Text = "HP:";
@@ -963,58 +980,58 @@ namespace ElectronicObserver.Window
 					switch (support.SupportFlag)
 					{
 						case 1:
-							FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedTorpedo;
+                            this.FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedTorpedo;
 							break;
 						case 2:
-							FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
+                            this.FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
 							break;
 						case 3:
-							FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Torpedo;
+                            this.FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Torpedo;
 							break;
 						case 4:
-							FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.DepthCharge;
+                            this.FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.DepthCharge;
 							break;
 						default:
-							FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Unknown;
+                            this.FleetFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Unknown;
 							break;
 					}
 
-					FleetFriend.ImageAlign = ContentAlignment.MiddleLeft;
-					ToolTipInfo.SetToolTip(FleetFriend, "지원공격\r\n" + support.GetBattleDetail());
+                    this.FleetFriend.ImageAlign = ContentAlignment.MiddleLeft;
+                    this.ToolTipInfo.SetToolTip(this.FleetFriend, "지원공격\r\n" + support.GetBattleDetail());
 
 					if ((isFriendCombined || hasFriend7thShip) && isEnemyCombined)
-						FleetFriend.Text = "아군";
+                        this.FleetFriend.Text = "아군";
 					else
-						FleetFriend.Text = "아군함대";
+                        this.FleetFriend.Text = "아군함대";
 
 				}
 				else
 				{
-					FleetFriend.ImageIndex = -1;
-					FleetFriend.ImageAlign = ContentAlignment.MiddleCenter;
-					FleetFriend.Text = "아군함대";
-					ToolTipInfo.SetToolTip(FleetFriend, null);
+                    this.FleetFriend.ImageIndex = -1;
+                    this.FleetFriend.ImageAlign = ContentAlignment.MiddleCenter;
+                    this.FleetFriend.Text = "아군함대";
+                    this.ToolTipInfo.SetToolTip(this.FleetFriend, null);
 
 				}
 			}
 
 
 			if (bd.Initial.IsBossDamaged)
-				HPBars[BattleIndex.EnemyMain1].BackColor = Color.MistyRose;
+                this.HPBars[BattleIndex.EnemyMain1].BackColor = Color.MistyRose;
 
 			if (!isBaseAirRaid)
 			{
 				foreach (int i in bd.MVPShipIndexes)
-					HPBars[BattleIndex.Get(BattleSides.FriendMain, i)].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                    this.HPBars[BattleIndex.Get(BattleSides.FriendMain, i)].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
 
                 if (isFriendCombined)
 				{
 					foreach (int i in bd.MVPShipCombinedIndexes)
-						HPBars[BattleIndex.Get(BattleSides.FriendEscort, i)].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                        this.HPBars[BattleIndex.Get(BattleSides.FriendEscort, i)].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
                 }
 			}
 
-			foreach (var bar in HPBars)
+			foreach (var bar in this.HPBars)
 				bar.ResumeUpdate();
 		}
 
@@ -1027,21 +1044,21 @@ namespace ElectronicObserver.Window
 		{
 			if (Utility.Configuration.Config.FormBattle.Display7thAsSingleLine && hasFriend7thShip)
 			{
-				if (_hpBarMoved)
+				if (this._hpBarMoved)
 					return;
-				TableBottom.SetCellPosition(HPBars[BattleIndex.FriendEscort1], new TableLayoutPanelCellPosition(0, 7));
+                this.TableBottom.SetCellPosition(this.HPBars[BattleIndex.FriendEscort1], new TableLayoutPanelCellPosition(0, 7));
 				bool fixSize = Utility.Configuration.Config.UI.IsLayoutFixed;
 				bool showHPBar = Utility.Configuration.Config.FormBattle.ShowHPBar;
-				ControlHelper.SetTableRowStyle(TableBottom, 7, fixSize ? new RowStyle(SizeType.Absolute, showHPBar ? 21 : 16) : new RowStyle(SizeType.AutoSize));
-				_hpBarMoved = true;
+				ControlHelper.SetTableRowStyle(this.TableBottom, 7, fixSize ? new RowStyle(SizeType.Absolute, showHPBar ? 21 : 16) : new RowStyle(SizeType.AutoSize));
+                this._hpBarMoved = true;
 			}
 			else
 			{
-				if (!_hpBarMoved)
+				if (!this._hpBarMoved)
 					return;
-				TableBottom.SetCellPosition(HPBars[BattleIndex.FriendEscort1], new TableLayoutPanelCellPosition(1, 1));
-				ControlHelper.SetTableRowStyle(TableBottom, 7, new RowStyle(SizeType.Absolute, 0));
-				_hpBarMoved = false;
+                this.TableBottom.SetCellPosition(this.HPBars[BattleIndex.FriendEscort1], new TableLayoutPanelCellPosition(1, 1));
+				ControlHelper.SetTableRowStyle(this.TableBottom, 7, new RowStyle(SizeType.Absolute, 0));
+                this._hpBarMoved = false;
 			}
 
 		}
@@ -1054,22 +1071,22 @@ namespace ElectronicObserver.Window
 		{
 			int rank = bm.PredictWinRank(out double friendrate, out double enemyrate);
 
-			DamageFriend.Text = friendrate.ToString("p1");
-			DamageEnemy.Text = enemyrate.ToString("p1");
+            this.DamageFriend.Text = friendrate.ToString("p1");
+            this.DamageEnemy.Text = enemyrate.ToString("p1");
 
 			if (bm.IsBaseAirRaid)
 			{
 				int kind = bm.Compass.AirRaidDamageKind;
-				WinRank.Text = Constants.GetAirRaidDamageShort(kind);
-				WinRank.ForeColor = (1 <= kind && kind <= 3) ? WinRankColor_Lose : WinRankColor_Win;
+                this.WinRank.Text = Constants.GetAirRaidDamageShort(kind);
+                this.WinRank.ForeColor = (1 <= kind && kind <= 3) ? this.WinRankColor_Lose : this.WinRankColor_Win;
 			}
 			else
 			{
-				WinRank.Text = Constants.GetWinRank(rank);
-				WinRank.ForeColor = rank >= 4 ? WinRankColor_Win : WinRankColor_Lose;
+                this.WinRank.Text = Constants.GetWinRank(rank);
+                this.WinRank.ForeColor = rank >= 4 ? this.WinRankColor_Win : this.WinRankColor_Lose;
 			}
 
-			WinRank.MinimumSize = Utility.Configuration.Config.UI.IsLayoutFixed ? new Size(DefaultBarSize.Width, 0) : new Size(HPBars[0].Width, 0);
+            this.WinRank.MinimumSize = Utility.Configuration.Config.UI.IsLayoutFixed ? new Size(this.DefaultBarSize.Width, 0) : new Size(this.HPBars[0].Width, 0);
 		}
 
 
@@ -1092,15 +1109,15 @@ namespace ElectronicObserver.Window
 				{
 					ShipData ship = fleet.MembersInstance[index];
 
-                    AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
-                    AirStage1Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                    AirStage1Friend.ImageAlign = ContentAlignment.MiddleLeft;
-					AirStage1Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
-					ToolTipInfo.SetToolTip(AirStage1Friend, "탐조등조사: " + ship.NameWithLevel);
+                    this.AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
+                    this.AirStage1Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage1Friend.ImageAlign = ContentAlignment.MiddleLeft;
+                    this.AirStage1Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
+                    this.ToolTipInfo.SetToolTip(this.AirStage1Friend, "탐조등조사: " + ship.NameWithLevel);
 				}
 				else
 				{
-					ToolTipInfo.SetToolTip(AirStage1Friend, null);
+                    this.ToolTipInfo.SetToolTip(this.AirStage1Friend, null);
 				}
 			}
 
@@ -1109,15 +1126,15 @@ namespace ElectronicObserver.Window
 				int index = pd.SearchlightIndexEnemy;
 				if (index != -1)
 				{
-                    AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
-                    AirStage1Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                    AirStage1Enemy.ImageAlign = ContentAlignment.MiddleLeft;
-					AirStage1Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
-					ToolTipInfo.SetToolTip(AirStage1Enemy, "탐조등조사: " + pd.SearchlightEnemyInstance.NameWithClass);
+                    this.AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
+                    this.AirStage1Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage1Enemy.ImageAlign = ContentAlignment.MiddleLeft;
+                    this.AirStage1Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
+                    this.ToolTipInfo.SetToolTip(this.AirStage1Enemy, "탐조등조사: " + pd.SearchlightEnemyInstance.NameWithClass);
 				}
 				else
 				{
-					ToolTipInfo.SetToolTip(AirStage1Enemy, null);
+                    this.ToolTipInfo.SetToolTip(this.AirStage1Enemy, null);
 				}
 			}
 
@@ -1125,26 +1142,26 @@ namespace ElectronicObserver.Window
 			//夜間触接判定
 			if (pd.TouchAircraftFriend != -1)
 			{
-				SearchingFriend.Text = "야간촉접";
-				SearchingFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
-				SearchingFriend.ImageAlign = ContentAlignment.MiddleLeft;
-				ToolTipInfo.SetToolTip(SearchingFriend, "야간촉접중: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftFriend].Name);
+                this.SearchingFriend.Text = "야간촉접";
+                this.SearchingFriend.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
+                this.SearchingFriend.ImageAlign = ContentAlignment.MiddleLeft;
+                this.ToolTipInfo.SetToolTip(this.SearchingFriend, "야간촉접중: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftFriend].Name);
 			}
 			else
 			{
-				ToolTipInfo.SetToolTip(SearchingFriend, null);
+                this.ToolTipInfo.SetToolTip(this.SearchingFriend, null);
 			}
 
 			if (pd.TouchAircraftEnemy != -1)
 			{
-				SearchingEnemy.Text = "야간촉접";
-				SearchingEnemy.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
-				SearchingFriend.ImageAlign = ContentAlignment.MiddleLeft;
-				ToolTipInfo.SetToolTip(SearchingEnemy, "야간촉접중: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftEnemy].Name);
+                this.SearchingEnemy.Text = "야간촉접";
+                this.SearchingEnemy.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
+                this.SearchingFriend.ImageAlign = ContentAlignment.MiddleLeft;
+                this.ToolTipInfo.SetToolTip(this.SearchingEnemy, "야간촉접중: " + KCDatabase.Instance.MasterEquipments[pd.TouchAircraftEnemy].Name);
 			}
 			else
 			{
-				ToolTipInfo.SetToolTip(SearchingEnemy, null);
+                this.ToolTipInfo.SetToolTip(this.SearchingEnemy, null);
 			}
 
 			//照明弾投射判定
@@ -1153,16 +1170,16 @@ namespace ElectronicObserver.Window
 
 				if (index != -1)
 				{
-					AirStage2Friend.Text = "#" + (index + 1);
-					AirStage2Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                    AirStage2Friend.ImageAlign = ContentAlignment.MiddleLeft;
-					AirStage2Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
-					ToolTipInfo.SetToolTip(AirStage2Friend, "조명탄사용: " + pd.FlareFriendInstance.NameWithLevel);
+                    this.AirStage2Friend.Text = "#" + (index + 1);
+                    this.AirStage2Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage2Friend.ImageAlign = ContentAlignment.MiddleLeft;
+                    this.AirStage2Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
+                    this.ToolTipInfo.SetToolTip(this.AirStage2Friend, "조명탄사용: " + pd.FlareFriendInstance.NameWithLevel);
 
 				}
 				else
 				{
-					ToolTipInfo.SetToolTip(AirStage2Friend, null);
+                    this.ToolTipInfo.SetToolTip(this.AirStage2Friend, null);
 				}
 			}
 
@@ -1171,15 +1188,15 @@ namespace ElectronicObserver.Window
 
 				if (index != -1)
 				{
-					AirStage2Enemy.Text = "#" + (index + 1);
-					AirStage2Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                    AirStage2Enemy.ImageAlign = ContentAlignment.MiddleLeft;
-					AirStage2Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
-					ToolTipInfo.SetToolTip(AirStage2Enemy, "조명탄사용: " + pd.FlareEnemyInstance.NameWithClass);
+                    this.AirStage2Enemy.Text = "#" + (index + 1);
+                    this.AirStage2Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage2Enemy.ImageAlign = ContentAlignment.MiddleLeft;
+                    this.AirStage2Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
+                    this.ToolTipInfo.SetToolTip(this.AirStage2Enemy, "조명탄사용: " + pd.FlareEnemyInstance.NameWithClass);
 				}
 				else
 				{
-					ToolTipInfo.SetToolTip(AirStage2Enemy, null);
+                    this.ToolTipInfo.SetToolTip(this.AirStage2Enemy, null);
 				}
 			}
 		}
@@ -1217,13 +1234,13 @@ namespace ElectronicObserver.Window
 			for (int i = 0; i < friend.Members.Count; i++)
 			{
 				if (friend.EscapedShipList.Contains(friend.Members[i]))
-					HPBars[i].BackColor = Color.Silver;
+                    this.HPBars[i].BackColor = Color.Silver;
 
 				else if (br.MVPIndex == i + 1)
-					HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                    this.HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
 
                 else
-					HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                    this.HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
             }
 
 			if (escort != null)
@@ -1231,13 +1248,13 @@ namespace ElectronicObserver.Window
 				for (int i = 0; i < escort.Members.Count; i++)
 				{
 					if (escort.EscapedShipList.Contains(escort.Members[i]))
-						HPBars[i + 6].BackColor = Color.Silver;
+                        this.HPBars[i + 6].BackColor = Color.Silver;
 
 					else if (br.MVPIndexCombined == i + 1)
-						HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                        this.HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
 
                     else
-						HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                        this.HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
                 }
 			}
 
@@ -1258,7 +1275,7 @@ namespace ElectronicObserver.Window
 			if (bm == null || bm.BattleMode == BattleManager.BattleModes.Undefined)
 				e.Cancel = true;
 
-			RightClickMenu_ShowBattleResult.Enabled = !BaseLayoutPanel.Visible;
+            this.RightClickMenu_ShowBattleResult.Enabled = !this.BaseLayoutPanel.Visible;
 		}
 
 		private void RightClickMenu_ShowBattleDetail_Click(object sender, EventArgs e)
@@ -1271,7 +1288,7 @@ namespace ElectronicObserver.Window
 			var dialog = new Dialog.DialogBattleDetail
 			{
 				BattleDetailText = BattleDetailDescriptor.GetBattleDetail(bm),
-				Location = RightClickMenu.Location
+				Location = this.RightClickMenu.Location
 			};
 			dialog.Show(this);
 
@@ -1279,7 +1296,7 @@ namespace ElectronicObserver.Window
 
 		private void RightClickMenu_ShowBattleResult_Click(object sender, EventArgs e)
 		{
-			BaseLayoutPanel.Visible = true;
+            this.BaseLayoutPanel.Visible = true;
 		}
 
 
@@ -1290,75 +1307,75 @@ namespace ElectronicObserver.Window
 
 			var config = Utility.Configuration.Config;
 
-			MainFont = TableTop.Font = TableBottom.Font = Font = config.UI.MainFont;
-			SubFont = config.UI.SubFont;
+            this.MainFont = this.TableTop.Font = this.TableBottom.Font = this.Font = config.UI.MainFont;
+            this.SubFont = config.UI.SubFont;
 
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
-            BaseLayoutPanel.AutoScroll = config.FormBattle.IsScrollable;
+            this.BaseLayoutPanel.AutoScroll = config.FormBattle.IsScrollable;
 
 
 			bool fixSize = config.UI.IsLayoutFixed;
 			bool showHPBar = config.FormBattle.ShowHPBar;
 
-			TableBottom.SuspendLayout();
+            this.TableBottom.SuspendLayout();
 			if (fixSize)
 			{
-				ControlHelper.SetTableColumnStyles(TableBottom, new ColumnStyle(SizeType.AutoSize));
-				ControlHelper.SetTableRowStyle(TableBottom, 0, new RowStyle(SizeType.Absolute, 21));
+				ControlHelper.SetTableColumnStyles(this.TableBottom, new ColumnStyle(SizeType.AutoSize));
+				ControlHelper.SetTableRowStyle(this.TableBottom, 0, new RowStyle(SizeType.Absolute, 21));
 				for (int i = 1; i <= 6; i++)
-					ControlHelper.SetTableRowStyle(TableBottom, i, new RowStyle(SizeType.Absolute, showHPBar ? 21 : 16));
-				ControlHelper.SetTableRowStyle(TableBottom, 8, new RowStyle(SizeType.Absolute, 21));
+					ControlHelper.SetTableRowStyle(this.TableBottom, i, new RowStyle(SizeType.Absolute, showHPBar ? 21 : 16));
+				ControlHelper.SetTableRowStyle(this.TableBottom, 8, new RowStyle(SizeType.Absolute, 21));
 			}
 			else
 			{
-				ControlHelper.SetTableColumnStyles(TableBottom, new ColumnStyle(SizeType.AutoSize));
-				ControlHelper.SetTableRowStyles(TableBottom, new RowStyle(SizeType.AutoSize));
+				ControlHelper.SetTableColumnStyles(this.TableBottom, new ColumnStyle(SizeType.AutoSize));
+				ControlHelper.SetTableRowStyles(this.TableBottom, new RowStyle(SizeType.AutoSize));
 			}
-			if (HPBars != null)
+			if (this.HPBars != null)
 			{
-				foreach (var b in HPBars)
+				foreach (var b in this.HPBars)
 				{
-					b.MainFont = MainFont;
-					b.SubFont = SubFont;
+					b.MainFont = this.MainFont;
+					b.SubFont = this.SubFont;
 					b.AutoSize = !fixSize;
 					if (!b.AutoSize)
 					{
-						b.Size = (HPBars[12].Visible && HPBars[18].Visible) ? SmallBarSize : DefaultBarSize;
+						b.Size = (this.HPBars[12].Visible && this.HPBars[18].Visible) ? this.SmallBarSize : this.DefaultBarSize;
 					}
 					b.HPBar.ColorMorphing = config.UI.BarColorMorphing;
 					b.HPBar.SetBarColorScheme(config.UI.BarColorScheme.Select(col => col.ColorData).ToArray());
 					b.ShowHPBar = showHPBar;
 				}
 			}
-			FleetFriend.MaximumSize =
-			FleetFriendEscort.MaximumSize =
-			FleetEnemy.MaximumSize =
-			FleetEnemyEscort.MaximumSize =
-			DamageFriend.MaximumSize =
-			DamageEnemy.MaximumSize =
-				fixSize ? DefaultBarSize : Size.Empty;
+            this.FleetFriend.MaximumSize =
+            this.FleetFriendEscort.MaximumSize =
+            this.FleetEnemy.MaximumSize =
+            this.FleetEnemyEscort.MaximumSize =
+            this.DamageFriend.MaximumSize =
+            this.DamageEnemy.MaximumSize =
+				fixSize ? this.DefaultBarSize : Size.Empty;
 
-			WinRank.MinimumSize = fixSize ? new Size(80, 0) : new Size(HPBars[0].Width, 0);
+            this.WinRank.MinimumSize = fixSize ? new Size(80, 0) : new Size(this.HPBars[0].Width, 0);
 
-			TableBottom.ResumeLayout();
+            this.TableBottom.ResumeLayout();
 
-			TableTop.SuspendLayout();
+            this.TableTop.SuspendLayout();
 			if (fixSize)
 			{
-				ControlHelper.SetTableColumnStyles(TableTop, new ColumnStyle(SizeType.Absolute, 21 * 4));
-				ControlHelper.SetTableRowStyles(TableTop, new RowStyle(SizeType.Absolute, 21));
-				TableTop.Width = TableTop.GetPreferredSize(BaseLayoutPanel.Size).Width;
+				ControlHelper.SetTableColumnStyles(this.TableTop, new ColumnStyle(SizeType.Absolute, 21 * 4));
+				ControlHelper.SetTableRowStyles(this.TableTop, new RowStyle(SizeType.Absolute, 21));
+                this.TableTop.Width = this.TableTop.GetPreferredSize(this.BaseLayoutPanel.Size).Width;
 			}
 			else
 			{
-				ControlHelper.SetTableColumnStyles(TableTop, new ColumnStyle(SizeType.Percent, 100));
-				ControlHelper.SetTableRowStyles(TableTop, new RowStyle(SizeType.AutoSize));
-				TableTop.Width = TableBottom.ClientSize.Width;
+				ControlHelper.SetTableColumnStyles(this.TableTop, new ColumnStyle(SizeType.Percent, 100));
+				ControlHelper.SetTableRowStyles(this.TableTop, new RowStyle(SizeType.AutoSize));
+                this.TableTop.Width = this.TableBottom.ClientSize.Width;
 			}
-			TableTop.Height = TableTop.GetPreferredSize(BaseLayoutPanel.Size).Height;
-			TableTop.ResumeLayout();
+            this.TableTop.Height = this.TableTop.GetPreferredSize(this.BaseLayoutPanel.Size).Height;
+            this.TableTop.ResumeLayout();
 
 		}
 

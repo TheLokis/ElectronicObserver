@@ -26,15 +26,15 @@ namespace ElectronicObserver.Window
 
         public FormInformation(FormMain parent)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            _ignorePort = 0;
-            _inSortie = null;
-            _prevResource = new int[4];
+            this._ignorePort = 0;
+            this._inSortie = null;
+            this._prevResource = new int[4];
 
-            ConfigurationChanged();
+            this.ConfigurationChanged();
 
-            Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormInformation]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormInformation]);
         }
 
 
@@ -43,33 +43,33 @@ namespace ElectronicObserver.Window
 
             APIObserver o = APIObserver.Instance;
 
-            o["api_port/port"].ResponseReceived += Updated;
-            o["api_req_member/get_practice_enemyinfo"].ResponseReceived += Updated;
-            o["api_get_member/picture_book"].ResponseReceived += Updated;
-            o["api_get_member/mapinfo"].ResponseReceived += Updated;
-            o["api_req_mission/result"].ResponseReceived += Updated;
-            o["api_req_practice/battle_result"].ResponseReceived += Updated;
-            o["api_req_sortie/battleresult"].ResponseReceived += Updated;
-            o["api_req_combined_battle/battleresult"].ResponseReceived += Updated;
-            o["api_req_hokyu/charge"].ResponseReceived += Updated;
-            o["api_req_map/start"].ResponseReceived += Updated;
-            o["api_req_map/next"].ResponseReceived += Updated;
-            o["api_req_practice/battle"].ResponseReceived += Updated;
-            o["api_get_member/sortie_conditions"].ResponseReceived += Updated;
-            o["api_req_mission/start"].RequestReceived += Updated;
+            o["api_port/port"].ResponseReceived += this.Updated;
+            o["api_req_member/get_practice_enemyinfo"].ResponseReceived += this.Updated;
+            o["api_get_member/picture_book"].ResponseReceived += this.Updated;
+            o["api_get_member/mapinfo"].ResponseReceived += this.Updated;
+            o["api_req_mission/result"].ResponseReceived += this.Updated;
+            o["api_req_practice/battle_result"].ResponseReceived += this.Updated;
+            o["api_req_sortie/battleresult"].ResponseReceived += this.Updated;
+            o["api_req_combined_battle/battleresult"].ResponseReceived += this.Updated;
+            o["api_req_hokyu/charge"].ResponseReceived += this.Updated;
+            o["api_req_map/start"].ResponseReceived += this.Updated;
+            o["api_req_map/next"].ResponseReceived += this.Updated;
+            o["api_req_practice/battle"].ResponseReceived += this.Updated;
+            o["api_get_member/sortie_conditions"].ResponseReceived += this.Updated;
+            o["api_req_mission/start"].RequestReceived += this.Updated;
 
-            Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+            Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
         }
 
         void ConfigurationChanged()
         {
 
-            Font = TextInformation.Font = Utility.Configuration.Config.UI.MainFont;
-            TextInformation.LanguageOption = RichTextBoxLanguageOptions.UIFonts;
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            TextInformation.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            TextInformation.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.Font = this.TextInformation.Font = Utility.Configuration.Config.UI.MainFont;
+            this.TextInformation.LanguageOption = RichTextBoxLanguageOptions.UIFonts;
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.TextInformation.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.TextInformation.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
 
         }
 
@@ -80,53 +80,53 @@ namespace ElectronicObserver.Window
             {
 
                 case "api_port/port":
-                    if (_ignorePort > 0)
-                        _ignorePort--;
+                    if (this._ignorePort > 0)
+                        this._ignorePort--;
                     else
-                        TextInformation.Text = "";      //とりあえずクリア
+                        this.TextInformation.Text = "";      //とりあえずクリア
 
-                    if (_inSortie != null)
+                    if (this._inSortie != null)
                     {
-                        TextInformation.Text = GetConsumptionResource(data);
+                        this.TextInformation.Text = GetConsumptionResource(data);
                     }
-                    _inSortie = null;
+                    this._inSortie = null;
 
-                    RecordMaterials();
+                    this.RecordMaterials();
 
                     // '16 summer event
                     if (data.api_event_object() && data.api_event_object.api_m_flag2() && (int)data.api_event_object.api_m_flag2 > 0)
                     {
-                        TextInformation.Text += "\r\n＊기믹해제＊\r\n";
+                        this.TextInformation.Text += "\r\n＊기믹해제＊\r\n";
                         Utility.Logger.Add(2, "적세력의 약화를 확인했습니다!");
                     }
                     break;
 
                 case "api_req_member/get_practice_enemyinfo":
-                    TextInformation.Text = GetPracticeEnemyInfo(data);
-                    RecordMaterials();
+                    this.TextInformation.Text = GetPracticeEnemyInfo(data);
+                    this.RecordMaterials();
                     break;
 
                 case "api_get_member/picture_book":
-                    TextInformation.Text = GetAlbumInfo(data);
+                    this.TextInformation.Text = GetAlbumInfo(data);
                     break;
 
                 case "api_get_member/mapinfo":
-                    TextInformation.Text = GetMapGauge(data);
+                    this.TextInformation.Text = GetMapGauge(data);
                     break;
 
                 case "api_req_mission/result":
-                    TextInformation.Text = GetExpeditionResult(data);
-                    _ignorePort = 1;
+                    this.TextInformation.Text = GetExpeditionResult(data);
+                    this._ignorePort = 1;
                     break;
 
                 case "api_req_practice/battle_result":
                 case "api_req_sortie/battleresult":
                 case "api_req_combined_battle/battleresult":
-                    TextInformation.Text = GetBattleResult(data);
+                    this.TextInformation.Text = GetBattleResult(data);
                     break;
 
                 case "api_req_hokyu/charge":
-                    TextInformation.Text = GetSupplyInformation(data);
+                    this.TextInformation.Text = GetSupplyInformation(data);
                     break;
 
                 case "api_req_mission/start":
@@ -135,32 +135,32 @@ namespace ElectronicObserver.Window
                     break;
 
                 case "api_get_member/sortie_conditions":
-                    CheckSallyArea();
+                    this.CheckSallyArea();
                     break;
 
                 case "api_req_map/start":
-                    _inSortie = KCDatabase.Instance.Fleet.Fleets.Values.Where(f => f.IsInSortie || f.ExpeditionState == 1).Select(f => f.FleetID).ToList();
+                    this._inSortie = KCDatabase.Instance.Fleet.Fleets.Values.Where(f => f.IsInSortie || f.ExpeditionState == 1).Select(f => f.FleetID).ToList();
 
-                    RecordMaterials();
+                    this.RecordMaterials();
                     break;
 
                 case "api_req_map/next":
                     {
                         var str = CheckGimmickUpdated(data);
                         if (!string.IsNullOrWhiteSpace(str))
-                            TextInformation.Text = str;
+                            this.TextInformation.Text = str;
 
                         if (data.api_destruction_battle())
                         {
                             str = CheckGimmickUpdated(data.api_destruction_battle);
                             if (!string.IsNullOrWhiteSpace(str))
-                                TextInformation.Text = str;
+                                this.TextInformation.Text = str;
                         }
                     }
                     break;
 
                 case "api_req_practice/battle":
-                    _inSortie = new List<int>() { KCDatabase.Instance.Battle.BattleDay.Initial.FriendFleetID };
+                    this._inSortie = new List<int>() { KCDatabase.Instance.Battle.BattleDay.Initial.FriendFleetID };
                     break;
 
             }
@@ -387,7 +387,7 @@ namespace ElectronicObserver.Window
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("[원정 귀환]");
-            sb.AppendLine(FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.TranslationType.ExpeditionTitle) + "\r\n");
+            sb.AppendLine(FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.DataType.ExpeditionTitle) + "\r\n");
             sb.AppendFormat("결과: {0}\r\n", Constants.GetExpeditionResult((int)data.api_clear_result));
             sb.AppendFormat("제독경험치: +{0}\r\n", (int)data.api_get_exp);
             sb.AppendFormat("함선경험치: +{0}\r\n", ((int[])data.api_get_ship_exp).Min());
@@ -399,7 +399,7 @@ namespace ElectronicObserver.Window
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("[전투종료]");
-            sb.AppendFormat("적함대명: {0}\r\n", FormMain.Instance.Translator.GetTranslation(data.api_enemy_info.api_deck_name, Utility.TranslationType.OperationSortie));
+            sb.AppendFormat("적함대명: {0}\r\n", FormMain.Instance.Translator.GetTranslation(data.api_enemy_info.api_deck_name, Utility.DataType.OperationSortie));
             sb.AppendFormat("승패판정: {0}\r\n", data.api_win_rank);
             sb.AppendFormat("제독경험치: +{0}\r\n", (int)data.api_get_exp);
 
@@ -436,13 +436,13 @@ namespace ElectronicObserver.Window
             StringBuilder sb = new StringBuilder();
             var material = KCDatabase.Instance.Material;
 
-            int fuel_diff = material.Fuel - _prevResource[0],
-                ammo_diff = material.Ammo - _prevResource[1],
-                steel_diff = material.Steel - _prevResource[2],
-                bauxite_diff = material.Bauxite - _prevResource[3];
+            int fuel_diff = material.Fuel - this._prevResource[0],
+                ammo_diff = material.Ammo - this._prevResource[1],
+                steel_diff = material.Steel - this._prevResource[2],
+                bauxite_diff = material.Bauxite - this._prevResource[3];
 
             var ships = KCDatabase.Instance.Fleet.Fleets.Values
-                .Where(f => _inSortie.Contains(f.FleetID))
+                .Where(f => this._inSortie.Contains(f.FleetID))
                 .SelectMany(f => f.MembersInstance)
                 .Where(s => s != null);
 
@@ -489,7 +489,7 @@ namespace ElectronicObserver.Window
             {
                 var freeShips = group.SelectMany(f => f).Where(s => s.SallyArea == 0);
 
-                TextInformation.Text = "[오출격경고]\r\n딱지없는 칸무스：\r\n" + string.Join("\r\n", freeShips.Select(s => s.NameWithLevel));
+                this.TextInformation.Text = "[오출격경고]\r\n딱지없는 칸무스：\r\n" + string.Join("\r\n", freeShips.Select(s => s.NameWithLevel));
 
                 if (Utility.Configuration.Config.Control.ShowSallyAreaAlertDialog)
                     MessageBox.Show("출격 딱지가 붙어있지않은 칸무스가 편성되어있습니다. \r\n주의해서 출격해주세요. \r\n\r\n（이 메시지는 설정→동작에서 비활성화할수있습니다.）", "오출격경고",
@@ -553,7 +553,7 @@ namespace ElectronicObserver.Window
                     sb.Append(string.Format("야간 보정 : {0}", data[1]));
             }
 
-            TextInformation.Text = sb.ToString();
+            this.TextInformation.Text = sb.ToString();
         }
 
         public void Show_FitInfo(int Shipid, int Equipmentid)
@@ -566,7 +566,7 @@ namespace ElectronicObserver.Window
             sb.Append(string.Format("[{0}]\r\n", db.MasterEquipments[Equipmentid].Name));
             sb.Append("정보 없음");
 
-            TextInformation.Text = sb.ToString();
+            this.TextInformation.Text = sb.ToString();
         }
 
         private void CheckExpedition(int missionID, int fleetID)
@@ -583,25 +583,13 @@ namespace ElectronicObserver.Window
             }
         }
 
+        // 작업 체크포인트 - 원정체크
         public void Check_Expedition(int fleetID, int MissionId)
         {
             KCDatabase db = KCDatabase.Instance;
             MissionData mis = db.Mission[MissionId];
-            IEnumerable<XElement> Data = FormMain.Instance.Translator.GetExpeditionData().Where(el =>
-            {
-                try
-                {
-                    if (el.Element("ID").Value.Equals(mis.ID.ToString())) return true;
-                }
-                catch
-                {
-                    return false;
-                }
-                return false;
-            });
+            var Data = FormMain.Instance.Translator.GetExpeditionData(MissionId.ToString());
 
-
-            foreach (XElement el in Data)
             {
                 FleetData fleet = db.Fleet[fleetID];
                 var members = db.Fleet[fleetID].MembersInstance.Where(s => s != null);
@@ -618,8 +606,8 @@ namespace ElectronicObserver.Window
                 string Req_FlagShip_Name = "";
                 int drums = 0;
                 int drumkanmusu = 0;
-                int FleetLevel = Convert.ToInt32(el.Element("FleetLevel").Value);
-                int FlagShipLevel = Convert.ToInt32(el.Element("FlagShipLevel").Value);
+                int FleetLevel = Convert.ToInt32(Data["FleetLevel"]);
+                int FlagShipLevel = Convert.ToInt32(Data["FlagShipLevel"]);
                 int Req_DrunNeed = 0;
                 int Req_DrunKanmusuNeed = 0;
                 int DrumBonus = 0;
@@ -633,9 +621,9 @@ namespace ElectronicObserver.Window
                 int[] Req_Types = { };
                 List<Expedition_Condition> Ex_Conds = new List<Expedition_Condition>();
 
-                if (el.Element("FleetTypes") != null)
+                if (Data["FleetTypes"] != null)
                 {
-                    Fleet_Types_String = el.Element("FleetTypes").Value;
+                    Fleet_Types_String = Data["FleetTypes"].ToString();
                     string[] conds_types = Fleet_Types_String.Split('|');
 
                     for (int i = 0; i < conds_types.Length; i++)
@@ -653,43 +641,43 @@ namespace ElectronicObserver.Window
                     }
                 }
 
-                if (el.Element("FlagShipTypeName") != null)
-                    Req_FlagShip_Name = el.Element("FlagShipTypeName").Value;
+                if (Data["FlagShipTypeName"] != null)
+                    Req_FlagShip_Name = Data["FlagShipTypeName"].ToString();
 
-                if (el.Element("FleetMembers") != null)
-                    Req_Fleet_Members = int.Parse(el.Element("FleetMembers").Value);
+                if (Data["FleetMembers"] != null)
+                    Req_Fleet_Members = int.Parse(Data["FleetMembers"].ToString());
 
-                if (el.Element("FlagShipType") != null)
-                    Req_FlagShip_Type = int.Parse(el.Element("FlagShipType").Value);
+                if (Data["FlagShipType"] != null)
+                    Req_FlagShip_Type = int.Parse(Data["FlagShipType"].ToString());
 
-                if (el.Element("DrunNeed") != null)
-                    if (el.Element("DrunNeed").Value != "")
-                        Req_DrunNeed = int.Parse(el.Element("DrunNeed").Value);
+                if (Data["DrunNeed"] != null)
+                    if (string.IsNullOrEmpty(Data["DrunNeed"].ToString()) == false)
+                        Req_DrunNeed = int.Parse(Data["DrunNeed"].ToString()) ;
 
-                if (el.Element("DrumBonus") != null)
-                    if (el.Element("DrumBonus").Value != "")
-                        DrumBonus = int.Parse(el.Element("DrumBonus").Value);
+                if (Data["DrumBonus"] != null)
+                    if (string.IsNullOrEmpty(Data["DrumBonus"].ToString()) == false)
+                        DrumBonus = int.Parse(Data["DrumBonus"].ToString());
 
-                if (el.Element("DrunKanmusu") != null)
-                    if (el.Element("DrunKanmusu").Value != "")
-                        Req_DrunKanmusuNeed = int.Parse(el.Element("DrunKanmusu").Value);
+                if (Data["DrunKanmusu"] != null)
+                    if (string.IsNullOrEmpty(Data["DrunKanmusu"].ToString()) == false)
+                        Req_DrunKanmusuNeed = int.Parse(Data["DrunKanmusu"].ToString());
 
-                if (el.Element("FleetPower") != null)
-                    Req_FleetPower = int.Parse(el.Element("FleetPower").Value);
+                if (Data["FleetPower"] != null)
+                    Req_FleetPower = int.Parse(Data["FleetPower"].ToString());
 
-                if (el.Element("FleetAA") != null)
-                    Req_FleetAA = int.Parse(el.Element("FleetAA").Value);
+                if (Data["FleetAA"] != null)
+                    Req_FleetAA = int.Parse(Data["FleetAA"].ToString());
 
-                if (el.Element("FleetASW") != null)
-                    Req_FleetASW = int.Parse(el.Element("FleetASW").Value);
+                if (Data["FleetASW"] != null)
+                    Req_FleetASW = int.Parse(Data["FleetASW"].ToString());
 
-                if (el.Element("FleetLOS") != null)
-                    Req_FleetLOS = int.Parse(el.Element("FleetLOS").Value);
+                if (Data["FleetLOS"] != null)
+                    Req_FleetLOS = int.Parse(Data["FleetLOS"].ToString());
 
-                int FuelAmount = Convert.ToInt32(el.Element("Fuel").Value);
-                int AmmoAmount = Convert.ToInt32(el.Element("Ammo").Value);
-                int SteelAmount = Convert.ToInt32(el.Element("Steel").Value);
-                int BauxAmount = Convert.ToInt32(el.Element("Baux").Value);
+                int FuelAmount = Convert.ToInt32(Data["Fuel"]);
+                int AmmoAmount = Convert.ToInt32(Data["Ammo"]);
+                int SteelAmount = Convert.ToInt32(Data["Steel"]);
+                int BauxAmount = Convert.ToInt32(Data["Baux"]);
 
                 StringBuilder sb = new StringBuilder();
                 sb.Append("[원정정보]\r\n");
@@ -820,19 +808,19 @@ namespace ElectronicObserver.Window
                 }
 
 
-                TextInformation.Text = sb.ToString();
+                this.TextInformation.Text = sb.ToString();
             }
-
+            
 
         }
 
         private void RecordMaterials()
         {
             var material = KCDatabase.Instance.Material;
-            _prevResource[0] = material.Fuel;
-            _prevResource[1] = material.Ammo;
-            _prevResource[2] = material.Steel;
-            _prevResource[3] = material.Bauxite;
+            this._prevResource[0] = material.Fuel;
+            this._prevResource[1] = material.Ammo;
+            this._prevResource[2] = material.Steel;
+            this._prevResource[3] = material.Bauxite;
         }
 
         protected override string GetPersistString()

@@ -30,13 +30,13 @@ namespace ElectronicObserver.Window.Control
 		[Description("現在値を指定します。")]
 		public int Value
 		{
-			get { return _value; }
+			get { return this._value; }
 			set
 			{
-				_value = value;
-				if (!_usePrevValue)
-					_prevValue = _value;
-				Refresh();
+                this._value = value;
+				if (!this._usePrevValue)
+                    this._prevValue = this._value;
+                this.Refresh();
 			}
 		}
 
@@ -48,12 +48,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("直前の値を指定します。")]
 		public int PrevValue
 		{
-			get { return _prevValue; }
+			get { return this._prevValue; }
 			set
 			{
-				if (_usePrevValue)
-					_prevValue = value;
-				Refresh();
+				if (this._usePrevValue)
+                    this._prevValue = value;
+                this.Refresh();
 			}
 		}
 
@@ -65,11 +65,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("最大値を指定します。")]
 		public int MaximumValue
 		{
-			get { return _maximumValue; }
+			get { return this._maximumValue; }
 			set
 			{
-				_maximumValue = value;
-				Refresh();
+                this._maximumValue = value;
+                this.Refresh();
 			}
 		}
 
@@ -81,13 +81,13 @@ namespace ElectronicObserver.Window.Control
 		[Description("直前の値を利用するかを指定します。")]
 		public bool UsePrevValue
 		{
-			get { return _usePrevValue; }
+			get { return this._usePrevValue; }
 			set
 			{
-				_usePrevValue = value;
-				if (!_usePrevValue)
-					_prevValue = _value;
-				Refresh();
+                this._usePrevValue = value;
+				if (!this._usePrevValue)
+                    this._prevValue = this._value;
+                this.Refresh();
 			}
 		}
 
@@ -100,11 +100,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("0%～25%エリアの始点の色を指定します。")]
 		public Color BarColor0Begin
 		{
-			get { return _barColor0Begin; }
+			get { return this._barColor0Begin; }
 			set
 			{
-				_barColor0Begin = value;
-				Refresh();
+                this._barColor0Begin = value;
+                this.Refresh();
 			}
 		}
 
@@ -116,11 +116,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("0%～25%エリアの終点の色を指定します。")]
 		public Color BarColor0End
 		{
-			get { return _barColor0End; }
+			get { return this._barColor0End; }
 			set
 			{
-				_barColor0End = value;
-				Refresh();
+                this._barColor0End = value;
+                this.Refresh();
 			}
 		}
 
@@ -132,11 +132,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("25～50%エリアの始点の色を指定します。")]
 		public Color BarColor1Begin
 		{
-			get { return _barColor1Begin; }
+			get { return this._barColor1Begin; }
 			set
 			{
-				_barColor1Begin = value;
-				Refresh();
+                this._barColor1Begin = value;
+                this.Refresh();
 			}
 		}
 
@@ -148,11 +148,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("25～50%エリアの終点の色を指定します。")]
 		public Color BarColor1End
 		{
-			get { return _barColor1End; }
+			get { return this._barColor1End; }
 			set
 			{
-				_barColor1End = value;
-				Refresh();
+                this._barColor1End = value;
+                this.Refresh();
 			}
 		}
 
@@ -164,11 +164,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("50～75%エリアの始点の色を指定します。")]
 		public Color BarColor2Begin
 		{
-			get { return _barColor2Begin; }
+			get { return this._barColor2Begin; }
 			set
 			{
-				_barColor2Begin = value;
-				Refresh();
+                this._barColor2Begin = value;
+                this.Refresh();
 			}
 		}
 
@@ -180,11 +180,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("50～75%エリアの終点の色を指定します。")]
 		public Color BarColor2End
 		{
-			get { return _barColor2End; }
+			get { return this._barColor2End; }
 			set
 			{
-				_barColor2End = value;
-				Refresh();
+                this._barColor2End = value;
+                this.Refresh();
 			}
 		}
 
@@ -196,11 +196,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("75～100%エリアの始点の色を指定します。")]
 		public Color BarColor3Begin
 		{
-			get { return _barColor3Begin; }
+			get { return this._barColor3Begin; }
 			set
 			{
-				_barColor3Begin = value;
-				Refresh();
+                this._barColor3Begin = value;
+                this.Refresh();
 			}
 		}
 
@@ -212,11 +212,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("75～100%エリアの終点の色を指定します。")]
 		public Color BarColor3End
 		{
-			get { return _barColor3End; }
+			get { return this._barColor3End; }
 			set
 			{
-				_barColor3End = value;
-				Refresh();
+                this._barColor3End = value;
+                this.Refresh();
 			}
 		}
 
@@ -228,11 +228,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("100%の時のバーの色を指定します。")]
 		public Color BarColor4
 		{
-			get { return _barColor4; }
+			get { return this._barColor4; }
 			set
 			{
-				_barColor4 = value;
-				Refresh();
+                this._barColor4 = value;
+                this.Refresh();
 			}
 		}
 
@@ -244,11 +244,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("現在値が増加した時のバーの色を指定します。")]
 		public Color BarColorIncrement
 		{
-			get { return _barColorIncrement; }
+			get { return this._barColorIncrement; }
 			set
 			{
-				_barColorIncrement = value;
-				Refresh();
+                this._barColorIncrement = value;
+                this.Refresh();
 			}
 		}
 
@@ -260,11 +260,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("現在値が減少した時のバーの色を指定します。")]
 		public Color BarColorDecrement
 		{
-			get { return _barColorDecrement; }
+			get { return this._barColorDecrement; }
 			set
 			{
-				_barColorDecrement = value;
-				Refresh();
+                this._barColorDecrement = value;
+                this.Refresh();
 			}
 		}
 
@@ -276,11 +276,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("バーの背景色を指定します。")]
 		public Color BarColorBackground
 		{
-			get { return _barColorBackground; }
+			get { return this._barColorBackground; }
 			set
 			{
-				_barColorBackground = value;
-				Refresh();
+                this._barColorBackground = value;
+                this.Refresh();
 			}
 		}
 
@@ -293,11 +293,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("バーの太さ(高さ)を指定します。")]
 		public int BarThickness
 		{
-			get { return _barThickness; }
+			get { return this._barThickness; }
 			set
 			{
-				_barThickness = value;
-				Refresh();
+                this._barThickness = value;
+                this.Refresh();
 			}
 		}
 
@@ -309,11 +309,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("バーの前景と背景のずれの大きさを指定します。影のような表現に利用します。")]
 		public int BarBackgroundOffset
 		{
-			get { return _barBackgroundOffset; }
+			get { return this._barBackgroundOffset; }
 			set
 			{
-				_barBackgroundOffset = value;
-				Refresh();
+                this._barBackgroundOffset = value;
+                this.Refresh();
 			}
 		}
 
@@ -325,11 +325,11 @@ namespace ElectronicObserver.Window.Control
 		/// </summary>
 		public bool ColorMorphing
 		{
-			get { return _colorMorphing; }
+			get { return this._colorMorphing; }
 			set
 			{
-				_colorMorphing = value;
-				Refresh();
+                this._colorMorphing = value;
+                this.Refresh();
 			}
 		}
 
@@ -348,18 +348,18 @@ namespace ElectronicObserver.Window.Control
 		public Color[] GetBarColorScheme()
 		{
 			return new Color[] {
-				_barColor0Begin,
-				_barColor0End,
-				_barColor1Begin,
-				_barColor1End,
-				_barColor2Begin,
-				_barColor2End,
-				_barColor3Begin,
-				_barColor3End,
-				_barColor4,
-				_barColorIncrement,
-				_barColorDecrement,
-				_barColorBackground,
+                this._barColor0Begin,
+                this._barColor0End,
+                this._barColor1Begin,
+                this._barColor1End,
+                this._barColor2Begin,
+                this._barColor2End,
+                this._barColor3Begin,
+                this._barColor3End,
+                this._barColor4,
+                this._barColorIncrement,
+                this._barColorDecrement,
+                this._barColorBackground,
 			};
 		}
 
@@ -370,21 +370,21 @@ namespace ElectronicObserver.Window.Control
 				throw new ArgumentOutOfRangeException("colors 의 배열 길이가 충분하지않습니다.");
 
 
-			_barColor0Begin = colors[0];
-			_barColor0End = colors[1];
-			_barColor1Begin = colors[2];
-			_barColor1End = colors[3];
-			_barColor2Begin = colors[4];
-			_barColor2End = colors[5];
-			_barColor3Begin = colors[6];
-			_barColor3End = colors[7];
-			_barColor4 = colors[8];
-			_barColorIncrement = colors[9];
-			_barColorDecrement = colors[10];
-			_barColorBackground = colors[11];
+            this._barColor0Begin = colors[0];
+            this._barColor0End = colors[1];
+            this._barColor1Begin = colors[2];
+            this._barColor1End = colors[3];
+            this._barColor2Begin = colors[4];
+            this._barColor2End = colors[5];
+            this._barColor3Begin = colors[6];
+            this._barColor3End = colors[7];
+            this._barColor4 = colors[8];
+            this._barColorIncrement = colors[9];
+            this._barColorDecrement = colors[10];
+            this._barColorBackground = colors[11];
 
 
-			Refresh();
+            this.Refresh();
 		}
 
 
@@ -426,54 +426,54 @@ namespace ElectronicObserver.Window.Control
 		public void Paint(Graphics g, Rectangle rect)
 		{
 
-			using (var b = new SolidBrush(BarColorBackground))
+			using (var b = new SolidBrush(this.BarColorBackground))
 			{
-				g.FillRectangle(b, new Rectangle(rect.X + BarBackgroundOffset, rect.Bottom - BarThickness, rect.Width - BarBackgroundOffset, BarThickness));
+				g.FillRectangle(b, new Rectangle(rect.X + this.BarBackgroundOffset, rect.Bottom - this.BarThickness, rect.Width - this.BarBackgroundOffset, this.BarThickness));
 			}
-			using (var b = new SolidBrush(Value > PrevValue ? BarColorIncrement : BarColorDecrement))
+			using (var b = new SolidBrush(this.Value > this.PrevValue ? this.BarColorIncrement : this.BarColorDecrement))
 			{
-				g.FillRectangle(b, new Rectangle(rect.X, rect.Bottom - BarThickness - BarBackgroundOffset,
-					(int)Math.Ceiling((rect.Width - BarBackgroundOffset) * GetPercentage(Math.Max(Value, PrevValue), MaximumValue)), BarThickness));
+				g.FillRectangle(b, new Rectangle(rect.X, rect.Bottom - this.BarThickness - this.BarBackgroundOffset,
+					(int)Math.Ceiling((rect.Width - this.BarBackgroundOffset) * GetPercentage(Math.Max(this.Value, this.PrevValue), this.MaximumValue)), this.BarThickness));
 			}
 
 			Color barColor;
-			double p = GetPercentage(Value, MaximumValue);
+			double p = GetPercentage(this.Value, this.MaximumValue);
 
-			if (!ColorMorphing)
+			if (!this.ColorMorphing)
 			{
 
 				if (p <= 0.25)
-					barColor = BarColor0Begin;
+					barColor = this.BarColor0Begin;
 				else if (p <= 0.50)
-					barColor = BarColor1Begin;
+					barColor = this.BarColor1Begin;
 				else if (p <= 0.75)
-					barColor = BarColor2Begin;
+					barColor = this.BarColor2Begin;
 				else if (p < 1.00)
-					barColor = BarColor3Begin;
+					barColor = this.BarColor3Begin;
 				else
-					barColor = BarColor4;
+					barColor = this.BarColor4;
 
 			}
 			else
 			{
 
 				if (p <= 0.25)
-					barColor = BlendColor(BarColor0Begin, BarColor0End, p * 4.0);
+					barColor = BlendColor(this.BarColor0Begin, this.BarColor0End, p * 4.0);
 				else if (p <= 0.50)
-					barColor = BlendColor(BarColor1Begin, BarColor1End, (p - 0.25) * 4.0);
+					barColor = BlendColor(this.BarColor1Begin, this.BarColor1End, (p - 0.25) * 4.0);
 				else if (p <= 0.75)
-					barColor = BlendColor(BarColor2Begin, BarColor2End, (p - 0.50) * 4.0);
+					barColor = BlendColor(this.BarColor2Begin, this.BarColor2End, (p - 0.50) * 4.0);
 				else if (p < 1.00)
-					barColor = BlendColor(BarColor3Begin, BarColor3End, (p - 0.75) * 4.0);
+					barColor = BlendColor(this.BarColor3Begin, this.BarColor3End, (p - 0.75) * 4.0);
 				else
-					barColor = BarColor4;
+					barColor = this.BarColor4;
 
 			}
 
 			using (var b = new SolidBrush(barColor))
 			{
-				g.FillRectangle(b, new Rectangle(rect.X, rect.Bottom - BarThickness - BarBackgroundOffset,
-					(int)Math.Ceiling((rect.Width - BarBackgroundOffset) * GetPercentage(Math.Min(Value, PrevValue), MaximumValue)), BarThickness));
+				g.FillRectangle(b, new Rectangle(rect.X, rect.Bottom - this.BarThickness - this.BarBackgroundOffset,
+					(int)Math.Ceiling((rect.Width - this.BarBackgroundOffset) * GetPercentage(Math.Min(this.Value, this.PrevValue), this.MaximumValue)), this.BarThickness));
 			}
 
 		}
@@ -485,8 +485,8 @@ namespace ElectronicObserver.Window.Control
 		/// </summary>
 		public Size GetPreferredSize(Size proposedSize)
 		{
-			return new Size(Math.Max(proposedSize.Width, BarThickness + BarBackgroundOffset),
-				Math.Max(proposedSize.Height, BarThickness + BarBackgroundOffset));
+			return new Size(Math.Max(proposedSize.Width, this.BarThickness + this.BarBackgroundOffset),
+				Math.Max(proposedSize.Height, this.BarThickness + this.BarBackgroundOffset));
 		}
 
 		/// <summary>
@@ -494,7 +494,7 @@ namespace ElectronicObserver.Window.Control
 		/// </summary>
 		public Size GetPreferredSize()
 		{
-			return GetPreferredSize(Size.Empty);
+			return this.GetPreferredSize(Size.Empty);
 		}
 
 

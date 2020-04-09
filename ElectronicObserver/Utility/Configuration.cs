@@ -127,19 +127,19 @@ namespace ElectronicObserver.Utility
 				public ConfigConnection()
 				{
 
-					Port = 40620;
-					SaveReceivedData = false;
-					SaveDataPath = @"KCAPI";
-					SaveRequest = false;
-					SaveResponse = true;
-					SaveOtherFile = false;
-					ApplyVersion = false;
-					RegisterAsSystemProxy = false;
-					UseUpstreamProxy = false;
-					UpstreamProxyPort = 0;
-					UpstreamProxyAddress = "127.0.0.1";
-					UseSystemProxy = false;
-					DownstreamProxy = "";
+                    this.Port = 40620;
+                    this.SaveReceivedData = false;
+                    this.SaveDataPath = @"KCAPI";
+                    this.SaveRequest = false;
+                    this.SaveResponse = true;
+                    this.SaveOtherFile = false;
+                    this.ApplyVersion = false;
+                    this.RegisterAsSystemProxy = false;
+                    this.UseUpstreamProxy = false;
+                    this.UpstreamProxyPort = 0;
+                    this.UpstreamProxyAddress = "127.0.0.1";
+                    this.UseSystemProxy = false;
+                    this.DownstreamProxy = "";
 				}
 
 			}
@@ -169,15 +169,15 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public bool BarColorMorphing
 				{
-					get { return _barColorMorphing; }
+					get { return this._barColorMorphing; }
 					set
 					{
-						_barColorMorphing = value;
+                        this._barColorMorphing = value;
 
-						if (!_barColorMorphing)
-							BarColorScheme = new List<SerializableColor>(DefaultBarColorScheme[0]);
+						if (!this._barColorMorphing)
+                            this.BarColorScheme = new List<SerializableColor>(this.DefaultBarColorScheme[0]);
 						else
-							BarColorScheme = new List<SerializableColor>(DefaultBarColorScheme[1]);
+                            this.BarColorScheme = new List<SerializableColor>(this.DefaultBarColorScheme[1]);
 					}
 				}
 
@@ -246,11 +246,11 @@ namespace ElectronicObserver.Utility
 
                 public ConfigUI()
 				{
-					MainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-					SubFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
-					BarColorMorphing = false;
-					IsLayoutFixed = true;
-                    Theme = Theme.Light;
+                    this.MainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+                    this.SubFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
+                    this.BarColorMorphing = false;
+                    this.IsLayoutFixed = true;
+                    this.Theme = Theme.Light;
                 }
                 
             }
@@ -294,7 +294,7 @@ namespace ElectronicObserver.Utility
 				{
 					get
 					{
-						switch (FileEncodingID)
+						switch (this.FileEncodingID)
 						{
 							case 0:
 								return new System.Text.UTF8Encoding(false);
@@ -341,15 +341,15 @@ namespace ElectronicObserver.Utility
 
 				public ConfigLog()
 				{
-					LogLevel = 2;
-					SaveLogFlag = true;
-					SaveErrorReport = true;
-					FileEncodingID = 1;
-					ShowSpoiler = true;
-					PlayTime = 0;
-					PlayTimeIgnoreInterval = 10 * 60;
-					SaveBattleLog = false;
-					SaveLogImmediately = false;
+                    this.LogLevel = 2;
+                    this.SaveLogFlag = true;
+                    this.SaveErrorReport = true;
+                    this.FileEncodingID = 1;
+                    this.ShowSpoiler = true;
+                    this.PlayTime = 0;
+                    this.PlayTimeIgnoreInterval = 10 * 60;
+                    this.SaveBattleLog = false;
+                    this.SaveLogImmediately = false;
 				}
 
 			}
@@ -417,20 +417,20 @@ namespace ElectronicObserver.Utility
                 public bool ExpManual { get; set; }
                 public ConfigControl()
 				{
-					ConditionBorder = 40;
-					RecordAutoSaving = 1;
-					UseSystemVolume = true;
-					LastVolume = 0.8f;
-					LastIsMute = false;
-					PowerEngagementForm = 1;
-					ShowSallyAreaAlertDialog = true;
-					ExpCheckerExpUnit = 2268;
-                    ShowExpeditionAlertDialog = true;
-                    MVPCheck = false;
-                    FlagShipCheck = false;
-                    MapSelect = "1-1";
-                    Rank = "S";
-                    ExpManual = false;
+                    this.ConditionBorder = 40;
+                    this.RecordAutoSaving = 1;
+                    this.UseSystemVolume = true;
+                    this.LastVolume = 0.8f;
+                    this.LastIsMute = false;
+                    this.PowerEngagementForm = 1;
+                    this.ShowSallyAreaAlertDialog = true;
+                    this.ExpCheckerExpUnit = 2268;
+                    this.ShowExpeditionAlertDialog = true;
+                    this.MVPCheck = false;
+                    this.FlagShipCheck = false;
+                    this.MapSelect = "1-1";
+                    this.Rank = "S";
+                    this.ExpManual = false;
 				}
 			}
 			/// <summary>動作</summary>
@@ -466,10 +466,10 @@ namespace ElectronicObserver.Utility
 
 				public ConfigDebug()
 				{
-					EnableDebugMenu = false;
-					LoadAPIListOnLoad = false;
-					APIListPath = "";
-					AlertOnError = false;
+                    this.EnableDebugMenu = false;
+                    this.LoadAPIListOnLoad = false;
+                    this.APIListPath = "";
+                    this.AlertOnError = false;
 				}
 			}
 			/// <summary>デバッグ</summary>
@@ -527,15 +527,15 @@ namespace ElectronicObserver.Utility
 
                 public ConfigLife()
 				{
-					ConfirmOnClosing = true;
-					TopMost = false;
-					LayoutFilePath = @"Settings\WindowLayout.zip";
-					CheckUpdateInformation = true;
-					ShowStatusBar = true;
-					ClockFormat = 0;
-					LockLayout = false;
-					CanCloseFloatWindowInLock = false;
-                    CanSizableFloatWindowInLock = false;
+                    this.ConfirmOnClosing = true;
+                    this.TopMost = false;
+                    this.LayoutFilePath = @"Settings\WindowLayout.zip";
+                    this.CheckUpdateInformation = true;
+                    this.ShowStatusBar = true;
+                    this.ClockFormat = 0;
+                    this.LockLayout = false;
+                    this.CanCloseFloatWindowInLock = false;
+                    this.CanSizableFloatWindowInLock = false;
 
                 }
 			}
@@ -567,9 +567,9 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormArsenal()
 				{
-					ShowShipName = true;
-					BlinkAtCompletion = true;
-					MaxShipNameWidth = 60;
+                    this.ShowShipName = true;
+                    this.BlinkAtCompletion = true;
+                    this.MaxShipNameWidth = 60;
 				}
 			}
 			/// <summary>[工廠]ウィンドウ</summary>
@@ -595,8 +595,8 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormDock()
 				{
-					BlinkAtCompletion = true;
-					MaxShipNameWidth = 64;
+                    this.BlinkAtCompletion = true;
+                    this.MaxShipNameWidth = 64;
 				}
 			}
 			/// <summary>[入渠]ウィンドウ</summary>
@@ -628,9 +628,9 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormHeadquarters()
 				{
-					BlinkAtMaximum = true;
-					Visibility = null;      // フォーム側で設定します
-					DisplayUseItemID = 68;  // 秋刀魚
+                    this.BlinkAtMaximum = true;
+                    this.Visibility = null;      // フォーム側で設定します
+                    this.DisplayUseItemID = 68;  // 秋刀魚
 				}
 			}
 			/// <summary>[司令部]ウィンドウ</summary>
@@ -766,28 +766,28 @@ namespace ElectronicObserver.Utility
 
                 public ConfigFormFleet()
 				{
-					ShowAircraft = true;
-					SearchingAbilityMethod = 4;
-					IsScrollable = true;
-					FixShipNameWidth = false;
-					ShortenHPBar = false;
-					ShowNextExp = true;
-					EquipmentLevelVisibility = Window.Control.ShipStatusEquipment.LevelVisibilityFlag.Both;
-					ShowAircraftLevelByNumber = false;
-					AirSuperiorityMethod = 1;
-                    ExpCheckerOption = 1;
-                    ShowAnchorageRepairingTimer = true;
-					BlinkAtCompletion = true;
-					ShowConditionIcon = true;
-					FixedShipNameWidth = 40;
-					ShowAirSuperiorityRange = false;
-					ReflectAnchorageRepairHealing = true;
-					EmphasizesSubFleetInPort = false;
-					BlinkAtDamaged = true;
-					FleetStateDisplayMode = 2;
-                    AppliesSallyAreaColor = false;
-                    FocusModifiedFleet = true;
-                    SallyAreaColorScheme = DefaultSallyAreaColorScheme.ToList();
+                    this.ShowAircraft = true;
+                    this.SearchingAbilityMethod = 4;
+                    this.IsScrollable = true;
+                    this.FixShipNameWidth = false;
+                    this.ShortenHPBar = false;
+                    this.ShowNextExp = true;
+                    this.EquipmentLevelVisibility = Window.Control.ShipStatusEquipment.LevelVisibilityFlag.Both;
+                    this.ShowAircraftLevelByNumber = false;
+                    this.AirSuperiorityMethod = 1;
+                    this.ExpCheckerOption = 1;
+                    this.ShowAnchorageRepairingTimer = true;
+                    this.BlinkAtCompletion = true;
+                    this.ShowConditionIcon = true;
+                    this.FixedShipNameWidth = 40;
+                    this.ShowAirSuperiorityRange = false;
+                    this.ReflectAnchorageRepairHealing = true;
+                    this.EmphasizesSubFleetInPort = false;
+                    this.BlinkAtDamaged = true;
+                    this.FleetStateDisplayMode = 2;
+                    this.AppliesSallyAreaColor = false;
+                    this.FocusModifiedFleet = true;
+                    this.SallyAreaColorScheme = this.DefaultSallyAreaColorScheme.ToList();
                 }
 			}
 			/// <summary>[艦隊]ウィンドウ</summary>
@@ -859,17 +859,17 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormQuest()
 				{
-					ShowRunningOnly = false;
-					ShowOnce = true;
-					ShowDaily = true;
-					ShowWeekly = true;
-					ShowMonthly = true;
-					ShowOther = true;
-					ColumnFilter = null;        //実際の初期化は FormQuest で行う
-					ColumnWidth = null;         //上に同じ
-					SortParameter = 3 << 1 | 0;
-					ProgressAutoSaving = 1;
-					AllowUserToSortRows = true;
+                    this.ShowRunningOnly = false;
+                    this.ShowOnce = true;
+                    this.ShowDaily = true;
+                    this.ShowWeekly = true;
+                    this.ShowMonthly = true;
+                    this.ShowOther = true;
+                    this.ColumnFilter = null;        //実際の初期化は FormQuest で行う
+                    this.ColumnWidth = null;         //上に同じ
+                    this.SortParameter = 3 << 1 | 0;
+                    this.ProgressAutoSaving = 1;
+                    this.AllowUserToSortRows = true;
 				}
 			}
 			/// <summary>[任務]ウィンドウ</summary>
@@ -902,9 +902,9 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormShipGroup()
 				{
-					AutoUpdate = true;
-					ShowStatusBar = true;
-					ShipNameSortMethod = 0;
+                    this.AutoUpdate = true;
+                    this.ShowStatusBar = true;
+                    this.ShipNameSortMethod = 0;
 				}
 			}
 			/// <summary>[艦船グループ]ウィンドウ</summary>
@@ -1020,25 +1020,25 @@ namespace ElectronicObserver.Utility
 
                 public ConfigFormBrowser()
 				{
-					ZoomRate = 1;
-					ZoomFit = false;
-					LogInPageURL = @"http://www.dmm.com/netgame_s/kancolle/";
-					IsEnabled = true;
-					ScreenShotPath = "ScreenShot";
-					ScreenShotFormat = 2;
-					ScreenShotSaveMode = 1;
-                    StyleSheet = "\r\nbody {\r\n	margin:0;\r\n	overflow:hidden\r\n}\r\n\r\n#game_frame {\r\n	position:fixed;\r\n	left:50%;\r\n	top:-16px;\r\n	margin-left:-450px;\r\n	z-index:1\r\n}\r\n";
-                    IsScrollable = false;
-					AppliesStyleSheet = true;
-					IsDMMreloadDialogDestroyable = false;
-					AvoidTwitterDeterioration = true;
-					ToolMenuDockStyle = DockStyle.Top;
-					IsToolMenuVisible = true;
-					ConfirmAtRefresh = true;
-                    HardwareAccelerationEnabled = true;
-                    PreserveDrawingBuffer = true;
-                    ForceColorProfile = false;
-                    SavesBrowserLog = false;
+                    this.ZoomRate = 1;
+                    this.ZoomFit = false;
+                    this.LogInPageURL = @"http://www.dmm.com/netgame_s/kancolle/";
+                    this.IsEnabled = true;
+                    this.ScreenShotPath = "ScreenShot";
+                    this.ScreenShotFormat = 2;
+                    this.ScreenShotSaveMode = 1;
+                    this.StyleSheet = "\r\nbody {\r\n	margin:0;\r\n	overflow:hidden\r\n}\r\n\r\n#game_frame {\r\n	position:fixed;\r\n	left:50%;\r\n	top:-16px;\r\n	margin-left:-450px;\r\n	z-index:1\r\n}\r\n";
+                    this.IsScrollable = false;
+                    this.AppliesStyleSheet = true;
+                    this.IsDMMreloadDialogDestroyable = false;
+                    this.AvoidTwitterDeterioration = true;
+                    this.ToolMenuDockStyle = DockStyle.Top;
+                    this.IsToolMenuVisible = true;
+                    this.ConfirmAtRefresh = true;
+                    this.HardwareAccelerationEnabled = true;
+                    this.PreserveDrawingBuffer = true;
+                    this.ForceColorProfile = false;
+                    this.SavesBrowserLog = false;
                 }
 			}
 			/// <summary>[ブラウザ]ウィンドウ</summary>
@@ -1071,10 +1071,10 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormCompass()
 				{
-					CandidateDisplayCount = 4;
-					IsScrollable = false;
-					MaxShipNameWidth = 60;
-                    ToAlphabet = false;
+                    this.CandidateDisplayCount = 4;
+                    this.IsScrollable = false;
+                    this.MaxShipNameWidth = 60;
+                    this.ToAlphabet = false;
 				}
 			}
 			/// <summary>[羅針盤]ウィンドウ</summary>
@@ -1106,9 +1106,9 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormJson()
 				{
-					AutoUpdate = false;
-					UpdatesTree = true;
-					AutoUpdateFilter = "";
+                    this.AutoUpdate = false;
+                    this.UpdatesTree = true;
+                    this.AutoUpdateFilter = "";
 				}
 			}
 			/// <summary>[JSON]ウィンドウ</summary>
@@ -1150,11 +1150,11 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormBattle()
 				{
-					IsScrollable = false;
-					HideDuringBattle = false;
-					ShowHPBar = true;
-					ShowShipTypeInHPBar = false;
-					Display7thAsSingleLine = true;
+                    this.IsScrollable = false;
+                    this.HideDuringBattle = false;
+                    this.ShowHPBar = true;
+                    this.ShowShipTypeInHPBar = false;
+                    this.Display7thAsSingleLine = true;
 				}
 			}
 
@@ -1178,7 +1178,7 @@ namespace ElectronicObserver.Utility
 
 				public ConfigFormBaseAirCorps()
 				{
-					ShowEventMapOnly = false;
+                    this.ShowEventMapOnly = false;
 				}
 			}
 
@@ -1241,27 +1241,27 @@ namespace ElectronicObserver.Utility
 
 				public ConfigNotifierBase()
 				{
-					IsEnabled = true;
-					IsSilenced = false;
-					ShowsDialog = true;
-					ImagePath = "";
-					DrawsImage = false;
-					SoundPath = "";
-					PlaysSound = false;
-					SoundVolume = 100;
-					LoopsSound = false;
-					DrawsMessage = true;
-					ClosingInterval = 10000;
-					AccelInterval = 0;
-					CloseOnMouseMove = false;
-					ClickFlag = Notifier.NotifierDialogClickFlags.Left;
-					Alignment = Notifier.NotifierDialogAlignment.BottomRight;
-					Location = new Point(0, 0);
-					HasFormBorder = true;
-					TopMost = true;
-					ShowWithActivation = true;
-					ForeColor = SystemColors.ControlText;
-					BackColor = SystemColors.Control;
+                    this.IsEnabled = true;
+                    this.IsSilenced = false;
+                    this.ShowsDialog = true;
+                    this.ImagePath = "";
+                    this.DrawsImage = false;
+                    this.SoundPath = "";
+                    this.PlaysSound = false;
+                    this.SoundVolume = 100;
+                    this.LoopsSound = false;
+                    this.DrawsMessage = true;
+                    this.ClosingInterval = 10000;
+                    this.AccelInterval = 0;
+                    this.CloseOnMouseMove = false;
+                    this.ClickFlag = Notifier.NotifierDialogClickFlags.Left;
+                    this.Alignment = Notifier.NotifierDialogAlignment.BottomRight;
+                    this.Location = new Point(0, 0);
+                    this.HasFormBorder = true;
+                    this.TopMost = true;
+                    this.ShowWithActivation = true;
+                    this.ForeColor = SystemColors.ControlText;
+                    this.BackColor = SystemColors.Control;
 				}
 
 			}
@@ -1284,14 +1284,14 @@ namespace ElectronicObserver.Utility
 				public ConfigNotifierDamage()
 					: base()
 				{
-					NotifiesBefore = false;
-					NotifiesNow = true;
-					NotifiesAfter = true;
-					LevelBorder = 1;
-					ContainsNotLockedShip = true;
-					ContainsSafeShip = true;
-					ContainsFlagship = true;
-					NotifiesAtEndpoint = false;
+                    this.NotifiesBefore = false;
+                    this.NotifiesNow = true;
+                    this.NotifiesAfter = true;
+                    this.LevelBorder = 1;
+                    this.ContainsNotLockedShip = true;
+                    this.ContainsSafeShip = true;
+                    this.ContainsFlagship = true;
+                    this.NotifiesAtEndpoint = false;
 				}
 			}
 
@@ -1307,13 +1307,90 @@ namespace ElectronicObserver.Utility
 				public ConfigNotifierAnchorageRepair()
 					: base()
 				{
-					NotificationLevel = 2;
+                    this.NotificationLevel = 2;
 				}
 			}
 
+            /// <summary>
+			/// [基地航空隊通知]の設定を扱います。
+			/// </summary>
+			public class ConfigNotifierBaseAirCorps : ConfigNotifierBase
+            {
+                /// <summary>
+                /// 未補給時に通知する
+                /// </summary>
+                public bool NotifiesNotSupplied { get; set; }
 
-			/// <summary>[遠征帰投通知]</summary>
-			[DataMember]
+                /// <summary>
+                /// 疲労時に通知する
+                /// </summary>
+                public bool NotifiesTired { get; set; }
+
+                /// <summary>
+                /// 編成されていないときに通知する
+                /// </summary>
+                public bool NotifiesNotOrganized { get; set; }
+
+
+                /// <summary>
+                /// 待機のとき通知する
+                /// </summary>
+                public bool NotifiesStandby { get; set; }
+
+                /// <summary>
+                /// 退避の時通知する
+                /// </summary>
+                public bool NotifiesRetreat { get; set; }
+
+                /// <summary>
+                /// 休息の時通知する
+                /// </summary>
+                public bool NotifiesRest { get; set; }
+
+
+                /// <summary>
+                /// 通常海域で通知する
+                /// </summary>
+                public bool NotifiesNormalMap { get; set; }
+
+                /// <summary>
+                /// イベント海域で通知する
+                /// </summary>
+                public bool NotifiesEventMap { get; set; }
+
+
+                /// <summary>
+                /// 基地枠の配置転換完了時に通知する
+                /// </summary>
+                public bool NotifiesSquadronRelocation { get; set; }
+
+                /// <summary>
+                /// 装備の配置転換完了時に通知する
+                /// </summary>
+                public bool NotifiesEquipmentRelocation { get; set; }
+
+
+                public ConfigNotifierBaseAirCorps()
+                    : base()
+                {
+                    this.NotifiesNotSupplied = true;
+                    this.NotifiesTired = false;
+                    this.NotifiesNotOrganized = false;
+
+                    this.NotifiesStandby = false;
+                    this.NotifiesRetreat = true;
+                    this.NotifiesRest = true;
+
+                    this.NotifiesNormalMap = false;
+                    this.NotifiesEventMap = true;
+
+                    this.NotifiesSquadronRelocation = true;
+                    this.NotifiesEquipmentRelocation = false;
+                }
+            }
+
+            /// <summary>[遠征帰投通知]</summary>
+            [DataMember]
 			public ConfigNotifierBase NotifierExpedition { get; private set; }
 
 			/// <summary>[建造完了通知]</summary>
@@ -1336,12 +1413,14 @@ namespace ElectronicObserver.Utility
 			[DataMember]
 			public ConfigNotifierAnchorageRepair NotifierAnchorageRepair { get; private set; }
 
+            [DataMember]
+            public ConfigNotifierBaseAirCorps NotifierBaseAirCorps { get; private set; }
 
 
-			/// <summary>
-			/// SyncBGMPlayer の設定を扱います。
-			/// </summary>
-			public class ConfigBGMPlayer : ConfigPartBase
+            /// <summary>
+            /// SyncBGMPlayer の設定を扱います。
+            /// </summary>
+            public class ConfigBGMPlayer : ConfigPartBase
 			{
 
 				public bool Enabled { get; set; }
@@ -1351,12 +1430,12 @@ namespace ElectronicObserver.Utility
 				public ConfigBGMPlayer()
 					: base()
 				{
-					// 初期値定義は SyncBGMPlayer 内でも
-					Enabled = false;
-					Handles = new List<SyncBGMPlayer.SoundHandle>();
+                    // 初期値定義は SyncBGMPlayer 内でも
+                    this.Enabled = false;
+                    this.Handles = new List<SyncBGMPlayer.SoundHandle>();
 					foreach (SyncBGMPlayer.SoundHandleID id in Enum.GetValues(typeof(SyncBGMPlayer.SoundHandleID)))
-						Handles.Add(new SyncBGMPlayer.SoundHandle(id));
-					SyncBrowserMute = false;
+                        this.Handles.Add(new SyncBGMPlayer.SoundHandle(id));
+                    this.SyncBrowserMute = false;
 				}
 			}
 			[DataMember]
@@ -1382,15 +1461,15 @@ namespace ElectronicObserver.Utility
                 public ConfigFleetImageGenerator()
 					: base()
 				{
-					Argument = FleetImageArgument.GetDefaultInstance();
-					ImageType = 0;
-					OutputType = 0;
-					OpenImageAfterOutput = false;
-					LastOutputPath = "";
-					DisableOverwritePrompt = false;
-					AutoSetFileNameToDate = false;
-					SyncronizeTitleAndFileName = false;
-                    FleetImageToJapanese = false;
+                    this.Argument = FleetImageArgument.GetDefaultInstance();
+                    this.ImageType = 0;
+                    this.OutputType = 0;
+                    this.OpenImageAfterOutput = false;
+                    this.LastOutputPath = "";
+                    this.DisableOverwritePrompt = false;
+                    this.AutoSetFileNameToDate = false;
+                    this.SyncronizeTitleAndFileName = false;
+                    this.FleetImageToJapanese = false;
 				}
 			}
 			[DataMember]
@@ -1414,15 +1493,15 @@ namespace ElectronicObserver.Utility
 				public ConfigWhitecap()
 					: base()
 				{
-					ShowInTaskbar = true;
-					TopMost = false;
-					BoardWidth = 200;
-					BoardHeight = 150;
-					ZoomRate = 2;
-					UpdateInterval = 100;
-					ColorTheme = 0;
-					BirthRule = (1 << 3);
-					AliveRule = (1 << 2) | (1 << 3);
+                    this.ShowInTaskbar = true;
+                    this.TopMost = false;
+                    this.BoardWidth = 200;
+                    this.BoardHeight = 150;
+                    this.ZoomRate = 2;
+                    this.UpdateInterval = 100;
+                    this.ColorTheme = 0;
+                    this.BirthRule = (1 << 3);
+                    this.AliveRule = (1 << 2) | (1 << 3);
 				}
 			}
 			[DataMember]
@@ -1445,43 +1524,44 @@ namespace ElectronicObserver.Utility
 
 			public ConfigurationData()
 			{
-				Initialize();
+                this.Initialize();
 			}
 
 			public override void Initialize()
 			{
 
-				Connection = new ConfigConnection();
-				UI = new ConfigUI();
-				Log = new ConfigLog();
-				Control = new ConfigControl();
-				Debug = new ConfigDebug();
-				Life = new ConfigLife();
+                this.Connection = new ConfigConnection();
+                this.UI = new ConfigUI();
+                this.Log = new ConfigLog();
+                this.Control = new ConfigControl();
+                this.Debug = new ConfigDebug();
+                this.Life = new ConfigLife();
 
-				FormArsenal = new ConfigFormArsenal();
-				FormDock = new ConfigFormDock();
-				FormFleet = new ConfigFormFleet();
-				FormHeadquarters = new ConfigFormHeadquarters();
-				FormQuest = new ConfigFormQuest();
-				FormShipGroup = new ConfigFormShipGroup();
-				FormBattle = new ConfigFormBattle();
-				FormBrowser = new ConfigFormBrowser();
-				FormCompass = new ConfigFormCompass();
-				FormJson = new ConfigFormJson();
-				FormBaseAirCorps = new ConfigFormBaseAirCorps();
+                this.FormArsenal = new ConfigFormArsenal();
+                this.FormDock = new ConfigFormDock();
+                this.FormFleet = new ConfigFormFleet();
+                this.FormHeadquarters = new ConfigFormHeadquarters();
+                this.FormQuest = new ConfigFormQuest();
+                this.FormShipGroup = new ConfigFormShipGroup();
+                this.FormBattle = new ConfigFormBattle();
+                this.FormBrowser = new ConfigFormBrowser();
+                this.FormCompass = new ConfigFormCompass();
+                this.FormJson = new ConfigFormJson();
+                this.FormBaseAirCorps = new ConfigFormBaseAirCorps();
 
-				NotifierExpedition = new ConfigNotifierBase();
-				NotifierConstruction = new ConfigNotifierBase();
-				NotifierRepair = new ConfigNotifierBase();
-				NotifierCondition = new ConfigNotifierBase();
-				NotifierDamage = new ConfigNotifierDamage();
-				NotifierAnchorageRepair = new ConfigNotifierAnchorageRepair();
+                this.NotifierExpedition = new ConfigNotifierBase();
+                this.NotifierConstruction = new ConfigNotifierBase();
+                this.NotifierRepair = new ConfigNotifierBase();
+                this.NotifierCondition = new ConfigNotifierBase();
+                this.NotifierDamage = new ConfigNotifierDamage();
+                this.NotifierAnchorageRepair = new ConfigNotifierAnchorageRepair();
+                this.NotifierBaseAirCorps = new ConfigNotifierBaseAirCorps();
 
-				BGMPlayer = new ConfigBGMPlayer();
-				FleetImageGenerator = new ConfigFleetImageGenerator();
-				Whitecap = new ConfigWhitecap();
+                this.BGMPlayer = new ConfigBGMPlayer();
+                this.FleetImageGenerator = new ConfigFleetImageGenerator();
+                this.Whitecap = new ConfigWhitecap();
 
-				VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
+                this.VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
 
 			}
 		}
@@ -1511,8 +1591,8 @@ namespace ElectronicObserver.Utility
 			if (temp != null)
 			{
 				_config = temp;
-				CheckUpdate(mainForm);
-				OnConfigurationChanged();
+                this.CheckUpdate(mainForm);
+                this.OnConfigurationChanged();
 			}
 			else
 			{
@@ -1695,13 +1775,13 @@ namespace ElectronicObserver.Utility
 
 			// version 2.8.2 or earlier
 			if (dt <= DateTimeHelper.CSVStringToTime("2017/10/17 20:30:00"))
-				Update282_ConvertRecord();
+                this.Update282_ConvertRecord();
 
 			if (dt <= DateTimeHelper.CSVStringToTime("2018/02/11 23:00:00"))
-				Update307_ConvertRecord();
+                this.Update307_ConvertRecord();
 
             if (dt <= DateTimeHelper.CSVStringToTime("2018/08/17 23:00:00"))
-                Update312_RemoveObsoleteRegistry();
+                this.Update312_RemoveObsoleteRegistry();
 
             Config.VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
 		}

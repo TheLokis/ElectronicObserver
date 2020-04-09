@@ -36,32 +36,32 @@ namespace ElectronicObserver.Data.Quest
         [DataMember]
         protected int CategoryIndex { get; set; }
 
-
-
         public ProgressDiscard(QuestData quest, int maxCount, bool countsAmount, int[] categories)
-            : this(quest, maxCount, countsAmount, categories, 2) { }
+            : this(quest, maxCount, countsAmount, categories, 2) 
+        { 
+
+        }
 
         public ProgressDiscard(QuestData quest, int maxCount, bool countsAmount, int[] categories, int categoryIndex)
             : base(quest, maxCount)
 		{
-			CountsAmount = countsAmount;
-			Categories = categories == null ? null : new HashSet<int>(categories);
-            CategoryIndex = categoryIndex;
+            this.CountsAmount = countsAmount;
+            this.Categories = categories == null ? null : new HashSet<int>(categories);
+            this.CategoryIndex = categoryIndex;
         }
-
 
 		public void Increment(IEnumerable<int> equipments)
 		{
-			if (!CountsAmount)
+			if (!this.CountsAmount)
 			{
-				Increment();
+                this.Increment();
 				return;
 			}
 
-			if (Categories == null)
+			if (this.Categories == null)
 			{
 				foreach (var i in equipments)
-					Increment();
+                    this.Increment();
 				return;
 			}
 
@@ -69,23 +69,23 @@ namespace ElectronicObserver.Data.Quest
 			{
 				var eq = KCDatabase.Instance.Equipments[i];
 
-                switch (CategoryIndex)
+                switch (this.CategoryIndex)
                 {
                     case -1:
-                        if (Categories.Contains(eq.EquipmentID))
-                            Increment();
+                        if (this.Categories.Contains(eq.EquipmentID))
+                            this.Increment();
                         break;
                     case 1:
-                        if (Categories.Contains(eq.MasterEquipment.CardType))
-                            Increment();
+                        if (this.Categories.Contains(eq.MasterEquipment.CardType))
+                            this.Increment();
                         break;
                     case 2:
-                        if (Categories.Contains((int)eq.MasterEquipment.CategoryType))
-                            Increment();
+                        if (this.Categories.Contains((int)eq.MasterEquipment.CategoryType))
+                            this.Increment();
                         break;
                     case 3:
-                        if (Categories.Contains(eq.MasterEquipment.IconType))
-                            Increment();
+                        if (this.Categories.Contains(eq.MasterEquipment.IconType))
+                            this.Increment();
                         break;
                 }
             }
@@ -95,9 +95,9 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-            return (Categories == null ? "" : string.Join("・", Categories.OrderBy(s => s).Select(s =>
+            return (this.Categories == null ? "" : string.Join("・", this.Categories.OrderBy(s => s).Select(s =>
             {
-                switch (CategoryIndex)
+                switch (this.CategoryIndex)
                 {
                     case -1:
                         return KCDatabase.Instance.MasterEquipments[s].Name;
@@ -110,7 +110,7 @@ namespace ElectronicObserver.Data.Quest
                     default:
                         return $"???[{s}]";
                 }
-            }))) + "폐기 " + ProgressMax + (CountsAmount ? "개" : "회");
+            }))) + "폐기 " + this.ProgressMax + (this.CountsAmount ? "개" : "회");
         }
 
 
@@ -121,7 +121,7 @@ namespace ElectronicObserver.Data.Quest
         [OnDeserializing]
         private void OnDeserializing(StreamingContext context)
         {
-            CategoryIndex = 2;
+            this.CategoryIndex = 2;
         }
 
 	}

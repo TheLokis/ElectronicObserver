@@ -40,10 +40,10 @@ namespace BrowserLib
 		/// </summary>
 		public PipeCommunicator(object instance, Type type, string listenUrl, string serviceAddress)
 		{
-			Server = new ServiceHost(instance, new Uri[] { new Uri(listenUrl) });
-			Binding.ReceiveTimeout = TimeSpan.MaxValue;
-			Server.AddServiceEndpoint(type, Binding, serviceAddress);
-			Server.Open();
+            this.Server = new ServiceHost(instance, new Uri[] { new Uri(listenUrl) });
+            this.Binding.ReceiveTimeout = TimeSpan.MaxValue;
+            this.Server.AddServiceEndpoint(type, this.Binding, serviceAddress);
+            this.Server.Open();
 		}
 
 		/// <summary>
@@ -51,15 +51,15 @@ namespace BrowserLib
 		/// </summary>
 		public void Connect(string to)
 		{
-			if (Proxy == null)
+			if (this.Proxy == null)
 			{
-				ServerUrl = to;
-				if (PipeFactory == null)
+                this.ServerUrl = to;
+				if (this.PipeFactory == null)
 				{
-					PipeFactory = new ChannelFactory<ClientType>(Binding, new EndpointAddress(ServerUrl));
+                    this.PipeFactory = new ChannelFactory<ClientType>(this.Binding, new EndpointAddress(this.ServerUrl));
 				}
-				Proxy = PipeFactory.CreateChannel();
-				Closed = false;
+                this.Proxy = this.PipeFactory.CreateChannel();
+                this.Closed = false;
 			}
 		}
 
@@ -68,22 +68,37 @@ namespace BrowserLib
 		/// </summary>
 		public void Close()
 		{
-			if (!Closed)
+			if (!this.Closed)
 			{
-				if (Proxy != null)
+				if (this.Proxy != null)
 				{
-					((IClientChannel)Proxy).Abort();
-					Proxy = null;
+					((IClientChannel)this.Proxy).Abort();
+                    this.Proxy = null;
 				}
-				Server.Close();
-				Closed = true;
+                this.Server.Close();
+                this.Closed = true;
 			}
 		}
 
-		/// <summary>
-		/// 非同期でactionを実行。例外が発生したらFaultイベントが発生するので、例外が出ることはない
-		/// </summary>
-		public async void AsyncRemoteRun(Action action)
+        public async Task CloseAsync(object instance)
+        {
+            if (!this.Closed)
+            {
+                if (this.Proxy != null)
+                {
+                    ((IClientChannel)this.Proxy).Abort();
+                    this.Proxy = null;
+                }
+                await Task.Factory.FromAsync(this.Server.BeginClose(_ => { }, instance), _ => { });
+
+                this.Closed = true;
+            }
+        }
+
+        /// <summary>
+        /// 非同期でactionを実行。例外が発生したらFaultイベントが発生するので、例外が出ることはない
+        /// </summary>
+        public async void AsyncRemoteRun(Action action)
 		{
 			try
 			{
@@ -92,21 +107,21 @@ namespace BrowserLib
 				{
 					try
 					{
-						if (Proxy == null) return;
+						if (this.Proxy == null) return;
 						await Task.Run(action);
 						return;
 					}
 					catch (CommunicationException cex)
 					{
-						((IClientChannel)Proxy).Abort();
-						Proxy = null;
+						((IClientChannel)this.Proxy).Abort();
+                        this.Proxy = null;
 						if (i >= 1)
 						{
 							// これ以上リトライしない
 							Faulted(cex);
 							break;
 						}
-						Connect(ServerUrl);
+                        this.Connect(this.ServerUrl);
 					}
 				}
 			}

@@ -102,84 +102,84 @@ namespace ElectronicObserver.Window.Support
 			[DataMember]
 			public int flags
 			{
-				get { return RawData.flags; }
-				set { RawData.flags = value; }
+				get { return this.RawData.flags; }
+				set { this.RawData.flags = value; }
 			}
 
 			[DataMember]
 			public int showCmd
 			{
-				get { return (int)RawData.showCmd; }
-				set { RawData.showCmd = (SW)value; }
+				get { return (int)this.RawData.showCmd; }
+				set { this.RawData.showCmd = (SW)value; }
 			}
 
 			[DataMember]
 			public int minPositionX
 			{
-				get { return RawData.minPosition.X; }
-				set { RawData.minPosition.X = value; }
+				get { return this.RawData.minPosition.X; }
+				set { this.RawData.minPosition.X = value; }
 			}
 
 			[DataMember]
 			public int minPositionY
 			{
-				get { return RawData.minPosition.Y; }
-				set { RawData.minPosition.Y = value; }
+				get { return this.RawData.minPosition.Y; }
+				set { this.RawData.minPosition.Y = value; }
 			}
 
 			[DataMember]
 			public int maxPositionX
 			{
-				get { return RawData.maxPosition.X; }
-				set { RawData.maxPosition.X = value; }
+				get { return this.RawData.maxPosition.X; }
+				set { this.RawData.maxPosition.X = value; }
 			}
 
 			[DataMember]
 			public int maxPositionY
 			{
-				get { return RawData.maxPosition.Y; }
-				set { RawData.maxPosition.Y = value; }
+				get { return this.RawData.maxPosition.Y; }
+				set { this.RawData.maxPosition.Y = value; }
 			}
 
 			[DataMember]
 			public int normalPositionLeft
 			{
-				get { return RawData.normalPosition.Left; }
-				set { RawData.normalPosition.Left = value; }
+				get { return this.RawData.normalPosition.Left; }
+				set { this.RawData.normalPosition.Left = value; }
 			}
 
 			[DataMember]
 			public int normalPositionTop
 			{
-				get { return RawData.normalPosition.Top; }
-				set { RawData.normalPosition.Top = value; }
+				get { return this.RawData.normalPosition.Top; }
+				set { this.RawData.normalPosition.Top = value; }
 			}
 
 			[DataMember]
 			public int normalPositionRight
 			{
-				get { return RawData.normalPosition.Right; }
-				set { RawData.normalPosition.Right = value; }
+				get { return this.RawData.normalPosition.Right; }
+				set { this.RawData.normalPosition.Right = value; }
 			}
 
 			[DataMember]
 			public int normalPositionBottom
 			{
-				get { return RawData.normalPosition.Bottom; }
-				set { RawData.normalPosition.Bottom = value; }
+				get { return this.RawData.normalPosition.Bottom; }
+				set { this.RawData.normalPosition.Bottom = value; }
 			}
 
 
 			public WindowPlacementWrapper() : base()
 			{
-				Initialize();
+                this.Initialize();
 			}
 
 			public override void Initialize()
 			{
-				RawData = new WINDOWPLACEMENT();
-				RawData.length = Marshal.SizeOf(RawData);
-				RawData.flags = 0;
+                this.RawData = new WINDOWPLACEMENT();
+                this.RawData.length = Marshal.SizeOf(this.RawData);
+                this.RawData.flags = 0;
 			}
 		}
 		#endregion

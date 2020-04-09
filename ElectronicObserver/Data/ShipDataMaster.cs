@@ -21,60 +21,60 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 艦船ID
 		/// </summary>
-		public int ShipID => (int)RawData.api_id;
+		public int ShipID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 図鑑番号
 		/// </summary>
-		public int AlbumNo => !RawData.api_sortno() ? 0 : (int)RawData.api_sortno;
+		public int AlbumNo => !this.RawData.api_sortno() ? 0 : (int)this.RawData.api_sortno;
 
         /// <summary>
 		/// 母港ソート順
 		/// </summary>
-		public int SortID => !RawData.api_sort_id() ? 0 : (int)RawData.api_sort_id;
+		public int SortID => !this.RawData.api_sort_id() ? 0 : (int)this.RawData.api_sort_id;
 
         /// <summary>
         /// 名前 번역됨
         /// </summary>
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Ships); }
+            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.ShipName); }
         }
 
-        public string Name_JP => RawData.api_name;
+        public string Name_JP => this.RawData.api_name;
 
 
         /// <summary>
         /// 読み
         /// </summary>
-        public string NameReading => RawData.api_yomi;
+        public string NameReading => this.RawData.api_yomi;
 
 		/// <summary>
 		/// 艦種
 		/// </summary>
-		public ShipTypes ShipType => (ShipTypes)(int)RawData.api_stype;
+		public ShipTypes ShipType => (ShipTypes)(int)this.RawData.api_stype;
 
         /// <summary>
         /// 艦型
         /// </summary>
-        public int ShipClass => (int)RawData.api_ctype;
+        public int ShipClass => (int)this.RawData.api_ctype;
 
 
 		/// <summary>
 		/// 改装Lv.
 		/// </summary>
-		public int RemodelAfterLevel => !RawData.api_afterlv() ? 0 : (int)RawData.api_afterlv;
+		public int RemodelAfterLevel => !this.RawData.api_afterlv() ? 0 : (int)this.RawData.api_afterlv;
 
 		/// <summary>
 		/// 改装後の艦船ID
 		/// 0=なし
 		/// </summary>
-		public int RemodelAfterShipID => !RawData.api_aftershipid() ? 0 : int.Parse((string)RawData.api_aftershipid);
+		public int RemodelAfterShipID => !this.RawData.api_aftershipid() ? 0 : int.Parse((string)this.RawData.api_aftershipid);
 
 		/// <summary>
 		/// 改装後の艦船
 		/// </summary>
-		public ShipDataMaster RemodelAfterShip => RemodelAfterShipID > 0 ? KCDatabase.Instance.MasterShips[RemodelAfterShipID] : null;
+		public ShipDataMaster RemodelAfterShip => this.RemodelAfterShipID > 0 ? KCDatabase.Instance.MasterShips[this.RemodelAfterShipID] : null;
 
 
 		/// <summary>
@@ -86,18 +86,18 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 改装前の艦船
 		/// </summary>
-		public ShipDataMaster RemodelBeforeShip => RemodelBeforeShipID > 0 ? KCDatabase.Instance.MasterShips[RemodelBeforeShipID] : null;
+		public ShipDataMaster RemodelBeforeShip => this.RemodelBeforeShipID > 0 ? KCDatabase.Instance.MasterShips[this.RemodelBeforeShipID] : null;
 
 
 		/// <summary>
 		/// 改装に必要な弾薬
 		/// </summary>
-		public int RemodelAmmo => !RawData.api_afterbull() ? 0 : (int)RawData.api_afterbull;
+		public int RemodelAmmo => !this.RawData.api_afterbull() ? 0 : (int)this.RawData.api_afterbull;
 
 		/// <summary>
 		/// 改装に必要な鋼材
 		/// </summary>
-		public int RemodelSteel => !RawData.api_afterfuel() ? 0 : (int)RawData.api_afterfuel;
+		public int RemodelSteel => !this.RawData.api_afterfuel() ? 0 : (int)this.RawData.api_afterfuel;
 
 		/// <summary>
 		/// 改装に改装設計図が必要かどうか
@@ -124,13 +124,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_taik())
+				if (this.RawData.api_taik())
 				{
-					return (int)RawData.api_taik[0];
+					return (int)this.RawData.api_taik[0];
 				}
 				else
 				{
-					return GetParameterElement()?.HPMin ?? 0;
+					return this.GetParameterElement()?.HPMin ?? 0;
 				}
 			}
 		}
@@ -142,13 +142,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_taik())
+				if (this.RawData.api_taik())
 				{
-					return (int)RawData.api_taik[1];
+					return (int)this.RawData.api_taik[1];
 				}
 				else
 				{
-					return GetParameterElement()?.HPMax ?? 0;
+					return this.GetParameterElement()?.HPMax ?? 0;
 				}
 			}
 		}
@@ -160,13 +160,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_souk())
+				if (this.RawData.api_souk())
 				{
-					return (int)RawData.api_souk[0];
+					return (int)this.RawData.api_souk[0];
 				}
 				else
 				{
-					return GetParameterElement()?.ArmorMin ?? 0;
+					return this.GetParameterElement()?.ArmorMin ?? 0;
 				}
 			}
 		}
@@ -178,13 +178,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_souk())
+				if (this.RawData.api_souk())
 				{
-					return (int)RawData.api_souk[1];
+					return (int)this.RawData.api_souk[1];
 				}
 				else
 				{
-					return GetParameterElement()?.ArmorMax ?? 0;
+					return this.GetParameterElement()?.ArmorMax ?? 0;
 				}
 			}
 		}
@@ -196,13 +196,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_houg())
+				if (this.RawData.api_houg())
 				{
-					return (int)RawData.api_houg[0];
+					return (int)this.RawData.api_houg[0];
 				}
 				else
 				{
-					return GetParameterElement()?.FirepowerMin ?? 0;
+					return this.GetParameterElement()?.FirepowerMin ?? 0;
 				}
 			}
 		}
@@ -214,13 +214,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_houg())
+				if (this.RawData.api_houg())
 				{
-					return (int)RawData.api_houg[1];
+					return (int)this.RawData.api_houg[1];
 				}
 				else
 				{
-					return GetParameterElement()?.FirepowerMax ?? 0;
+					return this.GetParameterElement()?.FirepowerMax ?? 0;
 				}
 			}
 		}
@@ -232,13 +232,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_raig())
+				if (this.RawData.api_raig())
 				{
-					return (int)RawData.api_raig[0];
+					return (int)this.RawData.api_raig[0];
 				}
 				else
 				{
-					return GetParameterElement()?.TorpedoMin ?? 0;
+					return this.GetParameterElement()?.TorpedoMin ?? 0;
 				}
 			}
 		}
@@ -250,13 +250,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_raig())
+				if (this.RawData.api_raig())
 				{
-					return (int)RawData.api_raig[1];
+					return (int)this.RawData.api_raig[1];
 				}
 				else
 				{
-					return GetParameterElement()?.TorpedoMax ?? 0;
+					return this.GetParameterElement()?.TorpedoMax ?? 0;
 				}
 			}
 		}
@@ -268,13 +268,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_tyku())
+				if (this.RawData.api_tyku())
 				{
-					return (int)RawData.api_tyku[0];
+					return (int)this.RawData.api_tyku[0];
 				}
 				else
 				{
-					return GetParameterElement()?.AAMin ?? 0;
+					return this.GetParameterElement()?.AAMin ?? 0;
 				}
 			}
 		}
@@ -286,13 +286,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_tyku())
+				if (this.RawData.api_tyku())
 				{
-					return (int)RawData.api_tyku[1];
+					return (int)this.RawData.api_tyku[1];
 				}
 				else
 				{
-					return GetParameterElement()?.AAMax ?? 0;
+					return this.GetParameterElement()?.AAMax ?? 0;
 				}
 			}
 		}
@@ -301,17 +301,17 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 対潜
 		/// </summary>
-		public ShipParameterRecord.Parameter ASW => GetParameterElement()?.ASW;
+		public ShipParameterRecord.Parameter ASW => this.GetParameterElement()?.ASW;
 
 		/// <summary>
 		/// 回避
 		/// </summary>
-		public ShipParameterRecord.Parameter Evasion => GetParameterElement()?.Evasion;
+		public ShipParameterRecord.Parameter Evasion => this.GetParameterElement()?.Evasion;
 
 		/// <summary>
 		/// 索敵
 		/// </summary>
-		public ShipParameterRecord.Parameter LOS => GetParameterElement()?.LOS;
+		public ShipParameterRecord.Parameter LOS => this.GetParameterElement()?.LOS;
 
 
 		/// <summary>
@@ -321,13 +321,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_luck())
+				if (this.RawData.api_luck())
 				{
-					return (int)RawData.api_luck[0];
+					return (int)this.RawData.api_luck[0];
 				}
 				else
 				{
-					return GetParameterElement()?.LuckMin ?? 0;
+					return this.GetParameterElement()?.LuckMin ?? 0;
 				}
 			}
 		}
@@ -339,13 +339,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_luck())
+				if (this.RawData.api_luck())
 				{
-					return (int)RawData.api_luck[1];
+					return (int)this.RawData.api_luck[1];
 				}
 				else
 				{
-					return GetParameterElement()?.LuckMax ?? 0;
+					return this.GetParameterElement()?.LuckMax ?? 0;
 				}
 			}
 		}
@@ -354,7 +354,7 @@ namespace ElectronicObserver.Data
 		/// 速力
 		/// 0=陸上基地, 5=低速, 10=高速
 		/// </summary>
-		public int Speed => (int)RawData.api_soku;
+		public int Speed => (int)this.RawData.api_soku;
 
 		/// <summary>
 		/// 射程
@@ -363,13 +363,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_leng())
+				if (this.RawData.api_leng())
 				{
-					return (int)RawData.api_leng;
+					return (int)this.RawData.api_leng;
 				}
 				else
 				{
-					return GetParameterElement()?.Range ?? 0;
+					return this.GetParameterElement()?.Range ?? 0;
 				}
 			}
 		}
@@ -379,7 +379,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 装備スロットの数
 		/// </summary>
-		public int SlotSize => (int)RawData.api_slot_num;
+		public int SlotSize => (int)this.RawData.api_slot_num;
 
 		/// <summary>
 		/// 各スロットの航空機搭載数
@@ -388,13 +388,13 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (RawData.api_maxeq())
+				if (this.RawData.api_maxeq())
 				{
-					return Array.AsReadOnly((int[])RawData.api_maxeq);
+					return Array.AsReadOnly((int[])this.RawData.api_maxeq);
 				}
 				else
 				{
-					var p = GetParameterElement();
+					var p = this.GetParameterElement();
 					if (p != null && p.Aircraft != null)
 						return Array.AsReadOnly(p.Aircraft);
 					else
@@ -406,7 +406,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 搭載
 		/// </summary>
-		public int AircraftTotal => Aircraft.Sum(a => Math.Max(a, 0));
+		public int AircraftTotal => this.Aircraft.Sum(a => Math.Max(a, 0));
 
 
 		/// <summary>
@@ -416,7 +416,7 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				var p = GetParameterElement();
+				var p = this.GetParameterElement();
 				if (p != null && p.DefaultSlot != null)
 					return Array.AsReadOnly(p.DefaultSlot);
 				else
@@ -428,7 +428,7 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 特殊装備カテゴリ　指定がない場合は null
         /// </summary>
-        public IEnumerable<int> SpecialEquippableCategories => specialEquippableCategory;
+        public IEnumerable<int> SpecialEquippableCategories => this.specialEquippableCategory;
         /// <summary>
         /// 装備可能なカテゴリ
         /// </summary>
@@ -436,10 +436,10 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                if (specialEquippableCategory != null)
-                    return SpecialEquippableCategories;
+                if (this.specialEquippableCategory != null)
+                    return this.SpecialEquippableCategories;
                 else
-                    return KCDatabase.Instance.ShipTypes[(int)ShipType].EquippableCategories;
+                    return KCDatabase.Instance.ShipTypes[(int)this.ShipType].EquippableCategories;
             }
         }
 
@@ -447,81 +447,81 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 建造時間(分)
         /// </summary>
-        public int BuildingTime => !RawData.api_buildtime() ? 0 : (int)RawData.api_buildtime;
+        public int BuildingTime => !this.RawData.api_buildtime() ? 0 : (int)this.RawData.api_buildtime;
 
 
 		/// <summary>
 		/// 解体資材
 		/// </summary>
-		public ReadOnlyCollection<int> Material => Array.AsReadOnly(!RawData.api_broken() ? new[] { 0, 0, 0, 0 } : (int[])RawData.api_broken);
+		public ReadOnlyCollection<int> Material => Array.AsReadOnly(!this.RawData.api_broken() ? new[] { 0, 0, 0, 0 } : (int[])this.RawData.api_broken);
 
 		/// <summary>
 		/// 近代化改修の素材にしたとき上昇するパラメータの量
 		/// </summary>
-		public ReadOnlyCollection<int> PowerUp => Array.AsReadOnly(!RawData.api_powup() ? new[] { 0, 0, 0, 0 } : (int[])RawData.api_powup);
+		public ReadOnlyCollection<int> PowerUp => Array.AsReadOnly(!this.RawData.api_powup() ? new[] { 0, 0, 0, 0 } : (int[])this.RawData.api_powup);
 
 		/// <summary>
 		/// レアリティ
 		/// </summary>
-		public int Rarity => !RawData.api_backs() ? 0 : (int)RawData.api_backs;
+		public int Rarity => !this.RawData.api_backs() ? 0 : (int)this.RawData.api_backs;
 
 		/// <summary>
 		/// ドロップ/ログイン時のメッセージ
 		/// </summary>
-		public string MessageGet => GetParameterElement()?.MessageGet?.Replace("<br>", "\r\n") ?? "";
+		public string MessageGet => this.GetParameterElement()?.MessageGet?.Replace("<br>", "\r\n") ?? "";
 
 		/// <summary>
 		/// 艦船名鑑でのメッセージ
 		/// </summary>
-		public string MessageAlbum => GetParameterElement()?.MessageAlbum?.Replace("<br>", "\r\n") ?? "";
+		public string MessageAlbum => this.GetParameterElement()?.MessageAlbum?.Replace("<br>", "\r\n") ?? "";
 
 
 		/// <summary>
 		/// 搭載燃料
 		/// </summary>
-		public int Fuel => !RawData.api_fuel_max() ? 0 : (int)RawData.api_fuel_max;
+		public int Fuel => !this.RawData.api_fuel_max() ? 0 : (int)this.RawData.api_fuel_max;
 
 		/// <summary>
 		/// 搭載弾薬
 		/// </summary>
-		public int Ammo => !RawData.api_bull_max() ? 0 : (int)RawData.api_bull_max;
+		public int Ammo => !this.RawData.api_bull_max() ? 0 : (int)this.RawData.api_bull_max;
 
 
 		/// <summary>
 		/// ボイス再生フラグ
 		/// </summary>
-		public int VoiceFlag => !RawData.api_voicef() ? 0 : (int)RawData.api_voicef;
+		public int VoiceFlag => !this.RawData.api_voicef() ? 0 : (int)this.RawData.api_voicef;
 
 
         /// <summary>
         /// グラフィック設定データへの参照
         /// </summary>
-        public ShipGraphicData GraphicData => KCDatabase.Instance.ShipGraphics[ShipID];
+        public ShipGraphicData GraphicData => KCDatabase.Instance.ShipGraphics[this.ShipID];
 
         /// <summary>
         /// リソースのファイル/フォルダ名
         /// </summary>
-        public string ResourceName => GraphicData?.ResourceName ?? "";
+        public string ResourceName => this.GraphicData?.ResourceName ?? "";
 
         /// <summary>
         /// 画像リソースのバージョン
         /// </summary>
-        public string ResourceGraphicVersion => GraphicData?.GraphicVersion ?? "";
+        public string ResourceGraphicVersion => this.GraphicData?.GraphicVersion ?? "";
 
         /// <summary>
         /// ボイスリソースのバージョン
         /// </summary>
-		public string ResourceVoiceVersion => GraphicData?.VoiceVersion ?? "";
+		public string ResourceVoiceVersion => this.GraphicData?.VoiceVersion ?? "";
 
         /// <summary>
         /// 母港ボイスリソースのバージョン
         /// </summary>
-        public string ResourcePortVoiceVersion => GraphicData?.PortVoiceVersion ?? "";
+        public string ResourcePortVoiceVersion => this.GraphicData?.PortVoiceVersion ?? "";
 
         /// <summary>
         /// 衣替え艦：ベースとなる艦船ID
         /// </summary>
-        public int OriginalCostumeShipID => GetParameterElement()?.OriginalCostumeShipID ?? -1;
+        public int OriginalCostumeShipID => this.GetParameterElement()?.OriginalCostumeShipID ?? -1;
 
 
 
@@ -539,50 +539,50 @@ namespace ElectronicObserver.Data
 			get
 			{
 				int incr;
-				if (HPMin < 30) incr = 4;
-				else if (HPMin < 40) incr = 5;
-				else if (HPMin < 50) incr = 6;
-				else if (HPMin < 70) incr = 7;
-				else if (HPMin < 90) incr = 8;
+				if (this.HPMin < 30) incr = 4;
+				else if (this.HPMin < 40) incr = 5;
+				else if (this.HPMin < 50) incr = 6;
+				else if (this.HPMin < 70) incr = 7;
+				else if (this.HPMin < 90) incr = 8;
 				else incr = 9;
 
-				return Math.Min(HPMin + incr, HPMax);
+				return Math.Min(this.HPMin + incr, this.HPMax);
 			}
 		}
 
 		/// <summary>
 		/// HP改修可能値(未婚時)
 		/// </summary>
-		public int HPMaxModernizable => Math.Min(HPMax - HPMin, HPModernizableLimit);
+		public int HPMaxModernizable => Math.Min(this.HPMax - this.HPMin, HPModernizableLimit);
 
 		/// <summary>
 		/// HP改修可能値(既婚時)
 		/// </summary>
-		public int HPMaxMarriedModernizable => Math.Min(HPMax - HPMaxMarried, HPModernizableLimit);
+		public int HPMaxMarriedModernizable => Math.Min(this.HPMax - this.HPMaxMarried, HPModernizableLimit);
 
 		/// <summary>
 		/// 近代化改修後のHP(未婚時)
 		/// </summary>
-		public int HPMaxModernized => Math.Min(HPMin + HPMaxModernizable, HPMax);
+		public int HPMaxModernized => Math.Min(this.HPMin + this.HPMaxModernizable, this.HPMax);
 
 
 		/// <summary>
 		/// 近代化改修後のHP(既婚時)
 		/// </summary>
-		public int HPMaxMarriedModernized => Math.Min(HPMaxMarried + HPMaxModernizable, HPMax);
+		public int HPMaxMarriedModernized => Math.Min(this.HPMaxMarried + this.HPMaxModernizable, this.HPMax);
 
 
 
 		/// <summary>
 		/// 対潜改修可能値
 		/// </summary>
-		public int ASWModernizable => ASW == null || ASW.Maximum == 0 ? 0 : ASWModernizableLimit;
+		public int ASWModernizable => this.ASW == null || this.ASW.Maximum == 0 ? 0 : ASWModernizableLimit;
 
 
 		/// <summary>
 		/// 深海棲艦かどうか
 		/// </summary>
-		public bool IsAbyssalShip => ShipID > 1500;
+		public bool IsAbyssalShip => this.ShipID > 1500;
 
 
 		/// <summary>
@@ -592,24 +592,24 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				if (!IsAbyssalShip || NameReading == "" || NameReading == "-")
-					return Name;
+				if (!this.IsAbyssalShip || this.NameReading == "" || this.NameReading == "-")
+					return this.Name;
 				else
-					return $"{Name} {NameReading}";
+					return $"{this.Name} {this.NameReading}";
 			}
 		}
 
 		/// <summary>
 		/// 陸上基地かどうか
 		/// </summary>
-		public bool IsLandBase => Speed == 0;
+		public bool IsLandBase => this.Speed == 0;
 
-        public ShipType ShipTypeInstance => KCDatabase.Instance.ShipTypes[(int)ShipType];
+        public ShipType ShipTypeInstance => KCDatabase.Instance.ShipTypes[(int)this.ShipType];
 
         /// <summary>
         /// 図鑑に載っているか
         /// </summary>
-        public bool IsListedInAlbum => 0 < AlbumNo && AlbumNo <= 420;
+        public bool IsListedInAlbum => 0 < this.AlbumNo && this.AlbumNo <= 420;
 
 
         /// <summary>
@@ -638,18 +638,18 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string ShipTypeName
         {
-            get { return FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ShipType].Name, Utility.TranslationType.ShipTypes); }
+            get { return FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)this.ShipType].Name, Utility.DataType.ShipType); }
         }
 
         /// <summary>
         /// 潜水艦系か (潜水艦/潜水空母)
         /// </summary>
-        public bool IsSubmarine => ShipType == ShipTypes.Submarine || ShipType == ShipTypes.SubmarineAircraftCarrier;
+        public bool IsSubmarine => this.ShipType == ShipTypes.Submarine || this.ShipType == ShipTypes.SubmarineAircraftCarrier;
 
 		/// <summary>
 		/// 空母系か (軽空母/正規空母/装甲空母)
 		/// </summary>
-		public bool IsAircraftCarrier => ShipType == ShipTypes.LightAircraftCarrier || ShipType == ShipTypes.AircraftCarrier || ShipType == ShipTypes.ArmoredAircraftCarrier;
+		public bool IsAircraftCarrier => this.ShipType == ShipTypes.LightAircraftCarrier || this.ShipType == ShipTypes.AircraftCarrier || this.ShipType == ShipTypes.ArmoredAircraftCarrier;
 
 
 		/// <summary>
@@ -658,7 +658,7 @@ namespace ElectronicObserver.Data
 		/// <returns></returns>
 		private ShipParameterRecord.ShipParameterElement GetParameterElement()
 		{
-			return RecordManager.Instance.ShipParameter[ShipID];
+			return RecordManager.Instance.ShipParameter[this.ShipID];
 		}
 
 
@@ -676,20 +676,20 @@ namespace ElectronicObserver.Data
 		public Color GetShipNameColor()
 		{
 
-			if (!IsAbyssalShip)
+			if (!this.IsAbyssalShip)
 			{
 				return Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
             }
 
-			bool isLateModel = Name.Contains("후기형");
-			bool isRemodeled = Name.Contains("개");
-			bool isDestroyed = Name.Contains("-괴");
-			bool isDemon = Name.Contains("귀");
-			bool isPrincess = Name.Contains("희");
-			bool isWaterDemon = Name.Contains("수귀");
-			bool isWaterPrincess = Name.Contains("수희");
-			bool isElite = NameReading == "elite";
-			bool isFlagship = NameReading == "flagship";
+			bool isLateModel = this.Name.Contains("후기형");
+			bool isRemodeled = this.Name.Contains("개");
+			bool isDestroyed = this.Name.Contains("-괴");
+			bool isDemon = this.Name.Contains("귀");
+			bool isPrincess = this.Name.Contains("희");
+			bool isWaterDemon = this.Name.Contains("수귀");
+			bool isWaterPrincess = this.Name.Contains("수희");
+			bool isElite = this.NameReading == "elite";
+			bool isFlagship = this.NameReading == "flagship";
 
 
 			if (isDestroyed)
@@ -725,26 +725,26 @@ namespace ElectronicObserver.Data
 
 		public ShipDataMaster()
 		{
-			RemodelBeforeShipID = 0;
+            this.RemodelBeforeShipID = 0;
 		}
 
         public Color GetShipNameColor(bool uis)
         {
 
-            if (!IsAbyssalShip)
+            if (!this.IsAbyssalShip)
             {
                 return SystemColors.ControlText;
             }
 
-            bool isLateModel = Name.Contains("후기형");
-            bool isRemodeled = Name.Contains("개");
-            bool isDestroyed = Name.EndsWith("-괴");
-            bool isDemon = Name.EndsWith("귀");
-            bool isPrincess = Name.EndsWith("희");
-            bool isWaterDemon = Name.EndsWith("수귀");
-            bool isWaterPrincess = Name.EndsWith("수희");
-            bool isElite = NameReading == "elite";
-            bool isFlagship = NameReading == "flagship";
+            bool isLateModel = this.Name.Contains("후기형");
+            bool isRemodeled = this.Name.Contains("개");
+            bool isDestroyed = this.Name.EndsWith("-괴");
+            bool isDemon = this.Name.EndsWith("귀");
+            bool isPrincess = this.Name.EndsWith("희");
+            bool isWaterDemon = this.Name.EndsWith("수귀");
+            bool isWaterPrincess = this.Name.EndsWith("수희");
+            bool isElite = this.NameReading == "elite";
+            bool isFlagship = this.NameReading == "flagship";
 
 
             if (isDestroyed)
@@ -777,10 +777,10 @@ namespace ElectronicObserver.Data
             }
         }
 
-        public int ID => ShipID;
+        public int ID => this.ShipID;
 
 
-		public override string ToString() => $"[{ShipID}] {NameWithClass}";
+		public override string ToString() => $"[{this.ShipID}] {this.NameWithClass}";
 
 
 	}

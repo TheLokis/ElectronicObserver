@@ -61,31 +61,31 @@ namespace ElectronicObserver.Utility
 				var type = Type.GetTypeFromProgID("WMPlayer.OCX.7");
 				if (type != null)
 				{
-					_wmp = Activator.CreateInstance(type);
-					_wmp.uiMode = "none";
-					_wmp.settings.autoStart = false;
-					_wmp.PlayStateChange += new Action<int>(wmp_PlayStateChange);
+                    this._wmp = Activator.CreateInstance(type);
+                    this._wmp.uiMode = "none";
+                    this._wmp.settings.autoStart = false;
+                    this._wmp.PlayStateChange += new Action<int>(this.wmp_PlayStateChange);
 				}
 				else
 				{
-					_wmp = null;
+                    this._wmp = null;
 				}
 			}
 			catch
 			{
-				_wmp = null;
+                this._wmp = null;
 			}
 
-			IsLoop = false;
-			_isShuffle = false;
-			IsMute = false;
-			LoopHeadPosition = 0.0;
-			AutoPlay = false;
-			_playlist = new List<string>();
-			_realPlaylist = new List<string>();
-			_rand = new Random();
+            this.IsLoop = false;
+            this._isShuffle = false;
+            this.IsMute = false;
+            this.LoopHeadPosition = 0.0;
+            this.AutoPlay = false;
+            this._playlist = new List<string>();
+            this._realPlaylist = new List<string>();
+            this._rand = new Random();
 
-			MediaEnded += MediaPlayer_MediaEnded;
+			MediaEnded += this.MediaPlayer_MediaEnded;
 		}
 
 
@@ -93,7 +93,7 @@ namespace ElectronicObserver.Utility
 		/// 利用可能かどうか
 		/// false の場合全機能が使用不可能
 		/// </summary>
-		public bool IsAvailable => _wmp != null;
+		public bool IsAvailable => this._wmp != null;
 
 		/// <summary>
 		/// メディアファイルのパス。
@@ -101,11 +101,11 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public string SourcePath
 		{
-			get { return !IsAvailable ? string.Empty : _wmp.URL; }
+			get { return !this.IsAvailable ? string.Empty : this._wmp.URL; }
 			set
 			{
-				if (IsAvailable && _wmp.URL != value)
-					_wmp.URL = value;
+				if (this.IsAvailable && this._wmp.URL != value)
+                    this._wmp.URL = value;
 			}
 		}
 
@@ -116,8 +116,8 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public int Volume
 		{
-			get { return !IsAvailable ? 0 : _wmp.settings.volume; }
-			set { if (IsAvailable) _wmp.settings.volume = value; }
+			get { return !this.IsAvailable ? 0 : this._wmp.settings.volume; }
+			set { if (this.IsAvailable) this._wmp.settings.volume = value; }
 		}
 
 		/// <summary>
@@ -125,8 +125,8 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public bool IsMute
 		{
-			get { return !IsAvailable ? false : _wmp.settings.mute; }
-			set { if (IsAvailable) _wmp.settings.mute = value; }
+			get { return !this.IsAvailable ? false : this._wmp.settings.mute; }
+			set { if (this.IsAvailable) this._wmp.settings.mute = value; }
 		}
 
 
@@ -136,12 +136,12 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public bool IsLoop
 		{
-			get { return _isLoop; }
+			get { return this._isLoop; }
 			set
 			{
-				_isLoop = value;
-				if (IsAvailable)
-					_wmp.settings.setMode("loop", _isLoop);
+                this._isLoop = value;
+				if (this.IsAvailable)
+                    this._wmp.settings.setMode("loop", this._isLoop);
 			}
 		}
 
@@ -156,25 +156,25 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public double CurrentPosition
 		{
-			get { return !IsAvailable ? 0.0 : _wmp.controls.currentPosition; }
-			set { if (IsAvailable) _wmp.controls.currentPosition = value; }
+			get { return !this.IsAvailable ? 0.0 : this._wmp.controls.currentPosition; }
+			set { if (this.IsAvailable) this._wmp.controls.currentPosition = value; }
 		}
 
 		/// <summary>
 		/// 再生状態
 		/// </summary>
-		public int PlayState => !IsAvailable ? 0 : _wmp.playState;
+		public int PlayState => !this.IsAvailable ? 0 : this._wmp.playState;
 
 		/// <summary>
 		/// 現在のメディアの名前
 		/// </summary>
-		public string MediaName => !IsAvailable ? string.Empty : _wmp.currentMedia?.name;
+		public string MediaName => !this.IsAvailable ? string.Empty : this._wmp.currentMedia?.name;
 
 		/// <summary>
 		/// 現在のメディアの長さ(秒単位)
 		/// なければ 0
 		/// </summary>
-		public double Duration => !IsAvailable ? 0.0 : _wmp.currentMedia?.duration ?? 0;
+		public double Duration => !this.IsAvailable ? 0.0 : this._wmp.currentMedia?.duration ?? 0;
 
 
 
@@ -184,7 +184,7 @@ namespace ElectronicObserver.Utility
 		/// <returns></returns>
 		public List<string> GetPlaylist()
 		{
-			return new List<string>(_playlist);
+			return new List<string>(this._playlist);
 		}
 
 		/// <summary>
@@ -194,11 +194,11 @@ namespace ElectronicObserver.Utility
 		public void SetPlaylist(IEnumerable<string> list)
 		{
 			if (list == null)
-				_playlist = new List<string>();
+                this._playlist = new List<string>();
 			else
-				_playlist = list.Distinct().ToList();
+                this._playlist = list.Distinct().ToList();
 
-			UpdateRealPlaylist();
+            this.UpdateRealPlaylist();
 		}
 
 
@@ -214,7 +214,7 @@ namespace ElectronicObserver.Utility
 		/// <param name="option">検索オプション。既定ではサブディレクトリは検索されません。</param>
 		public void SetPlaylistFromDirectory(string path, System.IO.SearchOption option = System.IO.SearchOption.TopDirectoryOnly)
 		{
-			SetPlaylist(SearchSupportedFiles(path, option));
+            this.SetPlaylist(this.SearchSupportedFiles(path, option));
 		}
 
 
@@ -225,19 +225,19 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		private int PlayingIndex
 		{
-			get { return _playingIndex; }
+			get { return this._playingIndex; }
 			set
 			{
-				if (_playingIndex != value)
+				if (this._playingIndex != value)
 				{
 
-					if (value < 0 || _realPlaylist.Count <= value)
+					if (value < 0 || this._realPlaylist.Count <= value)
 						return;
 
-					_playingIndex = value;
-					SourcePath = _realPlaylist[_playingIndex];
-					if (AutoPlay)
-						Play();
+                    this._playingIndex = value;
+                    this.SourcePath = this._realPlaylist[this._playingIndex];
+					if (this.AutoPlay)
+                        this.Play();
 				}
 			}
 		}
@@ -248,16 +248,16 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public bool IsShuffle
 		{
-			get { return _isShuffle; }
+			get { return this._isShuffle; }
 			set
 			{
-				bool changed = _isShuffle != value;
+				bool changed = this._isShuffle != value;
 
-				_isShuffle = value;
+                this._isShuffle = value;
 
 				if (changed)
 				{
-					UpdateRealPlaylist();
+                    this.UpdateRealPlaylist();
 				}
 			}
 		}
@@ -276,12 +276,12 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public void Play()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			if (_realPlaylist.Count > 0 && SourcePath != _realPlaylist[_playingIndex])
-				SourcePath = _realPlaylist[_playingIndex];
+			if (this._realPlaylist.Count > 0 && this.SourcePath != this._realPlaylist[this._playingIndex])
+                this.SourcePath = this._realPlaylist[this._playingIndex];
 
-			_wmp.controls.play();
+            this._wmp.controls.play();
 		}
 
 		/// <summary>
@@ -289,9 +289,9 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public void Pause()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			_wmp.controls.pause();
+            this._wmp.controls.pause();
 		}
 
 		/// <summary>
@@ -299,9 +299,9 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public void Stop()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			_wmp.controls.stop();
+            this._wmp.controls.stop();
 		}
 
 		/// <summary>
@@ -309,9 +309,9 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public void Close()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			_wmp.close();
+            this._wmp.close();
 		}
 
 
@@ -320,23 +320,23 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public void Next()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			int prevState = PlayState;
+			int prevState = this.PlayState;
 
-			if (PlayingIndex >= _realPlaylist.Count - 1)
+			if (this.PlayingIndex >= this._realPlaylist.Count - 1)
 			{
-				if (IsShuffle)
-					UpdateRealPlaylist();
-				PlayingIndex = 0;
+				if (this.IsShuffle)
+                    this.UpdateRealPlaylist();
+                this.PlayingIndex = 0;
 			}
 			else
 			{
-				PlayingIndex++;
+                this.PlayingIndex++;
 			}
 
-			if (prevState == 3 || AutoPlay)     // Playing
-				Play();
+			if (prevState == 3 || this.AutoPlay)     // Playing
+                this.Play();
 		}
 
 		/// <summary>
@@ -344,46 +344,46 @@ namespace ElectronicObserver.Utility
 		/// </summary>
 		public void Prev()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			if (IsShuffle)
+			if (this.IsShuffle)
 				return;
 
-			int prevState = PlayState;
+			int prevState = this.PlayState;
 
-			if (PlayingIndex == 0)
-				PlayingIndex = _realPlaylist.Count - 1;
+			if (this.PlayingIndex == 0)
+                this.PlayingIndex = this._realPlaylist.Count - 1;
 			else
-				PlayingIndex--;
+                this.PlayingIndex--;
 
-			if (prevState == 3 || AutoPlay)     // Playing
-				Play();
+			if (prevState == 3 || this.AutoPlay)     // Playing
+                this.Play();
 		}
 
 		private void UpdateRealPlaylist()
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			if (!IsShuffle)
+			if (!this.IsShuffle)
 			{
-				_realPlaylist = new List<string>(_playlist);
+                this._realPlaylist = new List<string>(this._playlist);
 
 			}
 			else
 			{
-				// shuffle
-				_realPlaylist = _playlist.OrderBy(s => Guid.NewGuid()).ToList();
+                // shuffle
+                this._realPlaylist = this._playlist.OrderBy(s => Guid.NewGuid()).ToList();
 
 				// 同じ曲が連続で流れるのを防ぐ
-				if (_realPlaylist.Count > 1 && SourcePath == _realPlaylist[0])
+				if (this._realPlaylist.Count > 1 && this.SourcePath == this._realPlaylist[0])
 				{
-					_realPlaylist = _realPlaylist.Skip(1).ToList();
-					_realPlaylist.Insert(_rand.Next(1, _realPlaylist.Count + 1), SourcePath);
+                    this._realPlaylist = this._realPlaylist.Skip(1).ToList();
+                    this._realPlaylist.Insert(this._rand.Next(1, this._realPlaylist.Count + 1), this.SourcePath);
 				}
 			}
 
-			int index = _realPlaylist.IndexOf(SourcePath);
-			PlayingIndex = index != -1 ? index : 0;
+			int index = this._realPlaylist.IndexOf(this.SourcePath);
+            this.PlayingIndex = index != -1 ? index : 0;
 		}
 
 
@@ -392,26 +392,26 @@ namespace ElectronicObserver.Utility
 		{
 
 			// ループ用処理
-			if (IsLoop && LoopHeadPosition > 0.0)
+			if (this.IsLoop && this.LoopHeadPosition > 0.0)
 			{
 				switch (NewState)
 				{
 					case 8:     //MediaEnded
-						_loopflag = true;
+                        this._loopflag = true;
 						break;
 
 					case 3:     //playing
-						if (_loopflag)
+						if (this._loopflag)
 						{
-							CurrentPosition = LoopHeadPosition;
-							_loopflag = false;
+                            this.CurrentPosition = this.LoopHeadPosition;
+                            this._loopflag = false;
 						}
 						break;
 				}
 			}
 
 			if (NewState == 8)  //MediaEnded
-				OnMediaEnded();
+                this.OnMediaEnded();
 
 			PlayStateChange(NewState);
 		}
@@ -421,8 +421,8 @@ namespace ElectronicObserver.Utility
 		void MediaPlayer_MediaEnded()
 		{
 			// プレイリストの処理
-			if (!IsLoop && AutoPlay)
-				Next();
+			if (!this.IsLoop && this.AutoPlay)
+                this.Next();
 		}
 
 

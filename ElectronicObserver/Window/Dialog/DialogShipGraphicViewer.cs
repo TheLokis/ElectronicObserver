@@ -35,15 +35,15 @@ namespace ElectronicObserver.Window.Dialog
 
 		private DialogShipGraphicViewer()
 		{
-			InitializeComponent();
-            ImagePathList = new List<string>();
+            this.InitializeComponent();
+            this.ImagePathList = new List<string>();
 
-            MouseWheel += DialogShipGraphicViewer_MouseWheel;
+            MouseWheel += this.DialogShipGraphicViewer_MouseWheel;
 
-			SetStyle(ControlStyles.ResizeRedraw, true);
-			ControlHelper.SetDoubleBuffered(DrawingPanel);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+			ControlHelper.SetDoubleBuffered(this.DrawingPanel);
 
-            OpenSwfDialog.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath + @"kcs2\resources\ship";
+            this.OpenSwfDialog.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath + @"kcs2\resources\ship";
 
 
             // 背景画像生成
@@ -54,7 +54,7 @@ namespace ElectronicObserver.Window.Dialog
 				g.FillRectangle(Brushes.LightGray, new Rectangle(0, 0, 8, 8));
 				g.FillRectangle(Brushes.LightGray, new Rectangle(8, 8, 8, 8));
 			}
-			DrawingPanel.BackgroundImage = back;
+            this.DrawingPanel.BackgroundImage = back;
 
 		}
 
@@ -62,19 +62,19 @@ namespace ElectronicObserver.Window.Dialog
 			: this()
 		{
 
-            Open(path);
+            this.Open(path);
         }
 
 		public DialogShipGraphicViewer(string[] pathlist)
 			: this()
 		{
-            Open(pathlist);
+            this.Open(pathlist);
         }
 
         public DialogShipGraphicViewer(int shipID)
     : this()
         {
-            Open(shipID);
+            this.Open(shipID);
         }
 
 
@@ -83,15 +83,15 @@ namespace ElectronicObserver.Window.Dialog
 
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip]);
 
-			RefreshImage();
+            this.RefreshImage();
 		}
 
 
 		private void DialogShipGraphicViewer_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			if (DrawingPanel.BackgroundImage != null)
-				DrawingPanel.BackgroundImage.Dispose();
-			ResourceManager.DestroyIcon(Icon);
+			if (this.DrawingPanel.BackgroundImage != null)
+                this.DrawingPanel.BackgroundImage.Dispose();
+			ResourceManager.DestroyIcon(this.Icon);
 		}
 
 
@@ -101,35 +101,35 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogShipGraphicViewer_KeyDown(object sender, KeyEventArgs e)
 		{
 
-            if (ImagePathList.Count == 0)
+            if (this.ImagePathList.Count == 0)
                 return;
 
 			bool fileChanged = false;
 
 			if (e.KeyCode == Keys.Left)
 			{
-				CurrentIndex--;
+                this.CurrentIndex--;
 				fileChanged = true;
 			}
 			else if (e.KeyCode == Keys.Right)
 			{
-				CurrentIndex++;
+                this.CurrentIndex++;
 				fileChanged = true;
 
 			}
 			else if (e.KeyCode == Keys.Up)
 			{
-				ZoomRate += 0.1;
+                this.ZoomRate += 0.1;
 			}
 			else if (e.KeyCode == Keys.Down)
 			{
-				ZoomRate -= 0.1;
+                this.ZoomRate -= 0.1;
 
 			}
 			else if (e.KeyCode == Keys.Oemtilde)
 			{   // "@"
-				AdvMode = !AdvMode;
-				RestrictedPatch = AdvMode && e.Shift;
+                this.AdvMode = !this.AdvMode;
+                this.RestrictedPatch = this.AdvMode && e.Shift;
 
 			}
 			else return;
@@ -137,52 +137,52 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (fileChanged)
 			{
-				CurrentIndex %= ImagePathList.Count;
-                if (CurrentIndex < 0)
-					CurrentIndex += CurrentIndex += ImagePathList.Count;
+                this.CurrentIndex %= this.ImagePathList.Count;
+                if (this.CurrentIndex < 0)
+                    this.CurrentIndex += this.CurrentIndex += this.ImagePathList.Count;
 
                 try
                 {
-                    CurrentImage?.Dispose();
-                    CurrentImage = null;
-                    using (var stream = new FileStream(ImagePathList[CurrentIndex], FileMode.Open, FileAccess.Read))
-                        CurrentImage = new Bitmap(stream);
+                    this.CurrentImage?.Dispose();
+                    this.CurrentImage = null;
+                    using (var stream = new FileStream(this.ImagePathList[this.CurrentIndex], FileMode.Open, FileAccess.Read))
+                        this.CurrentImage = new Bitmap(stream);
                 }
                 catch (Exception ex)
                 {
                     Utility.Logger.Add(3, $"이미지 뷰어：이미지 로드에 에러가 발생했습니다. {ex.Message}");
                 }
 
-                ImageOffset = new Point();
-				ZoomRate = 1;
+                this.ImageOffset = new Point();
+                this.ZoomRate = 1;
 			}
 
-			ValidateParameters();
-			RefreshImage();
+            this.ValidateParameters();
+            this.RefreshImage();
 		}
 
 		void DialogShipGraphicViewer_MouseWheel(object sender, MouseEventArgs e)
 		{
 			double wheel_delta = 120;
-			ZoomRate += (e.Delta / wheel_delta) * 0.1;
-			ValidateParameters();
-			RefreshImage();
+            this.ZoomRate += (e.Delta / wheel_delta) * 0.1;
+            this.ValidateParameters();
+            this.RefreshImage();
 		}
 
 		private void DrawingPanel_MouseMove(object sender, MouseEventArgs e)
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Left)
 			{
-				ImageOffset.X += e.Location.X - PreviousMouseLocation.X;
-				ImageOffset.Y += e.Location.Y - PreviousMouseLocation.Y;
-				RefreshImage();
+                this.ImageOffset.X += e.Location.X - this.PreviousMouseLocation.X;
+                this.ImageOffset.Y += e.Location.Y - this.PreviousMouseLocation.Y;
+                this.RefreshImage();
 			}
-			PreviousMouseLocation = e.Location;
+            this.PreviousMouseLocation = e.Location;
 		}
 
 		private void DrawingPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			PreviousMouseLocation = e.Location;
+            this.PreviousMouseLocation = e.Location;
 		}
 
 
@@ -195,7 +195,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void TopMenu_View_InterpolationMode_Sharp_Click(object sender, EventArgs e)
 		{
 
-			foreach (ToolStripMenuItem item in TopMenu_View_InterpolationMode.DropDownItems)
+			foreach (ToolStripMenuItem item in this.TopMenu_View_InterpolationMode.DropDownItems)
 			{
 				if (object.ReferenceEquals(item, sender))
 					item.CheckState = CheckState.Indeterminate;
@@ -203,41 +203,41 @@ namespace ElectronicObserver.Window.Dialog
 					item.CheckState = CheckState.Unchecked;
 			}
 
-			if (TopMenu_View_InterpolationMode_Sharp.Checked)
-				Interpolation = InterpolationMode.NearestNeighbor;
-			else if (TopMenu_View_InterpolationMode_Smooth.Checked)
-				Interpolation = InterpolationMode.HighQualityBicubic;
+			if (this.TopMenu_View_InterpolationMode_Sharp.Checked)
+                this.Interpolation = InterpolationMode.NearestNeighbor;
+			else if (this.TopMenu_View_InterpolationMode_Smooth.Checked)
+                this.Interpolation = InterpolationMode.HighQualityBicubic;
 
-			RefreshImage();
+            this.RefreshImage();
 		}
 
 
 		private void TopMenu_View_Zoom_In_Click(object sender, EventArgs e)
 		{
-			ZoomRate += 0.1;
-			ValidateParameters();
+            this.ZoomRate += 0.1;
+            this.ValidateParameters();
 		}
 
 		private void TopMenu_View_Zoom_Out_Click(object sender, EventArgs e)
 		{
-			ZoomRate -= 0.1;
-			ValidateParameters();
+            this.ZoomRate -= 0.1;
+            this.ValidateParameters();
 		}
 
 		private void TopMenu_View_Zoom_100_Click(object sender, EventArgs e)
 		{
-			ZoomRate = 1;
-			RefreshImage();
+            this.ZoomRate = 1;
+            this.RefreshImage();
 		}
 
 		private void TopMenu_View_Zoom_Fit_Click(object sender, EventArgs e)
 		{
-			RefreshImage();
+            this.RefreshImage();
 		}
 
 		private void ValidateParameters()
 		{
-			ZoomRate = Math.Min(Math.Max(ZoomRate, 0.1), 16);
+            this.ZoomRate = Math.Min(Math.Max(this.ZoomRate, 0.1), 16);
 		}
 
         #endregion
@@ -247,7 +247,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private void Open(string path)
         {
-            Open(new string[] { path });
+            this.Open(new string[] { path });
         }
 
         private void Open(string[] pathlist)
@@ -256,34 +256,34 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				for (int i = 0; i < pathlist.Length; i++)
 				{
-                    ImagePathList = pathlist.Where(p => File.Exists(p)).ToList();
+                    this.ImagePathList = pathlist.Where(p => File.Exists(p)).ToList();
 
                 }
 
 
-                if (ImagePathList.Count == 0)
+                if (this.ImagePathList.Count == 0)
                 {
                     MessageBox.Show("이미지를 찾을 수 없습니다.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
-                CurrentIndex = 0;
-                CurrentImage?.Dispose();
-                CurrentImage = null;
-                using (var stream = new FileStream(ImagePathList[CurrentIndex], FileMode.Open, FileAccess.Read))
-                    CurrentImage = new Bitmap(stream);
+                this.CurrentIndex = 0;
+                this.CurrentImage?.Dispose();
+                this.CurrentImage = null;
+                using (var stream = new FileStream(this.ImagePathList[this.CurrentIndex], FileMode.Open, FileAccess.Read))
+                    this.CurrentImage = new Bitmap(stream);
 
             }
 			catch (Exception ex)
 			{
 				MessageBox.Show(string.Join("\r\n", pathlist) + "를 열 수 없습니다.\r\n" + ex.GetType().Name + "\r\n" + ex.Message);
-                ImagePathList.Clear();
-                CurrentImage?.Dispose();
-                CurrentImage = null;
+                this.ImagePathList.Clear();
+                this.CurrentImage?.Dispose();
+                this.CurrentImage = null;
 
             }
 			finally
 			{
-				RefreshImage();
+                this.RefreshImage();
 			}
 
 		}
@@ -329,14 +329,14 @@ namespace ElectronicObserver.Window.Dialog
             foreach (var rec in RecordManager.Instance.ShipParameter.Record.Values.Where(r => r.OriginalCostumeShipID == shipID))
                 AddShip(rec.ShipID);
 
-            Open(list.ToArray());
+            this.Open(list.ToArray());
         }
 
         private void TopMenu_File_Open_Click(object sender, EventArgs e)
         {
-            if (OpenSwfDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (this.OpenSwfDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Open(OpenSwfDialog.FileNames);
+                this.Open(this.OpenSwfDialog.FileNames);
             }
         }
 
@@ -344,7 +344,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private void TopMenu_File_CopyToClipboard_Click(object sender, EventArgs e)
 		{
-			if (CurrentImage == null)
+			if (this.CurrentImage == null)
 			{
 				System.Media.SystemSounds.Exclamation.Play();
 				return;
@@ -353,7 +353,7 @@ namespace ElectronicObserver.Window.Dialog
 			try
 			{
 
-				Clipboard.SetImage(CurrentImage);
+				Clipboard.SetImage(this.CurrentImage);
 
 			}
 			catch (Exception)
@@ -374,7 +374,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogShipGraphicViewer_DragDrop(object sender, DragEventArgs e)
 		{
-			Open((string[])e.Data.GetData(DataFormats.FileDrop));
+            this.Open((string[])e.Data.GetData(DataFormats.FileDrop));
 		}
 
 		#endregion
@@ -384,36 +384,36 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DrawingPanel_Paint(object sender, PaintEventArgs e)
 		{
-			if (CurrentImage == null)
+			if (this.CurrentImage == null)
 				return;
 
-			e.Graphics.InterpolationMode = Interpolation;
+			e.Graphics.InterpolationMode = this.Interpolation;
 			e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-			var panelSize = DrawingPanel.Size;
+			var panelSize = this.DrawingPanel.Size;
 
-			double zoomRate = ZoomRate;
-			if (TopMenu_View_Zoom_Fit.Checked)
+			double zoomRate = this.ZoomRate;
+			if (this.TopMenu_View_Zoom_Fit.Checked)
 			{
-				zoomRate = Math.Min((double)panelSize.Width / CurrentImage.Width, (double)panelSize.Height / CurrentImage.Height);
+				zoomRate = Math.Min((double)panelSize.Width / this.CurrentImage.Width, (double)panelSize.Height / this.CurrentImage.Height);
 			}
 
-			var imgSize = new SizeF((float)(CurrentImage.Width * zoomRate), (float)(CurrentImage.Height * zoomRate));
+			var imgSize = new SizeF((float)(this.CurrentImage.Width * zoomRate), (float)(this.CurrentImage.Height * zoomRate));
 
 
-			if (DrawsInformation)
+			if (this.DrawsInformation)
 			{
-                var ship = GetShipFromPath(ImagePathList[CurrentIndex]);
+                var ship = this.GetShipFromPath(this.ImagePathList[this.CurrentIndex]);
 
                 e.Graphics.DrawString(
                     string.Format("{0} / {1}\r\n{2} ({3})\r\nZoom {4:p1}\r\n(←/→키로 페이지 넘기기)",
-                        CurrentIndex + 1, ImagePathList.Count, Path.GetFileName(ImagePathList[CurrentIndex]), ship?.NameWithClass ?? "???", zoomRate),
+                        this.CurrentIndex + 1, this.ImagePathList.Count, Path.GetFileName(this.ImagePathList[this.CurrentIndex]), ship?.NameWithClass ?? "???", zoomRate),
 
-                    Font, Brushes.DimGray, new PointF(0, 0));
+                    this.Font, Brushes.DimGray, new PointF(0, 0));
 			}
 
-            var location = new PointF((panelSize.Width - imgSize.Width) / 2 + ImageOffset.X, (panelSize.Height - imgSize.Height) / 2 + ImageOffset.Y);
-            e.Graphics.DrawImage(CurrentImage, new RectangleF(location.X, location.Y, imgSize.Width, imgSize.Height));
+            var location = new PointF((panelSize.Width - imgSize.Width) / 2 + this.ImageOffset.X, (panelSize.Height - imgSize.Height) / 2 + this.ImageOffset.Y);
+            e.Graphics.DrawImage(this.CurrentImage, new RectangleF(location.X, location.Y, imgSize.Width, imgSize.Height));
             /*// face recognition test
 			{
 				var ship = GetShipFromPath(ImagePathList[CurrentIndex]);
@@ -429,9 +429,9 @@ namespace ElectronicObserver.Window.Dialog
 			}
 			//*/
 
-            if (AdvMode)
+            if (this.AdvMode)
 			{
-				DrawAdvMode(e.Graphics);
+                this.DrawAdvMode(e.Graphics);
 			}
 
 		}
@@ -440,11 +440,11 @@ namespace ElectronicObserver.Window.Dialog
 		private void DrawAdvMode(Graphics g)
 		{
 
-            var ship = GetShipFromPath(ImagePathList[CurrentIndex]);
+            var ship = this.GetShipFromPath(this.ImagePathList[this.CurrentIndex]);
             if (ship == null)
 				return;
 
-			var panelSize = DrawingPanel.Size;
+			var panelSize = this.DrawingPanel.Size;
 
 			int mainHeight = 200;
 			int nameHeight = 64;
@@ -574,7 +574,7 @@ namespace ElectronicObserver.Window.Dialog
 						mes = "……";
 				}
 
-				if (RestrictedPatch)
+				if (this.RestrictedPatch)
 				{
 					mes = mes
 						.Replace("。", "♥")
@@ -598,13 +598,13 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DrawingPanel_Resize(object sender, EventArgs e)
 		{
-			RefreshImage();
+            this.RefreshImage();
 		}
 
 
 		private void RefreshImage()
 		{
-			DrawingPanel.Refresh();
+            this.DrawingPanel.Refresh();
 		}
 
         #endregion

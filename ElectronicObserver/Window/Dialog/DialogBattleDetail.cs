@@ -16,15 +16,15 @@ namespace ElectronicObserver.Window.Dialog
 
 		public string BattleDetailText
 		{
-			get { return TextBattleDetail.Text; }
-			set { TextBattleDetail.Text = value; }
+			get { return this.TextBattleDetail.Text; }
+			set { this.TextBattleDetail.Text = value; }
 		}
 
 		public DialogBattleDetail()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			Font = Utility.Configuration.Config.UI.MainFont;
+            this.Font = Utility.Configuration.Config.UI.MainFont;
 		}
 
 		private void DialogBattleDetail_Load(object sender, EventArgs e)
@@ -34,33 +34,33 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogBattleDetail_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 		}
 
 
 		private void DialogBattleDetail_Shown(object sender, EventArgs e)
 		{
-			ClientSize = new Size(
-				Math.Min(TextBattleDetail.Location.X * 2 + TextBattleDetail.Width + TextBattleDetail.Margin.Horizontal, 800),
-				Math.Min(TextBattleDetail.Location.Y * 2 + TextBattleDetail.Height + TextBattleDetail.Margin.Vertical, 600));
+            this.ClientSize = new Size(
+				Math.Min(this.TextBattleDetail.Location.X * 2 + this.TextBattleDetail.Width + this.TextBattleDetail.Margin.Horizontal, 800),
+				Math.Min(this.TextBattleDetail.Location.Y * 2 + this.TextBattleDetail.Height + this.TextBattleDetail.Margin.Vertical, 600));
 
-			var workingScreen = Screen.GetWorkingArea(Location);
-			var dialogRectangle = new Rectangle(Left, Top, Right, Bottom);
+			var workingScreen = Screen.GetWorkingArea(this.Location);
+			var dialogRectangle = new Rectangle(this.Left, this.Top, this.Right, this.Bottom);
 
 			if (!workingScreen.Contains(dialogRectangle))
 			{
 
-				if (Right > workingScreen.Right && Bottom > workingScreen.Bottom)
+				if (this.Right > workingScreen.Right && this.Bottom > workingScreen.Bottom)
 				{
-					Location = new Point(workingScreen.Right - Width, workingScreen.Bottom - Height);
+                    this.Location = new Point(workingScreen.Right - this.Width, workingScreen.Bottom - this.Height);
 				}
-				else if (Right > workingScreen.Right)
+				else if (this.Right > workingScreen.Right)
 				{
-					Location = new Point(workingScreen.Right - Width, Top);
+                    this.Location = new Point(workingScreen.Right - this.Width, this.Top);
 				}
-				else if (Bottom > workingScreen.Bottom)
+				else if (this.Bottom > workingScreen.Bottom)
 				{
-					Location = new Point(Left, workingScreen.Bottom - Height);
+                    this.Location = new Point(this.Left, workingScreen.Bottom - this.Height);
 				}
 				else
 				{

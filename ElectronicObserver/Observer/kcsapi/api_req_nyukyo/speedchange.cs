@@ -17,11 +17,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_nyukyo
 
 			KCDatabase db = KCDatabase.Instance;
 
-			db.Docks[int.Parse(data["api_ndock_id"])].LoadFromResponse(APIName, data);
+			db.Docks[int.Parse(data["api_ndock_id"])].LoadFromResponse(this.APIName, data);
 			db.Material.InstantRepair--;
 
 
-			db.Fleet.LoadFromRequest(APIName, data);
+			db.Fleet.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

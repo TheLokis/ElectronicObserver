@@ -21,7 +21,7 @@ namespace ElectronicObserver.Data
 			: base()
 		{
 
-			RequestData = new Dictionary<string, string>();
+            this.RequestData = new Dictionary<string, string>();
 
 		}
 
@@ -29,7 +29,7 @@ namespace ElectronicObserver.Data
 		public virtual void LoadFromRequest(string apiname, Dictionary<string, string> data)
 		{
 
-			/*
+            /*
 			// data is string:
 			data = HttpUtility.UrlDecode( data );
 
@@ -40,7 +40,7 @@ namespace ElectronicObserver.Data
 			}
 			*/
 
-			RequestData = data;
+            this.RequestData = data;
 		}
 
 	}

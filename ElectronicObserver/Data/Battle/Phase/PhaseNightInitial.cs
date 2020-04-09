@@ -17,10 +17,10 @@ namespace ElectronicObserver.Data.Battle.Phase
 		public PhaseNightInitial(BattleData battle, string title, bool isEscort)
 			: base(battle, title)
 		{
-			IsEscort = isEscort;
+            this.IsEscort = isEscort;
 		}
 
-		public override bool IsAvailable => RawData != null;
+		public override bool IsAvailable => this.RawData != null;
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
@@ -33,7 +33,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// 戦闘する自軍艦隊
 		/// 1=主力艦隊, 2=随伴艦隊
 		/// </summary>
-		public int ActiveFriendFleet => !RawData.api_active_deck() ? 1 : (int)RawData.api_active_deck[0];
+		public int ActiveFriendFleet => !this.RawData.api_active_deck() ? 1 : (int)this.RawData.api_active_deck[0];
 
 		/// <summary>
 		/// 自軍艦隊ID
@@ -42,66 +42,66 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				if (IsFriendEscort)
+				if (this.IsFriendEscort)
 					return 2;
 				else
-					return Battle.Initial.FriendFleetID;
+					return this.Battle.Initial.FriendFleetID;
 			}
 		}
 
 		/// <summary>
 		/// 自軍艦隊
 		/// </summary>
-		public FleetData FriendFleet => KCDatabase.Instance.Fleet[FriendFleetID];
+		public FleetData FriendFleet => KCDatabase.Instance.Fleet[this.FriendFleetID];
 
 		/// <summary>
 		/// 自軍が随伴艦隊かどうか
 		/// </summary>
-		public bool IsFriendEscort => IsEscort || ActiveFriendFleet != 1;
+		public bool IsFriendEscort => this.IsEscort || this.ActiveFriendFleet != 1;
 
 
 		/// <summary>
 		/// 敵軍艦隊ID
 		/// </summary>
-		public int EnemyFleetID => !RawData.api_active_deck() ? 1 : (int)RawData.api_active_deck[1];
+		public int EnemyFleetID => !this.RawData.api_active_deck() ? 1 : (int)this.RawData.api_active_deck[1];
 
 		/// <summary>
 		/// 敵軍艦隊
 		/// </summary>
-		public int[] EnemyMembers => !IsEnemyEscort ? Battle.Initial.EnemyMembers : Battle.Initial.EnemyMembersEscort;
+		public int[] EnemyMembers => !this.IsEnemyEscort ? this.Battle.Initial.EnemyMembers : this.Battle.Initial.EnemyMembersEscort;
 
 		/// <summary>
 		/// 敵軍艦隊
 		/// </summary>
-		public ShipDataMaster[] EnemyMembersInstance => !IsEnemyEscort ? Battle.Initial.EnemyMembersInstance : Battle.Initial.EnemyMembersEscortInstance;
+		public ShipDataMaster[] EnemyMembersInstance => !this.IsEnemyEscort ? this.Battle.Initial.EnemyMembersInstance : this.Battle.Initial.EnemyMembersEscortInstance;
 
 		/// <summary>
 		/// 敵軍が随伴艦隊かどうか
 		/// </summary>
-		public bool IsEnemyEscort => EnemyFleetID != 1;
+		public bool IsEnemyEscort => this.EnemyFleetID != 1;
 
 
 		/// <summary>
 		/// 自軍触接機ID
 		/// </summary>
-		public int TouchAircraftFriend => (RawData.api_touch_plane[0] is string) ? int.Parse(RawData.api_touch_plane[0]) : (int)RawData.api_touch_plane[0];
+		public int TouchAircraftFriend => (this.RawData.api_touch_plane[0] is string) ? int.Parse(this.RawData.api_touch_plane[0]) : (int)this.RawData.api_touch_plane[0];
 
 
 		/// <summary>
 		/// 敵軍触接機ID
 		/// </summary>
-		public int TouchAircraftEnemy => (RawData.api_touch_plane[1] is string) ? int.Parse(RawData.api_touch_plane[1]) : (int)RawData.api_touch_plane[1];
+		public int TouchAircraftEnemy => (this.RawData.api_touch_plane[1] is string) ? int.Parse(this.RawData.api_touch_plane[1]) : (int)this.RawData.api_touch_plane[1];
 
 
 		/// <summary>
 		/// 自軍照明弾投射艦インデックス(0-11, -1=発動せず)
 		/// </summary>
-		public int FlareIndexFriend => (int)RawData.api_flare_pos[0];
+		public int FlareIndexFriend => (int)this.RawData.api_flare_pos[0];
 
 		/// <summary>
 		/// 敵軍照明弾投射艦インデックス(0-11, -1=発動せず)
 		/// </summary>
-		public int FlareIndexEnemy => (int)RawData.api_flare_pos[1];
+		public int FlareIndexEnemy => (int)this.RawData.api_flare_pos[1];
 
 
 		/// <summary>
@@ -111,15 +111,15 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = FlareIndexFriend;
+				int index = this.FlareIndexFriend;
 
 				if (index < 0)
 					return null;
 
-				if (IsFriendEscort)
-					return FriendFleet.MembersInstance[index - 6];
+				if (this.IsFriendEscort)
+					return this.FriendFleet.MembersInstance[index - 6];
 				else
-					return FriendFleet.MembersInstance[index];
+					return this.FriendFleet.MembersInstance[index];
 
 			}
 		}
@@ -131,15 +131,15 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = FlareIndexEnemy;
+				int index = this.FlareIndexEnemy;
 
 				if (index < 0)
 					return null;
 
-				if (IsEnemyEscort)
-					return EnemyMembersInstance[index - 6];
+				if (this.IsEnemyEscort)
+					return this.EnemyMembersInstance[index - 6];
 				else
-					return EnemyMembersInstance[index];
+					return this.EnemyMembersInstance[index];
 			}
 		}
 
@@ -151,8 +151,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				var ships = FriendFleet.MembersWithoutEscaped;
-				var hps = IsFriendEscort ? Battle.Initial.FriendInitialHPsEscort : Battle.Initial.FriendInitialHPs;
+				var ships = this.FriendFleet.MembersWithoutEscaped;
+				var hps = this.IsFriendEscort ? this.Battle.Initial.FriendInitialHPsEscort : this.Battle.Initial.FriendInitialHPs;
 				int index = -1;
 
 				for (int i = 0; i < ships.Count; i++)
@@ -179,9 +179,9 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				var ships = EnemyMembersInstance;
-				var eqs = Battle.Initial.EnemySlotsInstance;
-				var hps = IsEnemyEscort ? Battle.Initial.EnemyInitialHPsEscort : Battle.Initial.EnemyInitialHPs;
+				var ships = this.EnemyMembersInstance;
+				var eqs = this.Battle.Initial.EnemySlotsInstance;
+				var hps = this.IsEnemyEscort ? this.Battle.Initial.EnemyInitialHPsEscort : this.Battle.Initial.EnemyInitialHPs;
 				int index = -1;
 
 				for (int i = 0; i < ships.Length; i++)
@@ -208,8 +208,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = SearchlightIndexEnemy;
-				return index == -1 ? null : EnemyMembersInstance[index];
+				int index = this.SearchlightIndexEnemy;
+				return index == -1 ? null : this.EnemyMembersInstance[index];
 			}
 		}
 

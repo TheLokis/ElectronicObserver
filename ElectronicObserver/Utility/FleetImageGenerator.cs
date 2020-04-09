@@ -1713,10 +1713,10 @@ namespace ElectronicObserver.Utility
 
 			public ShipParameterData(ResourceManager.IconContent iconIndex, string name, Func<ShipData, string> selector, bool isCharacter = false)
 			{
-				Icon = ResourceManager.Instance.Icons.Images[(int)iconIndex];
-				Name = name;
-				ValueSelector = selector;
-				IsCharacter = isCharacter;
+                this.Icon = ResourceManager.Instance.Icons.Images[(int)iconIndex];
+                this.Name = name;
+                this.ValueSelector = selector;
+                this.IsCharacter = isCharacter;
 			}
 		}
 
@@ -3493,38 +3493,38 @@ namespace ElectronicObserver.Utility
 		[DataMember]
 		public SerializableFont SerializedTitleFont
 		{
-			get { return TitleFont; }
-			set { TitleFont = value; }
+			get { return this.TitleFont; }
+			set { this.TitleFont = value; }
 		}
 		[DataMember]
 		public SerializableFont SerializedLargeFont
 		{
-			get { return LargeFont; }
-			set { LargeFont = value; }
+			get { return this.LargeFont; }
+			set { this.LargeFont = value; }
 		}
 		[DataMember]
 		public SerializableFont SerializedMediumFont
 		{
-			get { return MediumFont; }
-			set { MediumFont = value; }
+			get { return this.MediumFont; }
+			set { this.MediumFont = value; }
 		}
 		[DataMember]
 		public SerializableFont SerializedSmallFont
 		{
-			get { return SmallFont; }
-			set { SmallFont = value; }
+			get { return this.SmallFont; }
+			set { this.SmallFont = value; }
 		}
 		[DataMember]
 		public SerializableFont SerializedMediumDigitFont
 		{
-			get { return MediumDigitFont; }
-			set { MediumDigitFont = value; }
+			get { return this.MediumDigitFont; }
+			set { this.MediumDigitFont = value; }
 		}
 		[DataMember]
 		public SerializableFont SerializedSmallDigitFont
 		{
-			get { return SmallDigitFont; }
-			set { SmallDigitFont = value; }
+			get { return this.SmallDigitFont; }
+			set { this.SmallDigitFont = value; }
 		}
 
 
@@ -3545,9 +3545,9 @@ namespace ElectronicObserver.Utility
 
 		public FleetImageArgument()
 		{
-			BackgroundImagePath = "";
-			Title = "";
-			Comment = "";
+            this.BackgroundImagePath = "";
+            this.Title = "";
+            this.Comment = "";
 		}
 
 
@@ -3582,11 +3582,11 @@ namespace ElectronicObserver.Utility
 		public FleetImageArgument Clone()
 		{
 
-			var clone = (FleetImageArgument)MemberwiseClone();
+			var clone = (FleetImageArgument)this.MemberwiseClone();
 
-			clone.FleetIDs = FleetIDs.ToArray();
+			clone.FleetIDs = this.FleetIDs.ToArray();
 
-			clone.Fonts = Fonts.Select(f => (Font)f?.Clone()).ToArray();
+			clone.Fonts = this.Fonts.Select(f => (Font)f?.Clone()).ToArray();
 
 			return clone;
 		}
@@ -3594,7 +3594,7 @@ namespace ElectronicObserver.Utility
 
 		public void DisposeResources()
 		{
-			foreach (var font in Fonts)
+			foreach (var font in this.Fonts)
 			{
 				if (font != null)
 					font.Dispose();
@@ -3607,22 +3607,22 @@ namespace ElectronicObserver.Utility
 			get
 			{
 				return new Font[] {
-					TitleFont,
-					LargeFont,
-					MediumFont,
-					SmallFont,
-					MediumDigitFont,
-					SmallDigitFont,
+                    this.TitleFont,
+                    this.LargeFont,
+                    this.MediumFont,
+                    this.SmallFont,
+                    this.MediumDigitFont,
+                    this.SmallDigitFont,
 				};
 			}
 			set
 			{
-				TitleFont = value[0];
-				LargeFont = value[1];
-				MediumFont = value[2];
-				SmallFont = value[3];
-				MediumDigitFont = value[4];
-				SmallDigitFont = value[5];
+                this.TitleFont = value[0];
+                this.LargeFont = value[1];
+                this.MediumFont = value[2];
+                this.SmallFont = value[3];
+                this.MediumDigitFont = value[4];
+                this.SmallDigitFont = value[5];
 			}
 
 		}

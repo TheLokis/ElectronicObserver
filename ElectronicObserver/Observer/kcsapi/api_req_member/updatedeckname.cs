@@ -15,7 +15,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_member
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			KCDatabase.Instance.Fleet.Fleets[int.Parse(data["api_deck_id"])].LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Fleet.Fleets[int.Parse(data["api_deck_id"])].LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

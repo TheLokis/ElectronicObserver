@@ -21,15 +21,15 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-            JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
-            JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
-            BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
-            AirBattle = new PhaseAirBattle(this, "1차 항공전");
-            Support = new PhaseSupport(this, "지원 공격");
-            AirBattle2 = new PhaseAirBattle(this, "2차 항공전", "2");
+            this.JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
+            this.JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
+            this.BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
+            this.AirBattle = new PhaseAirBattle(this, "1차 항공전");
+            this.Support = new PhaseSupport(this, "지원 공격");
+            this.AirBattle2 = new PhaseAirBattle(this, "2차 항공전", "2");
 
-            foreach (var phase in GetPhases())
-				phase.EmulateBattle(_resultHPs, _attackDamages);
+            foreach (var phase in this.GetPhases())
+				phase.EmulateBattle(this._resultHPs, this._attackDamages);
 
 		}
 
@@ -41,14 +41,14 @@ namespace ElectronicObserver.Data.Battle
 
 		public override IEnumerable<PhaseBase> GetPhases()
 		{
-			yield return Initial;
-			yield return Searching;
-			yield return JetBaseAirAttack;
-			yield return JetAirBattle;
-			yield return BaseAirAttack;
-			yield return AirBattle;
-			yield return Support;
-			yield return AirBattle2;
+			yield return this.Initial;
+			yield return this.Searching;
+			yield return this.JetBaseAirAttack;
+			yield return this.JetAirBattle;
+			yield return this.BaseAirAttack;
+			yield return this.AirBattle;
+			yield return this.Support;
+			yield return this.AirBattle2;
 		}
 
 	}

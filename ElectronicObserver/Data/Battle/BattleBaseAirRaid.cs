@@ -20,10 +20,10 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			BaseAirRaid = new PhaseBaseAirRaid(this, "방공전");
+            this.BaseAirRaid = new PhaseBaseAirRaid(this, "방공전");
 
-			foreach (var phase in GetPhases())
-				phase.EmulateBattle(_resultHPs, _attackDamages);
+			foreach (var phase in this.GetPhases())
+				phase.EmulateBattle(this._resultHPs, this._attackDamages);
 
 		}
 
@@ -36,9 +36,9 @@ namespace ElectronicObserver.Data.Battle
 
 		public override IEnumerable<PhaseBase> GetPhases()
 		{
-			yield return Initial;
-			yield return Searching;
-			yield return BaseAirRaid;
+			yield return this.Initial;
+			yield return this.Searching;
+			yield return this.BaseAirRaid;
 		}
 	}
 }

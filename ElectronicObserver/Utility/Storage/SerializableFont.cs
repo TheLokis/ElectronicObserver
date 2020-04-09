@@ -24,25 +24,25 @@ namespace ElectronicObserver.Utility.Storage
 
 		public SerializableFont()
 		{
-			FontData = null;
+            this.FontData = null;
 		}
 
 		public SerializableFont(Font font)
 		{
-			FontData = font;
+            this.FontData = font;
 		}
 
 		public SerializableFont(string attribute)
 		{
-			SerializeFontAttribute = attribute;
+            this.SerializeFontAttribute = attribute;
 		}
 
 
 		[DataMember]
 		public string SerializeFontAttribute
 		{
-			get { return FontToString(FontData); }
-			set { FontData = StringToFont(value); }
+			get { return FontToString(this.FontData); }
+			set { this.FontData = StringToFont(value); }
 		}
 
 

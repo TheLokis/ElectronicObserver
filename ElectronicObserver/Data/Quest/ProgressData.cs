@@ -65,23 +65,23 @@ namespace ElectronicObserver.Data.Quest
 		/// 進捗率
 		/// </summary>
 		[IgnoreDataMember]
-		public virtual double ProgressPercentage => (double)Progress / ProgressMax;
+		public virtual double ProgressPercentage => (double)this.Progress / this.ProgressMax;
 
 		/// <summary>
 		/// クリア済みかどうか
 		/// </summary>
 		[IgnoreDataMember]
-		public bool IsCleared => ProgressPercentage >= 1.0;
+		public bool IsCleared => this.ProgressPercentage >= 1.0;
 
 
 		public ProgressData(QuestData quest, int maxCount)
 		{
-			QuestID = quest.QuestID;
-			ProgressMax = maxCount;
-			QuestType = quest.Type;
-			TemporaryProgress = 0;
-			SharedCounterShift = 0;
-			IgnoreCheckProgress = false;
+            this.QuestID = quest.QuestID;
+            this.ProgressMax = maxCount;
+            this.QuestType = quest.Type;
+            this.TemporaryProgress = 0;
+            this.SharedCounterShift = 0;
+            this.IgnoreCheckProgress = false;
 		}
 
 
@@ -92,11 +92,11 @@ namespace ElectronicObserver.Data.Quest
 		public virtual void Increment()
 		{
 
-			var q = KCDatabase.Instance.Quest[QuestID];
+			var q = KCDatabase.Instance.Quest[this.QuestID];
 
 			if (q == null)
 			{
-				TemporaryProgress++;
+                this.TemporaryProgress++;
 				return;
 			}
 
@@ -104,10 +104,10 @@ namespace ElectronicObserver.Data.Quest
 				return;
 
 
-			if (!IgnoreCheckProgress)
-				CheckProgress(q);
+			if (!this.IgnoreCheckProgress)
+                this.CheckProgress(q);
 
-			Progress = Math.Min(Progress + 1, ProgressMax);
+            this.Progress = Math.Min(this.Progress + 1, this.ProgressMax);
 		}
 
 		/// <summary>
@@ -116,20 +116,20 @@ namespace ElectronicObserver.Data.Quest
 		public virtual void Decrement()
 		{
 
-			var q = KCDatabase.Instance.Quest[QuestID];
+			var q = KCDatabase.Instance.Quest[this.QuestID];
 
 			if (q != null && q.State == 3)      //達成済なら無視
 				return;
 
 
-			Progress = Math.Max(Progress - 1, 0);
+            this.Progress = Math.Max(this.Progress - 1, 0);
 
-			if (!IgnoreCheckProgress)
-				CheckProgress(q);
+			if (!this.IgnoreCheckProgress)
+                this.CheckProgress(q);
 		}
 
 
-		public override string ToString() => $"{Progress}/{ProgressMax}";
+		public override string ToString() => $"{this.Progress}/{this.ProgressMax}";
 
 
 
@@ -140,23 +140,23 @@ namespace ElectronicObserver.Data.Quest
 		public virtual void CheckProgress(QuestData q)
 		{
 
-			if (TemporaryProgress > 0)
+			if (this.TemporaryProgress > 0)
 			{
 				if (q.State == 2)
-					Progress = Math.Min(Progress + TemporaryProgress, ProgressMax);
-				TemporaryProgress = 0;
+                    this.Progress = Math.Min(this.Progress + this.TemporaryProgress, this.ProgressMax);
+                this.TemporaryProgress = 0;
 			}
 
-			if (QuestType == 0)     // ver. 1.6.6 以前のデータとの互換性維持
-				QuestType = q.Type;
+			if (this.QuestType == 0)     // ver. 1.6.6 以前のデータとの互換性維持
+                this.QuestType = q.Type;
 
 			switch (q.Progress)
 			{
 				case 1:     //50%
-					Progress = (int)Math.Max(Progress, Math.Ceiling((ProgressMax + SharedCounterShift) * 0.5) - SharedCounterShift);
+                    this.Progress = (int)Math.Max(this.Progress, Math.Ceiling((this.ProgressMax + this.SharedCounterShift) * 0.5) - this.SharedCounterShift);
 					break;
 				case 2:     //80%
-					Progress = (int)Math.Max(Progress, Math.Ceiling((ProgressMax + SharedCounterShift) * 0.8) - SharedCounterShift);
+                    this.Progress = (int)Math.Max(this.Progress, Math.Ceiling((this.ProgressMax + this.SharedCounterShift) * 0.8) - this.SharedCounterShift);
 					break;
 			}
 
@@ -170,7 +170,7 @@ namespace ElectronicObserver.Data.Quest
 		public abstract string GetClearCondition();
 
 		[IgnoreDataMember]
-		public int ID => QuestID;
+		public int ID => this.QuestID;
 	}
 
 }

@@ -17,7 +17,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 			var ship = KCDatabase.Instance.Ships[Convert.ToInt32(data["api_id"])];
 			if (ship != null)
 			{
-				ship.LoadFromRequest(APIName, data);
+				ship.LoadFromRequest(this.APIName, data);
 
 				Utility.Logger.Add(2, $"{ship.NameWithLevel} 의 보강 장비 증설 개수가 완료되었습니다.");
 			}

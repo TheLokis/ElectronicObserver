@@ -26,31 +26,31 @@ namespace ElectronicObserver.Notifier
 		public NotifierAnchorageRepair()
 			: base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public NotifierAnchorageRepair(Utility.Configuration.ConfigurationData.ConfigNotifierAnchorageRepair config)
 			: base(config)
 		{
-			Initialize();
+            this.Initialize();
 
-			NotificationLevel = config.NotificationLevel;
+            this.NotificationLevel = config.NotificationLevel;
 		}
 
 		private void Initialize()
 		{
-			DialogData.Title = "아카시수리발동";
+            this.DialogData.Title = "아카시수리발동";
 
 
 			APIObserver o = APIObserver.Instance;
 
-			o["api_port/port"].ResponseReceived += ClearFlag;
+			o["api_port/port"].ResponseReceived += this.ClearFlag;
 		}
 
 		void ClearFlag(string apiname, dynamic data)
 		{
 
-			processedFlag = false;
+            this.processedFlag = false;
 		}
 
 
@@ -59,14 +59,14 @@ namespace ElectronicObserver.Notifier
 
 			var fleets = KCDatabase.Instance.Fleet;
 
-			if (!processedFlag)
+			if (!this.processedFlag)
 			{
 
-				if ((DateTime.Now - fleets.AnchorageRepairingTimer).TotalMilliseconds + AccelInterval >= 20 * 60 * 1000)
+				if ((DateTime.Now - fleets.AnchorageRepairingTimer).TotalMilliseconds + this.AccelInterval >= 20 * 60 * 1000)
 				{
 
 					bool clear;
-					switch (NotificationLevel)
+					switch (this.NotificationLevel)
 					{
 
 						case 0:     //いつでも
@@ -86,8 +86,8 @@ namespace ElectronicObserver.Notifier
 					if (clear)
 					{
 
-						Notify();
-						processedFlag = true;
+                        this.Notify();
+                        this.processedFlag = true;
 					}
 				}
 			}
@@ -98,7 +98,7 @@ namespace ElectronicObserver.Notifier
 		public override void Notify()
 		{
 
-			DialogData.Message = "아카시배치후 20분이 경과했습니다.";
+            this.DialogData.Message = "아카시배치후 20분이 경과했습니다.";
 
 			base.Notify();
 		}
@@ -112,7 +112,7 @@ namespace ElectronicObserver.Notifier
 
 			if (c != null)
 			{
-				c.NotificationLevel = NotificationLevel;
+				c.NotificationLevel = this.NotificationLevel;
 			}
 		}
 

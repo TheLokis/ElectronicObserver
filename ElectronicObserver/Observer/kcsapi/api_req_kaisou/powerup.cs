@@ -18,7 +18,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 			KCDatabase db = KCDatabase.Instance;
 
 
-			db.Fleet.LoadFromRequest(APIName, data);
+			db.Fleet.LoadFromRequest(this.APIName, data);
 
 
 			foreach (string id in data["api_id_items"].Split(",".ToCharArray()))
@@ -64,7 +64,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 					else
 					{
 						var updated_ship = new ShipData();
-						updated_ship.LoadFromResponse(APIName, data.api_ship);
+						updated_ship.LoadFromResponse(this.APIName, data.api_ship);
 
 						StringBuilder sb = new StringBuilder();
 						sb.Append(ship.NameWithLevel + " 의 근대화 개수에 성공했습니다.( ");
@@ -105,10 +105,10 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 						Utility.Logger.Add(2, sb.ToString());
 					}
 				}
-				ship.LoadFromResponse(APIName, data.api_ship);
+				ship.LoadFromResponse(this.APIName, data.api_ship);
 			}
 
-			db.Fleet.LoadFromResponse(APIName, data.api_deck);
+			db.Fleet.LoadFromResponse(this.APIName, data.api_deck);
 
 
 			base.OnResponseReceived((object)data);

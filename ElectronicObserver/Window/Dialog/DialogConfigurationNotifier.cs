@@ -25,81 +25,104 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogConfigurationNotifier(NotifierBase notifier)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			_notifier = notifier;
+            this._notifier = notifier;
 
-			//init base
-			_soundChanged = false;
-			_imageChanged = false;
+            //init base
+            this._soundChanged = false;
+            this._imageChanged = false;
 
-			GroupSound.AllowDrop = true;
-			GroupImage.AllowDrop = true;
+            this.GroupSound.AllowDrop = true;
+            this.GroupImage.AllowDrop = true;
 
 
 
-			//init from data
+            //init from data
 
-			IsEnabled.Checked = notifier.IsEnabled;
+            this.IsEnabled.Checked = notifier.IsEnabled;
 
-			PlaysSound.Checked = notifier.PlaysSound;
-			SoundPath.Text = notifier.SoundPath;
-			SoundVolume.Value = notifier.SoundVolume;
-			LoopsSound.Checked = notifier.LoopsSound;
+            this.PlaysSound.Checked = notifier.PlaysSound;
+            this.SoundPath.Text = notifier.SoundPath;
+            this.SoundVolume.Value = notifier.SoundVolume;
+            this.LoopsSound.Checked = notifier.LoopsSound;
 
-			DrawsImage.Checked = notifier.DialogData.DrawsImage;
-			ImagePath.Text = notifier.DialogData.ImagePath;
+            this.DrawsImage.Checked = notifier.DialogData.DrawsImage;
+            this.ImagePath.Text = notifier.DialogData.ImagePath;
 
-			ShowsDialog.Checked = notifier.ShowsDialog;
-			TopMostFlag.Checked = notifier.DialogData.TopMost;
-			Alignment.SelectedIndex = (int)notifier.DialogData.Alignment;
-			LocationX.Value = notifier.DialogData.Location.X;
-			LocationY.Value = notifier.DialogData.Location.Y;
-			DrawsMessage.Checked = notifier.DialogData.DrawsMessage;
-			HasFormBorder.Checked = notifier.DialogData.HasFormBorder;
-			AccelInterval.Value = notifier.AccelInterval / 1000;
-			ClosingInterval.Value = notifier.DialogData.ClosingInterval / 1000;
+            this.ShowsDialog.Checked = notifier.ShowsDialog;
+            this.TopMostFlag.Checked = notifier.DialogData.TopMost;
+            this.Alignment.SelectedIndex = (int)notifier.DialogData.Alignment;
+            this.LocationX.Value = notifier.DialogData.Location.X;
+            this.LocationY.Value = notifier.DialogData.Location.Y;
+            this.DrawsMessage.Checked = notifier.DialogData.DrawsMessage;
+            this.HasFormBorder.Checked = notifier.DialogData.HasFormBorder;
+            this.AccelInterval.Value = notifier.AccelInterval / 1000;
+            this.ClosingInterval.Value = notifier.DialogData.ClosingInterval / 1000;
 			for (int i = 0; i < (int)NotifierDialogClickFlags.HighestBit; i++)
-				CloseList.SetItemChecked(i, ((int)notifier.DialogData.ClickFlag & (1 << i)) != 0);
-			CloseList.SetItemChecked((int)NotifierDialogClickFlags.HighestBit, notifier.DialogData.CloseOnMouseMove);
-			ShowWithActivation.Checked = notifier.DialogData.ShowWithActivation;
-			ForeColorPreview.ForeColor = notifier.DialogData.ForeColor;
-			BackColorPreview.ForeColor = notifier.DialogData.BackColor;
-			LevelBorder.Maximum = ExpTable.ShipMaximumLevel;
+                this.CloseList.SetItemChecked(i, ((int)notifier.DialogData.ClickFlag & (1 << i)) != 0);
+            this.CloseList.SetItemChecked((int)NotifierDialogClickFlags.HighestBit, notifier.DialogData.CloseOnMouseMove);
+            this.ShowWithActivation.Checked = notifier.DialogData.ShowWithActivation;
+            this.ForeColorPreview.ForeColor = notifier.DialogData.ForeColor;
+            this.BackColorPreview.ForeColor = notifier.DialogData.BackColor;
+            this.LevelBorder.Maximum = ExpTable.ShipMaximumLevel;
 
 			NotifierDamage ndmg = notifier as NotifierDamage;
 			if (ndmg != null)
 			{
-				NotifiesBefore.Checked = ndmg.NotifiesBefore;
-				NotifiesNow.Checked = ndmg.NotifiesNow;
-				NotifiesAfter.Checked = ndmg.NotifiesAfter;
-				ContainsNotLockedShip.Checked = ndmg.ContainsNotLockedShip;
-				ContainsSafeShip.Checked = ndmg.ContainsSafeShip;
-				ContainsFlagship.Checked = ndmg.ContainsFlagship;
-				LevelBorder.Value = ndmg.LevelBorder;
-				NotifiesAtEndpoint.Checked = ndmg.NotifiesAtEndpoint;
+                this.NotifiesBefore.Checked = ndmg.NotifiesBefore;
+                this.NotifiesNow.Checked = ndmg.NotifiesNow;
+                this.NotifiesAfter.Checked = ndmg.NotifiesAfter;
+                this.ContainsNotLockedShip.Checked = ndmg.ContainsNotLockedShip;
+                this.ContainsSafeShip.Checked = ndmg.ContainsSafeShip;
+                this.ContainsFlagship.Checked = ndmg.ContainsFlagship;
+                this.LevelBorder.Value = ndmg.LevelBorder;
+                this.NotifiesAtEndpoint.Checked = ndmg.NotifiesAtEndpoint;
 
 			}
 			else
 			{
-				GroupDamage.Visible = false;
-				GroupDamage.Enabled = false;
+                this.GroupDamage.Visible = false;
+                this.GroupDamage.Enabled = false;
 			}
 
 			NotifierAnchorageRepair nanc = notifier as NotifierAnchorageRepair;
 			if (nanc != null)
 			{
-				AnchorageRepairNotificationLevel.SelectedIndex = nanc.NotificationLevel;
+                this.AnchorageRepairNotificationLevel.SelectedIndex = nanc.NotificationLevel;
 
 			}
 			else
 			{
-				GroupAnchorageRepair.Visible = false;
-				GroupAnchorageRepair.Enabled = false;
+                this.GroupAnchorageRepair.Visible = false;
+                this.GroupAnchorageRepair.Enabled = false;
 			}
 
+            var nbac = notifier as NotifierBaseAirCorps;
+            if (nbac != null)
+            {
+                this.BaseAirCorps_NotSupplied.Checked = nbac.NotifiesNotSupplied;
+                this.BaseAirCorps_Tired.Checked = nbac.NotifiesTired;
+                this.BaseAirCorps_NotOrganized.Checked = nbac.NotifiesNotOrganized;
 
-			DialogOpenSound.Filter = "사운드파일|" + string.Join(";", Utility.MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
+                this.BaseAirCorps_Standby.Checked = nbac.NotifiesStandby;
+                this.BaseAirCorps_Retreat.Checked = nbac.NotifiesRetreat;
+                this.BaseAirCorps_Rest.Checked = nbac.NotifiesRest;
+
+                this.BaseAirCorps_NormalMap.Checked = nbac.NotifiesNormalMap;
+                this.BaseAirCorps_EventMap.Checked = nbac.NotifiesEventMap;
+
+                this.BaseAirCorps_SquadronRelocation.Checked = nbac.NotifiesSquadronRelocation;
+                this.BaseAirCorps_EquipmentRelocation.Checked = nbac.NotifiesEquipmentRelocation;
+            }
+            else
+            {
+                this.GroupBaseAirCorps.Visible = false;
+                this.GroupBaseAirCorps.Enabled = false;
+            }
+
+
+            this.DialogOpenSound.Filter = "사운드파일|" + string.Join(";", Utility.MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
 
 		}
 
@@ -127,7 +150,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void GroupSound_DragDrop(object sender, DragEventArgs e)
 		{
 
-			SoundPath.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+            this.SoundPath.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
 		}
 
 		private void GroupImage_DragEnter(object sender, DragEventArgs e)
@@ -147,7 +170,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void GroupImage_DragDrop(object sender, DragEventArgs e)
 		{
 
-			ImagePath.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+            this.ImagePath.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
 		}
 
 
@@ -155,31 +178,31 @@ namespace ElectronicObserver.Window.Dialog
 		private void SoundPath_TextChanged(object sender, EventArgs e)
 		{
 
-			_soundChanged = true;
+            this._soundChanged = true;
 		}
 
 		private void ImagePath_TextChanged(object sender, EventArgs e)
 		{
 
-			_imageChanged = true;
+            this._imageChanged = true;
 		}
 
 		private void SoundPathSearch_Click(object sender, EventArgs e)
 		{
 
-			if (SoundPath.Text != "")
+			if (this.SoundPath.Text != "")
 			{
 				try
 				{
-					DialogOpenSound.InitialDirectory = System.IO.Path.GetDirectoryName(SoundPath.Text);
+                    this.DialogOpenSound.InitialDirectory = System.IO.Path.GetDirectoryName(this.SoundPath.Text);
 
 				}
 				catch (Exception) { }
 			}
 
-			if (DialogOpenSound.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.DialogOpenSound.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				SoundPath.Text = DialogOpenSound.FileName;
+                this.SoundPath.Text = this.DialogOpenSound.FileName;
 			}
 
 		}
@@ -187,19 +210,19 @@ namespace ElectronicObserver.Window.Dialog
 		private void ImagePathSearch_Click(object sender, EventArgs e)
 		{
 
-			if (ImagePath.Text != "")
+			if (this.ImagePath.Text != "")
 			{
 				try
 				{
-					DialogOpenImage.InitialDirectory = System.IO.Path.GetDirectoryName(ImagePath.Text);
+                    this.DialogOpenImage.InitialDirectory = System.IO.Path.GetDirectoryName(this.ImagePath.Text);
 
 				}
 				catch (Exception) { }
 			}
 
-			if (DialogOpenImage.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.DialogOpenImage.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				ImagePath.Text = DialogOpenImage.FileName;
+                this.ImagePath.Text = this.DialogOpenImage.FileName;
 			}
 		}
 
@@ -207,20 +230,20 @@ namespace ElectronicObserver.Window.Dialog
 		private void ForeColorSelect_Click(object sender, EventArgs e)
 		{
 
-			DialogColor.Color = ForeColorPreview.ForeColor;
-			if (DialogColor.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            this.DialogColor.Color = this.ForeColorPreview.ForeColor;
+			if (this.DialogColor.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				ForeColorPreview.ForeColor = DialogColor.Color;
+                this.ForeColorPreview.ForeColor = this.DialogColor.Color;
 			}
 		}
 
 		private void BackColorSelect_Click(object sender, EventArgs e)
 		{
 
-			DialogColor.Color = BackColorPreview.ForeColor;
-			if (DialogColor.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            this.DialogColor.Color = this.BackColorPreview.ForeColor;
+			if (this.DialogColor.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				BackColorPreview.ForeColor = DialogColor.Color;
+                this.BackColorPreview.ForeColor = this.DialogColor.Color;
 			}
 		}
 
@@ -228,26 +251,26 @@ namespace ElectronicObserver.Window.Dialog
 		private void ForeColorPreview_ForeColorChanged(object sender, EventArgs e)
 		{
 
-			if (ForeColorPreview.ForeColor.GetBrightness() >= 0.5)
+			if (this.ForeColorPreview.ForeColor.GetBrightness() >= 0.5)
 			{
-				ForeColorPreview.BackColor = Color.Black;
+                this.ForeColorPreview.BackColor = Color.Black;
 			}
 			else
 			{
-				ForeColorPreview.BackColor = Color.White;
+                this.ForeColorPreview.BackColor = Color.White;
 			}
 		}
 
 		private void BackColorPreview_ForeColorChanged(object sender, EventArgs e)
 		{
 
-			if (BackColorPreview.ForeColor.GetBrightness() >= 0.5)
+			if (this.BackColorPreview.ForeColor.GetBrightness() >= 0.5)
 			{
-				BackColorPreview.BackColor = Color.Black;
+                this.BackColorPreview.BackColor = Color.Black;
 			}
 			else
 			{
-				BackColorPreview.BackColor = Color.White;
+                this.BackColorPreview.BackColor = Color.White;
 			}
 		}
 
@@ -256,15 +279,15 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonOK_Click(object sender, EventArgs e)
 		{
 
-			if (!SetConfiguration()) return;
+			if (!this.SetConfiguration()) return;
 
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
 
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 
@@ -272,17 +295,17 @@ namespace ElectronicObserver.Window.Dialog
 		{
 
 
-			if (_soundChanged)
+			if (this._soundChanged)
 			{
-				if (!_notifier.LoadSound(SoundPath.Text) && PlaysSound.Checked)
+				if (!this._notifier.LoadSound(this.SoundPath.Text) && this.PlaysSound.Checked)
 				{
 					MessageBox.Show("사운드파일 불러오기에 실패했습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
 				}
 			}
-			if (_imageChanged)
+			if (this._imageChanged)
 			{
-				if (!_notifier.DialogData.LoadImage(ImagePath.Text) && DrawsImage.Checked)
+				if (!this._notifier.DialogData.LoadImage(this.ImagePath.Text) && this.DrawsImage.Checked)
 				{
 					MessageBox.Show("사운드파일 불러오기에 실패했습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return false;
@@ -290,89 +313,104 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			//set configuration
-			_notifier.IsEnabled = IsEnabled.Checked;
+            //set configuration
+            this._notifier.IsEnabled = this.IsEnabled.Checked;
 
-			_notifier.PlaysSound = PlaysSound.Checked;
-			_notifier.DialogData.DrawsImage = DrawsImage.Checked;
-			_notifier.SoundVolume = (int)SoundVolume.Value;
-			_notifier.LoopsSound = LoopsSound.Checked;
+            this._notifier.PlaysSound = this.PlaysSound.Checked;
+            this._notifier.DialogData.DrawsImage = this.DrawsImage.Checked;
+            this._notifier.SoundVolume = (int)this.SoundVolume.Value;
+            this._notifier.LoopsSound = this.LoopsSound.Checked;
 
-			_notifier.ShowsDialog = ShowsDialog.Checked;
-			_notifier.DialogData.TopMost = TopMostFlag.Checked;
-			_notifier.DialogData.Alignment = (NotifierDialogAlignment)Alignment.SelectedIndex;
-			_notifier.DialogData.Location = new Point((int)LocationX.Value, (int)LocationY.Value);
-			_notifier.DialogData.DrawsMessage = DrawsMessage.Checked;
-			_notifier.DialogData.HasFormBorder = HasFormBorder.Checked;
-			_notifier.AccelInterval = (int)(AccelInterval.Value * 1000);
-			_notifier.DialogData.ClosingInterval = (int)(ClosingInterval.Value * 1000);
+            this._notifier.ShowsDialog = this.ShowsDialog.Checked;
+            this._notifier.DialogData.TopMost = this.TopMostFlag.Checked;
+            this._notifier.DialogData.Alignment = (NotifierDialogAlignment)this.Alignment.SelectedIndex;
+            this._notifier.DialogData.Location = new Point((int)this.LocationX.Value, (int)this.LocationY.Value);
+            this._notifier.DialogData.DrawsMessage = this.DrawsMessage.Checked;
+            this._notifier.DialogData.HasFormBorder = this.HasFormBorder.Checked;
+            this._notifier.AccelInterval = (int)(this.AccelInterval.Value * 1000);
+            this._notifier.DialogData.ClosingInterval = (int)(this.ClosingInterval.Value * 1000);
 			{
 				int flag = 0;
 				for (int i = 0; i < (int)NotifierDialogClickFlags.HighestBit; i++)
-					flag |= (CloseList.GetItemChecked(i) ? 1 : 0) << i;
-				_notifier.DialogData.ClickFlag = (NotifierDialogClickFlags)flag;
+					flag |= (this.CloseList.GetItemChecked(i) ? 1 : 0) << i;
+                this._notifier.DialogData.ClickFlag = (NotifierDialogClickFlags)flag;
 			}
-			_notifier.DialogData.CloseOnMouseMove = CloseList.GetItemChecked((int)NotifierDialogClickFlags.HighestBit);
-			_notifier.DialogData.ForeColor = ForeColorPreview.ForeColor;
-			_notifier.DialogData.BackColor = BackColorPreview.ForeColor;
-			_notifier.DialogData.ShowWithActivation = ShowWithActivation.Checked;
+            this._notifier.DialogData.CloseOnMouseMove = this.CloseList.GetItemChecked((int)NotifierDialogClickFlags.HighestBit);
+            this._notifier.DialogData.ForeColor = this.ForeColorPreview.ForeColor;
+            this._notifier.DialogData.BackColor = this.BackColorPreview.ForeColor;
+            this._notifier.DialogData.ShowWithActivation = this.ShowWithActivation.Checked;
 
-			var ndmg = _notifier as NotifierDamage;
+			var ndmg = this._notifier as NotifierDamage;
 			if (ndmg != null)
 			{
-				ndmg.NotifiesBefore = NotifiesBefore.Checked;
-				ndmg.NotifiesNow = NotifiesNow.Checked;
-				ndmg.NotifiesAfter = NotifiesAfter.Checked;
-				ndmg.ContainsNotLockedShip = ContainsNotLockedShip.Checked;
-				ndmg.ContainsSafeShip = ContainsSafeShip.Checked;
-				ndmg.ContainsFlagship = ContainsFlagship.Checked;
-				ndmg.LevelBorder = (int)LevelBorder.Value;
-				ndmg.NotifiesAtEndpoint = NotifiesAtEndpoint.Checked;
+				ndmg.NotifiesBefore = this.NotifiesBefore.Checked;
+				ndmg.NotifiesNow = this.NotifiesNow.Checked;
+				ndmg.NotifiesAfter = this.NotifiesAfter.Checked;
+				ndmg.ContainsNotLockedShip = this.ContainsNotLockedShip.Checked;
+				ndmg.ContainsSafeShip = this.ContainsSafeShip.Checked;
+				ndmg.ContainsFlagship = this.ContainsFlagship.Checked;
+				ndmg.LevelBorder = (int)this.LevelBorder.Value;
+				ndmg.NotifiesAtEndpoint = this.NotifiesAtEndpoint.Checked;
 			}
 
-			var nanc = _notifier as NotifierAnchorageRepair;
+			var nanc = this._notifier as NotifierAnchorageRepair;
 			if (nanc != null)
 			{
-				nanc.NotificationLevel = AnchorageRepairNotificationLevel.SelectedIndex;
+				nanc.NotificationLevel = this.AnchorageRepairNotificationLevel.SelectedIndex;
 			}
 
-			return true;
+            var nbac = this._notifier as NotifierBaseAirCorps;
+            if (nbac != null)
+            {
+                nbac.NotifiesNotSupplied = this.BaseAirCorps_NotSupplied.Checked;
+                nbac.NotifiesTired = this.BaseAirCorps_Tired.Checked;
+                nbac.NotifiesNotOrganized = this.BaseAirCorps_NotOrganized.Checked;
+                nbac.NotifiesStandby = this.BaseAirCorps_Standby.Checked;
+                nbac.NotifiesRetreat = this.BaseAirCorps_Retreat.Checked;
+                nbac.NotifiesRest = this.BaseAirCorps_Rest.Checked;
+                nbac.NotifiesNormalMap = this.BaseAirCorps_NormalMap.Checked;
+                nbac.NotifiesEventMap = this.BaseAirCorps_EventMap.Checked;
+                nbac.NotifiesSquadronRelocation = this.BaseAirCorps_SquadronRelocation.Checked;
+                nbac.NotifiesEquipmentRelocation = this.BaseAirCorps_EquipmentRelocation.Checked;
+            }
+
+            return true;
 		}
 
 
 		private void ButtonTest_Click(object sender, EventArgs e)
 		{
 
-			if (!SetConfiguration()) return;
+			if (!this.SetConfiguration()) return;
 
-			if (_notifier.DialogData.Alignment == NotifierDialogAlignment.Custom)
+			if (this._notifier.DialogData.Alignment == NotifierDialogAlignment.Custom)
 			{
-				_notifier.DialogData.Message = "테스트 알림입니다.\r\n창을 이동시킨후 닫으면 해당위치로 좌표가 수정됩니다.";
-				_notifier.Notify((_sender, _e) =>
+                this._notifier.DialogData.Message = "테스트 알림입니다.\r\n창을 이동시킨후 닫으면 해당위치로 좌표가 수정됩니다.";
+                this._notifier.Notify((_sender, _e) =>
 				{
 					var dialog = _sender as DialogNotifier;
 					if (dialog != null)
 					{
-						_notifier.DialogData.Location = dialog.Location;
-						LocationX.Value = dialog.Location.X;
-						LocationY.Value = dialog.Location.Y;
+                        this._notifier.DialogData.Location = dialog.Location;
+                        this.LocationX.Value = dialog.Location.X;
+                        this.LocationY.Value = dialog.Location.Y;
 					}
 				});
 			}
 			else
 			{
-				_notifier.DialogData.Message = "테스트 알림입니다.";
-				_notifier.Notify();
+                this._notifier.DialogData.Message = "테스트 알림입니다.";
+                this._notifier.Notify();
 			}
 		}
 
 		private void SoundPathDirectorize_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrWhiteSpace(SoundPath.Text))
+			if (!string.IsNullOrWhiteSpace(this.SoundPath.Text))
 			{
 				try
 				{
-					SoundPath.Text = System.IO.Path.GetDirectoryName(SoundPath.Text);
+                    this.SoundPath.Text = System.IO.Path.GetDirectoryName(this.SoundPath.Text);
 				}
 				catch (Exception)
 				{

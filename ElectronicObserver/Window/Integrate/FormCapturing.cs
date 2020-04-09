@@ -19,7 +19,7 @@ namespace ElectronicObserver.Window.Integrate
 	{
 		public FormCapturing()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 	}
 

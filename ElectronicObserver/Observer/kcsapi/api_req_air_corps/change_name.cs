@@ -20,7 +20,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_air_corps
 
 			if (corps.ContainsKey(aircorpsID))
 			{
-				corps[aircorpsID].LoadFromRequest(APIName, data);
+				corps[aircorpsID].LoadFromRequest(this.APIName, data);
 			}
 
 			base.OnRequestReceived(data);

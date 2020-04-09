@@ -23,12 +23,12 @@ namespace ElectronicObserver.Data.Quest
 		public void Increment(int amount)
 		{
 			for (int i = 0; i < amount; i++)
-				Increment();
+                this.Increment();
 		}
 
 		public override string GetClearCondition()
 		{
-			return "해체 " + ProgressMax;
+			return "해체 " + this.ProgressMax;
 		}
 	}
 }

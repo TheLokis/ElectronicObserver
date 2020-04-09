@@ -26,13 +26,13 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 				if (!db.Arsenals.ContainsKey(id))
 				{
 					var a = new ArsenalData();
-					a.LoadFromResponse(APIName, ars);
+					a.LoadFromResponse(this.APIName, ars);
 					db.Arsenals.Add(a);
 
 				}
 				else
 				{
-					db.Arsenals[id].LoadFromResponse(APIName, ars);
+					db.Arsenals[id].LoadFromResponse(this.APIName, ars);
 				}
 			}
 
@@ -43,7 +43,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 				{
 
 					var eq = new EquipmentData();
-					eq.LoadFromResponse(APIName, elem);
+					eq.LoadFromResponse(this.APIName, elem);
 					db.Equipments.Add(eq);
 
 				}
@@ -52,7 +52,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 			//api_ship
 			{
 				ShipData ship = new ShipData();
-				ship.LoadFromResponse(APIName, data.api_ship);
+				ship.LoadFromResponse(this.APIName, data.api_ship);
 				db.Ships.Add(ship);
 
 				Utility.Logger.Add(2, string.Format("{0}「{1}」의 건조가 완료되었습니다.", ship.MasterShip.ShipTypeName, ship.MasterShip.NameWithClass));

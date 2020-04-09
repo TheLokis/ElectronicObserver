@@ -192,6 +192,7 @@ namespace ElectronicObserver.Window.Dialog
             this.FormBattle_HideDuringBattle = new System.Windows.Forms.CheckBox();
             this.FormBattle_IsScrollable = new System.Windows.Forms.CheckBox();
             this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.FormBrowser_SavesBrowserLog = new System.Windows.Forms.CheckBox();
             this.FormBrowser_ForceColorProfile = new System.Windows.Forms.CheckBox();
             this.FormBrowser_PreserveDrawingBuffer = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -256,7 +257,7 @@ namespace ElectronicObserver.Window.Dialog
             this.APIListBrowser = new System.Windows.Forms.OpenFileDialog();
             this.Log_PlayTime = new System.Windows.Forms.Label();
             this.PlayTimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.FormBrowser_SavesBrowserLog = new System.Windows.Forms.CheckBox();
+            this.Notification_BaseAirCorps = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Connection_UpstreamProxyPort)).BeginInit();
@@ -1063,7 +1064,7 @@ namespace ElectronicObserver.Window.Dialog
             this.Debug_SealingPanel.Controls.Add(this.Debug_APIListPathSearch);
             this.Debug_SealingPanel.Location = new System.Drawing.Point(0, 56);
             this.Debug_SealingPanel.Name = "Debug_SealingPanel";
-            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 245);
+            this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 243);
             this.Debug_SealingPanel.TabIndex = 1;
             // 
             // Debug_APIListPath
@@ -2248,13 +2249,24 @@ namespace ElectronicObserver.Window.Dialog
             this.tabPage12.Controls.Add(this.FormBrowser_LogInPageURL);
             this.tabPage12.Controls.Add(this.FormBrowser_ZoomRate);
             this.tabPage12.Controls.Add(this.label15);
-            this.tabPage12.Location = new System.Drawing.Point(4, 24);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(682, 338);
+            this.tabPage12.Size = new System.Drawing.Size(682, 340);
             this.tabPage12.TabIndex = 3;
             this.tabPage12.Text = "브라우저";
             this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // FormBrowser_SavesBrowserLog
+            // 
+            this.FormBrowser_SavesBrowserLog.AutoSize = true;
+            this.FormBrowser_SavesBrowserLog.Location = new System.Drawing.Point(6, 274);
+            this.FormBrowser_SavesBrowserLog.Name = "FormBrowser_SavesBrowserLog";
+            this.FormBrowser_SavesBrowserLog.Size = new System.Drawing.Size(182, 19);
+            this.FormBrowser_SavesBrowserLog.TabIndex = 18;
+            this.FormBrowser_SavesBrowserLog.Text = "브라우저의 오류 로그를 저장";
+            this.ToolTipInfo.SetToolTip(this.FormBrowser_SavesBrowserLog, "BrowserLog.log 에 브라우저 에러 로그를 저장합니다. \r\n문제해결에 도움이 될 수 있으나,\r\n프로그램이 무거워 질 수 있습니다.");
+            this.FormBrowser_SavesBrowserLog.UseVisualStyleBackColor = true;
             // 
             // FormBrowser_ForceColorProfile
             // 
@@ -2656,6 +2668,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.Notification_BaseAirCorps);
             this.tabPage11.Controls.Add(this.silenceFullscreen);
             this.tabPage11.Controls.Add(this.Notification_Silencio);
             this.tabPage11.Controls.Add(this.Notification_AnchorageRepair);
@@ -2677,7 +2690,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.silenceFullscreen.AutoSize = true;
             this.silenceFullscreen.Enabled = false;
-            this.silenceFullscreen.Location = new System.Drawing.Point(8, 207);
+            this.silenceFullscreen.Location = new System.Drawing.Point(8, 242);
             this.silenceFullscreen.Name = "silenceFullscreen";
             this.silenceFullscreen.Size = new System.Drawing.Size(160, 19);
             this.silenceFullscreen.TabIndex = 8;
@@ -2688,9 +2701,9 @@ namespace ElectronicObserver.Window.Dialog
             // Notification_Silencio
             // 
             this.Notification_Silencio.AutoSize = true;
-            this.Notification_Silencio.Location = new System.Drawing.Point(8, 181);
+            this.Notification_Silencio.Location = new System.Drawing.Point(8, 217);
             this.Notification_Silencio.Name = "Notification_Silencio";
-            this.Notification_Silencio.Size = new System.Drawing.Size(118, 19);
+            this.Notification_Silencio.Size = new System.Drawing.Size(106, 19);
             this.Notification_Silencio.TabIndex = 7;
             this.Notification_Silencio.Text = "모든 알림 무시";
             this.ToolTipInfo.SetToolTip(this.Notification_Silencio, "모든 알림을 무시합니다. 사운드도 음소거되며, \n대파 알림도 무시되니 \n대파시에는 주의해주세요.\r\n\r\n「실렌시오！닥쳐！」");
@@ -2710,7 +2723,7 @@ namespace ElectronicObserver.Window.Dialog
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 316);
+            this.label10.Location = new System.Drawing.Point(3, 314);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(256, 15);
             this.label10.TabIndex = 5;
@@ -2855,7 +2868,7 @@ namespace ElectronicObserver.Window.Dialog
             this.BGMPlayer_ControlGrid.RowHeadersVisible = false;
             this.BGMPlayer_ControlGrid.RowTemplate.Height = 21;
             this.BGMPlayer_ControlGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 265);
+            this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 263);
             this.BGMPlayer_ControlGrid.TabIndex = 0;
             this.BGMPlayer_ControlGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BGMPlayer_ControlGrid_CellContentClick);
             this.BGMPlayer_ControlGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.BGMPlayer_ControlGrid_CellFormatting);
@@ -2953,16 +2966,15 @@ namespace ElectronicObserver.Window.Dialog
             this.PlayTimeTimer.Interval = 1000;
             this.PlayTimeTimer.Tick += new System.EventHandler(this.PlayTimeTimer_Tick);
             // 
-            // FormBrowser_SavesBrowserLog
+            // Notification_BaseAirCorps
             // 
-            this.FormBrowser_SavesBrowserLog.AutoSize = true;
-            this.FormBrowser_SavesBrowserLog.Location = new System.Drawing.Point(6, 274);
-            this.FormBrowser_SavesBrowserLog.Name = "FormBrowser_SavesBrowserLog";
-            this.FormBrowser_SavesBrowserLog.Size = new System.Drawing.Size(182, 19);
-            this.FormBrowser_SavesBrowserLog.TabIndex = 18;
-            this.FormBrowser_SavesBrowserLog.Text = "브라우저의 오류 로그를 저장";
-            this.ToolTipInfo.SetToolTip(this.FormBrowser_SavesBrowserLog, "BrowserLog.log 에 브라우저 에러 로그를 저장합니다. \r\n문제해결에 도움이 될 수 있으나,\r\n프로그램이 무거워 질 수 있습니다.");
-            this.FormBrowser_SavesBrowserLog.UseVisualStyleBackColor = true;
+            this.Notification_BaseAirCorps.Location = new System.Drawing.Point(8, 181);
+            this.Notification_BaseAirCorps.Name = "Notification_BaseAirCorps";
+            this.Notification_BaseAirCorps.Size = new System.Drawing.Size(150, 23);
+            this.Notification_BaseAirCorps.TabIndex = 9;
+            this.Notification_BaseAirCorps.Text = "기지 항공대 알림 설정 ";
+            this.Notification_BaseAirCorps.UseVisualStyleBackColor = true;
+            this.Notification_BaseAirCorps.Click += new System.EventHandler(this.Notification_BaseAirCorps_Click);
             // 
             // DialogConfiguration
             // 
@@ -3280,5 +3292,6 @@ namespace ElectronicObserver.Window.Dialog
         private System.Windows.Forms.CheckBox FormFleet_FocusModifiedFleet;
         private System.Windows.Forms.CheckBox Control_ShowExpeditionAlertDialog;
         private System.Windows.Forms.CheckBox FormBrowser_SavesBrowserLog;
+        private System.Windows.Forms.Button Notification_BaseAirCorps;
     }
 }

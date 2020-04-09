@@ -21,7 +21,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 			var ship = KCDatabase.Instance.Ships[id];
 			Utility.Logger.Add(2, string.Format("{0} Lv. {1} 로 개장이 완료되었습니다.", ship.MasterShip.RemodelAfterShip.NameWithClass, ship.Level));
 
-			KCDatabase.Instance.Fleet.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Fleet.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

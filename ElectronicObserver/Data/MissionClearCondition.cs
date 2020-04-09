@@ -320,18 +320,18 @@ namespace ElectronicObserver.Data
             /// <summary>
             /// 遠征が失敗した理由 / 未対応遠征の場合のメッセージ
             /// </summary>
-            public ReadOnlyCollection<string> FailureReason => failureReason.AsReadOnly();
+            public ReadOnlyCollection<string> FailureReason => this.failureReason.AsReadOnly();
 
             // nullable!
             private FleetData targetFleet;
-            private IEnumerable<ShipData> members => (targetFleet?.MembersInstance ?? Enumerable.Empty<ShipData>()).Where(s => s != null);
+            private IEnumerable<ShipData> members => (this.targetFleet?.MembersInstance ?? Enumerable.Empty<ShipData>()).Where(s => s != null);
 
 
             public MissionClearConditionResult(FleetData targetFleet)
             {
                 this.targetFleet = targetFleet;
-                IsSuceeded = true;
-                failureReason = new List<string>();
+                this.IsSuceeded = true;
+                this.failureReason = new List<string>();
             }
 
 
@@ -339,80 +339,80 @@ namespace ElectronicObserver.Data
             {
                 if (!condition)
                 {
-                    IsSuceeded = false;
-                    failureReason.Add(failedMessage());
+                    this.IsSuceeded = false;
+                    this.failureReason.Add(failedMessage());
                 }
             }
 
-            private string CurrentValue(int value) => targetFleet != null ? (value.ToString() + "/") : "";
+            private string CurrentValue(int value) => this.targetFleet != null ? (value.ToString() + "/") : "";
 
             public MissionClearConditionResult AddMessage(string message)
             {
-                failureReason.Add(message);
+                this.failureReason.Add(message);
                 return this;
             }
             public MissionClearConditionResult Fail(string reason)
             {
-                Assert(false, () => reason);
+                this.Assert(false, () => reason);
                 return this;
             }
 
             public MissionClearConditionResult CheckFlagshipLevel(int leastLevel)
             {
-                int actualLevel = members.FirstOrDefault()?.Level ?? 0;
-                Assert(actualLevel >= leastLevel,
-                    () => $"기함Lv{CurrentValue(actualLevel)}{leastLevel}");
+                int actualLevel = this.members.FirstOrDefault()?.Level ?? 0;
+                this.Assert(actualLevel >= leastLevel,
+                    () => $"기함Lv{this.CurrentValue(actualLevel)}{leastLevel}");
                 return this;
             }
 
             public MissionClearConditionResult CheckLevelSum(int leastSum)
             {
-                int actualSum = members.Sum(s => s.Level);
-                Assert(actualSum >= leastSum,
-                    () => $"Lv합계{CurrentValue(actualSum)}{leastSum}");
+                int actualSum = this.members.Sum(s => s.Level);
+                this.Assert(actualSum >= leastSum,
+                    () => $"Lv합계{this.CurrentValue(actualSum)}{leastSum}");
                 return this;
             }
 
             public MissionClearConditionResult CheckShipCount(int leastCount)
             {
-                int actualCount = members.Count();
-                Assert(
+                int actualCount = this.members.Count();
+                this.Assert(
                     actualCount >= leastCount,
-                    () => $"함선수{CurrentValue(actualCount)}{leastCount}");
+                    () => $"함선수{this.CurrentValue(actualCount)}{leastCount}");
                 return this;
             }
 
 
             public MissionClearConditionResult CheckShipCount(Func<ShipData, bool> predicate, int leastCount, string whatis)
             {
-                int actualCount = members.Count(predicate);
-                Assert(
+                int actualCount = this.members.Count(predicate);
+                this.Assert(
                     actualCount >= leastCount,
-                    () => $"{whatis}{CurrentValue(actualCount)}{leastCount}");
+                    () => $"{whatis}{this.CurrentValue(actualCount)}{leastCount}");
                 return this;
             }
 
             public MissionClearConditionResult CheckShipCountByType(ShipTypes shipType, int leastCount) =>
-                CheckShipCount(s => s.MasterShip.ShipType == shipType, leastCount, KCDatabase.Instance.ShipTypes[(int)shipType].Name);
+                this.CheckShipCount(s => s.MasterShip.ShipType == shipType, leastCount, KCDatabase.Instance.ShipTypes[(int)shipType].Name);
 
             public MissionClearConditionResult CheckSmallShipCount(int leastCount) =>
-                CheckShipCount(s => s.MasterShip.ShipType == ShipTypes.Destroyer || s.MasterShip.ShipType == ShipTypes.Escort, leastCount, "(구축+해방)");
+                this.CheckShipCount(s => s.MasterShip.ShipType == ShipTypes.Destroyer || s.MasterShip.ShipType == ShipTypes.Escort, leastCount, "(구축+해방)");
 
             public MissionClearConditionResult CheckAircraftCarrierCount(int leastCount) =>
-                CheckShipCount(s => s.MasterShip.IsAircraftCarrier || s.MasterShip.ShipType == ShipTypes.SeaplaneTender, leastCount, "항모계");
+                this.CheckShipCount(s => s.MasterShip.IsAircraftCarrier || s.MasterShip.ShipType == ShipTypes.SeaplaneTender, leastCount, "항모계");
 
             public MissionClearConditionResult CheckSubmarineCount(int leastCount) =>
-               CheckShipCount(s => s.MasterShip.IsSubmarine, leastCount, "잠수함계");
+               this.CheckShipCount(s => s.MasterShip.IsSubmarine, leastCount, "잠수함계");
 
             public MissionClearConditionResult CheckEscortFleet()
             {
-                int lightCruiser = members.Count(s => s.MasterShip.ShipType == ShipTypes.LightCruiser);
-                int destroyer = members.Count(s => s.MasterShip.ShipType == ShipTypes.Destroyer);
-                int trainingCruiser = members.Count(s => s.MasterShip.ShipType == ShipTypes.TrainingCruiser);
-                int escort = members.Count(s => s.MasterShip.ShipType == ShipTypes.Escort);
-                int escortAircraftCarrier = members.Count(s => s.MasterShip.ShipType == ShipTypes.LightAircraftCarrier && s.ASWBase > 0);
+                int lightCruiser = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.LightCruiser);
+                int destroyer = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.Destroyer);
+                int trainingCruiser = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.TrainingCruiser);
+                int escort = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.Escort);
+                int escortAircraftCarrier = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.LightAircraftCarrier && s.ASWBase > 0);
 
-                Assert(
+                this.Assert(
                     (lightCruiser >= 1 && (destroyer + escort) >= 2) ||
                     (escortAircraftCarrier >= 1 && (destroyer >= 2 || escort >= 2)) ||
                     (destroyer >= 1 && escort >= 3) ||
@@ -425,13 +425,13 @@ namespace ElectronicObserver.Data
 
             public MissionClearConditionResult CheckEscortFleetDD3()
             {
-                int lightCruiser = members.Count(s => s.MasterShip.ShipType == ShipTypes.LightCruiser);
-                int destroyer = members.Count(s => s.MasterShip.ShipType == ShipTypes.Destroyer);
-                int trainingCruiser = members.Count(s => s.MasterShip.ShipType == ShipTypes.TrainingCruiser);
-                int escort = members.Count(s => s.MasterShip.ShipType == ShipTypes.Escort);
-                int escortAircraftCarrier = members.Count(s => s.MasterShip.ShipType == ShipTypes.LightAircraftCarrier && s.ASWBase > 0);
+                int lightCruiser = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.LightCruiser);
+                int destroyer = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.Destroyer);
+                int trainingCruiser = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.TrainingCruiser);
+                int escort = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.Escort);
+                int escortAircraftCarrier = this.members.Count(s => s.MasterShip.ShipType == ShipTypes.LightAircraftCarrier && s.ASWBase > 0);
 
-                Assert(
+                this.Assert(
                     (lightCruiser >= 1 && (destroyer + escort) >= 3) ||
                     (lightCruiser >= 1 && escort >= 2) ||
                     (escortAircraftCarrier >= 1 && (destroyer >= 2 || escort >= 2)) ||
@@ -445,33 +445,33 @@ namespace ElectronicObserver.Data
 
             public MissionClearConditionResult CheckFlagshipType(ShipTypes shipType)
             {
-                Assert(
-                   members.FirstOrDefault()?.MasterShip?.ShipType == shipType,
+                this.Assert(
+                   this.members.FirstOrDefault()?.MasterShip?.ShipType == shipType,
                     () => $"기함:{KCDatabase.Instance.ShipTypes[(int)shipType].Name}");
                 return this;
             }
 
             public MissionClearConditionResult CheckParameter(Func<ShipData, int> selector, int leastSum, string parameterName)
             {
-                int actualSum = members.Sum(s => selector(s));
-                Assert(
+                int actualSum = this.members.Sum(s => selector(s));
+                this.Assert(
                     actualSum >= leastSum,
-                    () => $"{parameterName}{CurrentValue(actualSum)}{leastSum}");
+                    () => $"{parameterName}{this.CurrentValue(actualSum)}{leastSum}");
                 return this;
             }
 
             public MissionClearConditionResult CheckFirepower(int leastSum) =>
-               CheckParameter(s => s.FirepowerTotal, leastSum, "화력");
+               this.CheckParameter(s => s.FirepowerTotal, leastSum, "화력");
 
             public MissionClearConditionResult CheckAA(int leastSum) =>
-                CheckParameter(s => s.AATotal, leastSum, "대공");
+                this.CheckParameter(s => s.AATotal, leastSum, "대공");
 
             public MissionClearConditionResult CheckLOS(int leastSum) =>
-               CheckParameter(s => s.LOSTotal, leastSum, "색적");
+               this.CheckParameter(s => s.LOSTotal, leastSum, "색적");
 
 
             public MissionClearConditionResult CheckASW(int leastSum) =>
-                CheckParameter(s => s.ASWTotal - s.AllSlotInstance.Sum(eq =>
+                this.CheckParameter(s => s.ASWTotal - s.AllSlotInstance.Sum(eq =>
                 {
                     if (eq == null) return 0;
                     switch (eq.MasterEquipment.CategoryType)
@@ -488,32 +488,32 @@ namespace ElectronicObserver.Data
 
             public MissionClearConditionResult CheckEquipmentCount(Func<EquipmentData, bool> predicate, int leastCount, string whatis)
             {
-                int actualCount = members.Sum(s => s.AllSlotInstance.Count(eq => eq != null && predicate(eq)));
-                Assert(actualCount >= leastCount,
-                    () => $"{whatis}:장비수{CurrentValue(actualCount)}{leastCount}");
+                int actualCount = this.members.Sum(s => s.AllSlotInstance.Count(eq => eq != null && predicate(eq)));
+                this.Assert(actualCount >= leastCount,
+                    () => $"{whatis}:장비수{this.CurrentValue(actualCount)}{leastCount}");
                 return this;
             }
 
             public MissionClearConditionResult CheckEquipmentCount(EquipmentTypes equipmentType, int leastCount) =>
-                CheckEquipmentCount(eq => eq.MasterEquipment.CategoryType == equipmentType, leastCount, KCDatabase.Instance.EquipmentTypes[(int)equipmentType].Name);
+                this.CheckEquipmentCount(eq => eq.MasterEquipment.CategoryType == equipmentType, leastCount, KCDatabase.Instance.EquipmentTypes[(int)equipmentType].Name);
 
 
             public MissionClearConditionResult CheckEquippedShipCount(Func<EquipmentData, bool> predicate, int leastCount, string whatis)
             {
-                int actualCount = members.Count(s => s.AllSlotInstance.Any(eq => eq != null && predicate(eq)));
-                Assert(actualCount >= leastCount,
-                    () => $"{whatis}:장비함선수{CurrentValue(actualCount)}{leastCount}");
+                int actualCount = this.members.Count(s => s.AllSlotInstance.Any(eq => eq != null && predicate(eq)));
+                this.Assert(actualCount >= leastCount,
+                    () => $"{whatis}:장비함선수{this.CurrentValue(actualCount)}{leastCount}");
                 return this;
             }
 
             public MissionClearConditionResult CheckEquippedShipCount(EquipmentTypes equipmentType, int leastCount) =>
-                CheckEquippedShipCount(eq => eq.MasterEquipment.CategoryType == equipmentType, leastCount, KCDatabase.Instance.EquipmentTypes[(int)equipmentType].Name);
+                this.CheckEquippedShipCount(eq => eq.MasterEquipment.CategoryType == equipmentType, leastCount, KCDatabase.Instance.EquipmentTypes[(int)equipmentType].Name);
 
 
 
             public override string ToString()
             {
-                return (IsSuceeded ? "성공" : "실패") + (FailureReason.Count == 0 ? "" : (" - " + string.Join(", ", FailureReason)));
+                return (this.IsSuceeded ? "성공" : "실패") + (this.FailureReason.Count == 0 ? "" : (" - " + string.Join(", ", this.FailureReason)));
             }
         }
 

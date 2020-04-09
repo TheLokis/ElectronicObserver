@@ -26,7 +26,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 
 				if (db.MapInfo[id] != null)
 				{
-					db.MapInfo[id].LoadFromResponse(APIName, elem);
+					db.MapInfo[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
@@ -40,13 +40,13 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 					if (db.BaseAirCorps[id] == null)
 					{
 						var inst = new BaseAirCorpsData();
-						inst.LoadFromResponse(APIName, elem);
+						inst.LoadFromResponse(this.APIName, elem);
 						db.BaseAirCorps.Add(inst);
 
 					}
 					else
 					{
-						db.BaseAirCorps[id].LoadFromResponse(APIName, elem);
+						db.BaseAirCorps[id].LoadFromResponse(this.APIName, elem);
 					}
 				}
 			}

@@ -20,23 +20,23 @@ namespace ElectronicObserver.Window.Dialog
 		/// </summary>
 		public string InputtedText
 		{
-			get { return TextInput.Text; }
-			set { TextInput.Text = value; }
+			get { return this.TextInput.Text; }
+			set { this.TextInput.Text = value; }
 		}
 
 
 		public DialogTextInput()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			ControlHelper.SetDoubleBuffered(tableLayoutPanel1);
+			ControlHelper.SetDoubleBuffered(this.tableLayoutPanel1);
 		}
 
 		public DialogTextInput(string title, string description)
 			: this()
 		{
 
-			Initialize(title, description);
+            this.Initialize(title, description);
 		}
 
 
@@ -49,11 +49,11 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			this.Text = title;
 
-			tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
 
-			Description.Text = description;
+            this.Description.Text = description;
 
-			tableLayoutPanel1.ResumeLayout();
+            this.tableLayoutPanel1.ResumeLayout();
 
 		}
 
@@ -66,13 +66,13 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (flag)
 			{
-				TextInput.Multiline = true;
-				TextInput.Dock = DockStyle.Fill;
+                this.TextInput.Multiline = true;
+                this.TextInput.Dock = DockStyle.Fill;
 			}
 			else
 			{
-				TextInput.Multiline = false;
-				TextInput.Dock = DockStyle.None;
+                this.TextInput.Multiline = false;
+                this.TextInput.Dock = DockStyle.None;
 			}
 
 		}
@@ -81,12 +81,12 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void ButtonOK_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 	}

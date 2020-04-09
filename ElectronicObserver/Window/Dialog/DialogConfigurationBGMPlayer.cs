@@ -19,35 +19,35 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogConfigurationBGMPlayer(SyncBGMPlayer.SoundHandle handle)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			FilePath.Text = handle.Path;
-			IsLoop.Checked = handle.IsLoop;
-			LoopHeadPosition.Value = (decimal)handle.LoopHeadPosition;
-			Volume.Value = handle.Volume;
+            this.FilePath.Text = handle.Path;
+            this.IsLoop.Checked = handle.IsLoop;
+            this.LoopHeadPosition.Value = (decimal)handle.LoopHeadPosition;
+            this.Volume.Value = handle.Volume;
 
-			Text = "BGM 설정 - " + SyncBGMPlayer.SoundHandleIDToString(handle.HandleID);
-			ResultHandle = handle.Clone();
+            this.Text = "BGM 설정 - " + SyncBGMPlayer.SoundHandleIDToString(handle.HandleID);
+            this.ResultHandle = handle.Clone();
 		}
 
 		private void DialogConfigurationBGMPlayer_Load(object sender, EventArgs e)
 		{
-			OpenMusicDialog.Filter = "음악 파일|" + string.Join(";", MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
+            this.OpenMusicDialog.Filter = "음악 파일|" + string.Join(";", MediaPlayer.SupportedExtensions.Select(s => "*." + s)) + "|File|*";
 		}
 
 		private void ButtonAccept_Click(object sender, EventArgs e)
 		{
-			ResultHandle.Path = FilePath.Text;
-			ResultHandle.IsLoop = IsLoop.Checked;
-			ResultHandle.LoopHeadPosition = (double)LoopHeadPosition.Value;
-			ResultHandle.Volume = (int)Volume.Value;
+            this.ResultHandle.Path = this.FilePath.Text;
+            this.ResultHandle.IsLoop = this.IsLoop.Checked;
+            this.ResultHandle.LoopHeadPosition = (double)this.LoopHeadPosition.Value;
+            this.ResultHandle.Volume = (int)this.Volume.Value;
 
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 		private void FilePath_DragEnter(object sender, DragEventArgs e)
@@ -60,21 +60,21 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void FilePath_DragDrop(object sender, DragEventArgs e)
 		{
-			FilePath.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+            this.FilePath.Text = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
 		}
 
 		private void FilePathSearch_Click(object sender, EventArgs e)
 		{
-			if (OpenMusicDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.OpenMusicDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				FilePath.Text = OpenMusicDialog.FileName;
+                this.FilePath.Text = this.OpenMusicDialog.FileName;
 			}
 		}
 
 		private void FilePathToDirectory_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrWhiteSpace(FilePath.Text))
-				FilePath.Text = Path.GetDirectoryName(FilePath.Text);
+			if (!string.IsNullOrWhiteSpace(this.FilePath.Text))
+                this.FilePath.Text = Path.GetDirectoryName(this.FilePath.Text);
 		}
 	}
 }

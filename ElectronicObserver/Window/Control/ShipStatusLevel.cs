@@ -26,12 +26,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("現在のレベルです。")]
 		public int Value
 		{
-			get { return _value; }
+			get { return this._value; }
 			set
 			{
-				_value = value;
-				_valueSizeCache = null;
-				PropertyChanged();
+                this._value = value;
+                this._valueSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -40,12 +40,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("レベルの最大値です。")]
 		public int MaximumValue
 		{
-			get { return _maximumValue; }
+			get { return this._maximumValue; }
 			set
 			{
-				_maximumValue = value;
-				_valueSizeCache = null;
-				PropertyChanged();
+                this._maximumValue = value;
+                this._valueSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -54,12 +54,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("次のレベルアップに必要な経験値です。")]
 		public int ValueNext
 		{
-			get { return _valueNext; }
+			get { return this._valueNext; }
 			set
 			{
-				_valueNext = value;
-				_valueNextSizeCache = null;
-				PropertyChanged();
+                this._valueNext = value;
+                this._valueNextSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -68,12 +68,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("次のレベルアップに必要な経験値の最大値です。")]
 		public int MaximumValueNext
 		{
-			get { return _maximumValueNext; }
+			get { return this._maximumValueNext; }
 			set
 			{
-				_maximumValueNext = value;
-				_valueNextSizeCache = null;
-				PropertyChanged();
+                this._maximumValueNext = value;
+                this._valueNextSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -82,11 +82,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("主要テキストの色を指定します。")]
 		public Color MainFontColor
 		{
-			get { return _mainFontColor; }
+			get { return this._mainFontColor; }
 			set
 			{
-				_mainFontColor = value;
-				PropertyChanged();
+                this._mainFontColor = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -95,11 +95,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("補助テキストの色を指定します。")]
 		public Color SubFontColor
 		{
-			get { return _subFontColor; }
+			get { return this._subFontColor; }
 			set
 			{
-				_subFontColor = value;
-				PropertyChanged();
+                this._subFontColor = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -108,12 +108,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("主要テキストのフォントを指定します。")]
 		public Font MainFont
 		{
-			get { return _mainFont; }
+			get { return this._mainFont; }
 			set
 			{
-				_mainFont = value;
-				_valueSizeCache = null;
-				PropertyChanged();
+                this._mainFont = value;
+                this._valueSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -122,14 +122,14 @@ namespace ElectronicObserver.Window.Control
 		[Description("補助テキストの色を指定します。")]
 		public Font SubFont
 		{
-			get { return _subFont; }
+			get { return this._subFont; }
 			set
 			{
-				_subFont = value;
-				_textSizeCache =
-				_valueNextSizeCache =
-				_textNextSizeCache = null;
-				PropertyChanged();
+                this._subFont = value;
+                this._textSizeCache =
+                this._valueNextSizeCache =
+                this._textNextSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -142,12 +142,12 @@ namespace ElectronicObserver.Window.Control
 		[Bindable(BindableSupport.Default)]
 		public override string Text
 		{
-			get { return _text; }
+			get { return this._text; }
 			set
 			{
-				_text = value;
-				_textSizeCache = null;
-				PropertyChanged();
+                this._text = value;
+                this._textSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -156,13 +156,13 @@ namespace ElectronicObserver.Window.Control
 		[Description("次のレベルアップに必要な経験値の説明文となるテキストを指定します。")]
 		public string TextNext
 		{
-			get { return _textNext; }
+			get { return this._textNext; }
 			set
 			{
-				_textNext = value;
-				_textNextSizeCache = null;
-				_valueNextSizeCache = null;
-				PropertyChanged();
+                this._textNext = value;
+                this._textNextSizeCache = null;
+                this._valueNextSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -176,8 +176,8 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _textSizeCache ??
-					(_textSizeCache = TextRenderer.MeasureText(Text, SubFont, MaxSize, TextFormatText) - new Size(!string.IsNullOrEmpty(Text) ? (int)(SubFont.Size / 2.0) : 0, 0)).Value;
+				return this._textSizeCache ??
+					(this._textSizeCache = TextRenderer.MeasureText(this.Text, this.SubFont, MaxSize, TextFormatText) - new Size(!string.IsNullOrEmpty(this.Text) ? (int)(this.SubFont.Size / 2.0) : 0, 0)).Value;
 			}
 		}
 
@@ -186,8 +186,8 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _valueSizeCache ??
-					(_valueSizeCache = TextRenderer.MeasureText(Math.Max(Value, MaximumValue).ToString(), MainFont, MaxSize, TextFormatValue) - new Size((int)(MainFont.Size / 2.0), 0)).Value;
+				return this._valueSizeCache ??
+					(this._valueSizeCache = TextRenderer.MeasureText(Math.Max(this.Value, this.MaximumValue).ToString(), this.MainFont, MaxSize, TextFormatValue) - new Size((int)(this.MainFont.Size / 2.0), 0)).Value;
 			}
 		}
 
@@ -196,10 +196,10 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _textNextSizeCache ??
-					(_textNextSizeCache = TextNext == null ?
+				return this._textNextSizeCache ??
+					(this._textNextSizeCache = this.TextNext == null ?
 						Size.Empty :
-						(TextRenderer.MeasureText(TextNext, SubFont, MaxSize, TextFormatText) - new Size(!string.IsNullOrEmpty(TextNext) ? (int)(SubFont.Size / 2.0) : 0, 0))).Value;
+						(TextRenderer.MeasureText(this.TextNext, this.SubFont, MaxSize, TextFormatText) - new Size(!string.IsNullOrEmpty(this.TextNext) ? (int)(this.SubFont.Size / 2.0) : 0, 0))).Value;
 			}
 		}
 
@@ -208,10 +208,10 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _valueNextSizeCache ??
-					(_valueNextSizeCache = TextNext == null ?
+				return this._valueNextSizeCache ??
+					(this._valueNextSizeCache = this.TextNext == null ?
 						Size.Empty :
-						(TextRenderer.MeasureText(Math.Max(ValueNext, MaximumValueNext).ToString(), SubFont, MaxSize, TextFormatText) - new Size((int)(MainFont.Size / 2.0), 0))).Value;
+						(TextRenderer.MeasureText(Math.Max(this.ValueNext, this.MaximumValueNext).ToString(), this.SubFont, MaxSize, TextFormatText) - new Size((int)(this.MainFont.Size / 2.0), 0))).Value;
 			}
 		}
 
@@ -224,29 +224,29 @@ namespace ElectronicObserver.Window.Control
 
 		public ShipStatusLevel()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
 
-			_value = 0;
-			_maximumValue = 0;
+            this._value = 0;
+            this._maximumValue = 0;
 
-			_mainFontColor = Color.FromArgb(0x00, 0x00, 0x00);
-			_subFontColor = Color.FromArgb(0x44, 0x44, 0x44);
-			_mainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-			_subFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
-			_text = "Lv.";
+            this._mainFontColor = Color.FromArgb(0x00, 0x00, 0x00);
+            this._subFontColor = Color.FromArgb(0x44, 0x44, 0x44);
+            this._mainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            this._subFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
+            this._text = "Lv.";
 
-			_valueNext = 0;
-			_maximumValueNext = 0;
-			_textNext = "next:";
+            this._valueNext = 0;
+            this._maximumValueNext = 0;
+            this._textNext = "next:";
 
 		}
 
 		private void ShipStatusLevel_Paint(object sender, PaintEventArgs e)
 		{
 
-			Rectangle basearea = new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, Height - Padding.Vertical);
+			Rectangle basearea = new Rectangle(this.Padding.Left, this.Padding.Top, this.Width - this.Padding.Horizontal, this.Height - this.Padding.Vertical);
 			//e.Graphics.DrawRectangle( Pens.Magenta, new Rectangle( basearea.X, basearea.Y, basearea.Width - 1, basearea.Height - 1 ) );
 
 
@@ -254,28 +254,28 @@ namespace ElectronicObserver.Window.Control
 
 			//alignment.bottom 
 
-			Point p = new Point(basearea.X, basearea.Bottom - TextSizeCache.Height);
-			TextRenderer.DrawText(e.Graphics, Text, SubFont, new Rectangle(p, TextSizeCache), SubFontColor, TextFormatText);
+			Point p = new Point(basearea.X, basearea.Bottom - this.TextSizeCache.Height);
+			TextRenderer.DrawText(e.Graphics, this.Text, this.SubFont, new Rectangle(p, this.TextSizeCache), this.SubFontColor, TextFormatText);
 			//e.Graphics.DrawRectangle( Pens.Orange, new Rectangle( p, TextSizeCache ) );
 
-			p.X += TextSizeCache.Width;
-			p.Y = basearea.Bottom - ValueSizeCache.Height;
-			TextRenderer.DrawText(e.Graphics, Value.ToString(), MainFont, new Rectangle(p, ValueSizeCache), MainFontColor, TextFormatValue);
+			p.X += this.TextSizeCache.Width;
+			p.Y = basearea.Bottom - this.ValueSizeCache.Height;
+			TextRenderer.DrawText(e.Graphics, this.Value.ToString(), this.MainFont, new Rectangle(p, this.ValueSizeCache), this.MainFontColor, TextFormatValue);
 			//e.Graphics.DrawRectangle( Pens.Orange, new Rectangle( p, ValueSizeCache ) );
 
 
-			p.X = basearea.Right - Math.Max(TextNextSizeCache.Width, ValueNextSizeCache.Width);
-			p.Y = basearea.Bottom - TextNextSizeCache.Height - ValueNextSizeCache.Height + (int)(SubFont.Size / 2.0);
-			if (TextNext != null)
+			p.X = basearea.Right - Math.Max(this.TextNextSizeCache.Width, this.ValueNextSizeCache.Width);
+			p.Y = basearea.Bottom - this.TextNextSizeCache.Height - this.ValueNextSizeCache.Height + (int)(this.SubFont.Size / 2.0);
+			if (this.TextNext != null)
 			{
-				TextRenderer.DrawText(e.Graphics, TextNext, SubFont, new Rectangle(p, TextNextSizeCache), SubFontColor, TextFormatText);
+				TextRenderer.DrawText(e.Graphics, this.TextNext, this.SubFont, new Rectangle(p, this.TextNextSizeCache), this.SubFontColor, TextFormatText);
 				//e.Graphics.DrawRectangle( Pens.Orange, new Rectangle( p, TextNextSizeCache ) );
 			}
 
-			p.Y = basearea.Bottom - ValueNextSizeCache.Height + 1;
-			if (TextNext != null)
+			p.Y = basearea.Bottom - this.ValueNextSizeCache.Height + 1;
+			if (this.TextNext != null)
 			{
-				TextRenderer.DrawText(e.Graphics, ValueNext.ToString(), SubFont, new Rectangle(p, ValueNextSizeCache), SubFontColor, TextFormatText);
+				TextRenderer.DrawText(e.Graphics, this.ValueNext.ToString(), this.SubFont, new Rectangle(p, this.ValueNextSizeCache), this.SubFontColor, TextFormatText);
 				//e.Graphics.DrawRectangle( Pens.Orange, new Rectangle( p, ValueNextSizeCache ) );
 			}
 
@@ -286,20 +286,24 @@ namespace ElectronicObserver.Window.Control
 		public override Size GetPreferredSize(Size proposedSize)
 		{
 
-			return new Size(ValueSizeCache.Width + TextSizeCache.Width + (TextNext == null ? 0 : InnerHorizontalMargin) + Math.Max(TextNextSizeCache.Width, ValueNextSizeCache.Width) + Padding.Horizontal,
-				Math.Max(ValueSizeCache.Height, TextNextSizeCache.Height + ValueNextSizeCache.Height - (int)(SubFont.Size / 2.0)) + Padding.Vertical - 1);
+			return new Size(this.ValueSizeCache.Width + this.TextSizeCache.Width + (this.TextNext == null ? 0 : this.InnerHorizontalMargin) + Math.Max(this.TextNextSizeCache.Width, this.ValueNextSizeCache.Width) + this.Padding.Horizontal,
+				Math.Max(this.ValueSizeCache.Height, this.TextNextSizeCache.Height + this.ValueNextSizeCache.Height - (int)(this.SubFont.Size / 2.0)) + this.Padding.Vertical - 1);
 
 		}
 
 
 		private void PropertyChanged()
 		{
-			if (AutoSize)
-				Size = GetPreferredSize(Size);
+			if (this.AutoSize)
+                this.Size = this.GetPreferredSize(this.Size);
 
-			Refresh();
+            this.Refresh();
 		}
 
-	}
+        private void ShipStatusLevel_DoubleClick(object sender, EventArgs e)
+        {
+            Clipboard.SetText($"{this._text} {this._value} {this._textNext} {this._valueNext}");
+        }
+    }
 
 }

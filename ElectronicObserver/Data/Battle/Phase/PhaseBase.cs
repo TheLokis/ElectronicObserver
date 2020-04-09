@@ -21,13 +21,13 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		protected PhaseBase(BattleData battle, string title)
 		{
-			Battle = battle;
-			BattleDetails = new List<BattleDetail>();
-			Title = title;
+            this.Battle = battle;
+            this.BattleDetails = new List<BattleDetail>();
+            this.Title = title;
 		}
 
 
-		protected dynamic RawData => Battle.RawData;
+		protected dynamic RawData => this.Battle.RawData;
 
 
 		protected static bool IsIndexFriend(int index) => 0 <= index && index < 12;
@@ -46,9 +46,9 @@ namespace ElectronicObserver.Data.Battle.Phase
 			hps[index] -= Math.Max(damage, 0);
 
 			// 自軍艦の撃沈が発生した場合(ダメコン処理)
-			if (hps[index] <= 0 && IsIndexFriend(index) && !Battle.IsPractice)
+			if (hps[index] <= 0 && IsIndexFriend(index) && !this.Battle.IsPractice)
 			{
-				var ship = Battle.Initial.GetFriendShip(index);
+				var ship = this.Battle.Initial.GetFriendShip(index);
 				if (ship == null)
 					return;
 
@@ -66,15 +66,15 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		protected virtual IEnumerable<BattleDetail> SearchBattleDetails(int index)
 		{
-			return BattleDetails.Where(d => d.AttackerIndex == index || d.DefenderIndex == index);
+			return this.BattleDetails.Where(d => d.AttackerIndex == index || d.DefenderIndex == index);
 		}
 		public virtual string GetBattleDetail(int index)
 		{
 			IEnumerable<BattleDetail> list;
 			if (index == -1)
-				list = BattleDetails;
+				list = this.BattleDetails;
 			else
-				list = SearchBattleDetails(index);
+				list = this.SearchBattleDetails(index);
 
 			if (list.Any())
 			{
@@ -82,10 +82,10 @@ namespace ElectronicObserver.Data.Battle.Phase
 			}
 			else return null;
 		}
-		public virtual string GetBattleDetail() { return GetBattleDetail(-1); }
+		public virtual string GetBattleDetail() { return this.GetBattleDetail(-1); }
 
 
-		public override string ToString() => string.Join(" / \r\n", BattleDetails);
+		public override string ToString() => string.Join(" / \r\n", this.BattleDetails);
 
 
 

@@ -16,7 +16,7 @@ namespace ElectronicObserver.Window.Dialog
     {
         public DialogExpeditionCheck()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void DialogExpeditionCheck_Load(object sender, EventArgs e)
@@ -25,25 +25,25 @@ namespace ElectronicObserver.Window.Dialog
             {
                 MessageBox.Show("원정 데이터가 로드되지 않았습니다.\r\n艦함대 컬렉션을 실행해주세요.",
                     "마스터 데이터 로드 에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
+                this.Close();
                 return;
             }
 
 
-            Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpeditionCheck]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpeditionCheck]);
         }
 
 
         private void UpdateCheckView()
         {
-            CheckView.SuspendLayout();
+            this.CheckView.SuspendLayout();
 
-            CheckView.Rows.Clear();
+            this.CheckView.Rows.Clear();
 
             var db = KCDatabase.Instance;
             var rows = new List<DataGridViewRow>(db.Mission.Count);
 
-            var defaultStyle = CheckView.RowsDefaultCellStyle;
+            var defaultStyle = this.CheckView.RowsDefaultCellStyle;
             var failedStyle = defaultStyle.Clone();
             failedStyle.BackColor = Color.MistyRose;
             failedStyle.SelectionBackColor = Color.Brown;
@@ -61,7 +61,7 @@ namespace ElectronicObserver.Window.Dialog
 
 
                 var row = new DataGridViewRow();
-                row.CreateCells(CheckView);
+                row.CreateCells(this.CheckView);
                 row.SetValues(
                     mission.MissionID,
                     mission.MissionID,
@@ -94,26 +94,26 @@ namespace ElectronicObserver.Window.Dialog
                 rows.Add(row);
             }
 
-            CheckView.Rows.AddRange(rows.ToArray());
+            this.CheckView.Rows.AddRange(rows.ToArray());
 
-            CheckView.Sort(CheckView_Name, ListSortDirection.Ascending);
+            this.CheckView.Sort(this.CheckView_Name, ListSortDirection.Ascending);
 
-            CheckView.ResumeLayout();
+            this.CheckView.ResumeLayout();
         }
 
         private void DialogExpeditionCheck_Activated(object sender, EventArgs e)
         {
-            int displayedRow = CheckView.FirstDisplayedScrollingRowIndex;
-            int selectedRow = CheckView.SelectedRows.OfType<DataGridViewRow>().FirstOrDefault()?.Index ?? -1;
+            int displayedRow = this.CheckView.FirstDisplayedScrollingRowIndex;
+            int selectedRow = this.CheckView.SelectedRows.OfType<DataGridViewRow>().FirstOrDefault()?.Index ?? -1;
 
-            UpdateCheckView();
+            this.UpdateCheckView();
 
-            if (0 <= displayedRow && displayedRow < CheckView.RowCount)
-                CheckView.FirstDisplayedScrollingRowIndex = displayedRow;
-            if (0 <= selectedRow && selectedRow < CheckView.RowCount)
+            if (0 <= displayedRow && displayedRow < this.CheckView.RowCount)
+                this.CheckView.FirstDisplayedScrollingRowIndex = displayedRow;
+            if (0 <= selectedRow && selectedRow < this.CheckView.RowCount)
             {
-                CheckView.ClearSelection();
-                CheckView.Rows[selectedRow].Selected = true;
+                this.CheckView.ClearSelection();
+                this.CheckView.Rows[selectedRow].Selected = true;
             }
         }
 
@@ -121,12 +121,12 @@ namespace ElectronicObserver.Window.Dialog
 
         private void CheckView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == CheckView_Name.Index)
+            if (e.ColumnIndex == this.CheckView_Name.Index)
             {
                 e.Value = KCDatabase.Instance.Mission[(int)e.Value].Name;
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == CheckView_ID.Index)
+            else if (e.ColumnIndex == this.CheckView_ID.Index)
             {
                 var mission = KCDatabase.Instance.Mission[(int)e.Value];
                 e.Value = $"{mission.DisplayID}:{KCDatabase.Instance.MapArea[mission.MapAreaID].Name}";
@@ -136,7 +136,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private void CheckView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (e.Column.Index == CheckView_Name.Index || e.Column.Index == CheckView_ID.Index)
+            if (e.Column.Index == this.CheckView_Name.Index || e.Column.Index == this.CheckView_ID.Index)
             {
                 var m1 = KCDatabase.Instance.Mission[(int)e.CellValue1];
                 var m2 = KCDatabase.Instance.Mission[(int)e.CellValue2];
@@ -152,7 +152,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private void DialogExpeditionCheck_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ResourceManager.DestroyIcon(Icon);
+            ResourceManager.DestroyIcon(this.Icon);
         }
     }
 }

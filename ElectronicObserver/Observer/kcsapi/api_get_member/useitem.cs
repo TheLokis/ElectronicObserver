@@ -24,7 +24,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 				{
 
 					var item = new UseItem();
-					item.LoadFromResponse(APIName, elem);
+					item.LoadFromResponse(this.APIName, elem);
 					db.UseItems.Add(item);
 
 				}

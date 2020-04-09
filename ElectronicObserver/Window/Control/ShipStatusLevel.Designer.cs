@@ -37,8 +37,8 @@
 			this.Name = "ShipStatusLevel";
 			this.Size = new System.Drawing.Size(80, 20);
 			this.Paint += new System.Windows.Forms.PaintEventHandler(this.ShipStatusLevel_Paint);
-			this.ResumeLayout(false);
-
+            this.DoubleClick += new System.EventHandler(this.ShipStatusLevel_DoubleClick);
+            this.ResumeLayout(false);
 		}
 
 		#endregion

@@ -14,7 +14,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_quest
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			KCDatabase.Instance.Quest.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Quest.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

@@ -37,7 +37,7 @@ namespace ElectronicObserver.Resource.Record
 		public virtual bool Load(string path)
 		{
 
-			path = GetFilePath(path);
+			path = this.GetFilePath(path);
 
 			try
 			{
@@ -45,19 +45,19 @@ namespace ElectronicObserver.Resource.Record
 				using (StreamReader sr = new StreamReader(path, Utility.Configuration.Config.Log.FileEncoding))
 				{
 
-					ClearRecord();
+                    this.ClearRecord();
 
 					string line;
 					sr.ReadLine();          //ヘッダを読み飛ばす
 
 					while ((line = sr.ReadLine()) != null)
 					{
-						LoadLine(line);
+                        this.LoadLine(line);
 					}
 
 				}
 
-				UpdateLastSavedIndex();
+                this.UpdateLastSavedIndex();
 				return true;
 
 			}
@@ -82,7 +82,7 @@ namespace ElectronicObserver.Resource.Record
 		public virtual bool SaveAll(string path)
 		{
 
-			path = GetFilePath(path);
+			path = this.GetFilePath(path);
 
 			try
 			{
@@ -90,12 +90,12 @@ namespace ElectronicObserver.Resource.Record
 				using (StreamWriter sw = new StreamWriter(path, false, Utility.Configuration.Config.Log.FileEncoding))
 				{
 
-					sw.WriteLine(RecordHeader);
-					sw.Write(SaveLinesAll());
+					sw.WriteLine(this.RecordHeader);
+					sw.Write(this.SaveLinesAll());
 
 				}
 
-				UpdateLastSavedIndex();
+                this.UpdateLastSavedIndex();
 				return true;
 
 			}
@@ -115,11 +115,11 @@ namespace ElectronicObserver.Resource.Record
 		public virtual bool SavePartial(string path)
 		{
 
-			if (!SupportsPartialSave)
+			if (!this.SupportsPartialSave)
 				return false;
 
 
-			path = GetFilePath(path);
+			path = this.GetFilePath(path);
 			bool exists = File.Exists(path);
 
 			try
@@ -129,12 +129,12 @@ namespace ElectronicObserver.Resource.Record
 				{
 
 					if (!exists)
-						sw.WriteLine(RecordHeader);
+						sw.WriteLine(this.RecordHeader);
 
-					sw.Write(SaveLinesPartial());
+					sw.Write(this.SaveLinesPartial());
 				}
 
-				UpdateLastSavedIndex();
+                this.UpdateLastSavedIndex();
 				return true;
 
 			}
@@ -149,7 +149,7 @@ namespace ElectronicObserver.Resource.Record
 
 		protected string GetFilePath(string path)
 		{
-			return path.Trim(@" \\""".ToCharArray()) + "\\" + FileName;
+			return path.Trim(@" \\""".ToCharArray()) + "\\" + this.FileName;
 		}
 
 

@@ -66,7 +66,7 @@ namespace ElectronicObserver.Resource.Record
 			/// <summary>
 			/// 大型艦建造かのフラグ
 			/// </summary>
-			public bool IsLargeDock => Fuel >= 1000;
+			public bool IsLargeDock => this.Fuel >= 1000;
 
 			/// <summary>
 			/// 空きドック数
@@ -92,32 +92,32 @@ namespace ElectronicObserver.Resource.Record
 
 			public ConstructionElement()
 			{
-				ShipID = -1;
-				Date = DateTime.Now;
+                this.ShipID = -1;
+                this.Date = DateTime.Now;
 			}
 
 			public ConstructionElement(string line)
 				: this()
 			{
-				LoadLine(line);
+                this.LoadLine(line);
 			}
 
 			public ConstructionElement(int shipID, int fuel, int ammo, int steel, int bauxite, int developmentMaterial, int emptyDock, int flagshipID, int hqLevel)
 			{
 				var ship = KCDatabase.Instance.MasterShips[shipID];
 				var flagship = KCDatabase.Instance.MasterShips[flagshipID];
-				ShipID = shipID;
-				ShipName = ship?.NameWithClass ?? "???";
-				Date = DateTime.Now;
-				Fuel = fuel;
-				Ammo = ammo;
-				Steel = steel;
-				Bauxite = bauxite;
-				DevelopmentMaterial = developmentMaterial;
-				EmptyDockAmount = emptyDock;
-				FlagshipID = flagshipID;
-				FlagshipName = flagship?.NameWithClass ?? "???";
-				HQLevel = hqLevel;
+                this.ShipID = shipID;
+                this.ShipName = ship?.NameWithClass ?? "???";
+                this.Date = DateTime.Now;
+                this.Fuel = fuel;
+                this.Ammo = ammo;
+                this.Steel = steel;
+                this.Bauxite = bauxite;
+                this.DevelopmentMaterial = developmentMaterial;
+                this.EmptyDockAmount = emptyDock;
+                this.FlagshipID = flagshipID;
+                this.FlagshipName = flagship?.NameWithClass ?? "???";
+                this.HQLevel = hqLevel;
 			}
 
 
@@ -128,38 +128,38 @@ namespace ElectronicObserver.Resource.Record
                 if (elem.Length < 13)
 					throw new ArgumentException("요소 수가 너무 적습니다.");
 
-				ShipID = int.Parse(elem[0]);
-				ShipName = elem[1];
-				Date = DateTimeHelper.CSVStringToTime(elem[2]);
-				Fuel = int.Parse(elem[3]);
-				Ammo = int.Parse(elem[4]);
-				Steel = int.Parse(elem[5]);
-				Bauxite = int.Parse(elem[6]);
-				DevelopmentMaterial = int.Parse(elem[7]);
-				//IsLargeDock=elem[8]は読み飛ばす
-				EmptyDockAmount = int.Parse(elem[9]);
-				FlagshipID = int.Parse(elem[10]);
-				FlagshipName = elem[11];
-				HQLevel = int.Parse(elem[12]);
+                this.ShipID = int.Parse(elem[0]);
+                this.ShipName = elem[1];
+                this.Date = DateTimeHelper.CSVStringToTime(elem[2]);
+                this.Fuel = int.Parse(elem[3]);
+                this.Ammo = int.Parse(elem[4]);
+                this.Steel = int.Parse(elem[5]);
+                this.Bauxite = int.Parse(elem[6]);
+                this.DevelopmentMaterial = int.Parse(elem[7]);
+                //IsLargeDock=elem[8]は読み飛ばす
+                this.EmptyDockAmount = int.Parse(elem[9]);
+                this.FlagshipID = int.Parse(elem[10]);
+                this.FlagshipName = elem[11];
+                this.HQLevel = int.Parse(elem[12]);
 
 			}
 
 			public override string SaveLine()
 			{
 				return string.Join(",",
-					ShipID,
-                    CsvHelper.EscapeCsvCell(ShipName),
-                    DateTimeHelper.TimeToCSVString(Date),
-					Fuel,
-					Ammo,
-					Steel,
-					Bauxite,
-					DevelopmentMaterial,
-					IsLargeDock ? 1 : 0,
-					EmptyDockAmount,
-					FlagshipID,
-                    CsvHelper.EscapeCsvCell(FlagshipName),
-                    HQLevel);
+                    this.ShipID,
+                    CsvHelper.EscapeCsvCell(this.ShipName),
+                    DateTimeHelper.TimeToCSVString(this.Date),
+                    this.Fuel,
+                    this.Ammo,
+                    this.Steel,
+                    this.Bauxite,
+                    this.DevelopmentMaterial,
+                    this.IsLargeDock ? 1 : 0,
+                    this.EmptyDockAmount,
+                    this.FlagshipID,
+                    CsvHelper.EscapeCsvCell(this.FlagshipName),
+                    this.HQLevel);
 			}
 		}
 
@@ -174,23 +174,23 @@ namespace ElectronicObserver.Resource.Record
 		public ConstructionRecord()
 			: base()
 		{
-			Record = new List<ConstructionElement>();
-			ConstructingDockID = -1;
+            this.Record = new List<ConstructionElement>();
+            this.ConstructingDockID = -1;
 		}
 
 		public override void RegisterEvents()
 		{
 			APIObserver ao = APIObserver.Instance;
 
-			ao["api_req_kousyou/createship"].RequestReceived += ConstructionStart;
-			ao["api_get_member/kdock"].ResponseReceived += ConstructionEnd;
+			ao["api_req_kousyou/createship"].RequestReceived += this.ConstructionStart;
+			ao["api_get_member/kdock"].ResponseReceived += this.ConstructionEnd;
 		}
 
 
 		public ConstructionElement this[int i]
 		{
-			get { return Record[i]; }
-			set { Record[i] = value; }
+			get { return this.Record[i]; }
+			set { this.Record[i] = value; }
 		}
 
 
@@ -198,36 +198,36 @@ namespace ElectronicObserver.Resource.Record
 		void ConstructionStart(string apiname, dynamic data)
 		{
 
-			ConstructingDockID = int.Parse(data["api_kdock_id"]);
+            this.ConstructingDockID = int.Parse(data["api_kdock_id"]);
 
 		}
 
 		void ConstructionEnd(string apiname, dynamic data)
 		{
 
-			if (ConstructingDockID == -1) return;
+			if (this.ConstructingDockID == -1) return;
 
-			ArsenalData a = KCDatabase.Instance.Arsenals[ConstructingDockID];
+			ArsenalData a = KCDatabase.Instance.Arsenals[this.ConstructingDockID];
 			int emptyDock = KCDatabase.Instance.Arsenals.Values.Count(c => c.State == 0);
 			ShipData flagship = KCDatabase.Instance.Fleet[1].MembersInstance[0];
 
-			Record.Add(new ConstructionElement(a.ShipID, a.Fuel, a.Ammo, a.Steel, a.Bauxite, a.DevelopmentMaterial,
+            this.Record.Add(new ConstructionElement(a.ShipID, a.Fuel, a.Ammo, a.Steel, a.Bauxite, a.DevelopmentMaterial,
 				emptyDock, flagship.ShipID, KCDatabase.Instance.Admiral.Level));
 
-			ConstructingDockID = -1;
+            this.ConstructingDockID = -1;
 		}
 
 
 
 		protected override void LoadLine(string line)
 		{
-			Record.Add(new ConstructionElement(line));
+            this.Record.Add(new ConstructionElement(line));
 		}
 
 		protected override string SaveLinesAll()
 		{
 			var sb = new StringBuilder();
-			foreach (var elem in Record.OrderBy(r => r.Date))
+			foreach (var elem in this.Record.OrderBy(r => r.Date))
 			{
 				sb.AppendLine(elem.SaveLine());
 			}
@@ -237,7 +237,7 @@ namespace ElectronicObserver.Resource.Record
 		protected override string SaveLinesPartial()
 		{
 			var sb = new StringBuilder();
-			foreach (var elem in Record.Skip(LastSavedCount).OrderBy(r => r.Date))
+			foreach (var elem in this.Record.Skip(this.LastSavedCount).OrderBy(r => r.Date))
 			{
 				sb.AppendLine(elem.SaveLine());
 			}
@@ -246,17 +246,17 @@ namespace ElectronicObserver.Resource.Record
 
 		protected override void UpdateLastSavedIndex()
 		{
-			LastSavedCount = Record.Count;
+            this.LastSavedCount = this.Record.Count;
 		}
 
-		public override bool NeedToSave => LastSavedCount < Record.Count;
+		public override bool NeedToSave => this.LastSavedCount < this.Record.Count;
 
 		public override bool SupportsPartialSave => true;
 
 		protected override void ClearRecord()
 		{
-			Record.Clear();
-			LastSavedCount = 0;
+            this.Record.Clear();
+            this.LastSavedCount = 0;
 		}
 
 

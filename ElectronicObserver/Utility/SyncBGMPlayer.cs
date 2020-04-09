@@ -47,28 +47,28 @@ namespace ElectronicObserver.Utility
 
 			public SoundHandle(SoundHandleID id)
 			{
-				HandleID = id;
-				Enabled = true;
-				Path = "";
-				IsLoop = true;
-				LoopHeadPosition = 0.0;
-				Volume = 100;
+                this.HandleID = id;
+                this.Enabled = true;
+                this.Path = "";
+                this.IsLoop = true;
+                this.LoopHeadPosition = 0.0;
+                this.Volume = 100;
 			}
 
 			[IgnoreDataMember]
-			public int ID => (int)HandleID;
+			public int ID => (int)this.HandleID;
 
-			public override string ToString() => Enum.GetName(typeof(SoundHandleID), HandleID) + " : " + Path;
+			public override string ToString() => Enum.GetName(typeof(SoundHandleID), this.HandleID) + " : " + this.Path;
 
 
 			public SoundHandle Clone()
 			{
-				return (SoundHandle)MemberwiseClone();
+				return (SoundHandle)this.MemberwiseClone();
 			}
 
 			object ICloneable.Clone()
 			{
-				return Clone();
+				return this.Clone();
 			}
 		}
 
@@ -96,8 +96,8 @@ namespace ElectronicObserver.Utility
 		public bool Enabled;
 		public bool IsMute
 		{
-			get { return _mp.IsMute; }
-			set { _mp.IsMute = value; }
+			get { return this._mp.IsMute; }
+			set { this._mp.IsMute = value; }
 		}
 
 		private MediaPlayer _mp;
@@ -108,158 +108,158 @@ namespace ElectronicObserver.Utility
 		public SyncBGMPlayer()
 		{
 
-			_mp = new MediaPlayer();
+            this._mp = new MediaPlayer();
 
-			if (!_mp.IsAvailable)
+			if (!this._mp.IsAvailable)
 				Utility.Logger.Add(3, "Windows Media Player 의 로드에 실패했습니다. 음성 재생이 되지 않습니다.");
 
-			_mp.AutoPlay = false;
-			_mp.IsShuffle = true;
+            this._mp.AutoPlay = false;
+            this._mp.IsShuffle = true;
 
-			_currentSoundHandleID = (SoundHandleID)(-1);
-			_isBoss = false;
+            this._currentSoundHandleID = (SoundHandleID)(-1);
+            this._isBoss = false;
 
 
-			Enabled = false;
-			Handles = new IDDictionary<SoundHandle>();
+            this.Enabled = false;
+            this.Handles = new IDDictionary<SoundHandle>();
 
 			foreach (SoundHandleID id in Enum.GetValues(typeof(SoundHandleID)))
-				Handles.Add(new SoundHandle(id));
+                this.Handles.Add(new SoundHandle(id));
 
 
 
 			#region API register
 			APIObserver o = APIObserver.Instance;
 
-			o["api_port/port"].ResponseReceived += PlayPort;
+			o["api_port/port"].ResponseReceived += this.PlayPort;
 
-			o["api_req_map/start"].ResponseReceived += PlaySortie;
-			o["api_req_map/next"].ResponseReceived += PlaySortie;
+			o["api_req_map/start"].ResponseReceived += this.PlaySortie;
+			o["api_req_map/next"].ResponseReceived += this.PlaySortie;
 
-			o["api_req_sortie/battle"].ResponseReceived += PlayBattleDay;
-			o["api_req_combined_battle/battle"].ResponseReceived += PlayBattleDay;
-			o["api_req_combined_battle/battle_water"].ResponseReceived += PlayBattleDay;
-			o["api_req_combined_battle/ec_battle"].ResponseReceived += PlayBattleDay;
-			o["api_req_combined_battle/each_battle"].ResponseReceived += PlayBattleDay;
-			o["api_req_combined_battle/each_battle_water"].ResponseReceived += PlayBattleDay;
+			o["api_req_sortie/battle"].ResponseReceived += this.PlayBattleDay;
+			o["api_req_combined_battle/battle"].ResponseReceived += this.PlayBattleDay;
+			o["api_req_combined_battle/battle_water"].ResponseReceived += this.PlayBattleDay;
+			o["api_req_combined_battle/ec_battle"].ResponseReceived += this.PlayBattleDay;
+			o["api_req_combined_battle/each_battle"].ResponseReceived += this.PlayBattleDay;
+			o["api_req_combined_battle/each_battle_water"].ResponseReceived += this.PlayBattleDay;
 
-			o["api_req_battle_midnight/battle"].ResponseReceived += PlayBattleNight;
-			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += PlayBattleNight;
-			o["api_req_sortie/night_to_day"].ResponseReceived += PlayBattleNight;
-            o["api_req_sortie/ld_shooting"].ResponseReceived += PlayBattleNight;
+			o["api_req_battle_midnight/battle"].ResponseReceived += this.PlayBattleNight;
+			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += this.PlayBattleNight;
+			o["api_req_sortie/night_to_day"].ResponseReceived += this.PlayBattleNight;
+            o["api_req_sortie/ld_shooting"].ResponseReceived += this.PlayBattleNight;
 
-            o["api_req_combined_battle/midnight_battle"].ResponseReceived += PlayBattleNight;
-			o["api_req_combined_battle/sp_midnight"].ResponseReceived += PlayBattleNight;
-			o["api_req_combined_battle/ec_midnight_battle"].ResponseReceived += PlayBattleNight;
-			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += PlayBattleNight;
-            o["api_req_combined_battle/ld_shooting"].ResponseReceived += PlayBattleNight;
+            o["api_req_combined_battle/midnight_battle"].ResponseReceived += this.PlayBattleNight;
+			o["api_req_combined_battle/sp_midnight"].ResponseReceived += this.PlayBattleNight;
+			o["api_req_combined_battle/ec_midnight_battle"].ResponseReceived += this.PlayBattleNight;
+			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += this.PlayBattleNight;
+            o["api_req_combined_battle/ld_shooting"].ResponseReceived += this.PlayBattleNight;
 
-            o["api_req_sortie/airbattle"].ResponseReceived += PlayBattleAir;
-			o["api_req_combined_battle/airbattle"].ResponseReceived += PlayBattleAir;
-			o["api_req_sortie/ld_airbattle"].ResponseReceived += PlayBattleAir;
-			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += PlayBattleAir;
+            o["api_req_sortie/airbattle"].ResponseReceived += this.PlayBattleAir;
+			o["api_req_combined_battle/airbattle"].ResponseReceived += this.PlayBattleAir;
+			o["api_req_sortie/ld_airbattle"].ResponseReceived += this.PlayBattleAir;
+			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += this.PlayBattleAir;
 
-			o["api_req_practice/battle"].ResponseReceived += PlayPracticeDay;
+			o["api_req_practice/battle"].ResponseReceived += this.PlayPracticeDay;
 
-			o["api_req_practice/midnight_battle"].ResponseReceived += PlayPracticeNight;
+			o["api_req_practice/midnight_battle"].ResponseReceived += this.PlayPracticeNight;
 
-			o["api_req_sortie/battleresult"].ResponseReceived += PlayBattleResult;
-			o["api_req_combined_battle/battleresult"].ResponseReceived += PlayBattleResult;
-			o["api_req_practice/battle_result"].ResponseReceived += PlayBattleResult;
+			o["api_req_sortie/battleresult"].ResponseReceived += this.PlayBattleResult;
+			o["api_req_combined_battle/battleresult"].ResponseReceived += this.PlayBattleResult;
+			o["api_req_practice/battle_result"].ResponseReceived += this.PlayBattleResult;
 
-			o["api_get_member/record"].ResponseReceived += PlayRecord;
+			o["api_get_member/record"].ResponseReceived += this.PlayRecord;
 
-			o["api_get_member/payitem"].ResponseReceived += PlayItem;
+			o["api_get_member/payitem"].ResponseReceived += this.PlayItem;
 
-			o["api_get_member/questlist"].ResponseReceived += PlayQuest;
+			o["api_get_member/questlist"].ResponseReceived += this.PlayQuest;
 
-			o["api_get_member/picture_book"].ResponseReceived += PlayAlbum;
+			o["api_get_member/picture_book"].ResponseReceived += this.PlayAlbum;
 
-			o["api_req_kousyou/remodel_slotlist"].ResponseReceived += PlayImprovementArsenal;
+			o["api_req_kousyou/remodel_slotlist"].ResponseReceived += this.PlayImprovementArsenal;
 
 			#endregion
 
-			Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
-			SystemEvents.SystemShuttingDown += SystemEvents_SystemShuttingDown;
+			Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
+			SystemEvents.SystemShuttingDown += this.SystemEvents_SystemShuttingDown;
 		}
 
 		public void ConfigurationChanged()
 		{
 			var c = Utility.Configuration.Config.BGMPlayer;
 
-			Enabled = c.Enabled;
+            this.Enabled = c.Enabled;
 
 			if (c.Handles != null)
-				Handles = new IDDictionary<SoundHandle>(c.Handles);
+                this.Handles = new IDDictionary<SoundHandle>(c.Handles);
 
 			if (!c.SyncBrowserMute)
-				IsMute = false;
+                this.IsMute = false;
 
-			// 設定変更を適用するためいったん閉じる
-			_mp.Close();
-			_currentSoundHandleID = (SoundHandleID)(-1);
+            // 設定変更を適用するためいったん閉じる
+            this._mp.Close();
+            this._currentSoundHandleID = (SoundHandleID)(-1);
 		}
 
 		void SystemEvents_SystemShuttingDown()
 		{
 			var c = Utility.Configuration.Config.BGMPlayer;
 
-			c.Enabled = Enabled;
-			c.Handles = Handles.Values.ToList();
+			c.Enabled = this.Enabled;
+			c.Handles = this.Handles.Values.ToList();
 		}
 
 
 		public void SetInitialVolume(int volume)
 		{
-			_mp.Volume = volume;
+            this._mp.Volume = volume;
 		}
 
 
 
 		void PlayPort(string apiname, dynamic data)
 		{
-			_isBoss = false;
-			Play(Handles[(int)SoundHandleID.Port]);
+            this._isBoss = false;
+            this.Play(this.Handles[(int)SoundHandleID.Port]);
 		}
 
 		void PlaySortie(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.Sortie]);
-			_isBoss = (int)data.api_event_id == 5;
+            this.Play(this.Handles[(int)SoundHandleID.Sortie]);
+            this._isBoss = (int)data.api_event_id == 5;
 		}
 
 		void PlayBattleDay(string apiname, dynamic data)
 		{
-			if (_isBoss)
-				Play(Handles[(int)SoundHandleID.BattleBoss]);
+			if (this._isBoss)
+                this.Play(this.Handles[(int)SoundHandleID.BattleBoss]);
 			else
-				Play(Handles[(int)SoundHandleID.BattleDay]);
+                this.Play(this.Handles[(int)SoundHandleID.BattleDay]);
 		}
 
 		void PlayBattleNight(string apiname, dynamic data)
 		{
-			if (_isBoss)
-				Play(Handles[(int)SoundHandleID.BattleBoss]);
+			if (this._isBoss)
+                this.Play(this.Handles[(int)SoundHandleID.BattleBoss]);
 			else
-				Play(Handles[(int)SoundHandleID.BattleNight]);
+                this.Play(this.Handles[(int)SoundHandleID.BattleNight]);
 		}
 
 		void PlayBattleAir(string apiname, dynamic data)
 		{
-			if (_isBoss)
-				Play(Handles[(int)SoundHandleID.BattleBoss]);
+			if (this._isBoss)
+                this.Play(this.Handles[(int)SoundHandleID.BattleBoss]);
 			else
-				Play(Handles[(int)SoundHandleID.BattleAir]);
+                this.Play(this.Handles[(int)SoundHandleID.BattleAir]);
 		}
 
 		void PlayPracticeDay(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.BattlePracticeDay]);
+            this.Play(this.Handles[(int)SoundHandleID.BattlePracticeDay]);
 		}
 
 		void PlayPracticeNight(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.BattlePracticeNight]);
+            this.Play(this.Handles[(int)SoundHandleID.BattlePracticeNight]);
 
 		}
 
@@ -270,13 +270,13 @@ namespace ElectronicObserver.Utility
 				case "S":
 				case "A":
 				case "B":
-					if (_isBoss)
-						Play(Handles[(int)SoundHandleID.ResultBossWin]);
+					if (this._isBoss)
+                        this.Play(this.Handles[(int)SoundHandleID.ResultBossWin]);
 					else
-						Play(Handles[(int)SoundHandleID.ResultWin]);
+                        this.Play(this.Handles[(int)SoundHandleID.ResultWin]);
 					break;
 				default:
-					Play(Handles[(int)SoundHandleID.ResultLose]);
+                    this.Play(this.Handles[(int)SoundHandleID.ResultLose]);
 					break;
 			}
 		}
@@ -284,51 +284,51 @@ namespace ElectronicObserver.Utility
 
 		void PlayRecord(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.Record]);
+            this.Play(this.Handles[(int)SoundHandleID.Record]);
 		}
 
 		void PlayItem(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.Item]);
+            this.Play(this.Handles[(int)SoundHandleID.Item]);
 		}
 
 		void PlayQuest(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.Quest]);
+            this.Play(this.Handles[(int)SoundHandleID.Quest]);
 		}
 
 		void PlayAlbum(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.Album]);
+            this.Play(this.Handles[(int)SoundHandleID.Album]);
 		}
 
 		void PlayImprovementArsenal(string apiname, dynamic data)
 		{
-			Play(Handles[(int)SoundHandleID.ImprovementArsenal]);
+            this.Play(this.Handles[(int)SoundHandleID.ImprovementArsenal]);
 		}
 
 
 		private bool Play(SoundHandle sh)
 		{
-			if (Enabled &&
+			if (this.Enabled &&
 				sh != null &&
 				sh.Enabled &&
 				!string.IsNullOrWhiteSpace(sh.Path) &&
-				sh.HandleID != _currentSoundHandleID)
+				sh.HandleID != this._currentSoundHandleID)
 			{
 
 
 				if (File.Exists(sh.Path))
 				{
-					_mp.Close();
-					_mp.SetPlaylist(null);
-					_mp.SourcePath = sh.Path;
+                    this._mp.Close();
+                    this._mp.SetPlaylist(null);
+                    this._mp.SourcePath = sh.Path;
 
 				}
 				else if (Directory.Exists(sh.Path))
 				{
-					_mp.Close();
-					_mp.SetPlaylistFromDirectory(sh.Path);
+                    this._mp.Close();
+                    this._mp.SetPlaylistFromDirectory(sh.Path);
 
 				}
 				else
@@ -336,13 +336,13 @@ namespace ElectronicObserver.Utility
 					return false;
 				}
 
-				_currentSoundHandleID = sh.HandleID;
+                this._currentSoundHandleID = sh.HandleID;
 
-				_mp.IsLoop = sh.IsLoop;
-				_mp.LoopHeadPosition = sh.LoopHeadPosition;
+                this._mp.IsLoop = sh.IsLoop;
+                this._mp.LoopHeadPosition = sh.LoopHeadPosition;
 				if (!Utility.Configuration.Config.Control.UseSystemVolume)
-					_mp.Volume = sh.Volume;
-				_mp.Play();
+                    this._mp.Volume = sh.Volume;
+                this._mp.Play();
 
 				return true;
 			}

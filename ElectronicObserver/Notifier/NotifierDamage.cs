@@ -61,64 +61,64 @@ namespace ElectronicObserver.Notifier
 		public NotifierDamage()
 			: base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public NotifierDamage(Utility.Configuration.ConfigurationData.ConfigNotifierDamage config)
 			: base(config)
 		{
-			Initialize();
+            this.Initialize();
 
-			NotifiesBefore = config.NotifiesBefore;
-			NotifiesNow = config.NotifiesNow;
-			NotifiesAfter = config.NotifiesAfter;
-			LevelBorder = config.LevelBorder;
-			ContainsNotLockedShip = config.ContainsNotLockedShip;
-			ContainsSafeShip = config.ContainsSafeShip;
-			ContainsFlagship = config.ContainsFlagship;
-			NotifiesAtEndpoint = config.NotifiesAtEndpoint;
+            this.NotifiesBefore = config.NotifiesBefore;
+            this.NotifiesNow = config.NotifiesNow;
+            this.NotifiesAfter = config.NotifiesAfter;
+            this.LevelBorder = config.LevelBorder;
+            this.ContainsNotLockedShip = config.ContainsNotLockedShip;
+            this.ContainsSafeShip = config.ContainsSafeShip;
+            this.ContainsFlagship = config.ContainsFlagship;
+            this.NotifiesAtEndpoint = config.NotifiesAtEndpoint;
 		}
 
 
 		private void Initialize()
 		{
-			DialogData.Title = "！대파경고！";
+            this.DialogData.Title = "！대파경고！";
 
 			APIObserver o = APIObserver.Instance;
 
-			o["api_port/port"].ResponseReceived += CloseAll;
+			o["api_port/port"].ResponseReceived += this.CloseAll;
 
-			o["api_req_map/start"].ResponseReceived += InSortie;
-			o["api_req_map/next"].ResponseReceived += InSortie;
+			o["api_req_map/start"].ResponseReceived += this.InSortie;
+			o["api_req_map/next"].ResponseReceived += this.InSortie;
 
-			o["api_get_member/mapinfo"].ResponseReceived += BeforeSortie;
+			o["api_get_member/mapinfo"].ResponseReceived += this.BeforeSortie;
 
-			o["api_req_sortie/battleresult"].ResponseReceived += BattleFinished;
-			o["api_req_combined_battle/battleresult"].ResponseReceived += BattleFinished;
+			o["api_req_sortie/battleresult"].ResponseReceived += this.BattleFinished;
+			o["api_req_combined_battle/battleresult"].ResponseReceived += this.BattleFinished;
 
-			o["api_req_sortie/battle"].ResponseReceived += BattleStarted;
-			o["api_req_battle_midnight/battle"].ResponseReceived += BattleStarted;
-			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += BattleStarted;
-			o["api_req_sortie/airbattle"].ResponseReceived += BattleStarted;
-			o["api_req_sortie/ld_airbattle"].ResponseReceived += BattleStarted;
-			o["api_req_sortie/night_to_day"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/battle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/battle_water"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/airbattle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/midnight_battle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/sp_midnight"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/ec_battle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/ec_midnight_battle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/each_battle"].ResponseReceived += BattleStarted;
-			o["api_req_combined_battle/each_battle_water"].ResponseReceived += BattleStarted;
+			o["api_req_sortie/battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_battle_midnight/battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += this.BattleStarted;
+			o["api_req_sortie/airbattle"].ResponseReceived += this.BattleStarted;
+			o["api_req_sortie/ld_airbattle"].ResponseReceived += this.BattleStarted;
+			o["api_req_sortie/night_to_day"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/battle_water"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/airbattle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/midnight_battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/sp_midnight"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/ec_battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/ec_midnight_battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/each_battle"].ResponseReceived += this.BattleStarted;
+			o["api_req_combined_battle/each_battle_water"].ResponseReceived += this.BattleStarted;
 
 		}
 
 		void CloseAll(string apiname, dynamic data)
 		{
-			DialogData.OnCloseAll();
+            this.DialogData.OnCloseAll();
 		}
 
 
@@ -126,17 +126,17 @@ namespace ElectronicObserver.Notifier
 
 		private void BeforeSortie(string apiname, dynamic data)
 		{
-			if (NotifiesNow || NotifiesBefore)
+			if (this.NotifiesNow || this.NotifiesBefore)
 			{
 
-				string[] array = GetDamagedShips(
+				string[] array = this.GetDamagedShips(
 					KCDatabase.Instance.Fleet.Fleets.Values
 					.Where(f => f.ExpeditionState == 0)
-					.SelectMany(f => f.MembersWithoutEscaped.Skip(!ContainsFlagship ? 1 : 0)));
+					.SelectMany(f => f.MembersWithoutEscaped.Skip(!this.ContainsFlagship ? 1 : 0)));
 
 				if (array != null && array.Length > 0)
 				{
-					Notify(array);
+                    this.Notify(array);
 				}
 			}
 		}
@@ -144,17 +144,17 @@ namespace ElectronicObserver.Notifier
 
 		private void InSortie(string apiname, dynamic data)
 		{
-			if (NotifiesAfter)
+			if (this.NotifiesAfter)
 			{
 
-				string[] array = GetDamagedShips(KCDatabase.Instance.Fleet.Fleets.Values
+				string[] array = this.GetDamagedShips(KCDatabase.Instance.Fleet.Fleets.Values
 					.Where(f => f.IsInSortie)
-					.SelectMany(f => f.MembersWithoutEscaped.Skip(!ContainsFlagship ? 1 : 0)));
+					.SelectMany(f => f.MembersWithoutEscaped.Skip(!this.ContainsFlagship ? 1 : 0)));
 
 
 				if (array != null && array.Length > 0)
 				{
-					Notify(array);
+                    this.Notify(array);
 				}
 			}
 		}
@@ -162,18 +162,18 @@ namespace ElectronicObserver.Notifier
 
 		private void BattleStarted(string apiname, dynamic data)
 		{
-			if (NotifiesBefore)
+			if (this.NotifiesBefore)
 			{
-				CheckBattle();
+                this.CheckBattle();
 			}
 		}
 
 
 		private void BattleFinished(string apiname, dynamic data)
 		{
-			if (NotifiesNow)
+			if (this.NotifiesNow)
 			{
-				CheckBattle();
+                this.CheckBattle();
 			}
 		}
 
@@ -183,21 +183,21 @@ namespace ElectronicObserver.Notifier
 
 			BattleManager bm = KCDatabase.Instance.Battle;
 
-			if (bm.Compass.IsEndPoint && !NotifiesAtEndpoint)
+			if (bm.Compass.IsEndPoint && !this.NotifiesAtEndpoint)
 				return;
 
 
 			var list = new List<string>();
 
 			var battle = bm.SecondBattle ?? bm.FirstBattle;
-			list.AddRange(GetDamagedShips(battle.Initial.FriendFleet, battle.ResultHPs.ToArray()));
+			list.AddRange(this.GetDamagedShips(battle.Initial.FriendFleet, battle.ResultHPs.ToArray()));
 
 			if (bm.IsCombinedBattle)
-				list.AddRange(GetDamagedShips(battle.Initial.FriendFleetEscort, battle.ResultHPs.Skip(6).ToArray()));
+				list.AddRange(this.GetDamagedShips(battle.Initial.FriendFleetEscort, battle.ResultHPs.Skip(6).ToArray()));
 
 
 			if (list.Count > 0)
-				Notify(list.ToArray());
+                this.Notify(list.ToArray());
 
 		}
 
@@ -209,14 +209,14 @@ namespace ElectronicObserver.Notifier
 				hp > 0 &&
 				(double)hp / ship.HPMax <= 0.25 &&
 				ship.RepairingDockID == -1 &&
-				ship.Level >= LevelBorder &&
-				(ContainsNotLockedShip ? true : (ship.IsLocked || ship.SlotInstance.Count(q => q != null && q.IsLocked) > 0)) &&
-				(ContainsSafeShip ? true : !ship.AllSlotInstanceMaster.Any(e => e?.CategoryType == EquipmentTypes.DamageControl));
+				ship.Level >= this.LevelBorder &&
+				(this.ContainsNotLockedShip ? true : (ship.IsLocked || ship.SlotInstance.Count(q => q != null && q.IsLocked) > 0)) &&
+				(this.ContainsSafeShip ? true : !ship.AllSlotInstanceMaster.Any(e => e?.CategoryType == EquipmentTypes.DamageControl));
 		}
 
 		private string[] GetDamagedShips(IEnumerable<ShipData> ships)
 		{
-			return ships.Where(s => IsShipDamaged(s, s?.HPCurrent ?? 0)).Select(s => $"{s.NameWithLevel} ({s.HPCurrent}/{s.HPMax})").ToArray();
+			return ships.Where(s => this.IsShipDamaged(s, s?.HPCurrent ?? 0)).Select(s => $"{s.NameWithLevel} ({s.HPCurrent}/{s.HPMax})").ToArray();
 		}
 
 		private string[] GetDamagedShips(FleetData fleet, int[] hps)
@@ -226,11 +226,11 @@ namespace ElectronicObserver.Notifier
 
 			for (int i = 0; i < fleet.Members.Count; i++)
 			{
-				if (i == 0 && !ContainsFlagship) continue;
+				if (i == 0 && !this.ContainsFlagship) continue;
 
 				ShipData s = fleet.MembersInstance[i];
 
-				if (s != null && !fleet.EscapedShipList.Contains(s.MasterID) && IsShipDamaged(s, hps[i]))
+				if (s != null && !fleet.EscapedShipList.Contains(s.MasterID) && this.IsShipDamaged(s, hps[i]))
 				{
 					list.AddLast($"{s.NameWithLevel} ({hps[i]}/{s.HPMax})");
 				}
@@ -242,7 +242,7 @@ namespace ElectronicObserver.Notifier
 		public void Notify(string[] messages)
 		{
 
-			DialogData.Message = string.Format("{0} 가 대파하였습니다!",
+            this.DialogData.Message = string.Format("{0} 가 대파하였습니다!",
 				string.Join(", ", messages));
 
 			base.Notify();
@@ -256,14 +256,14 @@ namespace ElectronicObserver.Notifier
 
 			if (config is Utility.Configuration.ConfigurationData.ConfigNotifierDamage c)
 			{
-				c.NotifiesBefore = NotifiesBefore;
-				c.NotifiesNow = NotifiesNow;
-				c.NotifiesAfter = NotifiesAfter;
-				c.LevelBorder = LevelBorder;
-				c.ContainsNotLockedShip = ContainsNotLockedShip;
-				c.ContainsSafeShip = ContainsSafeShip;
-				c.ContainsFlagship = ContainsFlagship;
-				c.NotifiesAtEndpoint = NotifiesAtEndpoint;
+				c.NotifiesBefore = this.NotifiesBefore;
+				c.NotifiesNow = this.NotifiesNow;
+				c.NotifiesAfter = this.NotifiesAfter;
+				c.LevelBorder = this.LevelBorder;
+				c.ContainsNotLockedShip = this.ContainsNotLockedShip;
+				c.ContainsSafeShip = this.ContainsSafeShip;
+				c.ContainsFlagship = this.ContainsFlagship;
+				c.NotifiesAtEndpoint = this.NotifiesAtEndpoint;
 			}
 		}
 

@@ -17,40 +17,40 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 海域ID
 		/// </summary>
-		public int MapID => (int)RawData.api_id;
+		public int MapID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 海域カテゴリID
 		/// </summary>
-		public int MapAreaID => (int)RawData.api_maparea_id;
+		public int MapAreaID => (int)this.RawData.api_maparea_id;
 
 		/// <summary>
 		/// 海域カテゴリ内番号
 		/// </summary>
-		public int MapInfoID => (int)RawData.api_no;
+		public int MapInfoID => (int)this.RawData.api_no;
 
 		/// <summary>
 		/// 海域名
 		/// </summary>
 		public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.OperationMaps); }
+            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.OperationMap); }
         }
 
 		/// <summary>
 		/// 難易度
 		/// </summary>
-		public int Difficulty => (int)RawData.api_level;
+		public int Difficulty => (int)this.RawData.api_level;
 
 		/// <summary>
 		/// 作戦名
 		/// </summary>
-		public string OperationName => RawData.api_opetext;
+		public string OperationName => this.RawData.api_opetext;
 
 		/// <summary>
 		/// 作戦情報
 		/// </summary>
-		public string Information => ((string)RawData.api_infotext).Replace("<br>", "");
+		public string Information => ((string)this.RawData.api_infotext).Replace("<br>", "");
 
         /// <summary>
         /// クリアに必要な撃破回数(主にEO海域)
@@ -102,12 +102,12 @@ namespace ElectronicObserver.Data
 		public MapInfoData()
 			: base()
 		{
-            RequiredDefeatedCount = -1;
-            IsCleared = false;
-			CurrentDefeatedCount = 0;
-			MapHPCurrent = MapHPMax = 0;
-			EventDifficulty = -1;
-			GaugeType = 2;
+            this.RequiredDefeatedCount = -1;
+            this.IsCleared = false;
+            this.CurrentDefeatedCount = 0;
+            this.MapHPCurrent = this.MapHPMax = 0;
+            this.EventDifficulty = -1;
+            this.GaugeType = 2;
 		}
 
 
@@ -121,17 +121,17 @@ namespace ElectronicObserver.Data
 					break;
 
 				case "api_get_member/mapinfo":
-					IsCleared = (int)data.api_cleared != 0;
-                    RequiredDefeatedCount = data.api_required_defeat_count() ? (int)data.api_required_defeat_count : -1;
-                    CurrentDefeatedCount = data.api_defeat_count() ? (int)data.api_defeat_count : 0;
+                    this.IsCleared = (int)data.api_cleared != 0;
+                    this.RequiredDefeatedCount = data.api_required_defeat_count() ? (int)data.api_required_defeat_count : -1;
+                    this.CurrentDefeatedCount = data.api_defeat_count() ? (int)data.api_defeat_count : 0;
 					if (data.api_eventmap())
 					{
-						MapHPCurrent = data.api_eventmap.api_now_maphp() ? (int)data.api_eventmap.api_now_maphp : 0;
-						MapHPMax = data.api_eventmap.api_max_maphp() ? (int)data.api_eventmap.api_max_maphp : 0;
-						EventDifficulty = data.api_eventmap.api_selected_rank() ? (int)data.api_eventmap.api_selected_rank : -1;
+                        this.MapHPCurrent = data.api_eventmap.api_now_maphp() ? (int)data.api_eventmap.api_now_maphp : 0;
+                        this.MapHPMax = data.api_eventmap.api_max_maphp() ? (int)data.api_eventmap.api_max_maphp : 0;
+                        this.EventDifficulty = data.api_eventmap.api_selected_rank() ? (int)data.api_eventmap.api_selected_rank : -1;
 					}
-                    GaugeType = data.api_gauge_type() ? (int)data.api_gauge_type : 2;
-                    CurrentGaugeIndex = data.api_gauge_num() ? (int)data.api_gauge_num : 0;
+                    this.GaugeType = data.api_gauge_type() ? (int)data.api_gauge_type : 2;
+                    this.CurrentGaugeIndex = data.api_gauge_num() ? (int)data.api_gauge_num : 0;
                     break;
 			}
 
@@ -145,16 +145,16 @@ namespace ElectronicObserver.Data
 			switch (apiname)
 			{
 				case "api_req_map/select_eventmap_rank":
-					EventDifficulty = int.Parse(data["api_rank"]);
+                    this.EventDifficulty = int.Parse(data["api_rank"]);
 					break;
 			}
 		}
 
 
 
-		public int ID => MapID;
+		public int ID => this.MapID;
 
-		public override string ToString() => $"[{MapID}] {Name}";
+		public override string ToString() => $"[{this.MapID}] {this.Name}";
 	}
 
 

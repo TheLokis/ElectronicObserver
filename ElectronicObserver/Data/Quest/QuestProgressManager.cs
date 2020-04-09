@@ -50,11 +50,11 @@ namespace ElectronicObserver.Data.Quest
         {
             get
             {
-                return Progresses.Values.ToList();
+                return this.Progresses.Values.ToList();
             }
             set
             {
-                Progresses = new IDDictionary<ProgressData>(value);
+                this.Progresses = new IDDictionary<ProgressData>(value);
             }
         }
 
@@ -75,53 +75,53 @@ namespace ElectronicObserver.Data.Quest
 
         public QuestProgressManager()
         {
-            Initialize();
+            this.Initialize();
         }
 
 
         public override void Initialize()
         {
-            Progresses = new IDDictionary<ProgressData>();
-            LastUpdateTime = DateTime.Now;
+            this.Progresses = new IDDictionary<ProgressData>();
+            this.LastUpdateTime = DateTime.Now;
 
-            RemoveEvents();     //二重登録防止
+            this.RemoveEvents();     //二重登録防止
 
 
             var ao = APIObserver.Instance;
 
-            ao.APIList["api_get_member/questlist"].ResponseReceived += QuestUpdated;
+            ao.APIList["api_get_member/questlist"].ResponseReceived += this.QuestUpdated;
 
-            ao.APIList["api_req_map/start"].ResponseReceived += StartSortie;
+            ao.APIList["api_req_map/start"].ResponseReceived += this.StartSortie;
 
-            ao.APIList["api_req_map/next"].ResponseReceived += NextSortie;
+            ao.APIList["api_req_map/next"].ResponseReceived += this.NextSortie;
 
-            ao.APIList["api_req_sortie/battleresult"].ResponseReceived += BattleFinished;
-            ao.APIList["api_req_combined_battle/battleresult"].ResponseReceived += BattleFinished;
+            ao.APIList["api_req_sortie/battleresult"].ResponseReceived += this.BattleFinished;
+            ao.APIList["api_req_combined_battle/battleresult"].ResponseReceived += this.BattleFinished;
 
-            ao.APIList["api_req_practice/battle_result"].ResponseReceived += PracticeFinished;
+            ao.APIList["api_req_practice/battle_result"].ResponseReceived += this.PracticeFinished;
 
-            ao.APIList["api_req_mission/result"].ResponseReceived += ExpeditionCompleted;
+            ao.APIList["api_req_mission/result"].ResponseReceived += this.ExpeditionCompleted;
 
-            ao.APIList["api_req_nyukyo/start"].RequestReceived += StartRepair;
+            ao.APIList["api_req_nyukyo/start"].RequestReceived += this.StartRepair;
 
-            ao.APIList["api_req_hokyu/charge"].ResponseReceived += Supplied;
+            ao.APIList["api_req_hokyu/charge"].ResponseReceived += this.Supplied;
 
-            ao.APIList["api_req_kousyou/createitem"].ResponseReceived += EquipmentDeveloped;
+            ao.APIList["api_req_kousyou/createitem"].ResponseReceived += this.EquipmentDeveloped;
 
-            ao.APIList["api_req_kousyou/createship"].RequestReceived += ShipConstructed;
+            ao.APIList["api_req_kousyou/createship"].RequestReceived += this.ShipConstructed;
 
-            ao.APIList["api_req_kousyou/destroyship"].RequestReceived += ShipDestructed;
+            ao.APIList["api_req_kousyou/destroyship"].RequestReceived += this.ShipDestructed;
 
             // 装備廃棄はイベント前に装備データが削除されてしまうので destroyitem2 から直接呼ばれる
 
-            ao.APIList["api_req_kousyou/remodel_slot"].ResponseReceived += EquipmentRemodeled;
+            ao.APIList["api_req_kousyou/remodel_slot"].ResponseReceived += this.EquipmentRemodeled;
 
-            ao.APIList["api_req_kaisou/powerup"].ResponseReceived += Modernized;
+            ao.APIList["api_req_kaisou/powerup"].ResponseReceived += this.Modernized;
 
-            ao.APIList["api_port/port"].ResponseReceived += TimerSave;
+            ao.APIList["api_port/port"].ResponseReceived += this.TimerSave;
 
 
-            _prevTime = DateTime.Now;
+            this._prevTime = DateTime.Now;
         }
 
         public void RemoveEvents()
@@ -129,40 +129,40 @@ namespace ElectronicObserver.Data.Quest
 
             var ao = APIObserver.Instance;
 
-            ao.APIList["api_get_member/questlist"].ResponseReceived -= QuestUpdated;
+            ao.APIList["api_get_member/questlist"].ResponseReceived -= this.QuestUpdated;
 
-            ao.APIList["api_req_map/start"].ResponseReceived -= StartSortie;
+            ao.APIList["api_req_map/start"].ResponseReceived -= this.StartSortie;
 
-            ao.APIList["api_req_map/next"].ResponseReceived -= NextSortie;
+            ao.APIList["api_req_map/next"].ResponseReceived -= this.NextSortie;
 
-            ao.APIList["api_req_sortie/battleresult"].ResponseReceived -= BattleFinished;
-            ao.APIList["api_req_combined_battle/battleresult"].ResponseReceived -= BattleFinished;
+            ao.APIList["api_req_sortie/battleresult"].ResponseReceived -= this.BattleFinished;
+            ao.APIList["api_req_combined_battle/battleresult"].ResponseReceived -= this.BattleFinished;
 
-            ao.APIList["api_req_practice/battle_result"].ResponseReceived -= PracticeFinished;
+            ao.APIList["api_req_practice/battle_result"].ResponseReceived -= this.PracticeFinished;
 
-            ao.APIList["api_req_mission/result"].ResponseReceived -= ExpeditionCompleted;
+            ao.APIList["api_req_mission/result"].ResponseReceived -= this.ExpeditionCompleted;
 
-            ao.APIList["api_req_nyukyo/start"].RequestReceived -= StartRepair;
+            ao.APIList["api_req_nyukyo/start"].RequestReceived -= this.StartRepair;
 
-            ao.APIList["api_req_hokyu/charge"].ResponseReceived -= Supplied;
+            ao.APIList["api_req_hokyu/charge"].ResponseReceived -= this.Supplied;
 
-            ao.APIList["api_req_kousyou/createitem"].ResponseReceived -= EquipmentDeveloped;
+            ao.APIList["api_req_kousyou/createitem"].ResponseReceived -= this.EquipmentDeveloped;
 
-            ao.APIList["api_req_kousyou/createship"].RequestReceived -= ShipConstructed;
+            ao.APIList["api_req_kousyou/createship"].RequestReceived -= this.ShipConstructed;
 
-            ao.APIList["api_req_kousyou/destroyship"].ResponseReceived -= ShipDestructed;
+            ao.APIList["api_req_kousyou/destroyship"].ResponseReceived -= this.ShipDestructed;
 
             // 装備廃棄は(ry
 
-            ao.APIList["api_req_kousyou/remodel_slot"].ResponseReceived -= EquipmentRemodeled;
+            ao.APIList["api_req_kousyou/remodel_slot"].ResponseReceived -= this.EquipmentRemodeled;
 
-            ao.APIList["api_req_kaisou/powerup"].ResponseReceived -= Modernized;
+            ao.APIList["api_req_kaisou/powerup"].ResponseReceived -= this.Modernized;
 
-            ao.APIList["api_port/port"].ResponseReceived -= TimerSave;
+            ao.APIList["api_port/port"].ResponseReceived -= this.TimerSave;
 
         }
 
-        public ProgressData this[int key] => Progresses[key];
+        public ProgressData this[int key] => this.Progresses[key];
 
 
 
@@ -178,19 +178,19 @@ namespace ElectronicObserver.Data.Quest
                     iscleared = false;
                     break;
                 case 1:
-                    iscleared = DateTimeHelper.IsCrossedHour(_prevTime);
+                    iscleared = DateTimeHelper.IsCrossedHour(this._prevTime);
                     break;
                 case 2:
-                    iscleared = DateTimeHelper.IsCrossedDay(_prevTime, 0, 0, 0);
+                    iscleared = DateTimeHelper.IsCrossedDay(this._prevTime, 0, 0, 0);
                     break;
             }
 
 
             if (iscleared)
             {
-                _prevTime = DateTime.Now;
+                this._prevTime = DateTime.Now;
 
-                Save();
+                this.Save();
                 Utility.Logger.Add(1, "임무 진행의 자동 저장을 실시했습니다.");
             }
 
@@ -205,7 +205,7 @@ namespace ElectronicObserver.Data.Quest
 
             //消えている・達成済みの任務の進捗情報を削除
             if (quests.IsLoadCompleted)
-                Progresses.RemoveAll(q => !quests.Quests.ContainsKey(q.QuestID) || quests[q.QuestID].State == 3);
+                this.Progresses.RemoveAll(q => !quests.Quests.ContainsKey(q.QuestID) || quests[q.QuestID].State == 3);
 
 
             foreach (var q in quests.Quests.Values)
@@ -215,7 +215,7 @@ namespace ElectronicObserver.Data.Quest
                 if (q.State == 3) continue;
 
                 // 進捗情報の生成
-                if (!Progresses.ContainsKey(q.QuestID))
+                if (!this.Progresses.ContainsKey(q.QuestID))
                 {
 
                     #region 地 獄 の 任 務 I D べ た 書 き 祭 り
@@ -315,10 +315,10 @@ namespace ElectronicObserver.Data.Quest
                             break;
                         case 854:   //|854|季|戦果拡張任務！「Z作戦」前段作戦|2-4・6-1・6-3ボスA勝利各1/6-4ボスS勝利1
                             Progresses.Add(new ProgressMultiBattle(q, new[]{
-                                new ProgressBattle( q, 1, "A", new[]{ 24 }, true ),
-                                new ProgressBattle( q, 1, "A", new[]{ 61 }, true ),
-                                new ProgressBattle( q, 1, "A", new[]{ 63 }, true ),
-                                new ProgressBattle( q, 1, "S", new[]{ 64 }, true ),
+                                new ProgressBattle(q, 1, "A", new[]{ 24 }, true),
+                                new ProgressBattle(q, 1, "A", new[]{ 61 }, true),
+                                new ProgressBattle(q, 1, "A", new[]{ 63 }, true),
+                                new ProgressBattle(q, 1, "S", new[]{ 64 }, true),
                             }));
                             break;
                         case 861:   //|861|季|強行輸送艦隊、抜錨！|1-6終点到達2|要(航空戦艦or補給艦)2
@@ -326,6 +326,14 @@ namespace ElectronicObserver.Data.Quest
                             break;
                         case 862:   //|862|季|前線の航空偵察を実施せよ！|6-3ボスA勝利2|要水母1軽巡2
                             Progresses.Add(new ProgressSpecialBattle(q, 2, "A", new[] { 63 }, true));
+                            break;
+                        case 872:   //|872|季|戦果拡張任務！「Z作戦」後段作戦|5-5・6-2・6-5・7-2(第二)ボスS勝利各1|要第一艦隊？
+                            Progresses.Add(new ProgressMultiBattle(q, new[]{
+                                new ProgressBattle(q, 1, "S", new[]{ 55 }, true),
+                                new ProgressBattle(q, 1, "S", new[]{ 62 }, true),
+                                new ProgressBattle(q, 1, "S", new[]{ 65 }, true),
+                                new ProgressSpecialBattle(q, 1, "S", new[]{ 72 }, true, 2),
+                            }));
                             break;
                         case 873:   //|873|季|北方海域警備を実施せよ！|3-1・3-2・3-3ボスA勝利各1|要軽巡1, 1エリア達成で50%,2エリアで80%
                             Progresses.Add(new ProgressMultiBattle(q, new[]{
@@ -358,6 +366,23 @@ namespace ElectronicObserver.Data.Quest
                                 new ProgressSpecialBattle(q, 1, "S", new[]{ 21 }, true),
                                 new ProgressSpecialBattle(q, 1, "S", new[]{ 22 }, true),
                                 new ProgressSpecialBattle(q, 1, "S", new[]{ 23 }, true),
+                            }));
+                            break;
+                        case 284:   //|284|季|南西諸島方面「海上警備行動」発令！|1-4・2-1・2-2・2-3ボスS勝利各1|要(軽母or軽巡or雷巡or練巡)1/(駆逐or海防)3
+                            Progresses.Add(new ProgressMultiBattle(q, new[]{
+                                new ProgressSpecialBattle(q, 1, "S", new[]{ 14 }, true),
+                                new ProgressSpecialBattle(q, 1, "S", new[]{ 21 }, true),
+                                new ProgressSpecialBattle(q, 1, "S", new[]{ 22 }, true),
+                                new ProgressSpecialBattle(q, 1, "S", new[]{ 23 }, true),
+                            }));
+                            break;
+                        case 845:   //|845|季|発令！「西方海域作戦」|4-1・4-2・4-3・4-4・4-5ボスS勝利各1
+                            Progresses.Add(new ProgressMultiBattle(q, new[] {
+                                new ProgressBattle(q, 1, "S", new[] { 41 }, true),
+                                new ProgressBattle(q, 1, "S", new[] { 42 }, true),
+                                new ProgressBattle(q, 1, "S", new[] { 43 }, true),
+                                new ProgressBattle(q, 1, "S", new[] { 44 }, true),
+                                new ProgressBattle(q, 1, "S", new[] { 45 }, true),
                             }));
                             break;
 
@@ -394,7 +419,7 @@ namespace ElectronicObserver.Data.Quest
                             Progresses.Add(new ProgressExpedition(q, 4, new[] { 5 }));
                             Progresses[q.QuestID].SharedCounterShift = 1;
                             break;
-                        case 426:   //|426|季|海上通商航路の警戒を厳とせよ！|「警備任務」「対潜警戒任務」「海上護衛任務」「強行偵察任務」成功各1|3エリア達成時点で80%                 
+                        case 426:   //|426|季|海上通商航路の警戒を厳とせよ！|「警備任務」「対潜警戒任務」「海上護衛任務」「強行偵察任務」成功各1|3エリア達成時点で80%				 
                             Progresses.Add(new ProgressMultiExpedition(q, new[]{
                                 new ProgressExpedition(q, 1, new[]{ 3 }),
                                 new ProgressExpedition(q, 1, new[]{ 4 }),
@@ -480,6 +505,9 @@ namespace ElectronicObserver.Data.Quest
                         case 643:   //|643|季|主力「陸攻」の調達|零式艦戦21型x2廃棄, (九六式陸攻x1, 九七式艦攻x2)保有
                             Progresses.Add(new ProgressDiscard(q, 2, true, new[] { 20 }, -1));
                             break;
+                        case 653:   //|653|季|工廠稼働！次期作戦準備！|14cm単装砲x6廃棄, (家具コイン6000, 35.6cm連装砲x3, 九六式艦戦x3)保有
+                            Progresses.Add(new ProgressDiscard(q, 6, true, new[] { 4 }, -1));
+                            break;
                         case 663:   //|663|季|新型艤装の継続研究|大口径主砲x10廃棄, 鋼材18000保有
                             Progresses.Add(new ProgressDiscard(q, 10, true, new[] { 3 }));
                             break;
@@ -530,14 +558,14 @@ namespace ElectronicObserver.Data.Quest
                 }
 
                 // 進捗度にずれがあった場合補正する
-                var p = Progresses[q.QuestID];
+                var p = this.Progresses[q.QuestID];
                 if (p != null)
                     p.CheckProgress(q);
 
             }
 
-            LastUpdateTime = DateTime.Now;
-            OnProgressChanged();
+            this.LastUpdateTime = DateTime.Now;
+            this.OnProgressChanged();
 
         }
 
@@ -555,7 +583,7 @@ namespace ElectronicObserver.Data.Quest
 
             #region Slaughter
 
-            var slaughterList = Progresses.Values.OfType<ProgressSlaughter>();
+            var slaughterList = this.Progresses.Values.OfType<ProgressSlaughter>();
 
             for (int i = 0; i < 6; i++)
             {
@@ -585,12 +613,12 @@ namespace ElectronicObserver.Data.Quest
 
             #region Battle
 
-            foreach (var p in Progresses.Values.OfType<ProgressBattle>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressBattle>())
             {
                 p.Increment(bm.Result.Rank, bm.Compass.MapAreaID * 10 + bm.Compass.MapInfoID, bm.Compass.EventID == 5);
             }
 
-            foreach (var p in Progresses.Values.OfType<ProgressMultiBattle>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressMultiBattle>())
             {
                 p.Increment(bm.Result.Rank, bm.Compass.MapAreaID * 10 + bm.Compass.MapInfoID, bm.Compass.EventID == 5);
             }
@@ -598,23 +626,23 @@ namespace ElectronicObserver.Data.Quest
             #endregion
 
 
-            var pago = Progresses.Values.OfType<ProgressAGo>().FirstOrDefault();
+            var pago = this.Progresses.Values.OfType<ProgressAGo>().FirstOrDefault();
             if (pago != null)
                 pago.IncrementBattle(bm.Result.Rank, bm.Compass.EventID == 5);
 
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void PracticeFinished(string apiname, dynamic data)
         {
 
-            foreach (var p in Progresses.Values.OfType<ProgressPractice>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressPractice>())
             {
                 p.Increment(data.api_win_rank);
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void ExpeditionCompleted(string apiname, dynamic data)
@@ -627,50 +655,50 @@ namespace ElectronicObserver.Data.Quest
 
             int areaID = fleet.ExpeditionDestination;
 
-            foreach (var p in Progresses.Values.OfType<ProgressExpedition>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressExpedition>())
             {
                 p.Increment(areaID);
             }
-            foreach (var p in Progresses.Values.OfType<ProgressMultiExpedition>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressMultiExpedition>())
             {
                 p.Increment(areaID);
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
 
         void StartRepair(string apiname, dynamic data)
         {
 
-            foreach (var p in Progresses.Values.OfType<ProgressDocking>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressDocking>())
             {
                 p.Increment();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void Supplied(string apiname, dynamic data)
         {
 
-            foreach (var p in Progresses.Values.OfType<ProgressSupply>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressSupply>())
             {
                 p.Increment();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void EquipmentRemodeled(string apiname, dynamic data)
         {
 
-            foreach (var p in Progresses.Values.OfType<ProgressImprovement>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressImprovement>())
             {
                 p.Increment();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
 
@@ -680,12 +708,12 @@ namespace ElectronicObserver.Data.Quest
 
             if ((int)data.api_powerup_flag == 0) return;    //近代化改修失敗
 
-            foreach (var p in Progresses.Values.OfType<ProgressModernization>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressModernization>())
             {
                 p.Increment();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         public void EquipmentDiscarded(string apiname, Dictionary<string, string> data)
@@ -693,62 +721,62 @@ namespace ElectronicObserver.Data.Quest
 
             var ids = data["api_slotitem_ids"].Split(",".ToCharArray()).Select(s => int.Parse(s));
 
-            foreach (var p in Progresses.Values.OfType<ProgressDiscard>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressDiscard>())
             {
                 p.Increment(ids);
             }
-            foreach (var p in Progresses.Values.OfType<ProgressMultiDiscard>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressMultiDiscard>())
             {
                 p.Increment(ids);
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void ShipDestructed(string apiname, dynamic data)
         {
             int amount = (data["api_ship_id"] as string).Split(",".ToCharArray()).Count();
 
-            foreach (var p in Progresses.Values.OfType<ProgressDestruction>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressDestruction>())
             {
                 p.Increment(amount);
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void ShipConstructed(string apiname, dynamic data)
         {
-            foreach (var p in Progresses.Values.OfType<ProgressConstruction>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressConstruction>())
             {
                 p.Increment();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void EquipmentDeveloped(string apiname, dynamic data)
         {
             int trials = KCDatabase.Instance.Development.DevelopmentTrials;
 
-            foreach (var p in Progresses.Values.OfType<ProgressDevelopment>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressDevelopment>())
             {
                 p.Increment();
                 for (int i = 0; i < trials; i++)
                     p.Increment();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         void StartSortie(string apiname, dynamic data)
         {
-            foreach (var p in Progresses.Values.OfType<ProgressAGo>())
+            foreach (var p in this.Progresses.Values.OfType<ProgressAGo>())
             {
                 p.IncrementSortie();
             }
 
-            OnProgressChanged();
+            this.OnProgressChanged();
         }
 
         private void NextSortie(string apiname, dynamic data)
@@ -758,36 +786,36 @@ namespace ElectronicObserver.Data.Quest
             // 船団護衛成功イベント
             if (compass?.EventID == 8)
             {
-                foreach (var p in Progresses.Values.OfType<ProgressBattle>())
+                foreach (var p in this.Progresses.Values.OfType<ProgressBattle>())
                 {
                     p.Increment("x", compass.MapAreaID * 10 + compass.MapInfoID, compass.IsEndPoint);
                 }
 
-                foreach (var p in Progresses.Values.OfType<ProgressMultiBattle>())
+                foreach (var p in this.Progresses.Values.OfType<ProgressMultiBattle>())
                 {
                     p.Increment("x", compass.MapAreaID * 10 + compass.MapInfoID, compass.IsEndPoint);
                 }
 
-                OnProgressChanged();
+                this.OnProgressChanged();
             }
         }
 
 
         public void Clear()
         {
-            Progresses.Clear();
-            LastUpdateTime = DateTime.Now;
+            this.Progresses.Clear();
+            this.LastUpdateTime = DateTime.Now;
         }
 
 
         public QuestProgressManager Load()
         {
-            return (QuestProgressManager)Load(DefaultFilePath);
+            return (QuestProgressManager)this.Load(DefaultFilePath);
         }
 
         public void Save()
         {
-            Save(DefaultFilePath);
+            this.Save(DefaultFilePath);
         }
 
         private void OnProgressChanged()

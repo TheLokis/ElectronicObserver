@@ -31,166 +31,166 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogHalloween()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 		private void DialogHalloween_Load(object sender, EventArgs e)
 		{
 
-			canvas = new Bitmap(320, 240, PixelFormat.Format32bppArgb);
-			paintbrush = Graphics.FromImage(canvas);
-			rand = new Random();
-			fairies = new Bitmap[4];
-			fairiesVector = new RectangleF[4];
+            this.canvas = new Bitmap(320, 240, PixelFormat.Format32bppArgb);
+            this.paintbrush = Graphics.FromImage(this.canvas);
+            this.rand = new Random();
+            this.fairies = new Bitmap[4];
+            this.fairiesVector = new RectangleF[4];
 
 			for (int i = 0; i < 4; i++)
 			{
 				try
 				{
-					fairies[i] = new Bitmap(ResourceManager.GetStreamFromArchive("Fairy/Fairy" + (i + 1) + ".png"));
+                    this.fairies[i] = new Bitmap(ResourceManager.GetStreamFromArchive("Fairy/Fairy" + (i + 1) + ".png"));
 				}
 				catch (Exception ex)
 				{
 					Utility.Logger.Add(1, "[PumpkinHead] Failed to gather fairies. Boo... " + ex.Message);
-					Close();
+                    this.Close();
 					return;
 				}
 			}
 
-			zoomscale = 2;
-			trickButton = new Rectangle(canvas.Width * 1 / 4 - 80 / 2, canvas.Height * 3 / 4 - 32 / 2, 80, 32);
-			treatButton = new Rectangle(canvas.Width * 3 / 4 - 80 / 2, canvas.Height * 3 / 4 - 32 / 2, 80, 32);
+            this.zoomscale = 2;
+            this.trickButton = new Rectangle(this.canvas.Width * 1 / 4 - 80 / 2, this.canvas.Height * 3 / 4 - 32 / 2, 80, 32);
+            this.treatButton = new Rectangle(this.canvas.Width * 3 / 4 - 80 / 2, this.canvas.Height * 3 / 4 - 32 / 2, 80, 32);
 
-			cursorPosition = new Point(-1, -1);
-			state = 1;
-			tick = 0;
+            this.cursorPosition = new Point(-1, -1);
+            this.state = 1;
+            this.tick = 0;
 
-			ClientSize = new Size(canvas.Width * zoomscale, canvas.Height * zoomscale);
-			Icon = ResourceManager.Instance.AppIcon;
-			Updater.Start();
+            this.ClientSize = new Size(this.canvas.Width * this.zoomscale, this.canvas.Height * this.zoomscale);
+            this.Icon = ResourceManager.Instance.AppIcon;
+            this.Updater.Start();
 
 		}
 
 		private void Updater_Tick(object sender, EventArgs e)
 		{
 
-			paintbrush.ResetTransform();
+            this.paintbrush.ResetTransform();
 
-			switch (state)
+			switch (this.state)
 			{
 				case 1:
-					// initial phase
+                    // initial phase
 
-					DrawBackground();
+                    this.DrawBackground();
 
 					//
 					{
 						string mes = "T r i c k   o r   T r e a t !";
-						paintbrush.DrawString(mes, Font, Brushes.White, (int)(canvas.Width / 2 - mes.Length * Font.Size / 4) + 1, canvas.Height * 1 / 8 + 1);
-						paintbrush.DrawString(mes, Font, Brushes.Red, (int)(canvas.Width / 2 - mes.Length * Font.Size / 4), canvas.Height * 1 / 8);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.White, (int)(this.canvas.Width / 2 - mes.Length * this.Font.Size / 4) + 1, this.canvas.Height * 1 / 8 + 1);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.Red, (int)(this.canvas.Width / 2 - mes.Length * this.Font.Size / 4), this.canvas.Height * 1 / 8);
 					}
 
-					paintbrush.DrawImage(fairies[3],
-						canvas.Width / 2 - fairies[3].Width / 2 + (cursorPosition.X >= canvas.Width / 2 ? fairies[3].Width : 0),
-						canvas.Height * 4 / 8 - fairies[3].Height / 2 + (int)(Math.Sin(1.0 / 4.0 * tick / GetFPS() * 2 * Math.PI) * fairies[3].Height / 4),
-						fairies[3].Width * (cursorPosition.X >= canvas.Width / 2 ? -1 : 1),
-						fairies[3].Height);
+                    this.paintbrush.DrawImage(this.fairies[3],
+                        this.canvas.Width / 2 - this.fairies[3].Width / 2 + (this.cursorPosition.X >= this.canvas.Width / 2 ? this.fairies[3].Width : 0),
+                        this.canvas.Height * 4 / 8 - this.fairies[3].Height / 2 + (int)(Math.Sin(1.0 / 4.0 * this.tick / this.GetFPS() * 2 * Math.PI) * this.fairies[3].Height / 4),
+                        this.fairies[3].Width * (this.cursorPosition.X >= this.canvas.Width / 2 ? -1 : 1),
+                        this.fairies[3].Height);
 
-					DrawButton("Trick!", trickButton, Brushes.Orange, Pens.White, trickButton.Contains(cursorPosition) ? Brushes.Red : Brushes.Maroon);
-					DrawButton("Treat!", treatButton, Brushes.Orange, Pens.White, treatButton.Contains(cursorPosition) ? Brushes.Red : Brushes.Maroon);
+                    this.DrawButton("Trick!", this.trickButton, Brushes.Orange, Pens.White, this.trickButton.Contains(this.cursorPosition) ? Brushes.Red : Brushes.Maroon);
+                    this.DrawButton("Treat!", this.treatButton, Brushes.Orange, Pens.White, this.treatButton.Contains(this.cursorPosition) ? Brushes.Red : Brushes.Maroon);
 
 					break;
 
 				case 2:
-					// Tricked
+                    // Tricked
 
-					DrawBackground();
+                    this.DrawBackground();
 
 					//
 
 					{
 						string mes = "B o o o o o o o o o o o o ! !";
-						paintbrush.DrawString(mes, Font, Brushes.White, (int)(canvas.Width / 2 - mes.Length * Font.Size / 4) + 1, canvas.Height * 1 / 8 + 1);
-						paintbrush.DrawString(mes, Font, Brushes.Red, (int)(canvas.Width / 2 - mes.Length * Font.Size / 4), canvas.Height * 1 / 8);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.White, (int)(this.canvas.Width / 2 - mes.Length * this.Font.Size / 4) + 1, this.canvas.Height * 1 / 8 + 1);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.Red, (int)(this.canvas.Width / 2 - mes.Length * this.Font.Size / 4), this.canvas.Height * 1 / 8);
 					}
 
 					{
 						string mes = "* Open config and press OK to restore  ";
-						paintbrush.DrawString(mes, Font, Brushes.White, (int)(canvas.Width - mes.Length * Font.Size / 2) + 1, canvas.Height * 15 / 16 + 1);
-						paintbrush.DrawString(mes, Font, Brushes.Brown, (int)(canvas.Width - mes.Length * Font.Size / 2), canvas.Height * 15 / 16);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.White, (int)(this.canvas.Width - mes.Length * this.Font.Size / 2) + 1, this.canvas.Height * 15 / 16 + 1);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.Brown, (int)(this.canvas.Width - mes.Length * this.Font.Size / 2), this.canvas.Height * 15 / 16);
 					}
 
-					for (int i = 0; i < fairiesVector.Length; i++)
+					for (int i = 0; i < this.fairiesVector.Length; i++)
 					{
-						fairiesVector[i].X += fairiesVector[i].Width;
-						fairiesVector[i].Y += fairiesVector[i].Height;
+                        this.fairiesVector[i].X += this.fairiesVector[i].Width;
+                        this.fairiesVector[i].Y += this.fairiesVector[i].Height;
 
-						if ((fairiesVector[i].X < 0 && fairiesVector[i].Width < 0) ||
-							 (fairiesVector[i].X >= canvas.Width - fairies[i].Width && fairiesVector[i].Width > 0))
-							fairiesVector[i].Width *= -1;
-						if ((fairiesVector[i].Y < 0 && fairiesVector[i].Height < 0) ||
-							 (fairiesVector[i].Y >= canvas.Height - fairies[i].Height && fairiesVector[i].Height > 0))
-							fairiesVector[i].Height *= -1;
+						if ((this.fairiesVector[i].X < 0 && this.fairiesVector[i].Width < 0) ||
+							 (this.fairiesVector[i].X >= this.canvas.Width - this.fairies[i].Width && this.fairiesVector[i].Width > 0))
+                            this.fairiesVector[i].Width *= -1;
+						if ((this.fairiesVector[i].Y < 0 && this.fairiesVector[i].Height < 0) ||
+							 (this.fairiesVector[i].Y >= this.canvas.Height - this.fairies[i].Height && this.fairiesVector[i].Height > 0))
+                            this.fairiesVector[i].Height *= -1;
 
-						paintbrush.DrawImage(fairies[i], new Rectangle(
-							(fairiesVector[i].Width <= 0 ? (int)fairiesVector[i].X : ((int)fairiesVector[i].X + fairies[i].Width)) + (int)Math.Round((rand.NextDouble() * 2.0 - 1.0) * 4.0),
-							(int)fairiesVector[i].Y + (int)Math.Round((rand.NextDouble() * 2.0 - 1.0) * 4.0),
-							(fairiesVector[i].Width > 0 ? -1 : 1) * fairies[i].Width,
-							fairies[i].Height));
+                        this.paintbrush.DrawImage(this.fairies[i], new Rectangle(
+							(this.fairiesVector[i].Width <= 0 ? (int)this.fairiesVector[i].X : ((int)this.fairiesVector[i].X + this.fairies[i].Width)) + (int)Math.Round((this.rand.NextDouble() * 2.0 - 1.0) * 4.0),
+							(int)this.fairiesVector[i].Y + (int)Math.Round((this.rand.NextDouble() * 2.0 - 1.0) * 4.0),
+							(this.fairiesVector[i].Width > 0 ? -1 : 1) * this.fairies[i].Width,
+                            this.fairies[i].Height));
 					}
 
 					break;
 
 
 				case 3:
-					// Treated
+                    // Treated
 
-					DrawBackground();
+                    this.DrawBackground();
 
 					//
 					{
 						string mes = "T h a n k   y o u ! !";
-						paintbrush.DrawString(mes, Font, Brushes.White, (int)(canvas.Width / 2 - mes.Length * Font.Size / 4) + 1, canvas.Height * 1 / 8 + 1);
-						paintbrush.DrawString(mes, Font, Brushes.Red, (int)(canvas.Width / 2 - mes.Length * Font.Size / 4), canvas.Height * 1 / 8);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.White, (int)(this.canvas.Width / 2 - mes.Length * this.Font.Size / 4) + 1, this.canvas.Height * 1 / 8 + 1);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.Red, (int)(this.canvas.Width / 2 - mes.Length * this.Font.Size / 4), this.canvas.Height * 1 / 8);
 					}
 
 					{
 						string mes = "* Set comment \"jackolantern\"  ";
-						paintbrush.DrawString(mes, Font, Brushes.White, (int)(canvas.Width - mes.Length * Font.Size / 2) + 1, canvas.Height * 15 / 16 + 1);
-						paintbrush.DrawString(mes, Font, Brushes.Brown, (int)(canvas.Width - mes.Length * Font.Size / 2), canvas.Height * 15 / 16);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.White, (int)(this.canvas.Width - mes.Length * this.Font.Size / 2) + 1, this.canvas.Height * 15 / 16 + 1);
+                        this.paintbrush.DrawString(mes, this.Font, Brushes.Brown, (int)(this.canvas.Width - mes.Length * this.Font.Size / 2), this.canvas.Height * 15 / 16);
 					}
 
 
 					// green girl
 					{
-						int w = fairies[0].Width;
-						int h = fairies[0].Height;
-						Point org = new Point(8 + w / 2, canvas.Height / 2 - h / 2);
-						switch (tick * 2 / GetFPS() % 4)
+						int w = this.fairies[0].Width;
+						int h = this.fairies[0].Height;
+						Point org = new Point(8 + w / 2, this.canvas.Height / 2 - h / 2);
+						switch (this.tick * 2 / this.GetFPS() % 4)
 						{
 							case 0:
-								paintbrush.DrawImage(fairies[0], new Point[] {
+                                this.paintbrush.DrawImage(this.fairies[0], new Point[] {
 									new Point( org.X, org.Y ),
 									new Point( org.X + w, org.Y ),
 									new Point( org.X, org.Y + h ),
 								});
 								break;
 							case 1:
-								paintbrush.DrawImage(fairies[0], new Point[] {
+                                this.paintbrush.DrawImage(this.fairies[0], new Point[] {
 									new Point( org.X + w, org.Y ),
 									new Point( org.X + w, org.Y + h ),
 									new Point( org.X, org.Y ),
 								});
 								break;
 							case 2:
-								paintbrush.DrawImage(fairies[0], new Point[] {
+                                this.paintbrush.DrawImage(this.fairies[0], new Point[] {
 									new Point( org.X + w, org.Y + h ),
 									new Point( org.X, org.Y + h ),
 									new Point( org.X + w, org.Y ),
 								});
 								break;
 							case 3:
-								paintbrush.DrawImage(fairies[0], new Point[] {
+                                this.paintbrush.DrawImage(this.fairies[0], new Point[] {
 									new Point( org.X, org.Y + h ),
 									new Point( org.X, org.Y ),
 									new Point( org.X + w, org.Y + h ),
@@ -203,69 +203,69 @@ namespace ElectronicObserver.Window.Dialog
 					//peach girl
 					{
 						int beattick = 8;
-						int phase = (int)(tick / 0.4 / GetFPS()) % beattick;
+						int phase = (int)(this.tick / 0.4 / this.GetFPS()) % beattick;
 						bool isInverted = phase >= beattick / 2;
-						paintbrush.ResetTransform();
-						paintbrush.DrawImage(fairies[1], new Rectangle(
-							64 + 8 + 32 + (isInverted ? fairies[1].Width : 0),
-							canvas.Height / 2 - fairies[1].Height / 2 + (phase % 4 == 0 ? ((int)(Math.Sin(tick % 4 / 2.0 * Math.PI) * 8)) : 0),
-							fairies[1].Width * (isInverted ? -1 : 1),
-							fairies[1].Height));
+                        this.paintbrush.ResetTransform();
+                        this.paintbrush.DrawImage(this.fairies[1], new Rectangle(
+							64 + 8 + 32 + (isInverted ? this.fairies[1].Width : 0),
+                            this.canvas.Height / 2 - this.fairies[1].Height / 2 + (phase % 4 == 0 ? ((int)(Math.Sin(this.tick % 4 / 2.0 * Math.PI) * 8)) : 0),
+                            this.fairies[1].Width * (isInverted ? -1 : 1),
+                            this.fairies[1].Height));
 					}
 
 					//bird girl
 					{
-						int beattick = 1 * GetFPS();
-						int phase = tick / beattick % 4;
+						int beattick = 1 * this.GetFPS();
+						int phase = this.tick / beattick % 4;
 						bool horizontalInverted = phase == 1 || phase == 2;
 						bool verticalInverted = phase == 2 || phase == 3;
-						paintbrush.DrawImage(fairies[2], new Rectangle(
-							128 + 8 + 32 + (horizontalInverted ? fairies[2].Width : 0) + (int)Math.Round((rand.NextDouble() * 2.0 - 1.0) * 8),
-							canvas.Height / 2 - fairies[2].Height / 2 + (verticalInverted ? fairies[2].Height : 0) + (int)Math.Round((rand.NextDouble() * 2.0 - 1.0) * 8),
-							fairies[2].Width * (horizontalInverted ? -1 : 1),
-							fairies[2].Height * (verticalInverted ? -1 : 1)));
+                        this.paintbrush.DrawImage(this.fairies[2], new Rectangle(
+							128 + 8 + 32 + (horizontalInverted ? this.fairies[2].Width : 0) + (int)Math.Round((this.rand.NextDouble() * 2.0 - 1.0) * 8),
+                            this.canvas.Height / 2 - this.fairies[2].Height / 2 + (verticalInverted ? this.fairies[2].Height : 0) + (int)Math.Round((this.rand.NextDouble() * 2.0 - 1.0) * 8),
+                            this.fairies[2].Width * (horizontalInverted ? -1 : 1),
+                            this.fairies[2].Height * (verticalInverted ? -1 : 1)));
 					}
 
 					//witch girl
 					{
 						double rad = 16;
-						double angle = (double)tick / GetFPS() * Math.PI % (2 * Math.PI);
-						paintbrush.DrawImage(fairies[3], new Rectangle(
-							192 + 8 + 32 + (int)(Math.Cos(angle) * rad) + (Math.Cos(angle) >= 0 ? fairies[3].Width : 0),
-							canvas.Height / 2 - fairies[3].Height / 2 + (int)(Math.Sin(angle) * rad),
-							fairies[3].Width * (Math.Cos(angle) >= 0 ? -1 : 1),
-							fairies[3].Height));
+						double angle = (double)this.tick / this.GetFPS() * Math.PI % (2 * Math.PI);
+                        this.paintbrush.DrawImage(this.fairies[3], new Rectangle(
+							192 + 8 + 32 + (int)(Math.Cos(angle) * rad) + (Math.Cos(angle) >= 0 ? this.fairies[3].Width : 0),
+                            this.canvas.Height / 2 - this.fairies[3].Height / 2 + (int)(Math.Sin(angle) * rad),
+                            this.fairies[3].Width * (Math.Cos(angle) >= 0 ? -1 : 1),
+                            this.fairies[3].Height));
 					}
 
 					break;
 			}
 
-			paintbrush.ResetTransform();
-			//paintbrush.DrawString( tick.ToString(), Font, Brushes.Red, 0, 0 );
+            this.paintbrush.ResetTransform();
+            //paintbrush.DrawString( tick.ToString(), Font, Brushes.Red, 0, 0 );
 
-			tick++;
-			Refresh();
+            this.tick++;
+            this.Refresh();
 		}
 
 		private void DialogHalloween_MouseClick(object sender, MouseEventArgs e)
 		{
-			cursorPosition = new Point(e.X / zoomscale, e.Y / zoomscale);
+            this.cursorPosition = new Point(e.X / this.zoomscale, e.Y / this.zoomscale);
 
-			switch (state)
+			switch (this.state)
 			{
 				case 1:
 
-					if (trickButton.Contains(cursorPosition))
+					if (this.trickButton.Contains(this.cursorPosition))
 					{
 
-						state = 2;
+                        this.state = 2;
 
 
 						// initialize movement
 						for (int i = 0; i < 4; i++)
 						{
-							fairiesVector[i] = new RectangleF(rand.Next(canvas.Width - fairies[i].Width), rand.Next(canvas.Height - fairies[i].Height),
-								(float)((rand.NextDouble() * 2.0 - 1.0) * 8.0), (float)((rand.NextDouble() * 2.0 - 1.0) * 8.0));
+                            this.fairiesVector[i] = new RectangleF(this.rand.Next(this.canvas.Width - this.fairies[i].Width), this.rand.Next(this.canvas.Height - this.fairies[i].Height),
+								(float)((this.rand.NextDouble() * 2.0 - 1.0) * 8.0), (float)((this.rand.NextDouble() * 2.0 - 1.0) * 8.0));
 						}
 
 
@@ -304,9 +304,9 @@ namespace ElectronicObserver.Window.Dialog
 						c.UI.SubFont = preservedfont_sub;
 
 					}
-					else if (treatButton.Contains(cursorPosition))
+					else if (this.treatButton.Contains(this.cursorPosition))
 					{
-						state = 3;
+                        this.state = 3;
 					}
 
 					break;
@@ -316,7 +316,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogHalloween_MouseMove(object sender, MouseEventArgs e)
 		{
-			cursorPosition = new Point(e.X / zoomscale, e.Y / zoomscale);
+            this.cursorPosition = new Point(e.X / this.zoomscale, e.Y / this.zoomscale);
 		}
 
 		private void DialogHalloween_Paint(object sender, PaintEventArgs e)
@@ -325,7 +325,7 @@ namespace ElectronicObserver.Window.Dialog
 			e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
 			e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
 
-			e.Graphics.DrawImage(canvas, 0, 0, canvas.Width * zoomscale, canvas.Height * zoomscale);
+			e.Graphics.DrawImage(this.canvas, 0, 0, this.canvas.Width * this.zoomscale, this.canvas.Height * this.zoomscale);
 
 		}
 
@@ -333,7 +333,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private int GetFPS()
 		{
-			return 1000 / Updater.Interval;
+			return 1000 / this.Updater.Interval;
 		}
 
 		private void DrawBackground()
@@ -342,14 +342,14 @@ namespace ElectronicObserver.Window.Dialog
 			const int squaresize = 32;
 			const int framerate = 4;
 
-			BitmapData bitmapdata = canvas.LockBits(new Rectangle(0, 0, canvas.Width, canvas.Height), ImageLockMode.WriteOnly, canvas.PixelFormat);
-			byte[] buffer = new byte[canvas.Width * canvas.Height * 4];
+			BitmapData bitmapdata = this.canvas.LockBits(new Rectangle(0, 0, this.canvas.Width, this.canvas.Height), ImageLockMode.WriteOnly, this.canvas.PixelFormat);
+			byte[] buffer = new byte[this.canvas.Width * this.canvas.Height * 4];
 
-			int shift = (tick * framerate / GetFPS()) % squaresize;
+			int shift = (this.tick * framerate / this.GetFPS()) % squaresize;
 
 			for (int i = 0; i < buffer.Length; i += 4)
 			{
-				int colflag = (((i / 4 % canvas.Width + shift) / squaresize) & 1) ^ (((i / 4 / canvas.Width + shift) / squaresize) & 1);
+				int colflag = (((i / 4 % this.canvas.Width + shift) / squaresize) & 1) ^ (((i / 4 / this.canvas.Width + shift) / squaresize) & 1);
 
 				if (colflag == 0)
 				{
@@ -372,16 +372,16 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 			Marshal.Copy(buffer, 0, bitmapdata.Scan0, buffer.Length);
-			canvas.UnlockBits(bitmapdata);
+            this.canvas.UnlockBits(bitmapdata);
 		}
 
 		private void DrawButton(string message, Rectangle rect, Brush foregroundBrush, Pen backgroundPen, Brush backgroundBrush)
 		{
-			paintbrush.FillRectangle(backgroundBrush, rect);
-			paintbrush.DrawRectangle(backgroundPen, rect);
-			paintbrush.DrawRectangle(backgroundPen, new Rectangle(rect.X + 2, rect.Y + 2, rect.Width - 4, rect.Height - 4));
-			paintbrush.DrawString(message, Font, Brushes.White, rect.X + rect.Width / 2 - (int)(message.Length * Font.Size / 2) / 2 + 1, rect.Y + rect.Height / 2 - (int)(Font.Size / 2) + 1);
-			paintbrush.DrawString(message, Font, foregroundBrush, rect.X + rect.Width / 2 - (int)(message.Length * Font.Size / 2) / 2, rect.Y + rect.Height / 2 - (int)(Font.Size / 2));
+            this.paintbrush.FillRectangle(backgroundBrush, rect);
+            this.paintbrush.DrawRectangle(backgroundPen, rect);
+            this.paintbrush.DrawRectangle(backgroundPen, new Rectangle(rect.X + 2, rect.Y + 2, rect.Width - 4, rect.Height - 4));
+            this.paintbrush.DrawString(message, this.Font, Brushes.White, rect.X + rect.Width / 2 - (int)(message.Length * this.Font.Size / 2) / 2 + 1, rect.Y + rect.Height / 2 - (int)(this.Font.Size / 2) + 1);
+            this.paintbrush.DrawString(message, this.Font, foregroundBrush, rect.X + rect.Width / 2 - (int)(message.Length * this.Font.Size / 2) / 2, rect.Y + rect.Height / 2 - (int)(this.Font.Size / 2));
 
 		}
 
@@ -389,13 +389,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogHalloween_FormClosed(object sender, FormClosedEventArgs e)
 		{
 
-			Updater.Stop();
+            this.Updater.Stop();
 
-			paintbrush.Dispose();
-			canvas.Dispose();
-			for (int i = 0; i < fairies.Length; i++)
-				if (fairies[i] != null)
-					fairies[i].Dispose();
+            this.paintbrush.Dispose();
+            this.canvas.Dispose();
+			for (int i = 0; i < this.fairies.Length; i++)
+				if (this.fairies[i] != null)
+                    this.fairies[i].Dispose();
 
 		}
 

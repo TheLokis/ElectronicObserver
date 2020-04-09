@@ -15,7 +15,7 @@ namespace ElectronicObserver.Window.Dialog
 	public partial class DialogLocalAPILoader : Form
 	{
 
-		public string FilePath => TextFilePath.Text;
+		public string FilePath => this.TextFilePath.Text;
 
 		public string FileData
 		{
@@ -24,7 +24,7 @@ namespace ElectronicObserver.Window.Dialog
 				try
 				{
 
-					using (var sr = new StreamReader(TextFilePath.Text))
+					using (var sr = new StreamReader(this.TextFilePath.Text))
 					{
 						return sr.ReadToEnd();
 					}
@@ -42,8 +42,8 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			get
 			{
-				if (APIList.SelectedIndex != -1)
-					return APIList.SelectedItem.ToString();
+				if (this.APIList.SelectedIndex != -1)
+					return this.APIList.SelectedItem.ToString();
 				else
 					return null;
 			}
@@ -53,21 +53,21 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			get
 			{
-				if (APIList.SelectedIndex != -1)
-					return "/kcsapi/" + APIList.SelectedItem.ToString();
+				if (this.APIList.SelectedIndex != -1)
+					return "/kcsapi/" + this.APIList.SelectedItem.ToString();
 				else
 					return null;
 			}
 		}
 
-		public bool IsRequest => APICategory.SelectedIndex == 0;
+		public bool IsRequest => this.APICategory.SelectedIndex == 0;
 
-		public bool IsResponse => APICategory.SelectedIndex == 1;
+		public bool IsResponse => this.APICategory.SelectedIndex == 1;
 
 
 		public DialogLocalAPILoader()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 
@@ -75,32 +75,32 @@ namespace ElectronicObserver.Window.Dialog
 		{
 
 			Icon iconWarning = SystemIcons.Warning;
-			Bitmap bmp = new Bitmap(PictureWarning.Width, PictureWarning.Height);
+			Bitmap bmp = new Bitmap(this.PictureWarning.Width, this.PictureWarning.Height);
 			using (Graphics g = Graphics.FromImage(bmp))
 			{
 
 				g.DrawIcon(iconWarning, 0, 0);
-				PictureWarning.Image = bmp;
+                this.PictureWarning.Image = bmp;
 
 			}
 
 
-			APICategory.SelectedIndex = 1;
+            this.APICategory.SelectedIndex = 1;
 
-			FileOpener.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
+            this.FileOpener.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
 		}
 
 
 		private void APICategory_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
-			APIList.Items.Clear();
-			if (APICategory.SelectedIndex == 0)
+            this.APIList.Items.Clear();
+			if (this.APICategory.SelectedIndex == 0)
 			{
 				//request
 				foreach (string s in APIObserver.Instance.APIList.Values.Where(a => a.IsRequestSupported).Select(a => a.APIName))
 				{
-					APIList.Items.Add(s);
+                    this.APIList.Items.Add(s);
 				}
 
 			}
@@ -109,11 +109,11 @@ namespace ElectronicObserver.Window.Dialog
 				//response
 				foreach (string s in APIObserver.Instance.APIList.Values.Where(a => a.IsResponseSupported).Select(a => a.APIName))
 				{
-					APIList.Items.Add(s);
+                    this.APIList.Items.Add(s);
 				}
 			}
 
-			APIList.SelectedIndex = 0;
+            this.APIList.SelectedIndex = 0;
 
 		}
 
@@ -121,14 +121,14 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonSearchFilePath_Click(object sender, EventArgs e)
 		{
 
-			if (File.Exists(TextFilePath.Text))
-				FileOpener.FileName = TextFilePath.Text;
+			if (File.Exists(this.TextFilePath.Text))
+                this.FileOpener.FileName = this.TextFilePath.Text;
 
-			FileOpener.Filter = APIList.SelectedItem.ToString() + "|*" + (APICategory.SelectedIndex == 0 ? "Q" : "S") + "@" + APIList.SelectedItem.ToString().Replace('/', '@') + ".json|JSON|*.json;*.js|File|*";
+            this.FileOpener.Filter = this.APIList.SelectedItem.ToString() + "|*" + (this.APICategory.SelectedIndex == 0 ? "Q" : "S") + "@" + this.APIList.SelectedItem.ToString().Replace('/', '@') + ".json|JSON|*.json;*.js|File|*";
 
-			if (FileOpener.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.FileOpener.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				TextFilePath.Text = FileOpener.FileName;
+                this.TextFilePath.Text = this.FileOpener.FileName;
 			}
 
 		}
@@ -137,12 +137,12 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void ButtonOpen_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 
@@ -166,7 +166,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			string[] path = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 			if (path.Length > 0 && File.Exists(path[0]))
-				TextFilePath.Text = path[0];
+                this.TextFilePath.Text = path[0];
 
 		}
 

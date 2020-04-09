@@ -20,12 +20,12 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 装備ID
 		/// </summary>
-		public int EquipmentID => (int)RawData.api_id;
+		public int EquipmentID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 図鑑番号
 		/// </summary>
-		public int AlbumNo => (int)RawData.api_sortno;
+		public int AlbumNo => (int)this.RawData.api_sortno;
 
         /// <summary>
         /// 名前 번역됨
@@ -33,16 +33,16 @@ namespace ElectronicObserver.Data
         public string Name
         {
             get {
-                return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment); }
+                return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.Equipment); }
         }
 
-        public string Name_JP => RawData.api_name;
+        public string Name_JP => this.RawData.api_name;
 
 
         /// <summary>
         /// 装備種別
         /// </summary>
-        public ReadOnlyCollection<int> EquipmentType => Array.AsReadOnly((int[])RawData.api_type);
+        public ReadOnlyCollection<int> EquipmentType => Array.AsReadOnly((int[])this.RawData.api_type);
 
 
 
@@ -51,57 +51,57 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 装甲
 		/// </summary>
-		public int Armor => (int)RawData.api_souk;
+		public int Armor => (int)this.RawData.api_souk;
 
 		/// <summary>
 		/// 火力
 		/// </summary>
-		public int Firepower => (int)RawData.api_houg;
+		public int Firepower => (int)this.RawData.api_houg;
 
 		/// <summary>
 		/// 雷装
 		/// </summary>
-		public int Torpedo => (int)RawData.api_raig;
+		public int Torpedo => (int)this.RawData.api_raig;
 
 		/// <summary>
 		/// 爆装
 		/// </summary>
-		public int Bomber => (int)RawData.api_baku;
+		public int Bomber => (int)this.RawData.api_baku;
 
 		/// <summary>
 		/// 対空
 		/// </summary>
-		public int AA => (int)RawData.api_tyku;
+		public int AA => (int)this.RawData.api_tyku;
 
 		/// <summary>
 		/// 対潜
 		/// </summary>
-		public int ASW => (int)RawData.api_tais;
+		public int ASW => (int)this.RawData.api_tais;
 
 		/// <summary>
 		/// 命中 / 対爆
 		/// </summary>
-		public int Accuracy => (int)RawData.api_houm;
+		public int Accuracy => (int)this.RawData.api_houm;
 
 		/// <summary>
 		/// 回避 / 迎撃
 		/// </summary>
-		public int Evasion => (int)RawData.api_houk;
+		public int Evasion => (int)this.RawData.api_houk;
 
 		/// <summary>
 		/// 索敵
 		/// </summary>
-		public int LOS => (int)RawData.api_saku;
+		public int LOS => (int)this.RawData.api_saku;
 
 		/// <summary>
 		/// 運
 		/// </summary>
-		public int Luck => (int)RawData.api_luck;
+		public int Luck => (int)this.RawData.api_luck;
 
 		/// <summary>
 		/// 射程
 		/// </summary>
-		public int Range => (int)RawData.api_leng;
+		public int Range => (int)this.RawData.api_leng;
 
 		#endregion
 
@@ -109,67 +109,67 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// レアリティ
 		/// </summary>
-		public int Rarity => (int)RawData.api_rare;
+		public int Rarity => (int)this.RawData.api_rare;
 
 		/// <summary>
 		/// 廃棄資材
 		/// </summary>
-		public ReadOnlyCollection<int> Material => Array.AsReadOnly((int[])RawData.api_broken);
+		public ReadOnlyCollection<int> Material => Array.AsReadOnly((int[])this.RawData.api_broken);
 
         /// <summary>
         /// 図鑑説明
         /// </summary>
-        public string Message => RawData.api_info() ? ((string)RawData.api_info).Replace("<br>", "\r\n") : "";
+        public string Message => this.RawData.api_info() ? ((string)this.RawData.api_info).Replace("<br>", "\r\n") : "";
         /// <summary>
         /// 基地航空隊：配置コスト
         /// </summary>
-        public int AircraftCost => RawData.api_cost() ? (int)RawData.api_cost : 0;
+        public int AircraftCost => this.RawData.api_cost() ? (int)this.RawData.api_cost : 0;
 
 
 		/// <summary>
 		/// 基地航空隊：戦闘行動半径
 		/// </summary>
-		public int AircraftDistance => RawData.api_distance() ? (int)RawData.api_distance : 0;
+		public int AircraftDistance => this.RawData.api_distance() ? (int)this.RawData.api_distance : 0;
 
 
 
 		/// <summary>
 		/// 深海棲艦専用装備かどうか
 		/// </summary>
-		public bool IsAbyssalEquipment => EquipmentID > 500;
+		public bool IsAbyssalEquipment => this.EquipmentID > 500;
 
 
 		/// <summary>
 		/// 図鑑に載っているか
 		/// </summary>
-		public bool IsListedInAlbum => AlbumNo > 0;
+		public bool IsListedInAlbum => this.AlbumNo > 0;
 
 
 		/// <summary>
 		/// 装備種別：小分類
 		/// </summary>
-		public int CardType => (int)RawData.api_type[1];
+		public int CardType => (int)this.RawData.api_type[1];
 
 		/// <summary>
 		/// 装備種別：カテゴリ
 		/// </summary>
-		public EquipmentTypes CategoryType => (EquipmentTypes)(int)RawData.api_type[2];
+		public EquipmentTypes CategoryType => (EquipmentTypes)(int)this.RawData.api_type[2];
 
 		/// <summary>
 		/// 装備種別：カテゴリ
 		/// </summary>
-		public EquipmentType CategoryTypeInstance => KCDatabase.Instance.EquipmentTypes[(int)CategoryType];
+		public EquipmentType CategoryTypeInstance => KCDatabase.Instance.EquipmentTypes[(int)this.CategoryType];
 
 		/// <summary>
 		/// 装備種別：アイコン
 		/// </summary>
-		public int IconType => (int)RawData.api_type[3];
+		public int IconType => (int)this.RawData.api_type[3];
 
         internal int[] equippableShipsAtExpansion = new int[0];
         /// <summary>
         /// 拡張スロットに装備可能な艦船IDのリスト
         /// </summary>
-        public IEnumerable<int> EquippableShipsAtExpansion => equippableShipsAtExpansion;
+        public IEnumerable<int> EquippableShipsAtExpansion => this.equippableShipsAtExpansion;
 
 
         // 以降自作判定
@@ -177,43 +177,43 @@ namespace ElectronicObserver.Data
 
         /// <summary> 砲系かどうか </summary>
         public bool IsGun =>
-			CategoryType == EquipmentTypes.MainGunSmall ||
-			CategoryType == EquipmentTypes.MainGunMedium ||
-			CategoryType == EquipmentTypes.MainGunLarge ||
-			CategoryType == EquipmentTypes.MainGunLarge2 ||
-			CategoryType == EquipmentTypes.SecondaryGun;
+            this.CategoryType == EquipmentTypes.MainGunSmall ||
+            this.CategoryType == EquipmentTypes.MainGunMedium ||
+            this.CategoryType == EquipmentTypes.MainGunLarge ||
+            this.CategoryType == EquipmentTypes.MainGunLarge2 ||
+            this.CategoryType == EquipmentTypes.SecondaryGun;
 
 		/// <summary> 主砲系かどうか </summary>
 		public bool IsMainGun =>
-			CategoryType == EquipmentTypes.MainGunSmall ||
-			CategoryType == EquipmentTypes.MainGunMedium ||
-			CategoryType == EquipmentTypes.MainGunLarge ||
-			CategoryType == EquipmentTypes.MainGunLarge2;
+            this.CategoryType == EquipmentTypes.MainGunSmall ||
+            this.CategoryType == EquipmentTypes.MainGunMedium ||
+            this.CategoryType == EquipmentTypes.MainGunLarge ||
+            this.CategoryType == EquipmentTypes.MainGunLarge2;
 
         public bool IsLargeGun =>
-            CategoryType == EquipmentTypes.MainGunLarge ||
-            CategoryType == EquipmentTypes.MainGunLarge2;
+            this.CategoryType == EquipmentTypes.MainGunLarge ||
+            this.CategoryType == EquipmentTypes.MainGunLarge2;
 
         /// <summary> 副砲系かどうか </summary>
-        public bool IsSecondaryGun => CategoryType == EquipmentTypes.SecondaryGun;
+        public bool IsSecondaryGun => this.CategoryType == EquipmentTypes.SecondaryGun;
 
 		/// <summary> 魚雷系かどうか </summary>
-		public bool IsTorpedo => CategoryType == EquipmentTypes.Torpedo || CategoryType == EquipmentTypes.SubmarineTorpedo;
+		public bool IsTorpedo => this.CategoryType == EquipmentTypes.Torpedo || this.CategoryType == EquipmentTypes.SubmarineTorpedo;
 
 		/// <summary> 後期型魚雷かどうか </summary>
 		public bool IsLateModelTorpedo =>
-			EquipmentID == 213 ||   // 後期型艦首魚雷(6門)
-			EquipmentID == 214;     // 熟練聴音員+後期型艦首魚雷(6門)
+            this.EquipmentID == 213 ||   // 後期型艦首魚雷(6門)
+            this.EquipmentID == 214;     // 熟練聴音員+後期型艦首魚雷(6門)
 
 
 		/// <summary> 高角砲かどうか </summary>
-		public bool IsHighAngleGun => IconType == 16;
+		public bool IsHighAngleGun => this.IconType == 16;
 
 		/// <summary> 高角砲+高射装置かどうか </summary>
-		public bool IsHighAngleGunWithAADirector => IsHighAngleGun && AA >= 8;
+		public bool IsHighAngleGunWithAADirector => this.IsHighAngleGun && this.AA >= 8;
 
 		/// <summary> 集中配備機銃かどうか </summary>
-		public bool IsConcentratedAAGun => CategoryType == EquipmentTypes.AAGun && AA >= 9;
+		public bool IsConcentratedAAGun => this.CategoryType == EquipmentTypes.AAGun && this.AA >= 9;
 
 
 		/// <summary> 航空機かどうか </summary>
@@ -221,7 +221,7 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				switch (CategoryType)
+				switch (this.CategoryType)
 				{
 					case EquipmentTypes.CarrierBasedFighter:
 					case EquipmentTypes.CarrierBasedBomber:
@@ -254,7 +254,7 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				switch (CategoryType)
+				switch (this.CategoryType)
 				{
 					case EquipmentTypes.CarrierBasedFighter:
 					case EquipmentTypes.CarrierBasedBomber:
@@ -281,7 +281,7 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				switch (CategoryType)
+				switch (this.CategoryType)
 				{
 					case EquipmentTypes.CarrierBasedRecon:
 					case EquipmentTypes.SeaplaneRecon:
@@ -301,7 +301,7 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				switch (CategoryType)
+				switch (this.CategoryType)
 				{
 					case EquipmentTypes.CarrierBasedBomber:
 					case EquipmentTypes.CarrierBasedTorpedo:
@@ -312,7 +312,7 @@ namespace ElectronicObserver.Data
 					case EquipmentTypes.LandBasedAttacker:
 					case EquipmentTypes.JetBomber:
 					case EquipmentTypes.JetTorpedo:
-						return ASW > 0;
+						return this.ASW > 0;
 
 					default:
 						return false;
@@ -321,53 +321,52 @@ namespace ElectronicObserver.Data
 		}
 
 		/// <summary> 夜間行動可能な航空機かどうか </summary>
-		public bool IsNightAircraft => IsNightFighter || IsNightAttacker;
+		public bool IsNightAircraft => this.IsNightFighter || this.IsNightAttacker;
 
 		/// <summary> 夜間戦闘機かどうか </summary>
-		public bool IsNightFighter => IconType == 45;
+		public bool IsNightFighter => this.IconType == 45;
 
 		/// <summary> 夜間攻撃機かどうか </summary>
-		public bool IsNightAttacker => IconType == 46;
+		public bool IsNightAttacker => this.IconType == 46;
 
 		/// <summary> Swordfish 系艦上攻撃機かどうか </summary>
-		public bool IsSwordfish => CategoryType == EquipmentTypes.CarrierBasedTorpedo && Name.Contains("Swordfish");
+		public bool IsSwordfish => this.CategoryType == EquipmentTypes.CarrierBasedTorpedo && this.Name.Contains("Swordfish");
 
 
 		/// <summary> 電探かどうか </summary>
-		public bool IsRadar => CategoryType == EquipmentTypes.RadarSmall || CategoryType == EquipmentTypes.RadarLarge || CategoryType == EquipmentTypes.RadarLarge2;
+		public bool IsRadar => this.CategoryType == EquipmentTypes.RadarSmall || this.CategoryType == EquipmentTypes.RadarLarge || this.CategoryType == EquipmentTypes.RadarLarge2;
 
 		/// <summary> 対空電探かどうか </summary>
-		public bool IsAirRadar => IsRadar && AA >= 2;
+		public bool IsAirRadar => this.IsRadar && this.AA >= 2;
 
 		/// <summary> 水上電探かどうか </summary>
-		public bool IsSurfaceRadar => IsRadar && LOS >= 5;
+		public bool IsSurfaceRadar => this.IsRadar && this.LOS >= 5;
 
         /// <summary> ソナーかどうか </summary>
-        public bool IsSonar => CategoryType == EquipmentTypes.Sonar || CategoryType == EquipmentTypes.SonarLarge;
+        public bool IsSonar => this.CategoryType == EquipmentTypes.Sonar || this.CategoryType == EquipmentTypes.SonarLarge;
 
 		/// <summary> 爆雷かどうか(投射機は含まない) </summary>
 		public bool IsDepthCharge =>
-			EquipmentID == 226 ||       // 九五式爆雷 
-			EquipmentID == 227;         // 二式爆雷
+            this.EquipmentID == 226 ||       // 九五式爆雷 
+            this.EquipmentID == 227;         // 二式爆雷
 
 		/// <summary> 爆雷投射機かどうか(爆雷は含まない) </summary>
-		public bool IsDepthChargeProjector => CategoryType == EquipmentTypes.DepthCharge && !IsDepthCharge;
+		public bool IsDepthChargeProjector => this.CategoryType == EquipmentTypes.DepthCharge && !this.IsDepthCharge;
 
 
-		/// <summary> 夜間作戦航空要員かどうか </summary>
-		public bool IsNightAviationPersonnel =>
-			EquipmentID == 258 ||       // 夜間作戦航空要員
-			EquipmentID == 259;         // 夜間作戦航空要員+熟練甲板員
+        public bool IsHightAltitudeFighter =>
+    this.EquipmentID == 350 ||   // Me163B
+    this.EquipmentID == 351 ||   // 試製 秋水
+    this.EquipmentID == 352;     // 秋水
 
+        /// <summary> 夜間作戦航空要員かどうか </summary>
+        public bool IsNightAviationPersonnel =>
+            this.EquipmentID == 258 ||       // 夜間作戦航空要員
+            this.EquipmentID == 259;         // 夜間作戦航空要員+熟練甲板員
 
+		public int ID => this.EquipmentID;
 
-
-
-
-
-		public int ID => EquipmentID;
-
-		public override string ToString() => $"[{EquipmentID}] {Name}";
+		public override string ToString() => $"[{this.EquipmentID}] {this.Name}";
 
 	}
 

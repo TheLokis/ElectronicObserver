@@ -25,7 +25,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_hokyu
 				int shipID = (int)elem.api_id;
 				ShipData ship = db.Ships[shipID];
 
-				ship.LoadFromResponse(APIName, elem);
+				ship.LoadFromResponse(this.APIName, elem);
 			}
 
 
@@ -37,7 +37,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_hokyu
 			};
 
 			//api_material
-			db.Material.LoadFromResponse(APIName, data.api_material);
+			db.Material.LoadFromResponse(this.APIName, data.api_material);
 
 			material[0] -= db.Material.Fuel;
 			material[1] -= db.Material.Ammo;

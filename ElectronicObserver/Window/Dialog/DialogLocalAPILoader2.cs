@@ -21,31 +21,31 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogLocalAPILoader2()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 		private void DialogLocalAPILoader2_Load(object sender, EventArgs e)
 		{
-			LoadFiles(Utility.Configuration.Config.Connection.SaveDataPath);
+            this.LoadFiles(Utility.Configuration.Config.Connection.SaveDataPath);
 		}
 
 
 		private void Menu_File_OpenFolder_Click(object sender, EventArgs e)
 		{
 
-			FolderBrowser.SelectedPath = Utility.Configuration.Config.Connection.SaveDataPath;
+            this.FolderBrowser.SelectedPath = Utility.Configuration.Config.Connection.SaveDataPath;
 
-			if (FolderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.FolderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				LoadFiles(FolderBrowser.SelectedPath);
+                this.LoadFiles(this.FolderBrowser.SelectedPath);
 			}
 
 		}
 
 		private void Menu_File_Reload_Click(object sender, EventArgs e)
 		{
-			if (Directory.Exists(CurrentPath))
-				LoadFiles(CurrentPath);
+			if (Directory.Exists(this.CurrentPath))
+                this.LoadFiles(this.CurrentPath);
 			else
 				MessageBox.Show("폴더가 지정되지 않았거나 존재하지 않습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
@@ -60,13 +60,13 @@ namespace ElectronicObserver.Window.Dialog
 				ExecuteAPI( (string)row.Cells[APIView_FileName.Index].Value );
 			}
 			/*/
-			if (!APICaller.IsBusy)
-				APICaller.RunWorkerAsync(APIView.SelectedRows.Cast<DataGridViewRow>().Select(row => row.Cells[APIView_FileName.Index].Value as string).OrderBy(s => s));
+			if (!this.APICaller.IsBusy)
+                this.APICaller.RunWorkerAsync(this.APIView.SelectedRows.Cast<DataGridViewRow>().Select(row => row.Cells[this.APIView_FileName.Index].Value as string).OrderBy(s => s));
 			else
 				if (MessageBox.Show("이미 실행 중입니다.\n중단 하시겠습니까?", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
 					== System.Windows.Forms.DialogResult.Yes)
 			{
-				APICaller.CancelAsync();
+                this.APICaller.CancelAsync();
 			}
 			//*/
 		}
@@ -74,9 +74,9 @@ namespace ElectronicObserver.Window.Dialog
 		private void ViewMenu_Delete_Click(object sender, EventArgs e)
 		{
 
-			foreach (DataGridViewRow row in APIView.SelectedRows)
+			foreach (DataGridViewRow row in this.APIView.SelectedRows)
 			{
-				APIView.Rows.Remove(row);
+                this.APIView.Rows.Remove(row);
 			}
 		}
 
@@ -84,19 +84,19 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonExecuteNext_Click(object sender, EventArgs e)
 		{
 
-			if (APIView.SelectedRows.Count == 1)
+			if (this.APIView.SelectedRows.Count == 1)
 			{
 
-				var row = APIView.SelectedRows[0];
-				int index = APIView.SelectedRows[0].Index;
+				var row = this.APIView.SelectedRows[0];
+				int index = this.APIView.SelectedRows[0].Index;
 
-				ExecuteAPI((string)row.Cells[APIView_FileName.Index].Value);
+                this.ExecuteAPI((string)row.Cells[this.APIView_FileName.Index].Value);
 
-				APIView.ClearSelection();
-				if (index < APIView.Rows.Count - 1)
+                this.APIView.ClearSelection();
+				if (index < this.APIView.Rows.Count - 1)
 				{
-					APIView.Rows[index + 1].Selected = true;
-					APIView.FirstDisplayedScrollingRowIndex = index + 1;
+                    this.APIView.Rows[index + 1].Selected = true;
+                    this.APIView.FirstDisplayedScrollingRowIndex = index + 1;
 				}
 			}
 			else
@@ -114,9 +114,9 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (!Directory.Exists(path)) return;
 
-			CurrentPath = path;
+            this.CurrentPath = path;
 
-			APIView.Rows.Clear();
+            this.APIView.Rows.Clear();
 
 			var rows = new LinkedList<DataGridViewRow>();
 
@@ -124,15 +124,15 @@ namespace ElectronicObserver.Window.Dialog
 			{
 
 				var row = new DataGridViewRow();
-				row.CreateCells(APIView);
+				row.CreateCells(this.APIView);
 
 				row.SetValues(Path.GetFileName(file));
 				rows.AddLast(row);
 
 			}
 
-			APIView.Rows.AddRange(rows.ToArray());
-			APIView.Sort(APIView_FileName, ListSortDirection.Ascending);
+            this.APIView.Rows.AddRange(rows.ToArray());
+            this.APIView.Sort(this.APIView_FileName, ListSortDirection.Ascending);
 
 		}
 
@@ -164,14 +164,14 @@ namespace ElectronicObserver.Window.Dialog
 		private void ExecuteAPI(string filename)
 		{
 
-			if (APIObserver.Instance.APIList.ContainsKey(GetAPIName(filename)))
+			if (APIObserver.Instance.APIList.ContainsKey(this.GetAPIName(filename)))
 			{
 
 				string data;
 
 				try
 				{
-					using (var sr = new System.IO.StreamReader(CurrentPath + "\\" + filename))
+					using (var sr = new System.IO.StreamReader(this.CurrentPath + "\\" + filename))
 					{
 						data = sr.ReadToEnd();
 					}
@@ -184,11 +184,11 @@ namespace ElectronicObserver.Window.Dialog
 				}
 
 
-				if (IsRequest(filename))
-					APIObserver.Instance.LoadRequest("/kcsapi/" + GetAPIName(filename), data);
+				if (this.IsRequest(filename))
+					APIObserver.Instance.LoadRequest("/kcsapi/" + this.GetAPIName(filename), data);
 
-				if (IsResponse(filename))
-					APIObserver.Instance.LoadResponse("/kcsapi/" + GetAPIName(filename), data);
+				if (this.IsResponse(filename))
+					APIObserver.Instance.LoadResponse("/kcsapi/" + this.GetAPIName(filename), data);
 			}
 
 		}
@@ -199,14 +199,14 @@ namespace ElectronicObserver.Window.Dialog
 		{
 
 			var files = e.Argument as IOrderedEnumerable<string>;
-			var act = new Action<string>(ExecuteAPI);
+			var act = new Action<string>(this.ExecuteAPI);
 
 			foreach (var file in files)
 			{
-				Invoke(act, file);
+                this.Invoke(act, file);
 				System.Threading.Thread.Sleep(10);      //ゆるして
 
-				if (APICaller.CancellationPending)
+				if (this.APICaller.CancellationPending)
 				{
 					e.Result = file;
 					break;
@@ -220,13 +220,13 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.Result != null)
 			{   //canceled	
-				int count = APIView.Rows.Count;
+				int count = this.APIView.Rows.Count;
 				int result = -1;
 				string canceledFile = e.Result as string;
 
 				for (int i = 0; i < count; i++)
 				{
-					if (APIView[APIView_FileName.Index, i].Value.ToString() == canceledFile)
+					if (this.APIView[this.APIView_FileName.Index, i].Value.ToString() == canceledFile)
 					{
 						result = i + 1;     // 探知結果までは処理済みのため
 						break;
@@ -235,9 +235,9 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (result != -1 && result < count)
 				{
-					APIView.ClearSelection();
-					APIView.Rows[result].Selected = true;
-					APIView.FirstDisplayedScrollingRowIndex = result;
+                    this.APIView.ClearSelection();
+                    this.APIView.Rows[result].Selected = true;
+                    this.APIView.FirstDisplayedScrollingRowIndex = result;
 				}
 			}
 		}
@@ -245,7 +245,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogLocalAPILoader2_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (APICaller.IsBusy)
+			if (this.APICaller.IsBusy)
 			{
 				e.Cancel = true;
 				System.Media.SystemSounds.Exclamation.Play();
@@ -256,11 +256,11 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonSearch_Click(object sender, EventArgs e)
 		{
 
-			int count = APIView.Rows.Count;
+			int count = this.APIView.Rows.Count;
 			int index;
 			int result = -1;
-			if (APIView.SelectedRows.Count > 0)
-				index = APIView.SelectedRows[0].Index + 1;
+			if (this.APIView.SelectedRows.Count > 0)
+				index = this.APIView.SelectedRows[0].Index + 1;
 			else
 				index = 0;
 
@@ -269,7 +269,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			for (int i = index; i < count; i++)
 			{
-				if (APIView[APIView_FileName.Index, i].Value.ToString().ToLower().Contains(TextFilter.Text.ToLower()))
+				if (this.APIView[this.APIView_FileName.Index, i].Value.ToString().ToLower().Contains(this.TextFilter.Text.ToLower()))
 				{
 					result = i;
 					break;
@@ -278,9 +278,9 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (result != -1)
 			{
-				APIView.ClearSelection();
-				APIView.Rows[result].Selected = true;
-				APIView.FirstDisplayedScrollingRowIndex = result;
+                this.APIView.ClearSelection();
+                this.APIView.Rows[result].Selected = true;
+                this.APIView.FirstDisplayedScrollingRowIndex = result;
 			}
 			else
 			{
@@ -291,11 +291,11 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonSearchPrev_Click(object sender, EventArgs e)
 		{
 
-			int count = APIView.Rows.Count;
+			int count = this.APIView.Rows.Count;
 			int index;
 			int result = -1;
-			if (APIView.SelectedRows.Count > 0)
-				index = APIView.SelectedRows[0].Index - 1;
+			if (this.APIView.SelectedRows.Count > 0)
+				index = this.APIView.SelectedRows[0].Index - 1;
 			else
 				index = count - 1;
 
@@ -304,7 +304,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			for (int i = index; i >= 0; i--)
 			{
-				if (APIView[APIView_FileName.Index, i].Value.ToString().ToLower().Contains(TextFilter.Text.ToLower()))
+				if (this.APIView[this.APIView_FileName.Index, i].Value.ToString().ToLower().Contains(this.TextFilter.Text.ToLower()))
 				{
 					result = i;
 					break;
@@ -313,9 +313,9 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (result != -1)
 			{
-				APIView.ClearSelection();
-				APIView.Rows[result].Selected = true;
-				APIView.FirstDisplayedScrollingRowIndex = result;
+                this.APIView.ClearSelection();
+                this.APIView.Rows[result].Selected = true;
+                this.APIView.FirstDisplayedScrollingRowIndex = result;
 			}
 			else
 			{
@@ -327,13 +327,13 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void ButtonSearchLastStart2_Click(object sender, EventArgs e)
 		{
-			for (int i = APIView.Rows.Count - 1; i >= 0; i--)
+			for (int i = this.APIView.Rows.Count - 1; i >= 0; i--)
 			{
-                if (APIView[APIView_FileName.Index, i].Value.ToString().ToLower().Contains("s@api_start2@getData."))
+                if (this.APIView[this.APIView_FileName.Index, i].Value.ToString().ToLower().Contains("s@api_start2@getData."))
                 {
-					APIView.ClearSelection();
-					APIView.Rows[i].Selected = true;
-					APIView.FirstDisplayedScrollingRowIndex = i;
+                    this.APIView.ClearSelection();
+                    this.APIView.Rows[i].Selected = true;
+                    this.APIView.FirstDisplayedScrollingRowIndex = i;
 					return;
 				}
 			}
@@ -348,7 +348,7 @@ namespace ElectronicObserver.Window.Dialog
 			if (e.KeyCode == Keys.Enter)
 			{
 				e.SuppressKeyPress = true;
-				ButtonSearch.PerformClick();
+                this.ButtonSearch.PerformClick();
 			}
 		}
 
@@ -357,7 +357,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			try
 			{
-				System.Diagnostics.Process.Start(CurrentPath + "\\" + APIView.SelectedCells.OfType<DataGridViewCell>().First().Value.ToString());
+				System.Diagnostics.Process.Start(this.CurrentPath + "\\" + this.APIView.SelectedCells.OfType<DataGridViewCell>().First().Value.ToString());
 			}
 			catch (Exception ex)
 			{

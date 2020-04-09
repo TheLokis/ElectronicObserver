@@ -49,7 +49,7 @@ namespace ElectronicObserver.Observer
         private APIObserver()
         {
 
-            APIList = new APIDictionary
+            this.APIList = new APIDictionary
             {
                 new kcsapi.api_start2.getData(),
                 new kcsapi.api_get_member.basic(),
@@ -138,10 +138,10 @@ namespace ElectronicObserver.Observer
             };
 
 
-            ServerAddress = null;
+            this.ServerAddress = null;
 
 
-            HttpProxy.AfterSessionComplete += HttpProxy_AfterSessionComplete;
+            HttpProxy.AfterSessionComplete += this.HttpProxy_AfterSessionComplete;
         }
 
 
@@ -174,7 +174,7 @@ namespace ElectronicObserver.Observer
                     HttpProxy.UpstreamProxyConfig = new ProxyConfig(ProxyConfigType.DirectAccess);
 
                 HttpProxy.Startup(portID, false, false);
-                ProxyPort = portID;
+                this.ProxyPort = portID;
 
 
                 ProxyStarted();
@@ -186,11 +186,11 @@ namespace ElectronicObserver.Observer
             {
 
                 Utility.Logger.Add(3, "APIObserver: 수신 시작에 실패했습니다." + ex.Message);
-                ProxyPort = 0;
+                this.ProxyPort = 0;
             }
 
 
-            return ProxyPort;
+            return this.ProxyPort;
         }
 
 
@@ -211,7 +211,7 @@ namespace ElectronicObserver.Observer
         {
             get
             {
-                if (APIList.ContainsKey(key)) return APIList[key];
+                if (this.APIList.ContainsKey(key)) return this.APIList[key];
                 else return null;
             }
         }
@@ -243,12 +243,12 @@ namespace ElectronicObserver.Observer
 
                     Task.Run((Action)(() =>
                     {
-                        SaveRequest(url, body);
+                        this.SaveRequest(url, body);
                     }));
                 }
 
 
-                UIControl.BeginInvoke((Action)(() => { LoadRequest(url, body); }));
+                this.UIControl.BeginInvoke((Action)(() => { this.LoadRequest(url, body); }));
             }
 
 
@@ -276,7 +276,7 @@ namespace ElectronicObserver.Observer
 
                         Task.Run((Action)(() =>
                         {
-                            SaveResponse(url, body);
+                            this.SaveResponse(url, body);
                         }));
 
                     }
@@ -360,14 +360,14 @@ namespace ElectronicObserver.Observer
                 // stringはイミュータブルなのでOK
                 string url = baseurl;
                 string body = session.Response.BodyAsString;
-                UIControl.BeginInvoke((Action)(() => { LoadResponse(url, body); }));
+                this.UIControl.BeginInvoke((Action)(() => { this.LoadResponse(url, body); }));
 
             }
 
 
-            if (ServerAddress == null && baseurl.Contains("/kcsapi/"))
+            if (this.ServerAddress == null && baseurl.Contains("/kcsapi/"))
             {
-                ServerAddress = session.Request.Headers.Host;
+                this.ServerAddress = session.Request.Headers.Host;
             }
 
         }
@@ -397,7 +397,7 @@ namespace ElectronicObserver.Observer
 
 
                 RequestReceived(shortpath, parsedData);
-                APIList.OnRequestReceived(shortpath, parsedData);
+                this.APIList.OnRequestReceived(shortpath, parsedData);
 
             }
             catch (Exception ex)
@@ -442,17 +442,17 @@ namespace ElectronicObserver.Observer
                 if (shortpath == "api_get_member/ship2")
                 {
                     ResponseReceived(shortpath, json);
-                    APIList.OnResponseReceived(shortpath, json);
+                    this.APIList.OnResponseReceived(shortpath, json);
                 }
                 else if (json.IsDefined("api_data"))
                 {
                     ResponseReceived(shortpath, json.api_data);
-                    APIList.OnResponseReceived(shortpath, json.api_data);
+                    this.APIList.OnResponseReceived(shortpath, json.api_data);
                 }
                 else
                 {
                     ResponseReceived(shortpath, null);
-                    APIList.OnResponseReceived(shortpath, null);
+                    this.APIList.OnResponseReceived(shortpath, null);
                 }
 
             }

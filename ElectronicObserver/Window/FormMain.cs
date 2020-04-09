@@ -17,6 +17,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,8 +31,8 @@ namespace ElectronicObserver.Window
 
 		#region Properties
 
-		public DockPanel MainPanel => MainDockPanel;
-		public FormWindowCapture WindowCapture => fWindowCapture;
+		public DockPanel MainPanel => this.MainDockPanel;
+		public FormWindowCapture WindowCapture => this.fWindowCapture;
 
 		private int ClockFormat;
 
@@ -75,6 +76,9 @@ namespace ElectronicObserver.Window
 
         public FormMain()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             CultureInfo c = CultureInfo.CurrentCulture;
             CultureInfo ui = CultureInfo.CurrentUICulture;
             if (c.Name != "en-US" && c.Name != "ja-JP")
@@ -85,11 +89,14 @@ namespace ElectronicObserver.Window
             {
                 ui = new CultureInfo("ko-KR");
             }
+
             Thread.CurrentThread.CurrentCulture = c;
             Thread.CurrentThread.CurrentUICulture = ui;
-            Translator = DynamicDataReader.Instance;
+
+			this.Translator = DynamicDataReader.Instance;
+
             Instance = this;
-            InitializeComponent();
+            this.InitializeComponent();
             //this.Text = SoftwareInformation.VersionJapanese;
             Utility.Configuration.Instance.Load(this);
 
@@ -108,7 +115,7 @@ namespace ElectronicObserver.Window
             }
 
             this.MainDockPanel.Theme = thm;
-            thm.Apply(MainDockPanel);
+            thm.Apply(this.MainDockPanel);
 
             this.Text = SoftwareInformation.SoftwareNameKorean;
 		}
@@ -118,27 +125,25 @@ namespace ElectronicObserver.Window
 
 			if (!Directory.Exists("Settings"))
 				Directory.CreateDirectory("Settings");
-
-
 			//Utility.Configuration.Instance.Load(this);
 
 
 			Utility.Logger.Instance.LogAdded += new Utility.LogAddedEventHandler((Utility.Logger.LogData data) =>
 			{
-				if (InvokeRequired)
+				if (this.InvokeRequired)
 				{
-					// Invokeはメッセージキューにジョブを投げて待つので、別のBeginInvokeされたジョブが既にキューにあると、
-					// それを実行してしまい、BeginInvokeされたジョブの順番が保てなくなる
-					// GUIスレッドによる処理は、順番が重要なことがあるので、GUIスレッドからInvokeを呼び出してはいけない
-					Invoke(new Utility.LogAddedEventHandler(Logger_LogAdded), data);
+                    // Invokeはメッセージキューにジョブを投げて待つので、別のBeginInvokeされたジョブが既にキューにあると、
+                    // それを実行してしまい、BeginInvokeされたジョブの順番が保てなくなる
+                    // GUIスレッドによる処理は、順番が重要なことがあるので、GUIスレッドからInvokeを呼び出してはいけない
+                    this.Invoke(new Utility.LogAddedEventHandler(this.Logger_LogAdded), data);
 				}
 				else
 				{
-					Logger_LogAdded(data);
+                    this.Logger_LogAdded(data);
 				}
 			});
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameKorean + " 를 시작합니다.");
 
 
@@ -148,87 +153,82 @@ namespace ElectronicObserver.Window
 			NotifierManager.Instance.Initialize(this);
 			SyncBGMPlayer.Instance.ConfigurationChanged();
 
-			#region Icon settings
-			Icon = ResourceManager.Instance.AppIcon;
+            #region Icon settings
+            this.Icon = ResourceManager.Instance.AppIcon;
 
-			StripMenu_File_Configuration.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormConfiguration];
+            this.StripMenu_File_Configuration.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormConfiguration];
 
-			StripMenu_View_Fleet.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleet];
-			StripMenu_View_FleetOverview.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleet];
-			StripMenu_View_ShipGroup.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormShipGroup];
-			StripMenu_View_Dock.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDock];
-			StripMenu_View_Arsenal.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormArsenal];
-			StripMenu_View_Headquarters.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormHeadQuarters];
-			StripMenu_View_Quest.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormQuest];
-			StripMenu_View_Information.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormInformation];
-			StripMenu_View_Compass.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormCompass];
-			StripMenu_View_Battle.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBattle];
-			StripMenu_View_Browser.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser];
-			StripMenu_View_Log.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormLog];
-			StripMenu_WindowCapture.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture];
-			StripMenu_View_BaseAirCorps.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
-			StripMenu_View_Json.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormJson];
+            this.StripMenu_View_Fleet.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleet];
+            this.StripMenu_View_FleetOverview.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleet];
+            this.StripMenu_View_ShipGroup.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormShipGroup];
+            this.StripMenu_View_Dock.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDock];
+            this.StripMenu_View_Arsenal.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormArsenal];
+            this.StripMenu_View_Headquarters.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormHeadQuarters];
+            this.StripMenu_View_Quest.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormQuest];
+            this.StripMenu_View_Information.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormInformation];
+            this.StripMenu_View_Compass.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormCompass];
+            this.StripMenu_View_Battle.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBattle];
+            this.StripMenu_View_Browser.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser];
+            this.StripMenu_View_Log.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormLog];
+            this.StripMenu_WindowCapture.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture];
+            this.StripMenu_View_BaseAirCorps.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
+            this.StripMenu_View_Json.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormJson];
 
-			StripMenu_Tool_EquipmentList.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormEquipmentList];
-			StripMenu_Tool_DropRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDropRecord];
-			StripMenu_Tool_DevelopmentRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDevelopmentRecord];
-			StripMenu_Tool_ConstructionRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormConstructionRecord];
-			StripMenu_Tool_ResourceChart.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart];
-			StripMenu_Tool_AlbumMasterShip.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip];
-			StripMenu_Tool_AlbumMasterEquipment.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
-            ToolStripMenuItem_AkashiList.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
-            StripMenu_Tool_MasterExpedition.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
-            StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
-			StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
-			StripMenu_Tool_BaseAirCorpsSimulation.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
-			StripMenu_Tool_ExpChecker.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker];
-            StripMenu_Tool_ExpeditionCheck.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpeditionCheck];
+            this.StripMenu_Tool_EquipmentList.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormEquipmentList];
+            this.StripMenu_Tool_DropRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDropRecord];
+            this.StripMenu_Tool_DevelopmentRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDevelopmentRecord];
+            this.StripMenu_Tool_ConstructionRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormConstructionRecord];
+            this.StripMenu_Tool_ResourceChart.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart];
+            this.StripMenu_Tool_AlbumMasterShip.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumShip];
+            this.StripMenu_Tool_AlbumMasterEquipment.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
+            this.ToolStripMenuItem_AkashiList.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
+            this.StripMenu_Tool_MasterExpedition.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment];
+            this.StripMenu_Tool_AntiAirDefense.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense];
+            this.StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
+            this.StripMenu_Tool_BaseAirCorpsSimulation.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
+            this.StripMenu_Tool_ExpChecker.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker];
+            this.StripMenu_Tool_ExpeditionCheck.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpeditionCheck];
 
-            StripMenu_Help_Version.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.AppIcon];
+            this.StripMenu_Help_Version.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.AppIcon];
 			#endregion
 
 
 			APIObserver.Instance.Start(Utility.Configuration.Config.Connection.Port, this);
 
 
-			MainDockPanel.Extender.FloatWindowFactory = new CustomFloatWindowFactory();
+            this.MainDockPanel.Extender.FloatWindowFactory = new CustomFloatWindowFactory();
 
 
-			SubForms = new List<DockContent>();
+            this.SubForms = new List<DockContent>();
 
-			//form init
-			//注：一度全てshowしないとイベントを受け取れないので注意	
-			fFleet = new FormFleet[4];
-			for (int i = 0; i < fFleet.Length; i++)
+            //form init
+            //注：一度全てshowしないとイベントを受け取れないので注意	
+            this.fFleet = new FormFleet[4];
+			for (int i = 0; i < this.fFleet.Length; i++)
 			{
-				SubForms.Add(fFleet[i] = new FormFleet(this, i + 1));
+                this.SubForms.Add(this.fFleet[i] = new FormFleet(this, i + 1));
 			}
 
-			SubForms.Add(fDock = new FormDock(this));
-			SubForms.Add(fArsenal = new FormArsenal(this));
-			SubForms.Add(fHeadquarters = new FormHeadquarters(this));
-			SubForms.Add(fInformation = new FormInformation(this));
-			SubForms.Add(fCompass = new FormCompass(this));
-			SubForms.Add(fLog = new FormLog(this));
-			SubForms.Add(fQuest = new FormQuest(this));
-			SubForms.Add(fBattle = new FormBattle(this));
-			SubForms.Add(fFleetOverview = new FormFleetOverview(this));
-			SubForms.Add(fShipGroup = new FormShipGroup(this));
-			SubForms.Add(fBrowser = new FormBrowserHost(this));
-			SubForms.Add(fWindowCapture = new FormWindowCapture(this));
-			SubForms.Add(fBaseAirCorps = new FormBaseAirCorps(this));
-			SubForms.Add(fJson = new FormJson(this));
+            this.SubForms.Add(this.fDock = new FormDock(this));
+            this.SubForms.Add(this.fArsenal = new FormArsenal(this));
+            this.SubForms.Add(this.fHeadquarters = new FormHeadquarters(this));
+            this.SubForms.Add(this.fInformation = new FormInformation(this));
+            this.SubForms.Add(this.fCompass = new FormCompass(this));
+            this.SubForms.Add(this.fLog = new FormLog(this));
+            this.SubForms.Add(this.fQuest = new FormQuest(this));
+            this.SubForms.Add(this.fBattle = new FormBattle(this));
+            this.SubForms.Add(this.fFleetOverview = new FormFleetOverview(this));
+            this.SubForms.Add(this.fShipGroup = new FormShipGroup(this));
+            this.SubForms.Add(this.fBrowser = new FormBrowserHost(this));
+            this.SubForms.Add(this.fWindowCapture = new FormWindowCapture(this));
+            this.SubForms.Add(this.fBaseAirCorps = new FormBaseAirCorps(this));
+            this.SubForms.Add(this.fJson = new FormJson(this));
 
-			ConfigurationChanged();     //設定から初期化
+            this.ConfigurationChanged();     //設定から初期化
 
-
-
-			LoadLayout(Configuration.Config.Life.LayoutFilePath);
-
-
+            this.LoadLayout(Configuration.Config.Life.LayoutFilePath);
 
 			SoftwareInformation.CheckUpdate();
-
 			// デバッグ: 開始時にAPIリストを読み込む
 			if (Configuration.Config.Debug.LoadAPIListOnLoad)
 			{
@@ -236,9 +236,9 @@ namespace ElectronicObserver.Window
 				try
 				{
 
-					await Task.Factory.StartNew(() => LoadAPIList(Configuration.Config.Debug.APIListPath));
+					await Task.Factory.StartNew(() => this.LoadAPIList(Configuration.Config.Debug.APIListPath));
 
-					Activate();     // 上記ロードに時間がかかるとウィンドウが表示されなくなることがあるので
+                    this.Activate();     // 上記ロードに時間がかかるとウィンドウが表示されなくなることがあるので
 				}
 				catch (Exception ex)
 				{
@@ -247,42 +247,40 @@ namespace ElectronicObserver.Window
 				}
 			}
 
-			APIObserver.Instance.ResponseReceived += (a, b) => UpdatePlayTime();
+			APIObserver.Instance.ResponseReceived += (a, b) => this.UpdatePlayTime();
 
 
 			// 🎃
 			if (DateTime.Now.Month == 10 && DateTime.Now.Day == 31)
 			{
-				APIObserver.Instance.APIList["api_port/port"].ResponseReceived += CallPumpkinHead;
+				APIObserver.Instance.APIList["api_port/port"].ResponseReceived += this.CallPumpkinHead;
 			}
 
-			// 完了通知（ログインページを開く）
-			fBrowser.InitializeApiCompleted();
+            // 完了通知（ログインページを開く）
+            this.fBrowser.InitializeApiCompleted();
 
-			UIUpdateTimer.Start();
+            this.UIUpdateTimer.Start();
 
             SoftwareInformation.CheckMaintenance();
 
-
             Utility.Logger.Add(3, "기동이 완료되었습니다.");
-
         }
 
 
 		private void FormMain_Shown(object sender, EventArgs e)
 		{
-			// Load で設定すると無視されるかバグる(タスクバーに出なくなる)のでここで設定
-			TopMost = Utility.Configuration.Config.Life.TopMost;
+            // Load で設定すると無視されるかバグる(タスクバーに出なくなる)のでここで設定
+            this.TopMost = Utility.Configuration.Config.Life.TopMost;
 
-			// HACK: タスクバーに表示されなくなる不具合への応急処置　効くかは知らない
-			ShowInTaskbar = true;
+            // HACK: タスクバーに表示されなくなる不具合への応急処置　効くかは知らない
+            this.ShowInTaskbar = true;
 		}
 
 		// Toggle TopMost of Main Form back and forth to workaround a .Net Bug: KB2756203 (~win7) / KB2769674 (win8~)
 		private void FormMain_RefreshTopMost()
 		{
-			TopMost = !TopMost;
-			TopMost = !TopMost;
+            this.TopMost = !this.TopMost;
+            this.TopMost = !this.TopMost;
 		}
 
 
@@ -291,51 +289,51 @@ namespace ElectronicObserver.Window
 
 			var c = Utility.Configuration.Config;
 
-            BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
-            StripMenu.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            StripMenu.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
-            StripStatus.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            StripStatus.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.StripMenu.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.StripMenu.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.StripStatus.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.StripStatus.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
 
-            StripMenu_Debug.Enabled = StripMenu_Debug.Visible =
-			StripMenu_View_Json.Enabled = StripMenu_View_Json.Visible =
+            this.StripMenu_Debug.Enabled = this.StripMenu_Debug.Visible =
+            this.StripMenu_View_Json.Enabled = this.StripMenu_View_Json.Visible =
 				c.Debug.EnableDebugMenu;
 
-			StripStatus.Visible = c.Life.ShowStatusBar;
+            this.StripStatus.Visible = c.Life.ShowStatusBar;
 
 			// Load で TopMost を変更するとバグるため(前述)
-			if (UIUpdateTimer.Enabled)
-				TopMost = c.Life.TopMost;
+			if (this.UIUpdateTimer.Enabled)
+                this.TopMost = c.Life.TopMost;
 
-			ClockFormat = c.Life.ClockFormat;
+            this.ClockFormat = c.Life.ClockFormat;
 
-			Font = c.UI.MainFont;
-			//StripMenu.Font = Font;
-			StripStatus.Font = Font;
-			MainDockPanel.Skin.AutoHideStripSkin.TextFont = Font;
-            MainDockPanel.Skin.DockPaneStripSkin.TextFont = Font;
+            this.Font = c.UI.MainFont;
+            //StripMenu.Font = Font;
+            this.StripStatus.Font = this.Font;
+            this.MainDockPanel.Skin.AutoHideStripSkin.TextFont = this.Font;
+            this.MainDockPanel.Skin.DockPaneStripSkin.TextFont = this.Font;
 
             if (c.Life.LockLayout)
 			{
-				MainDockPanel.AllowChangeLayout = false;
-				FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+                this.MainDockPanel.AllowChangeLayout = false;
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             }
 			else
 			{
-				MainDockPanel.AllowChangeLayout = true;
-				FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+                this.MainDockPanel.AllowChangeLayout = true;
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
 			}
 
-			StripMenu_File_Layout_LockLayout.Checked = c.Life.LockLayout;
-			MainDockPanel.CanCloseFloatWindowInLock = c.Life.CanCloseFloatWindowInLock;
-            MainDockPanel.CanSizableFloatWindowInLock = c.Life.CanSizableFloatWindowInLock;
-            StripMenu_File_Layout_TopMost.Checked = c.Life.TopMost;
+            this.StripMenu_File_Layout_LockLayout.Checked = c.Life.LockLayout;
+            this.MainDockPanel.CanCloseFloatWindowInLock = c.Life.CanCloseFloatWindowInLock;
+            this.MainDockPanel.CanSizableFloatWindowInLock = c.Life.CanSizableFloatWindowInLock;
+            this.StripMenu_File_Layout_TopMost.Checked = c.Life.TopMost;
 
-			StripMenu_File_Notification_MuteAll.Checked = Notifier.NotifierManager.Instance.GetNotifiers().All(n => n.IsSilenced);
+            this.StripMenu_File_Notification_MuteAll.Checked = Notifier.NotifierManager.Instance.GetNotifiers().All(n => n.IsSilenced);
 
 			if (!c.Control.UseSystemVolume)
-				_volumeUpdateState = -1;
+                this._volumeUpdateState = -1;
 		}
 
 
@@ -377,11 +375,11 @@ namespace ElectronicObserver.Window
 			// 東京標準時
 			DateTime now = DateTime.UtcNow + new TimeSpan(9, 0, 0);
 
-			switch (ClockFormat)
+			switch (this.ClockFormat)
 			{
 				case 0: //時計表示
-					StripStatus_Clock.Text = now.ToString("HH\\:mm\\:ss");
-					StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd)") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
+                    this.StripStatus_Clock.Text = now.ToString("HH\\:mm\\:ss");
+                    this.StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd)") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
 					break;
 
 				case 1: //演習更新まで
@@ -391,8 +389,8 @@ namespace ElectronicObserver.Window
 							border = border.AddHours(12);
 
 						TimeSpan ts = border - now;
-						StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
-						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
+                        this.StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
+                        this.StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
 
 					}
 					break;
@@ -404,8 +402,8 @@ namespace ElectronicObserver.Window
 							border = border.AddHours(24);
 
 						TimeSpan ts = border - now;
-						StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
-						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
+                        this.StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
+                        this.StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
 
 					}
 					break;
@@ -415,7 +413,7 @@ namespace ElectronicObserver.Window
 			// WMP コントロールによって音量が勝手に変えられてしまうため、前回終了時の音量の再設定を試みる。
 			// 10回試行してダメなら諦める(例外によるラグを防ぐため)
 			// 起動直後にやらないのはちょっと待たないと音量設定が有効にならないから
-			if (_volumeUpdateState != -1 && _volumeUpdateState < 10 && Utility.Configuration.Config.Control.UseSystemVolume)
+			if (this._volumeUpdateState != -1 && this._volumeUpdateState < 10 && Utility.Configuration.Config.Control.UseSystemVolume)
 			{
 
 				try
@@ -431,13 +429,13 @@ namespace ElectronicObserver.Window
 					foreach (var not in NotifierManager.Instance.GetNotifiers())
 						not.SetInitialVolume((int)(volume * 100));
 
-					_volumeUpdateState = -1;
+                    this._volumeUpdateState = -1;
 
 				}
 				catch (Exception)
 				{
 
-					_volumeUpdateState++;
+                    this._volumeUpdateState++;
 				}
 			}
 
@@ -462,17 +460,17 @@ namespace ElectronicObserver.Window
 
 			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameKorean + "를 종료합니다…");
 
-			UIUpdateTimer.Stop();
+            this.UIUpdateTimer.Stop();
 
-			fBrowser.CloseBrowser();
+            this.fBrowser.CloseBrowser();
 
-			UpdatePlayTime();
+            this.UpdatePlayTime();
 
 
 			SystemEvents.OnSystemShuttingDown();
 
 
-			SaveLayout(Configuration.Config.Life.LayoutFilePath);
+            this.SaveLayout(Configuration.Config.Life.LayoutFilePath);
 
 
 			// 音量の保存
@@ -517,46 +515,46 @@ namespace ElectronicObserver.Window
 			switch (persistString)
 			{
 				case "Fleet #1":
-					return fFleet[0];
+					return this.fFleet[0];
 				case "Fleet #2":
-					return fFleet[1];
+					return this.fFleet[1];
 				case "Fleet #3":
-					return fFleet[2];
+					return this.fFleet[2];
 				case "Fleet #4":
-					return fFleet[3];
+					return this.fFleet[3];
 				case "Dock":
-					return fDock;
+					return this.fDock;
 				case "Arsenal":
-					return fArsenal;
+					return this.fArsenal;
 				case "HeadQuarters":
-					return fHeadquarters;
+					return this.fHeadquarters;
 				case "Information":
-					return fInformation;
+					return this.fInformation;
 				case "Compass":
-					return fCompass;
+					return this.fCompass;
 				case "Log":
-					return fLog;
+					return this.fLog;
 				case "Quest":
-					return fQuest;
+					return this.fQuest;
 				case "Battle":
-					return fBattle;
+					return this.fBattle;
 				case "FleetOverview":
-					return fFleetOverview;
+					return this.fFleetOverview;
 				//case "ShipGroup":
 				//	return fShipGroup;
 				case "Browser":
-					return fBrowser;
+					return this.fBrowser;
 				case "WindowCapture":
-					return fWindowCapture;
+					return this.fWindowCapture;
 				case "BaseAirCorps":
-					return fBaseAirCorps;
+					return this.fBaseAirCorps;
 				case "Json":
-					return fJson;
+					return this.fJson;
 				default:
 					if (persistString.StartsWith("ShipGroup"))
 					{
-						fShipGroup.ConfigureFromPersistString(persistString);
-						return fShipGroup;
+                        this.fShipGroup.ConfigureFromPersistString(persistString);
+						return this.fShipGroup;
 					}
 					if (persistString.StartsWith(FormIntegrate.PREFIX))
 					{
@@ -578,29 +576,29 @@ namespace ElectronicObserver.Window
 				if (stream != null)
 				{
 
-					// 取り込んだウィンドウは一旦デタッチして閉じる
-					fWindowCapture.CloseAll();
+                    // 取り込んだウィンドウは一旦デタッチして閉じる
+                    this.fWindowCapture.CloseAll();
 
-					foreach (var f in SubForms)
+					foreach (var f in this.SubForms)
 					{
-						f.Show(MainDockPanel, DockState.Document);
+						f.Show(this.MainDockPanel, DockState.Document);
 						f.DockPanel = null;
 					}
 
-					MainDockPanel.LoadFromXml(stream, new DeserializeDockContent(GetDockContentFromPersistString));
+                    this.MainDockPanel.LoadFromXml(stream, new DeserializeDockContent(this.GetDockContentFromPersistString));
 
 
-					fWindowCapture.AttachAll();
+                    this.fWindowCapture.AttachAll();
 
 				}
 				else
 				{
 
-					foreach (var f in SubForms)
-						f.Show(MainDockPanel);
+					foreach (var f in this.SubForms)
+						f.Show(this.MainDockPanel);
 
 
-					foreach (var x in MainDockPanel.Contents)
+					foreach (var x in this.MainDockPanel.Contents)
 					{
 						x.DockHandler.Hide();
 					}
@@ -622,7 +620,7 @@ namespace ElectronicObserver.Window
 			try
 			{
 
-				MainDockPanel.SaveAsXml(stream, Encoding.UTF8);
+                this.MainDockPanel.SaveAsXml(stream, Encoding.UTF8);
 
 			}
 			catch (Exception ex)
@@ -642,10 +640,10 @@ namespace ElectronicObserver.Window
 			{
 				using (var archive = new ZipArchive(File.OpenRead(path), ZipArchiveMode.Read))
 				{
-					MainDockPanel.SuspendLayout(true);
+                    this.MainDockPanel.SuspendLayout(true);
 
 					WindowPlacementManager.LoadWindowPlacement(this, archive.GetEntry("WindowPlacement.xml").Open());
-					LoadSubWindowsLayout(archive.GetEntry("SubWindowLayout.xml").Open());
+                    this.LoadSubWindowsLayout(archive.GetEntry("SubWindowLayout.xml").Open());
 				}
 
 				Utility.Logger.Add(2, path + " 에서 레이아웃을 로드했습니다.");
@@ -658,7 +656,7 @@ namespace ElectronicObserver.Window
 				MessageBox.Show("레이아웃이 초기화 되었습니다.\r\n'보기'메뉴에서 원하는 창을 추가하십시오.", "레이아웃 파일이 잘못되었습니다.",
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				fBrowser.Show(MainDockPanel);
+                this.fBrowser.Show(this.MainDockPanel);
 
 			}
 			catch (DirectoryNotFoundException)
@@ -668,7 +666,7 @@ namespace ElectronicObserver.Window
 				MessageBox.Show("레이아웃이 초기화 되었습니다.\r\n'보기'메뉴에서 원하는 창을 추가하십시오.", "레이아웃 파일이 존재하지 않습니다.",
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				fBrowser.Show(MainDockPanel);
+                this.fBrowser.Show(this.MainDockPanel);
 
 			}
 			catch (Exception ex)
@@ -680,7 +678,7 @@ namespace ElectronicObserver.Window
 			finally
 			{
 
-				MainDockPanel.ResumeLayout(true, true);
+                this.MainDockPanel.ResumeLayout(true, true);
 			}
 
 		}
@@ -691,14 +689,14 @@ namespace ElectronicObserver.Window
 			try
 			{
 
-				CreateParentDirectories(path);
+                this.CreateParentDirectories(path);
 
 				using (var archive = new ZipArchive(File.Open(path, FileMode.Create), ZipArchiveMode.Create))
 				{
 
 					using (var layoutstream = archive.CreateEntry("SubWindowLayout.xml").Open())
 					{
-						SaveSubWindowsLayout(layoutstream);
+                        this.SaveSubWindowsLayout(layoutstream);
 					}
 					using (var placementstream = archive.CreateEntry("WindowPlacement.xml").Open())
 					{
@@ -735,7 +733,7 @@ namespace ElectronicObserver.Window
 		void Logger_LogAdded(Utility.Logger.LogData data)
 		{
 
-			StripStatus_Information.Text = data.Message.Replace("\r", " ").Replace("\n", " ");
+            this.StripStatus_Information.Text = data.Message.Replace("\r", " ").Replace("\n", " ");
 
 		}
 
@@ -753,7 +751,7 @@ namespace ElectronicObserver.Window
 		private void StripMenu_File_Configuration_Click(object sender, EventArgs e)
 		{
 
-			UpdatePlayTime();
+            this.UpdatePlayTime();
 
 			using (var dialog = new DialogConfiguration(Utility.Configuration.Config))
 			{
@@ -769,7 +767,7 @@ namespace ElectronicObserver.Window
 
 		private void StripMenu_File_Close_Click(object sender, EventArgs e)
 		{
-			Close();
+            this.Close();
 		}
 
 
@@ -813,7 +811,7 @@ namespace ElectronicObserver.Window
 					try
 					{
 
-						await Task.Factory.StartNew(() => LoadAPIList(ofd.FileName));
+						await Task.Factory.StartNew(() => this.LoadAPIList(ofd.FileName));
 
 					}
 					catch (Exception ex)
@@ -883,14 +881,14 @@ namespace ElectronicObserver.Window
 							{
 								if (isRequest)
 								{
-									Invoke((Action)(() =>
+                                    this.Invoke((Action)(() =>
 									{
 										APIObserver.Instance.LoadRequest("/kcsapi/" + line, sr2.ReadToEnd());
 									}));
 								}
 								else
 								{
-									Invoke((Action)(() =>
+                                    this.Invoke((Action)(() =>
 									{
 										APIObserver.Instance.LoadResponse("/kcsapi/" + line, sr2.ReadToEnd());
 									}));
@@ -1030,7 +1028,7 @@ namespace ElectronicObserver.Window
 			else
 			{
 				var dialogAlbumMasterShip = new DialogAlbumMasterShip();
-				FormMain_RefreshTopMost();
+                this.FormMain_RefreshTopMost();
 				dialogAlbumMasterShip.Show(this);
 			}
 
@@ -1047,7 +1045,7 @@ namespace ElectronicObserver.Window
 			else
 			{
 				var dialogAlbumMasterEquipment = new DialogAlbumMasterEquipment();
-				FormMain_RefreshTopMost();
+                this.FormMain_RefreshTopMost();
 				dialogAlbumMasterEquipment.Show(this);
 			}
 
@@ -1065,7 +1063,7 @@ namespace ElectronicObserver.Window
             else
             {
                 var dialogAlbumMasterExpedition = new DialogAlbumMasterExpedition();
-                FormMain_RefreshTopMost();
+                this.FormMain_RefreshTopMost();
                 dialogAlbumMasterExpedition.Show(this);
             }
         }
@@ -1081,7 +1079,7 @@ namespace ElectronicObserver.Window
 				try
 				{
 
-					int count = await Task.Factory.StartNew(() => DeleteOldAPI());
+					int count = await Task.Factory.StartNew(() => this.DeleteOldAPI());
 
 					MessageBox.Show("삭제가 완료되었습니다.\r\n" + count + " 개 파일을 삭제했습니다.", "삭제 성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -1143,7 +1141,7 @@ namespace ElectronicObserver.Window
 		{
 
 			var dialogEquipmentList = new DialogEquipmentList();
-			FormMain_RefreshTopMost();
+            this.FormMain_RefreshTopMost();
 			dialogEquipmentList.Show(this);
 
 		}
@@ -1182,7 +1180,7 @@ namespace ElectronicObserver.Window
 				try
 				{
 
-					int count = await Task.Factory.StartNew(() => RenameShipResource(path));
+					int count = await Task.Factory.StartNew(() => this.RenameShipResource(path));
 
 					MessageBox.Show(string.Format("작업이 완료되었습니다.\r\n{0} 개 항목의 이름을 변경했습니다.", count), "처리 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -1300,14 +1298,14 @@ namespace ElectronicObserver.Window
 		private void StripMenu_File_Layout_Load_Click(object sender, EventArgs e)
 		{
 
-			LoadLayout(Utility.Configuration.Config.Life.LayoutFilePath);
+            this.LoadLayout(Utility.Configuration.Config.Life.LayoutFilePath);
 
 		}
 
 		private void StripMenu_File_Layout_Save_Click(object sender, EventArgs e)
 		{
 
-			SaveLayout(Utility.Configuration.Config.Life.LayoutFilePath);
+            this.SaveLayout(Utility.Configuration.Config.Life.LayoutFilePath);
 
 		}
 
@@ -1327,7 +1325,7 @@ namespace ElectronicObserver.Window
 				{
 
 					Utility.Configuration.Config.Life.LayoutFilePath = PathHelper.GetPathFromOpenFileDialog(dialog);
-					LoadLayout(Utility.Configuration.Config.Life.LayoutFilePath);
+                    this.LoadLayout(Utility.Configuration.Config.Life.LayoutFilePath);
 
 				}
 
@@ -1351,7 +1349,7 @@ namespace ElectronicObserver.Window
 				{
 
 					Utility.Configuration.Config.Life.LayoutFilePath = PathHelper.GetPathFromSaveFileDialog(dialog);
-					SaveLayout(Utility.Configuration.Config.Life.LayoutFilePath);
+                    this.SaveLayout(Utility.Configuration.Config.Life.LayoutFilePath);
 
 				}
 			}
@@ -1363,7 +1361,7 @@ namespace ElectronicObserver.Window
 		{
 
 			var dialogResourceChart = new DialogResourceChart();
-			FormMain_RefreshTopMost();
+            this.FormMain_RefreshTopMost();
 			dialogResourceChart.Show(this);
 
 		}
@@ -1452,23 +1450,23 @@ namespace ElectronicObserver.Window
         private void StripMenu_File_Layout_LockLayout_Click(object sender, EventArgs e)
 		{
 
-			Utility.Configuration.Config.Life.LockLayout = StripMenu_File_Layout_LockLayout.Checked;
-			ConfigurationChanged();
+			Utility.Configuration.Config.Life.LockLayout = this.StripMenu_File_Layout_LockLayout.Checked;
+            this.ConfigurationChanged();
 
 		}
 
 		private void StripMenu_File_Layout_TopMost_Click(object sender, EventArgs e)
 		{
 
-			Utility.Configuration.Config.Life.TopMost = StripMenu_File_Layout_TopMost.Checked;
-			ConfigurationChanged();
+			Utility.Configuration.Config.Life.TopMost = this.StripMenu_File_Layout_TopMost.Checked;
+            this.ConfigurationChanged();
 
 		}
 
 
 		private void StripMenu_File_Notification_MuteAll_Click(object sender, EventArgs e)
 		{
-			bool isSilenced = StripMenu_File_Notification_MuteAll.Checked;
+			bool isSilenced = this.StripMenu_File_Notification_MuteAll.Checked;
 
 			foreach (var n in NotifierManager.Instance.GetNotifiers())
 				n.IsSilenced = isSilenced;
@@ -1484,18 +1482,18 @@ namespace ElectronicObserver.Window
 		private void CallPumpkinHead(string apiname, dynamic data)
 		{
 			new DialogHalloween().Show(this);
-			APIObserver.Instance.APIList["api_port/port"].ResponseReceived -= CallPumpkinHead;
+			APIObserver.Instance.APIList["api_port/port"].ResponseReceived -= this.CallPumpkinHead;
 		}
 
 
 		private void StripMenu_WindowCapture_AttachAll_Click(object sender, EventArgs e)
 		{
-			fWindowCapture.AttachAll();
+            this.fWindowCapture.AttachAll();
 		}
 
 		private void StripMenu_WindowCapture_DetachAll_Click(object sender, EventArgs e)
 		{
-			fWindowCapture.DetachAll();
+            this.fWindowCapture.DetachAll();
 		}
 
 
@@ -1505,13 +1503,13 @@ namespace ElectronicObserver.Window
 			var c = Utility.Configuration.Config.Log;
 			DateTime now = DateTime.Now;
 
-			double span = (now - _prevPlayTimeRecorded).TotalSeconds;
+			double span = (now - this._prevPlayTimeRecorded).TotalSeconds;
 			if (span < c.PlayTimeIgnoreInterval)
 			{
 				c.PlayTime += span;
 			}
 
-			_prevPlayTimeRecorded = now;
+            this._prevPlayTimeRecorded = now;
 		}
 
         private void StripMenu_Tool_AkashiList_Click(object sender, EventArgs e)
@@ -1579,97 +1577,97 @@ namespace ElectronicObserver.Window
 				form.FloatPane.FloatWindow.Location = new Point(128, 128);
 			}
 
-			form.Show(MainDockPanel);
+			form.Show(this.MainDockPanel);
 		}
 
 		private void StripMenu_View_Fleet_1_Click(object sender, EventArgs e)
 		{
-			ShowForm(fFleet[0]);
+            this.ShowForm(this.fFleet[0]);
 		}
 
 		private void StripMenu_View_Fleet_2_Click(object sender, EventArgs e)
 		{
-			ShowForm(fFleet[1]);
+            this.ShowForm(this.fFleet[1]);
 		}
 
 		private void StripMenu_View_Fleet_3_Click(object sender, EventArgs e)
 		{
-			ShowForm(fFleet[2]);
+            this.ShowForm(this.fFleet[2]);
 		}
 
 		private void StripMenu_View_Fleet_4_Click(object sender, EventArgs e)
 		{
-			ShowForm(fFleet[3]);
+            this.ShowForm(this.fFleet[3]);
 		}
 
 		private void StripMenu_View_Dock_Click(object sender, EventArgs e)
 		{
-			ShowForm(fDock);
+            this.ShowForm(this.fDock);
 		}
 
 		private void StripMenu_View_Arsenal_Click(object sender, EventArgs e)
 		{
-			ShowForm(fArsenal);
+            this.ShowForm(this.fArsenal);
 		}
 
 		private void StripMenu_View_Headquarters_Click(object sender, EventArgs e)
 		{
-			ShowForm(fHeadquarters);
+            this.ShowForm(this.fHeadquarters);
 		}
 
 		private void StripMenu_View_Information_Click(object sender, EventArgs e)
 		{
-			ShowForm(fInformation);
+            this.ShowForm(this.fInformation);
 		}
 
 		private void StripMenu_View_Compass_Click(object sender, EventArgs e)
 		{
-			ShowForm(fCompass);
+            this.ShowForm(this.fCompass);
 		}
 
 		private void StripMenu_View_Log_Click(object sender, EventArgs e)
 		{
-			ShowForm(fLog);
+            this.ShowForm(this.fLog);
 		}
 
 		private void StripMenu_View_Quest_Click(object sender, EventArgs e)
 		{
-			ShowForm(fQuest);
+            this.ShowForm(this.fQuest);
 		}
 
 		private void StripMenu_View_Battle_Click(object sender, EventArgs e)
 		{
-			ShowForm(fBattle);
+            this.ShowForm(this.fBattle);
 		}
 
 		private void StripMenu_View_FleetOverview_Click(object sender, EventArgs e)
 		{
-			ShowForm(fFleetOverview);
+            this.ShowForm(this.fFleetOverview);
 		}
 
 		private void StripMenu_View_ShipGroup_Click(object sender, EventArgs e)
 		{
-			ShowForm(fShipGroup);
+            this.ShowForm(this.fShipGroup);
 		}
 
 		private void StripMenu_View_Browser_Click(object sender, EventArgs e)
 		{
-			ShowForm(fBrowser);
+            this.ShowForm(this.fBrowser);
 		}
 
 		private void StripMenu_WindowCapture_SubWindow_Click(object sender, EventArgs e)
 		{
-			ShowForm(fWindowCapture);
+            this.ShowForm(this.fWindowCapture);
 		}
 
 		private void StripMenu_View_BaseAirCorps_Click(object sender, EventArgs e)
 		{
-			ShowForm(fBaseAirCorps);
+            this.ShowForm(this.fBaseAirCorps);
 		}
 
 		private void StripMenu_View_Json_Click(object sender, EventArgs e)
 		{
-			ShowForm(fJson);
+            this.ShowForm(this.fJson);
 		}
         
         #endregion

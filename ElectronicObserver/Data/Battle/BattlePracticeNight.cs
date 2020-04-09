@@ -18,10 +18,10 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			NightInitial = new PhaseNightInitial(this, "야전개시", false);
-			NightBattle = new PhaseNightBattle(this, "야전", 0);
+            this.NightInitial = new PhaseNightInitial(this, "야전개시", false);
+            this.NightBattle = new PhaseNightBattle(this, "야전", 0);
 
-			NightBattle.EmulateBattle(_resultHPs, _attackDamages);
+            this.NightBattle.EmulateBattle(this._resultHPs, this._attackDamages);
 
 		}
 
@@ -35,9 +35,9 @@ namespace ElectronicObserver.Data.Battle
 
 		public override IEnumerable<PhaseBase> GetPhases()
 		{
-			yield return Initial;
-			yield return NightInitial;
-			yield return NightBattle;
+			yield return this.Initial;
+			yield return this.NightInitial;
+			yield return this.NightBattle;
 		}
 	}
 }

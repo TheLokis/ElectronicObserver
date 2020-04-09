@@ -57,11 +57,11 @@ namespace ElectronicObserver.Notifier
 		/// </summary>
 		public bool LoopsSound
 		{
-			get { return _loopsSound; }
+			get { return this._loopsSound; }
 			set
 			{
-				_loopsSound = value;
-				SetIsLoop();
+                this._loopsSound = value;
+                this.SetIsLoop();
 			}
 		}
 
@@ -71,12 +71,12 @@ namespace ElectronicObserver.Notifier
 		/// </summary>
 		public int SoundVolume
 		{
-			get { return _soundVolume; }
+			get { return this._soundVolume; }
 			set
 			{
-				_soundVolume = value;
+                this._soundVolume = value;
 				if (!Utility.Configuration.Config.Control.UseSystemVolume)
-					Sound.Volume = _soundVolume;
+                    this.Sound.Volume = this._soundVolume;
 			}
 		}
 
@@ -86,17 +86,17 @@ namespace ElectronicObserver.Notifier
 		/// </summary>
 		public bool ShowsDialog
 		{
-			get { return _showsDialog; }
+			get { return this._showsDialog; }
 			set
 			{
-				_showsDialog = value;
-				SetIsLoop();
+                this._showsDialog = value;
+                this.SetIsLoop();
 			}
 		}
 
 		private void SetIsLoop()
 		{
-			Sound.IsLoop = LoopsSound && ShowsDialog;
+            this.Sound.IsLoop = this.LoopsSound && this.ShowsDialog;
 		}
 
 
@@ -111,46 +111,46 @@ namespace ElectronicObserver.Notifier
 		public NotifierBase()
 		{
 
-			Initialize();
-			DialogData = new NotifierDialogData();
+            this.Initialize();
+            this.DialogData = new NotifierDialogData();
 
 		}
 
 		public NotifierBase(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 		{
 
-			Initialize();
-			DialogData = new NotifierDialogData(config);
-			if (config.PlaysSound && config.SoundPath != null && config.SoundPath != "")
-				LoadSound(config.SoundPath);
+            this.Initialize();
+            this.DialogData = new NotifierDialogData(config);
+            if (config.PlaysSound && !string.IsNullOrEmpty(config.SoundPath))
+                this.LoadSound(config.SoundPath);
 
-			IsEnabled = config.IsEnabled;
-			IsSilenced = config.IsSilenced;
-			PlaysSound = config.PlaysSound;
-			SoundVolume = config.SoundVolume;
-			LoopsSound = config.LoopsSound;
-			ShowsDialog = config.ShowsDialog;
-			AccelInterval = config.AccelInterval;
+            this.IsEnabled = config.IsEnabled;
+            this.IsSilenced = config.IsSilenced;
+            this.PlaysSound = config.PlaysSound;
+            this.SoundVolume = config.SoundVolume;
+            this.LoopsSound = config.LoopsSound;
+            this.ShowsDialog = config.ShowsDialog;
+            this.AccelInterval = config.AccelInterval;
 
 		}
 
 		private void Initialize()
 		{
 
-			SystemEvents.UpdateTimerTick += UpdateTimerTick;
-			Sound = new MediaPlayer
+			SystemEvents.UpdateTimerTick += this.UpdateTimerTick;
+            this.Sound = new MediaPlayer
 			{
 				IsShuffle = true
 			};
-			Sound.MediaEnded += Sound_MediaEnded;
-			SoundPath = "";
+            this.Sound.MediaEnded += this.Sound_MediaEnded;
+            this.SoundPath = "";
 
 		}
 
 
 		public void SetInitialVolume(int volume)
 		{
-			Sound.Volume = volume;
+            this.Sound.Volume = volume;
 		}
 
 
@@ -169,17 +169,17 @@ namespace ElectronicObserver.Notifier
 			try
 			{
 
-				DisposeSound();
+                this.DisposeSound();
 
 				if (File.Exists(path))
 				{
-					Sound.SetPlaylist(null);
-					Sound.SourcePath = path;
+                    this.Sound.SetPlaylist(null);
+                    this.Sound.SourcePath = path;
 
 				}
 				else if (Directory.Exists(path))
 				{
-					Sound.SetPlaylistFromDirectory(path);
+                    this.Sound.SetPlaylistFromDirectory(path);
 
 				}
 				else
@@ -187,7 +187,7 @@ namespace ElectronicObserver.Notifier
 					throw new FileNotFoundException("지정된 파일 또는 디렉토리를 찾을 수 없습니다.");
 				}
 
-				SoundPath = path;
+                this.SoundPath = path;
 
 				return true;
 
@@ -196,7 +196,7 @@ namespace ElectronicObserver.Notifier
 			{
 
 				Utility.ErrorReporter.SendErrorReport(ex, string.Format("알림 시스템 : 알림 사운드 {0}의 로드에 실패했습니다.", path));
-				DisposeSound();
+                this.DisposeSound();
 
 			}
 
@@ -211,20 +211,20 @@ namespace ElectronicObserver.Notifier
 			try
 			{
 
-				if (Sound != null && PlaysSound)
+				if (this.Sound != null && this.PlaysSound)
 				{
-					if (Sound.PlayState == 3)
+					if (this.Sound.PlayState == 3)
 					{       //playing
-						if (Sound.GetPlaylist().Any())
-							Sound.Next();
+						if (this.Sound.GetPlaylist().Any())
+                            this.Sound.Next();
 
-						Sound.Stop();
+                        this.Sound.Stop();
 					}
 
-					//音量の再設定(システム側の音量変更によって設定が変わることがあるので)
-					SoundVolume = _soundVolume;
-                    
-					Sound.Play();
+                    //音量の再設定(システム側の音量変更によって設定が変わることがあるので)
+                    this.SoundVolume = this._soundVolume;
+
+                    this.Sound.Play();
 				}
 
 			}
@@ -240,15 +240,15 @@ namespace ElectronicObserver.Notifier
 		/// </summary>
 		public void DisposeSound()
 		{
-			Sound.Close();
-			Sound.SourcePath = SoundPath = "";
+            this.Sound.Close();
+            this.Sound.SourcePath = this.SoundPath = "";
 		}
 
 
 		void Sound_MediaEnded()
 		{
-			if (Sound.GetPlaylist().Any() && !LoopsSound)
-				Sound.Next();
+			if (this.Sound.GetPlaylist().Any() && !this.LoopsSound)
+                this.Sound.Next();
 		}
 
 
@@ -262,10 +262,10 @@ namespace ElectronicObserver.Notifier
 		public void ShowDialog(System.Windows.Forms.FormClosingEventHandler customClosingHandler = null)
 		{
 
-			if (ShowsDialog)
+			if (this.ShowsDialog)
 			{
-				var dialog = new DialogNotifier(DialogData);
-				dialog.FormClosing += dialog_FormClosing;
+				var dialog = new DialogNotifier(this.DialogData);
+				dialog.FormClosing += this.dialog_FormClosing;
 				if (customClosingHandler != null)
 				{
 					dialog.FormClosing += customClosingHandler;
@@ -276,10 +276,10 @@ namespace ElectronicObserver.Notifier
 
 		void dialog_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
 		{
-			if (LoopsSound)
+			if (this.LoopsSound)
 			{
-				Sound.Stop();
-				Sound.Next();
+                this.Sound.Stop();
+                this.Sound.Next();
 			}
 		}
 
@@ -288,7 +288,7 @@ namespace ElectronicObserver.Notifier
 		/// </summary>
 		public virtual void Notify()
 		{
-			Notify(null);
+            this.Notify(null);
 		}
 
 		/// <summary>
@@ -297,10 +297,10 @@ namespace ElectronicObserver.Notifier
 		public virtual void Notify(System.Windows.Forms.FormClosingEventHandler customClosingHandler)
 		{
 
-			if (!IsEnabled || IsSilenced) return;
+			if (!this.IsEnabled || this.IsSilenced) return;
 
-			ShowDialog(customClosingHandler);
-			PlaySound();
+            this.ShowDialog(customClosingHandler);
+            this.PlaySound();
 
 		}
 
@@ -308,15 +308,15 @@ namespace ElectronicObserver.Notifier
 		public virtual void ApplyToConfiguration(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 		{
 
-			DialogData.ApplyToConfiguration(config);
-			config.PlaysSound = PlaysSound;
-			config.SoundPath = SoundPath;
-			config.SoundVolume = SoundVolume;
-			config.LoopsSound = LoopsSound;
-			config.IsEnabled = IsEnabled;
-			config.IsSilenced = IsSilenced;
-			config.ShowsDialog = ShowsDialog;
-			config.AccelInterval = AccelInterval;
+            this.DialogData.ApplyToConfiguration(config);
+			config.PlaysSound = this.PlaysSound;
+			config.SoundPath = this.SoundPath;
+			config.SoundVolume = this.SoundVolume;
+			config.LoopsSound = this.LoopsSound;
+			config.IsEnabled = this.IsEnabled;
+			config.IsSilenced = this.IsSilenced;
+			config.ShowsDialog = this.ShowsDialog;
+			config.AccelInterval = this.AccelInterval;
 
 		}
 

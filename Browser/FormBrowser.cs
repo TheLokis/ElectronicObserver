@@ -59,29 +59,29 @@ namespace Browser
 		/// </summary>
 		private bool StyleSheetApplied
 		{
-			get { return _styleSheetApplied; }
+			get { return this._styleSheetApplied; }
 			set
 			{
 				if (value)
 				{
-					//Browser.Anchor = AnchorStyles.None;
-					ApplyZoom();
-					SizeAdjuster_SizeChanged(null, new EventArgs());
+                    //Browser.Anchor = AnchorStyles.None;
+                    this.ApplyZoom();
+                    this.SizeAdjuster_SizeChanged(null, new EventArgs());
 				}
 				else
 				{
-					SizeAdjuster.SuspendLayout();
-					if (IsBrowserInitialized)
+                    this.SizeAdjuster.SuspendLayout();
+					if (this.IsBrowserInitialized)
 					{
-						//Browser.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-						Browser.Location = new Point(0, 0);
-						Browser.MinimumSize = new Size(0, 0);
-						Browser.Size = SizeAdjuster.Size;
+                        //Browser.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                        this.Browser.Location = new Point(0, 0);
+                        this.Browser.MinimumSize = new Size(0, 0);
+                        this.Browser.Size = this.SizeAdjuster.Size;
 					}
-					SizeAdjuster.ResumeLayout();
+                    this.SizeAdjuster.ResumeLayout();
 				}
 
-				_styleSheetApplied = value;
+                this._styleSheetApplied = value;
 			}
 		}
 
@@ -97,12 +97,12 @@ namespace Browser
 
 		private NumericUpDown ToolMenu_Other_Volume_VolumeControl
 		{
-			get { return (NumericUpDown)((ToolStripControlHost)ToolMenu_Other_Volume.DropDownItems["ToolMenu_Other_Volume_VolumeControlHost"]).Control; }
+			get { return (NumericUpDown)((ToolStripControlHost)this.ToolMenu_Other_Volume.DropDownItems["ToolMenu_Other_Volume_VolumeControlHost"]).Control; }
 		}
 
 		private PictureBox ToolMenu_Other_LastScreenShot_Control
 		{
-			get { return (PictureBox)((ToolStripControlHost)ToolMenu_Other_LastScreenShot.DropDownItems["ToolMenu_Other_LastScreenShot_ImageHost"]).Control; }
+			get { return (PictureBox)((ToolStripControlHost)this.ToolMenu_Other_LastScreenShot.DropDownItems["ToolMenu_Other_LastScreenShot_ImageHost"]).Control; }
 		}
 
 
@@ -112,11 +112,11 @@ namespace Browser
 		/// <param name="serverUri">ホストプロセスとの通信用URL</param>
 		public FormBrowser(string serverUri)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			ServerUri = serverUri;
-			StyleSheetApplied = false;
-			_volumeManager = new VolumeManager((uint)Process.GetCurrentProcess().Id);
+            this.ServerUri = serverUri;
+            this.StyleSheetApplied = false;
+            this._volumeManager = new VolumeManager((uint)Process.GetCurrentProcess().Id);
 
 
 			// 音量設定用コントロールの追加
@@ -125,9 +125,9 @@ namespace Browser
 				control.Name = "ToolMenu_Other_Volume_VolumeControl";
 				control.Maximum = 100;
 				control.TextAlign = HorizontalAlignment.Right;
-				control.Font = ToolMenu_Other_Volume.Font;
+				control.Font = this.ToolMenu_Other_Volume.Font;
 
-				control.ValueChanged += ToolMenu_Other_Volume_ValueChanged;
+				control.ValueChanged += this.ToolMenu_Other_Volume_ValueChanged;
 				control.Tag = false;
 
 				var host = new ToolStripControlHost(control, "ToolMenu_Other_Volume_VolumeControlHost");
@@ -136,7 +136,7 @@ namespace Browser
 				control.Location = new Point(control.Margin.Left, control.Margin.Top);
 
 
-				ToolMenu_Other_Volume.DropDownItems.Add(host);
+                this.ToolMenu_Other_Volume.DropDownItems.Add(host);
 			}
 
 			// スクリーンショットプレビューコントロールの追加
@@ -145,13 +145,13 @@ namespace Browser
 				var control = new PictureBox();
 				control.Name = "ToolMenu_Other_LastScreenShot_Image";
 				control.SizeMode = PictureBoxSizeMode.Zoom;
-				control.Size = new Size((int)(KanColleSize.Width * zoomrate), (int)(KanColleSize.Height * zoomrate));
+				control.Size = new Size((int)(this.KanColleSize.Width * zoomrate), (int)(this.KanColleSize.Height * zoomrate));
 				control.Margin = new Padding();
-				control.Image = new Bitmap((int)(KanColleSize.Width * zoomrate), (int)(KanColleSize.Height * zoomrate), PixelFormat.Format24bppRgb);
+				control.Image = new Bitmap((int)(this.KanColleSize.Width * zoomrate), (int)(this.KanColleSize.Height * zoomrate), PixelFormat.Format24bppRgb);
 				using (var g = Graphics.FromImage(control.Image))
 				{
 					g.Clear(SystemColors.Control);
-					g.DrawString("스크린 샷을 아직 촬영하지 않았습니다.\r\n", Font, Brushes.Black, new Point(4, 4));
+					g.DrawString("스크린 샷을 아직 촬영하지 않았습니다.\r\n", this.Font, Brushes.Black, new Point(4, 4));
 				}
 
 				var host = new ToolStripControlHost(control, "ToolMenu_Other_LastScreenShot_ImageHost");
@@ -160,9 +160,9 @@ namespace Browser
 				host.AutoSize = false;
 				control.Location = new Point(control.Margin.Left, control.Margin.Top);
 
-				host.Click += ToolMenu_Other_LastScreenShot_ImageHost_Click;
+				host.Click += this.ToolMenu_Other_LastScreenShot_ImageHost_Click;
 
-				ToolMenu_Other_LastScreenShot.DropDownItems.Insert(0, host);
+                this.ToolMenu_Other_LastScreenShot.DropDownItems.Insert(0, host);
 			}
 
 		}
@@ -172,30 +172,30 @@ namespace Browser
 		{
 			SetWindowLong(this.Handle, GWL_STYLE, WS_CHILD);
 
-			// ホストプロセスに接続
-			BrowserHost = new PipeCommunicator<BrowserLib.IBrowserHost>(
-				this, typeof(BrowserLib.IBrowser), ServerUri + "Browser", "Browser");
-			BrowserHost.Connect(ServerUri + "/BrowserHost");
-			BrowserHost.Faulted += BrowserHostChannel_Faulted;
+            // ホストプロセスに接続
+            this.BrowserHost = new PipeCommunicator<BrowserLib.IBrowserHost>(
+				this, typeof(BrowserLib.IBrowser), this.ServerUri + "Browser", "Browser");
+            this.BrowserHost.Connect(this.ServerUri + "/BrowserHost");
+            this.BrowserHost.Faulted += this.BrowserHostChannel_Faulted;
 
 
-			ConfigurationChanged(BrowserHost.Proxy.Configuration);
+            this.ConfigurationChanged(this.BrowserHost.Proxy.Configuration);
 
 
-			// ウィンドウの親子設定＆ホストプロセスから接続してもらう
-			BrowserHost.Proxy.ConnectToBrowser(this.Handle);
+            // ウィンドウの親子設定＆ホストプロセスから接続してもらう
+            this.BrowserHost.Proxy.ConnectToBrowser(this.Handle);
 
-			// 親ウィンドウが生きているか確認 
-			HeartbeatTimer.Tick += (EventHandler)((sender2, e2) =>
+            // 親ウィンドウが生きているか確認 
+            this.HeartbeatTimer.Tick += (EventHandler)((sender2, e2) =>
 			{
-				BrowserHost.AsyncRemoteRun(() => { HostWindow = BrowserHost.Proxy.HWND; });
+                this.BrowserHost.AsyncRemoteRun(() => { this.HostWindow = this.BrowserHost.Proxy.HWND; });
 			});
-			HeartbeatTimer.Interval = 2000; // 2秒ごと　
-			HeartbeatTimer.Start();
+            this.HeartbeatTimer.Interval = 2000; // 2秒ごと　
+            this.HeartbeatTimer.Start();
 
-			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.GetIconResource());
+            this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.GetIconResource());
 
-			InitializeBrowser();
+            this.InitializeBrowser();
 		}
 
 
@@ -205,10 +205,10 @@ namespace Browser
 		/// </summary>
 		void InitializeBrowser()
 		{
-			if (Browser != null)
+			if (this.Browser != null)
 				return;
 
-			if (ProxySettings == null)
+			if (this.ProxySettings == null)
 				return;
 
 
@@ -221,42 +221,42 @@ namespace Browser
 				CachePath = BrowserCachePath,
 				Locale = "ja",
 				AcceptLanguageList = "ja,en-US,en",        // todo: いる？
-                LogSeverity = Configuration.SavesBrowserLog ? LogSeverity.Error : LogSeverity.Disable,
+                LogSeverity = this.Configuration.SavesBrowserLog ? LogSeverity.Error : LogSeverity.Disable,
                 LogFile = "BrowserLog.log",
             };
 
-            if (!Configuration.HardwareAccelerationEnabled)
+            if (!this.Configuration.HardwareAccelerationEnabled)
 				settings.DisableGpuAcceleration();
 
-			settings.CefCommandLineArgs.Add("proxy-server", ProxySettings);
-            if (Configuration.ForceColorProfile)
+			settings.CefCommandLineArgs.Add("proxy-server", this.ProxySettings);
+            if (this.Configuration.ForceColorProfile)
                 settings.CefCommandLineArgs.Add("force-color-profile", "srgb");
             CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
             Cef.Initialize(settings, false, (IBrowserProcessHandler)null);
 
-            var requestHandler = new RequestHandler(pixiSettingEnabled: Configuration.PreserveDrawingBuffer);
-            requestHandler.RenderProcessTerminated += (mes) => AddLog(3, mes);
+            var requestHandler = new RequestHandler(pixiSettingEnabled: this.Configuration.PreserveDrawingBuffer);
+            requestHandler.RenderProcessTerminated += (mes) => this.AddLog(3, mes);
 
-            Browser = new ChromiumWebBrowser(@"about:blank")
+            this.Browser = new ChromiumWebBrowser(@"about:blank")
 			{
 				Dock = DockStyle.None,
-				Size = SizeAdjuster.Size,
+				Size = this.SizeAdjuster.Size,
                 RequestHandler = requestHandler,
                 MenuHandler = new MenuHandler(),
 				KeyboardHandler = new KeyboardHandler(),
 				DragHandler = new DragHandler(),
 			};
 
-            Browser.AddressChanged += Browser_AddressChanged;
+            this.Browser.AddressChanged += this.Browser_AddressChanged;
 
-            Browser.LoadingStateChanged += Browser_LoadingStateChanged;
-            Browser.IsBrowserInitializedChanged += Browser_IsBrowserInitializedChanged;
+            this.Browser.LoadingStateChanged += this.Browser_LoadingStateChanged;
+            this.Browser.IsBrowserInitializedChanged += this.Browser_IsBrowserInitializedChanged;
 
-            SizeAdjuster.Controls.Add(Browser);
+            this.SizeAdjuster.Controls.Add(this.Browser);
 
             if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"CefEOBrowser"))) {
                 Directory.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"CefEOBrowser"), true);
-                AddLog(3, "해당 버전에서 이전버전의 브라우저 관련 쓸모없는 파일들을 삭제하였습니다.");
+                this.AddLog(3, "해당 버전에서 이전버전의 브라우저 관련 쓸모없는 파일들을 삭제하였습니다.");
             }
 		}
 
@@ -307,10 +307,10 @@ namespace Browser
 
         void Exit()
 		{
-			if (!BrowserHost.Closed)
+			if (!this.BrowserHost.Closed)
 			{
-				BrowserHost.Close();
-				HeartbeatTimer.Stop();
+                this.BrowserHost.Close();
+                this.HeartbeatTimer.Stop();
 				Cef.Shutdown();
 				Application.Exit();
 			}
@@ -318,43 +318,45 @@ namespace Browser
 
 		void BrowserHostChannel_Faulted(Exception e)
 		{
-			// 親と通信できなくなったら終了する
-			Exit();
+            // 親と通信できなくなったら終了する
+            this.Exit();
 		}
 
 		public void CloseBrowser()
 		{
-			HeartbeatTimer.Stop();
-			// リモートコールでClose()呼ぶのばヤバそうなので非同期にしておく
-			BeginInvoke((Action)(() => Exit()));
+            this.HeartbeatTimer.Stop();
+            // リモートコールでClose()呼ぶのばヤバそうなので非同期にしておく
+            this.BeginInvoke((Action)(() => this.Exit()));
 		}
 
 		public void ConfigurationChanged(BrowserLib.BrowserConfiguration conf)
 		{
-			Configuration = conf;
+            this.Configuration = conf;
 
-			SizeAdjuster.AutoScroll = Configuration.IsScrollable;
-			ToolMenu_Other_Zoom_Fit.Checked = Configuration.ZoomFit;
-			ApplyZoom();
-			ToolMenu_Other_AppliesStyleSheet.Checked = Configuration.AppliesStyleSheet;
-			ToolMenu.Dock = (DockStyle)Configuration.ToolMenuDockStyle;
-			ToolMenu.Visible = Configuration.IsToolMenuVisible;
+            this.SizeAdjuster.AutoScroll = this.Configuration.IsScrollable;
+            this.ToolMenu_Other_Zoom_Fit.Checked = this.Configuration.ZoomFit;
+            this.ApplyZoom();
+            this.ToolMenu_Other_AppliesStyleSheet.Checked = this.Configuration.AppliesStyleSheet;
+            this.ToolMenu.Dock = (DockStyle)this.Configuration.ToolMenuDockStyle;
+            this.ToolMenu.Visible = this.Configuration.IsToolMenuVisible;
+
+            this.ToolMenu_CacheClear.Visible = conf.EnableDebugMenu;
 
             switch (conf.Theme)
             {
                 default:
                 case 0:
-                    BackColor = SystemColors.Control;
-                    ForeColor = SystemColors.ControlText;
-                    ToolMenu.BackColor = SystemColors.Control;
-                    ToolMenu.ForeColor = SystemColors.ControlText;
+                    this.BackColor = SystemColors.Control;
+                    this.ForeColor = SystemColors.ControlText;
+                    this.ToolMenu.BackColor = SystemColors.Control;
+                    this.ToolMenu.ForeColor = SystemColors.ControlText;
                     break;
                 case 1:
                     var charcoal = Color.FromArgb(0x22, 0x22, 0x22);
-                    BackColor = charcoal;
-                    ForeColor = SystemColors.Control;
-                    ToolMenu.BackColor = charcoal;
-                    ToolMenu.ForeColor = SystemColors.Control;
+                    this.BackColor = charcoal;
+                    this.ForeColor = SystemColors.Control;
+                    this.ToolMenu.BackColor = charcoal;
+                    this.ToolMenu.ForeColor = SystemColors.Control;
                     break;
             }
 
@@ -363,66 +365,66 @@ namespace Browser
 
         private void ConfigurationUpdated()
 		{
-			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.ConfigurationUpdated(Configuration));
+            this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.ConfigurationUpdated(this.Configuration));
 		}
 
 		private void AddLog(int priority, string message)
 		{
-			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.AddLog(priority, message));
+            this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.AddLog(priority, message));
 		}
 
 		private void SendErrorReport(string exceptionName, string message)
 		{
-			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.SendErrorReport(exceptionName, message));
+            this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.SendErrorReport(exceptionName, message));
 		}
 
 
 		public void InitialAPIReceived()
 		{
-			IsKanColleLoaded = true;
+            this.IsKanColleLoaded = true;
 
-			//ロード直後の適用ではレイアウトがなぜか崩れるのでこのタイミングでも適用
-			ApplyStyleSheet();
-			ApplyZoom();
-			DestroyDMMreloadDialog();
+            //ロード直後の適用ではレイアウトがなぜか崩れるのでこのタイミングでも適用
+            this.ApplyStyleSheet();
+            this.ApplyZoom();
+            this.DestroyDMMreloadDialog();
 
-			//起動直後はまだ音声が鳴っていないのでミュートできないため、この時点で有効化
-			SetVolumeState();
+            //起動直後はまだ音声が鳴っていないのでミュートできないため、この時点で有効化
+            this.SetVolumeState();
 		}
 
 
 		private void SizeAdjuster_SizeChanged(object sender, EventArgs e)
 		{
-			if (!StyleSheetApplied)
+			if (!this.StyleSheetApplied)
 			{
-				if (Browser != null)
+				if (this.Browser != null)
 				{
-					Browser.Location = new Point(0, 0);
-					Browser.Size = SizeAdjuster.Size;
+                    this.Browser.Location = new Point(0, 0);
+                    this.Browser.Size = this.SizeAdjuster.Size;
 				}
 				return;
 			}
 
-			ApplyZoom();
+            this.ApplyZoom();
 		}
 
 		private void CenteringBrowser()
 		{
-			if (SizeAdjuster.Width == 0 || SizeAdjuster.Height == 0) return;
-			int x = Browser.Location.X, y = Browser.Location.Y;
-			bool isScrollable = Configuration.IsScrollable;
+			if (this.SizeAdjuster.Width == 0 || this.SizeAdjuster.Height == 0) return;
+			int x = this.Browser.Location.X, y = this.Browser.Location.Y;
+			bool isScrollable = this.Configuration.IsScrollable;
 
-			if (!isScrollable || Browser.Width <= SizeAdjuster.Width)
+			if (!isScrollable || this.Browser.Width <= this.SizeAdjuster.Width)
 			{
-				x = (SizeAdjuster.Width - Browser.Width) / 2;
+				x = (this.SizeAdjuster.Width - this.Browser.Width) / 2;
 			}
-			if (!isScrollable || Browser.Height <= SizeAdjuster.Height)
+			if (!isScrollable || this.Browser.Height <= this.SizeAdjuster.Height)
 			{
-				y = (SizeAdjuster.Height - Browser.Height) / 2;
+				y = (this.SizeAdjuster.Height - this.Browser.Height) / 2;
 			}
 
-			//if ( x != Browser.Location.X || y != Browser.Location.Y )
-			Browser.Location = new Point(x, y);
+            //if ( x != Browser.Location.X || y != Browser.Location.Y )
+            this.Browser.Location = new Point(x, y);
 		}
 
 
@@ -434,26 +436,26 @@ namespace Browser
 			if (e.IsLoading)
 				return;
 
-			BeginInvoke((Action)(() =>
+            this.BeginInvoke((Action)(() =>
 			{
-				ApplyStyleSheet();
+                this.ApplyStyleSheet();
 
-				ApplyZoom();
-				DestroyDMMreloadDialog();
+                this.ApplyZoom();
+                this.DestroyDMMreloadDialog();
 			}));
 		}
 
 
 		private bool IsBrowserInitialized =>
-			Browser != null &&
-			Browser.IsBrowserInitialized;
+            this.Browser != null &&
+            this.Browser.IsBrowserInitialized;
 
 		private IFrame GetMainFrame()
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return null;
 
-			var browser = Browser.GetBrowser();
+			var browser = this.Browser.GetBrowser();
 			var frame = browser.MainFrame;
 
 			if (frame?.Url?.Contains(@"http://www.dmm.com/netgame/social/") ?? false)
@@ -464,10 +466,10 @@ namespace Browser
 
 		private IFrame GetGameFrame()
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return null;
 
-			var browser = Browser.GetBrowser();
+			var browser = this.Browser.GetBrowser();
 			var frames = browser.GetFrameIdentifiers()
 						.Select(id => browser.GetFrame(id));
 
@@ -476,10 +478,10 @@ namespace Browser
 
 		private IFrame GetKanColleFrame()
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return null;
 
-			var browser = Browser.GetBrowser();
+			var browser = this.Browser.GetBrowser();
 			var frames = browser.GetFrameIdentifiers()
 					.Select(id => browser.GetFrame(id));
 
@@ -491,38 +493,38 @@ namespace Browser
 		/// </summary>
 		public void ApplyStyleSheet()
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return;
 
-			if (!Configuration.AppliesStyleSheet && !RestoreStyleSheet)
+			if (!this.Configuration.AppliesStyleSheet && !this.RestoreStyleSheet)
 				return;
 
 			try
 			{
-				var mainframe = GetMainFrame();
-				var gameframe = GetGameFrame();
+				var mainframe = this.GetMainFrame();
+				var gameframe = this.GetGameFrame();
 				if (mainframe == null || gameframe == null)
 					return;
 
-				if (RestoreStyleSheet)
+				if (this.RestoreStyleSheet)
 				{
-					mainframe.EvaluateScriptAsync(string.Format(Properties.Resources.RestoreScript, StyleClassID));
-					gameframe.EvaluateScriptAsync(string.Format(Properties.Resources.RestoreScript, StyleClassID));
-					StyleSheetApplied = false;
-					RestoreStyleSheet = false;
+					mainframe.EvaluateScriptAsync(string.Format(Properties.Resources.RestoreScript, this.StyleClassID));
+					gameframe.EvaluateScriptAsync(string.Format(Properties.Resources.RestoreScript, this.StyleClassID));
+                    this.StyleSheetApplied = false;
+                    this.RestoreStyleSheet = false;
 				}
 				else
 				{
-					mainframe.EvaluateScriptAsync(string.Format(Properties.Resources.PageScript, StyleClassID));
-					gameframe.EvaluateScriptAsync(string.Format(Properties.Resources.FrameScript, StyleClassID));
+					mainframe.EvaluateScriptAsync(string.Format(Properties.Resources.PageScript, this.StyleClassID));
+					gameframe.EvaluateScriptAsync(string.Format(Properties.Resources.FrameScript, this.StyleClassID));
 				}
 
-				StyleSheetApplied = true;
+                this.StyleSheetApplied = true;
 
 			}
 			catch (Exception ex)
 			{
-				SendErrorReport(ex.ToString(), "스타일 시트의 적용에 실패했습니다.");
+                this.SendErrorReport(ex.ToString(), "스타일 시트의 적용에 실패했습니다.");
 			}
 
 		}
@@ -532,15 +534,15 @@ namespace Browser
 		/// </summary>
 		public void DestroyDMMreloadDialog()
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return;
 
-			if (!Configuration.IsDMMreloadDialogDestroyable)
+			if (!this.Configuration.IsDMMreloadDialogDestroyable)
 				return;
 
 			try
 			{
-				var mainframe = GetMainFrame();
+				var mainframe = this.GetMainFrame();
 				if (mainframe == null)
 					return;
 
@@ -548,7 +550,7 @@ namespace Browser
 			}
 			catch (Exception ex)
 			{
-				SendErrorReport(ex.ToString(), "DMM의 페이지 새로고침 안내창 숨기기에 실패했습니다.");
+                this.SendErrorReport(ex.ToString(), "DMM의 페이지 새로고침 안내창 숨기기에 실패했습니다.");
 			}
 
 		}
@@ -556,12 +558,12 @@ namespace Browser
         private string navigateCache = null;
         private void Browser_IsBrowserInitializedChanged(object sender, IsBrowserInitializedChangedEventArgs e)
         {
-            if (IsBrowserInitialized && navigateCache != null)
+            if (this.IsBrowserInitialized && this.navigateCache != null)
             {
                 // ロードが完了したので再試行
-                string url = navigateCache;            // 非同期コールするのでコピーを取っておく必要がある
-                BeginInvoke((Action)(() => Navigate(url)));
-                navigateCache = null;
+                string url = this.navigateCache;            // 非同期コールするのでコピーを取っておく必要がある
+                this.BeginInvoke((Action)(() => this.Navigate(url)));
+                this.navigateCache = null;
             }
         }
 
@@ -570,21 +572,21 @@ namespace Browser
         /// </summary>
         public void Navigate(string url)
 		{
-            if (url != Configuration.LogInPageURL || !Configuration.AppliesStyleSheet)
-                StyleSheetApplied = false;
-            Browser.Load(url);
+            if (url != this.Configuration.LogInPageURL || !this.Configuration.AppliesStyleSheet)
+                this.StyleSheetApplied = false;
+            this.Browser.Load(url);
 
-            if (!IsBrowserInitialized)
+            if (!this.IsBrowserInitialized)
             {
                 // 大方ロードできないのであとで再試行する
-                navigateCache = url;
+                this.navigateCache = url;
             }
         }
 
 		/// <summary>
 		/// ブラウザを再読み込みします。
 		/// </summary>
-		public void RefreshBrowser() => RefreshBrowser(false);
+		public void RefreshBrowser() => this.RefreshBrowser(false);
 
 		/// <summary>
 		/// ブラウザを再読み込みします。
@@ -592,10 +594,10 @@ namespace Browser
 		/// <param name="ignoreCache">キャッシュを無視するか。</param>
 		public void RefreshBrowser(bool ignoreCache)
 		{
-			if (!Configuration.AppliesStyleSheet)
-				StyleSheetApplied = false;
+			if (!this.Configuration.AppliesStyleSheet)
+                this.StyleSheetApplied = false;
 
-			Browser.Reload(ignoreCache);
+            this.Browser.Reload(ignoreCache);
 		}
 
 		/// <summary>
@@ -603,20 +605,20 @@ namespace Browser
 		/// </summary>
 		public void ApplyZoom()
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return;
 
 
-			double zoomRate = Configuration.ZoomRate;
-			bool fit = Configuration.ZoomFit && StyleSheetApplied;
+			double zoomRate = this.Configuration.ZoomRate;
+			bool fit = this.Configuration.ZoomFit && this.StyleSheetApplied;
 
 
 			double zoomFactor;
 
 			if (fit)
 			{
-				double rateX = (double)SizeAdjuster.Width / KanColleSize.Width;
-				double rateY = (double)SizeAdjuster.Height / KanColleSize.Height;
+				double rateX = (double)this.SizeAdjuster.Width / this.KanColleSize.Width;
+				double rateY = (double)this.SizeAdjuster.Height / this.KanColleSize.Height;
 				zoomFactor = Math.Min(rateX, rateY);
 			}
 			else
@@ -630,26 +632,26 @@ namespace Browser
 			}
 
 
-			Browser.SetZoomLevel(Math.Log(zoomFactor, 1.2));
+            this.Browser.SetZoomLevel(Math.Log(zoomFactor, 1.2));
 
 
-			if (StyleSheetApplied)
+			if (this.StyleSheetApplied)
 			{
-				Browser.Size = Browser.MinimumSize = new Size(
-					(int)(KanColleSize.Width * zoomFactor),
-					(int)(KanColleSize.Height * zoomFactor)
+                this.Browser.Size = this.Browser.MinimumSize = new Size(
+					(int)(this.KanColleSize.Width * zoomFactor),
+					(int)(this.KanColleSize.Height * zoomFactor)
 					);
 
-				CenteringBrowser();
+                this.CenteringBrowser();
 			}
 
 			if (fit)
 			{
-				ToolMenu_Other_Zoom_Current.Text = "현재: 화면에맞춤";
+                this.ToolMenu_Other_Zoom_Current.Text = "현재: 화면에맞춤";
 			}
 			else
 			{
-				ToolMenu_Other_Zoom_Current.Text = $"현재: {zoomRate:p1}";
+                this.ToolMenu_Other_Zoom_Current.Text = $"현재: {zoomRate:p1}";
 			}
 
 		}
@@ -661,11 +663,11 @@ namespace Browser
         /// </summary>
         private async Task<Bitmap> TakeScreenShot()
         {
-            var kancolleFrame = GetKanColleFrame();
+            var kancolleFrame = this.GetKanColleFrame();
 
             if (kancolleFrame == null)
             {
-				AddLog(3, string.Format("칸코레가 실행되지 않아 스크린 샷을 찍을 수 없습니다."));
+                this.AddLog(3, string.Format("칸코레가 실행되지 않아 스크린 샷을 찍을 수 없습니다."));
 				System.Media.SystemSounds.Beep.Play();
                 return null;
             }
@@ -675,7 +677,7 @@ namespace Browser
             {
                 var request = new ScreenShotPacket();
 
-                if (Browser == null || !Browser.IsBrowserInitialized)
+                if (this.Browser == null || !this.Browser.IsBrowserInitialized)
                     return request.TaskSource.Task;
 
 
@@ -692,7 +694,7 @@ namespace Browser
 }})();
 ";
 
-                Browser.JavascriptObjectRepository.Register(request.ID, request, true);
+                this.Browser.JavascriptObjectRepository.Register(request.ID, request, true);
                 kancolleFrame.ExecuteJavaScriptAsync(script);
 
                 return request.TaskSource.Task;
@@ -701,7 +703,7 @@ namespace Browser
             var result = await InternalTakeScreenShot();
 
             // ごみ掃除
-            Browser.JavascriptObjectRepository.UnRegister(result.ID);
+            this.Browser.JavascriptObjectRepository.UnRegister(result.ID);
             kancolleFrame.ExecuteJavaScriptAsync($@"delete {result.ID}");
 
             return result.GetImage();
@@ -713,15 +715,15 @@ namespace Browser
 		public async Task SaveScreenShot()
 		{
 
-			int savemode = Configuration.ScreenShotSaveMode;
-			int format = Configuration.ScreenShotFormat;
-			string folderPath = Configuration.ScreenShotPath;
-			bool is32bpp = format != 1 && Configuration.AvoidTwitterDeterioration;
+			int savemode = this.Configuration.ScreenShotSaveMode;
+			int format = this.Configuration.ScreenShotFormat;
+			string folderPath = this.Configuration.ScreenShotPath;
+			bool is32bpp = format != 1 && this.Configuration.AvoidTwitterDeterioration;
 
 			Bitmap image = null;
             try
             {
-                image = await TakeScreenShot();
+                image = await this.TakeScreenShot();
 
 
                 if (image == null)
@@ -787,13 +789,13 @@ namespace Browser
 
 						string path = $"{folderPath}\\{DateTime.Now:yyyyMMdd_HHmmssff}.{ext}";
 						image.Save(path, imgFormat);
-						_lastScreenShotPath = path;
+                        this._lastScreenShotPath = path;
 
-						AddLog(2, $"스크린 샷을 {path} 에 저장 했습니다.");
+                        this.AddLog(2, $"스크린 샷을 {path} 에 저장 했습니다.");
 					}
 					catch (Exception ex)
 					{
-						SendErrorReport(ex.ToString(), "스크린 샷 저장에 실패했습니다.");
+                        this.SendErrorReport(ex.ToString(), "스크린 샷 저장에 실패했습니다.");
 					}
 				}
 
@@ -806,18 +808,18 @@ namespace Browser
 						Clipboard.SetImage(image);
 
 						if ((savemode & 3) != 3)
-							AddLog(2, "스크린 샷을 클립 보드에 복사했습니다.");
+                            this.AddLog(2, "스크린 샷을 클립 보드에 복사했습니다.");
 					}
 					catch (Exception ex)
 					{
-						SendErrorReport(ex.ToString(), "스크린 샷 클립 보드 복사에 실패했습니다.");
+                        this.SendErrorReport(ex.ToString(), "스크린 샷 클립 보드 복사에 실패했습니다.");
 					}
 				}
 
 			}
 			catch (Exception ex)
 			{
-				SendErrorReport(ex.ToString(), "스크린 샷 촬영에 실패했습니다.");
+                this.SendErrorReport(ex.ToString(), "스크린 샷 촬영에 실패했습니다.");
 			}
 			finally
 			{
@@ -833,17 +835,17 @@ namespace Browser
 			if (ushort.TryParse(proxy, out port))
 			{
 				WinInetUtil.SetProxyInProcessForNekoxy(port);
-				ProxySettings = "http=127.0.0.1:" + port;           // todo: 動くには動くが正しいかわからない
+                this.ProxySettings = "http=127.0.0.1:" + port;           // todo: 動くには動くが正しいかわからない
 			}
 			else
 			{
 				WinInetUtil.SetProxyInProcess(proxy, "local");
-				ProxySettings = proxy;
+                this.ProxySettings = proxy;
 			}
 
-			InitializeBrowser();
+            this.InitializeBrowser();
 
-			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.SetProxyCompleted());
+            this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.SetProxyCompleted());
 		}
 
 
@@ -886,26 +888,26 @@ namespace Browser
 					bmp.UnlockBits(bmpdata);
 				}
 
-				Icons.Images.Add(keys[i], bmp);
+                this.Icons.Images.Add(keys[i], bmp);
 			}
 
 
-			ToolMenu_ScreenShot.Image = ToolMenu_Other_ScreenShot.Image =
-				Icons.Images["Browser_ScreenShot"];
-			ToolMenu_Zoom.Image = ToolMenu_Other_Zoom.Image =
-				Icons.Images["Browser_Zoom"];
-			ToolMenu_Other_Zoom_Increment.Image =
-				Icons.Images["Browser_ZoomIn"];
-			ToolMenu_Other_Zoom_Decrement.Image =
-				Icons.Images["Browser_ZoomOut"];
-			ToolMenu_Refresh.Image = ToolMenu_Other_Refresh.Image =
-				Icons.Images["Browser_Refresh"];
-			ToolMenu_NavigateToLogInPage.Image = ToolMenu_Other_NavigateToLogInPage.Image =
-				Icons.Images["Browser_Navigate"];
-			ToolMenu_Other.Image =
-				Icons.Images["Browser_Other"];
+            this.ToolMenu_ScreenShot.Image = this.ToolMenu_Other_ScreenShot.Image =
+                this.Icons.Images["Browser_ScreenShot"];
+            this.ToolMenu_Zoom.Image = this.ToolMenu_Other_Zoom.Image =
+                this.Icons.Images["Browser_Zoom"];
+            this.ToolMenu_Other_Zoom_Increment.Image =
+                this.Icons.Images["Browser_ZoomIn"];
+            this.ToolMenu_Other_Zoom_Decrement.Image =
+                this.Icons.Images["Browser_ZoomOut"];
+            this.ToolMenu_Refresh.Image = this.ToolMenu_Other_Refresh.Image =
+                this.Icons.Images["Browser_Refresh"];
+            this.ToolMenu_NavigateToLogInPage.Image = this.ToolMenu_Other_NavigateToLogInPage.Image =
+                this.Icons.Images["Browser_Navigate"];
+            this.ToolMenu_Other.Image =
+                this.Icons.Images["Browser_Other"];
 
-			SetVolumeState();
+            this.SetVolumeState();
 		}
 
 
@@ -917,8 +919,8 @@ namespace Browser
 
 			try
 			{
-				mute = _volumeManager.IsMute;
-				volume = _volumeManager.Volume * 100;
+				mute = this._volumeManager.IsMute;
+				volume = this._volumeManager.Volume * 100;
 
 			}
 			catch (Exception)
@@ -928,41 +930,41 @@ namespace Browser
 				volume = 100;
 			}
 
-			ToolMenu_Mute.Image = ToolMenu_Other_Mute.Image =
-				Icons.Images[mute ? "Browser_Mute" : "Browser_Unmute"];
+            this.ToolMenu_Mute.Image = this.ToolMenu_Other_Mute.Image =
+                this.Icons.Images[mute ? "Browser_Mute" : "Browser_Unmute"];
 
 			{
-				var control = ToolMenu_Other_Volume_VolumeControl;
+				var control = this.ToolMenu_Other_Volume_VolumeControl;
 				control.Tag = false;
 				control.Value = (decimal)volume;
 				control.Tag = true;
 			}
 
-			Configuration.Volume = volume;
-			Configuration.IsMute = mute;
-			ConfigurationUpdated();
+            this.Configuration.Volume = volume;
+            this.Configuration.IsMute = mute;
+            this.ConfigurationUpdated();
 		}
 
 
 		private async void ToolMenu_Other_ScreenShot_Click(object sender, EventArgs e)
 		{
-			await SaveScreenShot();
+			await this.SaveScreenShot();
 		}
 
 		private void ToolMenu_Other_Zoom_Decrement_Click(object sender, EventArgs e)
 		{
-			Configuration.ZoomRate = Math.Max(Configuration.ZoomRate - 0.2, 0.1);
-			Configuration.ZoomFit = ToolMenu_Other_Zoom_Fit.Checked = false;
-			ApplyZoom();
-			ConfigurationUpdated();
+            this.Configuration.ZoomRate = Math.Max(this.Configuration.ZoomRate - 0.2, 0.1);
+            this.Configuration.ZoomFit = this.ToolMenu_Other_Zoom_Fit.Checked = false;
+            this.ApplyZoom();
+            this.ConfigurationUpdated();
 		}
 
 		private void ToolMenu_Other_Zoom_Increment_Click(object sender, EventArgs e)
 		{
-			Configuration.ZoomRate = Math.Min(Configuration.ZoomRate + 0.2, 10);
-			Configuration.ZoomFit = ToolMenu_Other_Zoom_Fit.Checked = false;
-			ApplyZoom();
-			ConfigurationUpdated();
+            this.Configuration.ZoomRate = Math.Min(this.Configuration.ZoomRate + 0.2, 10);
+            this.Configuration.ZoomFit = this.ToolMenu_Other_Zoom_Fit.Checked = false;
+            this.ApplyZoom();
+            this.ConfigurationUpdated();
 		}
 
 		private void ToolMenu_Other_Zoom_Click(object sender, EventArgs e)
@@ -970,55 +972,55 @@ namespace Browser
 
 			double zoom;
 
-			if (sender == ToolMenu_Other_Zoom_25)
+			if (sender == this.ToolMenu_Other_Zoom_25)
 				zoom = 0.25;
-			else if (sender == ToolMenu_Other_Zoom_50)
+			else if (sender == this.ToolMenu_Other_Zoom_50)
 				zoom = 0.50;
-			else if (sender == ToolMenu_Other_Zoom_Classic)
+			else if (sender == this.ToolMenu_Other_Zoom_Classic)
 				zoom = 0.667;       // 2/3 ジャストだと 799x479 になる
-			else if (sender == ToolMenu_Other_Zoom_75)
+			else if (sender == this.ToolMenu_Other_Zoom_75)
 				zoom = 0.75;
-			else if (sender == ToolMenu_Other_Zoom_100)
+			else if (sender == this.ToolMenu_Other_Zoom_100)
 				zoom = 1;
-			else if (sender == ToolMenu_Other_Zoom_150)
+			else if (sender == this.ToolMenu_Other_Zoom_150)
 				zoom = 1.5;
-			else if (sender == ToolMenu_Other_Zoom_200)
+			else if (sender == this.ToolMenu_Other_Zoom_200)
 				zoom = 2;
-			else if (sender == ToolMenu_Other_Zoom_250)
+			else if (sender == this.ToolMenu_Other_Zoom_250)
 				zoom = 2.5;
-			else if (sender == ToolMenu_Other_Zoom_300)
+			else if (sender == this.ToolMenu_Other_Zoom_300)
 				zoom = 3;
-			else if (sender == ToolMenu_Other_Zoom_400)
+			else if (sender == this.ToolMenu_Other_Zoom_400)
 				zoom = 4;
 			else
 				zoom = 1;
 
-			Configuration.ZoomRate = zoom;
-			Configuration.ZoomFit = ToolMenu_Other_Zoom_Fit.Checked = false;
-			ApplyZoom();
-			ConfigurationUpdated();
+            this.Configuration.ZoomRate = zoom;
+            this.Configuration.ZoomFit = this.ToolMenu_Other_Zoom_Fit.Checked = false;
+            this.ApplyZoom();
+            this.ConfigurationUpdated();
 		}
 
 		private void ToolMenu_Other_Zoom_Fit_Click(object sender, EventArgs e)
 		{
-			Configuration.ZoomFit = ToolMenu_Other_Zoom_Fit.Checked;
-			ApplyZoom();
-			ConfigurationUpdated();
+            this.Configuration.ZoomFit = this.ToolMenu_Other_Zoom_Fit.Checked;
+            this.ApplyZoom();
+            this.ConfigurationUpdated();
 		}
 
 
 		//ズームUIの使いまわし
 		private void ToolMenu_Other_DropDownOpening(object sender, EventArgs e)
 		{
-			var list = ToolMenu_Zoom.DropDownItems.Cast<ToolStripItem>().ToArray();
-			ToolMenu_Other_Zoom.DropDownItems.AddRange(list);
+			var list = this.ToolMenu_Zoom.DropDownItems.Cast<ToolStripItem>().ToArray();
+            this.ToolMenu_Other_Zoom.DropDownItems.AddRange(list);
 		}
 
 		private void ToolMenu_Zoom_DropDownOpening(object sender, EventArgs e)
 		{
 
-			var list = ToolMenu_Other_Zoom.DropDownItems.Cast<ToolStripItem>().ToArray();
-			ToolMenu_Zoom.DropDownItems.AddRange(list);
+			var list = this.ToolMenu_Other_Zoom.DropDownItems.Cast<ToolStripItem>().ToArray();
+            this.ToolMenu_Zoom.DropDownItems.AddRange(list);
 		}
 
 
@@ -1026,7 +1028,7 @@ namespace Browser
 		{
 			try
 			{
-				_volumeManager.ToggleMute();
+                this._volumeManager.ToggleMute();
 
 			}
 			catch (Exception)
@@ -1034,18 +1036,18 @@ namespace Browser
 				System.Media.SystemSounds.Beep.Play();
 			}
 
-			SetVolumeState();
+            this.SetVolumeState();
 		}
 
 		void ToolMenu_Other_Volume_ValueChanged(object sender, EventArgs e)
 		{
 
-			var control = ToolMenu_Other_Volume_VolumeControl;
+			var control = this.ToolMenu_Other_Volume_VolumeControl;
 
 			try
 			{
 				if ((bool)control.Tag)
-					_volumeManager.Volume = (float)(control.Value / 100);
+                    this._volumeManager.Volume = (float)(control.Value / 100);
 				control.BackColor = SystemColors.Window;
 
 			}
@@ -1061,23 +1063,23 @@ namespace Browser
 		private void ToolMenu_Other_Refresh_Click(object sender, EventArgs e)
 		{
 
-			if (!Configuration.ConfirmAtRefresh ||
+			if (!this.Configuration.ConfirmAtRefresh ||
 				MessageBox.Show("새로고침합니다.\r\n진행하시겠습니까?", "확인",
 				MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 				== DialogResult.OK)
 			{
-				RefreshBrowser();
+                this.RefreshBrowser();
 			}
 		}
 
 		private void ToolMenu_Other_RefreshIgnoreCache_Click(object sender, EventArgs e)
 		{
-			if (!Configuration.ConfirmAtRefresh ||
+			if (!this.Configuration.ConfirmAtRefresh ||
 				MessageBox.Show("캐시를 무시하고 새로고침합니다.\r\n진행하시겠습니까?", "확인",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 				== DialogResult.OK)
 			{
-				RefreshBrowser(true);
+                this.RefreshBrowser(true);
 			}
 		}
 
@@ -1089,92 +1091,92 @@ namespace Browser
 				== DialogResult.OK)
 			{
 
-				Navigate(Configuration.LogInPageURL);
+                this.Navigate(this.Configuration.LogInPageURL);
 			}
 
 		}
 
 		private void ToolMenu_Other_Navigate_Click(object sender, EventArgs e)
 		{
-			BrowserHost.AsyncRemoteRun(() => BrowserHost.Proxy.RequestNavigation(Browser.GetMainFrame()?.Url ?? ""));
+            this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.RequestNavigation(this.Browser.GetMainFrame()?.Url ?? ""));
 		}
 
 		private void ToolMenu_Other_AppliesStyleSheet_Click(object sender, EventArgs e)
 		{
-			Configuration.AppliesStyleSheet = ToolMenu_Other_AppliesStyleSheet.Checked;
-			if (!Configuration.AppliesStyleSheet)
-				RestoreStyleSheet = true;
-			ApplyStyleSheet();
-			ApplyZoom();
-			ConfigurationUpdated();
+            this.Configuration.AppliesStyleSheet = this.ToolMenu_Other_AppliesStyleSheet.Checked;
+			if (!this.Configuration.AppliesStyleSheet)
+                this.RestoreStyleSheet = true;
+            this.ApplyStyleSheet();
+            this.ApplyZoom();
+            this.ConfigurationUpdated();
 		}
 
 		private void ToolMenu_Other_Alignment_Click(object sender, EventArgs e)
 		{
 
-			if (sender == ToolMenu_Other_Alignment_Top)
-				ToolMenu.Dock = DockStyle.Top;
-			else if (sender == ToolMenu_Other_Alignment_Bottom)
-				ToolMenu.Dock = DockStyle.Bottom;
-			else if (sender == ToolMenu_Other_Alignment_Left)
-				ToolMenu.Dock = DockStyle.Left;
+			if (sender == this.ToolMenu_Other_Alignment_Top)
+                this.ToolMenu.Dock = DockStyle.Top;
+			else if (sender == this.ToolMenu_Other_Alignment_Bottom)
+                this.ToolMenu.Dock = DockStyle.Bottom;
+			else if (sender == this.ToolMenu_Other_Alignment_Left)
+                this.ToolMenu.Dock = DockStyle.Left;
 			else
-				ToolMenu.Dock = DockStyle.Right;
+                this.ToolMenu.Dock = DockStyle.Right;
 
-			Configuration.ToolMenuDockStyle = (int)ToolMenu.Dock;
+            this.Configuration.ToolMenuDockStyle = (int)this.ToolMenu.Dock;
 
-			ConfigurationUpdated();
+            this.ConfigurationUpdated();
 		}
 
 		private void ToolMenu_Other_Alignment_Invisible_Click(object sender, EventArgs e)
 		{
-			ToolMenu.Visible =
-			Configuration.IsToolMenuVisible = false;
-			ConfigurationUpdated();
+            this.ToolMenu.Visible =
+            this.Configuration.IsToolMenuVisible = false;
+            this.ConfigurationUpdated();
 		}
 
 
 
 		private void SizeAdjuster_DoubleClick(object sender, EventArgs e)
 		{
-			ToolMenu.Visible =
-			Configuration.IsToolMenuVisible = true;
-			ConfigurationUpdated();
+            this.ToolMenu.Visible =
+            this.Configuration.IsToolMenuVisible = true;
+            this.ConfigurationUpdated();
 		}
 
 		private void ContextMenuTool_ShowToolMenu_Click(object sender, EventArgs e)
 		{
-			ToolMenu.Visible =
-			Configuration.IsToolMenuVisible = true;
-			ConfigurationUpdated();
+            this.ToolMenu.Visible =
+            this.Configuration.IsToolMenuVisible = true;
+            this.ConfigurationUpdated();
 		}
 
 		private void ContextMenuTool_Opening(object sender, CancelEventArgs e)
 		{
 
-			if (IsKanColleLoaded || ToolMenu.Visible)
+			if (this.IsKanColleLoaded || this.ToolMenu.Visible)
 				e.Cancel = true;
 		}
 
 
 		private void ToolMenu_ScreenShot_Click(object sender, EventArgs e)
 		{
-			ToolMenu_Other_ScreenShot_Click(sender, e);
+            this.ToolMenu_Other_ScreenShot_Click(sender, e);
 		}
 
 		private void ToolMenu_Mute_Click(object sender, EventArgs e)
 		{
-			ToolMenu_Other_Mute_Click(sender, e);
+            this.ToolMenu_Other_Mute_Click(sender, e);
 		}
 
 		private void ToolMenu_Refresh_Click(object sender, EventArgs e)
 		{
-			ToolMenu_Other_Refresh_Click(sender, e);
+            this.ToolMenu_Other_Refresh_Click(sender, e);
 		}
 
 		private void ToolMenu_NavigateToLogInPage_Click(object sender, EventArgs e)
 		{
-			ToolMenu_Other_NavigateToLogInPage_Click(sender, e);
+            this.ToolMenu_Other_NavigateToLogInPage_Click(sender, e);
 		}
 
 
@@ -1182,13 +1184,13 @@ namespace Browser
 
 		private void FormBrowser_Activated(object sender, EventArgs e)
 		{
-			Browser.Focus();
+            this.Browser.Focus();
 		}
 
 		private void ToolMenu_Other_Alignment_DropDownOpening(object sender, EventArgs e)
 		{
 
-			foreach (var item in ToolMenu_Other_Alignment.DropDownItems)
+			foreach (var item in this.ToolMenu_Other_Alignment.DropDownItems)
 			{
 				var menu = item as ToolStripMenuItem;
 				if (menu != null)
@@ -1197,23 +1199,23 @@ namespace Browser
 				}
 			}
 
-			switch ((DockStyle)Configuration.ToolMenuDockStyle)
+			switch ((DockStyle)this.Configuration.ToolMenuDockStyle)
 			{
 				case DockStyle.Top:
-					ToolMenu_Other_Alignment_Top.Checked = true;
+                    this.ToolMenu_Other_Alignment_Top.Checked = true;
 					break;
 				case DockStyle.Bottom:
-					ToolMenu_Other_Alignment_Bottom.Checked = true;
+                    this.ToolMenu_Other_Alignment_Bottom.Checked = true;
 					break;
 				case DockStyle.Left:
-					ToolMenu_Other_Alignment_Left.Checked = true;
+                    this.ToolMenu_Other_Alignment_Left.Checked = true;
 					break;
 				case DockStyle.Right:
-					ToolMenu_Other_Alignment_Right.Checked = true;
+                    this.ToolMenu_Other_Alignment_Right.Checked = true;
 					break;
 			}
 
-			ToolMenu_Other_Alignment_Invisible.Checked = !Configuration.IsToolMenuVisible;
+            this.ToolMenu_Other_Alignment_Invisible.Checked = !this.Configuration.IsToolMenuVisible;
 		}
 
 
@@ -1223,11 +1225,11 @@ namespace Browser
 			try
 			{
 
-				using (var fs = new FileStream(_lastScreenShotPath, FileMode.Open, FileAccess.Read))
+				using (var fs = new FileStream(this._lastScreenShotPath, FileMode.Open, FileAccess.Read))
 				{
-					ToolMenu_Other_LastScreenShot_Control.Image?.Dispose();
+                    this.ToolMenu_Other_LastScreenShot_Control.Image?.Dispose();
 
-					ToolMenu_Other_LastScreenShot_Control.Image = Image.FromStream(fs);
+                    this.ToolMenu_Other_LastScreenShot_Control.Image = Image.FromStream(fs);
 				}
 
 			}
@@ -1240,54 +1242,53 @@ namespace Browser
 
 		void ToolMenu_Other_LastScreenShot_ImageHost_Click(object sender, EventArgs e)
 		{
-			if (_lastScreenShotPath != null && File.Exists(_lastScreenShotPath))
-				Process.Start(_lastScreenShotPath);
+			if (this._lastScreenShotPath != null && File.Exists(this._lastScreenShotPath))
+				Process.Start(this._lastScreenShotPath);
 		}
 
 		private void ToolMenu_Other_LastScreenShot_OpenScreenShotFolder_Click(object sender, EventArgs e)
 		{
-			if (Directory.Exists(Configuration.ScreenShotPath))
-				Process.Start(Configuration.ScreenShotPath);
+			if (Directory.Exists(this.Configuration.ScreenShotPath))
+				Process.Start(this.Configuration.ScreenShotPath);
 		}
 
 		private void ToolMenu_Other_LastScreenShot_CopyToClipboard_Click(object sender, EventArgs e)
 		{
 
-			if (_lastScreenShotPath != null && File.Exists(_lastScreenShotPath))
+			if (this._lastScreenShotPath != null && File.Exists(this._lastScreenShotPath))
 			{
 				try
 				{
-					using (var img = new Bitmap(_lastScreenShotPath))
+					using (var img = new Bitmap(this._lastScreenShotPath))
 					{
 						Clipboard.SetImage(img);
-						AddLog(2, string.Format("스크린 샷 {0}을 클립 보드에 복사했습니다.", _lastScreenShotPath));
+                        this.AddLog(2, string.Format("스크린 샷 {0}을 클립 보드에 복사했습니다.", this._lastScreenShotPath));
 					}
 				}
 				catch (Exception ex)
 				{
-					SendErrorReport(ex.Message, "스크린 샷 클립 보드 복사에 실패했습니다.");
+                    this.SendErrorReport(ex.Message, "스크린 샷 클립 보드 복사에 실패했습니다.");
 				}
 			}
 		}
 
 		private void ToolMenu_Other_OpenDevTool_Click(object sender, EventArgs e)
 		{
-			if (!IsBrowserInitialized)
+			if (!this.IsBrowserInitialized)
 				return;
 
-			Browser.GetBrowser().ShowDevTools();
+            this.Browser.GetBrowser().ShowDevTools();
 		}
 
         private void ToolMenu_CacheClear_Click(object sender, EventArgs e)
         {
-            if (!IsBrowserInitialized)
+            if (!this.IsBrowserInitialized)
                 return;
 
-            if (MessageBox.Show("브라우저의 캐시를 삭제합니다.\r\n캐시의 용량에 따라 브라우저의 작동이 길게는 수 분 정지될 수 있습니다.\r\n진행하시겠습니까?", "확인",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-                == DialogResult.OK)
+            if (MessageBox.Show("브라우저의 캐시를 삭제합니다. 브라우저의 재 시작이 필요하며, \r\n일부 환경에 따라 본 프로그램이 종료될 수 있습니다.\r\n진행하시겠습니까?", "확인",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                AddLog(2, "캐시 삭제 작동 확인");
+                this.BrowserHost.AsyncRemoteRun(() => this.BrowserHost.Proxy.ClearCache());
             }
         }
 

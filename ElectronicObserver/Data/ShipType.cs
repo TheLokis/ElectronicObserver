@@ -21,12 +21,12 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 艦種ID
 		/// </summary>
-		public int TypeID => (int)RawData.api_id;
+		public int TypeID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 並べ替え順
 		/// </summary>
-		public int SortID => (int)RawData.api_sortno;
+		public int SortID => (int)this.RawData.api_sortno;
 
         /// <summary>
         /// 艦種名 번역됨
@@ -34,7 +34,7 @@ namespace ElectronicObserver.Data
         //public string Name => RawData.api_name;
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ShipTypes); }
+            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.ShipType); }
         }
 
 
@@ -42,7 +42,7 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 入渠時間係数
         /// </summary>
-        public int RepairTime => (int)RawData.api_scnt;
+        public int RepairTime => (int)this.RawData.api_scnt;
 
 
         //TODO: api_kcnt
@@ -52,17 +52,17 @@ namespace ElectronicObserver.Data
         /// 装備可否フラグ
         /// </summary>
         private int[] _equippableCategories;
-        public ReadOnlyCollection<int> EquippableCategories => Array.AsReadOnly(_equippableCategories);
+        public ReadOnlyCollection<int> EquippableCategories => Array.AsReadOnly(this._equippableCategories);
 
 
         /// <summary>
         /// 艦種ID
         /// </summary>
-        public ShipTypes Type => (ShipTypes)TypeID;
+        public ShipTypes Type => (ShipTypes)this.TypeID;
 
 
-		public int ID => TypeID;
-		public override string ToString() => $"[{TypeID}] {Name}";
+		public int ID => this.TypeID;
+		public override string ToString() => $"[{this.TypeID}] {this.Name}";
 
 
 
@@ -70,7 +70,7 @@ namespace ElectronicObserver.Data
 			: base()
 		{
 
-            _equippableCategories = new int[0];
+            this._equippableCategories = new int[0];
         }
 
 		public override void LoadFromResponse(string apiname, dynamic data)
@@ -83,18 +83,18 @@ namespace ElectronicObserver.Data
 			base.LoadFromResponse(apiname, (object)data);
 
 
-			if (IsAvailable)
+			if (this.IsAvailable)
 			{
                 IEnumerable<int> getType()
                 {
-                    foreach (KeyValuePair<string, object> type in RawData.api_equip_type)
+                    foreach (KeyValuePair<string, object> type in this.RawData.api_equip_type)
                     {
                         if ((double)type.Value != 0)
                             yield return Convert.ToInt32(type.Key.Substring(7));     //skip api_id_
                     }
                 }
 
-                _equippableCategories = getType().ToArray();
+                this._equippableCategories = getType().ToArray();
             }
 		}
 

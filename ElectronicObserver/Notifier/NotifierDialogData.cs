@@ -108,35 +108,35 @@ namespace ElectronicObserver.Notifier
 		public NotifierDialogData()
 		{
 
-			Image = null;
+            this.Image = null;
 
 		}
 
 		public NotifierDialogData(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 		{
 
-			Image = null;
-			ImagePath = "";
+            this.Image = null;
+            this.ImagePath = "";
 			if (config.DrawsImage && config.ImagePath != null && config.ImagePath != "")
-				LoadImage(config.ImagePath);
-			DrawsImage = config.DrawsImage;
-			DrawsMessage = config.DrawsMessage;
-			ClosingInterval = config.ClosingInterval;
-			CloseOnMouseMove = config.CloseOnMouseMove;
-			ClickFlag = config.ClickFlag;
-			Alignment = config.Alignment;
-			Location = config.Location;
-			HasFormBorder = config.HasFormBorder;
-			TopMost = config.TopMost;
-			ShowWithActivation = config.ShowWithActivation;
-			ForeColor = config.ForeColor;
-			BackColor = config.BackColor;
+                this.LoadImage(config.ImagePath);
+            this.DrawsImage = config.DrawsImage;
+            this.DrawsMessage = config.DrawsMessage;
+            this.ClosingInterval = config.ClosingInterval;
+            this.CloseOnMouseMove = config.CloseOnMouseMove;
+            this.ClickFlag = config.ClickFlag;
+            this.Alignment = config.Alignment;
+            this.Location = config.Location;
+            this.HasFormBorder = config.HasFormBorder;
+            this.TopMost = config.TopMost;
+            this.ShowWithActivation = config.ShowWithActivation;
+            this.ForeColor = config.ForeColor;
+            this.BackColor = config.BackColor;
 		}
 
 
 		public NotifierDialogData Clone()
 		{
-			return (NotifierDialogData)MemberwiseClone();
+			return (NotifierDialogData)this.MemberwiseClone();
 		}
 
 
@@ -153,11 +153,11 @@ namespace ElectronicObserver.Notifier
 			try
 			{
 
-				DisposeImage();
+                this.DisposeImage();
 				using (System.IO.FileStream stream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
 				{
-					Image = new Bitmap(stream);
-					ImagePath = path;
+                    this.Image = new Bitmap(stream);
+                    this.ImagePath = path;
 				}
 
 				return true;
@@ -167,7 +167,7 @@ namespace ElectronicObserver.Notifier
 			{
 
 				Utility.ErrorReporter.SendErrorReport(ex, string.Format("알림: 알림 이미지 {0} 의 로드에 실패했습니다.", path));
-				DisposeImage();
+                this.DisposeImage();
 
 			}
 
@@ -179,12 +179,12 @@ namespace ElectronicObserver.Notifier
 		/// </summary>
 		public void DisposeImage()
 		{
-			if (Image != null)
+			if (this.Image != null)
 			{
-				Image.Dispose();
-				Image = null;
+                this.Image.Dispose();
+                this.Image = null;
 			}
-			ImagePath = "";
+            this.ImagePath = "";
 		}
 
 		#endregion
@@ -193,19 +193,19 @@ namespace ElectronicObserver.Notifier
 		public void ApplyToConfiguration(Utility.Configuration.ConfigurationData.ConfigNotifierBase config)
 		{
 
-			config.ImagePath = ImagePath;
-			config.DrawsImage = DrawsImage;
-			config.DrawsMessage = DrawsMessage;
-			config.ClosingInterval = ClosingInterval;
-			config.CloseOnMouseMove = CloseOnMouseMove;
-			config.ClickFlag = ClickFlag;
-			config.Alignment = Alignment;
-			config.Location = Location;
-			config.HasFormBorder = HasFormBorder;
-			config.TopMost = TopMost;
-			config.ShowWithActivation = ShowWithActivation;
-			config.ForeColor = ForeColor;
-			config.BackColor = BackColor;
+			config.ImagePath = this.ImagePath;
+			config.DrawsImage = this.DrawsImage;
+			config.DrawsMessage = this.DrawsMessage;
+			config.ClosingInterval = this.ClosingInterval;
+			config.CloseOnMouseMove = this.CloseOnMouseMove;
+			config.ClickFlag = this.ClickFlag;
+			config.Alignment = this.Alignment;
+			config.Location = this.Location;
+			config.HasFormBorder = this.HasFormBorder;
+			config.TopMost = this.TopMost;
+			config.ShowWithActivation = this.ShowWithActivation;
+			config.ForeColor = this.ForeColor;
+			config.BackColor = this.BackColor;
 
 		}
 

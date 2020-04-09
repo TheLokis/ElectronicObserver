@@ -17,14 +17,14 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogAlbumShipParameter()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 		public DialogAlbumShipParameter(int shipID)
 			: this()
 		{
 
-			InitView(shipID);
+            this.InitView(shipID);
 		}
 
 		private void DialogAlbumShipParameter_Load(object sender, EventArgs e)
@@ -47,19 +47,19 @@ namespace ElectronicObserver.Window.Dialog
 			var keys = RecordManager.Instance.ShipParameter.RecordHeader.Split(',');
 			var values = record.SaveLine().Split(',');
 
-			ParameterView.Rows.Clear();
+            this.ParameterView.Rows.Clear();
 			var rows = new DataGridViewRow[keys.Length];
 
 			for (int i = 0; i < rows.Length; i++)
 			{
 				rows[i] = new DataGridViewRow();
-				rows[i].CreateCells(ParameterView);
+				rows[i].CreateCells(this.ParameterView);
 				rows[i].SetValues(keys[i], values[i]);
 			}
 
 			rows[0].ReadOnly = rows[1].ReadOnly = true;
 
-			ParameterView.Rows.AddRange(rows);
+            this.ParameterView.Rows.AddRange(rows);
 
 		}
 
@@ -75,9 +75,9 @@ namespace ElectronicObserver.Window.Dialog
 
 				var sb = new StringBuilder();
 
-				foreach (DataGridViewRow row in ParameterView.Rows)
+				foreach (DataGridViewRow row in this.ParameterView.Rows)
 				{
-					sb.Append(row.Cells[ParameterView_Value.Index].Value + ",");
+					sb.Append(row.Cells[this.ParameterView_Value.Index].Value + ",");
 				}
 				sb.Remove(sb.Length - 1, 1);
 
@@ -94,17 +94,17 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			Close();
+            this.Close();
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			Close();
+            this.Close();
 		}
 
 		private void DialogAlbumShipParameter_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 		}
 	}
 }

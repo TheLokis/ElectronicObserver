@@ -17,7 +17,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 
 			//undone: このAPIが呼ばれた後 api_get_member/kdock が呼ばれ情報自体は更新されるので、建造ログのために使用？
 
-			KCDatabase.Instance.Material.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Material.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

@@ -27,21 +27,21 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public ExpressionManager() : base()
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 		public override void Initialize()
 		{
-			Expressions = new List<ExpressionList>();
-			predicate = null;
-			expression = null;
+            this.Expressions = new List<ExpressionList>();
+            this.predicate = null;
+            this.expression = null;
 		}
 
 
 		public ExpressionList this[int index]
 		{
-			get { return Expressions[index]; }
-			set { Expressions[index] = value; }
+			get { return this.Expressions[index]; }
+			set { this.Expressions[index] = value; }
 		}
 
 
@@ -50,7 +50,7 @@ namespace ElectronicObserver.Data.ShipGroup
 			Expression ex = null;
 			var paramex = Expression.Parameter(typeof(ShipData), "ship");
 
-			foreach (var exlist in Expressions)
+			foreach (var exlist in this.Expressions)
 			{
 				if (!exlist.Enabled)
 					continue;
@@ -79,8 +79,8 @@ namespace ElectronicObserver.Data.ShipGroup
 				ex = Expression.Constant(true, typeof(bool));       //:-P
 			}
 
-			predicate = Expression.Lambda<Func<ShipData, bool>>(ex, paramex);
-			expression = ex;
+            this.predicate = Expression.Lambda<Func<ShipData, bool>>(ex, paramex);
+            this.expression = ex;
 
 		}
 
@@ -88,24 +88,24 @@ namespace ElectronicObserver.Data.ShipGroup
 		public IEnumerable<ShipData> GetResult(IEnumerable<ShipData> list)
 		{
 
-			if (predicate == null)
+			if (this.predicate == null)
 				throw new InvalidOperationException("식이 컴파일 되지 않았습니다.");
 
-			return list.AsQueryable().Where(predicate).AsEnumerable();
+			return list.AsQueryable().Where(this.predicate).AsEnumerable();
 		}
 
-		public bool IsAvailable => predicate != null;
+		public bool IsAvailable => this.predicate != null;
 
 
 
 		public override string ToString()
 		{
 
-			if (Expressions == null)
+			if (this.Expressions == null)
 				return "(없음)";
 
 			StringBuilder sb = new StringBuilder();
-			foreach (var ex in Expressions)
+			foreach (var ex in this.Expressions)
 			{
 				if (!ex.Enabled)
 					continue;
@@ -122,15 +122,15 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public string ToExpressionString()
 		{
-			return expression.ToString();
+			return this.expression.ToString();
 		}
 
 
 
 		public ExpressionManager Clone()
 		{
-			var clone = (ExpressionManager)MemberwiseClone();
-			clone.Expressions = Expressions?.Select(e => e.Clone()).ToList();
+			var clone = (ExpressionManager)this.MemberwiseClone();
+			clone.Expressions = this.Expressions?.Select(e => e.Clone()).ToList();
 			clone.predicate = null;
 			clone.expression = null;
 			return clone;
@@ -138,7 +138,7 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		object ICloneable.Clone()
 		{
-			return Clone();
+			return this.Clone();
 		}
 
 

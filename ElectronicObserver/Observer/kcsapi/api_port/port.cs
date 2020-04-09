@@ -21,10 +21,10 @@ namespace ElectronicObserver.Observer.kcsapi.api_port
 
 
 			//api_material
-			db.Material.LoadFromResponse(APIName, data.api_material);
+			db.Material.LoadFromResponse(this.APIName, data.api_material);
 
 			//api_basic
-			db.Admiral.LoadFromResponse(APIName, data.api_basic);
+			db.Admiral.LoadFromResponse(this.APIName, data.api_basic);
 
 			//api_ship
 			db.Ships.Clear();
@@ -32,7 +32,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_port
 			{
 
 				var a = new ShipData();
-				a.LoadFromResponse(APIName, elem);
+				a.LoadFromResponse(this.APIName, elem);
 				db.Ships.Add(a);
 
 			}
@@ -47,18 +47,18 @@ namespace ElectronicObserver.Observer.kcsapi.api_port
 				if (!db.Docks.ContainsKey(id))
 				{
 					var a = new DockData();
-					a.LoadFromResponse(APIName, elem);
+					a.LoadFromResponse(this.APIName, elem);
 					db.Docks.Add(a);
 
 				}
 				else
 				{
-					db.Docks[id].LoadFromResponse(APIName, elem);
+					db.Docks[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 
 			//api_deck_port
-			db.Fleet.LoadFromResponse(APIName, data.api_deck_port);
+			db.Fleet.LoadFromResponse(this.APIName, data.api_deck_port);
 			db.Fleet.CombinedFlag = data.api_combined_flag() ? (int)data.api_combined_flag : 0;
 
 
@@ -86,7 +86,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_port
 				db.RelocatedEquipments.Clear();
 			}
 
-			db.Battle.LoadFromResponse(APIName, data);
+			db.Battle.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}

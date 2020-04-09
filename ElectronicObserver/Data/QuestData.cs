@@ -18,18 +18,18 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 任務ID
 		/// </summary>
-		public int QuestID => (int)RawData.api_no;
+		public int QuestID => (int)this.RawData.api_no;
 
 		/// <summary>
 		/// 任務カテゴリ
 		/// </summary>
-		public int Category => (int)RawData.api_category;
+		public int Category => (int)this.RawData.api_category;
 
 		/// <summary>
 		/// 任務出現タイプ
 		/// 1=デイリー, 2=ウィークリー, 3=マンスリー, 4=単発, 5=他
 		/// </summary>
-		public int Type => (int)RawData.api_type;
+		public int Type => (int)this.RawData.api_type;
 
 		/// <summary>
 		/// 遂行状態
@@ -37,8 +37,8 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int State
 		{
-			get { return (int)RawData.api_state; }
-			set { RawData.api_state = value; }
+			get { return (int)this.RawData.api_state; }
+			set { this.RawData.api_state = value; }
 		}
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation((string)RawData.api_title, Utility.TranslationType.QuestTitle, ID); }
+            get { return FormMain.Instance.Translator.GetTranslation((string)this.RawData.api_title, Utility.DataType.QuestTitle, this.ID); }
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                return FormMain.Instance.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail, ID);
+                return FormMain.Instance.Translator.GetTranslation((string)this.RawData.api_detail, Utility.DataType.QuestDetail, this.ID);
             }
         }
 
@@ -65,10 +65,10 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 進捗
         /// </summary>
-        public int Progress => (int)RawData.api_progress_flag;
+        public int Progress => (int)this.RawData.api_progress_flag;
 
-		public int ID => QuestID;
-		public override string ToString() => $"[{QuestID}] {Name}";
+		public int ID => this.QuestID;
+		public override string ToString() => $"[{this.QuestID}] {this.Name}";
 	}
 
 

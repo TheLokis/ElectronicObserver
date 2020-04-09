@@ -45,8 +45,8 @@ namespace ElectronicObserver.Window.Dialog
 		/// </summary>
 		public string OutputPath
 		{
-			get { return TextOutputPath.Text; }
-			set { TextOutputPath.Text = value; }
+			get { return this.TextOutputPath.Text; }
+			set { this.TextOutputPath.Text = value; }
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			get
 			{
-				if (RadioOutput_All.Checked)
+				if (this.RadioOutput_All.Checked)
 					return FilterModeConstants.All;
 				else
 					return FilterModeConstants.VisibleColumnOnly;
@@ -66,10 +66,10 @@ namespace ElectronicObserver.Window.Dialog
 				switch (value)
 				{
 					case FilterModeConstants.All:
-						RadioOutput_All.Checked = true; break;
+                        this.RadioOutput_All.Checked = true; break;
 
 					case FilterModeConstants.VisibleColumnOnly:
-						RadioOutput_VisibleColumnOnly.Checked = true; break;
+                        this.RadioOutput_VisibleColumnOnly.Checked = true; break;
 				}
 			}
 		}
@@ -81,7 +81,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			get
 			{
-				if (RadioFormat_User.Checked)
+				if (this.RadioFormat_User.Checked)
 					return OutputFormatConstants.User;
 				else
 					return OutputFormatConstants.Data;
@@ -91,10 +91,10 @@ namespace ElectronicObserver.Window.Dialog
 				switch (value)
 				{
 					case OutputFormatConstants.User:
-						RadioFormat_User.Checked = true; break;
+                        this.RadioFormat_User.Checked = true; break;
 
 					case OutputFormatConstants.Data:
-						RadioFormat_Data.Checked = true; break;
+                        this.RadioFormat_Data.Checked = true; break;
 				}
 			}
 		}
@@ -103,9 +103,9 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogShipGroupCSVOutput()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			DialogSaveCSV.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
+            this.DialogSaveCSV.InitialDirectory = Utility.Configuration.Config.Connection.SaveDataPath;
 
 		}
 
@@ -118,25 +118,25 @@ namespace ElectronicObserver.Window.Dialog
 		private void ButtonOutputPathSearch_Click(object sender, EventArgs e)
 		{
 
-			if (DialogSaveCSV.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.DialogSaveCSV.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
-				TextOutputPath.Text = DialogSaveCSV.FileName;
+                this.TextOutputPath.Text = this.DialogSaveCSV.FileName;
 
 			}
 
-			DialogSaveCSV.InitialDirectory = null;
+            this.DialogSaveCSV.InitialDirectory = null;
 
 		}
 
 		private void ButtonOK_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
 		}
 
 		private void ButtonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 		}
 
 	}

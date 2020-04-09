@@ -23,13 +23,13 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_air_corps
 				if (db.BaseAirCorps[id] == null)
 				{
 					var inst = new BaseAirCorpsData();
-					inst.LoadFromResponse(APIName, elem);
+					inst.LoadFromResponse(this.APIName, elem);
 					db.BaseAirCorps.Add(inst);
 
 				}
 				else
 				{
-					db.BaseAirCorps[id].LoadFromResponse(APIName, elem);
+					db.BaseAirCorps[id].LoadFromResponse(this.APIName, elem);
 				}
 			}
 

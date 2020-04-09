@@ -14,7 +14,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_map
 		public override void OnResponseReceived(dynamic data)
 		{
 
-			KCDatabase.Instance.Battle.LoadFromResponse(APIName, data);
+			KCDatabase.Instance.Battle.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 
@@ -33,7 +33,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_map
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			KCDatabase.Instance.Fleet.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Fleet.LoadFromRequest(this.APIName, data);
 
 			int deckID = int.Parse(data["api_deck_id"]);
 			int maparea = int.Parse(data["api_maparea_id"]);

@@ -20,7 +20,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		}
 
-		public override bool IsAvailable => StageFlag != null && StageFlag.Any(i => i != 0);
+		public override bool IsAvailable => this.StageFlag != null && this.StageFlag.Any(i => i != 0);
 
 
 
@@ -34,13 +34,13 @@ namespace ElectronicObserver.Data.Battle.Phase
 			for (int i = 0; i < hps.Length; i++)
 			{
 
-				int attackType = (TorpedoFlags[i] > 0 ? 1 : 0) | (BomberFlags[i] > 0 ? 2 : 0);
+				int attackType = (this.TorpedoFlags[i] > 0 ? 1 : 0) | (this.BomberFlags[i] > 0 ? 2 : 0);
 				if (attackType > 0)
 				{
 
-					// 航空戦は miss/hit=0, critical=1 のため +1 する(通常は miss=0, hit=1, critical=2) 
-					BattleDetails.Add(new BattleAirDetail(Battle, waveIndex, new BattleIndex(i, Battle.IsFriendCombined, Battle.IsEnemyCombined), Damages[i], Criticals[i] + 1, attackType, hps[i]));
-					AddDamage(hps, i, (int)Damages[i]);
+                    // 航空戦は miss/hit=0, critical=1 のため +1 する(通常は miss=0, hit=1, critical=2) 
+                    this.BattleDetails.Add(new BattleAirDetail(this.Battle, waveIndex, new BattleIndex(i, this.Battle.IsFriendCombined, this.Battle.IsEnemyCombined), this.Damages[i], this.Criticals[i] + 1, attackType, hps[i]));
+                    this.AddDamage(hps, i, (int)this.Damages[i]);
 				}
 			}
 		}
@@ -75,13 +75,13 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <param name="index">取得する配列のインデックス。基本的に 0=自軍, 1=敵軍</param>
 		protected int[] GetLaunchedShipIndex(int index)
 		{
-			if (AirBattleData == null)
+			if (this.AirBattleData == null)
 				return null;
 
-			if (!AirBattleData.api_plane_from())
+			if (!this.AirBattleData.api_plane_from())
 				return new int[0];
 
-			dynamic data = AirBattleData.api_plane_from;
+			dynamic data = this.AirBattleData.api_plane_from;
 
 			if (data == null || !data.IsArray)
 				return new int[0];
@@ -106,42 +106,42 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// Stage1(空対空戦闘)が存在するか
 		/// </summary>
-		public bool IsStage1Available => StageFlag != null && StageFlag[0] != 0 && AirBattleData.api_stage1() && AirBattleData.api_stage1 != null;
+		public bool IsStage1Available => this.StageFlag != null && this.StageFlag[0] != 0 && this.AirBattleData.api_stage1() && this.AirBattleData.api_stage1 != null;
 
 		/// <summary>
 		/// 自軍Stage1参加機数
 		/// </summary>
-		public int AircraftTotalStage1Friend => (int)AirBattleData.api_stage1.api_f_count;
+		public int AircraftTotalStage1Friend => (int)this.AirBattleData.api_stage1.api_f_count;
 
 		/// <summary>
 		/// 敵軍Stage1参加機数
 		/// </summary>
-		public int AircraftTotalStage1Enemy => (int)AirBattleData.api_stage1.api_e_count;
+		public int AircraftTotalStage1Enemy => (int)this.AirBattleData.api_stage1.api_e_count;
 
 		/// <summary>
 		/// 自軍Stage1撃墜機数
 		/// </summary>
-		public int AircraftLostStage1Friend => (int)AirBattleData.api_stage1.api_f_lostcount;
+		public int AircraftLostStage1Friend => (int)this.AirBattleData.api_stage1.api_f_lostcount;
 
 		/// <summary>
 		/// 敵軍Stage1撃墜機数
 		/// </summary>
-		public int AircraftLostStage1Enemy => (int)AirBattleData.api_stage1.api_e_lostcount;
+		public int AircraftLostStage1Enemy => (int)this.AirBattleData.api_stage1.api_e_lostcount;
 
 		/// <summary>
 		/// 制空権
 		/// </summary>
-		public int AirSuperiority => !AirBattleData.api_stage1.api_disp_seiku() ? -1 : (int)AirBattleData.api_stage1.api_disp_seiku;
+		public int AirSuperiority => !this.AirBattleData.api_stage1.api_disp_seiku() ? -1 : (int)this.AirBattleData.api_stage1.api_disp_seiku;
 
 		/// <summary>
 		/// 自軍触接機ID
 		/// </summary>
-		public int TouchAircraftFriend => !AirBattleData.api_stage1.api_touch_plane() ? -1 : (int)AirBattleData.api_stage1.api_touch_plane[0];
+		public int TouchAircraftFriend => !this.AirBattleData.api_stage1.api_touch_plane() ? -1 : (int)this.AirBattleData.api_stage1.api_touch_plane[0];
 
 		/// <summary>
 		/// 敵軍触接機ID
 		/// </summary>
-		public int TouchAircraftEnemy => !AirBattleData.api_stage1.api_touch_plane() ? -1 : (int)AirBattleData.api_stage1.api_touch_plane[1];
+		public int TouchAircraftEnemy => !this.AirBattleData.api_stage1.api_touch_plane() ? -1 : (int)this.AirBattleData.api_stage1.api_touch_plane[1];
 
 
 		// stage 2
@@ -149,48 +149,48 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// Stage2(艦対空戦闘)が存在するか
 		/// </summary>
-		public bool IsStage2Available => StageFlag != null && StageFlag[1] != 0 && AirBattleData.api_stage2() && AirBattleData.api_stage2 != null;
+		public bool IsStage2Available => this.StageFlag != null && this.StageFlag[1] != 0 && this.AirBattleData.api_stage2() && this.AirBattleData.api_stage2 != null;
 
 		/// <summary>
 		/// 自軍Stage2参加機数
 		/// </summary>
-		public int AircraftTotalStage2Friend => (int)AirBattleData.api_stage2.api_f_count;
+		public int AircraftTotalStage2Friend => (int)this.AirBattleData.api_stage2.api_f_count;
 
 		/// <summary>
 		/// 敵軍Stage2参加機数
 		/// </summary>
-		public int AircraftTotalStage2Enemy => (int)AirBattleData.api_stage2.api_e_count;
+		public int AircraftTotalStage2Enemy => (int)this.AirBattleData.api_stage2.api_e_count;
 
 		/// <summary>
 		/// 自軍Stage2撃墜機数
 		/// </summary>
-		public int AircraftLostStage2Friend => (int)AirBattleData.api_stage2.api_f_lostcount;
+		public int AircraftLostStage2Friend => (int)this.AirBattleData.api_stage2.api_f_lostcount;
 
 		/// <summary>
 		/// 敵軍Stage2撃墜機数
 		/// </summary>
-		public int AircraftLostStage2Enemy => (int)AirBattleData.api_stage2.api_e_lostcount;
+		public int AircraftLostStage2Enemy => (int)this.AirBattleData.api_stage2.api_e_lostcount;
 
 
 		/// <summary>
 		/// 対空カットインが発動したか
 		/// </summary>
-		public bool IsAACutinAvailable => AirBattleData.api_stage2.api_air_fire();
+		public bool IsAACutinAvailable => this.AirBattleData.api_stage2.api_air_fire();
 
 		/// <summary>
 		/// 対空カットイン発動艦番号
 		/// </summary>
-		public int AACutInIndex => (int)AirBattleData.api_stage2.api_air_fire.api_idx;
+		public int AACutInIndex => (int)this.AirBattleData.api_stage2.api_air_fire.api_idx;
 
 		/// <summary>
 		/// 対空カットイン発動艦
 		/// </summary>
-		public ShipData AACutInShip => Battle.Initial.GetFriendShip(AACutInIndex);
+		public ShipData AACutInShip => this.Battle.Initial.GetFriendShip(this.AACutInIndex);
 
 		/// <summary>
 		/// 対空カットイン種別
 		/// </summary>
-		public int AACutInKind => (int)AirBattleData.api_stage2.api_air_fire.api_kind;
+		public int AACutInKind => (int)this.AirBattleData.api_stage2.api_air_fire.api_kind;
 
 
 		// stage 3
@@ -198,12 +198,12 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// Stage3(航空攻撃)が存在するか
 		/// </summary>
-		public bool IsStage3Available => StageFlag != null && StageFlag[2] != 0 && AirBattleData.api_stage3() && AirBattleData.api_stage3 != null;
+		public bool IsStage3Available => this.StageFlag != null && this.StageFlag[2] != 0 && this.AirBattleData.api_stage3() && this.AirBattleData.api_stage3 != null;
 
 		/// <summary>
 		/// Stage3(航空攻撃)(対随伴艦隊)が存在するか
 		/// </summary>
-		public bool IsStage3CombinedAvailable => StageFlag != null && StageFlag[2] != 0 && AirBattleData.api_stage3_combined() && AirBattleData.api_stage3_combined != null;
+		public bool IsStage3CombinedAvailable => this.StageFlag != null && this.StageFlag[2] != 0 && this.AirBattleData.api_stage3_combined() && this.AirBattleData.api_stage3_combined != null;
 
 
 		protected T[] ConcatStage3Array<T>(string friendName, string enemyName) where T : struct, IComparable
@@ -213,10 +213,10 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 			void SetArray(string stage3Name, string sideName, int retIndex)
 			{
-				if (!AirBattleData[stage3Name].IsDefined(sideName))
+				if (!this.AirBattleData[stage3Name].IsDefined(sideName))
 					return;
 
-				var ar = (dynamic[])AirBattleData[stage3Name][sideName];
+				var ar = (dynamic[])this.AirBattleData[stage3Name][sideName];
 				if (ar == null)
 					return;
 
@@ -233,12 +233,12 @@ namespace ElectronicObserver.Data.Battle.Phase
 			}
 
 
-			if (IsStage3Available)
+			if (this.IsStage3Available)
 			{
 				SetArray("api_stage3", friendName, 0);
 				SetArray("api_stage3", enemyName, 12);
 			}
-			if (IsStage3CombinedAvailable)
+			if (this.IsStage3CombinedAvailable)
 			{
 				SetArray("api_stage3_combined", friendName, 6);
 				SetArray("api_stage3_combined", enemyName, 18);

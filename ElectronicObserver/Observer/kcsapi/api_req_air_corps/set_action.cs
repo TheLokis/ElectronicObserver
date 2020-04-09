@@ -19,7 +19,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_air_corps
 			int areaID = int.Parse(data["api_area_id"]);
 			foreach (var c in KCDatabase.Instance.BaseAirCorps.Values.Where(b => b.MapAreaID == areaID))
 			{
-				c.LoadFromRequest(APIName, data);
+				c.LoadFromRequest(this.APIName, data);
 			}
 
 			base.OnRequestReceived(data);

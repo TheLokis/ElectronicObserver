@@ -18,7 +18,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
 
-			_equipmentID = int.Parse(data["api_slot_id"]);
+            this._equipmentID = int.Parse(data["api_slot_id"]);
 
 			base.OnRequestReceived(data);
 		}
@@ -28,7 +28,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 
 			KCDatabase db = KCDatabase.Instance;
 
-			db.Material.LoadFromResponse(APIName, data.api_after_material);
+			db.Material.LoadFromResponse(this.APIName, data.api_after_material);
 
 
 			if (data.api_after_slot())
@@ -36,7 +36,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 				EquipmentData eq = db.Equipments[(int)data.api_after_slot.api_id];
 				if (eq != null)
 				{
-					eq.LoadFromResponse(APIName, data.api_after_slot);
+					eq.LoadFromResponse(this.APIName, data.api_after_slot);
 
 					if (Utility.Configuration.Config.Log.ShowSpoiler)
 						Utility.Logger.Add(2, string.Format("{0} 의 개수에 성공했습니다.", eq.NameWithLevel));
@@ -45,7 +45,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 			}
 			else if (Utility.Configuration.Config.Log.ShowSpoiler)
 			{
-				Utility.Logger.Add(2, string.Format("{0} 의 개수에 실패했습니다.", db.Equipments[_equipmentID].NameWithLevel));
+				Utility.Logger.Add(2, string.Format("{0} 의 개수에 실패했습니다.", db.Equipments[this._equipmentID].NameWithLevel));
 			}
 
 

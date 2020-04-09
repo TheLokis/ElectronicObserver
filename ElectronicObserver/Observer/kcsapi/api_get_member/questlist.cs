@@ -14,7 +14,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 		public override void OnResponseReceived(dynamic data)
 		{
 
-			KCDatabase.Instance.Quest.LoadFromResponse(APIName, data);
+			KCDatabase.Instance.Quest.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}

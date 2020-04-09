@@ -22,7 +22,7 @@ namespace ElectronicObserver.Data.Quest
 
         public ProgressSpecialBattle(QuestData quest, int maxCount, string lowestRank, int[] targetArea, bool isBossOnly, int gaugeIndex) : base(quest, maxCount, lowestRank, targetArea, isBossOnly)
         {
-            GaugeIndex = gaugeIndex;
+            this.GaugeIndex = gaugeIndex;
         }
 
 
@@ -49,7 +49,7 @@ namespace ElectronicObserver.Data.Quest
             bool isAccepted = false;
 
 
-            switch (QuestID)
+            switch (this.QuestID)
             {
                 // |249|月|「第五戦隊」出撃せよ！|2-5ボスS勝利1|要「那智」「妙高」「羽黒」
                 case 249:
@@ -164,7 +164,17 @@ namespace ElectronicObserver.Data.Quest
                 case 875:
                     isAccepted =
                         members.Any(s => s?.ShipID == 543) &&
-                        members.Any(s => s?.ShipID == 345 || s?.ShipID == 359 || s?.ShipID == 344);
+                        members.Any(s => {
+                        switch (s?.MasterShip?.NameReading)
+                        {
+                                case "たかなみ":
+                                case "おきなみ":
+                                case "あさしも":
+                                   return s.MasterShip.RemodelTier >= 1;
+                               default:
+                                   return false;
+                           }
+                       });
                     break;
 
                 // |888|季|新編成「三川艦隊」、鉄底海峡に突入せよ！|5-1・5-3・5-4ボスS勝利各1|要(鳥海or青葉or衣笠or加古or古鷹or天龍or夕張)4
@@ -190,9 +200,9 @@ namespace ElectronicObserver.Data.Quest
 
                 // |893|季|泊地周辺海域の安全確保を徹底せよ！|1-5・7-1・7-2(第一＆第二)ボスS勝利各3|3エリア達成時点で80%
                 case 893:
-                    if (GaugeIndex == 1)
+                    if (this.GaugeIndex == 1)
                         isAccepted = bm.Compass.Destination == 7;
-                    else if (GaugeIndex == 2)
+                    else if (this.GaugeIndex == 2)
                         isAccepted = bm.Compass.Destination == 15;
 
                     break;
@@ -218,8 +228,8 @@ namespace ElectronicObserver.Data.Quest
         {
             var sb = new StringBuilder(base.GetClearCondition());
 
-            if (GaugeIndex != -1)
-                sb.AppendFormat("(제 {0} 게이지)", GaugeIndex);
+            if (this.GaugeIndex != -1)
+                sb.AppendFormat("(제 {0} 게이지)", this.GaugeIndex);
 
             /*
 			switch (QuestID)

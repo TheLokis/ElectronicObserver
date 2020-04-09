@@ -45,7 +45,7 @@ namespace ElectronicObserver.Window
                 this.Parent = parent;
                 #region Initialize
 
-                Name = new Label
+                this.Name = new Label
                 {
                     Text = "[" + parent.FleetID.ToString() + "]",
                     Anchor = AnchorStyles.Left,
@@ -58,7 +58,7 @@ namespace ElectronicObserver.Window
                     Cursor = Cursors.Help
                 };
 
-                State = new FleetState
+                this.State = new FleetState
                 {
                     Anchor = AnchorStyles.Left,
                     ForeColor = parent.MainFontColor,
@@ -67,7 +67,7 @@ namespace ElectronicObserver.Window
                     AutoSize = true
                 };
 
-                AirSuperiority = new ImageLabel
+                this.AirSuperiority = new ImageLabel
                 {
                     Anchor = AnchorStyles.Left,
                     ForeColor = parent.MainFontColor,
@@ -78,7 +78,7 @@ namespace ElectronicObserver.Window
                     AutoSize = true
                 };
 
-                SearchingAbility = new ImageLabel
+                this.SearchingAbility = new ImageLabel
                 {
                     Anchor = AnchorStyles.Left,
                     ForeColor = parent.MainFontColor,
@@ -88,9 +88,9 @@ namespace ElectronicObserver.Window
                     Margin = new Padding(2, 0, 2, 0),
                     AutoSize = true
                 };
-                SearchingAbility.Click += (sender, e) => SearchingAbility_Click(sender, e, parent.FleetID);
+                this.SearchingAbility.Click += (sender, e) => this.SearchingAbility_Click(sender, e, parent.FleetID);
 
-                AntiAirPower = new ImageLabel
+                this.AntiAirPower = new ImageLabel
                 {
                     Anchor = AnchorStyles.Left,
                     ForeColor = parent.MainFontColor,
@@ -101,8 +101,8 @@ namespace ElectronicObserver.Window
                     AutoSize = true
                 };
 
-                
-                Expeditions = new ComboBox
+
+                this.Expeditions = new ComboBox
                 {
                     Anchor = AnchorStyles.Left,
                     BackColor = parent.BackColor,
@@ -114,11 +114,11 @@ namespace ElectronicObserver.Window
                     Width = 55,
                 };
 
-                Expeditions.SelectedValueChanged += Expeditions_SelectedValueChanged;
-                
-                ConfigurationChanged(parent);
+                this.Expeditions.SelectedValueChanged += this.Expeditions_SelectedValueChanged;
 
-                ToolTipInfo = parent.ToolTipInfo;
+                this.ConfigurationChanged(parent);
+
+                this.ToolTipInfo = parent.ToolTipInfo;
 
                 #endregion
 
@@ -128,40 +128,40 @@ namespace ElectronicObserver.Window
             private void Expeditions_SelectedValueChanged(object sender, EventArgs e)
             {
                 
-                for(int i = 0; i < Parent.ControlMember.Count() ;i++)
-                    Parent.ControlMember[i].SelectedItem = Convert.ToInt32(Expeditions.SelectedItem);
+                for(int i = 0; i < this.Parent.ControlMember.Count() ;i++)
+                    this.Parent.ControlMember[i].SelectedItem = Convert.ToInt32(this.Expeditions.SelectedItem);
 
-                FormMain.Instance.fInformation.Check_Expedition(Parent.FleetID, Convert.ToInt32(Expeditions.SelectedItem));
+                FormMain.Instance.fInformation.Check_Expedition(this.Parent.FleetID, Convert.ToInt32(this.Expeditions.SelectedItem));
             }
             
             public TableFleetControl(FormFleet parent, TableLayoutPanel table)
                 : this(parent)
             {
                 this.Parent = parent;
-                AddToTable(table);
+                this.AddToTable(table);
             }
 
             public void AddToTable(TableLayoutPanel table)
             {
 
                 table.SuspendLayout();
-                table.Controls.Add(Name, 0, 0);
-                table.Controls.Add(State, 1, 0);
-                table.Controls.Add(AirSuperiority, 2, 0);
-                table.Controls.Add(SearchingAbility, 3, 0);
-                table.Controls.Add(AntiAirPower, 4, 0);
-                table.Controls.Add(Expeditions, 5, 0);
+                table.Controls.Add(this.Name, 0, 0);
+                table.Controls.Add(this.State, 1, 0);
+                table.Controls.Add(this.AirSuperiority, 2, 0);
+                table.Controls.Add(this.SearchingAbility, 3, 0);
+                table.Controls.Add(this.AntiAirPower, 4, 0);
+                table.Controls.Add(this.Expeditions, 5, 0);
                 table.ResumeLayout();
 
             }
 
             private void SearchingAbility_Click(object sender, EventArgs e, int fleetID)
             {
-                BranchWeight--;
-                if (BranchWeight <= 0)
-                    BranchWeight = 4;
+                this.BranchWeight--;
+                if (this.BranchWeight <= 0)
+                    this.BranchWeight = 4;
 
-                Update(KCDatabase.Instance.Fleet[fleetID]);
+                this.Update(KCDatabase.Instance.Fleet[fleetID]);
             }
 
             public void Update(FleetData fleet)
@@ -170,15 +170,15 @@ namespace ElectronicObserver.Window
                 KCDatabase db = KCDatabase.Instance;
 
                 if (fleet == null) return;
-                
-                Expeditions.Items.Clear();
+
+                this.Expeditions.Items.Clear();
                 foreach (var ex in KCDatabase.Instance.Mission.Values)
                 {
-                    Expeditions.Items.Add(ex.ID);
+                    this.Expeditions.Items.Add(ex.ID);
                 }
-                
 
-                Name.Text = fleet.Name;
+
+                this.Name.Text = fleet.Name;
                 {
                     var members = fleet.MembersInstance.Where(s => s != null);
 
@@ -216,7 +216,7 @@ namespace ElectronicObserver.Window
                     var landing = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
 
 
-                    ToolTipInfo.SetToolTip(Name, string.Format(
+                    this.ToolTipInfo.SetToolTip(this.Name, string.Format(
                         "Lv합계: {0} / 평균: {1:0.00}\r\n" +
                         "{2}함대\r\n" +
                         "지원공격: {3}\r\n" +
@@ -250,15 +250,15 @@ namespace ElectronicObserver.Window
                 }
 
 
-                State.UpdateFleetState(fleet, ToolTipInfo);
+                this.State.UpdateFleetState(fleet, this.ToolTipInfo);
 
 
                 //制空戦力計算	
                 {
                     int airSuperiority = fleet.GetAirSuperiority();
                     bool includeLevel = Utility.Configuration.Config.FormFleet.AirSuperiorityMethod == 1;
-                    AirSuperiority.Text = fleet.GetAirSuperiorityString();
-                    ToolTipInfo.SetToolTip(AirSuperiority,
+                    this.AirSuperiority.Text = fleet.GetAirSuperiorityString();
+                    this.ToolTipInfo.SetToolTip(this.AirSuperiority,
                         string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n({4}: {5})\r\n",
                         (int)(airSuperiority / 3.0),
                         (int)(airSuperiority / 1.5),
@@ -270,14 +270,14 @@ namespace ElectronicObserver.Window
 
 
                 //索敵能力計算
-                SearchingAbility.Text = fleet.GetSearchingAbilityString(BranchWeight);
+                this.SearchingAbility.Text = fleet.GetSearchingAbilityString(this.BranchWeight);
                 {
                     StringBuilder sb = new StringBuilder();
                     double probStart = fleet.GetContactProbability();
                     var probSelect = fleet.GetContactSelectionProbability();
 
                     sb.AppendFormat("신판정식(33) 분기점계수: {0}\r\n　(클릭으로전환)\r\n\r\n촉접률: \r\n　확보 {1:p1} / 우세 {2:p1}\r\n",
-                        BranchWeight,
+                        this.BranchWeight,
                         probStart,
                         probStart * 0.6);
 
@@ -291,7 +291,7 @@ namespace ElectronicObserver.Window
                         }
                     }
 
-                    ToolTipInfo.SetToolTip(SearchingAbility, sb.ToString());
+                    this.ToolTipInfo.SetToolTip(this.SearchingAbility, sb.ToString());
                 }
 
                 // 対空能力計算
@@ -299,14 +299,14 @@ namespace ElectronicObserver.Window
                     var sb = new StringBuilder();
                     double lineahead = Calculator.GetAdjustedFleetAAValue(fleet, 1);
 
-                    AntiAirPower.Text = lineahead.ToString("0.0");
+                    this.AntiAirPower.Text = lineahead.ToString("0.0");
 
                     sb.AppendFormat("함대방공\r\n단종진: {0:0.0} / 복종진: {1:0.0} / 윤형진: {2:0.0}\r\n",
                         lineahead,
                         Calculator.GetAdjustedFleetAAValue(fleet, 2),
                         Calculator.GetAdjustedFleetAAValue(fleet, 3));
 
-                    ToolTipInfo.SetToolTip(AntiAirPower, sb.ToString());
+                    this.ToolTipInfo.SetToolTip(this.AntiAirPower, sb.ToString());
                 }
             }
 
@@ -314,31 +314,31 @@ namespace ElectronicObserver.Window
             public void Refresh()
             {
 
-                State.RefreshFleetState();
+                this.State.RefreshFleetState();
 
             }
 
             public void ConfigurationChanged(FormFleet parent)
             {
-                Name.Font = parent.MainFont;
-                State.Font = parent.MainFont;
-                State.RefreshFleetState();
-                AirSuperiority.Font = parent.MainFont;
-                SearchingAbility.Font = parent.MainFont;
-                AntiAirPower.Font = parent.MainFont;
-                Expeditions.Font = parent.MainFont;
+                this.Name.Font = parent.MainFont;
+                this.State.Font = parent.MainFont;
+                this.State.RefreshFleetState();
+                this.AirSuperiority.Font = parent.MainFont;
+                this.SearchingAbility.Font = parent.MainFont;
+                this.AntiAirPower.Font = parent.MainFont;
+                this.Expeditions.Font = parent.MainFont;
 
                 ControlHelper.SetTableRowStyles(parent.TableFleet, ControlHelper.GetDefaultRowStyle());
             }
 
             public void Dispose()
             {
-                Name.Dispose();
-                State.Dispose();
-                AirSuperiority.Dispose();
-                SearchingAbility.Dispose();
-                AntiAirPower.Dispose();
-                Expeditions.Dispose();
+                this.Name.Dispose();
+                this.State.Dispose();
+                this.AirSuperiority.Dispose();
+                this.SearchingAbility.Dispose();
+                this.AntiAirPower.Dispose();
+                this.Expeditions.Dispose();
             }
         }
 
@@ -364,99 +364,99 @@ namespace ElectronicObserver.Window
 
                 #region Initialize
 
-                Name = new ImageLabel();
-                Name.SuspendLayout();
-                Name.Text = "*nothing*";
-                Name.Anchor = AnchorStyles.Left;
-                Name.TextAlign = ContentAlignment.MiddleLeft;
-                Name.ImageAlign = ContentAlignment.MiddleCenter;
-                Name.ForeColor = parent.MainFontColor;
-                Name.Padding = new Padding(2, 1, 2, 1);
-                Name.Margin = new Padding(2, 1, 2, 1);
-                Name.AutoSize = true;
+                this.Name = new ImageLabel();
+                this.Name.SuspendLayout();
+                this.Name.Text = "*nothing*";
+                this.Name.Anchor = AnchorStyles.Left;
+                this.Name.TextAlign = ContentAlignment.MiddleLeft;
+                this.Name.ImageAlign = ContentAlignment.MiddleCenter;
+                this.Name.ForeColor = parent.MainFontColor;
+                this.Name.Padding = new Padding(2, 1, 2, 1);
+                this.Name.Margin = new Padding(2, 1, 2, 1);
+                this.Name.AutoSize = true;
                 //Name.AutoEllipsis = true;
-                Name.Visible = false;
-                Name.Cursor = Cursors.Help;
-                Name.MouseDown += Name_MouseDown;
-                Name.ResumeLayout();
+                this.Name.Visible = false;
+                this.Name.Cursor = Cursors.Help;
+                this.Name.MouseDown += this.Name_MouseDown;
+                this.Name.ResumeLayout();
 
-                Level = new ShipStatusLevel();
-                Level.SuspendLayout();
-                Level.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-                Level.Value = 0;
-                Level.MaximumValue = ExpTable.ShipMaximumLevel;
-                Level.ValueNext = 0;
-                Level.MainFontColor = parent.MainFontColor;
-                Level.SubFontColor = parent.SubFontColor;
+                this.Level = new ShipStatusLevel();
+                this.Level.SuspendLayout();
+                this.Level.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
+                this.Level.Value = 0;
+                this.Level.MaximumValue = ExpTable.ShipMaximumLevel;
+                this.Level.ValueNext = 0;
+                this.Level.MainFontColor = parent.MainFontColor;
+                this.Level.SubFontColor = parent.SubFontColor;
                 //Level.TextNext = "n.";
-                Level.Padding = new Padding(0, 0, 0, 0);
-                Level.Margin = new Padding(2, 0, 2, 1);
-                Level.AutoSize = true;
-                Level.Visible = false;
-                Level.Cursor = Cursors.Help;
-                Level.MouseDown += Level_MouseDown;
-                Level.ResumeLayout();
+                this.Level.Padding = new Padding(0, 0, 0, 0);
+                this.Level.Margin = new Padding(2, 0, 2, 1);
+                this.Level.AutoSize = true;
+                this.Level.Visible = false;
+                this.Level.Cursor = Cursors.Help;
+                this.Level.MouseDown += this.Level_MouseDown;
+                this.Level.ResumeLayout();
 
-                HP = new ShipStatusHP();
-                HP.SuspendUpdate();
-                HP.Anchor = AnchorStyles.Left;
-                HP.Value = 0;
-                HP.MaximumValue = 0;
-                HP.MaximumDigit = 999;
-                HP.UsePrevValue = false;
-                HP.MainFontColor = parent.MainFontColor;
-                HP.SubFontColor = parent.SubFontColor;
-                HP.Padding = new Padding(0, 0, 0, 0);
-                HP.Margin = new Padding(2, 1, 2, 2);
-                HP.AutoSize = true;
-                HP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                HP.Visible = false;
-                HP.ResumeUpdate();
+                this.HP = new ShipStatusHP();
+                this.HP.SuspendUpdate();
+                this.HP.Anchor = AnchorStyles.Left;
+                this.HP.Value = 0;
+                this.HP.MaximumValue = 0;
+                this.HP.MaximumDigit = 999;
+                this.HP.UsePrevValue = false;
+                this.HP.MainFontColor = parent.MainFontColor;
+                this.HP.SubFontColor = parent.SubFontColor;
+                this.HP.Padding = new Padding(0, 0, 0, 0);
+                this.HP.Margin = new Padding(2, 1, 2, 2);
+                this.HP.AutoSize = true;
+                this.HP.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                this.HP.Visible = false;
+                this.HP.ResumeUpdate();
 
-                Condition = new ImageLabel();
-                Condition.SuspendLayout();
-                Condition.Text = "*";
-                Condition.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-                Condition.ForeColor = parent.MainFontColor;
-                Condition.TextAlign = ContentAlignment.BottomRight;
-                Condition.ImageAlign = ContentAlignment.MiddleLeft;
-                Condition.ImageList = ResourceManager.Instance.Icons;
-                Condition.Padding = new Padding(2, 1, 2, 1);
-                Condition.Margin = new Padding(2, 1, 2, 1);
-                Condition.Size = new Size(40, 20);
-                Condition.AutoSize = true;
-                Condition.Visible = false;
-                Condition.ResumeLayout();
+                this.Condition = new ImageLabel();
+                this.Condition.SuspendLayout();
+                this.Condition.Text = "*";
+                this.Condition.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                this.Condition.ForeColor = parent.MainFontColor;
+                this.Condition.TextAlign = ContentAlignment.BottomRight;
+                this.Condition.ImageAlign = ContentAlignment.MiddleLeft;
+                this.Condition.ImageList = ResourceManager.Instance.Icons;
+                this.Condition.Padding = new Padding(2, 1, 2, 1);
+                this.Condition.Margin = new Padding(2, 1, 2, 1);
+                this.Condition.Size = new Size(40, 20);
+                this.Condition.AutoSize = true;
+                this.Condition.Visible = false;
+                this.Condition.ResumeLayout();
 
-                ShipResource = new ShipStatusResource(parent.ToolTipInfo);
-                ShipResource.SuspendLayout();
-                ShipResource.FuelCurrent = 0;
-                ShipResource.FuelMax = 0;
-                ShipResource.AmmoCurrent = 0;
-                ShipResource.AmmoMax = 0;
-                ShipResource.Anchor = AnchorStyles.Left;
-                ShipResource.Padding = new Padding(0, 2, 0, 0);
-                ShipResource.Margin = new Padding(2, 0, 2, 1);
-                ShipResource.Size = new Size(30, 20);
-                ShipResource.AutoSize = false;
-                ShipResource.Visible = false;
-                ShipResource.ResumeLayout();
+                this.ShipResource = new ShipStatusResource(parent.ToolTipInfo);
+                this.ShipResource.SuspendLayout();
+                this.ShipResource.FuelCurrent = 0;
+                this.ShipResource.FuelMax = 0;
+                this.ShipResource.AmmoCurrent = 0;
+                this.ShipResource.AmmoMax = 0;
+                this.ShipResource.Anchor = AnchorStyles.Left;
+                this.ShipResource.Padding = new Padding(0, 2, 0, 0);
+                this.ShipResource.Margin = new Padding(2, 0, 2, 1);
+                this.ShipResource.Size = new Size(30, 20);
+                this.ShipResource.AutoSize = false;
+                this.ShipResource.Visible = false;
+                this.ShipResource.ResumeLayout();
 
-                Equipments = new ShipStatusEquipment();
-                Equipments.SuspendUpdate();
-                Equipments.Anchor = AnchorStyles.Left;
-                Equipments.Padding = new Padding(0, 1, 0, 1);
-                Equipments.Margin = new Padding(2, 0, 2, 1);
-                Equipments.Size = new Size(40, 20);
-                Equipments.AutoSize = true;
-                Equipments.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                Equipments.Visible = false;
-                Equipments.ResumeUpdate();
+                this.Equipments = new ShipStatusEquipment();
+                this.Equipments.SuspendUpdate();
+                this.Equipments.Anchor = AnchorStyles.Left;
+                this.Equipments.Padding = new Padding(0, 1, 0, 1);
+                this.Equipments.Margin = new Padding(2, 0, 2, 1);
+                this.Equipments.Size = new Size(40, 20);
+                this.Equipments.AutoSize = true;
+                this.Equipments.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                this.Equipments.Visible = false;
+                this.Equipments.ResumeUpdate();
 
-                ConfigurationChanged(parent);
+                this.ConfigurationChanged(parent);
 
-                ToolTipInfo = parent.ToolTipInfo;
-                Parent = parent;
+                this.ToolTipInfo = parent.ToolTipInfo;
+                this.Parent = parent;
                 #endregion
 
             }
@@ -464,9 +464,9 @@ namespace ElectronicObserver.Window
             public TableMemberControl(FormFleet parent, TableLayoutPanel table, int row)
                 : this(parent)
             {
-                AddToTable(table, row);
+                this.AddToTable(table, row);
 
-                Equipments.Name = string.Format("{0}_{1}", parent.FleetID, row + 1);
+                this.Equipments.Name = string.Format("{0}_{1}", parent.FleetID, row + 1);
             }
 
             public void AddToTable(TableLayoutPanel table, int row)
@@ -474,12 +474,12 @@ namespace ElectronicObserver.Window
 
                 table.SuspendLayout();
 
-                table.Controls.Add(Name, 0, row);
-                table.Controls.Add(Level, 1, row);
-                table.Controls.Add(HP, 2, row);
-                table.Controls.Add(Condition, 3, row);
-                table.Controls.Add(ShipResource, 4, row);
-                table.Controls.Add(Equipments, 5, row);
+                table.Controls.Add(this.Name, 0, row);
+                table.Controls.Add(this.Level, 1, row);
+                table.Controls.Add(this.HP, 2, row);
+                table.Controls.Add(this.Condition, 3, row);
+                table.Controls.Add(this.ShipResource, 4, row);
+                table.Controls.Add(this.Equipments, 5, row);
 
                 table.ResumeLayout();
 
@@ -490,13 +490,13 @@ namespace ElectronicObserver.Window
                 string new_slot = "" + newShip.RawData.api_slot;
                 int new_ex_slot = (int)newShip.RawData.api_slot_ex;
 
-                if (newShip.ID != Cached_Ship.ID) return true;
+                if (newShip.ID != this.Cached_Ship.ID) return true;
 
-                if (newShip.MasterID != Cached_Ship.MasterID) return true;
+                if (newShip.MasterID != this.Cached_Ship.MasterID) return true;
 
-                if (!new_slot.Equals(old_slot)) return true;
+                if (!new_slot.Equals(this.old_slot)) return true;
 
-                if (new_ex_slot != old_ex_slot) return true;
+                if (new_ex_slot != this.old_ex_slot) return true;
 
                 return false;
             }
@@ -508,24 +508,24 @@ namespace ElectronicObserver.Window
 
                 if (ship != null)
                 {
-                    bool isEscaped = KCDatabase.Instance.Fleet[Parent.FleetID].EscapedShipList.Contains(shipMasterID);
+                    bool isEscaped = KCDatabase.Instance.Fleet[this.Parent.FleetID].EscapedShipList.Contains(shipMasterID);
 
                     
-                    if (Cached_Ship != null)
+                    if (this.Cached_Ship != null)
                     {
-                        if (isChanged(ship) && Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
+                        if (this.isChanged(ship) && Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
                             if (Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
-                                Parent.Show();
+                                this.Parent.Show();
                     }
-                    
 
-                    old_slot = "" + ship.RawData.api_slot;
-                    old_ex_slot = (int) ship.RawData.api_slot_ex;
-                    Cached_Ship = ship;
-                    
-                    Name.Text = ship.MasterShip.NameWithClass;
-                    Name.Tag = ship.ShipID;
-                    ToolTipInfo.SetToolTip(Name,
+
+                    this.old_slot = "" + ship.RawData.api_slot;
+                    this.old_ex_slot = (int) ship.RawData.api_slot_ex;
+                    this.Cached_Ship = ship;
+
+                    this.Name.Text = ship.MasterShip.NameWithClass;
+                    this.Name.Tag = ship.ShipID;
+                    this.ToolTipInfo.SetToolTip(this.Name,
                         string.Format(
                             "{0} {1}\r\n화력: {2}/{3}\r\n뇌장: {4}/{5}\r\n대공: {6}/{7}\r\n장갑: {8}/{9}\r\n대잠: {10}/{11}\r\n회피: {12}/{13}\r\n색적: {14}/{15}\r\n운: {16}\r\n사정: {17} / 속력: {18}\r\n(우클릭으로 도감에)\n",
                             ship.MasterShip.ShipTypeName, ship.NameWithLevel,
@@ -547,21 +547,21 @@ namespace ElectronicObserver.Window
                             (colorscheme?.Count ?? 0) > 0 &&
                             ship.SallyArea >= 0)
                         {
-                            Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.ExtraFontColor);
+                            this.Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.ExtraFontColor);
 
-                            Name.BackColor = colorscheme[Math.Min(ship.SallyArea, colorscheme.Count - 1)];
+                            this.Name.BackColor = colorscheme[Math.Min(ship.SallyArea, colorscheme.Count - 1)];
                         }
                         else
                         {
-                            Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                            Name.BackColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                            this.Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                            this.Name.BackColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
                         }
                     }
 
 
-                    Level.Value = ship.Level;
-                    Level.ValueNext = ship.ExpNext;
-                    Level.Tag = ship.MasterID;
+                    this.Level.Value = ship.Level;
+                    this.Level.ValueNext = ship.ExpNext;
+                    this.Level.Tag = ship.MasterID;
 
                     {
                         StringBuilder tip = new StringBuilder();
@@ -585,36 +585,36 @@ namespace ElectronicObserver.Window
 
                         tip.AppendLine("(우클릭으로 경험치계산기에)");
 
-                        ToolTipInfo.SetToolTip(Level, tip.ToString());
+                        this.ToolTipInfo.SetToolTip(this.Level, tip.ToString());
                     }
 
 
-                    HP.SuspendUpdate();
-                    HP.Value = HP.PrevValue = ship.HPCurrent;
-                    HP.MaximumValue = ship.HPMax;
-                    HP.UsePrevValue = false;
-                    HP.ShowDifference = false;
+                    this.HP.SuspendUpdate();
+                    this.HP.Value = this.HP.PrevValue = ship.HPCurrent;
+                    this.HP.MaximumValue = ship.HPMax;
+                    this.HP.UsePrevValue = false;
+                    this.HP.ShowDifference = false;
                     {
                         int dockID = ship.RepairingDockID;
 
                         if (dockID != -1)
                         {
-                            HP.RepairTime = db.Docks[dockID].CompletionTime;
-                            HP.RepairTimeShowMode = ShipStatusHPRepairTimeShowMode.Visible;
+                            this.HP.RepairTime = db.Docks[dockID].CompletionTime;
+                            this.HP.RepairTimeShowMode = ShipStatusHPRepairTimeShowMode.Visible;
                         }
                         else
                         {
-                            HP.RepairTimeShowMode = ShipStatusHPRepairTimeShowMode.Invisible;
+                            this.HP.RepairTimeShowMode = ShipStatusHPRepairTimeShowMode.Invisible;
                         }
                     }
-                    HP.Tag = (ship.RepairingDockID == -1 && 0.5 < ship.HPRate && ship.HPRate < 1.0) ? DateTimeHelper.FromAPITimeSpan(ship.RepairTime).TotalSeconds : 0.0;
+                    this.HP.Tag = (ship.RepairingDockID == -1 && 0.5 < ship.HPRate && ship.HPRate < 1.0) ? DateTimeHelper.FromAPITimeSpan(ship.RepairTime).TotalSeconds : 0.0;
                     if (isEscaped)
                     {
-                        HP.BackColor = Color.Silver;
+                        this.HP.BackColor = Color.Silver;
                     }
                     else
                     {
-                        HP.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                        this.HP.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
                     }
                     {
                         StringBuilder sb = new StringBuilder();
@@ -646,65 +646,65 @@ namespace ElectronicObserver.Window
                                 DateTimeHelper.ToTimeRemainString(Calculator.CalculateDockingUnitTime(ship)));
                         }
 
-                        ToolTipInfo.SetToolTip(HP, sb.ToString());
+                        this.ToolTipInfo.SetToolTip(this.HP, sb.ToString());
                     }
-                    HP.ResumeUpdate();
+                    this.HP.ResumeUpdate();
 
 
-                    Condition.Text = ship.Condition.ToString();
-                    Condition.Tag = ship.Condition;
-                    SetConditionDesign(ship.Condition);
+                    this.Condition.Text = ship.Condition.ToString();
+                    this.Condition.Tag = ship.Condition;
+                    this.SetConditionDesign(ship.Condition);
 
                     if (ship.Condition < 49)
                     {
                         TimeSpan ts = new TimeSpan(0, (int)Math.Ceiling((49 - ship.Condition) / 3.0) * 3, 0);
-                        ToolTipInfo.SetToolTip(Condition, string.Format("완전회복까지 약 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
+                        this.ToolTipInfo.SetToolTip(this.Condition, string.Format("완전회복까지 약 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
                     }
                     else
                     {
-                        ToolTipInfo.SetToolTip(Condition, string.Format("앞으로 {0} 회 대성공가능", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
+                        this.ToolTipInfo.SetToolTip(this.Condition, string.Format("앞으로 {0} 회 대성공가능", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
                     }
 
-                    ShipResource.SetResources(ship.Fuel, ship.FuelMax, ship.Ammo, ship.AmmoMax);
+                    this.ShipResource.SetResources(ship.Fuel, ship.FuelMax, ship.Ammo, ship.AmmoMax);
 
 
-                    Equipments.SetSlotList(ship);
-                    ToolTipInfo.SetToolTip(Equipments, GetEquipmentString(ship));
+                    this.Equipments.SetSlotList(ship);
+                    this.ToolTipInfo.SetToolTip(this.Equipments, this.GetEquipmentString(ship));
 
                 }
                 else
                 {
-                    Name.Tag = -1;
+                    this.Name.Tag = -1;
                 }
 
 
-                Name.Visible =
-                Level.Visible =
-                HP.Visible =
-                Condition.Visible =
-                ShipResource.Visible =
-                Equipments.Visible = shipMasterID != -1;
+                this.Name.Visible =
+                this.Level.Visible =
+                this.HP.Visible =
+                this.Condition.Visible =
+                this.ShipResource.Visible =
+                this.Equipments.Visible = shipMasterID != -1;
 
             }
 
             void Name_MouseDown(object sender, MouseEventArgs e)
             {
-                if (Name.Tag is int id && id != -1)
+                if (this.Name.Tag is int id && id != -1)
                 {
                     if ((e.Button & MouseButtons.Right) != 0)
                     {
-                        new DialogAlbumMasterShip(id).Show(Parent);
+                        new DialogAlbumMasterShip(id).Show(this.Parent);
                     }
                 }
             }
 
             private void Level_MouseDown(object sender, MouseEventArgs e)
             {
-                if (Level.Tag is int id && id != -1)
+                if (this.Level.Tag is int id && id != -1)
                 {
                     if ((e.Button & MouseButtons.Right) != 0)
                     {
-                        new DialogExpChecker(id).Show(Parent);
+                        new DialogExpChecker(id).Show(this.Parent);
                     }
                 }
             }
@@ -836,61 +836,61 @@ namespace ElectronicObserver.Window
             private void SetConditionDesign(int cond)
             {
 
-                if (Condition.ImageAlign == ContentAlignment.MiddleCenter)
+                if (this.Condition.ImageAlign == ContentAlignment.MiddleCenter)
                 {
                     // icon invisible
-                    Condition.ImageIndex = -1;
+                    this.Condition.ImageIndex = -1;
 
                     if (cond < 20)
-                        Condition.BackColor = Color.LightCoral;
+                        this.Condition.BackColor = Color.LightCoral;
                     else if (cond < 30)
-                        Condition.BackColor = Color.LightSalmon;
+                        this.Condition.BackColor = Color.LightSalmon;
                     else if (cond < 40)
-                        Condition.BackColor = Color.Moccasin;
+                        this.Condition.BackColor = Color.Moccasin;
                     else if (cond < 50)
-                        Condition.BackColor = Color.Transparent;
+                        this.Condition.BackColor = Color.Transparent;
                     else
-                        Condition.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
+                        this.Condition.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
 
                 }
                 else
                 {
-                    Condition.BackColor = Color.Transparent;
+                    this.Condition.BackColor = Color.Transparent;
 
                     if (cond < 20)
-                        Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionVeryTired;
+                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionVeryTired;
                     else if (cond < 30)
-                        Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionTired;
+                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionTired;
                     else if (cond < 40)
-                        Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionLittleTired;
+                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionLittleTired;
                     else if (cond < 50)
-                        Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionNormal;
+                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionNormal;
                     else
-                        Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionSparkle;
+                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionSparkle;
 
                 }
             }
 
             public void ConfigurationChanged(FormFleet parent)
             {
-                Name.Font = parent.MainFont;
-                Level.MainFont = parent.MainFont;
-                Level.SubFont = parent.SubFont;
-                HP.MainFont = parent.MainFont;
-                HP.SubFont = parent.SubFont;
-                Condition.Font = parent.MainFont;
-                SetConditionDesign((Condition.Tag as int?) ?? 49);
-                Equipments.Font = parent.SubFont;
+                this.Name.Font = parent.MainFont;
+                this.Level.MainFont = parent.MainFont;
+                this.Level.SubFont = parent.SubFont;
+                this.HP.MainFont = parent.MainFont;
+                this.HP.SubFont = parent.SubFont;
+                this.Condition.Font = parent.MainFont;
+                this.SetConditionDesign((this.Condition.Tag as int?) ?? 49);
+                this.Equipments.Font = parent.SubFont;
             }
 
             public void Dispose()
             {
-                Name.Dispose();
-                Level.Dispose();
-                HP.Dispose();
-                Condition.Dispose();
-                ShipResource.Dispose();
-                Equipments.Dispose();
+                this.Name.Dispose();
+                this.Level.Dispose();
+                this.HP.Dispose();
+                this.Condition.Dispose();
+                this.ShipResource.Dispose();
+                this.Equipments.Dispose();
             }
         }
 
@@ -911,101 +911,101 @@ namespace ElectronicObserver.Window
 
         public FormFleet(FormMain parent, int fleetID)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            FleetID = fleetID;
-            Utility.SystemEvents.UpdateTimerTick += UpdateTimerTick;
+            this.FleetID = fleetID;
+            Utility.SystemEvents.UpdateTimerTick += this.UpdateTimerTick;
 
-            ConfigurationChanged();
+            this.ConfigurationChanged();
 
-            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-            AnchorageRepairBound = 0;
+            this.AnchorageRepairBound = 0;
 
             //ui init
 
-            ControlHelper.SetDoubleBuffered(TableFleet);
-            ControlHelper.SetDoubleBuffered(TableMember);
+            ControlHelper.SetDoubleBuffered(this.TableFleet);
+            ControlHelper.SetDoubleBuffered(this.TableMember);
 
 
-            TableFleet.Visible = false;
-            TableFleet.SuspendLayout();
-            TableFleet.BorderStyle = BorderStyle.FixedSingle;
-            ControlFleet = new TableFleetControl(this, TableFleet);
-            TableFleet.ResumeLayout();
+            this.TableFleet.Visible = false;
+            this.TableFleet.SuspendLayout();
+            this.TableFleet.BorderStyle = BorderStyle.FixedSingle;
+            this.ControlFleet = new TableFleetControl(this, this.TableFleet);
+            this.TableFleet.ResumeLayout();
 
 
-            TableMember.SuspendLayout();
-            ControlMember = new TableMemberControl[7];
-            for (int i = 0; i < ControlMember.Length; i++)
+            this.TableMember.SuspendLayout();
+            this.ControlMember = new TableMemberControl[7];
+            for (int i = 0; i < this.ControlMember.Length; i++)
             {
-                ControlMember[i] = new TableMemberControl(this, TableMember, i);
+                this.ControlMember[i] = new TableMemberControl(this, this.TableMember, i);
             }
-            TableMember.ResumeLayout();
+            this.TableMember.ResumeLayout();
 
 
-            ConfigurationChanged();     //fixme: 苦渋の決断
+            this.ConfigurationChanged();     //fixme: 苦渋の決断
 
-            Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleet]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleet]);
 
         }
 
         private void FormFleet_Load(object sender, EventArgs e)
         {
 
-            Text = string.Format("#{0}", FleetID);
+            this.Text = string.Format("#{0}", this.FleetID);
 
             APIObserver o = APIObserver.Instance;
 
             // 작업 보류체크
             //o["api_req_nyukyo/start"].RequestReceived += Updated;
-            o["api_req_nyukyo/speedchange"].RequestReceived += Updated;
-            o["api_req_hensei/change"].RequestReceived += Updated;
-            o["api_req_kousyou/destroyship"].RequestReceived += Updated;
-            o["api_req_member/updatedeckname"].RequestReceived += Updated;
-            o["api_req_kaisou/remodeling"].RequestReceived += Updated;
-            o["api_req_map/start"].RequestReceived += Updated;
-            o["api_req_hensei/combined"].RequestReceived += Updated;
+            o["api_req_nyukyo/speedchange"].RequestReceived += this.Updated;
+            o["api_req_hensei/change"].RequestReceived += this.Updated;
+            o["api_req_kousyou/destroyship"].RequestReceived += this.Updated;
+            o["api_req_member/updatedeckname"].RequestReceived += this.Updated;
+            o["api_req_kaisou/remodeling"].RequestReceived += this.Updated;
+            o["api_req_map/start"].RequestReceived += this.Updated;
+            o["api_req_hensei/combined"].RequestReceived += this.Updated;
 
-            o["api_port/port"].ResponseReceived += Updated;
-            o["api_get_member/ship2"].ResponseReceived += Updated;
-            o["api_get_member/ndock"].ResponseReceived += Updated;
-            o["api_req_kousyou/getship"].ResponseReceived += Updated;
-            o["api_req_hokyu/charge"].ResponseReceived += Updated;
-            o["api_req_kousyou/destroyship"].ResponseReceived += Updated;
-            o["api_get_member/ship3"].ResponseReceived += Updated;
-            o["api_req_kaisou/powerup"].ResponseReceived += Updated;        //requestのほうは面倒なのでこちらでまとめてやる
-            o["api_get_member/deck"].ResponseReceived += Updated;
-            o["api_get_member/slot_item"].ResponseReceived += Updated;
-            o["api_req_map/start"].ResponseReceived += Updated;
-            o["api_req_map/next"].ResponseReceived += Updated;
-            o["api_get_member/ship_deck"].ResponseReceived += Updated;
-            o["api_req_hensei/preset_select"].ResponseReceived += Updated;
-            o["api_req_kaisou/slot_exchange_index"].ResponseReceived += Updated;
-            o["api_get_member/require_info"].ResponseReceived += Updated;
-            o["api_req_kaisou/slot_deprive"].ResponseReceived += Updated;
-            o["api_req_kaisou/marriage"].ResponseReceived += Updated;
+            o["api_port/port"].ResponseReceived += this.Updated;
+            o["api_get_member/ship2"].ResponseReceived += this.Updated;
+            o["api_get_member/ndock"].ResponseReceived += this.Updated;
+            o["api_req_kousyou/getship"].ResponseReceived += this.Updated;
+            o["api_req_hokyu/charge"].ResponseReceived += this.Updated;
+            o["api_req_kousyou/destroyship"].ResponseReceived += this.Updated;
+            o["api_get_member/ship3"].ResponseReceived += this.Updated;
+            o["api_req_kaisou/powerup"].ResponseReceived += this.Updated;        //requestのほうは面倒なのでこちらでまとめてやる
+            o["api_get_member/deck"].ResponseReceived += this.Updated;
+            o["api_get_member/slot_item"].ResponseReceived += this.Updated;
+            o["api_req_map/start"].ResponseReceived += this.Updated;
+            o["api_req_map/next"].ResponseReceived += this.Updated;
+            o["api_get_member/ship_deck"].ResponseReceived += this.Updated;
+            o["api_req_hensei/preset_select"].ResponseReceived += this.Updated;
+            o["api_req_kaisou/slot_exchange_index"].ResponseReceived += this.Updated;
+            o["api_get_member/require_info"].ResponseReceived += this.Updated;
+            o["api_req_kaisou/slot_deprive"].ResponseReceived += this.Updated;
+            o["api_req_kaisou/marriage"].ResponseReceived += this.Updated;
 
 
             //追加するときは FormFleetOverview にも同様に追加してください
 
-            Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+            Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
         }
 
         void Updated(string apiname, dynamic data)
         {
 
-            if (IsRemodeling)
+            if (this.IsRemodeling)
             {
                 if (apiname == "api_get_member/slot_item")
-                    IsRemodeling = false;
+                    this.IsRemodeling = false;
                 else
                     return;
             }
             if (apiname == "api_req_kaisou/remodeling")
             {
-                IsRemodeling = true;
+                this.IsRemodeling = true;
                 return;
             }
 
@@ -1013,51 +1013,51 @@ namespace ElectronicObserver.Window
 
             if (db.Ships.Count == 0) return;
 
-            FleetData fleet = db.Fleet.Fleets[FleetID];
+            FleetData fleet = db.Fleet.Fleets[this.FleetID];
 
             if (fleet == null) return;
 
-            TableFleet.SuspendLayout();
-            ControlFleet.Update(fleet);
-            TableFleet.Visible = true;
-            TableFleet.ResumeLayout();
+            this.TableFleet.SuspendLayout();
+            this.ControlFleet.Update(fleet);
+            this.TableFleet.Visible = true;
+            this.TableFleet.ResumeLayout();
 
-            AnchorageRepairBound = fleet.CanAnchorageRepair ? 2 + fleet.MembersInstance[0].SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility) : 0;
+            this.AnchorageRepairBound = fleet.CanAnchorageRepair ? 2 + fleet.MembersInstance[0].SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility) : 0;
 
-            TableMember.SuspendLayout();
-            TableMember.RowCount = fleet.Members.Count(id => id > 0);
-            for (int i = 0; i < ControlMember.Length; i++)
+            this.TableMember.SuspendLayout();
+            this.TableMember.RowCount = fleet.Members.Count(id => id > 0);
+            for (int i = 0; i < this.ControlMember.Length; i++)
             {
-                ControlMember[i].Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
+                this.ControlMember[i].Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
             }
-            TableMember.ResumeLayout();
+            this.TableMember.ResumeLayout();
 
 
-            if (Icon != null) ResourceManager.DestroyIcon(Icon);
-            Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[ControlFleet.State.GetIconIndex()]);
-            if (Parent != null) Parent.Refresh();       //アイコンを更新するため
+            if (this.Icon != null) ResourceManager.DestroyIcon(this.Icon);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[this.ControlFleet.State.GetIconIndex()]);
+            if (this.Parent != null) this.Parent.Refresh();       //アイコンを更新するため
 
         }
 
         void UpdateTimerTick()
         {
 
-            FleetData fleet = KCDatabase.Instance.Fleet.Fleets[FleetID];
+            FleetData fleet = KCDatabase.Instance.Fleet.Fleets[this.FleetID];
 
-            TableFleet.SuspendLayout();
+            this.TableFleet.SuspendLayout();
             {
                 if (fleet != null)
-                    ControlFleet.Refresh();
+                    this.ControlFleet.Refresh();
 
             }
-            TableFleet.ResumeLayout();
+            this.TableFleet.ResumeLayout();
 
-            TableMember.SuspendLayout();
-            for (int i = 0; i < ControlMember.Length; i++)
+            this.TableMember.SuspendLayout();
+            for (int i = 0; i < this.ControlMember.Length; i++)
             {
-                ControlMember[i].HP.Refresh();
+                this.ControlMember[i].HP.Refresh();
             }
-            TableMember.ResumeLayout();
+            this.TableMember.ResumeLayout();
 
 
             // anchorage repairing
@@ -1065,12 +1065,12 @@ namespace ElectronicObserver.Window
             {
                 TimeSpan elapsed = DateTime.Now - KCDatabase.Instance.Fleet.AnchorageRepairingTimer;
 
-                if (elapsed.TotalMinutes >= 20 && AnchorageRepairBound > 0)
+                if (elapsed.TotalMinutes >= 20 && this.AnchorageRepairBound > 0)
                 {
 
-                    for (int i = 0; i < AnchorageRepairBound; i++)
+                    for (int i = 0; i < this.AnchorageRepairBound; i++)
                     {
-                        var hpbar = ControlMember[i].HP;
+                        var hpbar = this.ControlMember[i].HP;
 
                         double dockingSeconds = hpbar.Tag as double? ?? 0.0;
 
@@ -1104,10 +1104,10 @@ namespace ElectronicObserver.Window
 
             StringBuilder sb = new StringBuilder();
             KCDatabase db = KCDatabase.Instance;
-            FleetData fleet = db.Fleet[FleetID];
+            FleetData fleet = db.Fleet[this.FleetID];
             if (fleet == null) return;
 
-            sb.AppendFormat("{0}\t제공치{1} / 색적능력 {2} / 수송능력 {3}\r\n", fleet.Name, fleet.GetAirSuperiority(), fleet.GetSearchingAbilityString(ControlFleet.BranchWeight), Calculator.GetTPDamage(fleet));
+            sb.AppendFormat("{0}\t제공치{1} / 색적능력 {2} / 수송능력 {3}\r\n", fleet.Name, fleet.GetAirSuperiority(), fleet.GetSearchingAbilityString(this.ControlFleet.BranchWeight), Calculator.GetTPDamage(fleet));
             for (int i = 0; i < fleet.Members.Count; i++)
             {
                 if (fleet[i] == -1)
@@ -1163,7 +1163,7 @@ namespace ElectronicObserver.Window
         private void ContextMenuFleet_Opening(object sender, CancelEventArgs e)
         {
 
-            ContextMenuFleet_Capture.Visible = Utility.Configuration.Config.Debug.EnableDebugMenu;
+            this.ContextMenuFleet_Capture.Visible = Utility.Configuration.Config.Debug.EnableDebugMenu;
 
         }
 
@@ -1223,6 +1223,26 @@ namespace ElectronicObserver.Window
 
             sb.Remove(sb.Length - 1, 1);        // remove ","
             sb.Append(@"}");
+
+            Clipboard.SetData(DataFormats.StringFormat, sb.ToString());
+        }
+
+        /// <summary>
+		/// 「艦隊分析 -艦これ-」の艦隊情報反映用フォーマットでコピー
+		/// https://kancolle-fleetanalysis.firebaseapp.com/#/
+		/// </summary>
+		private void ContextMenuFleet_CopyToFleetAnalysis_Click(object sender, EventArgs e)
+        {
+            var sb = new StringBuilder();
+
+            sb.Append("[");
+            foreach (var ship in KCDatabase.Instance.Ships.Values.Where(s => s.IsLocked))
+            {
+                sb.AppendFormat(@"{{""api_ship_id"":{0},""api_lv"":{1},""api_kyouka"":[{2}]}},",
+                    ship.ShipID, ship.Level, string.Join(",", (int[])ship.RawData.api_kyouka));
+            }
+            sb.Remove(sb.Length - 1, 1);        // remove ","
+            sb.Append("]");
 
             Clipboard.SetData(DataFormats.StringFormat, sb.ToString());
         }
@@ -1296,7 +1316,7 @@ namespace ElectronicObserver.Window
 
             var dialog = new DialogAntiAirDefense();
 
-            dialog.SetFleetID(FleetID);
+            dialog.SetFleetID(this.FleetID);
             dialog.Show(this);
 
         }
@@ -1315,7 +1335,7 @@ namespace ElectronicObserver.Window
         private void ContextMenuFleet_OutputFleetImage_Click(object sender, EventArgs e)
         {
 
-            using (var dialog = new DialogFleetImageGenerator(FleetID))
+            using (var dialog = new DialogFleetImageGenerator(this.FleetID))
             {
                 dialog.ShowDialog(this);
             }
@@ -1326,27 +1346,27 @@ namespace ElectronicObserver.Window
 
             var c = Utility.Configuration.Config;
 
-            MainFont = Font = c.UI.MainFont;
-            SubFont = c.UI.SubFont;
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.MainFont = this.Font = c.UI.MainFont;
+            this.SubFont = c.UI.SubFont;
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-            AutoScroll = c.FormFleet.IsScrollable;
+            this.AutoScroll = c.FormFleet.IsScrollable;
 
-            var fleet = KCDatabase.Instance.Fleet[FleetID];
+            var fleet = KCDatabase.Instance.Fleet[this.FleetID];
 
-            TableFleet.SuspendLayout();
-            if (ControlFleet != null && fleet != null)
+            this.TableFleet.SuspendLayout();
+            if (this.ControlFleet != null && fleet != null)
             {
-                ControlFleet.ConfigurationChanged(this);
-                ControlFleet.Update(fleet);
+                this.ControlFleet.ConfigurationChanged(this);
+                this.ControlFleet.Update(fleet);
             }
-            TableFleet.ResumeLayout();
+            this.TableFleet.ResumeLayout();
 
-            TableMember.SuspendLayout();
-            if (ControlMember != null)
+            this.TableMember.SuspendLayout();
+            if (this.ControlMember != null)
             {
                 bool showAircraft = c.FormFleet.ShowAircraft;
                 bool fixShipNameWidth = c.FormFleet.FixShipNameWidth;
@@ -1361,9 +1381,9 @@ namespace ElectronicObserver.Window
                 bool isLayoutFixed = c.UI.IsLayoutFixed;
                 // bool IsDarkSkinUse = c.UI.IsDarkSkinUse;
 
-                for (int i = 0; i < ControlMember.Length; i++)
+                for (int i = 0; i < this.ControlMember.Length; i++)
                 {
-                    var member = ControlMember[i];
+                    var member = this.ControlMember[i];
 
                     member.Equipments.ShowAircraft = showAircraft;
                     if (fixShipNameWidth)
@@ -1398,12 +1418,12 @@ namespace ElectronicObserver.Window
                 }
             }
 
-            ControlHelper.SetTableRowStyles(TableMember, ControlHelper.GetDefaultRowStyle());
-            TableMember.ResumeLayout();
+            ControlHelper.SetTableRowStyles(this.TableMember, ControlHelper.GetDefaultRowStyle());
+            this.TableMember.ResumeLayout();
 
-            TableMember.Location = new Point(TableMember.Location.X, TableFleet.Bottom /*+ Math.Max( TableFleet.Margin.Bottom, TableMember.Margin.Top )*/ );
+            this.TableMember.Location = new Point(this.TableMember.Location.X, this.TableFleet.Bottom /*+ Math.Max( TableFleet.Margin.Bottom, TableMember.Margin.Top )*/ );
 
-            TableMember.PerformLayout();        //fixme:サイズ変更に親パネルが追随しない
+            this.TableMember.PerformLayout();        //fixme:サイズ変更に親パネルが追随しない
 
         }
 
@@ -1414,7 +1434,7 @@ namespace ElectronicObserver.Window
 
         protected override string GetPersistString()
         {
-            return "Fleet #" + FleetID.ToString();
+            return "Fleet #" + this.FleetID.ToString();
         }
 
         /// <summary>
@@ -1426,14 +1446,14 @@ namespace ElectronicObserver.Window
             /*
             ControlFleet.Dispose();
             */
-            for (int i = 0; i < ControlMember.Length; i++)
-                ControlMember[i].Dispose();
+            for (int i = 0; i < this.ControlMember.Length; i++)
+                this.ControlMember[i].Dispose();
                 
 
             // --- auto generated ---
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
 
             base.Dispose(disposing);

@@ -68,7 +68,7 @@ namespace ElectronicObserver.Data.Battle
 		/// <summary>
 		/// 昼戦から開始する戦闘かどうか
 		/// </summary>
-		public bool StartsFromDayBattle => !StartsFromNightBattle;
+		public bool StartsFromDayBattle => !this.StartsFromNightBattle;
 
 		/// <summary>
 		/// 夜戦から開始する戦闘かどうか
@@ -77,7 +77,7 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				var phase = BattleMode & BattleModes.BattlePhaseMask;
+				var phase = this.BattleMode & BattleModes.BattlePhaseMask;
 				return phase == BattleModes.NightOnly || phase == BattleModes.NightDay;
 			}
 		}
@@ -85,33 +85,33 @@ namespace ElectronicObserver.Data.Battle
 		/// <summary>
 		/// 連合艦隊戦かどうか
 		/// </summary>
-		public bool IsCombinedBattle => (BattleMode & BattleModes.CombinedMask) != 0;
+		public bool IsCombinedBattle => (this.BattleMode & BattleModes.CombinedMask) != 0;
 
 		/// <summary>
 		/// 演習かどうか
 		/// </summary>
-		public bool IsPractice => (BattleMode & BattleModes.BattlePhaseMask) == BattleModes.Practice;
+		public bool IsPractice => (this.BattleMode & BattleModes.BattlePhaseMask) == BattleModes.Practice;
 
 		/// <summary>
 		/// 敵が連合艦隊かどうか
 		/// </summary>
-		public bool IsEnemyCombined => (BattleMode & BattleModes.EnemyCombinedFleet) != 0;
+		public bool IsEnemyCombined => (this.BattleMode & BattleModes.EnemyCombinedFleet) != 0;
 
 		/// <summary>
 		/// 基地空襲戦かどうか
 		/// </summary>
-		public bool IsBaseAirRaid => (BattleMode & BattleModes.BattlePhaseMask) == BattleModes.BaseAirRaid;
+		public bool IsBaseAirRaid => (this.BattleMode & BattleModes.BattlePhaseMask) == BattleModes.BaseAirRaid;
 
 
 		/// <summary>
 		/// 1回目の戦闘
 		/// </summary>
-		public BattleData FirstBattle => StartsFromDayBattle ? (BattleData)BattleDay : BattleNight;
+		public BattleData FirstBattle => this.StartsFromDayBattle ? (BattleData)this.BattleDay : this.BattleNight;
 
 		/// <summary>
 		/// 2回目の戦闘
 		/// </summary>
-		public BattleData SecondBattle => StartsFromDayBattle ? (BattleData)BattleNight : BattleDay;
+		public BattleData SecondBattle => this.StartsFromDayBattle ? (BattleData)this.BattleNight : this.BattleDay;
 
 
 		/// <summary>
@@ -144,7 +144,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public BattleManager()
 		{
-			DroppedItemCount = new Dictionary<int, int>();
+            this.DroppedItemCount = new Dictionary<int, int>();
 		}
 
 
@@ -156,172 +156,172 @@ namespace ElectronicObserver.Data.Battle
 			{
 				case "api_req_map/start":
 				case "api_req_map/next":
-					BattleDay = null;
-					BattleNight = null;
-					Result = null;
-					BattleMode = BattleModes.Undefined;
-					Compass = new CompassData();
-					Compass.LoadFromResponse(apiname, data);
+                    this.BattleDay = null;
+                    this.BattleNight = null;
+                    this.Result = null;
+                    this.BattleMode = BattleModes.Undefined;
+                    this.Compass = new CompassData();
+                    this.Compass.LoadFromResponse(apiname, data);
 
-					if (Compass.HasAirRaid)
+					if (this.Compass.HasAirRaid)
 					{
-						BattleMode = BattleModes.BaseAirRaid;
-						BattleDay = new BattleBaseAirRaid();
-						BattleDay.LoadFromResponse(apiname, Compass.AirRaidData);
-						BattleFinished();
+                        this.BattleMode = BattleModes.BaseAirRaid;
+                        this.BattleDay = new BattleBaseAirRaid();
+                        this.BattleDay.LoadFromResponse(apiname, this.Compass.AirRaidData);
+                        this.BattleFinished();
 					}
 					break;
 
 				case "api_req_sortie/battle":
-					BattleMode = BattleModes.Normal;
-					BattleDay = new BattleNormalDay();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Normal;
+                    this.BattleDay = new BattleNormalDay();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_battle_midnight/battle":
-					BattleNight = new BattleNormalNight();
-					BattleNight.TakeOverParameters(BattleDay);
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleNight = new BattleNormalNight();
+                    this.BattleNight.TakeOverParameters(this.BattleDay);
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
                 case "api_req_sortie/ld_shooting":
-                    BattleMode = BattleModes.Radar;
-                    BattleDay = new BattleNormalRadar();
-                    BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Radar;
+                    this.BattleDay = new BattleNormalRadar();
+                    this.BattleDay.LoadFromResponse(apiname, data);
                     break;
                 case "api_req_battle_midnight/sp_midnight":
-					BattleMode = BattleModes.NightOnly;
-					BattleDay = null;
-					BattleNight = new BattleNightOnly();
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.NightOnly;
+                    this.BattleDay = null;
+                    this.BattleNight = new BattleNightOnly();
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_sortie/airbattle":
-					BattleMode = BattleModes.AirBattle;
-					BattleDay = new BattleAirBattle();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.AirBattle;
+                    this.BattleDay = new BattleAirBattle();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_sortie/ld_airbattle":
-					BattleMode = BattleModes.AirRaid;
-					BattleDay = new BattleAirRaid();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.AirRaid;
+                    this.BattleDay = new BattleAirRaid();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_sortie/night_to_day":
-					BattleMode = BattleModes.NightDay;
-					BattleNight = new BattleNormalDayFromNight();
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.NightDay;
+                    this.BattleNight = new BattleNormalDayFromNight();
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/battle":
-					BattleMode = BattleModes.Normal | BattleModes.CombinedTaskForce;
-					BattleDay = new BattleCombinedNormalDay();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Normal | BattleModes.CombinedTaskForce;
+                    this.BattleDay = new BattleCombinedNormalDay();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/midnight_battle":
-					BattleNight = new BattleCombinedNormalNight();
-					//BattleNight.TakeOverParameters( BattleDay );		//checkme: 連合艦隊夜戦では昼戦での与ダメージがMVPに反映されない仕様？
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleNight = new BattleCombinedNormalNight();
+                    //BattleNight.TakeOverParameters( BattleDay );		//checkme: 連合艦隊夜戦では昼戦での与ダメージがMVPに反映されない仕様？
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/sp_midnight":
-					BattleMode = BattleModes.NightOnly | BattleModes.CombinedMask;
-					BattleDay = null;
-					BattleNight = new BattleCombinedNightOnly();
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.NightOnly | BattleModes.CombinedMask;
+                    this.BattleDay = null;
+                    this.BattleNight = new BattleCombinedNightOnly();
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/airbattle":
-					BattleMode = BattleModes.AirBattle | BattleModes.CombinedTaskForce;
-					BattleDay = new BattleCombinedAirBattle();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.AirBattle | BattleModes.CombinedTaskForce;
+                    this.BattleDay = new BattleCombinedAirBattle();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/battle_water":
-					BattleMode = BattleModes.Normal | BattleModes.CombinedSurface;
-					BattleDay = new BattleCombinedWater();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Normal | BattleModes.CombinedSurface;
+                    this.BattleDay = new BattleCombinedWater();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/ld_airbattle":
-					BattleMode = BattleModes.AirRaid | BattleModes.CombinedTaskForce;
-					BattleDay = new BattleCombinedAirRaid();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.AirRaid | BattleModes.CombinedTaskForce;
+                    this.BattleDay = new BattleCombinedAirRaid();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/ec_battle":
-					BattleMode = BattleModes.Normal | BattleModes.EnemyCombinedFleet;
-					BattleDay = new BattleEnemyCombinedDay();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Normal | BattleModes.EnemyCombinedFleet;
+                    this.BattleDay = new BattleEnemyCombinedDay();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/ec_midnight_battle":
-					BattleNight = new BattleEnemyCombinedNight();
-					BattleNight.TakeOverParameters(BattleDay);
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleNight = new BattleEnemyCombinedNight();
+                    this.BattleNight.TakeOverParameters(this.BattleDay);
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/ec_night_to_day":
-					BattleMode = BattleModes.NightDay | BattleModes.EnemyCombinedFleet;
-					BattleNight = new BattleEnemyCombinedDayFromNight();
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.NightDay | BattleModes.EnemyCombinedFleet;
+                    this.BattleNight = new BattleEnemyCombinedDayFromNight();
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_combined_battle/each_battle":
-					BattleMode = BattleModes.Normal | BattleModes.CombinedTaskForce | BattleModes.EnemyCombinedFleet;
-					BattleDay = new BattleCombinedEachDay();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Normal | BattleModes.CombinedTaskForce | BattleModes.EnemyCombinedFleet;
+                    this.BattleDay = new BattleCombinedEachDay();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
                 case "api_req_combined_battle/ld_shooting":
-                    BattleMode = BattleModes.Radar | BattleModes.CombinedTaskForce;
-                    BattleDay = new BattleCombinedRadar();
-                    BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Radar | BattleModes.CombinedTaskForce;
+                    this.BattleDay = new BattleCombinedRadar();
+                    this.BattleDay.LoadFromResponse(apiname, data);
                     break;
                 case "api_req_combined_battle/each_battle_water":
-					BattleMode = BattleModes.Normal | BattleModes.CombinedSurface | BattleModes.EnemyCombinedFleet;
-					BattleDay = new BattleCombinedEachWater();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Normal | BattleModes.CombinedSurface | BattleModes.EnemyCombinedFleet;
+                    this.BattleDay = new BattleCombinedEachWater();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 
 				case "api_req_member/get_practice_enemyinfo":
-					EnemyAdmiralName = data.api_nickname;
-					EnemyAdmiralRank = Constants.GetAdmiralRank((int)data.api_rank);
+                    this.EnemyAdmiralName = data.api_nickname;
+                    this.EnemyAdmiralRank = Constants.GetAdmiralRank((int)data.api_rank);
 					break;
 
 				case "api_req_practice/battle":
-					BattleMode = BattleModes.Practice;
-					BattleDay = new BattlePracticeDay();
-					BattleDay.LoadFromResponse(apiname, data);
+                    this.BattleMode = BattleModes.Practice;
+                    this.BattleDay = new BattlePracticeDay();
+                    this.BattleDay.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_practice/midnight_battle":
-					BattleNight = new BattlePracticeNight();
-					BattleNight.TakeOverParameters(BattleDay);
-					BattleNight.LoadFromResponse(apiname, data);
+                    this.BattleNight = new BattlePracticeNight();
+                    this.BattleNight.TakeOverParameters(this.BattleDay);
+                    this.BattleNight.LoadFromResponse(apiname, data);
 					break;
 
 				case "api_req_sortie/battleresult":
 				case "api_req_combined_battle/battleresult":
 				case "api_req_practice/battle_result":
-					Result = new BattleResultData();
-					Result.LoadFromResponse(apiname, data);
-					BattleFinished();
+                    this.Result = new BattleResultData();
+                    this.Result.LoadFromResponse(apiname, data);
+                    this.BattleFinished();
 					break;
 
 				case "api_port/port":
-					Compass = null;
-					BattleDay = null;
-					BattleNight = null;
-					Result = null;
-					BattleMode = BattleModes.Undefined;
-					DroppedShipCount = DroppedEquipmentCount = 0;
-					DroppedItemCount.Clear();
+                    this.Compass = null;
+                    this.BattleDay = null;
+                    this.BattleNight = null;
+                    this.Result = null;
+                    this.BattleMode = BattleModes.Undefined;
+                    this.DroppedShipCount = this.DroppedEquipmentCount = 0;
+                    this.DroppedItemCount.Clear();
 					break;
 
 				case "api_get_member/slot_item":
-					DroppedEquipmentCount = 0;
+                    this.DroppedEquipmentCount = 0;
 					break;
 
 			}
@@ -343,56 +343,56 @@ namespace ElectronicObserver.Data.Battle
 
 
 			// ロギング
-			if (IsPractice)
+			if (this.IsPractice)
 			{
 				Utility.Logger.Add(2,
 					string.Format("연습에서「{0}」{1}의「{2}」와 교전했습니다.( 랭크: {3}, 제독 경험치+{4}, 함선 경험치+{5} )",
-						EnemyAdmiralName, EnemyAdmiralRank, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
+                        this.EnemyAdmiralName, this.EnemyAdmiralRank, this.Result.EnemyFleetName, this.Result.Rank, this.Result.AdmiralExp, this.Result.BaseExp));
 			}
-			else if (IsBaseAirRaid)
+			else if (this.IsBaseAirRaid)
 			{
-				var initialHPs = BattleDay.Initial.FriendInitialHPs.TakeWhile(hp => hp >= 0);
-				var damage = initialHPs.Zip(BattleDay.ResultHPs.Take(initialHPs.Count()), (initial, result) => initial - result).Sum();
-				var airraid = ((BattleBaseAirRaid)BattleDay).BaseAirRaid;
+				var initialHPs = this.BattleDay.Initial.FriendInitialHPs.TakeWhile(hp => hp >= 0);
+				var damage = initialHPs.Zip(this.BattleDay.ResultHPs.Take(initialHPs.Count()), (initial, result) => initial - result).Sum();
+				var airraid = ((BattleBaseAirRaid)this.BattleDay).BaseAirRaid;
 
 				Utility.Logger.Add(2,
 					string.Format("{0}-{1}-{2} 로 기지에 공습을 받았습니다.( {3}, 데미지 합계: {4}, {5} )",
-						Compass.MapAreaID, Compass.MapInfoID, Compass.Destination,
-						Constants.GetAirSuperiority(airraid.IsAvailable ? airraid.AirSuperiority : -1), damage, Constants.GetAirRaidDamage(Compass.AirRaidDamageKind)));
+                        this.Compass.MapAreaID, this.Compass.MapInfoID, this.Compass.Destination,
+						Constants.GetAirSuperiority(airraid.IsAvailable ? airraid.AirSuperiority : -1), damage, Constants.GetAirRaidDamage(this.Compass.AirRaidDamageKind)));
 			}
 			else
 			{
 				Utility.Logger.Add(2,
 					string.Format("{0}-{1}-{2} 에서「{3}」와 교전했습니다. ( 랭크: {4}, 제독경험치+{5}, 함선경험치+{6} )",
-						Compass.MapAreaID, Compass.MapInfoID, Compass.Destination_Name, Result.EnemyFleetName, Result.Rank, Result.AdmiralExp, Result.BaseExp));
+                        this.Compass.MapAreaID, this.Compass.MapInfoID, this.Compass.Destination_Name, this.Result.EnemyFleetName, this.Result.Rank, this.Result.AdmiralExp, this.Result.BaseExp));
 			}
 
 
 			// Level up
-			if (!IsBaseAirRaid)
+			if (!this.IsBaseAirRaid)
 			{
-				var exps = Result.ExpList;
-				var lvup = Result.LevelUpList;
+				var exps = this.Result.ExpList;
+				var lvup = this.Result.LevelUpList;
 				for (int i = 0; i < lvup.Length; i++)
 				{
 					if (lvup[i].Length >= 2 && i < exps.Length && lvup[i][0] + exps[i] >= lvup[i][1])
 					{
-						var ship = FirstBattle.Initial.FriendFleet.MembersInstance[i];
+						var ship = this.FirstBattle.Initial.FriendFleet.MembersInstance[i];
 						int increment = Math.Max(lvup[i].Length - 2, 1);
 
 						Utility.Logger.Add(2, string.Format("{0} 가 Lv. {1} 이 되었습니다.", ship.Name, ship.Level + increment));
 					}
 				}
 
-				if (IsCombinedBattle)
+				if (this.IsCombinedBattle)
 				{
-					exps = Result.ExpListCombined;
-					lvup = Result.LevelUpListCombined;
+					exps = this.Result.ExpListCombined;
+					lvup = this.Result.LevelUpListCombined;
 					for (int i = 0; i < lvup.Length; i++)
 					{
 						if (lvup[i].Length >= 2 && i < exps.Length && lvup[i][0] + exps[i] >= lvup[i][1])
 						{
-							var ship = FirstBattle.Initial.FriendFleetEscort.MembersInstance[i];
+							var ship = this.FirstBattle.Initial.FriendFleetEscort.MembersInstance[i];
 							int increment = Math.Max(lvup[i].Length - 2, 1);
 
 							Utility.Logger.Add(2, string.Format("{0} 가 Lv. {1} 이 되었습니다.", ship.Name, ship.Level + increment));
@@ -404,25 +404,25 @@ namespace ElectronicObserver.Data.Battle
 
 
 			//ドロップ艦記録
-			if (!IsPractice && !IsBaseAirRaid)
+			if (!this.IsPractice && !this.IsBaseAirRaid)
 			{
 
 				//checkme: とてもアレな感じ
 
-				int shipID = Result.DroppedShipID;
-				int itemID = Result.DroppedItemID;
-				int eqID = Result.DroppedEquipmentID;
+				int shipID = this.Result.DroppedShipID;
+				int itemID = this.Result.DroppedItemID;
+				int eqID = this.Result.DroppedEquipmentID;
 				bool showLog = Utility.Configuration.Config.Log.ShowSpoiler;
 
 				if (shipID != -1)
 				{
 
 					ShipDataMaster ship = KCDatabase.Instance.MasterShips[shipID];
-					DroppedShipCount++;
+                    this.DroppedShipCount++;
 
 					var defaultSlot = ship.DefaultSlot;
 					if (defaultSlot != null)
-						DroppedEquipmentCount += defaultSlot.Count(id => id != -1);
+                        this.DroppedEquipmentCount += defaultSlot.Count(id => id != -1);
 
 					if (showLog)
 						Utility.Logger.Add(2, string.Format("{0}「{1}」가 함대에 합류했습니다.", ship.ShipTypeName, ship.NameWithClass));
@@ -431,15 +431,15 @@ namespace ElectronicObserver.Data.Battle
 				if (itemID != -1)
 				{
 
-					if (!DroppedItemCount.ContainsKey(itemID))
-						DroppedItemCount.Add(itemID, 0);
-					DroppedItemCount[itemID]++;
+					if (!this.DroppedItemCount.ContainsKey(itemID))
+                        this.DroppedItemCount.Add(itemID, 0);
+                    this.DroppedItemCount[itemID]++;
 
 					if (showLog)
 					{
 						var item = KCDatabase.Instance.UseItems[itemID];
 						var itemmaster = KCDatabase.Instance.MasterUseItems[itemID];
-						Utility.Logger.Add(2, string.Format("아이템「{0} 을 얻었습니다. ( 합계: {1}개 )", itemmaster?.Name ?? ("알수없는아이템 - ID:" + itemID), (item?.Count ?? 0) + DroppedItemCount[itemID]));
+						Utility.Logger.Add(2, string.Format("아이템「{0} 을 얻었습니다. ( 합계: {1}개 )", itemmaster?.Name ?? ("알수없는아이템 - ID:" + itemID), (item?.Count ?? 0) + this.DroppedItemCount[itemID]));
 					}
 				}
 
@@ -447,7 +447,7 @@ namespace ElectronicObserver.Data.Battle
 				{
 
 					EquipmentDataMaster eq = KCDatabase.Instance.MasterEquipments[eqID];
-					DroppedEquipmentCount++;
+                    this.DroppedEquipmentCount++;
 
 					if (showLog)
 					{
@@ -458,18 +458,18 @@ namespace ElectronicObserver.Data.Battle
 
 				// 満員判定
 				if (shipID == -1 && (
-					KCDatabase.Instance.Admiral.MaxShipCount - (KCDatabase.Instance.Ships.Count + DroppedShipCount) <= 0 ||
-					KCDatabase.Instance.Admiral.MaxEquipmentCount - (KCDatabase.Instance.Equipments.Count + DroppedEquipmentCount) <= 0))
+					KCDatabase.Instance.Admiral.MaxShipCount - (KCDatabase.Instance.Ships.Count + this.DroppedShipCount) <= 0 ||
+					KCDatabase.Instance.Admiral.MaxEquipmentCount - (KCDatabase.Instance.Equipments.Count + this.DroppedEquipmentCount) <= 0))
 				{
 					shipID = -2;
 				}
 
-				RecordManager.Instance.ShipDrop.Add(shipID, itemID, eqID, Compass.MapAreaID, Compass.MapInfoID, Compass.Destination, Compass.MapInfo.EventDifficulty, Compass.EventID == 5, enemyFleetData.FleetID, Result.Rank, KCDatabase.Instance.Admiral.Level);
+				RecordManager.Instance.ShipDrop.Add(shipID, itemID, eqID, this.Compass.MapAreaID, this.Compass.MapInfoID, this.Compass.Destination, this.Compass.MapInfo.EventDifficulty, this.Compass.EventID == 5, enemyFleetData.FleetID, this.Result.Rank, KCDatabase.Instance.Admiral.Level);
 			}
 
 
 
-			WriteBattleLog();
+            this.WriteBattleLog();
 
 
 
@@ -516,8 +516,8 @@ namespace ElectronicObserver.Data.Battle
 			int enemycount = 0;
 			int enemysunk = 0;
 
-			BattleData activeBattle = SecondBattle ?? FirstBattle;
-			var firstInitial = FirstBattle.Initial;
+			BattleData activeBattle = this.SecondBattle ?? this.FirstBattle;
+			var firstInitial = this.FirstBattle.Initial;
 
 			var friend = activeBattle.Initial.FriendFleet.MembersWithoutEscaped;
 			var friendescort = activeBattle.Initial.FriendFleetEscort?.MembersWithoutEscaped;
@@ -602,8 +602,8 @@ namespace ElectronicObserver.Data.Battle
 			enemyrate = (double)(enemybefore - enemyafter) / enemybefore;
 
 
-            if ((BattleMode & BattleModes.BattlePhaseMask) == BattleModes.AirRaid ||
-                (BattleMode & BattleModes.BattlePhaseMask) == BattleModes.Radar)
+            if ((this.BattleMode & BattleModes.BattlePhaseMask) == BattleModes.AirRaid ||
+                (this.BattleMode & BattleModes.BattlePhaseMask) == BattleModes.Radar)
                 return GetWinRankAirRaid(friendcount, friendsunk, friendrate);
 			else
 				return GetWinRank(friendcount, enemycount, friendsunk, enemysunk, friendrate, enemyrate,
@@ -710,9 +710,41 @@ namespace ElectronicObserver.Data.Battle
 			return rank;
 		}
 
+        /// <summary>
+        /// 敵連合艦隊戦において、夜戦突入時に敵本隊と戦闘可能な戦況かどうか
+        /// </summary>
+        public bool WillNightBattleWithMainFleet()
+        {
+            if (this.StartsFromDayBattle && this.IsEnemyCombined)
+            {
+                var initial = this.BattleDay.Initial;
+                int score = 0;
+                for (int i = 0; i < initial.EnemyInitialHPsEscort.Length; i++)
+                {
+                    if (initial.EnemyMembersEscort[i] > 0)
+                    {
+                        double rate = (double)this.BattleDay.ResultHPs[BattleIndex.Get(BattleSides.EnemyEscort, i)] / initial.EnemyMaxHPsEscort[i];
 
+                        if (rate > 0.5)
+                        {
+                            score += 10;
+                        }
+                        else if (rate > 0.25)
+                        {
+                            score += 7;
+                        }
+                        if (i == 0 && rate > 0)
+                        {
+                            score += 10;
+                        }
+                    }
+                }
+                return score < 30;
+            }
+            else return false;          // ? true?
+        }
 
-		private void WriteBattleLog()
+        private void WriteBattleLog()
 		{
 
 			if (!Utility.Configuration.Config.Log.SaveBattleLog)
@@ -726,10 +758,10 @@ namespace ElectronicObserver.Data.Battle
 					Directory.CreateDirectory(parent);
 
 				string info;
-				if (IsPractice)
+				if (this.IsPractice)
 					info = "practice";
 				else
-					info = $"{Compass.MapAreaID}-{Compass.MapInfoID}-{Compass.Destination}";
+					info = $"{this.Compass.MapAreaID}-{this.Compass.MapInfoID}-{this.Compass.Destination}";
 
 				string path = $"{parent}\\{DateTimeHelper.GetTimeStamp()}@{info}.txt";
 

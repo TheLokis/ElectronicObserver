@@ -21,23 +21,23 @@ namespace ElectronicObserver.Window.Integrate
 
 		public FormCandidate()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 		private void FormCandidate_Paint(object sender, PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			g.DrawRectangle(blackPen, 2, 2, Width - 4, Height - 4);
+			g.DrawRectangle(this.blackPen, 2, 2, this.Width - 4, this.Height - 4);
 		}
 
 		private void FormCandidate_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			blackPen.Dispose();
+            this.blackPen.Dispose();
 		}
 
 		private void FormCandidate_Resize(object sender, EventArgs e)
 		{
-			Invalidate();
+            this.Invalidate();
 		}
 	}
 }

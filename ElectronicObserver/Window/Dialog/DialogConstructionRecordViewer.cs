@@ -42,15 +42,15 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogConstructionRecordViewer()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			_record = RecordManager.Instance.Construction;
+            this._record = RecordManager.Instance.Construction;
 		}
 
 		private void DialogConstructionRecordViewer_Load(object sender, EventArgs e)
 		{
 
-			var includedShipNames = _record.Record
+			var includedShipNames = this._record.Record
 				.Select(r => r.ShipName)
 				.Distinct();
 
@@ -61,7 +61,7 @@ namespace ElectronicObserver.Window.Dialog
 			var removedShipNames = includedShipNames.Except(includedShipObjects.Select(s => s.NameWithClass));
 
 
-			var includedSecretaryNames = _record.Record
+			var includedSecretaryNames = this._record.Record
 				.Select(r => r.FlagshipName).Distinct();
 
 			var includedSecretaryObjects = includedSecretaryNames
@@ -84,22 +84,22 @@ namespace ElectronicObserver.Window.Dialog
 					dt.Rows.Add(ship.ShipType, ship.ShipTypeName);
 				}
 				dt.AcceptChanges();
-				ShipCategory.DisplayMember = "Display";
-				ShipCategory.ValueMember = "Value";
-				ShipCategory.DataSource = dt;
-				ShipCategory.SelectedIndex = 0;
+                this.ShipCategory.DisplayMember = "Display";
+                this.ShipCategory.ValueMember = "Value";
+                this.ShipCategory.DataSource = dt;
+                this.ShipCategory.SelectedIndex = 0;
 			}
 
 			{
-				ShipName.Items.Add(NameAny);
-				ShipName.Items.AddRange(includedShipObjects
+                this.ShipName.Items.Add(NameAny);
+                this.ShipName.Items.AddRange(includedShipObjects
 					.OrderBy(s => s.NameReading)
 					.OrderBy(s => s.ShipType)
 					.Select(s => s.NameWithClass)
 					.Union(removedShipNames.OrderBy(s => s))
 					.ToArray()
 					);
-				ShipName.SelectedIndex = 0;
+                this.ShipName.SelectedIndex = 0;
 			}
 
 			{
@@ -116,22 +116,22 @@ namespace ElectronicObserver.Window.Dialog
 					dt.Rows.Add(ship.ShipType, ship.ShipTypeName);
 				}
 				dt.AcceptChanges();
-				SecretaryCategory.DisplayMember = "Display";
-				SecretaryCategory.ValueMember = "Value";
-				SecretaryCategory.DataSource = dt;
-				SecretaryCategory.SelectedIndex = 0;
+                this.SecretaryCategory.DisplayMember = "Display";
+                this.SecretaryCategory.ValueMember = "Value";
+                this.SecretaryCategory.DataSource = dt;
+                this.SecretaryCategory.SelectedIndex = 0;
 			}
 
 			{
-				SecretaryName.Items.Add(NameAny);
-				SecretaryName.Items.AddRange(includedSecretaryObjects
+                this.SecretaryName.Items.Add(NameAny);
+                this.SecretaryName.Items.AddRange(includedSecretaryObjects
 					.OrderBy(s => s.NameReading)
 					.OrderBy(s => s.ShipType)
 					.Select(s => s.NameWithClass)
 					.Union(removedSecretaryNames.OrderBy(s => s))
 					.ToArray()
 					);
-				SecretaryName.SelectedIndex = 0;
+                this.SecretaryName.SelectedIndex = 0;
 			}
 
 			{
@@ -143,11 +143,11 @@ namespace ElectronicObserver.Window.Dialog
 				dt.Rows.Add(NameAny, NameAny);
 
 				var dict = new Dictionary<string, string>();
-				foreach (var r in _record.Record)
+				foreach (var r in this._record.Record)
 				{
-					string key = GetRecipeStringForSorting(r);
+					string key = this.GetRecipeStringForSorting(r);
 					if (!dict.ContainsKey(key))
-						dict.Add(key, GetRecipeString(r));
+						dict.Add(key, this.GetRecipeString(r));
 				}
 				foreach (var recipe in dict.OrderBy(p => p.Key))
 				{
@@ -155,10 +155,10 @@ namespace ElectronicObserver.Window.Dialog
 				}
 
 				dt.AcceptChanges();
-				Recipe.DisplayMember = "Display";
-				Recipe.ValueMember = "Value";
-				Recipe.DataSource = dt;
-				Recipe.SelectedIndex = 0;
+                this.Recipe.DisplayMember = "Display";
+                this.Recipe.ValueMember = "Value";
+                this.Recipe.DataSource = dt;
+                this.Recipe.SelectedIndex = 0;
 			}
 
 			{
@@ -168,7 +168,7 @@ namespace ElectronicObserver.Window.Dialog
 					new DataColumn( "Display", typeof( string ) ),
 				});
 				dt.Rows.Add(-1, NameAny);
-				foreach (var devmat in _record.Record
+				foreach (var devmat in this._record.Record
 					.GroupBy(r => r.DevelopmentMaterial, (key, r) => r.First())
 					.Select(r => r.DevelopmentMaterial)
 					.OrderBy(i => i))
@@ -176,10 +176,10 @@ namespace ElectronicObserver.Window.Dialog
 					dt.Rows.Add(devmat, devmat.ToString());
 				}
 				dt.AcceptChanges();
-				DevelopmentMaterial.DisplayMember = "Display";
-				DevelopmentMaterial.ValueMember = "Value";
-				DevelopmentMaterial.DataSource = dt;
-				DevelopmentMaterial.SelectedIndex = 0;
+                this.DevelopmentMaterial.DisplayMember = "Display";
+                this.DevelopmentMaterial.ValueMember = "Value";
+                this.DevelopmentMaterial.DataSource = dt;
+                this.DevelopmentMaterial.SelectedIndex = 0;
 			}
 
 			{
@@ -189,7 +189,7 @@ namespace ElectronicObserver.Window.Dialog
 					new DataColumn( "Display", typeof( string ) ),
 				});
 				dt.Rows.Add(-1, NameAny);
-				foreach (var dock in _record.Record
+				foreach (var dock in this._record.Record
 					.GroupBy(r => r.EmptyDockAmount, (key, r) => r.First())
 					.Select(r => r.EmptyDockAmount)
 					.OrderBy(i => i))
@@ -197,20 +197,20 @@ namespace ElectronicObserver.Window.Dialog
 					dt.Rows.Add(dock, dock.ToString());
 				}
 				dt.AcceptChanges();
-				EmptyDock.DisplayMember = "Display";
-				EmptyDock.ValueMember = "Value";
-				EmptyDock.DataSource = dt;
-				EmptyDock.SelectedIndex = 0;
+                this.EmptyDock.DisplayMember = "Display";
+                this.EmptyDock.ValueMember = "Value";
+                this.EmptyDock.DataSource = dt;
+                this.EmptyDock.SelectedIndex = 0;
 			}
 
-			DateBegin.Value = DateBegin.MinDate = DateEnd.MinDate = _record.Record.First().Date.Date;
-			DateEnd.Value = DateBegin.MaxDate = DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
+            this.DateBegin.Value = this.DateBegin.MinDate = this.DateEnd.MinDate = this._record.Record.First().Date.Date;
+            this.DateEnd.Value = this.DateBegin.MaxDate = this.DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
 
 			// スクロールバーを非表示にするため(実際の幅は検索開始時に設定される)
-			foreach (DataGridViewColumn column in RecordView.Columns)
+			foreach (DataGridViewColumn column in this.RecordView.Columns)
 				column.Width = 20;
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormConstructionRecord]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormConstructionRecord]);
 
 		}
 
@@ -222,20 +222,20 @@ namespace ElectronicObserver.Window.Dialog
 
 		private string GetRecipeString(int fuel, int ammo, int steel, int bauxite)
 		{
-			return GetRecipeString(new[] { fuel, ammo, steel, bauxite });
+			return this.GetRecipeString(new[] { fuel, ammo, steel, bauxite });
 		}
 
 		private string GetRecipeString(int fuel, int ammo, int steel, int bauxite, int devmat)
 		{
-			return GetRecipeString(new[] { fuel, ammo, steel, bauxite, devmat });
+			return this.GetRecipeString(new[] { fuel, ammo, steel, bauxite, devmat });
 		}
 
 		private string GetRecipeString(ConstructionRecord.ConstructionElement record, bool containsDevmat = false)
 		{
 			if (containsDevmat)
-				return GetRecipeString(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite, record.DevelopmentMaterial });
+				return this.GetRecipeString(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite, record.DevelopmentMaterial });
 			else
-				return GetRecipeString(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite });
+				return this.GetRecipeString(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite });
 		}
 
 		private string GetRecipeStringForSorting(int[] resources)
@@ -245,203 +245,203 @@ namespace ElectronicObserver.Window.Dialog
 
 		private string GetRecipeStringForSorting(int fuel, int ammo, int steel, int bauxite)
 		{
-			return GetRecipeStringForSorting(new[] { fuel, ammo, steel, bauxite });
+			return this.GetRecipeStringForSorting(new[] { fuel, ammo, steel, bauxite });
 		}
 
 		private string GetRecipeStringForSorting(int fuel, int ammo, int steel, int bauxite, int devmat)
 		{
-			return GetRecipeStringForSorting(new[] { fuel, ammo, steel, bauxite, devmat });
+			return this.GetRecipeStringForSorting(new[] { fuel, ammo, steel, bauxite, devmat });
 		}
 
 		private string GetRecipeStringForSorting(ConstructionRecord.ConstructionElement record, bool containsDevmat = false)
 		{
 			if (containsDevmat)
-				return GetRecipeStringForSorting(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite, record.DevelopmentMaterial });
+				return this.GetRecipeStringForSorting(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite, record.DevelopmentMaterial });
 			else
-				return GetRecipeStringForSorting(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite });
+				return this.GetRecipeStringForSorting(new[] { record.Fuel, record.Ammo, record.Steel, record.Bauxite });
 		}
 
 
 		private void ButtonRun_Click(object sender, EventArgs e)
 		{
 
-			if (Searcher.IsBusy)
+			if (this.Searcher.IsBusy)
 			{
 				if (MessageBox.Show("검색을 취소하시겠습니까?", "검색중입니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
 					== System.Windows.Forms.DialogResult.Yes)
 				{
-					Searcher.CancelAsync();
+                    this.Searcher.CancelAsync();
 				}
 				return;
 			}
 
-			RecordView.Rows.Clear();
+            this.RecordView.Rows.Clear();
 
 			var row = new DataGridViewRow();
-			row.CreateCells(RecordView);
+			row.CreateCells(this.RecordView);
 
 
 			var args = new SearchArgument
 			{
-				ShipCategory = (int)ShipCategory.SelectedValue,
-				ShipName = (string)ShipName.SelectedItem,
-				SecretaryCategory = (int)SecretaryCategory.SelectedValue,
-				SecretaryName = (string)SecretaryName.SelectedItem,
-				DateBegin = DateBegin.Value,
-				DateEnd = DateEnd.Value,
-				Recipe = Recipe.Text,
-				DevelopmentMaterial = (int)DevelopmentMaterial.SelectedValue,
-				EmptyDock = (int)EmptyDock.SelectedValue,
-				IsLargeConstruction = IsLargeConstruction.CheckState,
-				MergeRows = MergeRows.Checked,
+				ShipCategory = (int)this.ShipCategory.SelectedValue,
+				ShipName = (string)this.ShipName.SelectedItem,
+				SecretaryCategory = (int)this.SecretaryCategory.SelectedValue,
+				SecretaryName = (string)this.SecretaryName.SelectedItem,
+				DateBegin = this.DateBegin.Value,
+				DateEnd = this.DateEnd.Value,
+				Recipe = this.Recipe.Text,
+				DevelopmentMaterial = (int)this.DevelopmentMaterial.SelectedValue,
+				EmptyDock = (int)this.EmptyDock.SelectedValue,
+				IsLargeConstruction = this.IsLargeConstruction.CheckState,
+				MergeRows = this.MergeRows.Checked,
 				BaseRow = row
 			};
 
-			RecordView.Tag = args;
+            this.RecordView.Tag = args;
 
 
 			// column initialize
 			if (!args.MergeRows)
 			{
-				RecordView_Header.DisplayIndex = 0;
-				RecordView_Header.Width = 50;
-				RecordView_Header.HeaderText = "";
-				RecordView_Name.DisplayIndex = 1;
-				RecordView_Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-				RecordView_Name.HeaderText = "함명";
-				RecordView_Name.Visible = true;
-				RecordView_Date.DisplayIndex = 2;
-				RecordView_Date.Width = 140;
-				RecordView_Date.HeaderText = "날짜";
-				RecordView_Date.Visible = true;
-				RecordView_Recipe.DisplayIndex = 3;
-				RecordView_Recipe.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
-				RecordView_Recipe.Width = 200;
-				RecordView_Recipe.HeaderText = "레시피";
-				RecordView_Recipe.Visible = true;
-				RecordView_SecretaryShip.DisplayIndex = 4;
-				RecordView_SecretaryShip.Width = 60;
-				RecordView_SecretaryShip.HeaderText = "비서함";
-				RecordView_SecretaryShip.Visible = true;
-				RecordView_Material100.Visible = false;
-				RecordView_Material20.Visible = false;
-				RecordView_Material1.Visible = false;
+                this.RecordView_Header.DisplayIndex = 0;
+                this.RecordView_Header.Width = 50;
+                this.RecordView_Header.HeaderText = "";
+                this.RecordView_Name.DisplayIndex = 1;
+                this.RecordView_Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                this.RecordView_Name.HeaderText = "함명";
+                this.RecordView_Name.Visible = true;
+                this.RecordView_Date.DisplayIndex = 2;
+                this.RecordView_Date.Width = 140;
+                this.RecordView_Date.HeaderText = "날짜";
+                this.RecordView_Date.Visible = true;
+                this.RecordView_Recipe.DisplayIndex = 3;
+                this.RecordView_Recipe.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
+                this.RecordView_Recipe.Width = 200;
+                this.RecordView_Recipe.HeaderText = "레시피";
+                this.RecordView_Recipe.Visible = true;
+                this.RecordView_SecretaryShip.DisplayIndex = 4;
+                this.RecordView_SecretaryShip.Width = 60;
+                this.RecordView_SecretaryShip.HeaderText = "비서함";
+                this.RecordView_SecretaryShip.Visible = true;
+                this.RecordView_Material100.Visible = false;
+                this.RecordView_Material20.Visible = false;
+                this.RecordView_Material1.Visible = false;
 
 			}
 			else
 			{
 				if (args.ShipName != NameAny)
 				{
-					RecordView_Recipe.DisplayIndex = 0;
-					RecordView_Recipe.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-					RecordView_Recipe.HeaderText = "레시피";
-					RecordView_Recipe.Visible = true;
-					RecordView_Name.Visible = false;
+                    this.RecordView_Recipe.DisplayIndex = 0;
+                    this.RecordView_Recipe.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.RecordView_Recipe.HeaderText = "레시피";
+                    this.RecordView_Recipe.Visible = true;
+                    this.RecordView_Name.Visible = false;
 				}
 				else
 				{
-					RecordView_Name.DisplayIndex = 0;
-					RecordView_Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-					RecordView_Name.HeaderText = "함명";
-					RecordView_Name.Visible = true;
-					RecordView_Recipe.Visible = false;
+                    this.RecordView_Name.DisplayIndex = 0;
+                    this.RecordView_Name.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.RecordView_Name.HeaderText = "함명";
+                    this.RecordView_Name.Visible = true;
+                    this.RecordView_Recipe.Visible = false;
 				}
-				RecordView_Header.DisplayIndex = 1;
-				RecordView_Header.Width = 120;
-				RecordView_Header.HeaderText = "회수";
-				RecordView_Material100.DisplayIndex = 2;
-				RecordView_Material100.Width = 120;
-				RecordView_Material100.HeaderText = "개발자재x100";
-				RecordView_Material20.DisplayIndex = 3;
-				RecordView_Material20.Width = 120;
-				RecordView_Material20.HeaderText = "개발자재x20";
-				RecordView_Material1.DisplayIndex = 4;
-				RecordView_Material1.Width = 120;
-				RecordView_Material1.HeaderText = "개발자재x1";
+                this.RecordView_Header.DisplayIndex = 1;
+                this.RecordView_Header.Width = 120;
+                this.RecordView_Header.HeaderText = "회수";
+                this.RecordView_Material100.DisplayIndex = 2;
+                this.RecordView_Material100.Width = 120;
+                this.RecordView_Material100.HeaderText = "개발자재x100";
+                this.RecordView_Material20.DisplayIndex = 3;
+                this.RecordView_Material20.Width = 120;
+                this.RecordView_Material20.HeaderText = "개발자재x20";
+                this.RecordView_Material1.DisplayIndex = 4;
+                this.RecordView_Material1.Width = 120;
+                this.RecordView_Material1.HeaderText = "개발자재x1";
 				if (args.IsLargeConstruction == CheckState.Unchecked ||
 					(args.Recipe != NameAny && args.Recipe.IndexOf("/") < 4) ||
 					args.DevelopmentMaterial != -1)
 				{
-					RecordView_Material100.Visible = false;
-					RecordView_Material20.Visible = false;
-					RecordView_Material1.Visible = false;
+                    this.RecordView_Material100.Visible = false;
+                    this.RecordView_Material20.Visible = false;
+                    this.RecordView_Material1.Visible = false;
 				}
 				else
 				{
-					RecordView_Material100.Visible = true;
-					RecordView_Material20.Visible = true;
-					RecordView_Material1.Visible = true;
+                    this.RecordView_Material100.Visible = true;
+                    this.RecordView_Material20.Visible = true;
+                    this.RecordView_Material1.Visible = true;
 				}
-				RecordView_Date.Visible = false;
-				RecordView_SecretaryShip.Visible = false;
+                this.RecordView_Date.Visible = false;
+                this.RecordView_SecretaryShip.Visible = false;
 			}
-			RecordView.ColumnHeadersVisible = true;
+            this.RecordView.ColumnHeadersVisible = true;
 
 
-			StatusInfo.Text = "검색중입니다...";
-			StatusInfo.Tag = DateTime.Now;
+            this.StatusInfo.Text = "검색중입니다...";
+            this.StatusInfo.Tag = DateTime.Now;
 
-			Searcher.RunWorkerAsync(args);
+            this.Searcher.RunWorkerAsync(args);
 
 		}
 
 		private void ShipCategory_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
-			string name = (string)ShipName.SelectedItem;
-			var category = (ShipTypes)ShipCategory.SelectedValue;
+			string name = (string)this.ShipName.SelectedItem;
+			var category = (ShipTypes)this.ShipCategory.SelectedValue;
 
 			if (name != NameAny && (int)category != -1)
 			{
 				var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.NameWithClass == name);
 
 				if (ship == null || ship.ShipType != category)
-					ShipName.SelectedIndex = 0;
+                    this.ShipName.SelectedIndex = 0;
 			}
 		}
 
 		private void ShipName_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
-			string name = (string)ShipName.SelectedItem;
-			var category = (ShipTypes)ShipCategory.SelectedValue;
+			string name = (string)this.ShipName.SelectedItem;
+			var category = (ShipTypes)this.ShipCategory.SelectedValue;
 
 			if (name != NameAny && (int)category != -1)
 			{
 				var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.NameWithClass == name);
 
 				if (ship == null || ship.ShipType != category)
-					ShipCategory.SelectedIndex = 0;
+                    this.ShipCategory.SelectedIndex = 0;
 			}
 		}
 
 		private void SecretaryCategory_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
-			string name = (string)SecretaryName.SelectedItem;
-			var category = (ShipTypes)SecretaryCategory.SelectedValue;
+			string name = (string)this.SecretaryName.SelectedItem;
+			var category = (ShipTypes)this.SecretaryCategory.SelectedValue;
 
 			if (name != NameAny && (int)category != -1)
 			{
 				var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.NameWithClass == name);
 
 				if (ship == null || ship.ShipType != category)
-					SecretaryName.SelectedIndex = 0;
+                    this.SecretaryName.SelectedIndex = 0;
 			}
 		}
 
 		private void SecretaryName_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
-			string name = (string)SecretaryName.SelectedItem;
-			var category = (ShipTypes)SecretaryCategory.SelectedValue;
+			string name = (string)this.SecretaryName.SelectedItem;
+			var category = (ShipTypes)this.SecretaryCategory.SelectedValue;
 
 			if (name != NameAny && (int)category != -1)
 			{
 				var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.NameWithClass == name);
 
 				if (ship == null || ship.ShipType != category)
-					SecretaryCategory.SelectedIndex = 0;
+                    this.SecretaryCategory.SelectedIndex = 0;
 			}
 		}
 
@@ -500,7 +500,7 @@ namespace ElectronicObserver.Window.Dialog
 				{
 					string key;
 
-					key = GetRecipeString(r);
+					key = this.GetRecipeString(r);
 
 					if (!allcounts.ContainsKey(key))
 						allcounts.Add(key, new int[4]);
@@ -530,7 +530,7 @@ namespace ElectronicObserver.Window.Dialog
 					continue;
 
 
-				if (args.Recipe != NameAny && args.Recipe != GetRecipeString(r))
+				if (args.Recipe != NameAny && args.Recipe != this.GetRecipeString(r))
 					continue;
 
 				#endregion
@@ -545,7 +545,7 @@ namespace ElectronicObserver.Window.Dialog
 						i + 1,
 						r.ShipName,
 						r.Date,
-						GetRecipeString(r, true),
+                        this.GetRecipeString(r, true),
 						r.FlagshipName,
 						null,
 						null,
@@ -553,7 +553,7 @@ namespace ElectronicObserver.Window.Dialog
 						);
 
 					row.Cells[1].Tag = ((int?)ship?.ShipType ?? 0).ToString("D4") + (ship?.NameReading ?? r.ShipName);
-					row.Cells[3].Tag = GetRecipeStringForSorting(r, true);
+					row.Cells[3].Tag = this.GetRecipeStringForSorting(r, true);
 					row.Cells[4].Tag = ((int?)secretary?.ShipType ?? 0).ToString("D4") + (secretary?.NameReading ?? r.FlagshipName);
 
 					rows.AddLast(row);
@@ -565,7 +565,7 @@ namespace ElectronicObserver.Window.Dialog
 					string key;
 
 					if (priorityShip > 0)
-						key = GetRecipeString(r);
+						key = this.GetRecipeString(r);
 					else
 						key = r.ShipName;
 
@@ -589,7 +589,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				}
 
-				if (Searcher.CancellationPending)
+				if (this.Searcher.CancellationPending)
 					return;
 
 				i++;
@@ -617,7 +617,7 @@ namespace ElectronicObserver.Window.Dialog
 							c.Value[3]
 							);
 
-						row.Cells[3].Tag = GetRecipeStringForSorting(c.Key.Split("/".ToCharArray()).Select(s => int.Parse(s)).ToArray());
+						row.Cells[3].Tag = this.GetRecipeStringForSorting(c.Key.Split("/".ToCharArray()).Select(s => int.Parse(s)).ToArray());
 
 						row.Cells[0].Tag = allcounts[c.Key][0];
 						row.Cells[5].Tag = allcounts[c.Key][1];
@@ -662,7 +662,7 @@ namespace ElectronicObserver.Window.Dialog
 
 					rows.AddLast(row);
 
-					if (Searcher.CancellationPending)
+					if (this.Searcher.CancellationPending)
 						return;
 				}
 
@@ -680,18 +680,18 @@ namespace ElectronicObserver.Window.Dialog
 			if (!e.Cancelled)
 			{
 
-				RecordView.Rows.AddRange((DataGridViewRow[])e.Result);
+                this.RecordView.Rows.AddRange((DataGridViewRow[])e.Result);
 
-				RecordView.Sort(RecordView.SortedColumn ?? RecordView_Header,
-					RecordView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
+                this.RecordView.Sort(this.RecordView.SortedColumn ?? this.RecordView_Header,
+                    this.RecordView.SortOrder == SortOrder.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending);
 
-				StatusInfo.Text = "검색이 완료되었습니다. (" + (int)(DateTime.Now - (DateTime)StatusInfo.Tag).TotalMilliseconds + " ms)";
+                this.StatusInfo.Text = "검색이 완료되었습니다. (" + (int)(DateTime.Now - (DateTime)this.StatusInfo.Tag).TotalMilliseconds + " ms)";
 
 			}
 			else
 			{
 
-				StatusInfo.Text = "검색이 취소되었습니다.";
+                this.StatusInfo.Text = "검색이 취소되었습니다.";
 			}
 
 		}
@@ -699,8 +699,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void RecordView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
 		{
 
-			object tag1 = RecordView[e.Column.Index, e.RowIndex1].Tag;
-			object tag2 = RecordView[e.Column.Index, e.RowIndex2].Tag;
+			object tag1 = this.RecordView[e.Column.Index, e.RowIndex1].Tag;
+			object tag2 = this.RecordView[e.Column.Index, e.RowIndex2].Tag;
 
 			if (tag1 != null && (tag1 is double || tag1 is int) && e.CellValue1 is int)
 			{
@@ -741,7 +741,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.SortResult == 0)
 			{
-				e.SortResult = (int)(RecordView.Rows[e.RowIndex1].Tag ?? 0) - (int)(RecordView.Rows[e.RowIndex2].Tag ?? 0);
+				e.SortResult = (int)(this.RecordView.Rows[e.RowIndex1].Tag ?? 0) - (int)(this.RecordView.Rows[e.RowIndex2].Tag ?? 0);
 			}
 
 		}
@@ -749,16 +749,16 @@ namespace ElectronicObserver.Window.Dialog
 		private void RecordView_Sorted(object sender, EventArgs e)
 		{
 
-			for (int i = 0; i < RecordView.Rows.Count; i++)
+			for (int i = 0; i < this.RecordView.Rows.Count; i++)
 			{
-				RecordView.Rows[i].Tag = i;
+                this.RecordView.Rows[i].Tag = i;
 			}
 		}
 
 		private void RecordView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 
-			object tag = RecordView[e.ColumnIndex, e.RowIndex].Tag;
+			object tag = this.RecordView[e.ColumnIndex, e.RowIndex].Tag;
 
 			if (tag != null)
 			{
@@ -785,27 +785,27 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void RecordView_SelectionChanged(object sender, EventArgs e)
 		{
-			var args = RecordView.Tag as SearchArgument;
+			var args = this.RecordView.Tag as SearchArgument;
 			if (args == null)
 				return;
 
-			int selectedCount = RecordView.Rows.GetRowCount(DataGridViewElementStates.Selected);
+			int selectedCount = this.RecordView.Rows.GetRowCount(DataGridViewElementStates.Selected);
 
 			if (selectedCount == 0)
 				return;
 
 			if (args.MergeRows)
 			{
-				int count = RecordView.SelectedRows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
-				int allcount = RecordView.Rows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[RecordView_Header.Index].Value).Sum();
+				int count = this.RecordView.SelectedRows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[this.RecordView_Header.Index].Value).Sum();
+				int allcount = this.RecordView.Rows.OfType<DataGridViewRow>().Select(r => (int)r.Cells[this.RecordView_Header.Index].Value).Sum();
 
-				StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
+                this.StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
 					count, allcount, (double)count / allcount);
 			}
 			else
 			{
-				int allcount = RecordView.RowCount;
-				StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
+				int allcount = this.RecordView.RowCount;
+                this.StatusInfo.Text = string.Format("선택 항목 총합: {0} / {1} ({2:p1})",
 					selectedCount, allcount, (double)selectedCount / allcount);
 			}
 		}

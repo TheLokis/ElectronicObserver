@@ -37,9 +37,9 @@ namespace ElectronicObserver.Utility.Data
 
 			internal Experience(int level, int total, int next)
 			{
-				Level = level;
-				Total = total;
-				Next = next;
+                this.Level = level;
+                this.Total = total;
+                this.Next = next;
 			}
 
 		}

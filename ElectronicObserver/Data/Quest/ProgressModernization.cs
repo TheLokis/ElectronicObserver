@@ -22,7 +22,7 @@ namespace ElectronicObserver.Data.Quest
 
 		public override string GetClearCondition()
 		{
-			return "근대화개수 " + ProgressMax;
+			return "근대화개수 " + this.ProgressMax;
 		}
 	}
 }

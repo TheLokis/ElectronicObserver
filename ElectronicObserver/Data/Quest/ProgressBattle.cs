@@ -38,9 +38,9 @@ namespace ElectronicObserver.Data.Quest
 			: base(quest, maxCount)
 		{
 
-			LowestRank = Constants.GetWinRank(lowestRank);
-			TargetArea = targetArea == null ? null : new HashSet<int>(targetArea);
-			IsBossOnly = isBossOnly;
+            this.LowestRank = Constants.GetWinRank(lowestRank);
+            this.TargetArea = targetArea == null ? null : new HashSet<int>(targetArea);
+            this.IsBossOnly = isBossOnly;
 		}
 
 
@@ -48,17 +48,17 @@ namespace ElectronicObserver.Data.Quest
         public virtual void Increment(string rank, int areaID, bool isBoss)
         {
 
-            if (TargetArea != null && !TargetArea.Contains(areaID))
+            if (this.TargetArea != null && !this.TargetArea.Contains(areaID))
 				return;
 
-			if (Constants.GetWinRank(rank) < LowestRank)
+			if (Constants.GetWinRank(rank) < this.LowestRank)
 				return;
 
-			if (IsBossOnly && !isBoss)
+			if (this.IsBossOnly && !isBoss)
 				return;
 
 
-			Increment();
+            this.Increment();
 		}
 
 
@@ -66,13 +66,13 @@ namespace ElectronicObserver.Data.Quest
 		public override string GetClearCondition()
 		{
 			StringBuilder sb = new StringBuilder();
-			if (TargetArea != null)
+			if (this.TargetArea != null)
 			{
-				sb.Append(string.Join("・", TargetArea.OrderBy(s => s).Select(s => string.Format("{0}-{1}", s / 10, s % 10))));
+				sb.Append(string.Join("・", this.TargetArea.OrderBy(s => s).Select(s => string.Format("{0}-{1}", s / 10, s % 10))));
 			}
-			if (IsBossOnly)
+			if (this.IsBossOnly)
 				sb.Append(" 보스 ");
-			switch (LowestRank)
+			switch (this.LowestRank)
 			{
                 case 0:
                     sb.Append("전투 ");
@@ -83,7 +83,7 @@ namespace ElectronicObserver.Data.Quest
 					break;
 				case 2:
 				case 3:
-					sb.Append(Constants.GetWinRank(LowestRank) + "이상 ");
+					sb.Append(Constants.GetWinRank(this.LowestRank) + "이상 ");
 					break;
 				case 4:
 					sb.Append("승리 ");
@@ -91,10 +91,10 @@ namespace ElectronicObserver.Data.Quest
 				case 5:
 				case 6:
 				case 7:
-					sb.Append(Constants.GetWinRank(LowestRank) + "승리 ");
+					sb.Append(Constants.GetWinRank(this.LowestRank) + "승리 ");
 					break;
 			}
-			sb.Append(ProgressMax);
+			sb.Append(this.ProgressMax);
             sb.Append(" 회");
 
 			return sb.ToString();

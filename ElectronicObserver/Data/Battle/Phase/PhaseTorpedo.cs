@@ -25,13 +25,13 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 			this.phaseID = phaseID;
 
-			if (!IsAvailable)
+			if (!this.IsAvailable)
 				return;
 
-			Damages = GetConcatArray("api_fdam", "api_edam", 0.0);
-			AttackDamages = GetConcatArray("api_fydam", "api_eydam", 0);
-			Targets = GetConcatArray("api_frai", "api_erai", -1);
-			CriticalFlags = GetConcatArray("api_fcl", "api_ecl", 0);
+            this.Damages = this.GetConcatArray("api_fdam", "api_edam", 0.0);
+            this.AttackDamages = this.GetConcatArray("api_fydam", "api_eydam", 0);
+            this.Targets = this.GetConcatArray("api_frai", "api_erai", -1);
+            this.CriticalFlags = this.GetConcatArray("api_fcl", "api_ecl", 0);
 
 		}
 
@@ -40,14 +40,14 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				if (phaseID == 0)
+				if (this.phaseID == 0)
 				{
-					return RawData.api_opening_flag() ? (int)RawData.api_opening_flag != 0 : false;
+					return this.RawData.api_opening_flag() ? (int)this.RawData.api_opening_flag != 0 : false;
 
 				}
 				else
 				{
-					return (int)RawData.api_hourai_flag[phaseID - 1] != 0;
+					return (int)this.RawData.api_hourai_flag[this.phaseID - 1] != 0;
 				}
 			}
 		}
@@ -56,36 +56,36 @@ namespace ElectronicObserver.Data.Battle.Phase
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
 
-			if (!IsAvailable)
+			if (!this.IsAvailable)
 				return;
 
 			// 表示上は逐次ダメージ反映のほうが都合がいいが、AddDamage を逐次的にやるとダメコン判定を誤るため
 			int[] currentHP = new int[hps.Length];
 			Array.Copy(hps, currentHP, currentHP.Length);
 
-			for (int i = 0; i < Targets.Length; i++)
+			for (int i = 0; i < this.Targets.Length; i++)
 			{
-				if (Targets[i] >= 0)
+				if (this.Targets[i] >= 0)
 				{
-					BattleIndex attacker = new BattleIndex(i, Battle.IsFriendCombined, Battle.IsEnemyCombined);
-					BattleIndex defender = new BattleIndex(Targets[i] + (i < 12 ? 12 : 0), Battle.IsFriendCombined, Battle.IsEnemyCombined);
+					BattleIndex attacker = new BattleIndex(i, this.Battle.IsFriendCombined, this.Battle.IsEnemyCombined);
+					BattleIndex defender = new BattleIndex(this.Targets[i] + (i < 12 ? 12 : 0), this.Battle.IsFriendCombined, this.Battle.IsEnemyCombined);
 
-					BattleDetails.Add(new BattleDayDetail(Battle, attacker, defender, new double[] { AttackDamages[i] + Damages[defender] - Math.Floor(Damages[defender]) },    //propagates "guards flagship" flag
-						new int[] { CriticalFlags[i] }, -1, null, currentHP[defender]));
-					currentHP[defender] -= Math.Max(AttackDamages[i], 0);
+                    this.BattleDetails.Add(new BattleDayDetail(this.Battle, attacker, defender, new double[] { this.AttackDamages[i] + this.Damages[defender] - Math.Floor(this.Damages[defender]) },    //propagates "guards flagship" flag
+						new int[] { this.CriticalFlags[i] }, -1, null, currentHP[defender]));
+					currentHP[defender] -= Math.Max(this.AttackDamages[i], 0);
 				}
 			}
 
 			for (int i = 0; i < hps.Length; i++)
 			{
-				AddDamage(hps, i, (int)Damages[i]);
-				damages[i] += AttackDamages[i];
+                this.AddDamage(hps, i, (int)this.Damages[i]);
+				damages[i] += this.AttackDamages[i];
 			}
 
 		}
 
 
-		public dynamic TorpedoData => phaseID == 0 ? RawData.api_opening_atack : RawData.api_raigeki;
+		public dynamic TorpedoData => this.phaseID == 0 ? this.RawData.api_opening_atack : this.RawData.api_raigeki;
 
 
 		/// <summary>
@@ -113,8 +113,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 		private T[] GetConcatArray<T>(string friendName, string enemyName, T defaultValue)
 		{
-			var friend = (T[])TorpedoData[friendName];
-			var enemy = (T[])TorpedoData[enemyName];
+			var friend = (T[])this.TorpedoData[friendName];
+			var enemy = (T[])this.TorpedoData[enemyName];
 
 			var ret = new T[24];
 

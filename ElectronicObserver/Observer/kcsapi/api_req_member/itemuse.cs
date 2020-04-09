@@ -18,7 +18,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_member
                     if (elem != null && elem.api_slotitem())
                     {
 						var eq = new EquipmentData();
-						eq.LoadFromResponse(APIName, elem.api_slotitem);
+						eq.LoadFromResponse(this.APIName, elem.api_slotitem);
 						KCDatabase.Instance.Equipments.Add(eq);
 					}
 				}

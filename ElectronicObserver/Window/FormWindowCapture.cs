@@ -31,18 +31,18 @@ namespace ElectronicObserver.Window
 
 		public FormWindowCapture(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
 			this.parent = parent;
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture]);
 			this.windowCaptureButton.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture];
 
-			SystemEvents.SystemShuttingDown += SystemEvents_SystemShuttingDown;
+			SystemEvents.SystemShuttingDown += this.SystemEvents_SystemShuttingDown;
 		}
 
 		private void SystemEvents_SystemShuttingDown()
 		{
-			DetachAll();
+            this.DetachAll();
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void AddCapturedWindow(FormIntegrate form)
 		{
-			capturedWindows.Add(form);
+            this.capturedWindows.Add(form);
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void AttachAll()
 		{
-			capturedWindows.ForEach(form => form.Grab());
+            this.capturedWindows.ForEach(form => form.Grab());
 		}
 
 		/// <summary>
@@ -67,9 +67,9 @@ namespace ElectronicObserver.Window
 		public void DetachAll()
 		{
 			// ウィンドウのzオーダー維持のためデタッチはアタッチの逆順で行う
-			for (int i = capturedWindows.Count; i > 0; --i)
+			for (int i = this.capturedWindows.Count; i > 0; --i)
 			{
-				capturedWindows[i - 1].Detach();
+                this.capturedWindows[i - 1].Detach();
 			}
 		}
 
@@ -78,9 +78,9 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		public void CloseAll()
 		{
-			DetachAll();
-			capturedWindows.ForEach(form => form.Close());
-			capturedWindows.Clear();
+            this.DetachAll();
+            this.capturedWindows.ForEach(form => form.Close());
+            this.capturedWindows.Clear();
 		}
 
 		private void windowCaptureButton_WindowCaptured(IntPtr hWnd)
@@ -95,7 +95,7 @@ namespace ElectronicObserver.Window
 				== System.Windows.Forms.DialogResult.Yes)
 			{
 
-				FormIntegrate form = new FormIntegrate(parent);
+				FormIntegrate form = new FormIntegrate(this.parent);
 				form.Show(hWnd);
 			}
 		}

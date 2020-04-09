@@ -24,17 +24,17 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 装備のインスタンス
 		/// </summary>
-		public EquipmentData EquipmentInstance => KCDatabase.Instance.Equipments[EquipmentID];
+		public EquipmentData EquipmentInstance => KCDatabase.Instance.Equipments[this.EquipmentID];
 
 
 		public RelocationData(int equipmentID, DateTime relocatedTime)
 		{
-			EquipmentID = equipmentID;
-			RelocatedTime = relocatedTime;
+            this.EquipmentID = equipmentID;
+            this.RelocatedTime = relocatedTime;
 		}
 
-		public int ID => EquipmentID;
-		public override string ToString() => $"[{EquipmentID}] {EquipmentInstance.NameWithLevel} @ {RelocatedTime}";
+		public int ID => this.EquipmentID;
+		public override string ToString() => $"[{this.EquipmentID}] {this.EquipmentInstance.NameWithLevel} @ {this.RelocatedTime}";
 	}
 
 }

@@ -7,26 +7,12 @@ using System.Threading.Tasks;
 
 namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
 {
-
     public class createitem : APIBase
     {
-
-        private int[] materials;
-
-        public createitem()
-            : base()
-        {
-
-            materials = new int[4];
-        }
-
         public override void OnRequestReceived(Dictionary<string, string> data)
         {
 
-            for (int i = 0; i < 4; i++)
-            {
-                materials[i] = int.Parse(data["api_item" + (i + 1)]);
-            }
+            KCDatabase.Instance.Development.LoadFromRequest(this.APIName, data);
 
             base.OnRequestReceived(data);
         }
@@ -37,7 +23,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kousyou
             var dev = db.Development;
             //装備の追加　データが不十分のため、自力で構築しなければならない
 
-            dev.LoadFromResponse(APIName, data);
+            dev.LoadFromResponse(this.APIName, data);
 
             if (Utility.Configuration.Config.Log.ShowSpoiler)
             {

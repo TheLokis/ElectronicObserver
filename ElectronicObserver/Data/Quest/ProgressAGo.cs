@@ -47,8 +47,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int sortieCount
 		{
-			get { return Progress & 0xFF; }
-			set { Progress = (Progress & ~0xFF) | (Math.Min(value, sortieMax) & 0xFF); }
+			get { return this.Progress & 0xFF; }
+			set { this.Progress = (this.Progress & ~0xFF) | (Math.Min(value, this.sortieMax) & 0xFF); }
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int sWinCount
 		{
-			get { return (Progress >> 8) & 0xFF; }
-			set { Progress = (Progress & ~(0xFF << 8)) | ((Math.Min(value, sWinMax) & 0xFF) << 8); }
+			get { return (this.Progress >> 8) & 0xFF; }
+			set { this.Progress = (this.Progress & ~(0xFF << 8)) | ((Math.Min(value, this.sWinMax) & 0xFF) << 8); }
 		}
 
 		/// <summary>
@@ -67,8 +67,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int bossCount
 		{
-			get { return (Progress >> 16) & 0xFF; }
-			set { Progress = (Progress & ~(0xFF << 16)) | ((Math.Min(value, bossMax) & 0xFF) << 16); }
+			get { return (this.Progress >> 16) & 0xFF; }
+			set { this.Progress = (this.Progress & ~(0xFF << 16)) | ((Math.Min(value, this.bossMax) & 0xFF) << 16); }
 		}
 
 		/// <summary>
@@ -77,8 +77,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int bossWinCount
 		{
-			get { return (Progress >> 24) & 0xFF; }
-			set { Progress = (Progress & ~(0xFF << 24)) | ((Math.Min(value, bossWinMax) & 0xFF) << 24); }
+			get { return (this.Progress >> 24) & 0xFF; }
+			set { this.Progress = (this.Progress & ~(0xFF << 24)) | ((Math.Min(value, this.bossWinMax) & 0xFF) << 24); }
 		}
 
 
@@ -90,8 +90,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int sortieCountTemp
 		{
-			get { return TemporaryProgress & 0xFF; }
-			set { TemporaryProgress = (TemporaryProgress & ~0xFF) | (Math.Min(value, sortieMax) & 0xFF); }
+			get { return this.TemporaryProgress & 0xFF; }
+			set { this.TemporaryProgress = (this.TemporaryProgress & ~0xFF) | (Math.Min(value, this.sortieMax) & 0xFF); }
 		}
 
 		/// <summary>
@@ -100,8 +100,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int sWinCountTemp
 		{
-			get { return (TemporaryProgress >> 8) & 0xFF; }
-			set { TemporaryProgress = (TemporaryProgress & ~(0xFF << 8)) | ((Math.Min(value, sWinMax) & 0xFF) << 8); }
+			get { return (this.TemporaryProgress >> 8) & 0xFF; }
+			set { this.TemporaryProgress = (this.TemporaryProgress & ~(0xFF << 8)) | ((Math.Min(value, this.sWinMax) & 0xFF) << 8); }
 		}
 
 		/// <summary>
@@ -110,8 +110,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int bossCountTemp
 		{
-			get { return (TemporaryProgress >> 16) & 0xFF; }
-			set { TemporaryProgress = (TemporaryProgress & ~(0xFF << 16)) | ((Math.Min(value, bossMax) & 0xFF) << 16); }
+			get { return (this.TemporaryProgress >> 16) & 0xFF; }
+			set { this.TemporaryProgress = (this.TemporaryProgress & ~(0xFF << 16)) | ((Math.Min(value, this.bossMax) & 0xFF) << 16); }
 		}
 
 		/// <summary>
@@ -120,8 +120,8 @@ namespace ElectronicObserver.Data.Quest
 		[IgnoreDataMember]
 		private int bossWinCountTemp
 		{
-			get { return (TemporaryProgress >> 24) & 0xFF; }
-			set { TemporaryProgress = (TemporaryProgress & ~(0xFF << 24)) | ((Math.Min(value, bossWinMax) & 0xFF) << 24); }
+			get { return (this.TemporaryProgress >> 24) & 0xFF; }
+			set { this.TemporaryProgress = (this.TemporaryProgress & ~(0xFF << 24)) | ((Math.Min(value, this.bossWinMax) & 0xFF) << 24); }
 		}
 
 		#endregion
@@ -138,10 +138,10 @@ namespace ElectronicObserver.Data.Quest
 			get
 			{
 				double prog = 0;
-				prog += Math.Min((double)sortieCount / sortieMax, 1.0) * 0.25;
-				prog += Math.Min((double)sWinCount / sWinMax, 1.0) * 0.25;
-				prog += Math.Min((double)bossCount / bossMax, 1.0) * 0.25;
-				prog += Math.Min((double)bossWinCount / bossWinMax, 1.0) * 0.25;
+				prog += Math.Min((double)this.sortieCount / this.sortieMax, 1.0) * 0.25;
+				prog += Math.Min((double)this.sWinCount / this.sWinMax, 1.0) * 0.25;
+				prog += Math.Min((double)this.bossCount / this.bossMax, 1.0) * 0.25;
+				prog += Math.Min((double)this.bossWinCount / this.bossWinMax, 1.0) * 0.25;
 				return prog;
 			}
 		}
@@ -162,19 +162,19 @@ namespace ElectronicObserver.Data.Quest
 		public override void CheckProgress(QuestData q)
 		{
 
-			if (TemporaryProgress != 0)
+			if (this.TemporaryProgress != 0)
 			{
 				if (q.State == 2)
 				{
 
-					sortieCount = sortieCount + sortieCountTemp;
-					sWinCount = sWinCount + sWinCountTemp;
-					bossCount = bossCount + bossCountTemp;
-					bossWinCount = bossWinCount + bossWinCountTemp;
+                    this.sortieCount = this.sortieCount + this.sortieCountTemp;
+                    this.sWinCount = this.sWinCount + this.sWinCountTemp;
+                    this.bossCount = this.bossCount + this.bossCountTemp;
+                    this.bossWinCount = this.bossWinCount + this.bossWinCountTemp;
 
 				}
 
-				TemporaryProgress = 0;
+                this.TemporaryProgress = 0;
 			}
 
 		}
@@ -186,11 +186,11 @@ namespace ElectronicObserver.Data.Quest
 		public void IncrementSortie()
 		{
 
-			var q = KCDatabase.Instance.Quest[QuestID];
+			var q = KCDatabase.Instance.Quest[this.QuestID];
 
 			if (q == null)
 			{
-				sortieCountTemp++;
+                this.sortieCountTemp++;
 				return;
 			}
 
@@ -198,9 +198,9 @@ namespace ElectronicObserver.Data.Quest
 				return;
 
 
-			CheckProgress(q);
+            this.CheckProgress(q);
 
-			sortieCount++;
+            this.sortieCount++;
 		}
 
 		/// <summary>
@@ -209,14 +209,14 @@ namespace ElectronicObserver.Data.Quest
 		public void IncrementBattle(string rank, bool isBoss)
 		{
 
-			var q = KCDatabase.Instance.Quest[QuestID];
+			var q = KCDatabase.Instance.Quest[this.QuestID];
 
 			if (q != null)
 			{
 				if (q.State != 2)
 					return;
 				else
-					CheckProgress(q);
+                    this.CheckProgress(q);
 			}
 
 
@@ -224,14 +224,14 @@ namespace ElectronicObserver.Data.Quest
 
 			if (isBoss)
 			{
-				if (q != null) bossCount++; else bossCountTemp++;
+				if (q != null) this.bossCount++; else this.bossCountTemp++;
 
 				if (irank >= Constants.GetWinRank("B"))
-					if (q != null) bossWinCount++; else bossWinCountTemp++;
+					if (q != null) this.bossWinCount++; else this.bossWinCountTemp++;
 			}
 
 			if (irank >= Constants.GetWinRank("S"))
-				if (q != null) sWinCount++; else sWinCountTemp++;
+				if (q != null) this.sWinCount++; else this.sWinCountTemp++;
 
 		}
 
@@ -240,19 +240,19 @@ namespace ElectronicObserver.Data.Quest
 		{
 			var list = new List<DSPair>
 			{
-				new DSPair(Math.Min((double)sortieCount / sortieMax, 1.0), string.Format("출격 {0}/{1}", sortieCount, sortieMax)),
-				new DSPair(Math.Min((double)sWinCount / sWinMax, 1.0), string.Format(" S승리 {0}/{1}", sWinCount, sWinMax)),
-				new DSPair(Math.Min((double)bossCount / bossMax, 1.0), string.Format(" 보스 {0}/{1}", bossCount, bossMax)),
-				new DSPair(Math.Min((double)bossWinCount / bossWinMax, 1.0), string.Format(" 보스승리 {0}/{1}", bossWinCount, bossWinMax))
+				new DSPair(Math.Min((double)this.sortieCount / this.sortieMax, 1.0), string.Format("출격 {0}/{1}", this.sortieCount, this.sortieMax)),
+				new DSPair(Math.Min((double)this.sWinCount / this.sWinMax, 1.0), string.Format(" S승리 {0}/{1}", this.sWinCount, this.sWinMax)),
+				new DSPair(Math.Min((double)this.bossCount / this.bossMax, 1.0), string.Format(" 보스 {0}/{1}", this.bossCount, this.bossMax)),
+				new DSPair(Math.Min((double)this.bossWinCount / this.bossWinMax, 1.0), string.Format(" 보스승리 {0}/{1}", this.bossWinCount, this.bossWinMax))
 			};
 
 			var slist = list.Where(elem => elem.Key < 1.0).OrderBy(elem => elem.Key).Select(elem => elem.Value);
-            return string.Format("{0} ({1:p1})", slist.Count() > 0 ? string.Join(", ", slist) : "달성", ProgressPercentage);
+            return string.Format("{0} ({1:p1})", slist.Count() > 0 ? string.Join(", ", slist) : "달성", this.ProgressPercentage);
         }
 
 		public override string GetClearCondition()
 		{
-			return string.Format("출격 {0}, S승리 {1}, 보스 {2}, 보스승리 {3}", sortieMax, sWinMax, bossMax, bossWinMax);
+			return string.Format("출격 {0}, S승리 {1}, 보스 {2}, 보스승리 {3}", this.sortieMax, this.sWinMax, this.bossMax, this.bossWinMax);
 		}
 	}
 

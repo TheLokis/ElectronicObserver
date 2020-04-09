@@ -23,7 +23,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_member
 				new Window.Dialog.DialogHalloween().Show();
 			}
 
-			KCDatabase.Instance.Admiral.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.Admiral.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

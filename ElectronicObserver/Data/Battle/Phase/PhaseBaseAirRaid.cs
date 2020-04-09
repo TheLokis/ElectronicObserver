@@ -18,14 +18,14 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 参加した航空中隊データ
 		/// </summary>
-		public ReadOnlyCollection<BattleBaseAirCorpsSquadron> Squadrons => Array.AsReadOnly(_squadrons);
+		public ReadOnlyCollection<BattleBaseAirCorpsSquadron> Squadrons => Array.AsReadOnly(this._squadrons);
 
 		private IEnumerable<BattleBaseAirCorpsSquadron> GetSquadrons()
 		{
-			if (AirBattleData.api_map_squadron_plane == null)
+			if (this.AirBattleData.api_map_squadron_plane == null)
 				yield break;
 
-			foreach (KeyValuePair<string, dynamic> p in AirBattleData.api_map_squadron_plane)
+			foreach (KeyValuePair<string, dynamic> p in this.AirBattleData.api_map_squadron_plane)
 			{
 				if (!(p.Value is Codeplex.Data.DynamicJson))
 					continue;
@@ -42,25 +42,25 @@ namespace ElectronicObserver.Data.Battle.Phase
 			: base(data, title)
 		{
 
-			AirBattleData = data.RawData.api_air_base_attack;
-			StageFlag = AirBattleData.api_stage_flag() ? (int[])AirBattleData.api_stage_flag : null;
+            this.AirBattleData = data.RawData.api_air_base_attack;
+            this.StageFlag = this.AirBattleData.api_stage_flag() ? (int[])this.AirBattleData.api_stage_flag : null;
 
-			LaunchedShipIndexFriend = GetLaunchedShipIndex(0);
-			LaunchedShipIndexEnemy = GetLaunchedShipIndex(1);
+            this.LaunchedShipIndexFriend = this.GetLaunchedShipIndex(0);
+            this.LaunchedShipIndexEnemy = this.GetLaunchedShipIndex(1);
 
-			_squadrons = GetSquadrons().ToArray();
+            this._squadrons = this.GetSquadrons().ToArray();
 
-			TorpedoFlags = ConcatStage3Array<int>("api_frai_flag", "api_erai_flag");
-			BomberFlags = ConcatStage3Array<int>("api_fbak_flag", "api_ebak_flag");
-			Criticals = ConcatStage3Array<int>("api_fcl_flag", "api_ecl_flag");
-			Damages = ConcatStage3Array<double>("api_fdam", "api_edam");
+            this.TorpedoFlags = this.ConcatStage3Array<int>("api_frai_flag", "api_erai_flag");
+            this.BomberFlags = this.ConcatStage3Array<int>("api_fbak_flag", "api_ebak_flag");
+            this.Criticals = this.ConcatStage3Array<int>("api_fcl_flag", "api_ecl_flag");
+            this.Damages = this.ConcatStage3Array<double>("api_fdam", "api_edam");
 		}
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
-			if (!IsAvailable) return;
+			if (!this.IsAvailable) return;
 
-			CalculateAttack(-1, hps);
+            this.CalculateAttack(-1, hps);
 		}
 
 	}

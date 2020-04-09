@@ -31,9 +31,9 @@ namespace ElectronicObserver.Window
 			public TableArsenalControl(FormArsenal parent)
 			{
 
-				#region Initialize
+                #region Initialize
 
-				ShipName = new ImageLabel
+                this.ShipName = new ImageLabel
 				{
 					Text = "???",
 					Anchor = AnchorStyles.Left,
@@ -48,7 +48,7 @@ namespace ElectronicObserver.Window
 					Visible = true
 				};
 
-				CompletionTime = new Label
+                this.CompletionTime = new Label
 				{
 					Text = "",
 					Anchor = AnchorStyles.Left,
@@ -62,9 +62,9 @@ namespace ElectronicObserver.Window
 					Visible = true
 				};
 
-				ConfigurationChanged(parent);
+                this.ConfigurationChanged(parent);
 
-				tooltip = parent.ToolTipInfo;
+                this.tooltip = parent.ToolTipInfo;
 				#endregion
 
 			}
@@ -74,15 +74,15 @@ namespace ElectronicObserver.Window
 				: this(parent)
 			{
 
-				AddToTable(table, row);
+                this.AddToTable(table, row);
 			}
 
 
 			public void AddToTable(TableLayoutPanel table, int row)
 			{
 
-				table.Controls.Add(ShipName, 0, row);
-				table.Controls.Add(CompletionTime, 1, row);
+				table.Controls.Add(this.ShipName, 0, row);
+				table.Controls.Add(this.CompletionTime, 1, row);
 
 			}
 
@@ -94,45 +94,45 @@ namespace ElectronicObserver.Window
 				ArsenalData arsenal = db.Arsenals[arsenalID];
 				bool showShipName = Utility.Configuration.Config.FormArsenal.ShowShipName;
 
-				CompletionTime.BackColor = Color.Transparent;
-				tooltip.SetToolTip(ShipName, null);
-				tooltip.SetToolTip(CompletionTime, null);
+                this.CompletionTime.BackColor = Color.Transparent;
+                this.tooltip.SetToolTip(this.ShipName, null);
+                this.tooltip.SetToolTip(this.CompletionTime, null);
 
 				if (arsenal == null || arsenal.State == -1)
 				{
-					//locked
-					ShipName.Text = "";
-					CompletionTime.Text = "";
-					CompletionTime.Tag = null;
+                    //locked
+                    this.ShipName.Text = "";
+                    this.CompletionTime.Text = "";
+                    this.CompletionTime.Tag = null;
 
 				}
 				else if (arsenal.State == 0)
 				{
-					//empty
-					ShipName.Text = "----";
-					CompletionTime.Text = "";
-					CompletionTime.Tag = null;
+                    //empty
+                    this.ShipName.Text = "----";
+                    this.CompletionTime.Text = "";
+                    this.CompletionTime.Tag = null;
 
 				}
 				else if (arsenal.State == 2)
 				{
 					//building
 					string name = showShipName ? db.MasterShips[arsenal.ShipID].Name : "???";
-					ShipName.Text = name;
-					tooltip.SetToolTip(ShipName, name);
-					CompletionTime.Text = DateTimeHelper.ToTimeRemainString(arsenal.CompletionTime);
-					CompletionTime.Tag = arsenal.CompletionTime;
-					tooltip.SetToolTip(CompletionTime, "완료시간 : " + DateTimeHelper.TimeToCSVString(arsenal.CompletionTime));
+                    this.ShipName.Text = name;
+                    this.tooltip.SetToolTip(this.ShipName, name);
+                    this.CompletionTime.Text = DateTimeHelper.ToTimeRemainString(arsenal.CompletionTime);
+                    this.CompletionTime.Tag = arsenal.CompletionTime;
+                    this.tooltip.SetToolTip(this.CompletionTime, "완료시간 : " + DateTimeHelper.TimeToCSVString(arsenal.CompletionTime));
 
 				}
 				else if (arsenal.State == 3)
 				{
 					//complete!
 					string name = showShipName ? db.MasterShips[arsenal.ShipID].Name : "???";
-					ShipName.Text = name;
-					tooltip.SetToolTip(ShipName, name);
-					CompletionTime.Text = "완성！";
-					CompletionTime.Tag = null;
+                    this.ShipName.Text = name;
+                    this.tooltip.SetToolTip(this.ShipName, name);
+                    this.CompletionTime.Text = "완성！";
+                    this.CompletionTime.Tag = null;
 
 				}
 
@@ -142,23 +142,23 @@ namespace ElectronicObserver.Window
 			public void Refresh(int arsenalID)
 			{
 
-				if (CompletionTime.Tag != null)
+				if (this.CompletionTime.Tag != null)
 				{
 
-					var time = (DateTime)CompletionTime.Tag;
+					var time = (DateTime)this.CompletionTime.Tag;
 
-					CompletionTime.Text = DateTimeHelper.ToTimeRemainString(time);
+                    this.CompletionTime.Text = DateTimeHelper.ToTimeRemainString(time);
 
 					if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && (time - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierConstruction.AccelInterval)
 					{
-						CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
+                        this.CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 					}
 
 				}
-				else if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && !string.IsNullOrWhiteSpace(CompletionTime.Text))
+				else if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && !string.IsNullOrWhiteSpace(this.CompletionTime.Text))
 				{
-					//完成しているので
-					CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
+                    //完成しているので
+                    this.CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 				}
 			}
 
@@ -168,19 +168,19 @@ namespace ElectronicObserver.Window
 
 				var config = Utility.Configuration.Config.FormArsenal;
 
-				ShipName.Font = parent.Font;
-				CompletionTime.Font = parent.Font;
-				CompletionTime.BackColor = Color.Transparent;
-				ShipName.MaximumSize = new Size(config.MaxShipNameWidth, ShipName.MaximumSize.Height);
-                ShipName.ForeColor = parent.ForeColor;
-                CompletionTime.ForeColor = parent.ForeColor;
+                this.ShipName.Font = parent.Font;
+                this.CompletionTime.Font = parent.Font;
+                this.CompletionTime.BackColor = Color.Transparent;
+                this.ShipName.MaximumSize = new Size(config.MaxShipNameWidth, this.ShipName.MaximumSize.Height);
+                this.ShipName.ForeColor = parent.ForeColor;
+                this.CompletionTime.ForeColor = parent.ForeColor;
 
             }
 
 			public void Dispose()
 			{
-				ShipName.Dispose();
-				CompletionTime.Dispose();
+                this.ShipName.Dispose();
+                this.CompletionTime.Dispose();
 			}
 		}
 
@@ -190,25 +190,25 @@ namespace ElectronicObserver.Window
 
 		public FormArsenal(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			Utility.SystemEvents.UpdateTimerTick += UpdateTimerTick;
+			Utility.SystemEvents.UpdateTimerTick += this.UpdateTimerTick;
 
-			ControlHelper.SetDoubleBuffered(TableArsenal);
+			ControlHelper.SetDoubleBuffered(this.TableArsenal);
 
-			TableArsenal.SuspendLayout();
-			ControlArsenal = new TableArsenalControl[4];
-			for (int i = 0; i < ControlArsenal.Length; i++)
+            this.TableArsenal.SuspendLayout();
+            this.ControlArsenal = new TableArsenalControl[4];
+			for (int i = 0; i < this.ControlArsenal.Length; i++)
 			{
-				ControlArsenal[i] = new TableArsenalControl(this, TableArsenal, i);
+                this.ControlArsenal[i] = new TableArsenalControl(this, this.TableArsenal, i);
 			}
-			TableArsenal.ResumeLayout();
+            this.TableArsenal.ResumeLayout();
 
-			_buildingID = -1;
+            this._buildingID = -1;
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormArsenal]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormArsenal]);
 		}
 
 
@@ -218,14 +218,14 @@ namespace ElectronicObserver.Window
 
 			APIObserver o = APIObserver.Instance;
 
-			o["api_req_kousyou/createship"].RequestReceived += Updated;
-			o["api_req_kousyou/createship_speedchange"].RequestReceived += Updated;
+			o["api_req_kousyou/createship"].RequestReceived += this.Updated;
+			o["api_req_kousyou/createship_speedchange"].RequestReceived += this.Updated;
 
-			o["api_get_member/kdock"].ResponseReceived += Updated;
-			o["api_req_kousyou/getship"].ResponseReceived += Updated;
-			o["api_get_member/require_info"].ResponseReceived += Updated;
+			o["api_get_member/kdock"].ResponseReceived += this.Updated;
+			o["api_req_kousyou/getship"].ResponseReceived += this.Updated;
+			o["api_get_member/require_info"].ResponseReceived += this.Updated;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 
 		}
 
@@ -233,10 +233,10 @@ namespace ElectronicObserver.Window
 		void Updated(string apiname, dynamic data)
 		{
 
-			if (_buildingID != -1 && apiname == "api_get_member/kdock")
+			if (this._buildingID != -1 && apiname == "api_get_member/kdock")
 			{
 
-				ArsenalData arsenal = KCDatabase.Instance.Arsenals[_buildingID];
+				ArsenalData arsenal = KCDatabase.Instance.Arsenals[this._buildingID];
 				ShipDataMaster ship = KCDatabase.Instance.MasterShips[arsenal.ShipID];
 				string name;
 
@@ -253,7 +253,7 @@ namespace ElectronicObserver.Window
 				}
 
 				Utility.Logger.Add(2, string.Format("공창독 #{0}에 {1}의 건조를 시작했습니다. ({2}/{3}/{4}/{5}-{6} 비서함: {7})",
-					_buildingID,
+                    this._buildingID,
 					name,
 					arsenal.Fuel,
 					arsenal.Ammo,
@@ -263,37 +263,37 @@ namespace ElectronicObserver.Window
 					KCDatabase.Instance.Fleet[1].MembersInstance[0].NameWithLevel
 					));
 
-				_buildingID = -1;
+                this._buildingID = -1;
 			}
 
 			if (apiname == "api_req_kousyou/createship")
 			{
-				_buildingID = int.Parse(data["api_kdock_id"]);
+                this._buildingID = int.Parse(data["api_kdock_id"]);
 			}
 
-			UpdateUI();
+            this.UpdateUI();
 		}
 
 		void UpdateUI()
 		{
 
-			if (ControlArsenal == null) return;
+			if (this.ControlArsenal == null) return;
 
-			TableArsenal.SuspendLayout();
-			TableArsenal.RowCount = KCDatabase.Instance.Arsenals.Values.Count(a => a.State != -1);
-			for (int i = 0; i < ControlArsenal.Length; i++)
-				ControlArsenal[i].Update(i + 1);
-			TableArsenal.ResumeLayout();
+            this.TableArsenal.SuspendLayout();
+            this.TableArsenal.RowCount = KCDatabase.Instance.Arsenals.Values.Count(a => a.State != -1);
+			for (int i = 0; i < this.ControlArsenal.Length; i++)
+                this.ControlArsenal[i].Update(i + 1);
+            this.TableArsenal.ResumeLayout();
 
 		}
 
 		void UpdateTimerTick()
 		{
 
-			TableArsenal.SuspendLayout();
-			for (int i = 0; i < ControlArsenal.Length; i++)
-				ControlArsenal[i].Refresh(i + 1);
-			TableArsenal.ResumeLayout();
+            this.TableArsenal.SuspendLayout();
+			for (int i = 0; i < this.ControlArsenal.Length; i++)
+                this.ControlArsenal[i].Refresh(i + 1);
+            this.TableArsenal.ResumeLayout();
 
 		}
 
@@ -301,20 +301,20 @@ namespace ElectronicObserver.Window
 		void ConfigurationChanged()
 		{
 
-			Font = Utility.Configuration.Config.UI.MainFont;
-			MenuMain_ShowShipName.Checked = Utility.Configuration.Config.FormArsenal.ShowShipName;
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            if (ControlArsenal != null)
+            this.Font = Utility.Configuration.Config.UI.MainFont;
+            this.MenuMain_ShowShipName.Checked = Utility.Configuration.Config.FormArsenal.ShowShipName;
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            if (this.ControlArsenal != null)
 			{
-				TableArsenal.SuspendLayout();
+                this.TableArsenal.SuspendLayout();
 
-				foreach (var c in ControlArsenal)
+				foreach (var c in this.ControlArsenal)
 					c.ConfigurationChanged(this);
 
-				ControlHelper.SetTableRowStyles(TableArsenal, ControlHelper.GetDefaultRowStyle());
+				ControlHelper.SetTableRowStyles(this.TableArsenal, ControlHelper.GetDefaultRowStyle());
 
-				TableArsenal.ResumeLayout();
+                this.TableArsenal.ResumeLayout();
 			}
 
 
@@ -323,9 +323,9 @@ namespace ElectronicObserver.Window
 
 		private void MenuMain_ShowShipName_CheckedChanged(object sender, EventArgs e)
 		{
-			Utility.Configuration.Config.FormArsenal.ShowShipName = MenuMain_ShowShipName.Checked;
+			Utility.Configuration.Config.FormArsenal.ShowShipName = this.MenuMain_ShowShipName.Checked;
 
-			UpdateUI();
+            this.UpdateUI();
 		}
 
 

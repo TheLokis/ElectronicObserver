@@ -53,53 +53,53 @@ namespace ElectronicObserver.Data.Battle.Detail
 		/// <param name="defenderHP">防御側の攻撃を受ける直前のHP。</param>
 		public BattleDetail(BattleData bd, BattleIndex attackerIndex, BattleIndex defenderIndex, double[] damages, int[] criticalTypes, int attackType, int[] equipmentIDs, int defenderHP)
 		{
-			Battle = bd;
+            this.Battle = bd;
 
-			AttackerIndex = attackerIndex;
-			DefenderIndex = defenderIndex;
-			RawDamages = damages;
-			Damages = damages.Select(dmg => (int)dmg).ToArray();
-			GuardsFlagship = damages.Select(dmg => dmg != Math.Floor(dmg)).ToArray();
-			CriticalTypes = criticalTypes.Select(i => (CriticalType)i).ToArray();
-			AttackType = attackType;
-			EquipmentIDs = equipmentIDs;
-			DefenderHP = defenderHP;
+            this.AttackerIndex = attackerIndex;
+            this.DefenderIndex = defenderIndex;
+            this.RawDamages = damages;
+            this.Damages = damages.Select(dmg => (int)dmg).ToArray();
+            this.GuardsFlagship = damages.Select(dmg => dmg != Math.Floor(dmg)).ToArray();
+            this.CriticalTypes = criticalTypes.Select(i => (CriticalType)i).ToArray();
+            this.AttackType = attackType;
+            this.EquipmentIDs = equipmentIDs;
+            this.DefenderHP = defenderHP;
 
 		}
 
 
 		protected int[] SetAttacker()
 		{
-			if (AttackerIndex < 0)
+			if (this.AttackerIndex < 0)
 			{
-				Attacker = null;
+                this.Attacker = null;
 				return null;
 			}
 			else
 			{
-				switch (AttackerIndex.Side)
+				switch (this.AttackerIndex.Side)
 				{
 					case BattleSides.FriendMain:
 						{
-							var atk = Battle.Initial.FriendFleet.MembersInstance[AttackerIndex.Index];
-							Attacker = atk.MasterShip;
+							var atk = this.Battle.Initial.FriendFleet.MembersInstance[this.AttackerIndex.Index];
+                            this.Attacker = atk.MasterShip;
 							return atk.AllSlotMaster.ToArray();
 						}
 
 					case BattleSides.FriendEscort:
 						{
-							var atk = Battle.Initial.FriendFleetEscort.MembersInstance[AttackerIndex.Index];
-							Attacker = atk.MasterShip;
+							var atk = this.Battle.Initial.FriendFleetEscort.MembersInstance[this.AttackerIndex.Index];
+                            this.Attacker = atk.MasterShip;
 							return atk.AllSlotMaster.ToArray();
 						}
 
 					case BattleSides.EnemyMain:
-						Attacker = Battle.Initial.EnemyMembersInstance[AttackerIndex.Index];
-						return Battle.Initial.EnemySlots[AttackerIndex.Index];
+                        this.Attacker = this.Battle.Initial.EnemyMembersInstance[this.AttackerIndex.Index];
+						return this.Battle.Initial.EnemySlots[this.AttackerIndex.Index];
 
 					case BattleSides.EnemyEscort:
-						Attacker = Battle.Initial.EnemyMembersEscortInstance[AttackerIndex.Index];
-						return Battle.Initial.EnemySlotsEscort[AttackerIndex.Index];
+                        this.Attacker = this.Battle.Initial.EnemyMembersEscortInstance[this.AttackerIndex.Index];
+						return this.Battle.Initial.EnemySlotsEscort[this.AttackerIndex.Index];
 
 					default:
 						throw new NotSupportedException();
@@ -109,28 +109,28 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 		protected void SetDefender()
 		{
-			if (Battle.IsBaseAirRaid)
+			if (this.Battle.IsBaseAirRaid)
 			{
-				Defender = null;
+                this.Defender = null;
 			}
 			else
 			{
-				switch (DefenderIndex.Side)
+				switch (this.DefenderIndex.Side)
 				{
 					case BattleSides.FriendMain:
-						Defender = Battle.Initial.FriendFleet.MembersInstance[DefenderIndex.Index].MasterShip;
+                        this.Defender = this.Battle.Initial.FriendFleet.MembersInstance[this.DefenderIndex.Index].MasterShip;
 						break;
 
 					case BattleSides.FriendEscort:
-						Defender = Battle.Initial.FriendFleetEscort.MembersInstance[DefenderIndex.Index].MasterShip;
+                        this.Defender = this.Battle.Initial.FriendFleetEscort.MembersInstance[this.DefenderIndex.Index].MasterShip;
 						break;
 
 					case BattleSides.EnemyMain:
-						Defender = Battle.Initial.EnemyMembersInstance[DefenderIndex.Index];
+                        this.Defender = this.Battle.Initial.EnemyMembersInstance[this.DefenderIndex.Index];
 						break;
 
 					case BattleSides.EnemyEscort:
-						Defender = Battle.Initial.EnemyMembersEscortInstance[DefenderIndex.Index];
+                        this.Defender = this.Battle.Initial.EnemyMembersEscortInstance[this.DefenderIndex.Index];
 						break;
 				}
 			}
@@ -148,17 +148,17 @@ namespace ElectronicObserver.Data.Battle.Detail
 			StringBuilder builder = new StringBuilder();
 
 
-			if (Battle.IsPractice)
+			if (this.Battle.IsPractice)
 				builder.AppendFormat("{0}{1} → {2}{3}",
-					Attacker == null ? "" : AttackerIndex.IsFriend ? "아군 " : "적 ", GetAttackerName(),
-					DefenderIndex.IsFriend ? "아군 " : "적  ", GetDefenderName()
+                    this.Attacker == null ? "" : this.AttackerIndex.IsFriend ? "아군 " : "적 ", this.GetAttackerName(),
+                    this.DefenderIndex.IsFriend ? "아군 " : "적  ", this.GetDefenderName()
 					).AppendLine();
 			else
-				builder.AppendFormat("{0} → {1}", GetAttackerName(), GetDefenderName()).AppendLine();
+				builder.AppendFormat("{0} → {1}", this.GetAttackerName(), this.GetDefenderName()).AppendLine();
 
 
-			if (AttackType >= 0)
-				builder.Append("[").Append(GetAttackKind()).Append("] ");
+			if (this.AttackType >= 0)
+				builder.Append("[").Append(this.GetAttackKind()).Append("] ");
 
 			/*// 
 			if ( EquipmentIDs != null ) {
@@ -168,35 +168,35 @@ namespace ElectronicObserver.Data.Battle.Detail
 			}
 			//*/
 
-			for (int i = 0; i < Damages.Length; i++)
+			for (int i = 0; i < this.Damages.Length; i++)
 			{
-				if (CriticalTypes[i] == CriticalType.Invalid)   // カットイン(主砲/主砲)、カットイン(主砲/副砲)時に発生する
+				if (this.CriticalTypes[i] == CriticalType.Invalid)   // カットイン(主砲/主砲)、カットイン(主砲/副砲)時に発生する
 					continue;
 
 				if (i > 0)
 					builder.Append(" , ");
 
-				if (GuardsFlagship[i])
+				if (this.GuardsFlagship[i])
 					builder.Append("<기함보호> ");
 
-				switch (CriticalTypes[i])
+				switch (this.CriticalTypes[i])
 				{
 					case CriticalType.Miss:
 						builder.Append("Miss");
 						break;
 					case CriticalType.Hit:
-						builder.Append(Damages[i]).Append(" Dmg");
+						builder.Append(this.Damages[i]).Append(" Dmg");
 						break;
 					case CriticalType.Critical:
-						builder.Append(Damages[i]).Append(" Critical!");
+						builder.Append(this.Damages[i]).Append(" Critical!");
 						break;
 				}
 
 			}
 
 
-			int beforeHP = Math.Max(DefenderHP, 0);
-			int afterHP = Math.Max(DefenderHP - Damages.Sum(), 0);
+			int beforeHP = Math.Max(this.DefenderHP, 0);
+			int afterHP = Math.Max(this.DefenderHP - this.Damages.Sum(), 0);
 			if (beforeHP != afterHP)
 				builder.AppendFormat(" ( {0} → {1} )", beforeHP, afterHP);
 
@@ -206,13 +206,13 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 
 			// damage control
-			if (beforeHP > 0 && afterHP <= 0 && DefenderIndex.IsFriend && !Battle.IsPractice && !Battle.IsBaseAirRaid)
+			if (beforeHP > 0 && afterHP <= 0 && this.DefenderIndex.IsFriend && !this.Battle.IsPractice && !this.Battle.IsBaseAirRaid)
 			{
 				// 友軍艦隊時は常に beforeHP == 0 になるので、ここには来ないはず
 				// 暫定対策でしかないのでできればまともにしたい
 
-				var defender = (DefenderIndex.Side == BattleSides.FriendEscort ? Battle.Initial.FriendFleetEscort : Battle.Initial.FriendFleet)
-					?.MembersInstance?.ElementAtOrDefault(DefenderIndex.Index);
+				var defender = (this.DefenderIndex.Side == BattleSides.FriendEscort ? this.Battle.Initial.FriendFleetEscort : this.Battle.Initial.FriendFleet)
+					?.MembersInstance?.ElementAtOrDefault(this.DefenderIndex.Index);
 				if (defender != null)
 				{
 					int id = defender.DamageControlID;
@@ -231,21 +231,21 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 		protected virtual string GetAttackerName()
 		{
-			int index = AttackerIndex.Index + 1 + (AttackerIndex.IsEscort ? 6 : 0);
+			int index = this.AttackerIndex.Index + 1 + (this.AttackerIndex.IsEscort ? 6 : 0);
 
-			if (Attacker == null)
+			if (this.Attacker == null)
 				return "#" + index;
 
-			return Attacker.NameWithClass + " #" + index;
+			return this.Attacker.NameWithClass + " #" + index;
 		}
 
 		protected virtual string GetDefenderName()
 		{
-			int index = DefenderIndex.Index + 1 + (DefenderIndex.IsEscort ? 6 : 0);
+			int index = this.DefenderIndex.Index + 1 + (this.DefenderIndex.IsEscort ? 6 : 0);
 
-			if (Defender == null)
+			if (this.Defender == null)
 				return "#" + index;
-			return Defender.NameWithClass + " #" + index;
+			return this.Defender.NameWithClass + " #" + index;
 		}
 
 		protected abstract int CaclulateAttackKind(int[] slots, int attackerShipID, int defenderShipID);
@@ -263,11 +263,11 @@ namespace ElectronicObserver.Data.Battle.Detail
 		public BattleDayDetail(BattleData bd, BattleIndex attackerId, BattleIndex defenderId, double[] damages, int[] criticalTypes, int attackType, int[] equipmentIDs, int defenderHP)
 			: base(bd, attackerId, defenderId, damages, criticalTypes, attackType, equipmentIDs, defenderHP)
 		{
-			var attackerSlots = SetAttacker();
-			SetDefender();
+			var attackerSlots = this.SetAttacker();
+            this.SetDefender();
 
-			if (AttackType == 0 && Attacker != null)
-				AttackType = CaclulateAttackKind(attackerSlots, Attacker.ShipID, Defender.ShipID);
+			if (this.AttackType == 0 && this.Attacker != null)
+                this.AttackType = this.CaclulateAttackKind(attackerSlots, this.Attacker.ShipID, this.Defender.ShipID);
 
 		}
 
@@ -278,7 +278,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 		protected override string GetAttackKind()
 		{
-			return Constants.GetDayAttackKind((DayAttackKind)AttackType);
+			return Constants.GetDayAttackKind((DayAttackKind)this.AttackType);
 		}
 	}
 
@@ -291,11 +291,11 @@ namespace ElectronicObserver.Data.Battle.Detail
 		public BattleSupportDetail(BattleData bd, BattleIndex defenderId, double damage, int criticalType, int attackType, int defenderHP)
 			: base(bd, BattleIndex.Invalid, defenderId, new double[] { damage }, new int[] { criticalType }, attackType, null, defenderHP)
 		{
-			var attackerSlots = SetAttacker();
-			SetDefender();
+			var attackerSlots = this.SetAttacker();
+            this.SetDefender();
 
-			if (AttackType == 0 && Attacker != null)
-				AttackType = CaclulateAttackKind(attackerSlots, Attacker.ShipID, Defender.ShipID);
+			if (this.AttackType == 0 && this.Attacker != null)
+                this.AttackType = this.CaclulateAttackKind(attackerSlots, this.Attacker.ShipID, this.Defender.ShipID);
 		}
 
 		protected override string GetAttackerName()
@@ -310,7 +310,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 		protected override string GetAttackKind()
 		{
-			switch (AttackType)
+			switch (this.AttackType)
 			{
 				case 1:
 					return "공습";
@@ -338,23 +338,23 @@ namespace ElectronicObserver.Data.Battle.Detail
 		public BattleNightDetail(BattleData bd, BattleIndex attackerId, BattleIndex defenderId, double[] damages, int[] criticalTypes, int attackType, int[] equipmentIDs, bool nightAirAttackFlag, int defenderHP)
 			: base(bd, attackerId, defenderId, damages, criticalTypes, attackType, equipmentIDs, defenderHP)
 		{
-			NightAirAttackFlag = nightAirAttackFlag;
+            this.NightAirAttackFlag = nightAirAttackFlag;
 
-			var attackerSlots = SetAttacker();
-			SetDefender();
+			var attackerSlots = this.SetAttacker();
+            this.SetDefender();
 
-			if (AttackType == 0 && Attacker != null)
-				AttackType = CaclulateAttackKind(attackerSlots, Attacker.ShipID, Defender.ShipID);
+			if (this.AttackType == 0 && this.Attacker != null)
+                this.AttackType = this.CaclulateAttackKind(attackerSlots, this.Attacker.ShipID, this.Defender.ShipID);
 		}
 
 		protected override int CaclulateAttackKind(int[] slots, int attackerShipID, int defenderShipID)
 		{
-			return (int)Calculator.GetNightAttackKind(slots, attackerShipID, defenderShipID, false, NightAirAttackFlag);
+			return (int)Calculator.GetNightAttackKind(slots, attackerShipID, defenderShipID, false, this.NightAirAttackFlag);
 		}
 
 		protected override string GetAttackKind()
 		{
-			return Constants.GetNightAttackKind((NightAttackKind)AttackType);
+			return Constants.GetNightAttackKind((NightAttackKind)this.AttackType);
 		}
 	}
 
@@ -369,14 +369,14 @@ namespace ElectronicObserver.Data.Battle.Detail
 		public BattleAirDetail(BattleData bd, int waveIndex, BattleIndex defenderId, double damage, int criticalType, int attackType, int defenderHP)
 			: base(bd, BattleIndex.Invalid, defenderId, new double[] { damage }, new int[] { criticalType }, attackType, null, defenderHP)
 		{
-			WaveIndex = waveIndex;
+            this.WaveIndex = waveIndex;
 		}
 
 		protected override string GetAttackerName()
 		{
-			if (WaveIndex <= 0)
+			if (this.WaveIndex <= 0)
 			{
-				if (DefenderIndex.Side == BattleSides.FriendMain || DefenderIndex.Side == BattleSides.FriendEscort)
+				if (this.DefenderIndex.Side == BattleSides.FriendMain || this.DefenderIndex.Side == BattleSides.FriendEscort)
 					return "적항공대";
 				else
 					return "아군항공대";
@@ -384,15 +384,15 @@ namespace ElectronicObserver.Data.Battle.Detail
 			}
 			else
 			{
-				return string.Format("기지항공대 제{0}격", WaveIndex);
+				return string.Format("기지항공대 제{0}격", this.WaveIndex);
 
 			}
 		}
 
 		protected override string GetDefenderName()
 		{
-			if (WaveIndex < 0 && DefenderIndex.Side == BattleSides.FriendMain)
-				return string.Format("제{0}기지", DefenderIndex.Index + 1);
+			if (this.WaveIndex < 0 && this.DefenderIndex.Side == BattleSides.FriendMain)
+				return string.Format("제{0}기지", this.DefenderIndex.Index + 1);
 
 			return base.GetDefenderName();
 		}
@@ -404,7 +404,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 		protected override string GetAttackKind()
 		{
-			switch (AttackType)
+			switch (this.AttackType)
 			{
 				case 1:
 					return "뇌격";
@@ -431,38 +431,38 @@ namespace ElectronicObserver.Data.Battle.Detail
 		public BattleFriendlySupportDetail(BattleNight bd, BattleIndex attackerId, BattleIndex defenderId, double[] damages, int[] criticalTypes, int attackType, int[] equipmentIDs, bool nightAirAttackFlag, int defenderHP)
 			: base(bd, attackerId, defenderId, damages, criticalTypes, attackType, equipmentIDs, defenderHP)
 		{
-			NightAirAttackFlag = nightAirAttackFlag;
+            this.NightAirAttackFlag = nightAirAttackFlag;
 
 			int[] attackerSlots;
 
 			if (attackerId.IsFriend)
 			{
-				Attacker = bd.FriendlySupport.FriendlyMembersInstance[attackerId.Index];
+                this.Attacker = bd.FriendlySupport.FriendlyMembersInstance[attackerId.Index];
 				attackerSlots = bd.FriendlySupport.FriendlySlots[attackerId.Index];
 			}
 			else
 			{
-				attackerSlots = SetAttacker();
+				attackerSlots = this.SetAttacker();
 			}
 
 			if (defenderId.IsFriend)
-				Defender = bd.FriendlySupport.FriendlyMembersInstance[defenderId.Index];
+                this.Defender = bd.FriendlySupport.FriendlyMembersInstance[defenderId.Index];
 			else
-				SetDefender();
+                this.SetDefender();
 
 
-			if (AttackType == 0 && Attacker != null)
-				AttackType = CaclulateAttackKind(attackerSlots, Attacker.ShipID, Defender.ShipID);
+			if (this.AttackType == 0 && this.Attacker != null)
+                this.AttackType = this.CaclulateAttackKind(attackerSlots, this.Attacker.ShipID, this.Defender.ShipID);
 		}
 
 		protected override int CaclulateAttackKind(int[] slots, int attackerShipID, int defenderShipID)
 		{
-			return (int)Calculator.GetNightAttackKind(slots, attackerShipID, defenderShipID, false, NightAirAttackFlag);
+			return (int)Calculator.GetNightAttackKind(slots, attackerShipID, defenderShipID, false, this.NightAirAttackFlag);
 		}
 
 		protected override string GetAttackKind()
 		{
-			return Constants.GetNightAttackKind((NightAttackKind)AttackType);
+			return Constants.GetNightAttackKind((NightAttackKind)this.AttackType);
 		}
 	}
 

@@ -34,12 +34,12 @@ namespace ElectronicObserver.Resource.Record
 		{
 			get
 			{
-				yield return EnemyFleet;
-				yield return ShipParameter;
-				yield return Construction;
-				yield return ShipDrop;
-				yield return Development;
-				yield return Resource;
+				yield return this.EnemyFleet;
+				yield return this.ShipParameter;
+				yield return this.Construction;
+				yield return this.ShipDrop;
+				yield return this.Development;
+				yield return this.Resource;
 			}
 		}
 
@@ -49,25 +49,25 @@ namespace ElectronicObserver.Resource.Record
 		private RecordManager()
 		{
 
-			MasterPath = @"Record";
-			EnemyFleet = new EnemyFleetRecord();
-			ShipParameter = new ShipParameterRecord();
-			Construction = new ConstructionRecord();
-			ShipDrop = new ShipDropRecord();
-			Development = new DevelopmentRecord();
-			Resource = new ResourceRecord();
+            this.MasterPath = @"Record";
+            this.EnemyFleet = new EnemyFleetRecord();
+            this.ShipParameter = new ShipParameterRecord();
+            this.Construction = new ConstructionRecord();
+            this.ShipDrop = new ShipDropRecord();
+            this.Development = new DevelopmentRecord();
+            this.Resource = new ResourceRecord();
 
-			foreach (var r in Records)
+			foreach (var r in this.Records)
 				r.RegisterEvents();
 
 
-			if (!Directory.Exists(MasterPath))
+			if (!Directory.Exists(this.MasterPath))
 			{
-				Directory.CreateDirectory(MasterPath);
+				Directory.CreateDirectory(this.MasterPath);
 			}
 
-			_prevTime = DateTime.Now;
-			Observer.APIObserver.Instance["api_port/port"].ResponseReceived += TimerSave;
+            this._prevTime = DateTime.Now;
+			Observer.APIObserver.Instance["api_port/port"].ResponseReceived += this.TimerSave;
 		}
 
 		public bool Load(bool logging = true)
@@ -75,10 +75,10 @@ namespace ElectronicObserver.Resource.Record
 
 			bool succeeded = true;
 
-			ResourceManager.CopyDocumentFromArchive("Record/" + ShipParameter.FileName, MasterPath + "\\" + ShipParameter.FileName);
+			ResourceManager.CopyDocumentFromArchive("Record/" + this.ShipParameter.FileName, this.MasterPath + "\\" + this.ShipParameter.FileName);
 
-			foreach (var r in Records)
-				succeeded &= r.Load(MasterPath);
+			foreach (var r in this.Records)
+				succeeded &= r.Load(this.MasterPath);
 
 			if (logging)
 			{
@@ -100,8 +100,8 @@ namespace ElectronicObserver.Resource.Record
 
 			bool succeeded = true;
 
-			foreach (var r in Records)
-				succeeded &= r.SaveAll(MasterPath);
+			foreach (var r in this.Records)
+				succeeded &= r.SaveAll(this.MasterPath);
 
 			if (logging)
 			{
@@ -123,7 +123,7 @@ namespace ElectronicObserver.Resource.Record
 			bool succeeded = true;
 
 
-			foreach (var r in Records)
+			foreach (var r in this.Records)
 			{
 				if (!r.NeedToSave)
 				{
@@ -131,9 +131,9 @@ namespace ElectronicObserver.Resource.Record
 				}
 
 				if (r.SupportsPartialSave)
-					succeeded &= r.SavePartial(MasterPath);
+					succeeded &= r.SavePartial(this.MasterPath);
 				else
-					succeeded &= r.SaveAll(MasterPath);
+					succeeded &= r.SaveAll(this.MasterPath);
 
 			}
 
@@ -161,10 +161,10 @@ namespace ElectronicObserver.Resource.Record
 					iscleared = false;
 					break;
 				case 1:
-					iscleared = DateTimeHelper.IsCrossedHour(_prevTime);
+					iscleared = DateTimeHelper.IsCrossedHour(this._prevTime);
 					break;
 				case 2:
-					iscleared = DateTimeHelper.IsCrossedDay(_prevTime, 0, 0, 0);
+					iscleared = DateTimeHelper.IsCrossedDay(this._prevTime, 0, 0, 0);
 					break;
 				case 3:
 					iscleared = true;
@@ -174,12 +174,12 @@ namespace ElectronicObserver.Resource.Record
 
 			if (iscleared)
 			{
-				_prevTime = DateTime.Now;
+                this._prevTime = DateTime.Now;
 
-				if (Records.Any(r => r.NeedToSave))
+				if (this.Records.Any(r => r.NeedToSave))
 				{
 
-					if (SavePartial(false))
+					if (this.SavePartial(false))
 					{
 						Utility.Logger.Add(1, "기록 자동 저장 하였습니다.");
 					}

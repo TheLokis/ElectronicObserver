@@ -24,12 +24,12 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
 			{
 
 				var eq = new EquipmentData();
-				eq.LoadFromResponse(APIName, elem);
+				eq.LoadFromResponse(this.APIName, elem);
 				db.Equipments.Add(eq);
 
             }
 
-			db.Battle.LoadFromResponse(APIName, data);
+			db.Battle.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}

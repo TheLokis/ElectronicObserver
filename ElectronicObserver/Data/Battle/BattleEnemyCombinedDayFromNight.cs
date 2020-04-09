@@ -17,29 +17,29 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			NightInitial = new PhaseNightInitial(this, "야전개시", false);
-			FriendlySupport = new PhaseFriendlySupport(this, "우군함대원호");
-			NightSupport = new PhaseSupport(this, "야간지원공격", true);
-			NightBattle = new PhaseNightBattle(this, "제1차야전", 1);
-			NightBattle2 = new PhaseNightBattle(this, "제2차야전", 2);
+            this.NightInitial = new PhaseNightInitial(this, "야전개시", false);
+            this.FriendlySupport = new PhaseFriendlySupport(this, "우군함대원호");
+            this.NightSupport = new PhaseSupport(this, "야간지원공격", true);
+            this.NightBattle = new PhaseNightBattle(this, "제1차야전", 1);
+            this.NightBattle2 = new PhaseNightBattle(this, "제2차야전", 2);
 
 
-			if (NextToDay)
+			if (this.NextToDay)
 			{
-				JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
-				JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
-				BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
-				Support = new PhaseSupport(this, "지원공격");
-				AirBattle = new PhaseAirBattle(this, "항공전");
-				OpeningASW = new PhaseOpeningASW(this, "선제대잠");
-				OpeningTorpedo = new PhaseTorpedo(this, "선제뇌격", 0);
-				Shelling1 = new PhaseShelling(this, "제1차포격전", 1, "1");
-				Shelling2 = new PhaseShelling(this, "제2차포격전", 2, "2");
-				Torpedo = new PhaseTorpedo(this, "뇌격전", 3);
+                this.JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
+                this.JetAirBattle = new PhaseJetAirBattle(this, "분식 항공전");
+                this.BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
+                this.Support = new PhaseSupport(this, "지원공격");
+                this.AirBattle = new PhaseAirBattle(this, "항공전");
+                this.OpeningASW = new PhaseOpeningASW(this, "선제대잠");
+                this.OpeningTorpedo = new PhaseTorpedo(this, "선제뇌격", 0);
+                this.Shelling1 = new PhaseShelling(this, "제1차포격전", 1, "1");
+                this.Shelling2 = new PhaseShelling(this, "제2차포격전", 2, "2");
+                this.Torpedo = new PhaseTorpedo(this, "뇌격전", 3);
 			}
 
-			foreach (var phase in GetPhases())
-				phase.EmulateBattle(_resultHPs, _attackDamages);
+			foreach (var phase in this.GetPhases())
+				phase.EmulateBattle(this._resultHPs, this._attackDamages);
 		}
 
 		public override string APIName => "api_req_combined_battle/ec_night_to_day";
@@ -50,26 +50,26 @@ namespace ElectronicObserver.Data.Battle
 
 		public override IEnumerable<PhaseBase> GetPhases()
 		{
-			yield return Initial;
-			yield return Searching;
-			yield return NightInitial;
-			yield return FriendlySupport;
-			yield return NightSupport;
-			yield return NightBattle;
-			yield return NightBattle2;
+			yield return this.Initial;
+			yield return this.Searching;
+			yield return this.NightInitial;
+			yield return this.FriendlySupport;
+			yield return this.NightSupport;
+			yield return this.NightBattle;
+			yield return this.NightBattle2;
 
-			if (NextToDay)
+			if (this.NextToDay)
 			{
-				yield return JetBaseAirAttack;
-				yield return JetAirBattle;
-				yield return BaseAirAttack;
-				yield return Support;
-				yield return AirBattle;
-				yield return OpeningASW;
-				yield return OpeningTorpedo;
-				yield return Shelling1;
-				yield return Shelling2;
-				yield return Torpedo;
+				yield return this.JetBaseAirAttack;
+				yield return this.JetAirBattle;
+				yield return this.BaseAirAttack;
+				yield return this.Support;
+				yield return this.AirBattle;
+				yield return this.OpeningASW;
+				yield return this.OpeningTorpedo;
+				yield return this.Shelling1;
+				yield return this.Shelling2;
+				yield return this.Torpedo;
 			}
 		}
 	}

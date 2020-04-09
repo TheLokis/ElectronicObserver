@@ -28,26 +28,26 @@ namespace ElectronicObserver.Window.Dialog
 
         public DialogAkashilist()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            List<Button> Btns = new List<Button>() { Btn_Day0, Btn_Day1, Btn_Day2, Btn_Day3, Btn_Day4, Btn_Day5, Btn_Day6 };
+            List<Button> Btns = new List<Button>() { this.Btn_Day0, this.Btn_Day1, this.Btn_Day2, this.Btn_Day3, this.Btn_Day4, this.Btn_Day5, this.Btn_Day6 };
             List<string> Days = new List<string>() { "일", "월", "화", "수", "목", "금", "토" };
 
-            ControlHelper.SetDoubleBuffered(AkashiListView);
+            ControlHelper.SetDoubleBuffered(this.AkashiListView);
 
 
             //ShipView Initialize
             //AkashiListView.SuspendLayout();
 
-            Btn_BackColor_Reset();
+            this.Btn_BackColor_Reset();
             Btns[(int)DateTime.Today.DayOfWeek].BackColor = SystemColors.ActiveCaption;
 
-            Update_DataList((int)DateTime.Today.DayOfWeek, false, false);
+            this.Update_DataList((int)DateTime.Today.DayOfWeek, false, false);
         }
 
         public void Btn_BackColor_Reset()
         {
-            List<Button> Btns = new List<Button>() { Btn_Day0, Btn_Day1, Btn_Day2, Btn_Day3, Btn_Day4, Btn_Day5, Btn_Day6 };
+            List<Button> Btns = new List<Button>() { this.Btn_Day0, this.Btn_Day1, this.Btn_Day2, this.Btn_Day3, this.Btn_Day4, this.Btn_Day5, this.Btn_Day6 };
             foreach (var btn in Btns)
             {
                 btn.BackColor = SystemColors.Control;
@@ -57,7 +57,7 @@ namespace ElectronicObserver.Window.Dialog
         private void EquipmentView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
 
-            if (e.ColumnIndex == EqType.Index)
+            if (e.ColumnIndex == this.EqType.Index)
             {
                 e.Value = ResourceManager.GetEquipmentImage((int)e.Value);
                 e.FormattingApplied = true;
@@ -72,13 +72,12 @@ namespace ElectronicObserver.Window.Dialog
 
         public void Update_DataList(int day, bool Checked, bool KaisuChecked)
         {
-            current_day = day;
+            this.current_day = day;
 
-            AkashiListView.Rows.Clear();
+            this.AkashiListView.Rows.Clear();
 
-            JObject Data = DynamicDataReader.Instance.Master_Akashi_Data;
+            JObject Data = DynamicDataReader.Instance.GetData(DataType.AkashiData);
 
-            JObject Day_Data = DynamicDataReader.Instance.Master_Akashi_Day;
             KCDatabase db = KCDatabase.Instance;
 
             List<DataGridViewRow> rows = new List<DataGridViewRow>(Data.Count);
@@ -135,11 +134,11 @@ namespace ElectronicObserver.Window.Dialog
             DataGridViewCellStyle Default = new DataGridViewCellStyle();
             DataGridViewCellStyle CanKaisu = new DataGridViewCellStyle();
             CanKaisu.ForeColor = Color.Green;
-            EqType.AutoSizeMode =
-            Resource_Fuel.AutoSizeMode =
-            Resource_Ammo.AutoSizeMode =
-            Resource_Steel.AutoSizeMode =
-            Resource_Baux.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.EqType.AutoSizeMode =
+            this.Resource_Fuel.AutoSizeMode =
+            this.Resource_Ammo.AutoSizeMode =
+            this.Resource_Steel.AutoSizeMode =
+            this.Resource_Baux.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
             foreach (var eq in KCDatabase.Instance.MasterEquipments.Values)
             {
@@ -152,7 +151,7 @@ namespace ElectronicObserver.Window.Dialog
                 foreach (var EquipmentData in EquipmentDatas)
                 {
                     DataGridViewRow row = new DataGridViewRow();
-                    row.CreateCells(AkashiListView);
+                    row.CreateCells(this.AkashiListView);
                     int[] resources = EquipmentData["resource"][0].ToObject<int[]>();
                     List<int> kanmusus = new List<int>();
                     bool can_kaisu_day = false;
@@ -317,14 +316,14 @@ namespace ElectronicObserver.Window.Dialog
                 }
             }
 
-            EqType.AutoSizeMode =
-            Resource_Fuel.AutoSizeMode =
-            Resource_Ammo.AutoSizeMode =
-            Resource_Steel.AutoSizeMode =
-            Resource_Baux.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.EqType.AutoSizeMode =
+            this.Resource_Fuel.AutoSizeMode =
+            this.Resource_Ammo.AutoSizeMode =
+            this.Resource_Steel.AutoSizeMode =
+            this.Resource_Baux.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
-            AkashiListView.Rows.AddRange(rows.ToArray());
-            AkashiListView.Sort(EqType, ListSortDirection.Ascending);
+            this.AkashiListView.Rows.AddRange(rows.ToArray());
+            this.AkashiListView.Sort(this.EqType, ListSortDirection.Ascending);
 
         }
 
@@ -341,7 +340,7 @@ namespace ElectronicObserver.Window.Dialog
         {
             if (e.KeyCode == Keys.Enter)
             {
-                TextSearch_TextChanged(sender, e);
+                this.TextSearch_TextChanged(sender, e);
                 e.SuppressKeyPress = true;
                 e.Handled = true;
             }
@@ -357,35 +356,35 @@ namespace ElectronicObserver.Window.Dialog
 
         private void TextSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TextSearch.Text))
+            if (string.IsNullOrWhiteSpace(this.TextSearch.Text))
                 return;
 
 
             bool Search(string searchWord)
             {
                 var target =
-                    AkashiListView.Rows.OfType<DataGridViewRow>()
-                    .Select(r => KCDatabase.Instance.MasterEquipments[(int)r.Cells[EqID.Index].Value])
+                    this.AkashiListView.Rows.OfType<DataGridViewRow>()
+                    .Select(r => KCDatabase.Instance.MasterEquipments[(int)r.Cells[this.EqID.Index].Value])
                     .FirstOrDefault(
                         eq => Calculator.ToHiragana(eq.Name.ToLower()).Contains(searchWord));
 
                 if (target != null)
                 {
-                    AkashiListView.FirstDisplayedScrollingRowIndex = AkashiListView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[EqID.Index].Value == target.EquipmentID).Index;
+                    this.AkashiListView.FirstDisplayedScrollingRowIndex = this.AkashiListView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[this.EqID.Index].Value == target.EquipmentID).Index;
                     return true;
                 }
                 return false;
             }
 
-            if (!Search(Calculator.ToHiragana(TextSearch.Text.ToLower())))
-                Search(Calculator.RomaToHira(TextSearch.Text));
+            if (!Search(Calculator.ToHiragana(this.TextSearch.Text.ToLower())))
+                Search(Calculator.RomaToHira(this.TextSearch.Text));
         }
 
 
         private void DialogAlbumMasterShip_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-            ResourceManager.DestroyIcon(Icon);
+            ResourceManager.DestroyIcon(this.Icon);
 
         }
 
@@ -423,61 +422,61 @@ namespace ElectronicObserver.Window.Dialog
 
         private void Btn_Day0_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day0.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(0, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day0.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(0, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day1_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day1.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(1, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day1.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(1, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day2_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day2.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(2, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day2.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(2, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day3_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day3.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(3, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day3.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(3, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day4_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day4.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(4, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day4.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(4, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day5_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day5.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(5, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day5.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(5, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day6_Click(object sender, EventArgs e)
         {
-            Btn_BackColor_Reset();
-            Btn_Day6.BackColor = SystemColors.ActiveCaption;
-            Update_DataList(6, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Btn_BackColor_Reset();
+            this.Btn_Day6.BackColor = SystemColors.ActiveCaption;
+            this.Update_DataList(6, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Material_Check_Click(object sender, EventArgs e)
         {
-            Update_DataList(current_day, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Update_DataList(this.current_day, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Can_KaisuCheck_Click(object sender, EventArgs e)
         {
-            Update_DataList(current_day, CanMaterial_CheckBox.Checked, Can_KaisuCheck.Checked);
+            this.Update_DataList(this.current_day, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void EqListView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -492,7 +491,7 @@ namespace ElectronicObserver.Window.Dialog
 
         private void SelectionChanged(Object sender, EventArgs e)
         {
-            AkashiListView.ClearSelection();
+            this.AkashiListView.ClearSelection();
         }
     }
 }

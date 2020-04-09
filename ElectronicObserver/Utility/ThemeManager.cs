@@ -40,6 +40,9 @@ namespace ElectronicObserver.Utility
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.BlackFontColor), Color.White);
             colors.Add(Tuple.Create(Theme.Light, ThemeColors.ExtraFontColor), SystemColors.ControlText);
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.ExtraFontColor), SystemColors.ControlText);
+
+            colors.Add(Tuple.Create(Theme.Light, ThemeColors.WiilMainColor), Color.LightSteelBlue);
+            colors.Add(Tuple.Create(Theme.Dark, ThemeColors.WiilMainColor), Color.DarkSlateBlue);
         }
 
         public static Color GetColor(Theme th, ThemeColors tr)
@@ -71,6 +74,7 @@ namespace ElectronicObserver.Utility
         MVPHighlight,
         RepairColor,
         BlackFontColor,
-        ExtraFontColor
+        ExtraFontColor,
+        WiilMainColor,
     }
 }

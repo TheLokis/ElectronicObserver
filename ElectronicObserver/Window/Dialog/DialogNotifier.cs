@@ -24,38 +24,38 @@ namespace ElectronicObserver.Window.Dialog
 		public NotifierDialogData DialogData { get; set; }
 
 
-		private bool IsLayeredWindow => DialogData != null ? !DialogData.HasFormBorder && DialogData.DrawsImage : false;
+		private bool IsLayeredWindow => this.DialogData != null ? !this.DialogData.HasFormBorder && this.DialogData.DrawsImage : false;
 
-		protected override bool ShowWithoutActivation => !DialogData.ShowWithActivation;
+		protected override bool ShowWithoutActivation => !this.DialogData.ShowWithActivation;
 
 
 
 		public DialogNotifier(NotifierDialogData data)
 		{
 
-			InitializeComponent();
+            this.InitializeComponent();
 
-			DialogData = data.Clone();
+            this.DialogData = data.Clone();
 
-			Text = DialogData.Title;
-			Font = Utility.Configuration.Config.UI.MainFont;
-			Icon = Resource.ResourceManager.Instance.AppIcon;
-			Padding = new Padding(4);
+            this.Text = this.DialogData.Title;
+            this.Font = Utility.Configuration.Config.UI.MainFont;
+            this.Icon = Resource.ResourceManager.Instance.AppIcon;
+            this.Padding = new Padding(4);
 
-			//SetStyle( ControlStyles.UserPaint, true );
-			//SetStyle( ControlStyles.SupportsTransparentBackColor, true );
-			ForeColor = DialogData.ForeColor;
-			BackColor = DialogData.BackColor;
+            //SetStyle( ControlStyles.UserPaint, true );
+            //SetStyle( ControlStyles.SupportsTransparentBackColor, true );
+            this.ForeColor = this.DialogData.ForeColor;
+            this.BackColor = this.DialogData.BackColor;
 
-			if (DialogData.DrawsImage && DialogData.Image != null)
+			if (this.DialogData.DrawsImage && this.DialogData.Image != null)
 			{
-				ClientSize = DialogData.Image.Size;
+                this.ClientSize = this.DialogData.Image.Size;
 			}
 
-			if (!DialogData.HasFormBorder)
-				FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			if (!this.DialogData.HasFormBorder)
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
-			data.CloseAll += data_CloseAll;
+			data.CloseAll += this.data_CloseAll;
 
 		}
 
@@ -67,47 +67,47 @@ namespace ElectronicObserver.Window.Dialog
 
 
 			Rectangle screen = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
-			switch (DialogData.Alignment)
+			switch (this.DialogData.Alignment)
 			{
 
 				case NotifierDialogAlignment.TopLeft:
-					Location = new Point(screen.X, screen.Y);
+                    this.Location = new Point(screen.X, screen.Y);
 					break;
 				case NotifierDialogAlignment.TopCenter:
-					Location = new Point(screen.X + (screen.Width - Width) / 2, screen.Y);
+                    this.Location = new Point(screen.X + (screen.Width - this.Width) / 2, screen.Y);
 					break;
 				case NotifierDialogAlignment.TopRight:
-					Location = new Point(screen.Right - Width, screen.Y);
+                    this.Location = new Point(screen.Right - this.Width, screen.Y);
 					break;
 				case NotifierDialogAlignment.MiddleLeft:
-					Location = new Point(screen.X, screen.Y + (screen.Height - Height) / 2);
+                    this.Location = new Point(screen.X, screen.Y + (screen.Height - this.Height) / 2);
 					break;
 				case NotifierDialogAlignment.MiddleCenter:
-					Location = new Point(screen.X + (screen.Width - Width) / 2, screen.Y + (screen.Height - Height) / 2);
+                    this.Location = new Point(screen.X + (screen.Width - this.Width) / 2, screen.Y + (screen.Height - this.Height) / 2);
 					break;
 				case NotifierDialogAlignment.MiddleRight:
-					Location = new Point(screen.Right - Width, screen.Y + (screen.Height - Height) / 2);
+                    this.Location = new Point(screen.Right - this.Width, screen.Y + (screen.Height - this.Height) / 2);
 					break;
 				case NotifierDialogAlignment.BottomLeft:
-					Location = new Point(screen.X, screen.Bottom - Height);
+                    this.Location = new Point(screen.X, screen.Bottom - this.Height);
 					break;
 				case NotifierDialogAlignment.BottomCenter:
-					Location = new Point(screen.X + (screen.Width - Width) / 2, screen.Bottom - Height);
+                    this.Location = new Point(screen.X + (screen.Width - this.Width) / 2, screen.Bottom - this.Height);
 					break;
 				case NotifierDialogAlignment.BottomRight:
-					Location = new Point(screen.Right - Width, screen.Bottom - Height);
+                    this.Location = new Point(screen.Right - this.Width, screen.Bottom - this.Height);
 					break;
 				case NotifierDialogAlignment.Custom:
 				case NotifierDialogAlignment.CustomRelative:
-					Location = new Point(DialogData.Location.X, DialogData.Location.Y);
+                    this.Location = new Point(this.DialogData.Location.X, this.DialogData.Location.Y);
 					break;
 
 			}
 
-			if (IsLayeredWindow)
+			if (this.IsLayeredWindow)
 			{
 
-				Size size = DialogData.Image?.Size ?? new Size(300, 100);
+				Size size = this.DialogData.Image?.Size ?? new Size(300, 100);
 
 				// メッセージを書き込んだうえでレイヤードウィンドウ化する
 				using (var bmp = new Bitmap(size.Width, size.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
@@ -120,14 +120,14 @@ namespace ElectronicObserver.Window.Dialog
 						g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 						g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
 
-						if (DialogData.Image != null)
-							g.DrawImage(DialogData.Image, new Rectangle(0, 0, bmp.Width, bmp.Height));
+						if (this.DialogData.Image != null)
+							g.DrawImage(this.DialogData.Image, new Rectangle(0, 0, bmp.Width, bmp.Height));
 						else
-							g.Clear(DialogData.BackColor);
+							g.Clear(this.DialogData.BackColor);
 						//DrawMessage( g );
 
 						//*/
-						if (DialogData.DrawsMessage)
+						if (this.DialogData.DrawsMessage)
 						{
 
 							// fixme: どうしても滑らかにフォントが描画できなかったので超絶苦肉の策
@@ -135,9 +135,9 @@ namespace ElectronicObserver.Window.Dialog
 							using (var path = new GraphicsPath())
 							{
 
-								path.AddString(DialogData.Message, Font.FontFamily, (int)Font.Style, Font.Size, new RectangleF(Padding.Left, Padding.Top, ClientSize.Width - Padding.Horizontal, ClientSize.Height - Padding.Vertical), StringFormat.GenericDefault);
+								path.AddString(this.DialogData.Message, this.Font.FontFamily, (int)this.Font.Style, this.Font.Size, new RectangleF(this.Padding.Left, this.Padding.Top, this.ClientSize.Width - this.Padding.Horizontal, this.ClientSize.Height - this.Padding.Vertical), StringFormat.GenericDefault);
 
-								using (var brush = new SolidBrush(ForeColor))
+								using (var brush = new SolidBrush(this.ForeColor))
 								{
 									g.FillPath(brush, path);
 								}
@@ -146,15 +146,15 @@ namespace ElectronicObserver.Window.Dialog
 						//*/
 					}
 
-					SetLayeredWindow(bmp);
+                    this.SetLayeredWindow(bmp);
 
 				}
 			}
 
-			if (DialogData.ClosingInterval > 0)
+			if (this.DialogData.ClosingInterval > 0)
 			{
-				CloseTimer.Interval = DialogData.ClosingInterval;
-				CloseTimer.Start();
+                this.CloseTimer.Interval = this.DialogData.ClosingInterval;
+                this.CloseTimer.Start();
 			}
 		}
 
@@ -164,9 +164,9 @@ namespace ElectronicObserver.Window.Dialog
 			get
 			{
 				var cp = base.CreateParams;
-				if (DialogData != null && DialogData.TopMost)
+				if (this.DialogData != null && this.DialogData.TopMost)
 					cp.ExStyle |= 0x8;      //set topmost flag
-				if (IsLayeredWindow)
+				if (this.IsLayeredWindow)
 					cp.ExStyle |= 0x80000;  //set layered window flag
 				return cp;
 			}
@@ -176,21 +176,21 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogNotifier_Paint(object sender, PaintEventArgs e)
 		{
 
-			if (IsLayeredWindow) return;
+			if (this.IsLayeredWindow) return;
 
 			Graphics g = e.Graphics;
-			g.Clear(BackColor);
+			g.Clear(this.BackColor);
 
 			try
 			{
 
-				if (DialogData.DrawsImage && DialogData.Image != null)
+				if (this.DialogData.DrawsImage && this.DialogData.Image != null)
 				{
 
-					g.DrawImage(DialogData.Image, new Rectangle(0, 0, DialogData.Image.Width, DialogData.Image.Height));
+					g.DrawImage(this.DialogData.Image, new Rectangle(0, 0, this.DialogData.Image.Width, this.DialogData.Image.Height));
 				}
 
-				DrawMessage(g);
+                this.DrawMessage(g);
 
 			}
 			catch (Exception ex)
@@ -203,24 +203,24 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DrawMessage(Graphics g)
 		{
-			if (DialogData.DrawsMessage)
+			if (this.DialogData.DrawsMessage)
 			{
 
-				TextRenderer.DrawText(g, DialogData.Message, Font, new Rectangle(Padding.Left, Padding.Top, ClientSize.Width - Padding.Horizontal, ClientSize.Height - Padding.Vertical), ForeColor, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
+				TextRenderer.DrawText(g, this.DialogData.Message, this.Font, new Rectangle(this.Padding.Left, this.Padding.Top, this.ClientSize.Width - this.Padding.Horizontal, this.ClientSize.Height - this.Padding.Vertical), this.ForeColor, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
 			}
 		}
 
 		private void DialogNotifier_MouseClick(object sender, MouseEventArgs e)
 		{
 
-			var flag = DialogData.ClickFlag;
+			var flag = this.DialogData.ClickFlag;
 
 			if ((e.Button & System.Windows.Forms.MouseButtons.Left) != 0)
 			{
 				if ((flag & NotifierDialogClickFlags.Left) != 0 ||
 				   ((flag & NotifierDialogClickFlags.LeftDouble) != 0 && e.Clicks > 1))
 				{
-					Close();
+                    this.Close();
 					return;
 				}
 			}
@@ -230,7 +230,7 @@ namespace ElectronicObserver.Window.Dialog
 				if ((flag & NotifierDialogClickFlags.Right) != 0 ||
 				   ((flag & NotifierDialogClickFlags.RightDouble) != 0 && e.Clicks > 1))
 				{
-					Close();
+                    this.Close();
 					return;
 				}
 			}
@@ -240,7 +240,7 @@ namespace ElectronicObserver.Window.Dialog
 				if ((flag & NotifierDialogClickFlags.Middle) != 0 ||
 				   ((flag & NotifierDialogClickFlags.MiddleDouble) != 0 && e.Clicks > 1))
 				{
-					Close();
+                    this.Close();
 					return;
 				}
 			}
@@ -250,25 +250,25 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogNotifier_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Escape)
-				Close();
+                this.Close();
 		}
 
 		private void DialogNotifier_MouseMove(object sender, MouseEventArgs e)
 		{
-			if (DialogData.CloseOnMouseMove)
+			if (this.DialogData.CloseOnMouseMove)
 			{
-				Close();
+                this.Close();
 			}
 		}
 
 		private void CloseTimer_Tick(object sender, EventArgs e)
 		{
-			Close();
+            this.Close();
 		}
 
 		void data_CloseAll(object sender, EventArgs e)
 		{
-			Close();
+            this.Close();
 		}
 
 

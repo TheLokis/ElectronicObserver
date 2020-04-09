@@ -176,15 +176,15 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public ExpressionData()
 		{
-			Enabled = true;
+            this.Enabled = true;
 		}
 
 		public ExpressionData(string left, ExpressionOperator ope, object right)
 			: this()
 		{
-			LeftOperand = left;
-			Operator = ope;
-			RightOperand = right;
+            this.LeftOperand = left;
+            this.Operator = ope;
+            this.RightOperand = right;
 		}
 
 
@@ -192,10 +192,10 @@ namespace ElectronicObserver.Data.ShipGroup
 		{
 
 			Expression memberex = null;
-			Expression constex = Expression.Constant(RightOperand, RightOperand.GetType());
+			Expression constex = Expression.Constant(this.RightOperand, this.RightOperand.GetType());
 
 			{
-				Match match = regex_index.Match(LeftOperand);
+				Match match = regex_index.Match(this.LeftOperand);
 				if (match.Success)
 				{
 
@@ -221,7 +221,7 @@ namespace ElectronicObserver.Data.ShipGroup
 				}
 				else
 				{
-					memberex = Expression.PropertyOrField(paramex, LeftOperand);
+					memberex = Expression.PropertyOrField(paramex, this.LeftOperand);
 				}
 			}
 
@@ -229,7 +229,7 @@ namespace ElectronicObserver.Data.ShipGroup
 				memberex = Expression.Convert(memberex, typeof(int));
 
 			Expression condex;
-			switch (Operator)
+			switch (this.Operator)
 			{
 				case ExpressionOperator.Equal:
 					condex = Expression.Equal(memberex, constex);
@@ -339,12 +339,12 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public Type GetLeftOperandType()
 		{
-			return GetLeftOperandType(LeftOperand);
+			return GetLeftOperandType(this.LeftOperand);
 		}
 
 
 
-		public override string ToString() => $"{LeftOperandToString()} 값이 {RightOperandToString()} {OperatorToString()}";
+		public override string ToString() => $"{this.LeftOperandToString()} 값이 {this.RightOperandToString()} {this.OperatorToString()}";
 
 
 
@@ -353,10 +353,10 @@ namespace ElectronicObserver.Data.ShipGroup
 		/// </summary>
 		public string LeftOperandToString()
 		{
-			if (LeftOperandNameTable.ContainsKey(LeftOperand))
-				return LeftOperandNameTable[LeftOperand];
+			if (LeftOperandNameTable.ContainsKey(this.LeftOperand))
+				return LeftOperandNameTable[this.LeftOperand];
 			else
-				return LeftOperand;
+				return this.LeftOperand;
 		}
 
 		/// <summary>
@@ -364,7 +364,7 @@ namespace ElectronicObserver.Data.ShipGroup
 		/// </summary>
 		public string OperatorToString()
 		{
-			return OperatorNameTable[Operator];
+			return OperatorNameTable[this.Operator];
 		}
 
 		/// <summary>
@@ -373,116 +373,116 @@ namespace ElectronicObserver.Data.ShipGroup
 		public string RightOperandToString()
 		{
 
-			if (LeftOperand == ".MasterID")
+			if (this.LeftOperand == ".MasterID")
 			{
-				var ship = KCDatabase.Instance.Ships[(int)RightOperand];
+				var ship = KCDatabase.Instance.Ships[(int)this.RightOperand];
 				if (ship != null)
 					return $"{ship.MasterID} ({ship.NameWithLevel})";
 				else
-					return $"{(int)RightOperand} (미등록)";
+					return $"{(int)this.RightOperand} (미등록)";
 
 			}
-			else if (LeftOperand == ".ShipID")
+			else if (this.LeftOperand == ".ShipID")
 			{
-				var ship = KCDatabase.Instance.MasterShips[(int)RightOperand];
+				var ship = KCDatabase.Instance.MasterShips[(int)this.RightOperand];
 				if (ship != null)
 					return $"{ship.ShipID} ({ship.NameWithClass})";
 				else
-					return $"{(int)RightOperand} (불명)";
+					return $"{(int)this.RightOperand} (불명)";
 
 			}
-			else if (LeftOperand == ".MasterShip.ShipType")
+			else if (this.LeftOperand == ".MasterShip.ShipType")
 			{
-				var shiptype = KCDatabase.Instance.ShipTypes[(int)RightOperand];
+				var shiptype = KCDatabase.Instance.ShipTypes[(int)this.RightOperand];
 				if (shiptype != null)
-                    return FormMain.Instance.Translator.GetTranslation(shiptype.Name, Utility.TranslationType.ShipTypes);
+                    return FormMain.Instance.Translator.GetTranslation(shiptype.Name, Utility.DataType.ShipType);
 				else
-					return $"{(int)RightOperand} (미정의)";
+					return $"{(int)this.RightOperand} (미정의)";
 
 			}
-			else if (LeftOperand.Contains("SlotMaster"))
+			else if (this.LeftOperand.Contains("SlotMaster"))
 			{
-				if ((int)RightOperand == -1)
+				if ((int)this.RightOperand == -1)
 				{
 					return "(없음)";
 				}
 				else
 				{
-					var eq = KCDatabase.Instance.MasterEquipments[(int)RightOperand];
+					var eq = KCDatabase.Instance.MasterEquipments[(int)this.RightOperand];
 					if (eq != null)
 						return eq.Name;
 					else
-						return $"{(int)RightOperand} (미정의)";
+						return $"{(int)this.RightOperand} (미정의)";
 				}
 			}
-			else if (LeftOperand.Contains("Rate") && RightOperand is double)
+			else if (this.LeftOperand.Contains("Rate") && this.RightOperand is double)
 			{
-				return ((double)RightOperand).ToString("P0");
+				return ((double)this.RightOperand).ToString("P0");
 
 			}
-			else if (LeftOperand == ".RepairTime")
+			else if (this.LeftOperand == ".RepairTime")
 			{
-				return DateTimeHelper.ToTimeRemainString(DateTimeHelper.FromAPITimeSpan((int)RightOperand));
+				return DateTimeHelper.ToTimeRemainString(DateTimeHelper.FromAPITimeSpan((int)this.RightOperand));
 
 			}
-			else if (LeftOperand == ".Range")
+			else if (this.LeftOperand == ".Range")
 			{
-				return Constants.GetRange((int)RightOperand);
+				return Constants.GetRange((int)this.RightOperand);
 
 			}
-			else if (LeftOperand == ".Speed" || LeftOperand == ".MasterShip.Speed")
+			else if (this.LeftOperand == ".Speed" || this.LeftOperand == ".MasterShip.Speed")
 			{
-				return Constants.GetSpeed((int)RightOperand);
+				return Constants.GetSpeed((int)this.RightOperand);
 
 			}
-			else if (LeftOperand == ".MasterShip.Rarity")
+			else if (this.LeftOperand == ".MasterShip.Rarity")
 			{
-				return Constants.GetShipRarity((int)RightOperand);
+				return Constants.GetShipRarity((int)this.RightOperand);
 
 			}
-			else if (LeftOperand == ".MasterShip.AlbumNo")
+			else if (this.LeftOperand == ".MasterShip.AlbumNo")
 			{
-				var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.AlbumNo == (int)RightOperand);
+				var ship = KCDatabase.Instance.MasterShips.Values.FirstOrDefault(s => s.AlbumNo == (int)this.RightOperand);
 				if (ship != null)
-					return $"{(int)RightOperand} ({ship.NameWithClass})";
+					return $"{(int)this.RightOperand} ({ship.NameWithClass})";
 				else
-					return $"{(int)RightOperand} (불명)";
+					return $"{(int)this.RightOperand} (불명)";
 
 			}
-			else if (LeftOperand == ".MasterShip.RemodelAfterShipID")
+			else if (this.LeftOperand == ".MasterShip.RemodelAfterShipID")
 			{
 
-				if (((int)RightOperand) == 0)
+				if (((int)this.RightOperand) == 0)
 					return "최종개장";
 
-				var ship = KCDatabase.Instance.MasterShips[(int)RightOperand];
+				var ship = KCDatabase.Instance.MasterShips[(int)this.RightOperand];
 				if (ship != null)
 					return $"{ship.ShipID} ({ship.NameWithClass})";
 				else
-					return $"{(int)RightOperand} (불명)";
+					return $"{(int)this.RightOperand} (불명)";
 
 			}
-			else if (LeftOperand == ".MasterShip.RemodelBeforeShipID")
+			else if (this.LeftOperand == ".MasterShip.RemodelBeforeShipID")
 			{
 
-				if (((int)RightOperand) == 0)
+				if (((int)this.RightOperand) == 0)
 					return "미개장";
 
-				var ship = KCDatabase.Instance.MasterShips[(int)RightOperand];
+				var ship = KCDatabase.Instance.MasterShips[(int)this.RightOperand];
 				if (ship != null)
 					return $"{ship.ShipID} ({ship.NameWithClass})";
 				else
-					return $"{(int)RightOperand} (불명)";
+					return $"{(int)this.RightOperand} (불명)";
 
 			}
-			else if (RightOperand is bool)
+			else if (this.RightOperand is bool)
 			{
-				return ((bool)RightOperand) ? "○" : "×";
+				return ((bool)this.RightOperand) ? "○" : "×";
 
 			}
 			else
 			{
-				return RightOperand.ToString();
+				return this.RightOperand.ToString();
 
 			}
 
@@ -491,13 +491,13 @@ namespace ElectronicObserver.Data.ShipGroup
 
 		public ExpressionData Clone()
 		{
-			var clone = MemberwiseClone();      //checkme: 右辺値に参照型を含む場合死ぬ
+			var clone = this.MemberwiseClone();      //checkme: 右辺値に参照型を含む場合死ぬ
 			return (ExpressionData)clone;
 		}
 
 		object ICloneable.Clone()
 		{
-			return Clone();
+			return this.Clone();
 		}
 	}
 

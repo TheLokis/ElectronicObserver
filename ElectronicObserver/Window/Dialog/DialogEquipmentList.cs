@@ -25,22 +25,22 @@ namespace ElectronicObserver.Window.Dialog
 		public DialogEquipmentList()
 		{
 
-			InitializeComponent();
+            this.InitializeComponent();
 
-			ControlHelper.SetDoubleBuffered(EquipmentView);
+			ControlHelper.SetDoubleBuffered(this.EquipmentView);
 
-			Font = Utility.Configuration.Config.UI.MainFont;
+            this.Font = Utility.Configuration.Config.UI.MainFont;
 
-			foreach (DataGridViewColumn column in EquipmentView.Columns)
+			foreach (DataGridViewColumn column in this.EquipmentView.Columns)
 			{
 				column.MinimumWidth = 2;
 			}
 
 
 
-			#region CellStyle
+            #region CellStyle
 
-			CSDefaultLeft = new DataGridViewCellStyle
+            this.CSDefaultLeft = new DataGridViewCellStyle
 			{
 				Alignment = DataGridViewContentAlignment.MiddleLeft,
 				BackColor = SystemColors.Control,
@@ -51,27 +51,27 @@ namespace ElectronicObserver.Window.Dialog
 				WrapMode = DataGridViewTriState.False
 			};
 
-			CSDefaultRight = new DataGridViewCellStyle(CSDefaultLeft)
+            this.CSDefaultRight = new DataGridViewCellStyle(this.CSDefaultLeft)
 			{
 				Alignment = DataGridViewContentAlignment.MiddleRight
 			};
 
-			CSUnselectableLeft = new DataGridViewCellStyle(CSDefaultLeft);
-			CSUnselectableLeft.SelectionForeColor = CSUnselectableLeft.ForeColor;
-			CSUnselectableLeft.SelectionBackColor = CSUnselectableLeft.BackColor;
+            this.CSUnselectableLeft = new DataGridViewCellStyle(this.CSDefaultLeft);
+            this.CSUnselectableLeft.SelectionForeColor = this.CSUnselectableLeft.ForeColor;
+            this.CSUnselectableLeft.SelectionBackColor = this.CSUnselectableLeft.BackColor;
 
-			CSUnselectableRight = new DataGridViewCellStyle(CSDefaultRight);
-			CSUnselectableRight.SelectionForeColor = CSUnselectableRight.ForeColor;
-			CSUnselectableRight.SelectionBackColor = CSUnselectableRight.BackColor;
+            this.CSUnselectableRight = new DataGridViewCellStyle(this.CSDefaultRight);
+            this.CSUnselectableRight.SelectionForeColor = this.CSUnselectableRight.ForeColor;
+            this.CSUnselectableRight.SelectionBackColor = this.CSUnselectableRight.BackColor;
 
 
-			EquipmentView.DefaultCellStyle = CSDefaultRight;
-			EquipmentView_Name.DefaultCellStyle = CSDefaultLeft;
-			EquipmentView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            this.EquipmentView.DefaultCellStyle = this.CSDefaultRight;
+            this.EquipmentView_Name.DefaultCellStyle = this.CSDefaultLeft;
+            this.EquipmentView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-			DetailView.DefaultCellStyle = CSUnselectableRight;
-			DetailView_EquippedShip.DefaultCellStyle = CSUnselectableLeft;
-			DetailView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            this.DetailView.DefaultCellStyle = this.CSUnselectableRight;
+            this.DetailView_EquippedShip.DefaultCellStyle = this.CSUnselectableLeft;
+            this.DetailView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
 			#endregion
 
@@ -80,7 +80,7 @@ namespace ElectronicObserver.Window.Dialog
 		private void DialogEquipmentList_Load(object sender, EventArgs e)
 		{
 
-			UpdateView();
+            this.UpdateView();
 
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormEquipmentList]);
 
@@ -90,11 +90,11 @@ namespace ElectronicObserver.Window.Dialog
 		private void EquipmentView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
 		{
 
-			if (e.Column.Index == EquipmentView_Name.Index)
+			if (e.Column.Index == this.EquipmentView_Name.Index)
 			{
 
-				int id1 = (int)EquipmentView[EquipmentView_ID.Index, e.RowIndex1].Value;
-				int id2 = (int)EquipmentView[EquipmentView_ID.Index, e.RowIndex2].Value;
+				int id1 = (int)this.EquipmentView[this.EquipmentView_ID.Index, e.RowIndex1].Value;
+				int id2 = (int)this.EquipmentView[this.EquipmentView_ID.Index, e.RowIndex2].Value;
 
 				e.SortResult =
 					KCDatabase.Instance.MasterEquipments[id1].CategoryType -
@@ -116,7 +116,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.SortResult == 0)
 			{
-				e.SortResult = (EquipmentView.Rows[e.RowIndex1].Tag as int? ?? 0) - (EquipmentView.Rows[e.RowIndex2].Tag as int? ?? 0);
+				e.SortResult = (this.EquipmentView.Rows[e.RowIndex1].Tag as int? ?? 0) - (this.EquipmentView.Rows[e.RowIndex2].Tag as int? ?? 0);
 			}
 
 			e.Handled = true;
@@ -126,15 +126,15 @@ namespace ElectronicObserver.Window.Dialog
 		private void EquipmentView_Sorted(object sender, EventArgs e)
 		{
 
-			for (int i = 0; i < EquipmentView.Rows.Count; i++)
-				EquipmentView.Rows[i].Tag = i;
+			for (int i = 0; i < this.EquipmentView.Rows.Count; i++)
+                this.EquipmentView.Rows[i].Tag = i;
 
 		}
 
 		private void EquipmentView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 
-			if (e.ColumnIndex == EquipmentView_Icon.Index)
+			if (e.ColumnIndex == this.EquipmentView_Icon.Index)
 			{
 				e.Value = ResourceManager.GetEquipmentImage((int)e.Value);
 				e.FormattingApplied = true;
@@ -145,8 +145,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void EquipmentView_SelectionChanged(object sender, EventArgs e)
 		{
 
-			if (EquipmentView.Enabled && EquipmentView.SelectedRows != null && EquipmentView.SelectedRows.Count > 0)
-				UpdateDetailView((int)EquipmentView[EquipmentView_ID.Index, EquipmentView.SelectedRows[0].Index].Value);
+			if (this.EquipmentView.Enabled && this.EquipmentView.SelectedRows != null && this.EquipmentView.SelectedRows.Count > 0)
+                this.UpdateDetailView((int)this.EquipmentView[this.EquipmentView_ID.Index, this.EquipmentView.SelectedRows[0].Index].Value);
 
 		}
 
@@ -154,9 +154,9 @@ namespace ElectronicObserver.Window.Dialog
 		private void DetailView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 
-			if (e.ColumnIndex != DetailView_EquippedShip.Index)
+			if (e.ColumnIndex != this.DetailView_EquippedShip.Index)
 			{
-				if (AreEqual(e.RowIndex, e.RowIndex - 1))
+				if (this.AreEqual(e.RowIndex, e.RowIndex - 1))
 				{
 
 					e.Value = "";
@@ -165,7 +165,7 @@ namespace ElectronicObserver.Window.Dialog
 				}
 			}
 
-			if (e.ColumnIndex == DetailView_Level.Index)
+			if (e.ColumnIndex == this.DetailView_Level.Index)
 			{
 
 				e.Value = "+" + e.Value;
@@ -180,13 +180,13 @@ namespace ElectronicObserver.Window.Dialog
 
 			e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
 
-			if (AreEqual(e.RowIndex, e.RowIndex + 1))
+			if (this.AreEqual(e.RowIndex, e.RowIndex + 1))
 			{
 				e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
 			}
 			else
 			{
-				e.AdvancedBorderStyle.Bottom = DetailView.AdvancedCellBorderStyle.Bottom;
+				e.AdvancedBorderStyle.Bottom = this.DetailView.AdvancedCellBorderStyle.Bottom;
 			}
 
 		}
@@ -198,15 +198,15 @@ namespace ElectronicObserver.Window.Dialog
 		{
 
 			if (rowIndex1 < 0 ||
-				rowIndex1 >= DetailView.Rows.Count ||
+				rowIndex1 >= this.DetailView.Rows.Count ||
 				rowIndex2 < 0 ||
-				rowIndex2 >= DetailView.Rows.Count)
+				rowIndex2 >= this.DetailView.Rows.Count)
 				return false;
 
-			return ((IComparable)DetailView[DetailView_Level.Index, rowIndex1].Value)
-				.CompareTo(DetailView[DetailView_Level.Index, rowIndex2].Value) == 0 &&
-				((IComparable)DetailView[DetailView_AircraftLevel.Index, rowIndex1].Value)
-				.CompareTo(DetailView[DetailView_AircraftLevel.Index, rowIndex2].Value) == 0;
+			return ((IComparable)this.DetailView[this.DetailView_Level.Index, rowIndex1].Value)
+				.CompareTo(this.DetailView[this.DetailView_Level.Index, rowIndex2].Value) == 0 &&
+				((IComparable)this.DetailView[this.DetailView_AircraftLevel.Index, rowIndex1].Value)
+				.CompareTo(this.DetailView[this.DetailView_AircraftLevel.Index, rowIndex2].Value) == 0;
 		}
 
 
@@ -252,11 +252,11 @@ namespace ElectronicObserver.Window.Dialog
 
 
 
-			//表示処理
-			EquipmentView.SuspendLayout();
+            //表示処理
+            this.EquipmentView.SuspendLayout();
 
-			EquipmentView.Enabled = false;
-			EquipmentView.Rows.Clear();
+            this.EquipmentView.Enabled = false;
+            this.EquipmentView.Rows.Clear();
 
 
 			var rows = new List<DataGridViewRow>(allCount.Count);
@@ -266,7 +266,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 
 				var row = new DataGridViewRow();
-				row.CreateCells(EquipmentView);
+				row.CreateCells(this.EquipmentView);
 				row.SetValues(
 					id,
 					masterEquipments[id].IconType,
@@ -281,16 +281,16 @@ namespace ElectronicObserver.Window.Dialog
 			for (int i = 0; i < rows.Count; i++)
 				rows[i].Tag = i;
 
-			EquipmentView.Rows.AddRange(rows.ToArray());
+            this.EquipmentView.Rows.AddRange(rows.ToArray());
 
-			EquipmentView.Sort(EquipmentView_Name, ListSortDirection.Ascending);
+            this.EquipmentView.Sort(this.EquipmentView_Name, ListSortDirection.Ascending);
 
 
-			EquipmentView.Enabled = true;
-			EquipmentView.ResumeLayout();
+            this.EquipmentView.Enabled = true;
+            this.EquipmentView.ResumeLayout();
 
-			if (EquipmentView.Rows.Count > 0)
-				EquipmentView.CurrentCell = EquipmentView[0, 0];
+			if (this.EquipmentView.Rows.Count > 0)
+                this.EquipmentView.CurrentCell = this.EquipmentView[0, 0];
 
 		}
 
@@ -308,12 +308,12 @@ namespace ElectronicObserver.Window.Dialog
 
 			public DetailCounter(int lv, int aircraftLv)
 			{
-				level = lv;
-				aircraftLevel = aircraftLv;
-				countAll = 0;
-				countRemainPrev = 0;
-				countRemain = 0;
-				equippedShips = new List<string>();
+                this.level = lv;
+                this.aircraftLevel = aircraftLv;
+                this.countAll = 0;
+                this.countRemainPrev = 0;
+                this.countRemain = 0;
+                this.equippedShips = new List<string>();
 			}
 
 			public static int CalculateID(int level, int aircraftLevel)
@@ -326,7 +326,7 @@ namespace ElectronicObserver.Window.Dialog
 				return CalculateID(eq.Level, eq.AircraftLevel);
 			}
 
-			public int ID => CalculateID(level, aircraftLevel); }
+			public int ID => CalculateID(this.level, this.aircraftLevel); }
 
 
 		/// <summary>
@@ -335,9 +335,9 @@ namespace ElectronicObserver.Window.Dialog
 		private void UpdateDetailView(int equipmentID)
 		{
 
-			DetailView.SuspendLayout();
+            this.DetailView.SuspendLayout();
 
-			DetailView.Rows.Clear();
+            this.DetailView.Rows.Clear();
 
 			//装備数カウント
 			var eqs = KCDatabase.Instance.Equipments.Values.Where(eq => eq.EquipmentID == equipmentID);
@@ -443,20 +443,20 @@ namespace ElectronicObserver.Window.Dialog
 				{
 
 					var row = new DataGridViewRow();
-					row.CreateCells(DetailView);
+					row.CreateCells(this.DetailView);
 					row.SetValues(c.level, c.aircraftLevel, c.countAll, c.countRemain, s);
 					rows.Add(row);
 				}
 
 			}
 
-			DetailView.Rows.AddRange(rows.ToArray());
-			DetailView.Sort(DetailView_AircraftLevel, ListSortDirection.Ascending);
-			DetailView.Sort(DetailView_Level, ListSortDirection.Ascending);
+            this.DetailView.Rows.AddRange(rows.ToArray());
+            this.DetailView.Sort(this.DetailView_AircraftLevel, ListSortDirection.Ascending);
+            this.DetailView.Sort(this.DetailView_Level, ListSortDirection.Ascending);
 
-			DetailView.ResumeLayout();
+            this.DetailView.ResumeLayout();
 
-			Text = "장비목록 - " + KCDatabase.Instance.MasterEquipments[equipmentID].Name;
+            this.Text = "장비목록 - " + KCDatabase.Instance.MasterEquipments[equipmentID].Name;
 		}
 
 
@@ -467,9 +467,9 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.SortResult == 0)
 			{
-				e.SortResult = (DetailView.Rows[e.RowIndex1].Tag as int? ?? 0) - (DetailView.Rows[e.RowIndex2].Tag as int? ?? 0);
+				e.SortResult = (this.DetailView.Rows[e.RowIndex1].Tag as int? ?? 0) - (this.DetailView.Rows[e.RowIndex2].Tag as int? ?? 0);
 
-				if (DetailView.SortOrder == SortOrder.Descending)
+				if (this.DetailView.SortOrder == SortOrder.Descending)
 					e.SortResult = -e.SortResult;
 			}
 
@@ -479,8 +479,8 @@ namespace ElectronicObserver.Window.Dialog
 		private void DetailView_Sorted(object sender, EventArgs e)
 		{
 
-			for (int i = 0; i < DetailView.Rows.Count; i++)
-				DetailView.Rows[i].Tag = i;
+			for (int i = 0; i < this.DetailView.Rows.Count; i++)
+                this.DetailView.Rows[i].Tag = i;
 
 		}
 
@@ -489,13 +489,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void Menu_File_CSVOutput_Click(object sender, EventArgs e)
 		{
 
-			if (SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
 				try
 				{
 
-					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
+					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
 						sw.WriteLine("고유ID,장비ID,장비명,개수Lv,함재기Lv,잠금,장비함ID,장비함");
@@ -551,14 +551,14 @@ namespace ElectronicObserver.Window.Dialog
         private void DialogEquipmentList_FormClosed(object sender, FormClosedEventArgs e)
 		{
 
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 
 		}
 
 		private void TopMenu_File_Update_Click(object sender, EventArgs e)
 		{
 
-			UpdateView();
+            this.UpdateView();
 		}
 
 

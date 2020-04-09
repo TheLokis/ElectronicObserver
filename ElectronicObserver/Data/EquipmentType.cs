@@ -18,12 +18,12 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 装備種別ID
 		/// </summary>
-		public int TypeID => (int)RawData.api_id;
+		public int TypeID => (int)this.RawData.api_id;
 
 		/// <summary>
 		/// 名前
 		/// </summary>
-		public string Name { get { return FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.EquipmentType); } }
+		public string Name { get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.EquipmentType); } }
 
     //show_flg
 
@@ -31,12 +31,12 @@ namespace ElectronicObserver.Data
     /// <summary>
     /// 装備種別ID
     /// </summary>
-    public EquipmentTypes Type => (EquipmentTypes)TypeID;
+    public EquipmentTypes Type => (EquipmentTypes)this.TypeID;
 
 
-		public override string ToString() => $"[{TypeID}] {Name}";
+		public override string ToString() => $"[{this.TypeID}] {this.Name}";
 
-		public int ID => TypeID;
+		public int ID => this.TypeID;
 
 	}
 

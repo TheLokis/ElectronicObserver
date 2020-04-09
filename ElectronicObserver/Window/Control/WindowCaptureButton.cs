@@ -29,45 +29,45 @@ namespace ElectronicObserver.Window.Control
 
 		public WindowCaptureButton()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 		private void OnMouseMoved()
 		{
 			Point cursor = System.Windows.Forms.Cursor.Position;
 
-			CapturingImageWindow.Location = new Point(
+            this.CapturingImageWindow.Location = new Point(
 				cursor.X - this.Image.Width / 2,
 				cursor.Y - this.Image.Height / 2
 				);
 
-			IntPtr newCandidate = RootWindowFromPoint(cursor);
-			if (currentCandidate != newCandidate)
+			IntPtr newCandidate = this.RootWindowFromPoint(cursor);
+			if (this.currentCandidate != newCandidate)
 			{
 				if (newCandidate == IntPtr.Zero)
 				{
-					CandidateBoxWindow.Visible = false;
+                    this.CandidateBoxWindow.Visible = false;
 				}
 				else
 				{
 					// ウィンドウ選択が変わったので移動
 					WinAPI.GetWindowRect(newCandidate, out WinAPI.RECT candidateRect);
-					CandidateBoxWindow.Bounds = new Rectangle(candidateRect.left, candidateRect.top,
+                    this.CandidateBoxWindow.Bounds = new Rectangle(candidateRect.left, candidateRect.top,
 						candidateRect.right - candidateRect.left, candidateRect.bottom - candidateRect.top);
-					if (!CandidateBoxWindow.Visible)
+					if (!this.CandidateBoxWindow.Visible)
 					{
-						CandidateBoxWindow.Visible = true;
+                        this.CandidateBoxWindow.Visible = true;
 					}
 				}
-				currentCandidate = newCandidate;
+                this.currentCandidate = newCandidate;
 			}
 		}
 
 		private void OnMouseUp()
 		{
 
-			IntPtr selected = currentCandidate;
-			OnCanceled();
+			IntPtr selected = this.currentCandidate;
+            this.OnCanceled();
 
 			if (selected != IntPtr.Zero)
 			{
@@ -84,10 +84,10 @@ namespace ElectronicObserver.Window.Control
 
 		private void OnCanceled()
 		{
-			CapturingImageWindow.Visible = false;
-			CandidateBoxWindow.Visible = false;
-			currentCandidate = IntPtr.Zero;
-			selectingWindow = false;
+            this.CapturingImageWindow.Visible = false;
+            this.CandidateBoxWindow.Visible = false;
+            this.currentCandidate = IntPtr.Zero;
+            this.selectingWindow = false;
 		}
 
 		private IntPtr RootWindowFromPoint(Point cursor)
@@ -98,8 +98,8 @@ namespace ElectronicObserver.Window.Control
 			int currentProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
 			WinAPI.EnumWindows((WinAPI.EnumWindowsDelegate)((hWnd, lparam) =>
 			{
-				if (CapturingImageWindow.Handle != hWnd &&
-					CandidateBoxWindow.Handle != hWnd)
+				if (this.CapturingImageWindow.Handle != hWnd &&
+                    this.CandidateBoxWindow.Handle != hWnd)
 				{
 					WinAPI.GetClassName(hWnd, className, className.Capacity);
 					WinAPI.GetWindowText(hWnd, windowText, windowText.Capacity);
@@ -125,20 +125,20 @@ namespace ElectronicObserver.Window.Control
 
 		protected override void WndProc(ref Message m)
 		{
-			if (selectingWindow)
+			if (this.selectingWindow)
 			{
 				// マウスをキャプチャしている時だけ
 				switch (m.Msg)
 				{
 					case WinAPI.WM_MOUSEMOVE:
-						OnMouseMoved();
+                        this.OnMouseMoved();
 						break;
 					case WinAPI.WM_LBUTTONUP:
-						OnMouseUp();
+                        this.OnMouseUp();
 						break;
 					case WinAPI.WM_CANCELMODE:
 					case WinAPI.WM_CAPTURECHANGED:
-						OnCanceled();
+                        this.OnCanceled();
 						break;
 				}
 				return;
@@ -149,18 +149,18 @@ namespace ElectronicObserver.Window.Control
 		protected override void OnMouseDown(MouseEventArgs mevent)
 		{
 			base.OnMouseDown(mevent);
-			Capture = true;
-			selectingWindow = true;
+            this.Capture = true;
+            this.selectingWindow = true;
 
 			Point cursor = System.Windows.Forms.Cursor.Position;
-			CapturingImageWindow.Location = new Point(
+            this.CapturingImageWindow.Location = new Point(
 				cursor.X - this.Image.Width / 2,
 				cursor.Y - this.Image.Height / 2
 				);
 
-			CapturingImageWindow.BackgroundImage = Image;
-			CapturingImageWindow.Show();
-			CapturingImageWindow.Size = this.Image.Size;
+            this.CapturingImageWindow.BackgroundImage = this.Image;
+            this.CapturingImageWindow.Show();
+            this.CapturingImageWindow.Size = this.Image.Size;
 		}
 	}
 }

@@ -19,13 +19,13 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 飛行場が存在する海域ID
 		/// </summary>
-		public int MapAreaID => RawData.api_area_id() ? (int)RawData.api_area_id : -1;
+		public int MapAreaID => this.RawData.api_area_id() ? (int)this.RawData.api_area_id : -1;
 
 
 		/// <summary>
 		/// 航空隊ID
 		/// </summary>
-		public int AirCorpsID => (int)RawData.api_rid;
+		public int AirCorpsID => (int)this.RawData.api_rid;
 
 
         /// <summary>
@@ -51,14 +51,14 @@ namespace ElectronicObserver.Data
         /// </summary>
         public IDDictionary<BaseAirCorpsSquadron> Squadrons { get; private set; }
 
-		public BaseAirCorpsSquadron this[int i] => Squadrons[i];
+		public BaseAirCorpsSquadron this[int i] => this.Squadrons[i];
 
 
 
 
 		public BaseAirCorpsData()
 		{
-			Squadrons = new IDDictionary<BaseAirCorpsSquadron>();
+            this.Squadrons = new IDDictionary<BaseAirCorpsSquadron>();
 		}
 
 
@@ -69,7 +69,7 @@ namespace ElectronicObserver.Data
 			switch (apiname)
 			{
 				case "api_req_air_corps/change_name":
-					Name = data["api_name"];
+                    this.Name = data["api_name"];
 					break;
 
 				case "api_req_air_corps/set_action":
@@ -78,11 +78,11 @@ namespace ElectronicObserver.Data
 						int[] ids = data["api_base_id"].Split(",".ToCharArray()).Select(s => int.Parse(s)).ToArray();
 						int[] actions = data["api_action_kind"].Split(",".ToCharArray()).Select(s => int.Parse(s)).ToArray();
 
-						int index = Array.IndexOf(ids, AirCorpsID);
+						int index = Array.IndexOf(ids, this.AirCorpsID);
 
 						if (index >= 0)
 						{
-							ActionKind = actions[index];
+                            this.ActionKind = actions[index];
 						}
 
 					}
@@ -98,18 +98,18 @@ namespace ElectronicObserver.Data
 				case "api_get_member/base_air_corps":
 				default:
 					base.LoadFromResponse(apiname, (object)data);
-                    Name = (string)data.api_name;
-                    Distance = (int)data.api_distance.api_base + (int)data.api_distance.api_bonus;
-                    ActionKind = (int)data.api_action_kind;
+                    this.Name = (string)data.api_name;
+                    this.Distance = (int)data.api_distance.api_base + (int)data.api_distance.api_bonus;
+                    this.ActionKind = (int)data.api_action_kind;
                     SetSquadrons(apiname, data.api_plane_info);
 					break;
 
 				case "api_req_air_corps/set_plane":
 					{
-						var prev = Squadrons.Values.Select(sq => sq != null && sq.State == 1 ? sq.EquipmentMasterID : 0).ToArray();
+						var prev = this.Squadrons.Values.Select(sq => sq != null && sq.State == 1 ? sq.EquipmentMasterID : 0).ToArray();
 						SetSquadrons(apiname, data.api_plane_info);
 
-						foreach (var deleted in prev.Except(Squadrons.Values.Select(sq => sq != null && sq.State == 1 ? sq.EquipmentMasterID : 0)))
+						foreach (var deleted in prev.Except(this.Squadrons.Values.Select(sq => sq != null && sq.State == 1 ? sq.EquipmentMasterID : 0)))
 						{
 							var eq = KCDatabase.Instance.Equipments[deleted];
 
@@ -119,7 +119,7 @@ namespace ElectronicObserver.Data
 							}
 						}
 
-                        Distance = (int)data.api_distance.api_base + (int)data.api_distance.api_bonus;
+                        this.Distance = (int)data.api_distance.api_base + (int)data.api_distance.api_bonus;
                     }
 					break;
 
@@ -137,27 +137,27 @@ namespace ElectronicObserver.Data
 
 				int id = (int)elem.api_squadron_id;
 
-				if (!Squadrons.ContainsKey(id))
+				if (!this.Squadrons.ContainsKey(id))
 				{
 					var a = new BaseAirCorpsSquadron();
 					a.LoadFromResponse(apiname, elem);
-					Squadrons.Add(a);
+                    this.Squadrons.Add(a);
 
 				}
 				else
 				{
-					Squadrons[id].LoadFromResponse(apiname, elem);
+                    this.Squadrons[id].LoadFromResponse(apiname, elem);
 				}
 			}
 		}
 
 
 
-		public override string ToString() => $"[{MapAreaID}:{AirCorpsID}] {Name}";
+		public override string ToString() => $"[{this.MapAreaID}:{this.AirCorpsID}] {this.Name}";
 
 
 
-		public int ID => GetID(RawData);
+		public int ID => GetID(this.RawData);
 
 
 		public static int GetID(int mapAreaID, int airCorpsID) => mapAreaID * 10 + airCorpsID;

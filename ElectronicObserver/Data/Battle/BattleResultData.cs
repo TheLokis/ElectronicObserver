@@ -25,7 +25,7 @@ namespace ElectronicObserver.Data.Battle
         /// <summary>
         /// 演習の結果かどうか
         /// </summary>
-        private bool IsPractice => _APIName == "api_req_practice/battle_result";
+        private bool IsPractice => this._APIName == "api_req_practice/battle_result";
 
 
 
@@ -33,28 +33,28 @@ namespace ElectronicObserver.Data.Battle
         /// <summary>
         /// 勝利ランク
         /// </summary>
-        public string Rank => RawData.api_win_rank;
+        public string Rank => this.RawData.api_win_rank;
 
         /// <summary>
         /// 獲得提督経験値
         /// </summary>
-        public int AdmiralExp => (int)RawData.api_get_exp;
+        public int AdmiralExp => (int)this.RawData.api_get_exp;
 
         /// <summary>
         /// MVP艦のインデックス (1-6, -1=なし)
         /// </summary>
-        public int MVPIndex => (int)RawData.api_mvp;
+        public int MVPIndex => (int)this.RawData.api_mvp;
 
         /// <summary>
         /// 随伴艦隊 MVP 艦のインデックス (1-6, -1=なし)
         /// </summary>
-        public int MVPIndexCombined => RawData.api_mvp_combined() && RawData.api_mvp_combined != null ? (int)RawData.api_mvp_combined : -1;
+        public int MVPIndexCombined => this.RawData.api_mvp_combined() && this.RawData.api_mvp_combined != null ? (int)this.RawData.api_mvp_combined : -1;
 
 
         /// <summary>
         /// 獲得基本経験値
         /// </summary>
-        public int BaseExp => (int)RawData.api_get_base_exp;
+        public int BaseExp => (int)this.RawData.api_get_base_exp;
 
 
         /// <summary>
@@ -65,10 +65,10 @@ namespace ElectronicObserver.Data.Battle
         {
             get
             {
-                if (!RawData.api_get_ship_exp())
+                if (!this.RawData.api_get_ship_exp())
                     return new int[6];
 
-                var src = (int[])RawData.api_get_ship_exp;
+                var src = (int[])this.RawData.api_get_ship_exp;
                 var ret = new int[Math.Max(src.Length - 1, 6)];
                 Array.Copy(src, 1, ret, 0, src.Length - 1);
                 return ret;
@@ -83,10 +83,10 @@ namespace ElectronicObserver.Data.Battle
         {
             get
             {
-                if (!RawData.api_get_ship_exp_combined())
+                if (!this.RawData.api_get_ship_exp_combined())
                     return new int[6];
 
-                var src = (int[])RawData.api_get_ship_exp_combined;
+                var src = (int[])this.RawData.api_get_ship_exp_combined;
                 var ret = new int[Math.Max(src.Length - 1, 6)];
                 Array.Copy(src, 1, ret, 0, src.Length - 1);
                 return ret;
@@ -101,11 +101,11 @@ namespace ElectronicObserver.Data.Battle
         {
             get
             {
-                if (!RawData.api_get_exp_lvup())
+                if (!this.RawData.api_get_exp_lvup())
                     return new int[0][];
 
                 var ret = new List<int[]>();
-                foreach (var data in RawData.api_get_exp_lvup)
+                foreach (var data in this.RawData.api_get_exp_lvup)
                 {
                     ret.Add((int[])data);
                 }
@@ -121,11 +121,11 @@ namespace ElectronicObserver.Data.Battle
         {
             get
             {
-                if (!RawData.api_get_exp_lvup_combined())
+                if (!this.RawData.api_get_exp_lvup_combined())
                     return new int[0][];
 
                 var ret = new List<int[]>();
-                foreach (var data in RawData.api_get_exp_lvup_combined)
+                foreach (var data in this.RawData.api_get_exp_lvup_combined)
                 {
                     ret.Add((int[])data);
                 }
@@ -142,7 +142,7 @@ namespace ElectronicObserver.Data.Battle
         /// </summary>
         public string EnemyFleetName
         { get
-            { return FormMain.Instance.Translator.GetTranslation(RawData.api_enemy_info.api_deck_name, Utility.TranslationType.OperationSortie); }
+            { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_enemy_info.api_deck_name, Utility.DataType.OperationSortie); }
         }
     //undone: 複数の battleresult に対応させる
 
@@ -154,12 +154,12 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				if (IsPractice)
+				if (this.IsPractice)
 					return -1;
-				if ((int)RawData.api_get_flag[1] == 0)
+				if ((int)this.RawData.api_get_flag[1] == 0)
 					return -1;
 
-				return (int)RawData.api_get_ship.api_ship_id;
+				return (int)this.RawData.api_get_ship.api_ship_id;
 			}
 		}
 
@@ -171,12 +171,12 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				if (IsPractice)
+				if (this.IsPractice)
 					return -1;
-				if ((int)RawData.api_get_flag[0] == 0)
+				if ((int)this.RawData.api_get_flag[0] == 0)
 					return -1;
 
-				return (int)RawData.api_get_useitem.api_useitem_id;
+				return (int)this.RawData.api_get_useitem.api_useitem_id;
 			}
 		}
 
@@ -188,12 +188,12 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				if (IsPractice)
+				if (this.IsPractice)
 					return -1;
-				if ((int)RawData.api_get_flag[2] == 0)
+				if ((int)this.RawData.api_get_flag[2] == 0)
 					return -1;
 
-				return (int)RawData.api_get_slotitem.api_slotitem_id;
+				return (int)this.RawData.api_get_slotitem.api_slotitem_id;
 			}
 		}
 
@@ -207,13 +207,13 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				if (!RawData.api_escape())
+				if (!this.RawData.api_escape())
 				{
 					return false;
 				}
 				else
 				{
-					return (int)RawData.api_escape != 0;
+					return (int)this.RawData.api_escape != 0;
 				}
 			}
 		}
@@ -225,17 +225,17 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				if (!RawData.api_escape())
+				if (!this.RawData.api_escape())
 				{
 					return null;
 				}
-				else if (!RawData.api_escape.api_tow_idx())
+				else if (!this.RawData.api_escape.api_tow_idx())
 				{
-					return new int[1] { (int)RawData.api_escape.api_escape_idx[0] };
+					return new int[1] { (int)this.RawData.api_escape.api_escape_idx[0] };
 				}
 				else
 				{
-					return new int[2] { (int)RawData.api_escape.api_escape_idx[0], (int)RawData.api_escape.api_tow_idx[0] };
+					return new int[2] { (int)this.RawData.api_escape.api_escape_idx[0], (int)this.RawData.api_escape.api_tow_idx[0] };
 				}
 
 			}
@@ -246,7 +246,7 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			_APIName = apiname;
+            this._APIName = apiname;
 
 		}
 	}

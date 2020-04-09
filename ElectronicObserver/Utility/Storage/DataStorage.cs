@@ -32,7 +32,7 @@ namespace ElectronicObserver.Utility.Storage
 		[OnDeserializing]
 		private void DefaultDeserializing(StreamingContext sc)
 		{
-			Initialize();
+            this.Initialize();
 		}
 
 
@@ -61,7 +61,7 @@ namespace ElectronicObserver.Utility.Storage
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, GetType().Name + " 의 쓰기에 실패했습니다.");
+				Utility.ErrorReporter.SendErrorReport(ex, this.GetType().Name + " 의 쓰기에 실패했습니다.");
 			}
 
 		}
@@ -78,7 +78,7 @@ namespace ElectronicObserver.Utility.Storage
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, GetType().Name + " 의 쓰기에 실패했습니다.");
+				Utility.ErrorReporter.SendErrorReport(ex, this.GetType().Name + " 의 쓰기에 실패했습니다.");
 			}
 		}
 
@@ -100,19 +100,19 @@ namespace ElectronicObserver.Utility.Storage
 			catch (FileNotFoundException)
 			{
 
-				Utility.Logger.Add(3, string.Format("{0}: {1} 은 존재하지않습니다.", GetType().Name, path));
+				Utility.Logger.Add(3, string.Format("{0}: {1} 은 존재하지않습니다.", this.GetType().Name, path));
 
 			}
 			catch (DirectoryNotFoundException)
 			{
 
-				Utility.Logger.Add(3, string.Format("{0}: {1} 은 존재하지않습니다.", GetType().Name, path));
+				Utility.Logger.Add(3, string.Format("{0}: {1} 은 존재하지않습니다.", this.GetType().Name, path));
 
 			}
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, GetType().Name + " 의 로드에 실패했습니다.");
+				Utility.ErrorReporter.SendErrorReport(ex, this.GetType().Name + " 의 로드에 실패했습니다.");
 
 			}
 
@@ -147,7 +147,7 @@ namespace ElectronicObserver.Utility.Storage
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, GetType().Name + " 의 쓰기에 실패했습니다.");
+				Utility.ErrorReporter.SendErrorReport(ex, this.GetType().Name + " 의 쓰기에 실패했습니다.");
 			}
 
 		}
@@ -170,19 +170,19 @@ namespace ElectronicObserver.Utility.Storage
 			catch (FileNotFoundException)
 			{
 
-				Utility.Logger.Add(3, GetType().Name + ": 파일은 존재하지않습니다.");
+				Utility.Logger.Add(3, this.GetType().Name + ": 파일은 존재하지않습니다.");
 
 			}
 			catch (DirectoryNotFoundException)
 			{
 
-				Utility.Logger.Add(3, GetType().Name + ": 파일은 존재하지않습니다.");
+				Utility.Logger.Add(3, this.GetType().Name + ": 파일은 존재하지않습니다.");
 
 			}
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, GetType().Name + " 의 로드에 실패했습니다.");
+				Utility.ErrorReporter.SendErrorReport(ex, this.GetType().Name + " 의 로드에 실패했습니다.");
 
 			}
 
@@ -203,13 +203,13 @@ namespace ElectronicObserver.Utility.Storage
 			catch (DirectoryNotFoundException)
 			{
 
-				Utility.Logger.Add(3, GetType().Name + ": 파일은 존재하지 않습니다.");
+				Utility.Logger.Add(3, this.GetType().Name + ": 파일은 존재하지 않습니다.");
 
 			}
 			catch (Exception ex)
 			{
 
-				Utility.ErrorReporter.SendErrorReport(ex, GetType().Name + " 의 로드에 실패했습니다.。");
+				Utility.ErrorReporter.SendErrorReport(ex, this.GetType().Name + " 의 로드에 실패했습니다.。");
 
 			}
 

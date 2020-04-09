@@ -21,10 +21,10 @@ namespace ElectronicObserver.Window.Dialog
 			public readonly int Kind;
 			public AACutinComboBoxData(int kind)
 			{
-				Kind = kind;
+                this.Kind = kind;
 			}
 
-			public override string ToString() => $"{Kind}: {Constants.GetAACutinKind(Kind)}";
+			public override string ToString() => $"{this.Kind}: {Constants.GetAACutinKind(this.Kind)}";
 
 
 			public static implicit operator int(AACutinComboBoxData data)
@@ -40,10 +40,10 @@ namespace ElectronicObserver.Window.Dialog
 			public readonly int Formation;
 			public FormationComboBoxData(int formation)
 			{
-				Formation = formation;
+                this.Formation = formation;
 			}
 
-			public override string ToString() => Constants.GetFormation(Formation);
+			public override string ToString() => Constants.GetFormation(this.Formation);
 
 
 			public static implicit operator int(FormationComboBoxData data)
@@ -64,8 +64,8 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogAntiAirDefense()
 		{
-			InitializeComponent();
-			enemySlotCountValue = (int)EnemySlotCount.Value;
+            this.InitializeComponent();
+            this.enemySlotCountValue = (int)this.EnemySlotCount.Value;
 		}
 
 		private void DialogAntiAirDefense_Load(object sender, EventArgs e)
@@ -74,37 +74,37 @@ namespace ElectronicObserver.Window.Dialog
 			if (!KCDatabase.Instance.Fleet.IsAvailable)
 			{
 				MessageBox.Show("함대 데이터가 로드되지 않았습니다. \r\n칸코레 시작후 열어주세요.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Close();
+                this.Close();
 				return;
 			}
 
-			FleetID.SelectedIndex = 0;
-			Formation.SelectedIndex = 0;
+            this.FleetID.SelectedIndex = 0;
+            this.Formation.SelectedIndex = 0;
 
-			UpdateAACutinKind(ShowAll.Checked);
-			UpdateFormation();
+            this.UpdateAACutinKind(this.ShowAll.Checked);
+            this.UpdateFormation();
 
 			this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAntiAirDefense]);
 		}
 
 		private void DialogAntiAirDefense_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 		}
 
 
 		public void SetFleetID(int id)
 		{
-			FleetID.SelectedIndex = id - 1;
+            this.FleetID.SelectedIndex = id - 1;
 		}
 
 		private void Updated()
 		{
 
-			ShipData[] ships = GetShips().ToArray();
-			int formation = Formation.SelectedItem as FormationComboBoxData;
-			int aaCutinKind = AACutinKind.SelectedItem as AACutinComboBoxData;
-			int enemyAircraftCount = enemySlotCountValue;
+			ShipData[] ships = this.GetShips().ToArray();
+			int formation = this.Formation.SelectedItem as FormationComboBoxData;
+			int aaCutinKind = this.AACutinKind.SelectedItem as AACutinComboBoxData;
+			int enemyAircraftCount = this.enemySlotCountValue;
 
 
 			// 加重対空値
@@ -114,10 +114,10 @@ namespace ElectronicObserver.Window.Dialog
 			double adjustedFleetAA = Calculator.GetAdjustedFleetAAValue(ships, formation);
 
 			// 割合撃墜
-			double[] proportionalAAs = adjustedAAs.Select((val, i) => Calculator.GetProportionalAirDefense(val, IsCombined ? (i < 6 ? 1 : 2) : -1)).ToArray();
+			double[] proportionalAAs = adjustedAAs.Select((val, i) => Calculator.GetProportionalAirDefense(val, this.IsCombined ? (i < 6 ? 1 : 2) : -1)).ToArray();
 
 			// 固定撃墜
-			int[] fixedAAs = adjustedAAs.Select((val, i) => Calculator.GetFixedAirDefense(val, adjustedFleetAA, aaCutinKind, IsCombined ? (i < 6 ? 1 : 2) : -1)).ToArray();
+			int[] fixedAAs = adjustedAAs.Select((val, i) => Calculator.GetFixedAirDefense(val, adjustedFleetAA, aaCutinKind, this.IsCombined ? (i < 6 ? 1 : 2) : -1)).ToArray();
 
 
 
@@ -135,7 +135,7 @@ namespace ElectronicObserver.Window.Dialog
 
 
 
-			ResultView.Rows.Clear();
+            this.ResultView.Rows.Clear();
 			var rows = new DataGridViewRow[ships.Length];
 			for (int i = 0; i < ships.Length; i++)
 			{
@@ -143,30 +143,30 @@ namespace ElectronicObserver.Window.Dialog
 					continue;
 
 				rows[i] = new DataGridViewRow();
-				rows[i].CreateCells(ResultView);
+				rows[i].CreateCells(this.ResultView);
 
 				rows[i].SetValues(ships[i].Name, ships[i].AABase, adjustedAAs[i], proportionalAAs[i], fixedAAs[i], shootDownBoth[i], shootDownProportional[i], shootDownFixed[i], shootDownFailed[i]);
 
 			}
-			ResultView.Rows.AddRange(rows.Where(r => r != null).ToArray());
+            this.ResultView.Rows.AddRange(rows.Where(r => r != null).ToArray());
 
-			AdjustedFleetAA.Text = adjustedFleetAA.ToString("0.0");
+            this.AdjustedFleetAA.Text = adjustedFleetAA.ToString("0.0");
 			{
 				var allShootDown = shootDownBoth.Concat(shootDownProportional).Concat(shootDownFixed).Concat(shootDownFailed);
-				AnnihilationProbability.Text = (allShootDown.Count(i => i >= enemyAircraftCount) / Math.Max(ships.Count(s => s != null) * 4, 1.0)).ToString("p1");
+                this.AnnihilationProbability.Text = (allShootDown.Count(i => i >= enemyAircraftCount) / Math.Max(ships.Count(s => s != null) * 4, 1.0)).ToString("p1");
 			}
 		}
 
 
 		private IEnumerable<ShipData> GetShips()
 		{
-			if (FleetID.SelectedIndex < 4)
-				return KCDatabase.Instance.Fleet[FleetID.SelectedIndex + 1].MembersWithoutEscaped;
+			if (this.FleetID.SelectedIndex < 4)
+				return KCDatabase.Instance.Fleet[this.FleetID.SelectedIndex + 1].MembersWithoutEscaped;
 			else
 				return KCDatabase.Instance.Fleet[1].MembersWithoutEscaped.Concat(KCDatabase.Instance.Fleet[2].MembersWithoutEscaped);
 		}
 
-		private bool IsCombined => FleetID.SelectedIndex == 4;
+		private bool IsCombined => this.FleetID.SelectedIndex == 4;
 
 
 		private void UpdateAACutinKind(bool showAll)
@@ -184,7 +184,7 @@ namespace ElectronicObserver.Window.Dialog
 			else
 			{
 
-				list = GetShips()
+				list = this.GetShips()
 					.Where(s => s != null)
 					.Select(s => Calculator.GetAACutinKind(s.ShipID, s.AllSlotMaster.ToArray()))
 					.Concat(Enumerable.Repeat(0, 1))
@@ -194,36 +194,36 @@ namespace ElectronicObserver.Window.Dialog
 
 			}
 
-			AACutinKind.Items.Clear();
-			AACutinKind.Items.AddRange(list);
-			AACutinKind.SelectedIndex = 0;
+            this.AACutinKind.Items.Clear();
+            this.AACutinKind.Items.AddRange(list);
+            this.AACutinKind.SelectedIndex = 0;
 		}
 
 		private void UpdateFormation()
 		{
-			var items = (IsCombined ? Enumerable.Range(11, 4) : Enumerable.Range(1, 6))
+			var items = (this.IsCombined ? Enumerable.Range(11, 4) : Enumerable.Range(1, 6))
 				.Select(i => new FormationComboBoxData(i)).ToArray();
 
-			int selected = Formation.SelectedItem as FormationComboBoxData;
+			int selected = this.Formation.SelectedItem as FormationComboBoxData;
 			int index = Array.FindIndex(items, item => item == selected);
 
-			Formation.Items.Clear();
-			Formation.Items.AddRange(items);
-			Formation.SelectedIndex = Math.Max(index, 0);
+            this.Formation.Items.Clear();
+            this.Formation.Items.AddRange(items);
+            this.Formation.SelectedIndex = Math.Max(index, 0);
 		}
 
 
 		private void ResultView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 
-			if (e.ColumnIndex == ResultView_ShootDownBoth.Index ||
-				e.ColumnIndex == ResultView_ShootDownProportional.Index ||
-				e.ColumnIndex == ResultView_ShootDownFixed.Index ||
-				e.ColumnIndex == ResultView_ShootDownFailed.Index)
+			if (e.ColumnIndex == this.ResultView_ShootDownBoth.Index ||
+				e.ColumnIndex == this.ResultView_ShootDownProportional.Index ||
+				e.ColumnIndex == this.ResultView_ShootDownFixed.Index ||
+				e.ColumnIndex == this.ResultView_ShootDownFailed.Index)
 			{
 
 				int value = e.Value as int? ?? 0;
-				int enemySlot = enemySlotCountValue;
+				int enemySlot = this.enemySlotCountValue;
 
 				e.Value = string.Format("{0} ({1:p0})", value, (double)value / enemySlot);
 				e.FormattingApplied = true;
@@ -237,30 +237,30 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void FleetID_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			Updated();
-			UpdateAACutinKind(ShowAll.Checked);
-			UpdateFormation();
+            this.Updated();
+            this.UpdateAACutinKind(this.ShowAll.Checked);
+            this.UpdateFormation();
 		}
 
 		private void Formation_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			Updated();
+            this.Updated();
 		}
 
 		private void AACutinKind_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			Updated();
+            this.Updated();
 		}
 
 		private void EnemySlotCount_ValueChanged(object sender, EventArgs e)
 		{
-			enemySlotCountValue = (int)EnemySlotCount.Value;
-			Updated();
+            this.enemySlotCountValue = (int)this.EnemySlotCount.Value;
+            this.Updated();
 		}
 
 		private void ShowAll_CheckedChanged(object sender, EventArgs e)
 		{
-			UpdateAACutinKind(ShowAll.Checked);
+            this.UpdateAACutinKind(this.ShowAll.Checked);
 		}
 
 

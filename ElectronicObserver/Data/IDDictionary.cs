@@ -23,32 +23,32 @@ namespace ElectronicObserver.Data
 
 		public IDDictionary(IEnumerable<TData> source)
 		{
-			dict = source.ToDictionary(x => x.ID);
+            this.dict = source.ToDictionary(x => x.ID);
 		}
 
 
 		internal void Add(TData data)
 		{
-			dict.Add(data.ID, data);
+            this.dict.Add(data.ID, data);
 		}
 
 		internal void Remove(TData data)
 		{
-			dict.Remove(data.ID);
+            this.dict.Remove(data.ID);
 		}
 
 		internal void Remove(int id)
 		{
-			dict.Remove(id);
+            this.dict.Remove(id);
 		}
 
 		internal int RemoveAll(Predicate<TData> predicate)
 		{
-			var removekeys = dict.Values.Where(elem => predicate(elem)).Select(elem => elem.ID).ToArray();
+			var removekeys = this.dict.Values.Where(elem => predicate(elem)).Select(elem => elem.ID).ToArray();
 
 			foreach (var key in removekeys)
 			{
-				dict.Remove(key);
+                this.dict.Remove(key);
 			}
 
 			return removekeys.Count();
@@ -56,36 +56,36 @@ namespace ElectronicObserver.Data
 
 		internal void Clear()
 		{
-			dict.Clear();
+            this.dict.Clear();
 		}
 
 
 		public bool ContainsKey(int key)
 		{
-			return dict.ContainsKey(key);
+			return this.dict.ContainsKey(key);
 		}
 
-		public IEnumerable<int> Keys => dict.Keys;
+		public IEnumerable<int> Keys => this.dict.Keys;
 
 		public bool TryGetValue(int key, out TData value)
 		{
-			return dict.TryGetValue(key, out value);
+			return this.dict.TryGetValue(key, out value);
 		}
 
-		public IEnumerable<TData> Values => dict.Values;
+		public IEnumerable<TData> Values => this.dict.Values;
 
-		public TData this[int key] => dict.ContainsKey(key) ? dict[key] : null;
+		public TData this[int key] => this.dict.ContainsKey(key) ? this.dict[key] : null;
 
-		public int Count => dict.Count;
+		public int Count => this.dict.Count;
 
 		public IEnumerator<KeyValuePair<int, TData>> GetEnumerator()
 		{
-			return dict.GetEnumerator();
+			return this.dict.GetEnumerator();
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return dict.GetEnumerator();
+			return this.dict.GetEnumerator();
 		}
 	}
 

@@ -11,7 +11,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_sortie
 	{
 		public override void OnResponseReceived(dynamic data)
 		{
-			KCDatabase.Instance.Fleet.LoadFromResponse(APIName, data);
+			KCDatabase.Instance.Fleet.LoadFromResponse(this.APIName, data);
 
 			base.OnResponseReceived((object)data);
 		}

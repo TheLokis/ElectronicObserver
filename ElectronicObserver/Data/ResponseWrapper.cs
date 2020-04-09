@@ -26,17 +26,17 @@ namespace ElectronicObserver.Data
 		/// <param name="data">受信したデータ。</param>
 		public virtual void LoadFromResponse(string apiname, dynamic data)
 		{
-			RawData = data;
+            this.RawData = data;
 		}
 
 		/// <summary>
 		/// 現在のデータが有効かを取得します。
 		/// </summary>
-		public bool IsAvailable => RawData != null;
+		public bool IsAvailable => this.RawData != null;
 
 		public ResponseWrapper()
 		{
-			RawData = null;
+            this.RawData = null;
 		}
 
 	}

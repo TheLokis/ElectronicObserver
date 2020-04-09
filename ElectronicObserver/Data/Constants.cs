@@ -836,6 +836,8 @@ namespace ElectronicObserver.Data
                     return "흉열(나가토)";
                 case DayAttackKind.SpecialMutsu:
                     return "흉열(무츠)";
+                case DayAttackKind.SpecialColorado:
+                    return "콜로라도터치";
                 case DayAttackKind.ZuiunMultiAngle:
                     return "즈이운입체공격";
                 case DayAttackKind.SeaAirMultiAngle:
@@ -897,6 +899,8 @@ namespace ElectronicObserver.Data
                     return "흉열(나가토)";
                 case NightAttackKind.SpecialMutsu:
                     return "흉열(무츠)";
+                case NightAttackKind.SpecialColorado:
+                    return "콜로라도터치";
                 case NightAttackKind.Shelling:
                     return "포격";
 				case NightAttackKind.AirAttack:
@@ -995,13 +999,19 @@ namespace ElectronicObserver.Data
                 case 33:
                     return "고각포/기총<고틀랜드개>";
                 case 34:
-                    return "플래쳐포改+GFCSx2<존스턴>";
+                    return "플래쳐포 개+GFCSx2<존스턴>";
                 case 35:
-                    return "플래쳐포改+GFCS/플래쳐포改<존스턴>";
+                    return "플래쳐포 개+GFCS/플래쳐포改<존스턴>";
                 case 36:
-                    return "플래쳐포改x2/GFCS<존스턴>";
+                    return "플래쳐포 개x2/GFCS<존스턴>";
                 case 37:
-                    return "플래쳐포改x2<존스턴>";
+                    return "플래쳐포 개x2<존스턴>";
+                case 39:
+                    return "애틀란타포+GFCS/애틀란타포<애틀란타>";
+                case 40:
+                    return "애틀란타포x2/GFCS<애틀란타>";
+                case 41:
+                    return "애틀란타포x2<애틀란타>";
                 default:
 					return "불명(" + id + ")";
 			}

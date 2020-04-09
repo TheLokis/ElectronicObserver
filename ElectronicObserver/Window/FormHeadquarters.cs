@@ -25,49 +25,49 @@ namespace ElectronicObserver.Window
 
 		public FormHeadquarters(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			_parentForm = parent;
+            this._parentForm = parent;
 
 
 			ImageList icons = ResourceManager.Instance.Icons;
 
-			ShipCount.ImageList = icons;
-			ShipCount.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
-			EquipmentCount.ImageList = icons;
-			EquipmentCount.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersEquipment;
-			InstantRepair.ImageList = icons;
-			InstantRepair.ImageIndex = (int)ResourceManager.IconContent.ItemInstantRepair;
-			InstantConstruction.ImageList = icons;
-			InstantConstruction.ImageIndex = (int)ResourceManager.IconContent.ItemInstantConstruction;
-			DevelopmentMaterial.ImageList = icons;
-			DevelopmentMaterial.ImageIndex = (int)ResourceManager.IconContent.ItemDevelopmentMaterial;
-			ModdingMaterial.ImageList = icons;
-			ModdingMaterial.ImageIndex = (int)ResourceManager.IconContent.ItemModdingMaterial;
-			FurnitureCoin.ImageList = icons;
-			FurnitureCoin.ImageIndex = (int)ResourceManager.IconContent.ItemFurnitureCoin;
-			Fuel.ImageList = icons;
-			Fuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-			Ammo.ImageList = icons;
-			Ammo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			Steel.ImageList = icons;
-			Steel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-			Bauxite.ImageList = icons;
-			Bauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
-			DisplayUseItem.ImageList = icons;
-			DisplayUseItem.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
+            this.ShipCount.ImageList = icons;
+            this.ShipCount.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
+            this.EquipmentCount.ImageList = icons;
+            this.EquipmentCount.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersEquipment;
+            this.InstantRepair.ImageList = icons;
+            this.InstantRepair.ImageIndex = (int)ResourceManager.IconContent.ItemInstantRepair;
+            this.InstantConstruction.ImageList = icons;
+            this.InstantConstruction.ImageIndex = (int)ResourceManager.IconContent.ItemInstantConstruction;
+            this.DevelopmentMaterial.ImageList = icons;
+            this.DevelopmentMaterial.ImageIndex = (int)ResourceManager.IconContent.ItemDevelopmentMaterial;
+            this.ModdingMaterial.ImageList = icons;
+            this.ModdingMaterial.ImageIndex = (int)ResourceManager.IconContent.ItemModdingMaterial;
+            this.FurnitureCoin.ImageList = icons;
+            this.FurnitureCoin.ImageIndex = (int)ResourceManager.IconContent.ItemFurnitureCoin;
+            this.Fuel.ImageList = icons;
+            this.Fuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
+            this.Ammo.ImageList = icons;
+            this.Ammo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
+            this.Steel.ImageList = icons;
+            this.Steel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
+            this.Bauxite.ImageList = icons;
+            this.Bauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
+            this.DisplayUseItem.ImageList = icons;
+            this.DisplayUseItem.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
 
 
-			ControlHelper.SetDoubleBuffered(FlowPanelMaster);
-			ControlHelper.SetDoubleBuffered(FlowPanelAdmiral);
-			ControlHelper.SetDoubleBuffered(FlowPanelFleet);
-			ControlHelper.SetDoubleBuffered(FlowPanelUseItem);
-			ControlHelper.SetDoubleBuffered(FlowPanelResource);
+			ControlHelper.SetDoubleBuffered(this.FlowPanelMaster);
+			ControlHelper.SetDoubleBuffered(this.FlowPanelAdmiral);
+			ControlHelper.SetDoubleBuffered(this.FlowPanelFleet);
+			ControlHelper.SetDoubleBuffered(this.FlowPanelUseItem);
+			ControlHelper.SetDoubleBuffered(this.FlowPanelResource);
 
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormHeadQuarters]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormHeadQuarters]);
 
 		}
 
@@ -77,38 +77,38 @@ namespace ElectronicObserver.Window
 
 			APIObserver o = APIObserver.Instance;
 
-			o.APIList["api_req_nyukyo/start"].RequestReceived += Updated;
-			o.APIList["api_req_nyukyo/speedchange"].RequestReceived += Updated;
-			o.APIList["api_req_kousyou/createship"].RequestReceived += Updated;
-			o.APIList["api_req_kousyou/createship_speedchange"].RequestReceived += Updated;
-			o.APIList["api_req_kousyou/destroyship"].RequestReceived += Updated;
-			o.APIList["api_req_kousyou/destroyitem2"].RequestReceived += Updated;
-			o.APIList["api_req_member/updatecomment"].RequestReceived += Updated;
+			o.APIList["api_req_nyukyo/start"].RequestReceived += this.Updated;
+			o.APIList["api_req_nyukyo/speedchange"].RequestReceived += this.Updated;
+			o.APIList["api_req_kousyou/createship"].RequestReceived += this.Updated;
+			o.APIList["api_req_kousyou/createship_speedchange"].RequestReceived += this.Updated;
+			o.APIList["api_req_kousyou/destroyship"].RequestReceived += this.Updated;
+			o.APIList["api_req_kousyou/destroyitem2"].RequestReceived += this.Updated;
+			o.APIList["api_req_member/updatecomment"].RequestReceived += this.Updated;
 
-			o.APIList["api_get_member/basic"].ResponseReceived += Updated;
-			o.APIList["api_get_member/slot_item"].ResponseReceived += Updated;
-			o.APIList["api_port/port"].ResponseReceived += Updated;
-			o.APIList["api_get_member/ship2"].ResponseReceived += Updated;
-			o.APIList["api_req_kousyou/getship"].ResponseReceived += Updated;
-			o.APIList["api_req_hokyu/charge"].ResponseReceived += Updated;
-			o.APIList["api_req_kousyou/destroyship"].ResponseReceived += Updated;
-			o.APIList["api_req_kousyou/destroyitem2"].ResponseReceived += Updated;
-			o.APIList["api_req_kaisou/powerup"].ResponseReceived += Updated;
-			o.APIList["api_req_kousyou/createitem"].ResponseReceived += Updated;
-			o.APIList["api_req_kousyou/remodel_slot"].ResponseReceived += Updated;
-			o.APIList["api_get_member/material"].ResponseReceived += Updated;
-			o.APIList["api_get_member/ship_deck"].ResponseReceived += Updated;
-			o.APIList["api_req_air_corps/set_plane"].ResponseReceived += Updated;
-			o.APIList["api_req_air_corps/supply"].ResponseReceived += Updated;
-			o.APIList["api_get_member/useitem"].ResponseReceived += Updated;
+			o.APIList["api_get_member/basic"].ResponseReceived += this.Updated;
+			o.APIList["api_get_member/slot_item"].ResponseReceived += this.Updated;
+			o.APIList["api_port/port"].ResponseReceived += this.Updated;
+			o.APIList["api_get_member/ship2"].ResponseReceived += this.Updated;
+			o.APIList["api_req_kousyou/getship"].ResponseReceived += this.Updated;
+			o.APIList["api_req_hokyu/charge"].ResponseReceived += this.Updated;
+			o.APIList["api_req_kousyou/destroyship"].ResponseReceived += this.Updated;
+			o.APIList["api_req_kousyou/destroyitem2"].ResponseReceived += this.Updated;
+			o.APIList["api_req_kaisou/powerup"].ResponseReceived += this.Updated;
+			o.APIList["api_req_kousyou/createitem"].ResponseReceived += this.Updated;
+			o.APIList["api_req_kousyou/remodel_slot"].ResponseReceived += this.Updated;
+			o.APIList["api_get_member/material"].ResponseReceived += this.Updated;
+			o.APIList["api_get_member/ship_deck"].ResponseReceived += this.Updated;
+			o.APIList["api_req_air_corps/set_plane"].ResponseReceived += this.Updated;
+			o.APIList["api_req_air_corps/supply"].ResponseReceived += this.Updated;
+			o.APIList["api_get_member/useitem"].ResponseReceived += this.Updated;
 
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
-			Utility.SystemEvents.UpdateTimerTick += SystemEvents_UpdateTimerTick;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
+			Utility.SystemEvents.UpdateTimerTick += this.SystemEvents_UpdateTimerTick;
 
-			FlowPanelResource.SetFlowBreak(Ammo, true);
+            this.FlowPanelResource.SetFlowBreak(this.Ammo, true);
 
-			FlowPanelMaster.Visible = false;
+            this.FlowPanelMaster.Visible = false;
 
 		}
 
@@ -117,26 +117,26 @@ namespace ElectronicObserver.Window
 		void ConfigurationChanged()
 		{
 
-			Font = FlowPanelMaster.Font = Utility.Configuration.Config.UI.MainFont;
-			HQLevel.MainFont = Utility.Configuration.Config.UI.MainFont;
-			HQLevel.SubFont = Utility.Configuration.Config.UI.SubFont;
+            this.Font = this.FlowPanelMaster.Font = Utility.Configuration.Config.UI.MainFont;
+            this.HQLevel.MainFont = Utility.Configuration.Config.UI.MainFont;
+            this.HQLevel.SubFont = Utility.Configuration.Config.UI.SubFont;
 
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            HQLevel.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            HQLevel.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.HQLevel.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.HQLevel.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
             // 点滅しない設定にしたときに消灯状態で固定されるのを防ぐ
             if (!Utility.Configuration.Config.FormHeadquarters.BlinkAtMaximum)
 			{
-                if (ShipCount.Tag as bool? ?? false)
+                if (this.ShipCount.Tag as bool? ?? false)
                 {
-                    ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
                 }
 
-                if (EquipmentCount.Tag as bool? ?? false)
+                if (this.EquipmentCount.Tag as bool? ?? false)
                 {
-                    EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
                 }
             }
 
@@ -144,24 +144,24 @@ namespace ElectronicObserver.Window
 			CheckVisibilityConfiguration();
 			{
 				var visibility = Utility.Configuration.Config.FormHeadquarters.Visibility.List;
-				AdmiralName.Visible = visibility[0];
-				AdmiralComment.Visible = visibility[1];
-				HQLevel.Visible = visibility[2];
-				ShipCount.Visible = visibility[3];
-				EquipmentCount.Visible = visibility[4];
-				InstantRepair.Visible = visibility[5];
-				InstantConstruction.Visible = visibility[6];
-				DevelopmentMaterial.Visible = visibility[7];
-				ModdingMaterial.Visible = visibility[8];
-				FurnitureCoin.Visible = visibility[9];
-				Fuel.Visible = visibility[10];
-				Ammo.Visible = visibility[11];
-				Steel.Visible = visibility[12];
-				Bauxite.Visible = visibility[13];
-				DisplayUseItem.Visible = visibility[14];
+                this.AdmiralName.Visible = visibility[0];
+                this.AdmiralComment.Visible = visibility[1];
+                this.HQLevel.Visible = visibility[2];
+                this.ShipCount.Visible = visibility[3];
+                this.EquipmentCount.Visible = visibility[4];
+                this.InstantRepair.Visible = visibility[5];
+                this.InstantConstruction.Visible = visibility[6];
+                this.DevelopmentMaterial.Visible = visibility[7];
+                this.ModdingMaterial.Visible = visibility[8];
+                this.FurnitureCoin.Visible = visibility[9];
+                this.Fuel.Visible = visibility[10];
+                this.Ammo.Visible = visibility[11];
+                this.Steel.Visible = visibility[12];
+                this.Bauxite.Visible = visibility[13];
+                this.DisplayUseItem.Visible = visibility[14];
 			}
 
-			UpdateDisplayUseItem();
+            this.UpdateDisplayUseItem();
 		}
 
 
@@ -221,11 +221,11 @@ namespace ElectronicObserver.Window
 
 
 
-            FlowPanelMaster.SuspendLayout();
+            this.FlowPanelMaster.SuspendLayout();
 
-			//Admiral
-			FlowPanelAdmiral.SuspendLayout();
-			AdmiralName.Text = string.Format("{0} {1}", db.Admiral.AdmiralName, Constants.GetAdmiralRank(db.Admiral.Rank));
+            //Admiral
+            this.FlowPanelAdmiral.SuspendLayout();
+            this.AdmiralName.Text = string.Format("{0} {1}", db.Admiral.AdmiralName, Constants.GetAdmiralRank(db.Admiral.Rank));
 			{
 				StringBuilder tooltip = new StringBuilder();
 
@@ -246,25 +246,25 @@ namespace ElectronicObserver.Window
 
 				tooltip.AppendFormat("갑훈장 보유 수: {0}\r\n", db.Admiral.Medals);
 
-				ToolTipInfo.SetToolTip(AdmiralName, tooltip.ToString());
+                this.ToolTipInfo.SetToolTip(this.AdmiralName, tooltip.ToString());
 			}
-			AdmiralComment.Text = db.Admiral.Comment;
-			FlowPanelAdmiral.ResumeLayout();
+            this.AdmiralComment.Text = db.Admiral.Comment;
+            this.FlowPanelAdmiral.ResumeLayout();
 
-			//HQ Level
-			HQLevel.Value = db.Admiral.Level;
+            //HQ Level
+            this.HQLevel.Value = db.Admiral.Level;
 			{
 				StringBuilder tooltip = new StringBuilder();
 				if (db.Admiral.Level < ExpTable.AdmiralExp.Max(e => e.Key))
 				{
-					HQLevel.TextNext = "next:";
-					HQLevel.ValueNext = ExpTable.GetNextExpAdmiral(db.Admiral.Exp);
+                    this.HQLevel.TextNext = "next:";
+                    this.HQLevel.ValueNext = ExpTable.GetNextExpAdmiral(db.Admiral.Exp);
 					tooltip.AppendFormat("{0} / {1}\r\n", db.Admiral.Exp, ExpTable.AdmiralExp[db.Admiral.Level + 1].Total);
 				}
 				else
 				{
-					HQLevel.TextNext = "exp:";
-					HQLevel.ValueNext = db.Admiral.Exp;
+                    this.HQLevel.TextNext = "exp:";
+                    this.HQLevel.ValueNext = db.Admiral.Exp;
 				}
 
 				//戦果ツールチップ
@@ -294,37 +294,37 @@ namespace ElectronicObserver.Window
 					}
 				}
 
-				ToolTipInfo.SetToolTip(HQLevel, tooltip.ToString());
+                this.ToolTipInfo.SetToolTip(this.HQLevel, tooltip.ToString());
 			}
 
-			//Fleet
-			FlowPanelFleet.SuspendLayout();
+            //Fleet
+            this.FlowPanelFleet.SuspendLayout();
 			{
 
-				ShipCount.Text = string.Format("{0}/{1}", RealShipCount, db.Admiral.MaxShipCount);
-				if (RealShipCount > db.Admiral.MaxShipCount - 5)
+                this.ShipCount.Text = string.Format("{0}/{1}", this.RealShipCount, db.Admiral.MaxShipCount);
+				if (this.RealShipCount > db.Admiral.MaxShipCount - 5)
 				{
-                    ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
                 }
 				else
 				{
-					ShipCount.BackColor = Color.Transparent;
+                    this.ShipCount.BackColor = Color.Transparent;
 				}
-				ShipCount.Tag = RealShipCount >= db.Admiral.MaxShipCount;
+                this.ShipCount.Tag = this.RealShipCount >= db.Admiral.MaxShipCount;
 
-				EquipmentCount.Text = string.Format("{0}/{1}", RealEquipmentCount, db.Admiral.MaxEquipmentCount);
-				if (RealEquipmentCount > db.Admiral.MaxEquipmentCount + 3 - 20)
+                this.EquipmentCount.Text = string.Format("{0}/{1}", this.RealEquipmentCount, db.Admiral.MaxEquipmentCount);
+				if (this.RealEquipmentCount > db.Admiral.MaxEquipmentCount + 3 - 20)
 				{
-                    EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
                 }
 				else
 				{
-					EquipmentCount.BackColor = Color.Transparent;
+                    this.EquipmentCount.BackColor = Color.Transparent;
 				}
-				EquipmentCount.Tag = RealEquipmentCount >= db.Admiral.MaxEquipmentCount;
+                this.EquipmentCount.Tag = this.RealEquipmentCount >= db.Admiral.MaxEquipmentCount;
 
 			}
-			FlowPanelFleet.ResumeLayout();
+            this.FlowPanelFleet.ResumeLayout();
 
 
 
@@ -333,94 +333,94 @@ namespace ElectronicObserver.Window
 			var resmonth = RecordManager.Instance.Resource.GetRecord(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddHours(5));
 
 
-			//UseItems
-			FlowPanelUseItem.SuspendLayout();
+            //UseItems
+            this.FlowPanelUseItem.SuspendLayout();
 
-			InstantRepair.Text = db.Material.InstantRepair.ToString();
-			InstantRepair.BackColor = db.Material.InstantRepair >= 3000 ? overcolor : Color.Transparent;
-			ToolTipInfo.SetToolTip(InstantRepair, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+            this.InstantRepair.Text = db.Material.InstantRepair.ToString();
+            this.InstantRepair.BackColor = db.Material.InstantRepair >= 3000 ? overcolor : Color.Transparent;
+            this.ToolTipInfo.SetToolTip(this.InstantRepair, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.InstantRepair - resday.InstantRepair),
 					resweek == null ? 0 : (db.Material.InstantRepair - resweek.InstantRepair),
 					resmonth == null ? 0 : (db.Material.InstantRepair - resmonth.InstantRepair)));
 
-			InstantConstruction.Text = db.Material.InstantConstruction.ToString();
-			InstantConstruction.BackColor = db.Material.InstantConstruction >= 3000 ? overcolor : Color.Transparent;
-			ToolTipInfo.SetToolTip(InstantConstruction, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+            this.InstantConstruction.Text = db.Material.InstantConstruction.ToString();
+            this.InstantConstruction.BackColor = db.Material.InstantConstruction >= 3000 ? overcolor : Color.Transparent;
+            this.ToolTipInfo.SetToolTip(this.InstantConstruction, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.InstantConstruction - resday.InstantConstruction),
 					resweek == null ? 0 : (db.Material.InstantConstruction - resweek.InstantConstruction),
 					resmonth == null ? 0 : (db.Material.InstantConstruction - resmonth.InstantConstruction)));
 
-			DevelopmentMaterial.Text = db.Material.DevelopmentMaterial.ToString();
-			DevelopmentMaterial.BackColor = db.Material.DevelopmentMaterial >= 3000 ? overcolor : Color.Transparent;
-			ToolTipInfo.SetToolTip(DevelopmentMaterial, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+            this.DevelopmentMaterial.Text = db.Material.DevelopmentMaterial.ToString();
+            this.DevelopmentMaterial.BackColor = db.Material.DevelopmentMaterial >= 3000 ? overcolor : Color.Transparent;
+            this.ToolTipInfo.SetToolTip(this.DevelopmentMaterial, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.DevelopmentMaterial - resday.DevelopmentMaterial),
 					resweek == null ? 0 : (db.Material.DevelopmentMaterial - resweek.DevelopmentMaterial),
 					resmonth == null ? 0 : (db.Material.DevelopmentMaterial - resmonth.DevelopmentMaterial)));
 
-			ModdingMaterial.Text = db.Material.ModdingMaterial.ToString();
-			ModdingMaterial.BackColor = db.Material.ModdingMaterial >= 3000 ? overcolor : Color.Transparent;
-			ToolTipInfo.SetToolTip(ModdingMaterial, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+            this.ModdingMaterial.Text = db.Material.ModdingMaterial.ToString();
+            this.ModdingMaterial.BackColor = db.Material.ModdingMaterial >= 3000 ? overcolor : Color.Transparent;
+            this.ToolTipInfo.SetToolTip(this.ModdingMaterial, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.ModdingMaterial - resday.ModdingMaterial),
 					resweek == null ? 0 : (db.Material.ModdingMaterial - resweek.ModdingMaterial),
 					resmonth == null ? 0 : (db.Material.ModdingMaterial - resmonth.ModdingMaterial)));
 
-			FurnitureCoin.Text = db.Admiral.FurnitureCoin.ToString();
-			FurnitureCoin.BackColor = db.Admiral.FurnitureCoin >= 200000 ? overcolor : Color.Transparent;
+            this.FurnitureCoin.Text = db.Admiral.FurnitureCoin.ToString();
+            this.FurnitureCoin.BackColor = db.Admiral.FurnitureCoin >= 200000 ? overcolor : Color.Transparent;
 			{
 				int small = db.UseItems[10]?.Count ?? 0;
 				int medium = db.UseItems[11]?.Count ?? 0;
 				int large = db.UseItems[12]?.Count ?? 0;
 
-				ToolTipInfo.SetToolTip(FurnitureCoin,
+                this.ToolTipInfo.SetToolTip(this.FurnitureCoin,
 						string.Format("(소) x {0} ( +{1} )\r\n(중) x {2} ( +{3} )\r\n(대) x {4} ( +{5} )\r\n",
 							small, small * 200,
 							medium, medium * 400,
 							large, large * 700));
 			}
-			UpdateDisplayUseItem();
-			FlowPanelUseItem.ResumeLayout();
+            this.UpdateDisplayUseItem();
+            this.FlowPanelUseItem.ResumeLayout();
 
 
-			//Resources
-			FlowPanelResource.SuspendLayout();
+            //Resources
+            this.FlowPanelResource.SuspendLayout();
 			{
 
-				Fuel.Text = db.Material.Fuel.ToString();
-				Fuel.BackColor = db.Material.Fuel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
-				ToolTipInfo.SetToolTip(Fuel, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+                this.Fuel.Text = db.Material.Fuel.ToString();
+                this.Fuel.BackColor = db.Material.Fuel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+                this.ToolTipInfo.SetToolTip(this.Fuel, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.Fuel - resday.Fuel),
 					resweek == null ? 0 : (db.Material.Fuel - resweek.Fuel),
 					resmonth == null ? 0 : (db.Material.Fuel - resmonth.Fuel)));
 
-				Ammo.Text = db.Material.Ammo.ToString();
-				Ammo.BackColor = db.Material.Ammo < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
-				ToolTipInfo.SetToolTip(Ammo, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+                this.Ammo.Text = db.Material.Ammo.ToString();
+                this.Ammo.BackColor = db.Material.Ammo < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+                this.ToolTipInfo.SetToolTip(this.Ammo, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.Ammo - resday.Ammo),
 					resweek == null ? 0 : (db.Material.Ammo - resweek.Ammo),
 					resmonth == null ? 0 : (db.Material.Ammo - resmonth.Ammo)));
 
-				Steel.Text = db.Material.Steel.ToString();
-				Steel.BackColor = db.Material.Steel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
-				ToolTipInfo.SetToolTip(Steel, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+                this.Steel.Text = db.Material.Steel.ToString();
+                this.Steel.BackColor = db.Material.Steel < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+                this.ToolTipInfo.SetToolTip(this.Steel, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.Steel - resday.Steel),
 					resweek == null ? 0 : (db.Material.Steel - resweek.Steel),
 					resmonth == null ? 0 : (db.Material.Steel - resmonth.Steel)));
 
-				Bauxite.Text = db.Material.Bauxite.ToString();
-				Bauxite.BackColor = db.Material.Bauxite < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
-				ToolTipInfo.SetToolTip(Bauxite, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
+                this.Bauxite.Text = db.Material.Bauxite.ToString();
+                this.Bauxite.BackColor = db.Material.Bauxite < db.Admiral.MaxResourceRegenerationAmount ? Color.Transparent : overcolor;
+                this.ToolTipInfo.SetToolTip(this.Bauxite, string.Format("오늘: {0:+##;-##;±0}\n이번주: {1:+##;-##;±0}\n이달: {2:+##;-##;±0}",
 					resday == null ? 0 : (db.Material.Bauxite - resday.Bauxite),
 					resweek == null ? 0 : (db.Material.Bauxite - resweek.Bauxite),
 					resmonth == null ? 0 : (db.Material.Bauxite - resmonth.Bauxite)));
 
 			}
-			FlowPanelResource.ResumeLayout();
+            this.FlowPanelResource.ResumeLayout();
 
-			FlowPanelMaster.ResumeLayout();
-			if (!FlowPanelMaster.Visible)
-				FlowPanelMaster.Visible = true;
-			AdmiralName.Refresh();
-			AdmiralComment.Refresh();
+            this.FlowPanelMaster.ResumeLayout();
+			if (!this.FlowPanelMaster.Visible)
+                this.FlowPanelMaster.Visible = true;
+            this.AdmiralName.Refresh();
+            this.AdmiralComment.Refresh();
 
 		}
 
@@ -434,14 +434,14 @@ namespace ElectronicObserver.Window
 
 			if (Utility.Configuration.Config.FormHeadquarters.BlinkAtMaximum)
 			{
-                if (ShipCount.Tag as bool? ?? false)
+                if (this.ShipCount.Tag as bool? ?? false)
                 {
-                    ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
+                    this.ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
                 }
 
-                if (EquipmentCount.Tag as bool? ?? false)
+                if (this.EquipmentCount.Tag as bool? ?? false)
                 {
-                    EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
+                    this.EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
                 }
             }
 		}
@@ -450,7 +450,7 @@ namespace ElectronicObserver.Window
 		private void Resource_MouseClick(object sender, MouseEventArgs e)
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
-				new Dialog.DialogResourceChart().Show(_parentForm);
+				new Dialog.DialogResourceChart().Show(this._parentForm);
 		}
 
 		private void Resource_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -483,8 +483,8 @@ namespace ElectronicObserver.Window
 			switch (itemMaster?.Name)
 			{
 				case null:
-					DisplayUseItem.Text = "???";
-					ToolTipInfo.SetToolTip(DisplayUseItem, "알수없는항목 (ID: " + Utility.Configuration.Config.FormHeadquarters.DisplayUseItemID + ")" + tail);
+                    this.DisplayUseItem.Text = "???";
+                    this.ToolTipInfo.SetToolTip(this.DisplayUseItem, "알수없는항목 (ID: " + Utility.Configuration.Config.FormHeadquarters.DisplayUseItemID + ")" + tail);
 					break;
 
 				// '18 spring event special mode
@@ -492,14 +492,20 @@ namespace ElectronicObserver.Window
 				case "매실":
 				case "김":
 				case "차":
-					DisplayUseItem.Text = (item?.Count ?? 0).ToString();
-					ToolTipInfo.SetToolTip(DisplayUseItem,
+                    this.DisplayUseItem.Text = (item?.Count ?? 0).ToString();
+                    this.ToolTipInfo.SetToolTip(this.DisplayUseItem,
 						$"쌀: {db.UseItems[85]?.Count ?? 0}\r\n매실: {db.UseItems[86]?.Count ?? 0}\r\n김: {db.UseItems[87]?.Count ?? 0}\r\n차: {db.UseItems[88]?.Count ?? 0}\r\n{tail}");
 					break;
+                case "꽁치":
+                case "정어리":
+                    this.DisplayUseItem.Text = (item?.Count ?? 0).ToString();
+                    this.ToolTipInfo.SetToolTip(this.DisplayUseItem,
+                        $"꽁치: {db.UseItems[68]?.Count ?? 0}\r\n정어리: {db.UseItems[93]?.Count ?? 0}\r\n{tail}");
+                    break;
 
-				default:
-					DisplayUseItem.Text = (item?.Count ?? 0).ToString();
-					ToolTipInfo.SetToolTip(DisplayUseItem,
+                default:
+                    this.DisplayUseItem.Text = (item?.Count ?? 0).ToString();
+                    this.ToolTipInfo.SetToolTip(this.DisplayUseItem,
 						itemMaster.Name + tail);
 					break;
 			}

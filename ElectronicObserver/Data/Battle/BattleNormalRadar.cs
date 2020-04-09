@@ -16,13 +16,13 @@ namespace ElectronicObserver.Data.Battle
         {
             base.LoadFromResponse(apiname, (object)data);
 
-            JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
-            BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
+            this.JetBaseAirAttack = new PhaseJetBaseAirAttack(this, "기지항공대 분식 강습");
+            this.BaseAirAttack = new PhaseBaseAirAttack(this, "기지 항공대 공격");
 
-            Shelling1 = new PhaseRadar(this, "레이더사격");
+            this.Shelling1 = new PhaseRadar(this, "레이더사격");
 
-            foreach (var phase in GetPhases())
-                phase.EmulateBattle(_resultHPs, _attackDamages);
+            foreach (var phase in this.GetPhases())
+                phase.EmulateBattle(this._resultHPs, this._attackDamages);
         }
 
 
@@ -32,11 +32,11 @@ namespace ElectronicObserver.Data.Battle
 
         public override IEnumerable<PhaseBase> GetPhases()
         {
-            yield return Initial;
-            yield return Searching;     // ?
-            yield return JetBaseAirAttack;
-            yield return BaseAirAttack;
-            yield return Shelling1;
+            yield return this.Initial;
+            yield return this.Searching;     // ?
+            yield return this.JetBaseAirAttack;
+            yield return this.BaseAirAttack;
+            yield return this.Shelling1;
         }
     }
 }

@@ -22,41 +22,41 @@ namespace ElectronicObserver.Window.Control
 
 		public int FuelCurrent
 		{
-			get { return BarFuel.Value; }
+			get { return this.BarFuel.Value; }
 			set
 			{
-				BarFuel.Value = value;
-				PropertyChanged();
+                this.BarFuel.Value = value;
+                this.PropertyChanged();
 			}
 		}
 
 		public int FuelMax
 		{
-			get { return BarFuel.MaximumValue; }
+			get { return this.BarFuel.MaximumValue; }
 			set
 			{
-				BarFuel.MaximumValue = value;
-				PropertyChanged();
+                this.BarFuel.MaximumValue = value;
+                this.PropertyChanged();
 			}
 		}
 
 		public int AmmoCurrent
 		{
-			get { return BarAmmo.Value; }
+			get { return this.BarAmmo.Value; }
 			set
 			{
-				BarAmmo.Value = value;
-				PropertyChanged();
+                this.BarAmmo.Value = value;
+                this.PropertyChanged();
 			}
 		}
 
 		public int AmmoMax
 		{
-			get { return BarAmmo.MaximumValue; }
+			get { return this.BarAmmo.MaximumValue; }
 			set
 			{
-				BarAmmo.MaximumValue = value;
-				PropertyChanged();
+                this.BarAmmo.MaximumValue = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -65,14 +65,14 @@ namespace ElectronicObserver.Window.Control
 
 		public ShipStatusResource(ToolTip resourceTip)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			BarFuel = new StatusBarModule();
-			BarAmmo = new StatusBarModule();
+            this.BarFuel = new StatusBarModule();
+            this.BarAmmo = new StatusBarModule();
 
-			BarFuel.UsePrevValue = BarAmmo.UsePrevValue = false;
+            this.BarFuel.UsePrevValue = this.BarAmmo.UsePrevValue = false;
 
-			ResourceTip = resourceTip;
+            this.ResourceTip = resourceTip;
 		}
 
 
@@ -83,12 +83,12 @@ namespace ElectronicObserver.Window.Control
 			//FIXME: サブウィンドウ状態のときToolTipが出現しない不具合を確認。
 
 			string tiptext = string.Format("연료 : {0}/{1} ({2}%)\r\n탄약 : {3}/{4} ({5}%)",
-				FuelCurrent, FuelMax, (int)Math.Ceiling(100.0 * FuelCurrent / FuelMax),
-				AmmoCurrent, AmmoMax, (int)Math.Ceiling(100.0 * AmmoCurrent / AmmoMax));
+                this.FuelCurrent, this.FuelMax, (int)Math.Ceiling(100.0 * this.FuelCurrent / this.FuelMax),
+                this.AmmoCurrent, this.AmmoMax, (int)Math.Ceiling(100.0 * this.AmmoCurrent / this.AmmoMax));
 
-			ResourceTip.SetToolTip(this, tiptext);
+            this.ResourceTip.SetToolTip(this, tiptext);
 
-			Invalidate();
+            this.Invalidate();
 		}
 
 
@@ -102,12 +102,12 @@ namespace ElectronicObserver.Window.Control
 		public void SetResources(int fuelCurrent, int fuelMax, int ammoCurrent, int ammoMax)
 		{
 
-			BarFuel.Value = fuelCurrent;
-			BarFuel.MaximumValue = fuelMax;
-			BarAmmo.Value = ammoCurrent;
-			BarAmmo.MaximumValue = ammoMax;
+            this.BarFuel.Value = fuelCurrent;
+            this.BarFuel.MaximumValue = fuelMax;
+            this.BarAmmo.Value = ammoCurrent;
+            this.BarAmmo.MaximumValue = ammoMax;
 
-			PropertyChanged();
+            this.PropertyChanged();
 		}
 
 
@@ -117,8 +117,8 @@ namespace ElectronicObserver.Window.Control
 
 			const int margin = 3;
 
-			BarFuel.Paint(e.Graphics, new Rectangle(0, margin, this.Width, BarFuel.GetPreferredSize().Height));
-			BarAmmo.Paint(e.Graphics, new Rectangle(0, this.Height - margin - BarFuel.GetPreferredSize().Height, this.Width, BarFuel.GetPreferredSize().Height));
+            this.BarFuel.Paint(e.Graphics, new Rectangle(0, margin, this.Width, this.BarFuel.GetPreferredSize().Height));
+            this.BarAmmo.Paint(e.Graphics, new Rectangle(0, this.Height - margin - this.BarFuel.GetPreferredSize().Height, this.Width, this.BarFuel.GetPreferredSize().Height));
 
 		}
 

@@ -19,7 +19,7 @@ namespace ElectronicObserver.Data.Battle.Phase
         {
         }
 
-        public override bool IsAvailable => RawData.api_hougeki1() && RawData.api_hougeki1 != null;
+        public override bool IsAvailable => this.RawData.api_hougeki1() && this.RawData.api_hougeki1 != null;
 
     }
 }

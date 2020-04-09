@@ -45,16 +45,16 @@ namespace ElectronicObserver.Window.Dialog
 
 
 
-		private ChartType SelectedChartType => (ChartType)GetSelectedMenuStripIndex(Menu_Graph);
+		private ChartType SelectedChartType => (ChartType)this.GetSelectedMenuStripIndex(this.Menu_Graph);
 
-		private ChartSpan SelectedChartSpan => (ChartSpan)GetSelectedMenuStripIndex(Menu_Span);
+		private ChartSpan SelectedChartSpan => (ChartSpan)this.GetSelectedMenuStripIndex(this.Menu_Span);
 
 
 
 
 		public DialogResourceChart()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 		}
 
 
@@ -65,14 +65,14 @@ namespace ElectronicObserver.Window.Dialog
 			if (!RecordManager.Instance.Resource.Record.Any())
 			{
 				MessageBox.Show("기록 데이터가 존재하지 않습니다.\n모항화면으로 한번 이동해주세요.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Close();
+                this.Close();
 				return;
 			}
 
 
 			{
 				int i = 0;
-				foreach (var span in Menu_Span.DropDownItems.OfType<ToolStripMenuItem>())
+				foreach (var span in this.Menu_Span.DropDownItems.OfType<ToolStripMenuItem>())
 				{
 					span.Tag = i;
 					i++;
@@ -80,13 +80,13 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SwitchMenuStrip(Menu_Graph, 0);
-			SwitchMenuStrip(Menu_Span, 2);
+            this.SwitchMenuStrip(this.Menu_Graph, 0);
+            this.SwitchMenuStrip(this.Menu_Span, 2);
 
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormResourceChart]);
 
-			UpdateChart();
+            this.UpdateChart();
 		}
 
 
@@ -94,29 +94,29 @@ namespace ElectronicObserver.Window.Dialog
 		private void SetResourceChart()
 		{
 
-			ResourceChart.ChartAreas.Clear();
-			var area = ResourceChart.ChartAreas.Add("ResourceChartArea");
-			area.AxisX = CreateAxisX(SelectedChartSpan);
-			area.AxisY = CreateAxisY(2000);
-			area.AxisY2 = CreateAxisY(200);
+            this.ResourceChart.ChartAreas.Clear();
+			var area = this.ResourceChart.ChartAreas.Add("ResourceChartArea");
+			area.AxisX = this.CreateAxisX(this.SelectedChartSpan);
+			area.AxisY = this.CreateAxisY(2000);
+			area.AxisY2 = this.CreateAxisY(200);
 
-			ResourceChart.Legends.Clear();
-			var legend = ResourceChart.Legends.Add("ResourceLegend");
-			legend.Font = Font;
+            this.ResourceChart.Legends.Clear();
+			var legend = this.ResourceChart.Legends.Add("ResourceLegend");
+			legend.Font = this.Font;
 
 
-			ResourceChart.Series.Clear();
+            this.ResourceChart.Series.Clear();
 
-			var fuel = ResourceChart.Series.Add("ResourceSeries_Fuel");
-			var ammo = ResourceChart.Series.Add("ResourceSeries_Ammo");
-			var steel = ResourceChart.Series.Add("ResourceSeries_Steel");
-			var bauxite = ResourceChart.Series.Add("ResourceSeries_Bauxite");
-			var instantRepair = ResourceChart.Series.Add("ResourceSeries_InstantRepair");
+			var fuel = this.ResourceChart.Series.Add("ResourceSeries_Fuel");
+			var ammo = this.ResourceChart.Series.Add("ResourceSeries_Ammo");
+			var steel = this.ResourceChart.Series.Add("ResourceSeries_Steel");
+			var bauxite = this.ResourceChart.Series.Add("ResourceSeries_Bauxite");
+			var instantRepair = this.ResourceChart.Series.Add("ResourceSeries_InstantRepair");
 
 			var setSeries = new Action<Series>(s =>
 			{
 				s.ChartType = SeriesChartType.Line;
-				s.Font = Font;
+				s.Font = this.Font;
 				s.XValueType = ChartValueType.DateTime;
 			});
 
@@ -144,7 +144,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			//データ設定
 			{
-				var record = GetRecords();
+				var record = this.GetRecords();
 
 				if (record.Any())
 				{
@@ -152,7 +152,7 @@ namespace ElectronicObserver.Window.Dialog
 					foreach (var r in record)
 					{
 
-						if (ShouldSkipRecord(r.Date - prev.Date))
+						if (this.ShouldSkipRecord(r.Date - prev.Date))
 							continue;
 
 						fuel.Points.AddXY(r.Date.ToOADate(), r.Fuel);
@@ -167,38 +167,38 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
 		private void SetResourceDiffChart()
 		{
 
-			ResourceChart.ChartAreas.Clear();
-			var area = ResourceChart.ChartAreas.Add("ResourceChartArea");
-			area.AxisX = CreateAxisX(SelectedChartSpan);
-			area.AxisY = CreateAxisY(200);
-			area.AxisY2 = CreateAxisY(20);
+            this.ResourceChart.ChartAreas.Clear();
+			var area = this.ResourceChart.ChartAreas.Add("ResourceChartArea");
+			area.AxisX = this.CreateAxisX(this.SelectedChartSpan);
+			area.AxisY = this.CreateAxisY(200);
+			area.AxisY2 = this.CreateAxisY(20);
 
-			ResourceChart.Legends.Clear();
-			var legend = ResourceChart.Legends.Add("ResourceLegend");
-			legend.Font = Font;
+            this.ResourceChart.Legends.Clear();
+			var legend = this.ResourceChart.Legends.Add("ResourceLegend");
+			legend.Font = this.Font;
 
 
-			ResourceChart.Series.Clear();
+            this.ResourceChart.Series.Clear();
 
-			var fuel = ResourceChart.Series.Add("ResourceSeries_Fuel");
-			var ammo = ResourceChart.Series.Add("ResourceSeries_Ammo");
-			var steel = ResourceChart.Series.Add("ResourceSeries_Steel");
-			var bauxite = ResourceChart.Series.Add("ResourceSeries_Bauxite");
-			var instantRepair = ResourceChart.Series.Add("ResourceSeries_InstantRepair");
+			var fuel = this.ResourceChart.Series.Add("ResourceSeries_Fuel");
+			var ammo = this.ResourceChart.Series.Add("ResourceSeries_Ammo");
+			var steel = this.ResourceChart.Series.Add("ResourceSeries_Steel");
+			var bauxite = this.ResourceChart.Series.Add("ResourceSeries_Bauxite");
+			var instantRepair = this.ResourceChart.Series.Add("ResourceSeries_InstantRepair");
 
 			var setSeries = new Action<Series>(s =>
 			{
 				s.ChartType = SeriesChartType.Area;
 				//s.SetCustomProperty( "PointWidth", "1.0" );		//棒グラフの幅
 				//s.Enabled = false;	//表示するか
-				s.Font = Font;
+				s.Font = this.Font;
 				s.XValueType = ChartValueType.DateTime;
 			});
 
@@ -231,7 +231,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			//データ設定
 			{
-				var record = GetRecords();
+				var record = this.GetRecords();
 
 				ResourceRecord.ResourceElement prev = null;
 
@@ -241,7 +241,7 @@ namespace ElectronicObserver.Window.Dialog
 					foreach (var r in record)
 					{
 
-						if (ShouldSkipRecord(r.Date - prev.Date))
+						if (this.ShouldSkipRecord(r.Date - prev.Date))
 							continue;
 
 						double[] ys = new double[] {
@@ -251,7 +251,7 @@ namespace ElectronicObserver.Window.Dialog
 							r.Bauxite - prev.Bauxite,
 							r.InstantRepair - prev.InstantRepair };
 
-						if (Menu_Option_DivideByDay.Checked)
+						if (this.Menu_Option_DivideByDay.Checked)
 						{
 							for (int i = 0; i < 4; i++)
 								ys[i] /= Math.Max((r.Date - prev.Date).TotalDays, 1.0 / 1440.0);
@@ -276,7 +276,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
@@ -284,27 +284,27 @@ namespace ElectronicObserver.Window.Dialog
 		private void SetMaterialChart()
 		{
 
-			ResourceChart.ChartAreas.Clear();
-			var area = ResourceChart.ChartAreas.Add("ResourceChartArea");
-			area.AxisX = CreateAxisX(SelectedChartSpan);
-			area.AxisY = CreateAxisY(50, 200);
+            this.ResourceChart.ChartAreas.Clear();
+			var area = this.ResourceChart.ChartAreas.Add("ResourceChartArea");
+			area.AxisX = this.CreateAxisX(this.SelectedChartSpan);
+			area.AxisY = this.CreateAxisY(50, 200);
 
-			ResourceChart.Legends.Clear();
-			var legend = ResourceChart.Legends.Add("ResourceLegend");
-			legend.Font = Font;
+            this.ResourceChart.Legends.Clear();
+			var legend = this.ResourceChart.Legends.Add("ResourceLegend");
+			legend.Font = this.Font;
 
 
-			ResourceChart.Series.Clear();
+            this.ResourceChart.Series.Clear();
 
-			var instantConstruction = ResourceChart.Series.Add("ResourceSeries_InstantConstruction");
-			var instantRepair = ResourceChart.Series.Add("ResourceSeries_InstantRepair");
-			var developmentMaterial = ResourceChart.Series.Add("ResourceSeries_DevelopmentMaterial");
-			var moddingMaterial = ResourceChart.Series.Add("ResourceSeries_ModdingMaterial");
+			var instantConstruction = this.ResourceChart.Series.Add("ResourceSeries_InstantConstruction");
+			var instantRepair = this.ResourceChart.Series.Add("ResourceSeries_InstantRepair");
+			var developmentMaterial = this.ResourceChart.Series.Add("ResourceSeries_DevelopmentMaterial");
+			var moddingMaterial = this.ResourceChart.Series.Add("ResourceSeries_ModdingMaterial");
 
 			var setSeries = new Action<Series>(s =>
 			{
 				s.ChartType = SeriesChartType.Line;
-				s.Font = Font;
+				s.Font = this.Font;
 				s.XValueType = ChartValueType.DateTime;
 			});
 
@@ -327,7 +327,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			//データ設定
 			{
-				var record = GetRecords();
+				var record = this.GetRecords();
 
 				if (record.Any())
 				{
@@ -335,7 +335,7 @@ namespace ElectronicObserver.Window.Dialog
 					foreach (var r in record)
 					{
 
-						if (ShouldSkipRecord(r.Date - prev.Date))
+						if (this.ShouldSkipRecord(r.Date - prev.Date))
 							continue;
 
 						instantConstruction.Points.AddXY(r.Date.ToOADate(), r.InstantConstruction);
@@ -359,36 +359,36 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
 		private void SetMateialDiffChart()
 		{
 
-			ResourceChart.ChartAreas.Clear();
-			var area = ResourceChart.ChartAreas.Add("ResourceChartArea");
-			area.AxisX = CreateAxisX(SelectedChartSpan);
-			area.AxisY = CreateAxisY(5, 20);
+            this.ResourceChart.ChartAreas.Clear();
+			var area = this.ResourceChart.ChartAreas.Add("ResourceChartArea");
+			area.AxisX = this.CreateAxisX(this.SelectedChartSpan);
+			area.AxisY = this.CreateAxisY(5, 20);
 
-			ResourceChart.Legends.Clear();
-			var legend = ResourceChart.Legends.Add("ResourceLegend");
-			legend.Font = Font;
+            this.ResourceChart.Legends.Clear();
+			var legend = this.ResourceChart.Legends.Add("ResourceLegend");
+			legend.Font = this.Font;
 
 
-			ResourceChart.Series.Clear();
+            this.ResourceChart.Series.Clear();
 
-			var instantConstruction = ResourceChart.Series.Add("ResourceSeries_InstantConstruction");
-			var instantRepair = ResourceChart.Series.Add("ResourceSeries_InstantRepair");
-			var developmentMaterial = ResourceChart.Series.Add("ResourceSeries_DevelopmentMaterial");
-			var moddingMaterial = ResourceChart.Series.Add("ResourceSeries_ModdingMaterial");
+			var instantConstruction = this.ResourceChart.Series.Add("ResourceSeries_InstantConstruction");
+			var instantRepair = this.ResourceChart.Series.Add("ResourceSeries_InstantRepair");
+			var developmentMaterial = this.ResourceChart.Series.Add("ResourceSeries_DevelopmentMaterial");
+			var moddingMaterial = this.ResourceChart.Series.Add("ResourceSeries_ModdingMaterial");
 
 			var setSeries = new Action<Series>(s =>
 			{
 				s.ChartType = SeriesChartType.Area;
 				//s.SetCustomProperty( "PointWidth", "1.0" );		//棒グラフの幅
 				//s.Enabled = false;	//表示するか
-				s.Font = Font;
+				s.Font = this.Font;
 				s.XValueType = ChartValueType.DateTime;
 			});
 
@@ -415,7 +415,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			//データ設定
 			{
-				var record = GetRecords();
+				var record = this.GetRecords();
 
 				ResourceRecord.ResourceElement prev = null;
 
@@ -425,7 +425,7 @@ namespace ElectronicObserver.Window.Dialog
 					foreach (var r in record)
 					{
 
-						if (ShouldSkipRecord(r.Date - prev.Date))
+						if (this.ShouldSkipRecord(r.Date - prev.Date))
 							continue;
 
 						double[] ys = new double[] {
@@ -434,7 +434,7 @@ namespace ElectronicObserver.Window.Dialog
 							r.DevelopmentMaterial - prev.DevelopmentMaterial ,
 							r.ModdingMaterial - prev.ModdingMaterial };
 
-						if (Menu_Option_DivideByDay.Checked)
+						if (this.Menu_Option_DivideByDay.Checked)
 						{
 							for (int i = 0; i < 4; i++)
 								ys[i] /= Math.Max((r.Date - prev.Date).TotalDays, 1.0 / 1440.0);
@@ -466,7 +466,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
@@ -474,24 +474,24 @@ namespace ElectronicObserver.Window.Dialog
 		private void SetExperienceChart()
 		{
 
-			ResourceChart.ChartAreas.Clear();
-			var area = ResourceChart.ChartAreas.Add("ResourceChartArea");
-			area.AxisX = CreateAxisX(SelectedChartSpan);
-			area.AxisY = CreateAxisY(20000);
+            this.ResourceChart.ChartAreas.Clear();
+			var area = this.ResourceChart.ChartAreas.Add("ResourceChartArea");
+			area.AxisX = this.CreateAxisX(this.SelectedChartSpan);
+			area.AxisY = this.CreateAxisY(20000);
 
-			ResourceChart.Legends.Clear();
-			var legend = ResourceChart.Legends.Add("ResourceLegend");
-			legend.Font = Font;
+            this.ResourceChart.Legends.Clear();
+			var legend = this.ResourceChart.Legends.Add("ResourceLegend");
+			legend.Font = this.Font;
 
 
-			ResourceChart.Series.Clear();
+            this.ResourceChart.Series.Clear();
 
-			var exp = ResourceChart.Series.Add("ResourceSeries_Experience");
+			var exp = this.ResourceChart.Series.Add("ResourceSeries_Experience");
 
 			var setSeries = new Action<Series>(s =>
 			{
 				s.ChartType = SeriesChartType.Line;
-				s.Font = Font;
+				s.Font = this.Font;
 				s.XValueType = ChartValueType.DateTime;
 			});
 
@@ -502,7 +502,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			//データ設定
 			{
-				var record = GetRecords();
+				var record = this.GetRecords();
 
 				if (record.Any())
 				{
@@ -510,7 +510,7 @@ namespace ElectronicObserver.Window.Dialog
 					foreach (var r in record)
 					{
 
-						if (ShouldSkipRecord(r.Date - prev.Date))
+						if (this.ShouldSkipRecord(r.Date - prev.Date))
 							continue;
 
 						exp.Points.AddXY(r.Date.ToOADate(), r.HQExp);
@@ -530,26 +530,26 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
 		private void SetExperienceDiffChart()
 		{
 
-			ResourceChart.ChartAreas.Clear();
-			var area = ResourceChart.ChartAreas.Add("ResourceChartArea");
-			area.AxisX = CreateAxisX(SelectedChartSpan);
-			area.AxisY = CreateAxisY(2000);
+            this.ResourceChart.ChartAreas.Clear();
+			var area = this.ResourceChart.ChartAreas.Add("ResourceChartArea");
+			area.AxisX = this.CreateAxisX(this.SelectedChartSpan);
+			area.AxisY = this.CreateAxisY(2000);
 
-			ResourceChart.Legends.Clear();
-			var legend = ResourceChart.Legends.Add("ResourceLegend");
-			legend.Font = Font;
+            this.ResourceChart.Legends.Clear();
+			var legend = this.ResourceChart.Legends.Add("ResourceLegend");
+			legend.Font = this.Font;
 
 
-			ResourceChart.Series.Clear();
+            this.ResourceChart.Series.Clear();
 
-			var exp = ResourceChart.Series.Add("ResourceSeries_Experience");
+			var exp = this.ResourceChart.Series.Add("ResourceSeries_Experience");
 
 
 			var setSeries = new Action<Series>(s =>
@@ -557,7 +557,7 @@ namespace ElectronicObserver.Window.Dialog
 				s.ChartType = SeriesChartType.Area;
 				//s.SetCustomProperty( "PointWidth", "1.0" );		//棒グラフの幅
 				//s.Enabled = false;	//表示するか
-				s.Font = Font;
+				s.Font = this.Font;
 				s.XValueType = ChartValueType.DateTime;
 			});
 
@@ -569,7 +569,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			//データ設定
 			{
-				var record = GetRecords();
+				var record = this.GetRecords();
 
 				ResourceRecord.ResourceElement prev = null;
 
@@ -579,12 +579,12 @@ namespace ElectronicObserver.Window.Dialog
 					foreach (var r in record)
 					{
 
-						if (ShouldSkipRecord(r.Date - prev.Date))
+						if (this.ShouldSkipRecord(r.Date - prev.Date))
 							continue;
 
 						double ys = r.HQExp - prev.HQExp;
 
-						if (Menu_Option_DivideByDay.Checked)
+						if (this.Menu_Option_DivideByDay.Checked)
 							ys /= Math.Max((r.Date - prev.Date).TotalDays, 1.0 / 1440.0);
 
 						exp.Points.AddXY(prev.Date.ToOADate(), ys);
@@ -607,7 +607,7 @@ namespace ElectronicObserver.Window.Dialog
 			}
 
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
@@ -655,7 +655,7 @@ namespace ElectronicObserver.Window.Dialog
 					break;
 			}
 
-			axis.LabelStyle.Font = Font;
+			axis.LabelStyle.Font = this.Font;
 			axis.MajorGrid.LineColor = Color.FromArgb(192, 192, 192);
 
 			return axis;
@@ -667,7 +667,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			Axis axis = new Axis();
 
-			axis.LabelStyle.Font = Font;
+			axis.LabelStyle.Font = this.Font;
 			axis.IsStartedFromZero = true;
 			axis.Interval = majorInterval;
 			axis.MajorGrid.LineColor = Color.FromArgb(192, 192, 192);
@@ -681,7 +681,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private Axis CreateAxisY(int interval)
 		{
-			return CreateAxisY(interval, interval * 5);
+			return this.CreateAxisY(interval, interval * 5);
 		}
 
 
@@ -693,7 +693,7 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				var dp = e.HitTestResult.Series.Points[e.HitTestResult.PointIndex];
 
-				switch (SelectedChartType)
+				switch (this.SelectedChartType)
 				{
 					case ChartType.Resource:
 					case ChartType.Material:
@@ -710,7 +710,7 @@ namespace ElectronicObserver.Window.Dialog
 							DateTime.FromOADate(dp.XValue),
 							e.HitTestResult.Series.LegendText,
 							dp.YValues[0],
-							Menu_Option_DivideByDay.Checked ? " / day" : "");
+                            this.Menu_Option_DivideByDay.Checked ? " / day" : "");
 						break;
 				}
 			}
@@ -755,25 +755,25 @@ namespace ElectronicObserver.Window.Dialog
 		private void UpdateChart()
 		{
 
-			switch (SelectedChartType)
+			switch (this.SelectedChartType)
 			{
 				case ChartType.Resource:
-					SetResourceChart();
+                    this.SetResourceChart();
 					break;
 				case ChartType.ResourceDiff:
-					SetResourceDiffChart();
+                    this.SetResourceDiffChart();
 					break;
 				case ChartType.Material:
-					SetMaterialChart();
+                    this.SetMaterialChart();
 					break;
 				case ChartType.MaterialDiff:
-					SetMateialDiffChart();
+                    this.SetMateialDiffChart();
 					break;
 				case ChartType.Experience:
-					SetExperienceChart();
+                    this.SetExperienceChart();
 					break;
 				case ChartType.ExperienceDiff:
-					SetExperienceDiffChart();
+                    this.SetExperienceDiffChart();
 					break;
 			}
 
@@ -785,7 +785,7 @@ namespace ElectronicObserver.Window.Dialog
 			var border = DateTime.MinValue;
 			var now = DateTime.Now;
 
-			switch (SelectedChartSpan)
+			switch (this.SelectedChartSpan)
 			{
 				case ChartSpan.Day:
 					border = now.AddDays(-1);
@@ -844,13 +844,13 @@ namespace ElectronicObserver.Window.Dialog
 		private bool ShouldSkipRecord(TimeSpan span)
 		{
 
-			if (Menu_Option_ShowAllData.Checked)
+			if (this.Menu_Option_ShowAllData.Checked)
 				return false;
 
 			if (span.Ticks == 0)        //初回のデータ( prev == First )は無視しない
 				return false;
 
-			switch (SelectedChartSpan)
+			switch (this.SelectedChartSpan)
 			{
 				case ChartSpan.Day:
 				case ChartSpan.Week:
@@ -885,36 +885,36 @@ namespace ElectronicObserver.Window.Dialog
 				unitbase < 5 ? 0.5 :
 				unitbase < 7 ? 1.0 : 2.0);
 
-			ResourceChart.ChartAreas[0].AxisY.Minimum = Math.Floor(min / unit) * unit;
-			ResourceChart.ChartAreas[0].AxisY.Maximum = Math.Ceiling(max / unit) * unit;
+            this.ResourceChart.ChartAreas[0].AxisY.Minimum = Math.Floor(min / unit) * unit;
+            this.ResourceChart.ChartAreas[0].AxisY.Maximum = Math.Ceiling(max / unit) * unit;
 
-			ResourceChart.ChartAreas[0].AxisY.Interval = unit;
-			ResourceChart.ChartAreas[0].AxisY.MinorGrid.Interval = unit / 2;
+            this.ResourceChart.ChartAreas[0].AxisY.Interval = unit;
+            this.ResourceChart.ChartAreas[0].AxisY.MinorGrid.Interval = unit / 2;
 
-			if (ResourceChart.Series.Where(s => s.Enabled).Any(s => s.YAxisType == AxisType.Secondary)) {
-				ResourceChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
-				if (ResourceChart.Series.Count(s => s.Enabled) == 1) {
-					ResourceChart.ChartAreas[0].AxisY2.MajorGrid.Enabled = true;
-					ResourceChart.ChartAreas[0].AxisY2.MinorGrid.Enabled = true;
+			if (this.ResourceChart.Series.Where(s => s.Enabled).Any(s => s.YAxisType == AxisType.Secondary)) {
+                this.ResourceChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
+				if (this.ResourceChart.Series.Count(s => s.Enabled) == 1) {
+                    this.ResourceChart.ChartAreas[0].AxisY2.MajorGrid.Enabled = true;
+                    this.ResourceChart.ChartAreas[0].AxisY2.MinorGrid.Enabled = true;
 				} else {
-					ResourceChart.ChartAreas[0].AxisY2.MajorGrid.Enabled = false;
-					ResourceChart.ChartAreas[0].AxisY2.MinorGrid.Enabled = false;
+                    this.ResourceChart.ChartAreas[0].AxisY2.MajorGrid.Enabled = false;
+                    this.ResourceChart.ChartAreas[0].AxisY2.MinorGrid.Enabled = false;
 				}
-				ResourceChart.ChartAreas[0].AxisY2.Minimum = ResourceChart.ChartAreas[0].AxisY.Minimum / 100;
-				ResourceChart.ChartAreas[0].AxisY2.Maximum = ResourceChart.ChartAreas[0].AxisY.Maximum / 100;
-				ResourceChart.ChartAreas[0].AxisY2.Interval = unit / 100;
-				ResourceChart.ChartAreas[0].AxisY2.MinorGrid.Interval = unit / 200;
+                this.ResourceChart.ChartAreas[0].AxisY2.Minimum = this.ResourceChart.ChartAreas[0].AxisY.Minimum / 100;
+                this.ResourceChart.ChartAreas[0].AxisY2.Maximum = this.ResourceChart.ChartAreas[0].AxisY.Maximum / 100;
+                this.ResourceChart.ChartAreas[0].AxisY2.Interval = unit / 100;
+                this.ResourceChart.ChartAreas[0].AxisY2.MinorGrid.Interval = unit / 200;
 			} else {
-				ResourceChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.False;
+                this.ResourceChart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.False;
 			}
 
 		}
 
 		private void SetYBounds()
 		{
-			SetYBounds(
-				!ResourceChart.Series.Any(s => s.Enabled) || SelectedChartType == ChartType.ExperienceDiff ? 0 : ResourceChart.Series.Where(s => s.Enabled).Select(s => s.YAxisType == AxisType.Secondary ? s.Points.Min(p => p.YValues[0] * 100) : s.Points.Min(p => p.YValues[0])).Min(),
-				!ResourceChart.Series.Any(s => s.Enabled) ? 0 : ResourceChart.Series.Where(s => s.Enabled).Select(s => s.YAxisType == AxisType.Secondary ? s.Points.Max(p => p.YValues[0] * 100) : s.Points.Max(p => p.YValues[0])).Max()
+            this.SetYBounds(
+				!this.ResourceChart.Series.Any(s => s.Enabled) || this.SelectedChartType == ChartType.ExperienceDiff ? 0 : this.ResourceChart.Series.Where(s => s.Enabled).Select(s => s.YAxisType == AxisType.Secondary ? s.Points.Min(p => p.YValues[0] * 100) : s.Points.Min(p => p.YValues[0])).Min(),
+				!this.ResourceChart.Series.Any(s => s.Enabled) ? 0 : this.ResourceChart.Series.Where(s => s.Enabled).Select(s => s.YAxisType == AxisType.Secondary ? s.Points.Max(p => p.YValues[0] * 100) : s.Points.Max(p => p.YValues[0])).Max()
 				);
 		}
 
@@ -924,7 +924,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			e.LegendItems.Clear();
 
-			foreach (var series in ResourceChart.Series)
+			foreach (var series in this.ResourceChart.Series)
 			{
 
 				var legendItem = new LegendItem
@@ -961,16 +961,16 @@ namespace ElectronicObserver.Window.Dialog
 			if (e.Button != System.Windows.Forms.MouseButtons.Left)
 				return;
 
-			var hittest = ResourceChart.HitTest(e.X, e.Y, ChartElementType.LegendItem);
+			var hittest = this.ResourceChart.HitTest(e.X, e.Y, ChartElementType.LegendItem);
 
 			if (hittest.Object != null)
 			{
 
 				var legend = (LegendItem)hittest.Object;
-				ResourceChart.Series[legend.SeriesName].Enabled ^= true;
+                this.ResourceChart.Series[legend.SeriesName].Enabled ^= true;
 			}
 
-			SetYBounds();
+            this.SetYBounds();
 		}
 
 
@@ -980,56 +980,56 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void Menu_Graph_Resource_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Graph, 0);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Graph, 0);
+            this.UpdateChart();
 		}
 
 		private void Menu_Graph_ResourceDiff_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Graph, 1);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Graph, 1);
+            this.UpdateChart();
 		}
 
 		private void Menu_Graph_Material_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Graph, 2);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Graph, 2);
+            this.UpdateChart();
 		}
 
 		private void Menu_Graph_MaterialDiff_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Graph, 3);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Graph, 3);
+            this.UpdateChart();
 		}
 
 		private void Menu_Graph_Experience_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Graph, 4);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Graph, 4);
+            this.UpdateChart();
 		}
 
 		private void Menu_Graph_ExperienceDiff_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Graph, 5);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Graph, 5);
+            this.UpdateChart();
 		}
 
 
 		private void Menu_Span_Menu_Click(object sender, EventArgs e)
 		{
-			SwitchMenuStrip(Menu_Span, (int)((ToolStripMenuItem)sender).Tag);
-			UpdateChart();
+            this.SwitchMenuStrip(this.Menu_Span, (int)((ToolStripMenuItem)sender).Tag);
+            this.UpdateChart();
 		}
 
 
 		private void Menu_Option_ShowAllData_Click(object sender, EventArgs e)
 		{
-			UpdateChart();
+            this.UpdateChart();
 		}
 
 		private void Menu_Option_DivideByDay_Click(object sender, EventArgs e)
 		{
-			UpdateChart();
+            this.UpdateChart();
 		}
 
 
@@ -1037,12 +1037,12 @@ namespace ElectronicObserver.Window.Dialog
 		private void Menu_File_SaveImage_Click(object sender, EventArgs e)
 		{
 
-			if (SaveImageDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.SaveImageDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 				try
 				{
 
-					ResourceChart.SaveImage(SaveImageDialog.FileName, ChartImageFormat.Png);
+                    this.ResourceChart.SaveImage(this.SaveImageDialog.FileName, ChartImageFormat.Png);
 
 				}
 				catch (Exception ex)
@@ -1056,7 +1056,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void DialogResourceChart_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 		}
 
 

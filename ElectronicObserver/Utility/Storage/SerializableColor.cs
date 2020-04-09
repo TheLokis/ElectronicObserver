@@ -24,37 +24,37 @@ namespace ElectronicObserver.Utility.Storage
 
 		public SerializableColor()
 		{
-			ColorData = Color.Black;
+            this.ColorData = Color.Black;
 		}
 
 		public SerializableColor(Color color)
 		{
-			ColorData = color;
+            this.ColorData = color;
 		}
 
 		public SerializableColor(string attribute)
 		{
-			SerializedColor = attribute;
+            this.SerializedColor = attribute;
 		}
 
 		public SerializableColor(uint colorCode)
 		{
-			ColorData = UIntToColor(colorCode);
+            this.ColorData = UIntToColor(colorCode);
 		}
 
 
 		[DataMember]
 		public string SerializedColor
 		{
-			get { return ColorToString(ColorData); }
-			set { ColorData = StringToColor(value); }
+			get { return ColorToString(this.ColorData); }
+			set { this.ColorData = StringToColor(value); }
 		}
 
 		[IgnoreDataMember]
 		public uint ColorCode
 		{
-			get { return ColorToUint(ColorData); }
-			set { ColorData = UIntToColor(value); }
+			get { return ColorToUint(this.ColorData); }
+			set { this.ColorData = UIntToColor(value); }
 		}
 
 

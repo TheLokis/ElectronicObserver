@@ -144,8 +144,8 @@ namespace ElectronicObserver.Data.Battle
 
 		public BattleIndex(BattleSides side, int index)
 		{
-			Side = side;
-			Index = index;
+            this.Side = side;
+            this.Index = index;
 		}
 
 		public BattleIndex(int index, bool isFriendCombined, bool isEnemyCombined)
@@ -154,35 +154,35 @@ namespace ElectronicObserver.Data.Battle
 			{
 				if (isFriendCombined)
 				{
-					Side = index < 6 ? BattleSides.FriendMain : BattleSides.FriendEscort;
-					Index = index % 6;
+                    this.Side = index < 6 ? BattleSides.FriendMain : BattleSides.FriendEscort;
+                    this.Index = index % 6;
 				}
 				else
 				{
-					Side = BattleSides.FriendMain;
-					Index = index;
+                    this.Side = BattleSides.FriendMain;
+                    this.Index = index;
 				}
 			}
 			else
 			{
 				if (isEnemyCombined)
 				{
-					Side = index < 18 ? BattleSides.EnemyMain : BattleSides.EnemyEscort;
-					Index = index % 6;
+                    this.Side = index < 18 ? BattleSides.EnemyMain : BattleSides.EnemyEscort;
+                    this.Index = index % 6;
 				}
 				else
 				{
-					Side = BattleSides.EnemyMain;
-					Index = index - 12;
+                    this.Side = BattleSides.EnemyMain;
+                    this.Index = index - 12;
 				}
 			}
 		}
 
 
-		public bool IsFriend => Side == BattleSides.FriendMain || Side == BattleSides.FriendEscort;
-		public bool IsEnemy => Side == BattleSides.EnemyMain || Side == BattleSides.EnemyEscort;
-		public bool IsMain => Side == BattleSides.FriendMain || Side == BattleSides.EnemyMain;
-		public bool IsEscort => Side == BattleSides.FriendEscort || Side == BattleSides.EnemyEscort;
+		public bool IsFriend => this.Side == BattleSides.FriendMain || this.Side == BattleSides.FriendEscort;
+		public bool IsEnemy => this.Side == BattleSides.EnemyMain || this.Side == BattleSides.EnemyEscort;
+		public bool IsMain => this.Side == BattleSides.FriendMain || this.Side == BattleSides.EnemyMain;
+		public bool IsEscort => this.Side == BattleSides.FriendEscort || this.Side == BattleSides.EnemyEscort;
 
 
 		// note: FriendMain7 is equal to FriendEscort1
@@ -190,7 +190,7 @@ namespace ElectronicObserver.Data.Battle
 
 		public static int Get(BattleSides side, int index) => new BattleIndex(side, index);
 
-		public override string ToString() => $"{Side} #{Index + 1}";
+		public override string ToString() => $"{this.Side} #{this.Index + 1}";
 	}
 
 	public enum BattleSides

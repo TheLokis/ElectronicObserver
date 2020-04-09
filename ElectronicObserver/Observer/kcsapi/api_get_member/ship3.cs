@@ -19,11 +19,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
             //api_ship_data
             foreach (var elem in data.api_ship_data)
             {
-
                 int id = (int)elem.api_id;
+                bool isRemodeled = false;
 
                 ShipData ship = db.Ships[id];
-                ship.LoadFromResponse(APIName, elem);
+                ship.LoadFromResponse(this.APIName, elem);
 
                 for (int i = 0; i < ship.Slot.Count; i++)
                 {
@@ -31,13 +31,15 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
                     if (!db.Equipments.ContainsKey(ship.Slot[i]))
                     {       //改装時に新装備を入手するが、追加される前にIDを与えられてしまうため
                         EquipmentData eq = new EquipmentData();
-                        eq.LoadFromResponse(APIName, ship.Slot[i]);
+                        eq.LoadFromResponse(this.APIName, ship.Slot[i]);
                         db.Equipments.Add(eq);
+                        isRemodeled = true;
                     }
                 }
 
                 // 장비 시너지 검색
-                if (ship.MasterShip.ASW.IsDetermined &&
+                if (!isRemodeled &&
+                    ship.MasterShip.ASW.IsDetermined &&
                     ship.MasterShip.Evasion.IsDetermined &&
                     ship.MasterShip.LOS.IsDetermined)
                 {
@@ -108,7 +110,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_get_member
             }
 
             //api_deck_data
-            db.Fleet.LoadFromResponse(APIName, data.api_deck_data);
+            db.Fleet.LoadFromResponse(this.APIName, data.api_deck_data);
 
             base.OnResponseReceived((object)data);
         }

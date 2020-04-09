@@ -19,9 +19,9 @@ namespace ElectronicObserver.Window
 
 		public FormLog(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 		}
 
 		private void FormLog_Load(object sender, EventArgs e)
@@ -30,48 +30,48 @@ namespace ElectronicObserver.Window
 			foreach (var log in Utility.Logger.Log)
 			{
 				if (log.Priority >= Utility.Configuration.Config.Log.LogLevel)
-					LogList.Items.Add(log.ToString());
+                    this.LogList.Items.Add(log.ToString());
 			}
-			LogList.TopIndex = LogList.Items.Count - 1;
+            this.LogList.TopIndex = this.LogList.Items.Count - 1;
 
 			Utility.Logger.Instance.LogAdded += new Utility.LogAddedEventHandler((Utility.Logger.LogData data) =>
 			{
-				if (InvokeRequired)
+				if (this.InvokeRequired)
 				{
-					// Invokeはメッセージキューにジョブを投げて待つので、別のBeginInvokeされたジョブが既にキューにあると、
-					// それを実行してしまい、BeginInvokeされたジョブの順番が保てなくなる
-					// GUIスレッドによる処理は、順番が重要なことがあるので、GUIスレッドからInvokeを呼び出してはいけない
-					Invoke(new Utility.LogAddedEventHandler(Logger_LogAdded), data);
+                    // Invokeはメッセージキューにジョブを投げて待つので、別のBeginInvokeされたジョブが既にキューにあると、
+                    // それを実行してしまい、BeginInvokeされたジョブの順番が保てなくなる
+                    // GUIスレッドによる処理は、順番が重要なことがあるので、GUIスレッドからInvokeを呼び出してはいけない
+                    this.Invoke(new Utility.LogAddedEventHandler(this.Logger_LogAdded), data);
 				}
 				else
 				{
-					Logger_LogAdded(data);
+                    this.Logger_LogAdded(data);
 				}
 			});
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormLog]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormLog]);
 		}
 
 
 		void ConfigurationChanged()
 		{
 
-			LogList.Font = Font = Utility.Configuration.Config.UI.MainFont;
+            this.LogList.Font = this.Font = Utility.Configuration.Config.UI.MainFont;
 
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            LogList.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            LogList.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.LogList.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.LogList.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
         }
 
 
 		void Logger_LogAdded(Utility.Logger.LogData data)
 		{
 
-			int index = LogList.Items.Add(data.ToString());
-			LogList.TopIndex = index;
+			int index = this.LogList.Items.Add(data.ToString());
+            this.LogList.TopIndex = index;
 
 		}
 
@@ -80,7 +80,7 @@ namespace ElectronicObserver.Window
 		private void ContextMenuLog_Clear_Click(object sender, EventArgs e)
 		{
 
-			LogList.Items.Clear();
+            this.LogList.Items.Clear();
 
 		}
 

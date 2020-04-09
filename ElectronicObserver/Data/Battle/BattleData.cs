@@ -19,13 +19,13 @@ namespace ElectronicObserver.Data.Battle
 		/// <summary>
 		/// 戦闘終了時の各艦のHP
 		/// </summary>
-		public ReadOnlyCollection<int> ResultHPs => Array.AsReadOnly(_resultHPs);
+		public ReadOnlyCollection<int> ResultHPs => Array.AsReadOnly(this._resultHPs);
 
 		protected int[] _attackDamages;
 		/// <summary>
 		/// 各艦の与ダメージ
 		/// </summary>
-		public ReadOnlyCollection<int> AttackDamages => Array.AsReadOnly(_attackDamages);
+		public ReadOnlyCollection<int> AttackDamages => Array.AsReadOnly(this._attackDamages);
 
 
 		public PhaseInitial Initial { get; protected set; }
@@ -37,21 +37,21 @@ namespace ElectronicObserver.Data.Battle
 		{
 			base.LoadFromResponse(apiname, (object)data);
 
-			Initial = new PhaseInitial(this, "전력");
-			Searching = new PhaseSearching(this, "색적");
+            this.Initial = new PhaseInitial(this, "전력");
+            this.Searching = new PhaseSearching(this, "색적");
 
-			_resultHPs = new int[24];
-			Array.Copy(Initial.FriendInitialHPs, 0, _resultHPs, 0, Initial.FriendInitialHPs.Length);
-			Array.Copy(Initial.EnemyInitialHPs, 0, _resultHPs, 12, Initial.EnemyInitialHPs.Length);
-			if (Initial.FriendInitialHPsEscort != null)
-				Array.Copy(Initial.FriendInitialHPsEscort, 0, _resultHPs, 6, 6);
-			if (Initial.EnemyInitialHPsEscort != null)
-				Array.Copy(Initial.EnemyInitialHPsEscort, 0, _resultHPs, 18, 6);
+            this._resultHPs = new int[24];
+			Array.Copy(this.Initial.FriendInitialHPs, 0, this._resultHPs, 0, this.Initial.FriendInitialHPs.Length);
+			Array.Copy(this.Initial.EnemyInitialHPs, 0, this._resultHPs, 12, this.Initial.EnemyInitialHPs.Length);
+			if (this.Initial.FriendInitialHPsEscort != null)
+				Array.Copy(this.Initial.FriendInitialHPsEscort, 0, this._resultHPs, 6, 6);
+			if (this.Initial.EnemyInitialHPsEscort != null)
+				Array.Copy(this.Initial.EnemyInitialHPsEscort, 0, this._resultHPs, 18, 6);
 
 
 
-			if (_attackDamages == null)
-				_attackDamages = new int[_resultHPs.Length];
+			if (this._attackDamages == null)
+                this._attackDamages = new int[this._resultHPs.Length];
 		}
 
 
@@ -62,8 +62,8 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				int memberCount = Initial.FriendFleet.Members.Count;
-				int max = _attackDamages.Take(memberCount).Max();
+				int memberCount = this.Initial.FriendFleet.Members.Count;
+				int max = this._attackDamages.Take(memberCount).Max();
 				if (max == 0)
 				{       // 全員ノーダメージなら旗艦MVP
 					yield return 0;
@@ -73,7 +73,7 @@ namespace ElectronicObserver.Data.Battle
 				{
 					for (int i = 0; i < memberCount; i++)
 					{
-						if (_attackDamages[i] == max)
+						if (this._attackDamages[i] == max)
 							yield return i;
 					}
 				}
@@ -88,7 +88,7 @@ namespace ElectronicObserver.Data.Battle
 		{
 			get
 			{
-				int max = _attackDamages.Skip(6).Take(6).Max();
+				int max = this._attackDamages.Skip(6).Take(6).Max();
 				if (max == 0)
 				{       // 全員ノーダメージなら旗艦MVP
 					yield return 0;
@@ -98,7 +98,7 @@ namespace ElectronicObserver.Data.Battle
 				{
 					for (int i = 0; i < 6; i++)
 					{
-						if (_attackDamages[i + 6] == max)
+						if (this._attackDamages[i + 6] == max)
 							yield return i;
 					}
 				}
@@ -111,7 +111,7 @@ namespace ElectronicObserver.Data.Battle
 		/// </summary>
 		internal void TakeOverParameters(BattleData prev)
 		{
-			_attackDamages = (int[])prev._attackDamages.Clone();
+            this._attackDamages = (int[])prev._attackDamages.Clone();
 		}
 
 
@@ -128,8 +128,8 @@ namespace ElectronicObserver.Data.Battle
 
 
 		public virtual bool IsPractice => false;
-		public virtual bool IsFriendCombined => Initial.IsFriendCombined;
-		public virtual bool IsEnemyCombined => Initial.IsEnemyCombined;
+		public virtual bool IsFriendCombined => this.Initial.IsFriendCombined;
+		public virtual bool IsEnemyCombined => this.Initial.IsEnemyCombined;
 		public virtual bool IsBaseAirRaid => false;
 
 
@@ -139,7 +139,7 @@ namespace ElectronicObserver.Data.Battle
 		/// </summary>
 		public string GetBattleDetail()
 		{
-			return GetBattleDetail(-1);
+			return this.GetBattleDetail(-1);
 		}
 
 		/// <summary>
@@ -150,7 +150,7 @@ namespace ElectronicObserver.Data.Battle
 		{
 			var sb = new StringBuilder();
 
-			foreach (var phase in GetPhases())
+			foreach (var phase in this.GetPhases())
 			{
 				string bd = phase.GetBattleDetail(index);
 

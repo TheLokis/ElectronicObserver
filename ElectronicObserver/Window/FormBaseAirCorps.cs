@@ -31,9 +31,9 @@ namespace ElectronicObserver.Window
 			public TableBaseAirCorpsControl(FormBaseAirCorps parent)
 			{
 
-				#region Initialize
+                #region Initialize
 
-				Name = new ImageLabel
+                this.Name = new ImageLabel
 				{
 					Name = "Name",
 					Text = "*",
@@ -49,7 +49,7 @@ namespace ElectronicObserver.Window
 					Cursor = Cursors.Help
 				};
 
-				ActionKind = new ImageLabel
+                this.ActionKind = new ImageLabel
 				{
 					Text = "*",
 					Anchor = AnchorStyles.Left,
@@ -62,7 +62,7 @@ namespace ElectronicObserver.Window
 					Visible = false
 				};
 
-				AirSuperiority = new ImageLabel
+                this.AirSuperiority = new ImageLabel
 				{
 					Text = "*",
 					Anchor = AnchorStyles.Left,
@@ -76,7 +76,7 @@ namespace ElectronicObserver.Window
 					Visible = false
 				};
 
-				Distance = new ImageLabel
+                this.Distance = new ImageLabel
 				{
 					Text = "*",
 					Anchor = AnchorStyles.Left,
@@ -90,7 +90,7 @@ namespace ElectronicObserver.Window
 					Visible = false
 				};
 
-				Squadrons = new ShipStatusEquipment
+                this.Squadrons = new ShipStatusEquipment
 				{
 					Anchor = AnchorStyles.Left,
 					Padding = new Padding(0, 1, 0, 2),
@@ -99,11 +99,11 @@ namespace ElectronicObserver.Window
 					AutoSize = true,
 					Visible = false
 				};
-				Squadrons.ResumeLayout();
+                this.Squadrons.ResumeLayout();
 
-				ConfigurationChanged(parent);
+                this.ConfigurationChanged(parent);
 
-				ToolTipInfo = parent.ToolTipInfo;
+                this.ToolTipInfo = parent.ToolTipInfo;
 
 				#endregion
 
@@ -113,7 +113,7 @@ namespace ElectronicObserver.Window
 			public TableBaseAirCorpsControl(FormBaseAirCorps parent, TableLayoutPanel table, int row)
 				: this(parent)
 			{
-				AddToTable(table, row);
+                this.AddToTable(table, row);
 			}
 
 			public void AddToTable(TableLayoutPanel table, int row)
@@ -121,11 +121,11 @@ namespace ElectronicObserver.Window
 
 				table.SuspendLayout();
 
-				table.Controls.Add(Name, 0, row);
-				table.Controls.Add(ActionKind, 1, row);
-				table.Controls.Add(AirSuperiority, 2, row);
-				table.Controls.Add(Distance, 3, row);
-				table.Controls.Add(Squadrons, 4, row);
+				table.Controls.Add(this.Name, 0, row);
+				table.Controls.Add(this.ActionKind, 1, row);
+				table.Controls.Add(this.AirSuperiority, 2, row);
+				table.Controls.Add(this.Distance, 3, row);
+				table.Controls.Add(this.Squadrons, 4, row);
 				table.ResumeLayout();
 
 				ControlHelper.SetTableRowStyle(table, row, ControlHelper.GetDefaultRowStyle());
@@ -146,8 +146,8 @@ namespace ElectronicObserver.Window
 				else
 				{
 
-					Name.Text = string.Format("#{0} - {1}", corps.MapAreaID, corps.Name);
-					Name.Tag = corps.MapAreaID;
+                    this.Name.Text = string.Format("#{0} - {1}", corps.MapAreaID, corps.Name);
+                    this.Name.Tag = corps.MapAreaID;
 					var sb = new StringBuilder();
 
 
@@ -164,15 +164,15 @@ namespace ElectronicObserver.Window
 
 						if (tired == 2)
 						{
-							Name.ImageAlign = ContentAlignment.MiddleRight;
-							Name.ImageIndex = (int)ResourceManager.IconContent.ConditionTired;
+                            this.Name.ImageAlign = ContentAlignment.MiddleRight;
+                            this.Name.ImageIndex = (int)ResourceManager.IconContent.ConditionTired;
 							sb.AppendLine("피로");
 
 						}
 						else
 						{
-							Name.ImageAlign = ContentAlignment.MiddleRight;
-							Name.ImageIndex = (int)ResourceManager.IconContent.ConditionVeryTired;
+                            this.Name.ImageAlign = ContentAlignment.MiddleRight;
+                            this.Name.ImageIndex = (int)ResourceManager.IconContent.ConditionVeryTired;
 							sb.AppendLine("과로");
 
 						}
@@ -180,22 +180,28 @@ namespace ElectronicObserver.Window
 					}
 					else if (corps.Squadrons.Values.Any(sq => sq != null && sq.AircraftCurrent < sq.AircraftMax))
 					{
-						// 未補給
-						Name.ImageAlign = ContentAlignment.MiddleRight;
-						Name.ImageIndex = (int)ResourceManager.IconContent.FleetNotReplenished;
+                        // 未補給
+                        this.Name.ImageAlign = ContentAlignment.MiddleRight;
+                        this.Name.ImageIndex = (int)ResourceManager.IconContent.FleetNotReplenished;
 						sb.AppendLine("미보급");
 
 					}
 					else
 					{
-						Name.ImageAlign = ContentAlignment.MiddleCenter;
-						Name.ImageIndex = -1;
+                        this.Name.ImageAlign = ContentAlignment.MiddleCenter;
+                        this.Name.ImageIndex = -1;
 
 					}
-					ToolTipInfo.SetToolTip(Name, sb.ToString());
+
+                    sb.AppendLine(string.Format("총 제공: 방공 {0} / 대고고도 {1}",
+                db.BaseAirCorps.Values.Where(c => c.MapAreaID == corps.MapAreaID && c.ActionKind == 2).Select(c => Calculator.GetAirSuperiority(c)).DefaultIfEmpty(0).Sum(),
+                db.BaseAirCorps.Values.Where(c => c.MapAreaID == corps.MapAreaID && c.ActionKind == 2).Select(c => Calculator.GetAirSuperiority(c, isHighAltitude: true)).DefaultIfEmpty(0).Sum()
+                ));
+
+                    this.ToolTipInfo.SetToolTip(this.Name, sb.ToString());
 
 
-					ActionKind.Text = "[" + Constants.GetBaseAirCorpsActionKind(corps.ActionKind) + "]";
+                    this.ActionKind.Text = "[" + Constants.GetBaseAirCorpsActionKind(corps.ActionKind) + "]";
 
 					{
 						int airSuperiority = Calculator.GetAirSuperiority(corps);
@@ -203,36 +209,49 @@ namespace ElectronicObserver.Window
 						{
 							int airSuperiority_max = Calculator.GetAirSuperiority(corps, true);
 							if (airSuperiority < airSuperiority_max)
-								AirSuperiority.Text = string.Format("{0} ～ {1}", airSuperiority, airSuperiority_max);
+                                this.AirSuperiority.Text = string.Format("{0} ～ {1}", airSuperiority, airSuperiority_max);
 							else
-								AirSuperiority.Text = airSuperiority.ToString();
+                                this.AirSuperiority.Text = airSuperiority.ToString();
 						}
 						else
 						{
-							AirSuperiority.Text = airSuperiority.ToString();
+                            this.AirSuperiority.Text = airSuperiority.ToString();
 						}
 
-						ToolTipInfo.SetToolTip(AirSuperiority,
-							string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
+                        var tip = new StringBuilder();
+                        tip.AppendFormat(string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n",
 							(int)(airSuperiority / 3.0),
 							(int)(airSuperiority / 1.5),
 							Math.Max((int)(airSuperiority * 1.5 - 1), 0),
 							Math.Max((int)(airSuperiority * 3.0 - 1), 0)));
-					}
 
-					Distance.Text = corps.Distance.ToString();
+                        if (corps.ActionKind == 2)
+                        {
+                            int airSuperiorityHighAltitude = Calculator.GetAirSuperiority(corps, isHighAltitude: true);
+                            tip.AppendFormat("\r\n대고고도폭격：제공 {0}\r\n확보: {1}\r\n우세: {2}\r\n균형: {3}\r\n열세: {4}\r\n",
+                                airSuperiorityHighAltitude,
+                                (int)(airSuperiorityHighAltitude / 3.0),
+                                (int)(airSuperiorityHighAltitude / 1.5),
+                                Math.Max((int)(airSuperiorityHighAltitude * 1.5 - 1), 0),
+                                Math.Max((int)(airSuperiorityHighAltitude * 3.0 - 1), 0));
+                        }
 
-					Squadrons.SetSlotList(corps);
-					ToolTipInfo.SetToolTip(Squadrons, GetEquipmentString(corps));
+                        this.ToolTipInfo.SetToolTip(this.AirSuperiority, tip.ToString());
+                    }
+
+                    this.Distance.Text = corps.Distance.ToString();
+
+                    this.Squadrons.SetSlotList(corps);
+                    this.ToolTipInfo.SetToolTip(this.Squadrons, this.GetEquipmentString(corps));
 
 				}
 
 
-				Name.Visible =
-				ActionKind.Visible =
-				AirSuperiority.Visible =
-				Distance.Visible =
-				Squadrons.Visible =
+                this.Name.Visible =
+                this.ActionKind.Visible =
+                this.AirSuperiority.Visible =
+                this.Distance.Visible =
+                this.Squadrons.Visible =
 					baseAirCorpsID != -1;
 			}
 
@@ -247,15 +266,15 @@ namespace ElectronicObserver.Window
 
 
 
-				Name.Font = mainfont;
-				ActionKind.Font = mainfont;
-				AirSuperiority.Font = mainfont;
-				Distance.Font = mainfont;
-				Squadrons.Font = subfont;
+                this.Name.Font = mainfont;
+                this.ActionKind.Font = mainfont;
+                this.AirSuperiority.Font = mainfont;
+                this.Distance.Font = mainfont;
+                this.Squadrons.Font = subfont;
 
-				Squadrons.ShowAircraft = config.FormFleet.ShowAircraft;
-				Squadrons.ShowAircraftLevelByNumber = config.FormFleet.ShowAircraftLevelByNumber;
-				Squadrons.LevelVisibility = config.FormFleet.EquipmentLevelVisibility;
+                this.Squadrons.ShowAircraft = config.FormFleet.ShowAircraft;
+                this.Squadrons.ShowAircraftLevelByNumber = config.FormFleet.ShowAircraftLevelByNumber;
+                this.Squadrons.LevelVisibility = config.FormFleet.EquipmentLevelVisibility;
 
 			}
 
@@ -316,11 +335,11 @@ namespace ElectronicObserver.Window
 
 			public void Dispose()
 			{
-				Name.Dispose();
-				ActionKind.Dispose();
-				AirSuperiority.Dispose();
-				Distance.Dispose();
-				Squadrons.Dispose();
+                this.Name.Dispose();
+                this.ActionKind.Dispose();
+                this.AirSuperiority.Dispose();
+                this.Distance.Dispose();
+                this.Squadrons.Dispose();
 			}
 		}
 
@@ -329,20 +348,20 @@ namespace ElectronicObserver.Window
 
 		public FormBaseAirCorps(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
 
-			ControlMember = new TableBaseAirCorpsControl[9];
-			TableMember.SuspendLayout();
-			for (int i = 0; i < ControlMember.Length; i++)
+            this.ControlMember = new TableBaseAirCorpsControl[9];
+            this.TableMember.SuspendLayout();
+			for (int i = 0; i < this.ControlMember.Length; i++)
 			{
-				ControlMember[i] = new TableBaseAirCorpsControl(this, TableMember, i);
+                this.ControlMember[i] = new TableBaseAirCorpsControl(this, this.TableMember, i);
 			}
-			TableMember.ResumeLayout();
+            this.TableMember.ResumeLayout();
 
-			ConfigurationChanged();
+            this.ConfigurationChanged();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps]);
 		}
 
 		private void FormBaseAirCorps_Load(object sender, EventArgs e)
@@ -350,16 +369,16 @@ namespace ElectronicObserver.Window
 
 			var api = Observer.APIObserver.Instance;
 
-			api["api_port/port"].ResponseReceived += Updated;
-			api["api_get_member/mapinfo"].ResponseReceived += Updated;
-			api["api_get_member/base_air_corps"].ResponseReceived += Updated;
-			api["api_req_air_corps/change_name"].ResponseReceived += Updated;
-			api["api_req_air_corps/set_action"].ResponseReceived += Updated;
-			api["api_req_air_corps/set_plane"].ResponseReceived += Updated;
-			api["api_req_air_corps/supply"].ResponseReceived += Updated;
-			api["api_req_air_corps/expand_base"].ResponseReceived += Updated;
+			api["api_port/port"].ResponseReceived += this.Updated;
+			api["api_get_member/mapinfo"].ResponseReceived += this.Updated;
+			api["api_get_member/base_air_corps"].ResponseReceived += this.Updated;
+			api["api_req_air_corps/change_name"].ResponseReceived += this.Updated;
+			api["api_req_air_corps/set_action"].ResponseReceived += this.Updated;
+			api["api_req_air_corps/set_plane"].ResponseReceived += this.Updated;
+			api["api_req_air_corps/supply"].ResponseReceived += this.Updated;
+			api["api_req_air_corps/expand_base"].ResponseReceived += this.Updated;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 
 		}
 
@@ -369,22 +388,22 @@ namespace ElectronicObserver.Window
 
 			var c = Utility.Configuration.Config;
 
-			TableMember.SuspendLayout();
+            this.TableMember.SuspendLayout();
 
-			Font = c.UI.MainFont;
+            this.Font = c.UI.MainFont;
 
-			foreach (var control in ControlMember)
+			foreach (var control in this.ControlMember)
 				control.ConfigurationChanged(this);
 
-			ControlHelper.SetTableRowStyles(TableMember, ControlHelper.GetDefaultRowStyle());
+			ControlHelper.SetTableRowStyles(this.TableMember, ControlHelper.GetDefaultRowStyle());
 
-			TableMember.ResumeLayout();
+            this.TableMember.ResumeLayout();
 
-            ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
 
             if (KCDatabase.Instance.BaseAirCorps.Any())
-				Updated(null, null);
+                this.Updated(null, null);
 		}
 
 
@@ -406,13 +425,13 @@ namespace ElectronicObserver.Window
 			}
 
 
-			TableMember.SuspendLayout();
-			TableMember.RowCount = keys.Count();
-			for (int i = 0; i < ControlMember.Length; i++)
+            this.TableMember.SuspendLayout();
+            this.TableMember.RowCount = keys.Count();
+			for (int i = 0; i < this.ControlMember.Length; i++)
 			{
-				ControlMember[i].Update(i < keys.Count() ? keys.ElementAt(i) : -1);
+                this.ControlMember[i].Update(i < keys.Count() ? keys.ElementAt(i) : -1);
 			}
-			TableMember.ResumeLayout();
+            this.TableMember.ResumeLayout();
 
 			// set icon
 			{
@@ -434,9 +453,9 @@ namespace ElectronicObserver.Window
 				else
 					imageIndex = (int)ResourceManager.IconContent.FormBaseAirCorps;
 
-				if (Icon != null) ResourceManager.DestroyIcon(Icon);
-				Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[imageIndex]);
-				if (Parent != null) Parent.Refresh();       //アイコンを更新するため
+				if (this.Icon != null) ResourceManager.DestroyIcon(this.Icon);
+                this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[imageIndex]);
+				if (this.Parent != null) this.Parent.Refresh();       //アイコンを更新するため
 			}
 
 		}
@@ -450,17 +469,17 @@ namespace ElectronicObserver.Window
 				return;
 			}
 
-			if (ContextMenuBaseAirCorps.SourceControl.Name == "Name")
-				ContextMenuBaseAirCorps_CopyOrganization.Tag = ContextMenuBaseAirCorps.SourceControl.Tag as int? ?? -1;
+			if (this.ContextMenuBaseAirCorps.SourceControl.Name == "Name")
+                this.ContextMenuBaseAirCorps_CopyOrganization.Tag = this.ContextMenuBaseAirCorps.SourceControl.Tag as int? ?? -1;
 			else
-				ContextMenuBaseAirCorps_CopyOrganization.Tag = -1;
+                this.ContextMenuBaseAirCorps_CopyOrganization.Tag = -1;
 		}
 
 		private void ContextMenuBaseAirCorps_CopyOrganization_Click(object sender, EventArgs e)
 		{
 
 			var sb = new StringBuilder();
-			int areaid = ContextMenuBaseAirCorps_CopyOrganization.Tag as int? ?? -1;
+			int areaid = this.ContextMenuBaseAirCorps_CopyOrganization.Tag as int? ?? -1;
 
 			var baseaircorps = KCDatabase.Instance.BaseAirCorps.Values;
 			if (areaid != -1)

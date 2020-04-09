@@ -23,26 +23,26 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 			if (!db.Ships.ContainsKey(setid))
 			{
 				var a = new ShipData();
-				a.LoadFromResponse(APIName, data.api_ship_data.api_set_ship);
+				a.LoadFromResponse(this.APIName, data.api_ship_data.api_set_ship);
 				db.Ships.Add(a);
 
 			}
 			else
 			{
-				db.Ships[setid].LoadFromResponse(APIName, data.api_ship_data.api_set_ship);
+				db.Ships[setid].LoadFromResponse(this.APIName, data.api_ship_data.api_set_ship);
 			}
 
 
 			if (!db.Ships.ContainsKey(unsetid))
 			{
 				var a = new ShipData();
-				a.LoadFromResponse(APIName, data.api_ship_data.api_unset_ship);
+				a.LoadFromResponse(this.APIName, data.api_ship_data.api_unset_ship);
 				db.Ships.Add(a);
 
 			}
 			else
 			{
-				db.Ships[unsetid].LoadFromResponse(APIName, data.api_ship_data.api_unset_ship);
+				db.Ships[unsetid].LoadFromResponse(this.APIName, data.api_ship_data.api_unset_ship);
 			}
 
 			base.OnResponseReceived((object)data);

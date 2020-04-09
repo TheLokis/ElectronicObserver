@@ -33,12 +33,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("HPの現在値です。")]
 		public int Value
 		{
-			get { return _HPBar.Value; }
+			get { return this._HPBar.Value; }
 			set
 			{
-				_HPBar.Value = value;
-				_valueSizeCache = _preferredSizeCache = null;
-				PropertyChanged();
+                this._HPBar.Value = value;
+                this._valueSizeCache = this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -46,11 +46,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("以前のHPです。")]
 		public int PrevValue
 		{
-			get { return _HPBar.PrevValue; }
+			get { return this._HPBar.PrevValue; }
 			set
 			{
-				_HPBar.PrevValue = value;
-				PropertyChanged();
+                this._HPBar.PrevValue = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -58,12 +58,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("HPの最大値です。")]
 		public int MaximumValue
 		{
-			get { return _HPBar.MaximumValue; }
+			get { return this._HPBar.MaximumValue; }
 			set
 			{
-				_HPBar.MaximumValue = value;
-				_maximumValueSizeCache = _preferredSizeCache = null;
-				PropertyChanged();
+                this._HPBar.MaximumValue = value;
+                this._maximumValueSizeCache = this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -72,11 +72,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("修復が完了する日時です。")]
 		public DateTime RepairTime
 		{
-			get { return _repairTime; }
+			get { return this._repairTime; }
 			set
 			{
-				_repairTime = value;
-				PropertyChanged();
+                this._repairTime = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -85,11 +85,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("修復完了日時の表示方法を指定します。。")]
 		public ShipStatusHPRepairTimeShowMode RepairTimeShowMode
 		{
-			get { return _repairTimeShowMode; }
+			get { return this._repairTimeShowMode; }
 			set
 			{
-				_repairTimeShowMode = value;
-				PropertyChanged();
+                this._repairTimeShowMode = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -99,14 +99,14 @@ namespace ElectronicObserver.Window.Control
 		[Description("想定されるHPの最大値です。この値に応じてレイアウトされます。")]
 		public int MaximumDigit
 		{
-			get { return _maximumDigit; }
+			get { return this._maximumDigit; }
 			set
 			{
-				_maximumDigit = value;
-				_valueSizeCache =
-				_maximumValueSizeCache =
-				_preferredSizeCache = null;
-				PropertyChanged();
+                this._maximumDigit = value;
+                this._valueSizeCache =
+                this._maximumValueSizeCache =
+                this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -118,12 +118,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _mainFontColor;
+				return this._mainFontColor;
 			}
 			set
 			{
-				_mainFontColor = value;
-				PropertyChanged();
+                this._mainFontColor = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -134,12 +134,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _subFontColor;
+				return this._subFontColor;
 			}
 			set
 			{
-				_subFontColor = value;
-				PropertyChanged();
+                this._subFontColor = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -150,12 +150,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _repairFontColor;
+				return this._repairFontColor;
 			}
 			set
 			{
-				_repairFontColor = value;
-				PropertyChanged();
+                this._repairFontColor = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -167,15 +167,15 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _mainFont;
+				return this._mainFont;
 			}
 			set
 			{
-				_mainFont = value;
-				_valueSizeCache =
-				_repairTimeSizeCache =
-				_preferredSizeCache = null;
-				PropertyChanged();
+                this._mainFont = value;
+                this._valueSizeCache =
+                this._repairTimeSizeCache =
+                this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -186,16 +186,16 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				return _subFont;
+				return this._subFont;
 			}
 			set
 			{
-				_subFont = value;
-				_textSizeCache =
-				_maximumValueSizeCache =
-				_slashSizeCache =
-				_preferredSizeCache = null;
-				PropertyChanged();
+                this._subFont = value;
+                this._textSizeCache =
+                this._maximumValueSizeCache =
+                this._slashSizeCache =
+                this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -208,12 +208,12 @@ namespace ElectronicObserver.Window.Control
 		[Bindable(BindableSupport.Default)]
 		public override string Text
 		{
-			get { return _text; }
+			get { return this._text; }
 			set
 			{
-				_text = value;
-				_textSizeCache = _preferredSizeCache = null;
-				PropertyChanged();
+                this._text = value;
+                this._textSizeCache = this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -222,11 +222,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("以前の値との差分を表示するかを指定します。")]
 		public bool UsePrevValue
 		{
-			get { return HPBar.UsePrevValue; }
+			get { return this.HPBar.UsePrevValue; }
 			set
 			{
-				HPBar.UsePrevValue = value;
-				PropertyChanged();
+                this.HPBar.UsePrevValue = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -236,11 +236,11 @@ namespace ElectronicObserver.Window.Control
 		[Description("最大値の代わりに以前の値を表示するかを指定します。")]
 		public bool ShowDifference
 		{
-			get { return _showDifference; }
+			get { return this._showDifference; }
 			set
 			{
-				_showDifference = value;
-				PropertyChanged();
+                this._showDifference = value;
+                this.PropertyChanged();
 			}
 		}
 
@@ -249,12 +249,12 @@ namespace ElectronicObserver.Window.Control
 		[Description("HPバーを表示するかを指定します。")]
 		public bool ShowHPBar
 		{
-			get { return _showHPBar; }
+			get { return this._showHPBar; }
 			set
 			{
-				_showHPBar = value;
-				_preferredSizeCache = null;
-				PropertyChanged();
+                this._showHPBar = value;
+                this._preferredSizeCache = null;
+                this.PropertyChanged();
 			}
 		}
 
@@ -264,8 +264,8 @@ namespace ElectronicObserver.Window.Control
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public StatusBarModule HPBar
 		{
-			get { return _HPBar; }
-			set { _HPBar = value; }
+			get { return this._HPBar; }
+			set { this._HPBar = value; }
 		}
 
 
@@ -273,12 +273,12 @@ namespace ElectronicObserver.Window.Control
 
 		public void SuspendUpdate()
 		{
-			IsRefreshSuspended = true;
+            this.IsRefreshSuspended = true;
 		}
 		public void ResumeUpdate()
 		{
-			IsRefreshSuspended = false;
-			PropertyChanged();
+            this.IsRefreshSuspended = false;
+            this.PropertyChanged();
 		}
 
 
@@ -289,12 +289,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				if (_textSizeCache == null)
+				if (this._textSizeCache == null)
 				{
-					_textSizeCache = TextRenderer.MeasureText(Text, SubFont, MaxSize, TextFormatText) - new Size(!string.IsNullOrEmpty(Text) ? (int)(SubFont.Size / 2.0) : 0, 0);
-					_preferredSizeCache = null;
+                    this._textSizeCache = TextRenderer.MeasureText(this.Text, this.SubFont, MaxSize, TextFormatText) - new Size(!string.IsNullOrEmpty(this.Text) ? (int)(this.SubFont.Size / 2.0) : 0, 0);
+                    this._preferredSizeCache = null;
 				}
-				return _textSizeCache.Value;
+				return this._textSizeCache.Value;
 			}
 		}
 
@@ -303,12 +303,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				if (_valueSizeCache == null)
+				if (this._valueSizeCache == null)
 				{
-					_valueSizeCache = TextRenderer.MeasureText(Math.Max(Value, MaximumDigit).ToString(), MainFont, MaxSize, TextFormatHP) - new Size((int)(MainFont.Size / 2.0), 0);
-					_preferredSizeCache = null;
+                    this._valueSizeCache = TextRenderer.MeasureText(Math.Max(this.Value, this.MaximumDigit).ToString(), this.MainFont, MaxSize, TextFormatHP) - new Size((int)(this.MainFont.Size / 2.0), 0);
+                    this._preferredSizeCache = null;
 				}
-				return _valueSizeCache.Value;
+				return this._valueSizeCache.Value;
 			}
 		}
 
@@ -317,12 +317,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				if (_maximumValueSizeCache == null)
+				if (this._maximumValueSizeCache == null)
 				{
-					_maximumValueSizeCache = TextRenderer.MeasureText(Math.Max(MaximumValue, MaximumDigit).ToString(), SubFont, MaxSize, TextFormatHP) - new Size((int)(SubFont.Size / 2.0), 0);
-					_preferredSizeCache = null;
+                    this._maximumValueSizeCache = TextRenderer.MeasureText(Math.Max(this.MaximumValue, this.MaximumDigit).ToString(), this.SubFont, MaxSize, TextFormatHP) - new Size((int)(this.SubFont.Size / 2.0), 0);
+                    this._preferredSizeCache = null;
 				}
-				return _maximumValueSizeCache.Value;
+				return this._maximumValueSizeCache.Value;
 			}
 		}
 
@@ -331,12 +331,12 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				if (_slashSizeCache == null)
+				if (this._slashSizeCache == null)
 				{
-					_slashSizeCache = TextRenderer.MeasureText(SlashText, SubFont, MaxSize, TextFormatHP) - new Size((int)(SubFont.Size / 2.0), 0);
-					_preferredSizeCache = null;
+                    this._slashSizeCache = TextRenderer.MeasureText(SlashText, this.SubFont, MaxSize, TextFormatHP) - new Size((int)(this.SubFont.Size / 2.0), 0);
+                    this._preferredSizeCache = null;
 				}
-				return _slashSizeCache.Value;
+				return this._slashSizeCache.Value;
 			}
 		}
 
@@ -345,11 +345,11 @@ namespace ElectronicObserver.Window.Control
 		{
 			get
 			{
-				if (_repairTimeSizeCache == null)
+				if (this._repairTimeSizeCache == null)
 				{
-					_repairTimeSizeCache = TextRenderer.MeasureText(DateTimeHelper.ToTimeRemainString(TimeSpan.Zero), MainFont, MaxSize, TextFormatTime) - new Size((int)(MainFont.Size / 2.0), 0);
+                    this._repairTimeSizeCache = TextRenderer.MeasureText(DateTimeHelper.ToTimeRemainString(TimeSpan.Zero), this.MainFont, MaxSize, TextFormatTime) - new Size((int)(this.MainFont.Size / 2.0), 0);
 				}
-				return _repairTimeSizeCache.Value;
+				return this._repairTimeSizeCache.Value;
 			}
 		}
 
@@ -362,33 +362,33 @@ namespace ElectronicObserver.Window.Control
 
 		public ShipStatusHP()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
 
-			_HPBar = new StatusBarModule
+            this._HPBar = new StatusBarModule
 			{
 				Value = 66,
 				PrevValue = 88,
 				MaximumValue = 100
 			};
-			_repairTime = DateTime.Now;
+            this._repairTime = DateTime.Now;
 
-			_maximumDigit = 999;
+            this._maximumDigit = 999;
 
-			_mainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-			_mainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this._mainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            this._mainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
 
-            _subFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
-			_subFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this._subFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
+            this._subFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
-            _repairFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RepairColor);
-            _text = "HP:";
+            this._repairFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RepairColor);
+            this._text = "HP:";
 
-			_HPBar.UsePrevValue = true;
-			_showDifference = false;
-			_repairTimeShowMode = ShipStatusHPRepairTimeShowMode.Invisible;
-			_showHPBar = true;
+            this._HPBar.UsePrevValue = true;
+            this._showDifference = false;
+            this._repairTimeShowMode = ShipStatusHPRepairTimeShowMode.Invisible;
+            this._showHPBar = true;
 
 		}
 
@@ -397,50 +397,50 @@ namespace ElectronicObserver.Window.Control
 		{
 
 			Graphics g = e.Graphics;
-			Rectangle basearea = new Rectangle(Padding.Left, Padding.Top, Width - Padding.Horizontal, Height - Padding.Vertical);
-			Size barSize = ShowHPBar ? _HPBar.GetPreferredSize(new Size(basearea.Width, 0)) : Size.Empty;
+			Rectangle basearea = new Rectangle(this.Padding.Left, this.Padding.Top, this.Width - this.Padding.Horizontal, this.Height - this.Padding.Vertical);
+			Size barSize = this.ShowHPBar ? this._HPBar.GetPreferredSize(new Size(basearea.Width, 0)) : Size.Empty;
 
 
 
-			if (RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.Visible ||
-				(RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.MouseOver && _onMouse))
+			if (this.RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.Visible ||
+				(this.RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.MouseOver && this._onMouse))
 			{
-				string timestr = DateTimeHelper.ToTimeRemainString((DateTime)RepairTime);
+				string timestr = DateTimeHelper.ToTimeRemainString((DateTime)this.RepairTime);
 
 				var rect = new Rectangle(basearea.X, basearea.Y, basearea.Width, basearea.Height - barSize.Height);
 				Font font;
-				if (rect.Width >= RepairTimeSizeCache.Width)
-					font = MainFont;
+				if (rect.Width >= this.RepairTimeSizeCache.Width)
+					font = this.MainFont;
 				else
-					font = SubFont;
+					font = this.SubFont;
 
-				TextRenderer.DrawText(g, timestr, font, rect, RepairFontColor, TextFormatTime);
+				TextRenderer.DrawText(g, timestr, font, rect, this.RepairFontColor, TextFormatTime);
 
 			}
 			else
 			{
 
-				Point p = new Point(basearea.X, basearea.Bottom - barSize.Height - Math.Max(TextSizeCache.Height, MaximumValueSizeCache.Height) + 1);
-				TextRenderer.DrawText(g, Text, SubFont, new Rectangle(p, TextSizeCache), SubFontColor, TextFormatText);
+				Point p = new Point(basearea.X, basearea.Bottom - barSize.Height - Math.Max(this.TextSizeCache.Height, this.MaximumValueSizeCache.Height) + 1);
+				TextRenderer.DrawText(g, this.Text, this.SubFont, new Rectangle(p, this.TextSizeCache), this.SubFontColor, TextFormatText);
 				//g.DrawRectangle( Pens.Orange, new Rectangle( p, TextSizeCache ) );
 
-				p.X = basearea.Right - MaximumValueSizeCache.Width;
-				TextRenderer.DrawText(g, !ShowDifference ? MaximumValue.ToString() : GetDifferenceString(), SubFont, new Rectangle(p, MaximumValueSizeCache), SubFontColor, TextFormatHP);
+				p.X = basearea.Right - this.MaximumValueSizeCache.Width;
+				TextRenderer.DrawText(g, !this.ShowDifference ? this.MaximumValue.ToString() : this.GetDifferenceString(), this.SubFont, new Rectangle(p, this.MaximumValueSizeCache), this.SubFontColor, TextFormatHP);
 				//g.DrawRectangle( Pens.Orange, new Rectangle( p, MaximumValueSizeCache ) );
 
-				p.X -= SlashSizeCache.Width;
-				TextRenderer.DrawText(g, SlashText, SubFont, new Rectangle(p, SlashSizeCache), SubFontColor, TextFormatHP);
+				p.X -= this.SlashSizeCache.Width;
+				TextRenderer.DrawText(g, SlashText, this.SubFont, new Rectangle(p, this.SlashSizeCache), this.SubFontColor, TextFormatHP);
 				//g.DrawRectangle( Pens.Orange, new Rectangle( p, SlashSizeCache ) );
 
-				p.X -= ValueSizeCache.Width;
-				p.Y = basearea.Bottom - barSize.Height - ValueSizeCache.Height + 1;
-				TextRenderer.DrawText(g, Math.Max(Value, 0).ToString(), MainFont, new Rectangle(p, ValueSizeCache), MainFontColor, TextFormatHP);
+				p.X -= this.ValueSizeCache.Width;
+				p.Y = basearea.Bottom - barSize.Height - this.ValueSizeCache.Height + 1;
+				TextRenderer.DrawText(g, Math.Max(this.Value, 0).ToString(), this.MainFont, new Rectangle(p, this.ValueSizeCache), this.MainFontColor, TextFormatHP);
 				//g.DrawRectangle( Pens.Orange, new Rectangle( p, ValueSizeCache ) );
 
 			}
 
-			if (ShowHPBar)
-				_HPBar.Paint(g, new Rectangle(basearea.X, basearea.Bottom - barSize.Height, barSize.Width, barSize.Height));
+			if (this.ShowHPBar)
+                this._HPBar.Paint(g, new Rectangle(basearea.X, basearea.Bottom - barSize.Height, barSize.Width, barSize.Height));
 		}
 
 
@@ -448,33 +448,33 @@ namespace ElectronicObserver.Window.Control
 		public override Size GetPreferredSize(Size proposedSize)
 		{
 
-			if (_preferredSizeCache == null)
+			if (this._preferredSizeCache == null)
 			{
 
-				Size barSize = ShowHPBar ? _HPBar.GetPreferredSize() : Size.Empty;
+				Size barSize = this.ShowHPBar ? this._HPBar.GetPreferredSize() : Size.Empty;
 
-				_preferredSizeCache = new Size(
-					TextSizeCache.Width + ValueSizeCache.Width + SlashSizeCache.Width + MaximumValueSizeCache.Width + Padding.Horizontal,
-					Math.Max(TextSizeCache.Height, ValueSizeCache.Height) + barSize.Height + Padding.Vertical);
+                this._preferredSizeCache = new Size(
+                    this.TextSizeCache.Width + this.ValueSizeCache.Width + this.SlashSizeCache.Width + this.MaximumValueSizeCache.Width + this.Padding.Horizontal,
+					Math.Max(this.TextSizeCache.Height, this.ValueSizeCache.Height) + barSize.Height + this.Padding.Vertical);
 			}
 
-			return _preferredSizeCache.Value;
+			return this._preferredSizeCache.Value;
 		}
 
 
 
 		private void PropertyChanged()
 		{
-			if (!IsRefreshSuspended)
+			if (!this.IsRefreshSuspended)
 			{
-				if (AutoSize)
+				if (this.AutoSize)
 				{
-					var size = GetPreferredSize(MaxSize);
+					var size = this.GetPreferredSize(MaxSize);
 
-					if (size != Size)
-						Size = size;
+					if (size != this.Size)
+                        this.Size = size;
 				}
-				Refresh();
+                this.Refresh();
 			}
 		}
 
@@ -487,21 +487,21 @@ namespace ElectronicObserver.Window.Control
 		private string GetDifferenceString()
 		{
 
-			return (Value - PrevValue).ToString("+0;-0;-0");
+			return (this.Value - this.PrevValue).ToString("+0;-0;-0");
 		}
 
 		private void ShipStatusHP_MouseEnter(object sender, EventArgs e)
 		{
-			_onMouse = true;
-			if (RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.MouseOver)
-				PropertyChanged();
+            this._onMouse = true;
+			if (this.RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.MouseOver)
+                this.PropertyChanged();
 		}
 
 		private void ShipStatusHP_MouseLeave(object sender, EventArgs e)
 		{
-			_onMouse = false;
-			if (RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.MouseOver)
-				PropertyChanged();
+            this._onMouse = false;
+			if (this.RepairTimeShowMode == ShipStatusHPRepairTimeShowMode.MouseOver)
+                this.PropertyChanged();
 		}
 
 	}

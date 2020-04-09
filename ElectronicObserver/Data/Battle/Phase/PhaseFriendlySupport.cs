@@ -15,19 +15,19 @@ namespace ElectronicObserver.Data.Battle.Phase
 		public PhaseFriendlySupport(BattleData battle, string title)
 			: base(battle, title)
 		{
-			if (!IsAvailable)
+			if (!this.IsAvailable)
 				return;
 
 			// info translation
 
-			int[] GetArrayOrDefault(string objectName, int length) => !InfoData.IsDefined(objectName) ? null : FixedArray((int[])InfoData[objectName], length);
+			int[] GetArrayOrDefault(string objectName, int length) => !this.InfoData.IsDefined(objectName) ? null : FixedArray((int[])this.InfoData[objectName], length);
 			int[][] GetArraysOrDefault(string objectName, int topLength, int bottomLength)
 			{
-				if (!InfoData.IsDefined(objectName))
+				if (!this.InfoData.IsDefined(objectName))
 					return null;
 
 				int[][] ret = new int[topLength][];
-				dynamic[] raw = (dynamic[])InfoData[objectName];
+				dynamic[] raw = (dynamic[])this.InfoData[objectName];
 				for (int i = 0; i < ret.Length; i++)
 				{
 					if (i < raw.Length)
@@ -38,28 +38,28 @@ namespace ElectronicObserver.Data.Battle.Phase
 				return ret;
 			}
 
-			FriendlyMembers = GetArrayOrDefault("api_ship_id", 7);
-			FriendlyMembersInstance = FriendlyMembers.Select(id => KCDatabase.Instance.MasterShips[id]).ToArray();
-			FriendlyLevels = GetArrayOrDefault("api_ship_lv", 7);
-			FriendlyInitialHPs = GetArrayOrDefault("api_nowhps", 7);
-			FriendlyMaxHPs = GetArrayOrDefault("api_maxhps", 7);
+            this.FriendlyMembers = GetArrayOrDefault("api_ship_id", 7);
+            this.FriendlyMembersInstance = this.FriendlyMembers.Select(id => KCDatabase.Instance.MasterShips[id]).ToArray();
+            this.FriendlyLevels = GetArrayOrDefault("api_ship_lv", 7);
+            this.FriendlyInitialHPs = GetArrayOrDefault("api_nowhps", 7);
+            this.FriendlyMaxHPs = GetArrayOrDefault("api_maxhps", 7);
 
-			FriendlySlots = GetArraysOrDefault("api_Slot", 7, 5);
-			FriendlyParameters = GetArraysOrDefault("api_Param", 7, 4);
+            this.FriendlySlots = GetArraysOrDefault("api_Slot", 7, 5);
+            this.FriendlyParameters = GetArraysOrDefault("api_Param", 7, 4);
 
 
 			// battle translation
 
-			int[] fleetflag = (int[])ShellingData.api_at_eflag;
-			int[] attackers = (int[])ShellingData.api_at_list;
-			int[] nightAirAttackFlags = (int[])ShellingData.api_n_mother_list;
-			int[] attackTypes = (int[])ShellingData.api_sp_list;
-			int[][] defenders = ((dynamic[])ShellingData.api_df_list).Select(elem => ((int[])elem).Where(e => e != -1).ToArray()).ToArray();
-			int[][] attackEquipments = ((dynamic[])ShellingData.api_si_list).Select(elem => ((dynamic[])elem).Select<dynamic, int>(ch => ch is string ? int.Parse(ch) : (int)ch).ToArray()).ToArray();
-			int[][] criticals = ((dynamic[])ShellingData.api_cl_list).Select(elem => ((int[])elem).Where(e => e != -1).ToArray()).ToArray();
-			double[][] rawDamages = ((dynamic[])ShellingData.api_damage).Select(elem => ((double[])elem).Where(e => e != -1).ToArray()).ToArray();
+			int[] fleetflag = (int[])this.ShellingData.api_at_eflag;
+			int[] attackers = (int[])this.ShellingData.api_at_list;
+			int[] nightAirAttackFlags = (int[])this.ShellingData.api_n_mother_list;
+			int[] attackTypes = (int[])this.ShellingData.api_sp_list;
+			int[][] defenders = ((dynamic[])this.ShellingData.api_df_list).Select(elem => ((int[])elem).Where(e => e != -1).ToArray()).ToArray();
+			int[][] attackEquipments = ((dynamic[])this.ShellingData.api_si_list).Select(elem => ((dynamic[])elem).Select<dynamic, int>(ch => ch is string ? int.Parse(ch) : (int)ch).ToArray()).ToArray();
+			int[][] criticals = ((dynamic[])this.ShellingData.api_cl_list).Select(elem => ((int[])elem).Where(e => e != -1).ToArray()).ToArray();
+			double[][] rawDamages = ((dynamic[])this.ShellingData.api_damage).Select(elem => ((double[])elem).Where(e => e != -1).ToArray()).ToArray();
 
-			Attacks = new List<PhaseFriendlySupportAttack>();
+            this.Attacks = new List<PhaseFriendlySupportAttack>();
 
 
 
@@ -67,7 +67,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 			{
 				var attack = new PhaseFriendlySupportAttack
 				{
-					Attacker = new BattleIndex(attackers[i] + (fleetflag[i] == 0 ? 0 : 12), false, Battle.IsEnemyCombined),
+					Attacker = new BattleIndex(attackers[i] + (fleetflag[i] == 0 ? 0 : 12), false, this.Battle.IsEnemyCombined),
 					NightAirAttackFlag = nightAirAttackFlags[i] == -1,
 					AttackType = attackTypes[i],
 					EquipmentIDs = attackEquipments[i],
@@ -76,34 +76,34 @@ namespace ElectronicObserver.Data.Battle.Phase
 				{
 					var defender = new PhaseFriendlySupportDefender
 					{
-						Defender = new BattleIndex(defenders[i][k] + (fleetflag[i] == 0 ? 12 : 0), false, Battle.IsEnemyCombined),
+						Defender = new BattleIndex(defenders[i][k] + (fleetflag[i] == 0 ? 12 : 0), false, this.Battle.IsEnemyCombined),
 						CriticalFlag = criticals[i][k],
 						RawDamage = rawDamages[i][k]
 					};
 					attack.Defenders.Add(defender);
 				}
 
-				Attacks.Add(attack);
+                this.Attacks.Add(attack);
 			}
 		}
 
-		public override bool IsAvailable => RawData.api_friendly_info();
+		public override bool IsAvailable => this.RawData.api_friendly_info();
 
 
 		public override void EmulateBattle(int[] hps, int[] damages)
 		{
-			if (!IsAvailable)
+			if (!this.IsAvailable)
 				return;
 
             // note: HP計算が正しくできない - 送られてくるHPにはすでに友軍支援のダメージが適用済みであるため、昼戦終了時のHPを参照しなければならない
-            int[] friendhps = FriendlyInitialHPs;
+            int[] friendhps = this.FriendlyInitialHPs;
 
-            foreach (var attack in Attacks)
+            foreach (var attack in this.Attacks)
 			{
 				foreach (var defs in attack.Defenders.GroupBy(d => d.Defender))
 				{
-                    BattleDetails.Add(new BattleFriendlySupportDetail(
-                        (BattleNight)Battle,
+                    this.BattleDetails.Add(new BattleFriendlySupportDetail(
+                        (BattleNight)this.Battle,
                         attack.Attacker,
                         defs.Key,
                         defs.Select(d => d.RawDamage).ToArray(),
@@ -115,7 +115,7 @@ namespace ElectronicObserver.Data.Battle.Phase
                     if (defs.Key.IsFriend)
                         friendhps[defs.Key] -= Math.Max(defs.Sum(d => d.Damage), 0);
                     else
-                        AddDamage(hps, defs.Key, defs.Sum(d => d.Damage));
+                        this.AddDamage(hps, defs.Key, defs.Sum(d => d.Damage));
                 }
 			}
 
@@ -125,23 +125,23 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 戦闘情報データ
 		/// </summary>
-		public dynamic InfoData => RawData.api_friendly_info;
+		public dynamic InfoData => this.RawData.api_friendly_info;
 
 		/// <summary>
 		/// 戦闘データ
 		/// </summary>
-		public dynamic BattleData => RawData.api_friendly_battle;
+		public dynamic BattleData => this.RawData.api_friendly_battle;
 
 		/// <summary>
 		/// 砲撃戦データ
 		/// </summary>
-		public dynamic ShellingData => RawData.api_friendly_battle.api_hougeki;
+		public dynamic ShellingData => this.RawData.api_friendly_battle.api_hougeki;
 
 
 		/// <summary>
 		/// 種別？
 		/// </summary>
-		public int Type => (int)InfoData.api_production_type;
+		public int Type => (int)this.InfoData.api_production_type;
 
 
 		/// <summary>
@@ -188,12 +188,12 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// <summary>
 		/// 自軍照明弾投射艦インデックス
 		/// </summary>
-		public int FlareIndexFriend => (int)BattleData.api_flare_pos[0];
+		public int FlareIndexFriend => (int)this.BattleData.api_flare_pos[0];
 
 		/// <summary>
 		/// 敵軍照明弾投射艦インデックス
 		/// </summary>
-		public int FlareIndexEnemy => (int)BattleData.api_flare_pos[1];
+		public int FlareIndexEnemy => (int)this.BattleData.api_flare_pos[1];
 
 
 		/// <summary>
@@ -203,9 +203,9 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = FlareIndexFriend;
-				if (0 <= index && index < FriendlyMembersInstance.Length)
-					return FriendlyMembersInstance[index];
+				int index = this.FlareIndexFriend;
+				if (0 <= index && index < this.FriendlyMembersInstance.Length)
+					return this.FriendlyMembersInstance[index];
 				return null;
 			}
 		}
@@ -217,8 +217,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = FlareIndexEnemy;
-				var nightinitial = (Battle as BattleNight)?.NightInitial;
+				int index = this.FlareIndexEnemy;
+				var nightinitial = (this.Battle as BattleNight)?.NightInitial;
 
 				if (nightinitial != null &&
 					0 <= index && index < nightinitial.EnemyMembersInstance.Length)
@@ -238,13 +238,13 @@ namespace ElectronicObserver.Data.Battle.Phase
 				int index = -1;
 				var eqmaster = KCDatabase.Instance.MasterEquipments;
 
-				for ( int i = 0; i < FriendlyMembersInstance.Length; i++)
+				for ( int i = 0; i < this.FriendlyMembersInstance.Length; i++)
 				{
-					if(FriendlyMembers[i] != -1 && FriendlyInitialHPs[i] > 1)
+					if(this.FriendlyMembers[i] != -1 && this.FriendlyInitialHPs[i] > 1)
 					{
-						if (FriendlySlots[i].Any(id => eqmaster[id]?.CategoryType == EquipmentTypes.SearchlightLarge))
+						if (this.FriendlySlots[i].Any(id => eqmaster[id]?.CategoryType == EquipmentTypes.SearchlightLarge))
 							return i;
-						else if (FriendlySlots[i].Any(id => eqmaster[id]?.CategoryType == EquipmentTypes.Searchlight) && index == -1)
+						else if (this.FriendlySlots[i].Any(id => eqmaster[id]?.CategoryType == EquipmentTypes.Searchlight) && index == -1)
 							index = i;
 					}
 				}
@@ -258,7 +258,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 		/// 敵軍探照灯照射艦番号
 		/// 厳密には異なるが(友軍の攻撃で探照灯所持艦の HP が 1 になった場合 -1 になる)、めったに起こるものでもないので気にしないことにする
 		/// </summary>
-		public int SearchlightIndexEnemy => (Battle as BattleNight)?.NightInitial?.SearchlightIndexEnemy ?? -1;
+		public int SearchlightIndexEnemy => (this.Battle as BattleNight)?.NightInitial?.SearchlightIndexEnemy ?? -1;
 
 
 		/// <summary>
@@ -268,9 +268,9 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = SearchlightIndexFriend;
-				if (0 <= index && index < FriendlyMembersInstance.Length)
-					return FriendlyMembersInstance[index];
+				int index = this.SearchlightIndexFriend;
+				if (0 <= index && index < this.FriendlyMembersInstance.Length)
+					return this.FriendlyMembersInstance[index];
 				return null;
 			}
 		}
@@ -282,8 +282,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 		{
 			get
 			{
-				int index = SearchlightIndexEnemy;
-				var nightinitial = (Battle as BattleNight)?.NightInitial;
+				int index = this.SearchlightIndexEnemy;
+				var nightinitial = (this.Battle as BattleNight)?.NightInitial;
 
 				if (nightinitial != null &&
 					0 <= index && index < nightinitial.EnemyMembersInstance.Length)
@@ -307,7 +307,7 @@ namespace ElectronicObserver.Data.Battle.Phase
 
 			public PhaseFriendlySupportAttack()
 			{
-				Defenders = new List<PhaseFriendlySupportDefender>();
+                this.Defenders = new List<PhaseFriendlySupportDefender>();
 			}
 		}
 
@@ -316,8 +316,8 @@ namespace ElectronicObserver.Data.Battle.Phase
 			public BattleIndex Defender;
 			public int CriticalFlag;
 			public double RawDamage;
-			public bool GuardsFlagship => RawDamage != Math.Floor(RawDamage);
-			public int Damage => (int)RawDamage;
+			public bool GuardsFlagship => this.RawDamage != Math.Floor(this.RawDamage);
+			public int Damage => (int)this.RawDamage;
 		}
 
 

@@ -16,9 +16,7 @@ namespace ElectronicObserver
 		[STAThread]
 		static void Main(string[] args)
 		{
-
 			bool allowMultiInstance = args.Contains("-m") || args.Contains("--multi-instance");
-
 
 			using (var mutex = new Mutex(false, Application.ExecutablePath.Replace('\\', '/'), out var created))
 			{
@@ -46,7 +44,6 @@ namespace ElectronicObserver
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new FormMain());
-
 			}
 		}
 	}

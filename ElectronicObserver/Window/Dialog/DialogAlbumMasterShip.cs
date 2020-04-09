@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace ElectronicObserver.Window.Dialog
 {
@@ -32,111 +33,111 @@ namespace ElectronicObserver.Window.Dialog
 
 		public DialogAlbumMasterShip()
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			Aircrafts = new ImageLabel[] { Aircraft1, Aircraft2, Aircraft3, Aircraft4, Aircraft5 };
-			Equipments = new ImageLabel[] { Equipment1, Equipment2, Equipment3, Equipment4, Equipment5 };
+            this.Aircrafts = new ImageLabel[] { this.Aircraft1, this.Aircraft2, this.Aircraft3, this.Aircraft4, this.Aircraft5 };
+            this.Equipments = new ImageLabel[] { this.Equipment1, this.Equipment2, this.Equipment3, this.Equipment4, this.Equipment5 };
 
-			loadingResourceShipID = -1;
+            this.loadingResourceShipID = -1;
 
-			TitleHP.ImageList =
-			TitleFirepower.ImageList =
-			TitleTorpedo.ImageList =
-			TitleAA.ImageList =
-			TitleArmor.ImageList =
-			TitleASW.ImageList =
-			TitleEvasion.ImageList =
-			TitleLOS.ImageList =
-			TitleLuck.ImageList =
-			TitleSpeed.ImageList =
-			TitleRange.ImageList =
-			Rarity.ImageList =
-			Fuel.ImageList =
-			Ammo.ImageList =
-			TitleBuildingTime.ImageList =
-			MaterialFuel.ImageList =
-			MaterialAmmo.ImageList =
-			MaterialSteel.ImageList =
-			MaterialBauxite.ImageList =
-			PowerUpFirepower.ImageList =
-			PowerUpTorpedo.ImageList =
-			PowerUpAA.ImageList =
-			PowerUpArmor.ImageList =
-			RemodelBeforeLevel.ImageList =
-			RemodelBeforeAmmo.ImageList =
-			RemodelBeforeSteel.ImageList =
-			RemodelAfterLevel.ImageList =
-			RemodelAfterAmmo.ImageList =
-			RemodelAfterSteel.ImageList =
+            this.TitleHP.ImageList =
+            this.TitleFirepower.ImageList =
+            this.TitleTorpedo.ImageList =
+            this.TitleAA.ImageList =
+            this.TitleArmor.ImageList =
+            this.TitleASW.ImageList =
+            this.TitleEvasion.ImageList =
+            this.TitleLOS.ImageList =
+            this.TitleLuck.ImageList =
+            this.TitleSpeed.ImageList =
+            this.TitleRange.ImageList =
+            this.Rarity.ImageList =
+            this.Fuel.ImageList =
+            this.Ammo.ImageList =
+            this.TitleBuildingTime.ImageList =
+            this.MaterialFuel.ImageList =
+            this.MaterialAmmo.ImageList =
+            this.MaterialSteel.ImageList =
+            this.MaterialBauxite.ImageList =
+            this.PowerUpFirepower.ImageList =
+            this.PowerUpTorpedo.ImageList =
+            this.PowerUpAA.ImageList =
+            this.PowerUpArmor.ImageList =
+            this.RemodelBeforeLevel.ImageList =
+            this.RemodelBeforeAmmo.ImageList =
+            this.RemodelBeforeSteel.ImageList =
+            this.RemodelAfterLevel.ImageList =
+            this.RemodelAfterAmmo.ImageList =
+            this.RemodelAfterSteel.ImageList =
 				ResourceManager.Instance.Icons;
 
-			TitleAirSuperiority.ImageList =
-			TitleDayAttack.ImageList =
-			TitleNightAttack.ImageList =
-			Equipment1.ImageList =
-			Equipment2.ImageList =
-			Equipment3.ImageList =
-			Equipment4.ImageList =
-			Equipment5.ImageList =
+            this.TitleAirSuperiority.ImageList =
+            this.TitleDayAttack.ImageList =
+            this.TitleNightAttack.ImageList =
+            this.Equipment1.ImageList =
+            this.Equipment2.ImageList =
+            this.Equipment3.ImageList =
+            this.Equipment4.ImageList =
+            this.Equipment5.ImageList =
 				ResourceManager.Instance.Equipments;
 
-			TitleHP.ImageIndex = (int)ResourceManager.IconContent.ParameterHP;
-			TitleFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
-			TitleTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
-			TitleAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
-			TitleArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
-			TitleASW.ImageIndex = (int)ResourceManager.IconContent.ParameterASW;
-			TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
-			TitleLOS.ImageIndex = (int)ResourceManager.IconContent.ParameterLOS;
-			TitleLuck.ImageIndex = (int)ResourceManager.IconContent.ParameterLuck;
-			TitleSpeed.ImageIndex = (int)ResourceManager.IconContent.ParameterSpeed;
-			TitleRange.ImageIndex = (int)ResourceManager.IconContent.ParameterRange;
-			Fuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-			Ammo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			TitleBuildingTime.ImageIndex = (int)ResourceManager.IconContent.FormArsenal;
-			MaterialFuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-			MaterialAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			MaterialSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-			MaterialBauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
-			PowerUpFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
-			PowerUpTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
-			PowerUpAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
-			PowerUpArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
-			RemodelBeforeAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			RemodelBeforeSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-			RemodelAfterAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-			RemodelAfterSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-			TitleAirSuperiority.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter;
-			TitleDayAttack.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
-			TitleNightAttack.ImageIndex = (int)ResourceManager.EquipmentContent.Torpedo;
+            this.TitleHP.ImageIndex = (int)ResourceManager.IconContent.ParameterHP;
+            this.TitleFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
+            this.TitleTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
+            this.TitleAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
+            this.TitleArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
+            this.TitleASW.ImageIndex = (int)ResourceManager.IconContent.ParameterASW;
+            this.TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
+            this.TitleLOS.ImageIndex = (int)ResourceManager.IconContent.ParameterLOS;
+            this.TitleLuck.ImageIndex = (int)ResourceManager.IconContent.ParameterLuck;
+            this.TitleSpeed.ImageIndex = (int)ResourceManager.IconContent.ParameterSpeed;
+            this.TitleRange.ImageIndex = (int)ResourceManager.IconContent.ParameterRange;
+            this.Fuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
+            this.Ammo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
+            this.TitleBuildingTime.ImageIndex = (int)ResourceManager.IconContent.FormArsenal;
+            this.MaterialFuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
+            this.MaterialAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
+            this.MaterialSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
+            this.MaterialBauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
+            this.PowerUpFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
+            this.PowerUpTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
+            this.PowerUpAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
+            this.PowerUpArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
+            this.RemodelBeforeAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
+            this.RemodelBeforeSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
+            this.RemodelAfterAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
+            this.RemodelAfterSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
+            this.TitleAirSuperiority.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter;
+            this.TitleDayAttack.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
+            this.TitleNightAttack.ImageIndex = (int)ResourceManager.EquipmentContent.Torpedo;
 
-			ParameterLevel.Value = ParameterLevel.Maximum = ExpTable.ShipMaximumLevel;
-
-
-			TableBattle.Visible = false;
-			BasePanelShipGirl.Visible = false;
+            this.ParameterLevel.Value = this.ParameterLevel.Maximum = ExpTable.ShipMaximumLevel;
 
 
-			ControlHelper.SetDoubleBuffered(TableShipName);
-			ControlHelper.SetDoubleBuffered(TableParameterMain);
-			ControlHelper.SetDoubleBuffered(TableParameterSub);
-			ControlHelper.SetDoubleBuffered(TableConsumption);
-			ControlHelper.SetDoubleBuffered(TableEquipment);
-			ControlHelper.SetDoubleBuffered(TableArsenal);
-			ControlHelper.SetDoubleBuffered(TableRemodel);
-			ControlHelper.SetDoubleBuffered(TableBattle);
-
-			ControlHelper.SetDoubleBuffered(ShipView);
+            this.TableBattle.Visible = false;
+            this.BasePanelShipGirl.Visible = false;
 
 
-			//ShipView Initialize
-			ShipView.SuspendLayout();
+			ControlHelper.SetDoubleBuffered(this.TableShipName);
+			ControlHelper.SetDoubleBuffered(this.TableParameterMain);
+			ControlHelper.SetDoubleBuffered(this.TableParameterSub);
+			ControlHelper.SetDoubleBuffered(this.TableConsumption);
+			ControlHelper.SetDoubleBuffered(this.TableEquipment);
+			ControlHelper.SetDoubleBuffered(this.TableArsenal);
+			ControlHelper.SetDoubleBuffered(this.TableRemodel);
+			ControlHelper.SetDoubleBuffered(this.TableBattle);
 
-			ShipView_ShipID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-			ShipView_ShipType.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+			ControlHelper.SetDoubleBuffered(this.ShipView);
 
 
-			ShipView.Rows.Clear();
+            //ShipView Initialize
+            this.ShipView.SuspendLayout();
+
+            this.ShipView_ShipID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            this.ShipView_ShipType.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+
+            this.ShipView.Rows.Clear();
 
 			List<DataGridViewRow> rows = new List<DataGridViewRow>(KCDatabase.Instance.MasterShips.Values.Count(s => s.Name != "なし"));
 
@@ -146,35 +147,36 @@ namespace ElectronicObserver.Window.Dialog
 				if (ship.Name == "なし") continue;
 
 				DataGridViewRow row = new DataGridViewRow();
-				row.CreateCells(ShipView);
-                row.SetValues(ship.ShipID, FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.TranslationType.ShipTypes), ship.NameWithClass);
+				row.CreateCells(this.ShipView);
+                row.SetValues(ship.ShipID, FormMain.Instance.Translator.GetTranslation
+					(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.DataType.ShipType), ship.NameWithClass);
                 //row.SetValues(ship.ShipID, row.SetValues(ship.ShipID, ship.ShipTypeName, ship.NameWithClass));
-                row.Cells[ShipView_ShipType.Index].Tag = ship.ShipType;
-				row.Cells[ShipView_Name.Index].Tag = ship.IsAbyssalShip ? null : ship.NameReading;
+                row.Cells[this.ShipView_ShipType.Index].Tag = ship.ShipType;
+				row.Cells[this.ShipView_Name.Index].Tag = ship.IsAbyssalShip ? null : ship.NameReading;
 				rows.Add(row);
 
 			}
-			ShipView.Rows.AddRange(rows.ToArray());
+            this.ShipView.Rows.AddRange(rows.ToArray());
 
-			ShipView_ShipID.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-			ShipView_ShipType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.ShipView_ShipID.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.ShipView_ShipType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
-			ShipView.Sort(ShipView_ShipID, ListSortDirection.Ascending);
-			ShipView.ResumeLayout();
+            this.ShipView.Sort(this.ShipView_ShipID, ListSortDirection.Ascending);
+            this.ShipView.ResumeLayout();
 		}
 
 		public DialogAlbumMasterShip(int shipID)
 			: this()
 		{
 
-			UpdateAlbumPage(shipID);
+            this.UpdateAlbumPage(shipID);
 
 
 			if (KCDatabase.Instance.MasterShips.ContainsKey(shipID))
 			{
-				var row = ShipView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[ShipView_ShipID.Index].Value == shipID);
+				var row = this.ShipView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[this.ShipView_ShipID.Index].Value == shipID);
 				if (row != null)
-					ShipView.FirstDisplayedScrollingRowIndex = row.Index;
+                    this.ShipView.FirstDisplayedScrollingRowIndex = row.Index;
 			}
 
 		}
@@ -194,18 +196,18 @@ namespace ElectronicObserver.Window.Dialog
 		private void ShipView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
 		{
 
-			if (e.Column.Index == ShipView_ShipType.Index)
+			if (e.Column.Index == this.ShipView_ShipType.Index)
 			{
-				e.SortResult = (int)ShipView[e.Column.Index, e.RowIndex1].Tag - (int)ShipView[e.Column.Index, e.RowIndex2].Tag;
+				e.SortResult = (int)this.ShipView[e.Column.Index, e.RowIndex1].Tag - (int)this.ShipView[e.Column.Index, e.RowIndex2].Tag;
 
 			}
-			else if (e.Column.Index == ShipView_Name.Index)
+			else if (e.Column.Index == this.ShipView_Name.Index)
 			{
 
 				// 艦娘優先; 艦娘同士なら読みで比べる、深海棲艦同士なら名前で比べる
 
-				string tag1 = ShipView[e.Column.Index, e.RowIndex1].Tag as string;
-				string tag2 = ShipView[e.Column.Index, e.RowIndex2].Tag as string;
+				string tag1 = this.ShipView[e.Column.Index, e.RowIndex1].Tag as string;
+				string tag2 = this.ShipView[e.Column.Index, e.RowIndex2].Tag as string;
 
 				if (tag1 != null)
 				{
@@ -233,7 +235,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.SortResult == 0)
 			{
-				e.SortResult = (int)(ShipView.Rows[e.RowIndex1].Tag ?? 0) - (int)(ShipView.Rows[e.RowIndex2].Tag ?? 0);
+				e.SortResult = (int)(this.ShipView.Rows[e.RowIndex1].Tag ?? 0) - (int)(this.ShipView.Rows[e.RowIndex2].Tag ?? 0);
 			}
 
 			e.Handled = true;
@@ -242,9 +244,9 @@ namespace ElectronicObserver.Window.Dialog
 		private void ShipView_Sorted(object sender, EventArgs e)
 		{
 
-			for (int i = 0; i < ShipView.Rows.Count; i++)
+			for (int i = 0; i < this.ShipView.Rows.Count; i++)
 			{
-				ShipView.Rows[i].Tag = i;
+                this.ShipView.Rows[i].Tag = i;
 			}
 
 		}
@@ -256,18 +258,18 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.RowIndex >= 0)
 			{
-				int shipID = (int)ShipView.Rows[e.RowIndex].Cells[0].Value;
+				int shipID = (int)this.ShipView.Rows[e.RowIndex].Cells[0].Value;
 
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
 				{
-					Cursor = Cursors.AppStarting;
-					new DialogAlbumMasterShip(shipID).Show(Owner);
-					Cursor = Cursors.Default;
+                    this.Cursor = Cursors.AppStarting;
+					new DialogAlbumMasterShip(shipID).Show(this.Owner);
+                    this.Cursor = Cursors.Default;
 
 				}
 				else if ((e.Button & System.Windows.Forms.MouseButtons.Left) != 0)
 				{
-					UpdateAlbumPage(shipID);
+                    this.UpdateAlbumPage(shipID);
 				}
 			}
 
@@ -285,20 +287,21 @@ namespace ElectronicObserver.Window.Dialog
 			if (ship == null) return;
 
 
-			BasePanelShipGirl.SuspendLayout();
+            this.BasePanelShipGirl.SuspendLayout();
 
-			//header
-			TableShipName.SuspendLayout();
-			_shipID = shipID;
-			ShipID.Text = ship.ShipID.ToString();
-			AlbumNo.Text = ship.AlbumNo.ToString();
+            //header
+            this.TableShipName.SuspendLayout();
+            this._shipID = shipID;
+            this.ShipID.Text = ship.ShipID.ToString();
+            this.AlbumNo.Text = ship.AlbumNo.ToString();
 
-			ResourceName.Text = $"{ship.ResourceName} {ship.ResourceGraphicVersion}/{ship.ResourceVoiceVersion}/{ship.ResourcePortVoiceVersion}";
-			ToolTipInfo.SetToolTip(ResourceName, string.Format("리소스파일 이름: {0}\r\n그래픽 ver. {1}\r\n음성 ver. {2}\r\n모항 음성 ver. {3}\r\n({4})",
+            this.ResourceName.Text = $"{ship.ResourceName} {ship.ResourceGraphicVersion}/{ship.ResourceVoiceVersion}/{ship.ResourcePortVoiceVersion}";
+            this.ToolTipInfo.SetToolTip(this.ResourceName, string.Format("리소스파일 이름: {0}\r\n그래픽 ver. {1}\r\n음성 ver. {2}\r\n모항 음성 ver. {3}\r\n({4})",
 				ship.ResourceName, ship.ResourceGraphicVersion, ship.ResourceVoiceVersion, ship.ResourcePortVoiceVersion, Constants.GetVoiceFlag(ship.VoiceFlag)));
 
-			
-			ShipType.Text = ship.IsLandBase ? "육상기지" : FormMain.Instance.Translator.GetTranslation(db.ShipTypes[(int)ship.ShipType].Name, Utility.TranslationType.ShipTypes);
+
+            this.ShipType.Text = ship.IsLandBase ? 
+				"육상기지" : FormMain.Instance.Translator.GetTranslation(db.ShipTypes[(int)ship.ShipType].Name, Utility.DataType.ShipType);
             {
                 var tip = new StringBuilder();
                 if (ship.IsAbyssalShip)
@@ -309,54 +312,54 @@ namespace ElectronicObserver.Window.Dialog
                     tip.AppendLine($"{Constants.GetShipClass(ship.ShipClass)}: {ship.ShipClass}");
                 tip.AppendLine();
                 tip.AppendLine("장착가능：");
-                tip.AppendLine(GetEquippableString(shipID));
-                ToolTipInfo.SetToolTip(ShipType, tip.ToString());
+                tip.AppendLine(this.GetEquippableString(shipID));
+                this.ToolTipInfo.SetToolTip(this.ShipType, tip.ToString());
             }
 
-            ShipName.Text = ship.NameWithClass;
-			ShipName.ForeColor = ship.GetShipNameColor(true);
+            this.ShipName.Text = ship.NameWithClass;
+            this.ShipName.ForeColor = ship.GetShipNameColor(true);
 
-            ToolTipInfo.SetToolTip(ShipName, (!ship.IsAbyssalShip ? ship.NameReading + "\r\n" : "") + "(우클릭으로 복사)");
-			TableShipName.ResumeLayout();
+            this.ToolTipInfo.SetToolTip(this.ShipName, (!ship.IsAbyssalShip ? ship.NameReading + "\r\n" : "") + "(우클릭으로 복사)");
+            this.TableShipName.ResumeLayout();
 
 
-			//main parameter
-			TableParameterMain.SuspendLayout();
+            //main parameter
+            this.TableParameterMain.SuspendLayout();
 
 			if (!ship.IsAbyssalShip)
 			{
 
-				TitleParameterMin.Text = "초기값";
-				TitleParameterMax.Text = "최대값";
+                this.TitleParameterMin.Text = "초기값";
+                this.TitleParameterMax.Text = "최대값";
 
-				HPMin.Text = ship.HPMin.ToString();
-				HPMax.Text = ship.HPMaxMarried.ToString();
-				ToolTipInfo.SetToolTip(HPMin, string.Format("개수후: {0} (+{1})", ship.HPMaxModernized, ship.HPMaxModernizable));
-				ToolTipInfo.SetToolTip(HPMax, string.Format("개수후: {0} (+{1})\r\n(최대 내구: {2})", ship.HPMaxMarriedModernized, ship.HPMaxMarriedModernizable, ship.HPMax));
+                this.HPMin.Text = ship.HPMin.ToString();
+                this.HPMax.Text = ship.HPMaxMarried.ToString();
+                this.ToolTipInfo.SetToolTip(this.HPMin, string.Format("개수후: {0} (+{1})", ship.HPMaxModernized, ship.HPMaxModernizable));
+                this.ToolTipInfo.SetToolTip(this.HPMax, string.Format("개수후: {0} (+{1})\r\n(최대 내구: {2})", ship.HPMaxMarriedModernized, ship.HPMaxMarriedModernizable, ship.HPMax));
 
-				FirepowerMin.Text = ship.FirepowerMin.ToString();
-				FirepowerMax.Text = ship.FirepowerMax.ToString();
+                this.FirepowerMin.Text = ship.FirepowerMin.ToString();
+                this.FirepowerMax.Text = ship.FirepowerMax.ToString();
 
-				TorpedoMin.Text = ship.TorpedoMin.ToString();
-				TorpedoMax.Text = ship.TorpedoMax.ToString();
+                this.TorpedoMin.Text = ship.TorpedoMin.ToString();
+                this.TorpedoMax.Text = ship.TorpedoMax.ToString();
 
-				AAMin.Text = ship.AAMin.ToString();
-				AAMax.Text = ship.AAMax.ToString();
+                this.AAMin.Text = ship.AAMin.ToString();
+                this.AAMax.Text = ship.AAMax.ToString();
 
-				ArmorMin.Text = ship.ArmorMin.ToString();
-				ArmorMax.Text = ship.ArmorMax.ToString();
+                this.ArmorMin.Text = ship.ArmorMin.ToString();
+                this.ArmorMax.Text = ship.ArmorMax.ToString();
 
-				ASWMin.Text = GetParameterMinBound(ship.ASW);
-				ASWMax.Text = GetParameterMax(ship.ASW);
+                this.ASWMin.Text = this.GetParameterMinBound(ship.ASW);
+                this.ASWMax.Text = this.GetParameterMax(ship.ASW);
 
-				EvasionMin.Text = GetParameterMinBound(ship.Evasion);
-				EvasionMax.Text = GetParameterMax(ship.Evasion);
+                this.EvasionMin.Text = this.GetParameterMinBound(ship.Evasion);
+                this.EvasionMax.Text = this.GetParameterMax(ship.Evasion);
 
-				LOSMin.Text = GetParameterMinBound(ship.LOS);
-				LOSMax.Text = GetParameterMax(ship.LOS);
+                this.LOSMin.Text = this.GetParameterMinBound(ship.LOS);
+                this.LOSMax.Text = this.GetParameterMax(ship.LOS);
 
-				LuckMin.Text = ship.LuckMin.ToString();
-				LuckMax.Text = ship.LuckMax.ToString();
+                this.LuckMin.Text = ship.LuckMin.ToString();
+                this.LuckMax.Text = ship.LuckMax.ToString();
 
 			}
 			else
@@ -391,70 +394,70 @@ namespace ElectronicObserver.Window.Dialog
 					}
 				}
 
-				TitleParameterMin.Text = "기본값";
-				TitleParameterMax.Text = "장비포함";
+                this.TitleParameterMin.Text = "기본값";
+                this.TitleParameterMax.Text = "장비포함";
 
-				HPMin.Text = ship.HPMin > 0 ? ship.HPMin.ToString() : "???";
-				HPMax.Text = hp > 0 ? hp.ToString() : "???";
-				ToolTipInfo.SetToolTip(HPMin, null);
-				ToolTipInfo.SetToolTip(HPMax, null);
+                this.HPMin.Text = ship.HPMin > 0 ? ship.HPMin.ToString() : "???";
+                this.HPMax.Text = hp > 0 ? hp.ToString() : "???";
+                this.ToolTipInfo.SetToolTip(this.HPMin, null);
+                this.ToolTipInfo.SetToolTip(this.HPMax, null);
 
-				FirepowerMin.Text = ship.FirepowerMax.ToString();
-				FirepowerMax.Text = firepower.ToString();
+                this.FirepowerMin.Text = ship.FirepowerMax.ToString();
+                this.FirepowerMax.Text = firepower.ToString();
 
-				TorpedoMin.Text = ship.TorpedoMax.ToString();
-				TorpedoMax.Text = torpedo.ToString();
+                this.TorpedoMin.Text = ship.TorpedoMax.ToString();
+                this.TorpedoMax.Text = torpedo.ToString();
 
-				AAMin.Text = ship.AAMax.ToString();
-				AAMax.Text = aa.ToString();
+                this.AAMin.Text = ship.AAMax.ToString();
+                this.AAMax.Text = aa.ToString();
 
-				ArmorMin.Text = ship.ArmorMax.ToString();
-				ArmorMax.Text = armor.ToString();
+                this.ArmorMin.Text = ship.ArmorMax.ToString();
+                this.ArmorMax.Text = armor.ToString();
 
-				ASWMin.Text = ship.ASW != null && ship.ASW.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.ASW.Maximum.ToString() : "???";
-				ASWMax.Text = asw.ToString();
+                this.ASWMin.Text = ship.ASW != null && ship.ASW.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.ASW.Maximum.ToString() : "???";
+                this.ASWMax.Text = asw.ToString();
 
-				EvasionMin.Text = ship.Evasion != null && ship.Evasion.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.Evasion.Maximum.ToString() : "???";
-				EvasionMax.Text = evasion.ToString();
+                this.EvasionMin.Text = ship.Evasion != null && ship.Evasion.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.Evasion.Maximum.ToString() : "???";
+                this.EvasionMax.Text = evasion.ToString();
 
-				LOSMin.Text = ship.LOS != null && ship.LOS.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.LOS.Maximum.ToString() : "???";
-				LOSMax.Text = los.ToString();
+                this.LOSMin.Text = ship.LOS != null && ship.LOS.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.LOS.Maximum.ToString() : "???";
+                this.LOSMax.Text = los.ToString();
 
-				LuckMin.Text = ship.LuckMax > 0 ? ship.LuckMax.ToString() : "???";
-				LuckMax.Text = luck > 0 ? luck.ToString() : "???";
+                this.LuckMin.Text = ship.LuckMax > 0 ? ship.LuckMax.ToString() : "???";
+                this.LuckMax.Text = luck > 0 ? luck.ToString() : "???";
 
 			}
-			UpdateLevelParameter(ship.ShipID);
+            this.UpdateLevelParameter(ship.ShipID);
 
-			TableParameterMain.ResumeLayout();
+            this.TableParameterMain.ResumeLayout();
 
 
-			//sub parameter
-			TableParameterSub.SuspendLayout();
+            //sub parameter
+            this.TableParameterSub.SuspendLayout();
 
-			Speed.Text = Constants.GetSpeed(ship.Speed);
+            this.Speed.Text = Constants.GetSpeed(ship.Speed);
 			if (!ship.IsAbyssalShip)
 			{
-				Range.Text = Constants.GetRange(ship.Range);
-				ToolTipInfo.SetToolTip(Range, null);
+                this.Range.Text = Constants.GetRange(ship.Range);
+                this.ToolTipInfo.SetToolTip(this.Range, null);
 			}
 			else
 			{
 				var availableEquipments = (ship.DefaultSlot ?? Enumerable.Repeat(-1, 5))
 					.Select(id => KCDatabase.Instance.MasterEquipments[id])
 					.Where(eq => eq != null);
-				Range.Text = Constants.GetRange(Math.Max(ship.Range, availableEquipments.Any() ? availableEquipments.Max(eq => eq.Range) : 0));
-				ToolTipInfo.SetToolTip(Range, "기본사정: " + Constants.GetRange(ship.Range));
+                this.Range.Text = Constants.GetRange(Math.Max(ship.Range, availableEquipments.Any() ? availableEquipments.Max(eq => eq.Range) : 0));
+                this.ToolTipInfo.SetToolTip(this.Range, "기본사정: " + Constants.GetRange(ship.Range));
 			}
-			Rarity.Text = Constants.GetShipRarity(ship.Rarity);
-			Rarity.ImageIndex = (int)ResourceManager.IconContent.RarityRed + ship.Rarity;
+            this.Rarity.Text = Constants.GetShipRarity(ship.Rarity);
+            this.Rarity.ImageIndex = (int)ResourceManager.IconContent.RarityRed + ship.Rarity;
 
-			TableParameterSub.ResumeLayout();
+            this.TableParameterSub.ResumeLayout();
 
-			TableConsumption.SuspendLayout();
+            this.TableConsumption.SuspendLayout();
 
-			Fuel.Text = ship.Fuel.ToString();
-			Ammo.Text = ship.Ammo.ToString();
+            this.Fuel.Text = ship.Fuel.ToString();
+            this.Ammo.Text = ship.Ammo.ToString();
 
 			string tooltiptext = string.Format(
 				"입거시 소비:\r\nHP1당: 강재 {0:F2} / 연료 {1:F2}\r\n최대: 강재 {2} / 연료 {3}\r\n",
@@ -464,42 +467,42 @@ namespace ElectronicObserver.Window.Dialog
 				(int)(ship.Fuel * 0.032 * (ship.HPMaxMarried - 1))
 				);
 
-			ToolTipInfo.SetToolTip(TableConsumption, tooltiptext);
-			ToolTipInfo.SetToolTip(TitleConsumption, tooltiptext);
-			ToolTipInfo.SetToolTip(Fuel, tooltiptext);
-			ToolTipInfo.SetToolTip(Ammo, tooltiptext);
+            this.ToolTipInfo.SetToolTip(this.TableConsumption, tooltiptext);
+            this.ToolTipInfo.SetToolTip(this.TitleConsumption, tooltiptext);
+            this.ToolTipInfo.SetToolTip(this.Fuel, tooltiptext);
+            this.ToolTipInfo.SetToolTip(this.Ammo, tooltiptext);
 
-			TableConsumption.ResumeLayout();
+            this.TableConsumption.ResumeLayout();
 
-			Description.Text = ship.MessageAlbum != "" ? ship.MessageAlbum : ship.MessageGet;
-			Description.Tag = ship.MessageAlbum != "" ? 1 : 0;
+            this.Description.Text = ship.MessageAlbum != "" ? this.FormatDescription(ship.MessageAlbum) : this.FormatDescription(ship.MessageGet);
+            this.Description.Tag = ship.MessageAlbum != "" ? 1 : 0;
 
 
-			//equipment
-			TableEquipment.SuspendLayout();
+            //equipment
+            this.TableEquipment.SuspendLayout();
 
-			for (int i = 0; i < Equipments.Length; i++)
+			for (int i = 0; i < this.Equipments.Length; i++)
 			{
 
 				if (ship.Aircraft[i] > 0 || i < ship.SlotSize)
-					Aircrafts[i].Text = ship.Aircraft[i].ToString();
+                    this.Aircrafts[i].Text = ship.Aircraft[i].ToString();
 				else
-					Aircrafts[i].Text = "";
+                    this.Aircrafts[i].Text = "";
 
 
-				ToolTipInfo.SetToolTip(Equipments[i], null);
+                this.ToolTipInfo.SetToolTip(this.Equipments[i], null);
 
 				if (ship.DefaultSlot == null)
 				{
 					if (i < ship.SlotSize)
 					{
-						Equipments[i].Text = "???";
-						Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Unknown;
+                        this.Equipments[i].Text = "???";
+                        this.Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Unknown;
 					}
 					else
 					{
-						Equipments[i].Text = "";
-						Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Locked;
+                        this.Equipments[i].Text = "";
+                        this.Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Locked;
 					}
 
 				}
@@ -508,21 +511,21 @@ namespace ElectronicObserver.Window.Dialog
 					EquipmentDataMaster eq = db.MasterEquipments[ship.DefaultSlot[i]];
 					if (eq == null)
 					{
-						// 破損データが入っていた場合
-						Equipments[i].Text = "(없음)";
-						Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Nothing;
+                        // 破損データが入っていた場合
+                        this.Equipments[i].Text = "(없음)";
+                        this.Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Nothing;
 
 					}
 					else
 					{
 
-						Equipments[i].Text = eq.Name;
+                        this.Equipments[i].Text = eq.Name;
 
 						int eqicon = eq.EquipmentType[3];
 						if (eqicon >= (int)ResourceManager.EquipmentContent.Locked)
 							eqicon = (int)ResourceManager.EquipmentContent.Unknown;
 
-						Equipments[i].ImageIndex = eqicon;
+                        this.Equipments[i].ImageIndex = eqicon;
 
 						{
 							StringBuilder sb = new StringBuilder();
@@ -539,133 +542,133 @@ namespace ElectronicObserver.Window.Dialog
 							if (eq.Bomber != 0) sb.AppendFormat("폭장 {0:+0;-0}\r\n", eq.Bomber);
 							sb.AppendLine("(우클릭으로 도감에)");
 
-							ToolTipInfo.SetToolTip(Equipments[i], sb.ToString());
+                            this.ToolTipInfo.SetToolTip(this.Equipments[i], sb.ToString());
 						}
 					}
 
 				}
 				else if (i < ship.SlotSize)
 				{
-					Equipments[i].Text = "(없음)";
-					Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Nothing;
+                    this.Equipments[i].Text = "(없음)";
+                    this.Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Nothing;
 
 				}
 				else
 				{
-					Equipments[i].Text = "";
-					Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Locked;
+                    this.Equipments[i].Text = "";
+                    this.Equipments[i].ImageIndex = (int)ResourceManager.EquipmentContent.Locked;
 				}
 			}
 
-			TableEquipment.ResumeLayout();
+            this.TableEquipment.ResumeLayout();
 
 
-			//arsenal
-			TableArsenal.SuspendLayout();
-			BuildingTime.Text = DateTimeHelper.ToTimeRemainString(new TimeSpan(0, ship.BuildingTime, 0));
+            //arsenal
+            this.TableArsenal.SuspendLayout();
+            this.BuildingTime.Text = DateTimeHelper.ToTimeRemainString(new TimeSpan(0, ship.BuildingTime, 0));
 
-			MaterialFuel.Text = ship.Material[0].ToString();
-			MaterialAmmo.Text = ship.Material[1].ToString();
-			MaterialSteel.Text = ship.Material[2].ToString();
-			MaterialBauxite.Text = ship.Material[3].ToString();
+            this.MaterialFuel.Text = ship.Material[0].ToString();
+            this.MaterialAmmo.Text = ship.Material[1].ToString();
+            this.MaterialSteel.Text = ship.Material[2].ToString();
+            this.MaterialBauxite.Text = ship.Material[3].ToString();
 
-			PowerUpFirepower.Text = ship.PowerUp[0].ToString();
-			PowerUpTorpedo.Text = ship.PowerUp[1].ToString();
-			PowerUpAA.Text = ship.PowerUp[2].ToString();
-			PowerUpArmor.Text = ship.PowerUp[3].ToString();
+            this.PowerUpFirepower.Text = ship.PowerUp[0].ToString();
+            this.PowerUpTorpedo.Text = ship.PowerUp[1].ToString();
+            this.PowerUpAA.Text = ship.PowerUp[2].ToString();
+            this.PowerUpArmor.Text = ship.PowerUp[3].ToString();
 
-			TableArsenal.ResumeLayout();
+            this.TableArsenal.ResumeLayout();
 
 
 			//remodel
 			if (!ship.IsAbyssalShip)
 			{
 
-				TableRemodel.SuspendLayout();
+                this.TableRemodel.SuspendLayout();
 
 				if (ship.RemodelBeforeShipID == 0)
 				{
-					RemodelBeforeShipName.Text = "(없음)";
-					ToolTipInfo.SetToolTip(RemodelBeforeShipName, null);
-					RemodelBeforeLevel.Text = "";
-					RemodelBeforeLevel.ImageIndex = -1;
-					ToolTipInfo.SetToolTip(RemodelBeforeLevel, null);
-					RemodelBeforeAmmo.Text = "-";
-					RemodelBeforeSteel.Text = "-";
+                    this.RemodelBeforeShipName.Text = "(없음)";
+                    this.ToolTipInfo.SetToolTip(this.RemodelBeforeShipName, null);
+                    this.RemodelBeforeLevel.Text = "";
+                    this.RemodelBeforeLevel.ImageIndex = -1;
+                    this.ToolTipInfo.SetToolTip(this.RemodelBeforeLevel, null);
+                    this.RemodelBeforeAmmo.Text = "-";
+                    this.RemodelBeforeSteel.Text = "-";
 				}
 				else
 				{
 					ShipDataMaster sbefore = ship.RemodelBeforeShip;
-					RemodelBeforeShipName.Text = sbefore.Name;
-					ToolTipInfo.SetToolTip(RemodelBeforeShipName, "(왼클릭으로 열기, 우클릭으로 새창)");
-					RemodelBeforeLevel.Text = string.Format("Lv. {0}", sbefore.RemodelAfterLevel);
-					RemodelBeforeLevel.ImageIndex = GetRemodelItemImageIndex(sbefore);
-					ToolTipInfo.SetToolTip(RemodelBeforeLevel, GetRemodelItem(sbefore));
-					RemodelBeforeAmmo.Text = sbefore.RemodelAmmo.ToString();
-					RemodelBeforeSteel.Text = sbefore.RemodelSteel.ToString();
+                    this.RemodelBeforeShipName.Text = sbefore.Name;
+                    this.ToolTipInfo.SetToolTip(this.RemodelBeforeShipName, "(왼클릭으로 열기, 우클릭으로 새창)");
+                    this.RemodelBeforeLevel.Text = string.Format("Lv. {0}", sbefore.RemodelAfterLevel);
+                    this.RemodelBeforeLevel.ImageIndex = GetRemodelItemImageIndex(sbefore);
+                    this.ToolTipInfo.SetToolTip(this.RemodelBeforeLevel, GetRemodelItem(sbefore));
+                    this.RemodelBeforeAmmo.Text = sbefore.RemodelAmmo.ToString();
+                    this.RemodelBeforeSteel.Text = sbefore.RemodelSteel.ToString();
 				}
 
 				if (ship.RemodelAfterShipID == 0)
 				{
-					RemodelAfterShipName.Text = "(없음)";
-					ToolTipInfo.SetToolTip(RemodelAfterShipName, null);
-					RemodelAfterLevel.Text = "";
-					RemodelAfterLevel.ImageIndex = -1;
-					ToolTipInfo.SetToolTip(RemodelAfterLevel, null);
-					RemodelAfterAmmo.Text = "-";
-					RemodelAfterSteel.Text = "-";
+                    this.RemodelAfterShipName.Text = "(없음)";
+                    this.ToolTipInfo.SetToolTip(this.RemodelAfterShipName, null);
+                    this.RemodelAfterLevel.Text = "";
+                    this.RemodelAfterLevel.ImageIndex = -1;
+                    this.ToolTipInfo.SetToolTip(this.RemodelAfterLevel, null);
+                    this.RemodelAfterAmmo.Text = "-";
+                    this.RemodelAfterSteel.Text = "-";
 				}
 				else
 				{
-					RemodelAfterShipName.Text = ship.RemodelAfterShip.Name;
-					ToolTipInfo.SetToolTip(RemodelAfterShipName, "(왼클릭으로 열기, 우클릭으로 새창)");
-                    RemodelAfterLevel.Text = string.Format("Lv. {0}", ship.RemodelAfterLevel);
-					RemodelAfterLevel.ImageIndex = GetRemodelItemImageIndex(ship);
-					ToolTipInfo.SetToolTip(RemodelAfterLevel, GetRemodelItem(ship));
-					RemodelAfterAmmo.Text = ship.RemodelAmmo.ToString();
-					RemodelAfterSteel.Text = ship.RemodelSteel.ToString();
+                    this.RemodelAfterShipName.Text = ship.RemodelAfterShip.Name;
+                    this.ToolTipInfo.SetToolTip(this.RemodelAfterShipName, "(왼클릭으로 열기, 우클릭으로 새창)");
+                    this.RemodelAfterLevel.Text = string.Format("Lv. {0}", ship.RemodelAfterLevel);
+                    this.RemodelAfterLevel.ImageIndex = GetRemodelItemImageIndex(ship);
+                    this.ToolTipInfo.SetToolTip(this.RemodelAfterLevel, GetRemodelItem(ship));
+                    this.RemodelAfterAmmo.Text = ship.RemodelAmmo.ToString();
+                    this.RemodelAfterSteel.Text = ship.RemodelSteel.ToString();
 				}
-				TableRemodel.ResumeLayout();
+                this.TableRemodel.ResumeLayout();
 
 
-				TableRemodel.Visible = true;
-				TableBattle.Visible = false;
+                this.TableRemodel.Visible = true;
+                this.TableBattle.Visible = false;
 
 
 			}
 			else
 			{
 
-				TableBattle.SuspendLayout();
+                this.TableBattle.SuspendLayout();
 
-				AirSuperiority.Text = Calculator.GetAirSuperiority(ship).ToString();
-				DayAttack.Text = Constants.GetDayAttackKind(Calculator.GetDayAttackKind(ship.DefaultSlot?.ToArray(), ship.ShipID, -1));
-				NightAttack.Text = Constants.GetNightAttackKind(Calculator.GetNightAttackKind(ship.DefaultSlot?.ToArray(), ship.ShipID, -1));
+                this.AirSuperiority.Text = Calculator.GetAirSuperiority(ship).ToString();
+                this.DayAttack.Text = Constants.GetDayAttackKind(Calculator.GetDayAttackKind(ship.DefaultSlot?.ToArray(), ship.ShipID, -1));
+                this.NightAttack.Text = Constants.GetNightAttackKind(Calculator.GetNightAttackKind(ship.DefaultSlot?.ToArray(), ship.ShipID, -1));
 
-				TableBattle.ResumeLayout();
+                this.TableBattle.ResumeLayout();
 
-				TableRemodel.Visible = false;
-				TableBattle.Visible = true;
+                this.TableRemodel.Visible = false;
+                this.TableBattle.Visible = true;
 
 			}
 
 
-			if (ShipBanner.Image != null)
+			if (this.ShipBanner.Image != null)
 			{
-				var img = ShipBanner.Image;
-				ShipBanner.Image = null;
+				var img = this.ShipBanner.Image;
+                this.ShipBanner.Image = null;
 				img.Dispose();
 			}
-			if (!ImageLoader.IsBusy)
+			if (!this.ImageLoader.IsBusy)
 			{
-				loadingResourceShipID = ship.ShipID;
-                ImageLoader.RunWorkerAsync(ship.ShipID);
+                this.loadingResourceShipID = ship.ShipID;
+                this.ImageLoader.RunWorkerAsync(ship.ShipID);
             }
 
 
 
-			BasePanelShipGirl.ResumeLayout();
-			BasePanelShipGirl.Visible = true;
+            this.BasePanelShipGirl.ResumeLayout();
+            this.BasePanelShipGirl.Visible = true;
 
 
 			this.Text = "함선도감 - " + ship.NameWithClass;
@@ -683,25 +686,25 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (!ship.IsAbyssalShip)
 			{
-				ASWLevel.Text = EstimateParameter((int)ParameterLevel.Value, ship.ASW);
-				EvasionLevel.Text = EstimateParameter((int)ParameterLevel.Value, ship.Evasion);
-				LOSLevel.Text = EstimateParameter((int)ParameterLevel.Value, ship.LOS);
-				ASWLevel.Visible =
-				ASWSeparater.Visible =
-				EvasionLevel.Visible =
-				EvasionSeparater.Visible =
-				LOSLevel.Visible =
-				LOSSeparater.Visible = true;
+                this.ASWLevel.Text = this.EstimateParameter((int)this.ParameterLevel.Value, ship.ASW);
+                this.EvasionLevel.Text = this.EstimateParameter((int)this.ParameterLevel.Value, ship.Evasion);
+                this.LOSLevel.Text = this.EstimateParameter((int)this.ParameterLevel.Value, ship.LOS);
+                this.ASWLevel.Visible =
+                this.ASWSeparater.Visible =
+                this.EvasionLevel.Visible =
+                this.EvasionSeparater.Visible =
+                this.LOSLevel.Visible =
+                this.LOSSeparater.Visible = true;
 
 			}
 			else
 			{
-				ASWLevel.Visible =
-				ASWSeparater.Visible =
-				EvasionLevel.Visible =
-				EvasionSeparater.Visible =
-				LOSLevel.Visible =
-				LOSSeparater.Visible = false;
+                this.ASWLevel.Visible =
+                this.ASWSeparater.Visible =
+                this.EvasionLevel.Visible =
+                this.EvasionSeparater.Visible =
+                this.LOSLevel.Visible =
+                this.LOSSeparater.Visible = false;
 			}
 		}
 
@@ -758,17 +761,17 @@ namespace ElectronicObserver.Window.Dialog
 
         private void ParameterLevel_ValueChanged(object sender, EventArgs e)
 		{
-			if (_shipID != -1)
+			if (this._shipID != -1)
 			{
-				LevelTimer.Start();
+                this.LevelTimer.Start();
 				//UpdateLevelParameter( _shipID );
 			}
 		}
 
 		private void LevelTimer_Tick(object sender, EventArgs e)
 		{
-			if (_shipID != -1)
-				UpdateLevelParameter(_shipID);
+			if (this._shipID != -1)
+                this.UpdateLevelParameter(this._shipID);
 		}
 
 
@@ -813,34 +816,34 @@ namespace ElectronicObserver.Window.Dialog
 		private void RemodelBeforeShipName_MouseClick(object sender, MouseEventArgs e)
 		{
 
-			if (_shipID == -1) return;
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			if (this._shipID == -1) return;
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 
 			if (ship != null && ship.RemodelBeforeShipID != 0)
 			{
 
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
-					new DialogAlbumMasterShip(ship.RemodelBeforeShipID).Show(Owner);
+					new DialogAlbumMasterShip(ship.RemodelBeforeShipID).Show(this.Owner);
 
 				else if ((e.Button & System.Windows.Forms.MouseButtons.Left) != 0)
-					UpdateAlbumPage(ship.RemodelBeforeShipID);
+                    this.UpdateAlbumPage(ship.RemodelBeforeShipID);
 			}
 		}
 
 		private void RemodelAfterShipName_MouseClick(object sender, MouseEventArgs e)
 		{
 
-			if (_shipID == -1) return;
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			if (this._shipID == -1) return;
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 
 			if (ship != null && ship.RemodelAfterShipID != 0)
 			{
 
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
-					new DialogAlbumMasterShip(ship.RemodelAfterShipID).Show(Owner);
+					new DialogAlbumMasterShip(ship.RemodelAfterShipID).Show(this.Owner);
 
 				else if ((e.Button & System.Windows.Forms.MouseButtons.Left) != 0)
-					UpdateAlbumPage(ship.RemodelAfterShipID);
+                    this.UpdateAlbumPage(ship.RemodelAfterShipID);
 			}
 		}
 
@@ -852,20 +855,20 @@ namespace ElectronicObserver.Window.Dialog
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
 
-				for (int i = 0; i < Equipments.Length; i++)
+				for (int i = 0; i < this.Equipments.Length; i++)
 				{
-					if (sender == Equipments[i])
+					if (sender == this.Equipments[i])
 					{
 
-						if (_shipID != -1)
+						if (this._shipID != -1)
 						{
-							ShipDataMaster ship = KCDatabase.Instance.MasterShips[_shipID];
+							ShipDataMaster ship = KCDatabase.Instance.MasterShips[this._shipID];
 
 							if (ship != null && ship.DefaultSlot != null && i < ship.DefaultSlot.Count && KCDatabase.Instance.MasterEquipments.ContainsKey(ship.DefaultSlot[i]))
 							{
-								Cursor = Cursors.AppStarting;
-								new DialogAlbumMasterEquipment(ship.DefaultSlot[i]).Show(Owner);
-								Cursor = Cursors.Default;
+                                this.Cursor = Cursors.AppStarting;
+								new DialogAlbumMasterEquipment(ship.DefaultSlot[i]).Show(this.Owner);
+                                this.Cursor = Cursors.Default;
 							}
 						}
 					}
@@ -901,13 +904,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void StripMenu_File_OutputCSVUser_Click(object sender, EventArgs e)
 		{
 
-			if (SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
 				try
 				{
 
-					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
+					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
 						sw.WriteLine("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,결혼내구,최대내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
@@ -1007,13 +1010,13 @@ namespace ElectronicObserver.Window.Dialog
 		private void StripMenu_File_OutputCSVData_Click(object sender, EventArgs e)
 		{
 
-			if (SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (this.SaveCSVDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 
 				try
 				{
 
-					using (StreamWriter sw = new StreamWriter(SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
+					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
 						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,최대내구,결혼내구,개장내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠최소,초기대잠최대,최대대잠,대잠{0}최소,대잠{0}최대,초기회피최소,초기회피최대,최대회피,회피{0}최소,회피{0}최대,초기색적최소,초기색적최대,최대색적,색적{0}최소,색적{0}최대,초기운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개수화력,개수뇌장,개수대공,개수장갑,드롭대사,도감대사,소모연료,소모탄약,음성,리소스이름,이미지버전,음성버전,모항음성버전", ExpTable.ShipMaximumLevel));
@@ -1167,7 +1170,7 @@ namespace ElectronicObserver.Window.Dialog
         private void DialogAlbumMasterShip_FormClosed(object sender, FormClosedEventArgs e)
 		{
 
-			ResourceManager.DestroyIcon(Icon);
+			ResourceManager.DestroyIcon(this.Icon);
 
 		}
 
@@ -1176,32 +1179,39 @@ namespace ElectronicObserver.Window.Dialog
 		private void Description_Click(object sender, EventArgs e)
 		{
 
-			int tag = Description.Tag as int? ?? 0;
-			ShipDataMaster ship = KCDatabase.Instance.MasterShips[_shipID];
+			int tag = this.Description.Tag as int? ?? 0;
+			ShipDataMaster ship = KCDatabase.Instance.MasterShips[this._shipID];
 
 			if (ship == null) return;
 
 			if (tag == 0 && ship.MessageAlbum.Length > 0)
 			{
-				Description.Text = ship.MessageAlbum;
-				Description.Tag = 1;
+                this.Description.Text = this.FormatDescription(ship.MessageAlbum);
+                this.Description.Tag = 1;
 
 			}
 			else
 			{
-				Description.Text = ship.MessageGet;
-				Description.Tag = 0;
+                this.Description.Text = this.FormatDescription(ship.MessageGet);
+                this.Description.Tag = 0;
 			}
 		}
 
+        private string FormatDescription(string description)
+        {
+            // 本家の改行がアレなので、区切り文字+改行 以外の改行を削除する
+            var regex = new Regex(@"([^、。,\.！？!\?])\r\n");
+            return regex.Replace(description, "$1");
+        }
 
-		private void ResourceName_MouseClick(object sender, MouseEventArgs e)
+
+        private void ResourceName_MouseClick(object sender, MouseEventArgs e)
 		{
 
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
 
-				var ship = KCDatabase.Instance.MasterShips[_shipID];
+				var ship = KCDatabase.Instance.MasterShips[this._shipID];
 				if (ship != null)
 				{
 					Clipboard.SetData(DataFormats.StringFormat, ship.ResourceName);
@@ -1215,16 +1225,16 @@ namespace ElectronicObserver.Window.Dialog
 		private void StripMenu_Edit_EditParameter_Click(object sender, EventArgs e)
 		{
 
-			if (_shipID <= 0)
+			if (this._shipID <= 0)
 			{
 				MessageBox.Show("함선을 선택하십시오.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				return;
 			}
 
-			using (var dialog = new DialogAlbumShipParameter(_shipID))
+			using (var dialog = new DialogAlbumShipParameter(this._shipID))
 			{
 				dialog.ShowDialog(this);
-				UpdateAlbumPage(_shipID);
+                this.UpdateAlbumPage(this._shipID);
 			}
 
 		}
@@ -1252,24 +1262,24 @@ namespace ElectronicObserver.Window.Dialog
 		private void ImageLoader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 
-			if (ShipBanner.Image != null)
+			if (this.ShipBanner.Image != null)
 			{
-				var img = ShipBanner.Image;
-				ShipBanner.Image = null;
+				var img = this.ShipBanner.Image;
+                this.ShipBanner.Image = null;
 				img.Dispose();
 			}
 
-			if (loadingResourceShipID != _shipID)
+			if (this.loadingResourceShipID != this._shipID)
 			{
 				if (e.Result != null)
 					((Bitmap)e.Result).Dispose();
 
-				if (!ImageLoader.IsBusy)
+				if (!this.ImageLoader.IsBusy)
 				{
-					loadingResourceShipID = _shipID;
-					var ship = KCDatabase.Instance.MasterShips[_shipID];
+                    this.loadingResourceShipID = this._shipID;
+					var ship = KCDatabase.Instance.MasterShips[this._shipID];
 					if (ship != null)
-                        ImageLoader.RunWorkerAsync(_shipID);
+                        this.ImageLoader.RunWorkerAsync(this._shipID);
                 }
 
 				return;
@@ -1277,8 +1287,8 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (e.Result != null)
 			{
-				ShipBanner.Image = e.Result as Bitmap;
-				loadingResourceShipID = -1;
+                this.ShipBanner.Image = e.Result as Bitmap;
+                this.loadingResourceShipID = -1;
 			}
 
 		}
@@ -1288,15 +1298,15 @@ namespace ElectronicObserver.Window.Dialog
 		private void TextSearch_TextChanged(object sender, EventArgs e)
 		{
 
-			if (string.IsNullOrWhiteSpace(TextSearch.Text))
+			if (string.IsNullOrWhiteSpace(this.TextSearch.Text))
 				return;
 
 
 			bool Search(string searchWord)
 			{
 				var target =
-					ShipView.Rows.OfType<DataGridViewRow>()
-					.Select(r => KCDatabase.Instance.MasterShips[(int)r.Cells[ShipView_ShipID.Index].Value])
+                    this.ShipView.Rows.OfType<DataGridViewRow>()
+					.Select(r => KCDatabase.Instance.MasterShips[(int)r.Cells[this.ShipView_ShipID.Index].Value])
 					.FirstOrDefault(
 					ship =>
 						Calculator.ToHiragana(ship.NameWithClass.ToLower()).StartsWith(searchWord) ||
@@ -1304,14 +1314,14 @@ namespace ElectronicObserver.Window.Dialog
 
 				if (target != null)
 				{
-					ShipView.FirstDisplayedScrollingRowIndex = ShipView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[ShipView_ShipID.Index].Value == target.ShipID).Index;
+                    this.ShipView.FirstDisplayedScrollingRowIndex = this.ShipView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[this.ShipView_ShipID.Index].Value == target.ShipID).Index;
 					return true;
 				}
 				return false;
 			}
 
-			if (!Search(Calculator.ToHiragana(TextSearch.Text.ToLower())))
-				Search(Calculator.RomaToHira(TextSearch.Text));
+			if (!Search(Calculator.ToHiragana(this.TextSearch.Text.ToLower())))
+				Search(Calculator.RomaToHira(this.TextSearch.Text));
 
 		}
 
@@ -1320,7 +1330,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
-				TextSearch_TextChanged(sender, e);
+                this.TextSearch_TextChanged(sender, e);
 				e.SuppressKeyPress = true;
 				e.Handled = true;
 			}
@@ -1328,7 +1338,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void StripMenu_Edit_CopyShipName_Click(object sender, EventArgs e)
 		{
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 			if (ship != null)
 				Clipboard.SetText(ship.NameWithClass);
 			else
@@ -1339,7 +1349,7 @@ namespace ElectronicObserver.Window.Dialog
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-				var ship = KCDatabase.Instance.MasterShips[_shipID];
+				var ship = KCDatabase.Instance.MasterShips[this._shipID];
 				if (ship != null)
 					Clipboard.SetText(ship.NameWithClass);
 				else
@@ -1349,7 +1359,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void StripMenu_Edit_CopyShipData_Click(object sender, EventArgs e)
 		{
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 			if (ship == null)
 			{
 				System.Media.SystemSounds.Exclamation.Play();
@@ -1372,9 +1382,9 @@ namespace ElectronicObserver.Window.Dialog
 				sb.AppendFormat("뇌장: {0} / {1}\r\n", ship.TorpedoMin, ship.TorpedoMax);
 				sb.AppendFormat("대공: {0} / {1}\r\n", ship.AAMin, ship.AAMax);
 				sb.AppendFormat("장갑: {0} / {1}\r\n", ship.ArmorMin, ship.ArmorMax);
-				sb.AppendFormat("대잠: {0} / {1}\r\n", GetParameterMinBound(ship.ASW), GetParameterMax(ship.ASW));
-				sb.AppendFormat("회피: {0} / {1}\r\n", GetParameterMinBound(ship.Evasion), GetParameterMax(ship.Evasion));
-				sb.AppendFormat("색적: {0} / {1}\r\n", GetParameterMinBound(ship.LOS), GetParameterMax(ship.LOS));
+				sb.AppendFormat("대잠: {0} / {1}\r\n", this.GetParameterMinBound(ship.ASW), this.GetParameterMax(ship.ASW));
+				sb.AppendFormat("회피: {0} / {1}\r\n", this.GetParameterMinBound(ship.Evasion), this.GetParameterMax(ship.Evasion));
+				sb.AppendFormat("색적: {0} / {1}\r\n", this.GetParameterMinBound(ship.LOS), this.GetParameterMax(ship.LOS));
 				sb.AppendFormat("운: {0} / {1}\r\n", ship.LuckMin, ship.LuckMax);
 				sb.AppendFormat("속력: {0} / 사정: {1}\r\n", Constants.GetSpeed(ship.Speed), Constants.GetRange(ship.Range));
 				sb.AppendFormat("소비연탄: 연료 {0} / 탄약 {1}\r\n", ship.Fuel, ship.Ammo);
@@ -1389,9 +1399,9 @@ namespace ElectronicObserver.Window.Dialog
 				sb.AppendFormat("뇌장: {0} / {1}\r\n", ship.TorpedoMin, ship.TorpedoMax + availableEquipments.Sum(eq => eq.Torpedo));
 				sb.AppendFormat("대공: {0} / {1}\r\n", ship.AAMin, ship.AAMax + availableEquipments.Sum(eq => eq.AA));
 				sb.AppendFormat("장갑: {0} / {1}\r\n", ship.ArmorMin, ship.ArmorMax + availableEquipments.Sum(eq => eq.Armor));
-				sb.AppendFormat("대잠: {0} / {1}\r\n", GetParameterMax(ship.ASW), (ship.ASW != null && !ship.ASW.IsMaximumDefault ? ship.ASW.Maximum : 0) + availableEquipments.Sum(eq => eq.ASW));
-				sb.AppendFormat("회피: {0} / {1}\r\n", GetParameterMax(ship.Evasion), (ship.Evasion != null && !ship.Evasion.IsMaximumDefault ? ship.Evasion.Maximum : 0) + availableEquipments.Sum(eq => eq.Evasion));
-				sb.AppendFormat("색적: {0} / {1}\r\n", GetParameterMax(ship.LOS), (ship.LOS != null && !ship.LOS.IsMaximumDefault ? ship.LOS.Maximum : 0) + availableEquipments.Sum(eq => eq.LOS));
+				sb.AppendFormat("대잠: {0} / {1}\r\n", this.GetParameterMax(ship.ASW), (ship.ASW != null && !ship.ASW.IsMaximumDefault ? ship.ASW.Maximum : 0) + availableEquipments.Sum(eq => eq.ASW));
+				sb.AppendFormat("회피: {0} / {1}\r\n", this.GetParameterMax(ship.Evasion), (ship.Evasion != null && !ship.Evasion.IsMaximumDefault ? ship.Evasion.Maximum : 0) + availableEquipments.Sum(eq => eq.Evasion));
+				sb.AppendFormat("색적: {0} / {1}\r\n", this.GetParameterMax(ship.LOS), (ship.LOS != null && !ship.LOS.IsMaximumDefault ? ship.LOS.Maximum : 0) + availableEquipments.Sum(eq => eq.LOS));
 				sb.AppendFormat("운: {0} / {1}\r\n", ship.LuckMin > 0 ? ship.LuckMin.ToString() : "???", luckSum > 0 ? luckSum.ToString() : "???");
 				sb.AppendFormat("속력: {0} / 사정: {1}\r\n", Constants.GetSpeed(ship.Speed),
 					Constants.GetRange(Math.Max(ship.Range, availableEquipments.Any() ? availableEquipments.Max(eq => eq.Range) : 0)));
@@ -1477,7 +1487,7 @@ namespace ElectronicObserver.Window.Dialog
 
 			sb.AppendLine("드랍해역:");
 			{
-				string result = GetAppearingArea(ship.ShipID);
+				string result = this.GetAppearingArea(ship.ShipID);
 				if (string.IsNullOrEmpty(result))
 					result = "(불명)";
 				sb.AppendLine(result);
@@ -1576,14 +1586,14 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void StripMenu_View_ShowAppearingArea_Click(object sender, EventArgs e)
 		{
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 			if (ship == null)
 			{
 				System.Media.SystemSounds.Exclamation.Play();
 				return;
 			}
 
-			string result = GetAppearingArea(ship.ShipID);
+			string result = this.GetAppearingArea(ship.ShipID);
 
 			if (string.IsNullOrEmpty(result))
 				result = ship.NameWithClass + " 의 드랍해역을 알수없습니다.";
@@ -1598,16 +1608,16 @@ namespace ElectronicObserver.Window.Dialog
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
 
-				StripMenu_View_ShowShipGraphicViewer.PerformClick();
+                this.StripMenu_View_ShowShipGraphicViewer.PerformClick();
 			}
 		}
 
 		private void StripMenu_View_ShowShipGraphicViewer_Click(object sender, EventArgs e)
 		{
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 			if (ship != null)
 			{
-                new DialogShipGraphicViewer(ship.ShipID).Show(Owner);
+                new DialogShipGraphicViewer(ship.ShipID).Show(this.Owner);
             }
 			else
 			{
@@ -1618,7 +1628,7 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void StripMenu_Edit_GoogleShipName_Click(object sender, EventArgs e)
 		{
-			var ship = KCDatabase.Instance.MasterShips[_shipID];
+			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 			if (ship == null)
 			{
 				System.Media.SystemSounds.Exclamation.Play();
