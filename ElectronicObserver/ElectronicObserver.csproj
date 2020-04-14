@@ -292,7 +292,8 @@
     <Compile Include="Resource\Record\ResourceRecord.cs" />
     <Compile Include="Resource\KCResourceHelper.cs" />
     <Compile Include="Utility\Data\RecordHash.cs" />
-    <Compile Include="Utility\DynamicDataReader.cs" />
+    <Compile Include="Utility\ExternalData\ExternalDataGetter.cs" />
+    <Compile Include="Utility\ExternalData\ExternalDataReader.cs" />
     <Compile Include="Utility\FleetImageGenerator.cs" />
     <Compile Include="Utility\Storage\CsvHelper.cs" />
     <Compile Include="Utility\SyncBGMPlayer.cs" />
@@ -367,6 +368,7 @@
     <Compile Include="Utility\Storage\SerializableList.cs" />
     <Compile Include="Utility\SystemEvents.cs" />
     <Compile Include="Utility\ThemeManager.cs" />
+    <Compile Include="Utility\UtilExtension.cs" />
     <Compile Include="Utility\WinAPI.cs" />
     <Compile Include="Window\Control\FleetState.cs">
       <SubType>UserControl</SubType>
@@ -488,6 +490,12 @@
     </Compile>
     <Compile Include="Window\Dialog\DialogDevelopmentRecordViewer.Designer.cs">
       <DependentUpon>DialogDevelopmentRecordViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\Dialog\DialogExpeditionRecordViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Dialog\DialogExpeditionRecordViewer.Designer.cs">
+      <DependentUpon>DialogExpeditionRecordViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Window\Dialog\DialogDropRecordViewer.cs">
       <SubType>Form</SubType>
@@ -787,6 +795,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\DialogDevelopmentRecordViewer.resx">
       <DependentUpon>DialogDevelopmentRecordViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Dialog\DialogExpeditionRecordViewer.resx">
+      <DependentUpon>DialogExpeditionRecordViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\DialogDropRecordViewer.resx">
       <DependentUpon>DialogDropRecordViewer.cs</DependentUpon>

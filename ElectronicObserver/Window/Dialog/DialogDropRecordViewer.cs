@@ -19,15 +19,14 @@ namespace ElectronicObserver.Window.Dialog
 
         private ShipDropRecord _record;
 
-        private const string NameAny = "(전부)";
-        private const string NameNotExist = "(없음)";
-        private const string NameFullPort = "(여유공간X)";
-        private const string NameExist = "(드롭)";
+        private const string _nameAny = "(전부)";
+        private const string _nameNotExist = "(없음)";
+        private const string _nameFullPort = "(여유공간X)";
+        private const string _nameExist = "(드롭)";
 
-        private const string MapAny = "*";
+        private const string _mapAny = "*";
 
-        private Dictionary<int, DataTable> MapCellTable;
-
+        private Dictionary<int, DataTable> _mapCellTable;
 
         private class SearchArgument
         {
@@ -63,7 +62,7 @@ namespace ElectronicObserver.Window.Dialog
             var includedShipNames = this._record.Record
                 .Select(r => r.ShipName)
                 .Distinct()
-                .Except(new[] { NameNotExist, NameFullPort });
+                .Except(new[] { _nameNotExist, _nameFullPort });
 
             var includedShipObjects = includedShipNames
                 .Select(name => KCDatabase.Instance.MasterShips.Values.FirstOrDefault(ship => ship.NameWithClass == name))
@@ -75,7 +74,7 @@ namespace ElectronicObserver.Window.Dialog
             var includedItemNames = this._record.Record
                 .Select(r => r.ItemName)
                 .Distinct()
-                .Except(new[] { NameNotExist });
+                .Except(new[] { _nameNotExist });
 
             var includedItemObjects = includedItemNames
                 .Select(name => KCDatabase.Instance.MasterUseItems.Values.FirstOrDefault(item => item.Name == name))
@@ -89,9 +88,7 @@ namespace ElectronicObserver.Window.Dialog
                 new DataColumn( "Display", typeof( string ) ),
             });
 
-
-
-            this.MapCellTable = new Dictionary<int, DataTable>();
+            this._mapCellTable = new Dictionary<int, DataTable>();
             {
                 var dict = new Dictionary<int, HashSet<int>>();
 
@@ -111,29 +108,29 @@ namespace ElectronicObserver.Window.Dialog
                 {
                     int MapAreaID = p.Key / 10;
                     int MapInfoID = p.Key % 10;
-                    this.MapCellTable.Add(p.Key, dtbase.Clone());
-                    this.MapCellTable[p.Key].Rows.Add(-1, MapAny);
+                    this._mapCellTable.Add(p.Key, dtbase.Clone());
+                    this._mapCellTable[p.Key].Rows.Add(-1, _mapAny);
 
                     if (Utility.Configuration.Config.FormCompass.ToAlphabet)
                     {
                         foreach (var c in p.Value.OrderBy(k => k))
-                            this.MapCellTable[p.Key].Rows.Add(c, c.ToString() + "(" + NodeData.GetNodeName(MapAreaID, MapInfoID, c) + ")");
+                            this._mapCellTable[p.Key].Rows.Add(c, c.ToString() + "(" + NodeData.GetNodeName(MapAreaID, MapInfoID, c) + ")");
                     }
                     else
                     {
                         foreach (var c in p.Value.OrderBy(k => k))
-                            this.MapCellTable[p.Key].Rows.Add(c, c.ToString());
+                            this._mapCellTable[p.Key].Rows.Add(c, c.ToString());
                     }
-                    this.MapCellTable[p.Key].AcceptChanges();
+                    this._mapCellTable[p.Key].AcceptChanges();
                 }
             }
 
 
 
-            this.ShipName.Items.Add(NameAny);
-            this.ShipName.Items.Add(NameExist);
-            this.ShipName.Items.Add(NameNotExist);
-            this.ShipName.Items.Add(NameFullPort);
+            this.ShipName.Items.Add(_nameAny);
+            this.ShipName.Items.Add(_nameExist);
+            this.ShipName.Items.Add(_nameNotExist);
+            this.ShipName.Items.Add(_nameFullPort);
             this.ShipName.Items.AddRange(includedShipObjects
                 .OrderBy(s => s.NameReading)
                 .OrderBy(s => s.ShipType)
@@ -143,9 +140,9 @@ namespace ElectronicObserver.Window.Dialog
                 );
             this.ShipName.SelectedIndex = 0;
 
-            this.ItemName.Items.Add(NameAny);
-            this.ItemName.Items.Add(NameExist);
-            this.ItemName.Items.Add(NameNotExist);
+            this.ItemName.Items.Add(_nameAny);
+            this.ItemName.Items.Add(_nameExist);
+            this.ItemName.Items.Add(_nameNotExist);
             this.ItemName.Items.AddRange(includedItemObjects
                 .OrderBy(i => i.ItemID)
                 .Select(i => i.Name)
@@ -162,7 +159,7 @@ namespace ElectronicObserver.Window.Dialog
 
             {
                 DataTable dt = dtbase.Clone();
-                dt.Rows.Add(-1, MapAny);
+                dt.Rows.Add(-1, _mapAny);
                 foreach (var i in this._record.Record
                     .Select(r => r.MapAreaID)
                     .Distinct()
@@ -177,7 +174,7 @@ namespace ElectronicObserver.Window.Dialog
 
             {
                 DataTable dt = dtbase.Clone();
-                dt.Rows.Add(-1, MapAny);
+                dt.Rows.Add(-1, _mapAny);
                 foreach (var i in this._record.Record
                     .Select(r => r.MapInfoID)
                     .Distinct()
@@ -192,7 +189,7 @@ namespace ElectronicObserver.Window.Dialog
 
             {
                 DataTable dt = dtbase.Clone();
-                dt.Rows.Add(-1, MapAny);
+                dt.Rows.Add(-1, _mapAny);
                 // 残りは都度生成する
                 dt.AcceptChanges();
                 this.MapCellID.DisplayMember = "Display";
@@ -203,7 +200,7 @@ namespace ElectronicObserver.Window.Dialog
 
             {
                 DataTable dt = dtbase.Clone();
-                dt.Rows.Add(0, MapAny);
+                dt.Rows.Add(0, _mapAny);
                 foreach (var diff in this._record.Record
                     .Select(r => r.Difficulty)
                     .Distinct()
@@ -319,7 +316,7 @@ namespace ElectronicObserver.Window.Dialog
         {
 
             if (str.Length == 0)
-                return NameNotExist;
+                return _nameNotExist;
 
             StringBuilder sb = new StringBuilder();
 
@@ -403,9 +400,9 @@ namespace ElectronicObserver.Window.Dialog
             else
             {
                 this.MapCellID.Enabled = true;
-                if (this.MapCellTable.ContainsKey(maparea * 10 + mapinfo))
+                if (this._mapCellTable.ContainsKey(maparea * 10 + mapinfo))
                 {
-                    this.MapCellID.DataSource = this.MapCellTable[maparea * 10 + mapinfo];
+                    this.MapCellID.DataSource = this._mapCellTable[maparea * 10 + mapinfo];
                 }
                 else
                 {
@@ -510,11 +507,11 @@ namespace ElectronicObserver.Window.Dialog
 
 
             int priorityShip =
-                args.ShipName == NameAny ? 0 :
-                args.ShipName == NameExist ? 1 : 2;
+                args.ShipName == _nameAny ? 0 :
+                args.ShipName == _nameExist ? 1 : 2;
             int priorityItem =
-                args.ItemName == NameAny ? 0 :
-                args.ItemName == NameExist ? 1 : 2;
+                args.ItemName == _nameAny ? 0 :
+                args.ItemName == _nameExist ? 1 : 2;
             int priorityContent = Math.Max(priorityShip, priorityItem);
 
             var records = RecordManager.Instance.ShipDrop.Record;
@@ -527,19 +524,19 @@ namespace ElectronicObserver.Window.Dialog
                 var counts = new Dictionary<string, int[]>();
                 var allcounts = new Dictionary<string, int[]>();
 
-                List<int> Same_Node = new List<int>();
-                Same_Node = NodeData.Get_Same_Node(args.MapAreaID, args.MapInfoID, args.MapCellID);
+                List<int> sameNodes = new List<int>();
+                sameNodes = NodeData.GetSameNodeList(args.MapAreaID, args.MapInfoID, args.MapCellID);
                 bool exists_other_cell = false;
-                int SameNode = -1;
+                int sameNode = -1;
                 if (Utility.Configuration.Config.FormCompass.ToAlphabet)
                 {
-                    if (Same_Node.Count > 1)
+                    if (sameNodes.Count > 1)
                     {
                         exists_other_cell = true;
-                        foreach (int Node in Same_Node)
+                        foreach (int Node in sameNodes)
                         {
                             if (args.MapCellID != Node)
-                                SameNode = Node;
+                                sameNode = Node;
                         }
                     }
                 }
@@ -566,7 +563,7 @@ namespace ElectronicObserver.Window.Dialog
 
                     if (exists_other_cell)
                     {
-                        if (args.MapCellID != -1 && args.MapCellID != r.CellID && SameNode != r.CellID)
+                        if (args.MapCellID != -1 && args.MapCellID != r.CellID && sameNode != r.CellID)
                             continue;
                     }
                     else
@@ -632,17 +629,17 @@ namespace ElectronicObserver.Window.Dialog
 
                     switch (args.ShipName)
                     {
-                        case NameAny:
+                        case _nameAny:
                             break;
-                        case NameExist:
+                        case _nameExist:
                             if (r.ShipID < 0)
                                 continue;
                             break;
-                        case NameNotExist:
+                        case _nameNotExist:
                             if (r.ShipID != -1)
                                 continue;
                             break;
-                        case NameFullPort:
+                        case _nameFullPort:
                             if (r.ShipID != -2)
                                 continue;
                             break;
@@ -654,13 +651,13 @@ namespace ElectronicObserver.Window.Dialog
 
                     switch (args.ItemName)
                     {
-                        case NameAny:
+                        case _nameAny:
                             break;
-                        case NameExist:
+                        case _nameExist:
                             if (r.ItemID < 0)
                                 continue;
                             break;
-                        case NameNotExist:
+                        case _nameNotExist:
                             if (r.ItemID != -1)
                                 continue;
                             break;
@@ -671,7 +668,6 @@ namespace ElectronicObserver.Window.Dialog
                     }
 
                     #endregion
-
 
                     if (!args.MergeRows)
                     {

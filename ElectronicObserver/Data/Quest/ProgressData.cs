@@ -91,7 +91,6 @@ namespace ElectronicObserver.Data.Quest
 		/// </summary>
 		public virtual void Increment()
 		{
-
 			var q = KCDatabase.Instance.Quest[this.QuestID];
 
 			if (q == null)
@@ -102,7 +101,6 @@ namespace ElectronicObserver.Data.Quest
 
 			if (q.State != 2)
 				return;
-
 
 			if (!this.IgnoreCheckProgress)
                 this.CheckProgress(q);
@@ -115,7 +113,6 @@ namespace ElectronicObserver.Data.Quest
 		/// </summary>
 		public virtual void Decrement()
 		{
-
 			var q = KCDatabase.Instance.Quest[this.QuestID];
 
 			if (q != null && q.State == 3)      //達成済なら無視

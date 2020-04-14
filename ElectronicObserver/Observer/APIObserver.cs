@@ -434,7 +434,6 @@ namespace ElectronicObserver.Observer
                 int result = (int)json.api_result;
                 if (result != 1)
                 {
-
                     throw new InvalidOperationException("에러코를 발견했습니다. ( 오류 코드 :  " + result + ")");
                 }
 

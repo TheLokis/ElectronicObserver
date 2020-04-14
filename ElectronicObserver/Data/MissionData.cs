@@ -16,7 +16,7 @@ namespace ElectronicObserver.Data
 
         /// 遠征ID
         /// </summary>
-        public int MissionID => (int)this.RawData.api_id;
+        public int MissionID	=> (int)this.RawData.api_id;
 
         /// <summary>
         /// 表示される遠征ID
@@ -26,7 +26,7 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 海域カテゴリID
         /// </summary>
-        public int MapAreaID => (int)this.RawData.api_maparea_id;
+        public int MapAreaID	=> (int)this.RawData.api_maparea_id;
 
 		/// <summary>
 		/// 遠征名 번역됨
@@ -47,29 +47,29 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 遠征時間(分単位)
         /// </summary>
-        public int Time => (int)this.RawData.api_time;
+        public int Time			=> (int)this.RawData.api_time;
 
 		/// <summary>
 		/// 難易度
 		/// </summary>
-		public int Difficulty => (int)this.RawData.api_difficulty;
+		public int Difficulty	=> (int)this.RawData.api_difficulty;
 
 		/// <summary>
 		/// 消費燃料割合
 		/// </summary>
-		public double Fuel => this.RawData.api_use_fuel;
+		public double Fuel		=> this.RawData.api_use_fuel;
 
 		/// <summary>
 		/// 消費弾薬割合
 		/// </summary>
-		public double Ammo => this.RawData.api_use_bull;
+		public double Ammo		=> this.RawData.api_use_bull;
 
 		//win_item<n>
 
 		/// <summary>
 		/// 遠征中断・強制帰投可能かどうか
 		/// </summary>
-		public bool Cancelable => (int)this.RawData.api_return_flag != 0;
+		public bool Cancelable	=> (int)this.RawData.api_return_flag != 0;
 
 
 

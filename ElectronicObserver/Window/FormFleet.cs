@@ -24,7 +24,7 @@ namespace ElectronicObserver.Window
     public partial class FormFleet : DockContent
     {
 
-        private bool IsRemodeling = false;
+        private bool _isRemodeling = false;
 
 
         private class TableFleetControl : IDisposable
@@ -121,7 +121,6 @@ namespace ElectronicObserver.Window
                 this.ToolTipInfo = parent.ToolTipInfo;
 
                 #endregion
-
             }
 
             
@@ -131,7 +130,7 @@ namespace ElectronicObserver.Window
                 for(int i = 0; i < this.Parent.ControlMember.Count() ;i++)
                     this.Parent.ControlMember[i].SelectedItem = Convert.ToInt32(this.Expeditions.SelectedItem);
 
-                FormMain.Instance.fInformation.Check_Expedition(this.Parent.FleetID, Convert.ToInt32(this.Expeditions.SelectedItem));
+                FormMain.Instance.fInformation.CheckExpeditionCondition(this.Parent.FleetID, Convert.ToInt32(this.Expeditions.SelectedItem));
             }
             
             public TableFleetControl(FormFleet parent, TableLayoutPanel table)
@@ -143,7 +142,6 @@ namespace ElectronicObserver.Window
 
             public void AddToTable(TableLayoutPanel table)
             {
-
                 table.SuspendLayout();
                 table.Controls.Add(this.Name, 0, 0);
                 table.Controls.Add(this.State, 1, 0);
@@ -152,7 +150,6 @@ namespace ElectronicObserver.Window
                 table.Controls.Add(this.AntiAirPower, 4, 0);
                 table.Controls.Add(this.Expeditions, 5, 0);
                 table.ResumeLayout();
-
             }
 
             private void SearchingAbility_Click(object sender, EventArgs e, int fleetID)
@@ -180,17 +177,16 @@ namespace ElectronicObserver.Window
 
                 this.Name.Text = fleet.Name;
                 {
-                    var members = fleet.MembersInstance.Where(s => s != null);
+                    var members     = fleet.MembersInstance.Where(s => s != null);
 
-                    int levelSum = members.Sum(s => s.Level);
+                    int levelSum    = members.Sum(s => s.Level);
 
-                    int fueltotal = members.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1));
-                    int ammototal = members.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int fueltotal   = members.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int ammototal   = members.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int fuelunit    = members.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int ammounit    = members.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
 
-                    int fuelunit = members.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
-                    int ammounit = members.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
-
-                    int speed = members.Select(s => s.Speed).DefaultIfEmpty(20).Min();
+                    int speed       = members.Select(s => s.Speed).DefaultIfEmpty(20).Min();
 
                     string supporttype;
                     switch (fleet.SupportType)
@@ -320,13 +316,13 @@ namespace ElectronicObserver.Window
 
             public void ConfigurationChanged(FormFleet parent)
             {
-                this.Name.Font = parent.MainFont;
-                this.State.Font = parent.MainFont;
+                this.Name.Font      = parent.MainFont;
+                this.State.Font     = parent.MainFont;
                 this.State.RefreshFleetState();
-                this.AirSuperiority.Font = parent.MainFont;
-                this.SearchingAbility.Font = parent.MainFont;
-                this.AntiAirPower.Font = parent.MainFont;
-                this.Expeditions.Font = parent.MainFont;
+                this.AirSuperiority.Font    = parent.MainFont;
+                this.SearchingAbility.Font  = parent.MainFont;
+                this.AntiAirPower.Font      = parent.MainFont;
+                this.Expeditions.Font       = parent.MainFont;
 
                 ControlHelper.SetTableRowStyles(parent.TableFleet, ControlHelper.GetDefaultRowStyle());
             }
@@ -352,11 +348,11 @@ namespace ElectronicObserver.Window
             public ShipStatusEquipment Equipments;
             public int SelectedItem = 0;
 
-            private ToolTip ToolTipInfo;
-            private FormFleet Parent;
-            private ShipData Cached_Ship;
-            private string old_slot;
-            private int old_ex_slot;
+            private ToolTip     _toolTipInfo;
+            private FormFleet   _parent;
+            private ShipData    _cachedShip;
+            private string      _oldSlot;
+            private int         _oldExSlot;
 
 
             public TableMemberControl(FormFleet parent)
@@ -455,8 +451,8 @@ namespace ElectronicObserver.Window
 
                 this.ConfigurationChanged(parent);
 
-                this.ToolTipInfo = parent.ToolTipInfo;
-                this.Parent = parent;
+                this._toolTipInfo = parent.ToolTipInfo;
+                this._parent = parent;
                 #endregion
 
             }
@@ -471,7 +467,6 @@ namespace ElectronicObserver.Window
 
             public void AddToTable(TableLayoutPanel table, int row)
             {
-
                 table.SuspendLayout();
 
                 table.Controls.Add(this.Name, 0, row);
@@ -482,7 +477,6 @@ namespace ElectronicObserver.Window
                 table.Controls.Add(this.Equipments, 5, row);
 
                 table.ResumeLayout();
-
             }
 
             public bool isChanged(ShipData newShip)
@@ -490,13 +484,13 @@ namespace ElectronicObserver.Window
                 string new_slot = "" + newShip.RawData.api_slot;
                 int new_ex_slot = (int)newShip.RawData.api_slot_ex;
 
-                if (newShip.ID != this.Cached_Ship.ID) return true;
+                if (newShip.ID != this._cachedShip.ID) return true;
 
-                if (newShip.MasterID != this.Cached_Ship.MasterID) return true;
+                if (newShip.MasterID != this._cachedShip.MasterID) return true;
 
-                if (!new_slot.Equals(this.old_slot)) return true;
+                if (!new_slot.Equals(this._oldSlot)) return true;
 
-                if (new_ex_slot != this.old_ex_slot) return true;
+                if (new_ex_slot != this._oldExSlot) return true;
 
                 return false;
             }
@@ -508,24 +502,23 @@ namespace ElectronicObserver.Window
 
                 if (ship != null)
                 {
-                    bool isEscaped = KCDatabase.Instance.Fleet[this.Parent.FleetID].EscapedShipList.Contains(shipMasterID);
-
+                    bool isEscaped = KCDatabase.Instance.Fleet[this._parent.FleetID].EscapedShipList.Contains(shipMasterID);
                     
-                    if (this.Cached_Ship != null)
+                    if (this._cachedShip != null)
                     {
                         if (this.isChanged(ship) && Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
                             if (Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
-                                this.Parent.Show();
+                                this._parent.Show();
                     }
 
 
-                    this.old_slot = "" + ship.RawData.api_slot;
-                    this.old_ex_slot = (int) ship.RawData.api_slot_ex;
-                    this.Cached_Ship = ship;
+                    this._oldSlot = "" + ship.RawData.api_slot;
+                    this._oldExSlot = (int) ship.RawData.api_slot_ex;
+                    this._cachedShip = ship;
 
                     this.Name.Text = ship.MasterShip.NameWithClass;
                     this.Name.Tag = ship.ShipID;
-                    this.ToolTipInfo.SetToolTip(this.Name,
+                    this._toolTipInfo.SetToolTip(this.Name,
                         string.Format(
                             "{0} {1}\r\n화력: {2}/{3}\r\n뇌장: {4}/{5}\r\n대공: {6}/{7}\r\n장갑: {8}/{9}\r\n대잠: {10}/{11}\r\n회피: {12}/{13}\r\n색적: {14}/{15}\r\n운: {16}\r\n사정: {17} / 속력: {18}\r\n(우클릭으로 도감에)\n",
                             ship.MasterShip.ShipTypeName, ship.NameWithLevel,
@@ -585,7 +578,7 @@ namespace ElectronicObserver.Window
 
                         tip.AppendLine("(우클릭으로 경험치계산기에)");
 
-                        this.ToolTipInfo.SetToolTip(this.Level, tip.ToString());
+                        this._toolTipInfo.SetToolTip(this.Level, tip.ToString());
                     }
 
 
@@ -646,7 +639,7 @@ namespace ElectronicObserver.Window
                                 DateTimeHelper.ToTimeRemainString(Calculator.CalculateDockingUnitTime(ship)));
                         }
 
-                        this.ToolTipInfo.SetToolTip(this.HP, sb.ToString());
+                        this._toolTipInfo.SetToolTip(this.HP, sb.ToString());
                     }
                     this.HP.ResumeUpdate();
 
@@ -658,18 +651,18 @@ namespace ElectronicObserver.Window
                     if (ship.Condition < 49)
                     {
                         TimeSpan ts = new TimeSpan(0, (int)Math.Ceiling((49 - ship.Condition) / 3.0) * 3, 0);
-                        this.ToolTipInfo.SetToolTip(this.Condition, string.Format("완전회복까지 약 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
+                        this._toolTipInfo.SetToolTip(this.Condition, string.Format("완전회복까지 약 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
                     }
                     else
                     {
-                        this.ToolTipInfo.SetToolTip(this.Condition, string.Format("앞으로 {0} 회 대성공가능", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
+                        this._toolTipInfo.SetToolTip(this.Condition, string.Format("앞으로 {0} 회 대성공가능", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
                     }
 
                     this.ShipResource.SetResources(ship.Fuel, ship.FuelMax, ship.Ammo, ship.AmmoMax);
 
 
                     this.Equipments.SetSlotList(ship);
-                    this.ToolTipInfo.SetToolTip(this.Equipments, this.GetEquipmentString(ship));
+                    this._toolTipInfo.SetToolTip(this.Equipments, this.GetEquipmentString(ship));
 
                 }
                 else
@@ -693,7 +686,7 @@ namespace ElectronicObserver.Window
                 {
                     if ((e.Button & MouseButtons.Right) != 0)
                     {
-                        new DialogAlbumMasterShip(id).Show(this.Parent);
+                        new DialogAlbumMasterShip(id).Show(this._parent);
                     }
                 }
             }
@@ -704,7 +697,7 @@ namespace ElectronicObserver.Window
                 {
                     if ((e.Button & MouseButtons.Right) != 0)
                     {
-                        new DialogExpChecker(id).Show(this.Parent);
+                        new DialogExpChecker(id).Show(this._parent);
                     }
                 }
             }
@@ -996,16 +989,16 @@ namespace ElectronicObserver.Window
         void Updated(string apiname, dynamic data)
         {
 
-            if (this.IsRemodeling)
+            if (this._isRemodeling)
             {
                 if (apiname == "api_get_member/slot_item")
-                    this.IsRemodeling = false;
+                    this._isRemodeling = false;
                 else
                     return;
             }
             if (apiname == "api_req_kaisou/remodeling")
             {
-                this.IsRemodeling = true;
+                this._isRemodeling = true;
                 return;
             }
 

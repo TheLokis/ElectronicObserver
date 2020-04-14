@@ -199,14 +199,11 @@ namespace ElectronicObserver.Data.Quest
 
         void QuestUpdated(string apiname, dynamic data)
         {
-
-
             var quests = KCDatabase.Instance.Quest;
 
             //消えている・達成済みの任務の進捗情報を削除
             if (quests.IsLoadCompleted)
                 this.Progresses.RemoveAll(q => !quests.Quests.ContainsKey(q.QuestID) || quests[q.QuestID].State == 3);
-
 
             foreach (var q in quests.Quests.Values)
             {
@@ -566,9 +563,7 @@ namespace ElectronicObserver.Data.Quest
 
             this.LastUpdateTime = DateTime.Now;
             this.OnProgressChanged();
-
         }
-
 
         void BattleFinished(string apiname, dynamic data)
         {
@@ -718,13 +713,13 @@ namespace ElectronicObserver.Data.Quest
 
         public void EquipmentDiscarded(string apiname, Dictionary<string, string> data)
         {
-
             var ids = data["api_slotitem_ids"].Split(",".ToCharArray()).Select(s => int.Parse(s));
 
             foreach (var p in this.Progresses.Values.OfType<ProgressDiscard>())
             {
                 p.Increment(ids);
             }
+
             foreach (var p in this.Progresses.Values.OfType<ProgressMultiDiscard>())
             {
                 p.Increment(ids);

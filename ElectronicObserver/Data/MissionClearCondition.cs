@@ -323,13 +323,13 @@ namespace ElectronicObserver.Data
             public ReadOnlyCollection<string> FailureReason => this.failureReason.AsReadOnly();
 
             // nullable!
-            private FleetData targetFleet;
-            private IEnumerable<ShipData> members => (this.targetFleet?.MembersInstance ?? Enumerable.Empty<ShipData>()).Where(s => s != null);
+            private FleetData _targetFleet;
+            private IEnumerable<ShipData> members => (this._targetFleet?.MembersInstance ?? Enumerable.Empty<ShipData>()).Where(s => s != null);
 
 
             public MissionClearConditionResult(FleetData targetFleet)
             {
-                this.targetFleet = targetFleet;
+                this._targetFleet = targetFleet;
                 this.IsSuceeded = true;
                 this.failureReason = new List<string>();
             }
@@ -344,7 +344,7 @@ namespace ElectronicObserver.Data
                 }
             }
 
-            private string CurrentValue(int value) => this.targetFleet != null ? (value.ToString() + "/") : "";
+            private string CurrentValue(int value) => this._targetFleet != null ? (value.ToString() + "/") : "";
 
             public MissionClearConditionResult AddMessage(string message)
             {

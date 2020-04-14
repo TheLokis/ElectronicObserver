@@ -60,8 +60,11 @@ namespace ElectronicObserver.Data.Quest
 
 			if (this.Categories == null)
 			{
-				foreach (var i in equipments)
+                foreach (var i in equipments)
+                {
                     this.Increment();
+                }
+
 				return;
 			}
 

@@ -71,7 +71,7 @@ namespace ElectronicObserver.Window
 
         public static FormMain Instance;
 
-        public DynamicDataReader Translator { get; private set; }
+        public ExternalDataReader Translator { get; private set; }
 
 
         public FormMain()
@@ -93,7 +93,7 @@ namespace ElectronicObserver.Window
             Thread.CurrentThread.CurrentCulture = c;
             Thread.CurrentThread.CurrentUICulture = ui;
 
-			this.Translator = DynamicDataReader.Instance;
+			this.Translator = ExternalDataReader.Instance;
 
             Instance = this;
             this.InitializeComponent();

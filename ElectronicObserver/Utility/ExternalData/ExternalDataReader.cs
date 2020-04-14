@@ -10,7 +10,7 @@ using ElectronicObserver.Data;
 
 namespace ElectronicObserver.Utility
 {
-    public class ExternalData
+    public class ExternalDataInfo
     {
         public string Version { get; set; }
         public JObject Data { get; set; }
@@ -38,22 +38,20 @@ namespace ElectronicObserver.Utility
         None,
     }
 
-    public class DynamicDataReader
+    public partial class ExternalDataReader
     {
-        private List<ExternalData> _externalDatas = new List<ExternalData>();
+        private List<ExternalDataInfo> _externalDatas = new List<ExternalDataInfo>();
         private static string _hubsite = "https://thelokis.github.io/EOTranslation/Translation/";
         //private static string _hubsite = "http://172.30.1.20:8080/Translations/";
 
-        #region Singleton
-        private static readonly DynamicDataReader _instance = new DynamicDataReader();
-        public static DynamicDataReader Instance = _instance;
-        #endregion
+        private static readonly ExternalDataReader _instance = new ExternalDataReader();
+        public static ExternalDataReader Instance = _instance;
 
-        internal DynamicDataReader()
+        internal ExternalDataReader()
         {
             for (int i = 0; i < (int)DataType.None; i++)
             {
-                var data = new ExternalData();
+                var data = new ExternalDataInfo();
                 var dataType = (DataType)i;
                 data.DataType = dataType;
 
@@ -184,150 +182,6 @@ namespace ElectronicObserver.Utility
             });
         }
 
-        public JObject GetData(DataType type)
-        {
-            return this._externalDatas.Find(i => i.DataType == type).Data;
-        }
-
-        public JToken GetExpeditionData(string id)
-        {
-            var obj = this.GetData(DataType.ExpeditionData)["Expedition"] as JArray;
-            if (obj == null) return null;
-
-            for (int i = 0; i < obj.Count; i++)
-            {
-                var data = obj[i];
-                if (data["ID"].ToString().Equals(id) == true)
-                {
-                    return data;
-                }
-            }
-
-            return null;
-        }
-
-        public string GetTranslation(string jpString, DataType type, int id = -1)
-        {
-            try
-            {
-                string translated = jpString;
-                var translationList = this.GetData(type);
-                if (translationList == null)
-                {
-                    return translated;
-                }
-
-                if (id != -1)
-                {
-                    if (this.GetTranslation(id, translationList, ref translated, type) == true)
-                    {
-                        return translated;
-                    } 
-                }
-                else
-                {
-                    if (this.GetTranslation(jpString, translationList, ref translated, type) == true)
-                    {
-                        return translated;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.Add(3, "번역 파일을 불러오는데 실패했습니다. : " + e.Message + ":" + type);
-                return jpString;
-            }
-
-            return jpString;
-        }
-
-        public bool GetTranslation(int id, JObject translationList, ref string translate, DataType type)
-        {
-            var founded = translationList.TryGetValue(id.ToString(), out JToken value);
-            if (founded == false || value == null)
-            {
-                return false;
-            }
-
-            translate = value.ToString();
-            return true;
-        }
-
-        public bool GetTranslation(string jpString, JObject translationList, ref string translate, DataType type, string shipSuffix = "")
-        {
-            var founded = translationList.TryGetValue(jpString, out JToken value);
-            if (founded == false || value == null)
-            {
-                if (type == DataType.ShipName)
-                {
-                    var suffixList = this.GetData(DataType.ShipSuffix);
-                    foreach (var suffix in suffixList)
-                    {
-                        if (jpString.Contains(suffix.Key.ToString()) == true)
-                        {
-                            translate = jpString.Remove(jpString.Length - suffix.Key.ToString().Length);
-                            return this.GetTranslation(translate, translationList, ref translate, DataType.ShipName, suffix.Value.ToString());
-                        }
-                    }
-                }
-
-                translate = jpString;
-                return false;
-            }
-
-            translate = value.ToString() + shipSuffix;
-            return true;
-        }
-
-        public void Get_Fit(Dictionary<string, string> data)
-        {
-            int Shipid = int.Parse(data["api_id"]);
-            int Equipmentid = int.Parse(data["api_item_id"]);
-            if (Equipmentid == -1)
-                return;
-            KCDatabase db = KCDatabase.Instance;
-            if (db.Equipments[Equipmentid].MasterEquipment.IsLargeGun)
-            {
-                bool Married = db.Ships[Shipid].Level >= 100;
-                int Master_Shipid = db.Ships[Shipid].MasterShip.ID;
-                int Master_Itemid = db.Equipments[Equipmentid].MasterEquipment.ID;
-                if (this.Check_WeightData(Master_Shipid))
-                {
-                    Master_Shipid = this.GetData(DataType.FitData)[Master_Shipid.ToString()].ToObject<int>();
-                }
-                var WeightData = this.Find_WeightData(Master_Shipid);
-                if (WeightData == null)
-                {
-                    Window.FormMain.Instance.fInformation.Show_FitInfo(Master_Shipid, Master_Itemid);
-                    return;
-                }
-                JObject Class_Data = (JObject)WeightData["weightClass"];
-                JObject Accuracy_Data = (JObject)WeightData["accuracy"];
-                string Weight_Type = "unknown";
-                foreach (var WeightClass in Class_Data)
-                {
-                    int[] Weights = WeightClass.Value.ToObject<int[]>();
-                    if (Weights.Contains(Master_Itemid))
-                    {
-                        Weight_Type = WeightClass.Key;
-                        break;
-                    }
-                }
-                if (Weight_Type.Equals("unknown"))
-                {
-                    Window.FormMain.Instance.fInformation.Show_FitInfo(Master_Shipid, Master_Itemid);
-                }
-                else
-                {
-                    int[] Fit_Bonus = new int[] { Accuracy_Data[Weight_Type]["day"].ToObject<int>(), Accuracy_Data[Weight_Type]["night"].ToObject<int>() };
-                    float Marry_Data = 0;
-                    if (Accuracy_Data[Weight_Type]["married"] != null)
-                        Marry_Data = Accuracy_Data[Weight_Type]["married"].ToObject<float>();
-                    Window.FormMain.Instance.fInformation.Show_FitInfo(db.Ships[Shipid].Name, db.MasterEquipments[Master_Itemid].Name, Fit_Bonus, Marry_Data, Married);
-                }
-            }
-        }
-
         public string DataTypeToName(DataType type)
         {
             switch (type)
@@ -370,28 +224,7 @@ namespace ElectronicObserver.Utility
             }
         }
 
-        public bool Check_WeightData(int Shipid)
-        {
-            var Fit_Info = this.GetData(DataType.FitData)[Shipid.ToString()];
-            if (Fit_Info == null)
-                return false;
-
-            if (Fit_Info.Type == JTokenType.Integer)
-                return true;
-
-            return false;
-        }
-
-        public JObject Find_WeightData(int Shipid)
-        {
-            var Fit_Info = this.GetData(DataType.FitData)[Shipid.ToString()];
-            if (Fit_Info != null)
-                return (JObject)Fit_Info;
-            else
-                return null;
-        }
-
-        public void ForeachExternalData(System.Action<ExternalData> action)
+        public void ForeachExternalData(System.Action<ExternalDataInfo> action)
         {
             this._externalDatas.ForEach(action);
         }

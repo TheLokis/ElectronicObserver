@@ -23,12 +23,13 @@ namespace ElectronicObserver.Resource.Record
 
 		public string MasterPath { get; private set; }
 
-		public EnemyFleetRecord EnemyFleet { get; private set; }
-		public ShipParameterRecord ShipParameter { get; private set; }
-		public ConstructionRecord Construction { get; private set; }
-		public ShipDropRecord ShipDrop { get; private set; }
-		public DevelopmentRecord Development { get; private set; }
-		public ResourceRecord Resource { get; private set; }
+		public EnemyFleetRecord			EnemyFleet		{ get; private set; }
+		public ShipParameterRecord		ShipParameter	{ get; private set; }
+		public ConstructionRecord		Construction	{ get; private set; }
+		public ShipDropRecord			ShipDrop		{ get; private set; }
+		public DevelopmentRecord		Development		{ get; private set; }
+		public ResourceRecord			Resource		{ get; private set; }
+		public ExpeditionRecord			Expedition		{ get; private set; }
 
 		private IEnumerable<RecordBase> Records
 		{
@@ -40,6 +41,7 @@ namespace ElectronicObserver.Resource.Record
 				yield return this.ShipDrop;
 				yield return this.Development;
 				yield return this.Resource;
+				yield return this.Expedition;
 			}
 		}
 
@@ -49,19 +51,20 @@ namespace ElectronicObserver.Resource.Record
 		private RecordManager()
 		{
 
-            this.MasterPath = @"Record";
-            this.EnemyFleet = new EnemyFleetRecord();
-            this.ShipParameter = new ShipParameterRecord();
-            this.Construction = new ConstructionRecord();
-            this.ShipDrop = new ShipDropRecord();
-            this.Development = new DevelopmentRecord();
-            this.Resource = new ResourceRecord();
+            this.MasterPath		= @"Record";
+            this.EnemyFleet		= new EnemyFleetRecord();
+            this.ShipParameter	= new ShipParameterRecord();
+            this.Construction	= new ConstructionRecord();
+            this.ShipDrop		= new ShipDropRecord();
+            this.Development	= new DevelopmentRecord();
+            this.Resource		= new ResourceRecord();
+			this.Expedition		= new ExpeditionRecord();
 
 			foreach (var r in this.Records)
 				r.RegisterEvents();
 
 
-			if (!Directory.Exists(this.MasterPath))
+			if (Directory.Exists(this.MasterPath) == false)
 			{
 				Directory.CreateDirectory(this.MasterPath);
 			}
@@ -94,7 +97,6 @@ namespace ElectronicObserver.Resource.Record
 
 		public bool SaveAll(bool logging = true)
 		{
-
 			//api_start2がロード済みのときのみ
 			if (KCDatabase.Instance.MasterShips.Count == 0) return false;
 
@@ -181,11 +183,11 @@ namespace ElectronicObserver.Resource.Record
 
 					if (this.SavePartial(false))
 					{
-						Utility.Logger.Add(1, "기록 자동 저장 하였습니다.");
+						Utility.Logger.Add(1, "기록 자동 저장하였습니다.");
 					}
 					else
 					{
-						Utility.Logger.Add(3, "기록 자동 저장 실패하였습니다.");
+						Utility.Logger.Add(3, "기록 자동 저장을 실패하였습니다.");
 					}
 				}
 			}

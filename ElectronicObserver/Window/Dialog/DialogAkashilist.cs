@@ -1,19 +1,14 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Resource;
-using ElectronicObserver.Resource.Record;
 using ElectronicObserver.Utility.Data;
-using ElectronicObserver.Utility.Mathematics;
-using ElectronicObserver.Window.Control;
 using ElectronicObserver.Window.Support;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ElectronicObserver.Utility;
 using Newtonsoft.Json;
@@ -23,32 +18,26 @@ namespace ElectronicObserver.Window.Dialog
 {
     public partial class DialogAkashilist : Form
     {
-
-        private int current_day;
+        private int _currentDay;
+        private List<Button> _btns = null;
 
         public DialogAkashilist()
         {
             this.InitializeComponent();
 
-            List<Button> Btns = new List<Button>() { this.Btn_Day0, this.Btn_Day1, this.Btn_Day2, this.Btn_Day3, this.Btn_Day4, this.Btn_Day5, this.Btn_Day6 };
-            List<string> Days = new List<string>() { "일", "월", "화", "수", "목", "금", "토" };
+            this._btns = new List<Button>() { this.Btn_Day0, this.Btn_Day1, this.Btn_Day2, this.Btn_Day3, this.Btn_Day4, this.Btn_Day5, this.Btn_Day6 };
 
             ControlHelper.SetDoubleBuffered(this.AkashiListView);
 
-
-            //ShipView Initialize
-            //AkashiListView.SuspendLayout();
-
             this.Btn_BackColor_Reset();
-            Btns[(int)DateTime.Today.DayOfWeek].BackColor = SystemColors.ActiveCaption;
-
-            this.Update_DataList((int)DateTime.Today.DayOfWeek, false, false);
+            this._btns[(int)DateTime.Today.DayOfWeek].BackColor = SystemColors.ActiveCaption;
+            this.UpdateDataList((int)DateTime.Today.DayOfWeek, false, false);
         }
 
         public void Btn_BackColor_Reset()
         {
-            List<Button> Btns = new List<Button>() { this.Btn_Day0, this.Btn_Day1, this.Btn_Day2, this.Btn_Day3, this.Btn_Day4, this.Btn_Day5, this.Btn_Day6 };
-            foreach (var btn in Btns)
+
+            foreach (var btn in this._btns)
             {
                 btn.BackColor = SystemColors.Control;
             }
@@ -70,13 +59,13 @@ namespace ElectronicObserver.Window.Dialog
             if (e.IsSelected) e.Item.Selected = false;
         }
 
-        public void Update_DataList(int day, bool Checked, bool KaisuChecked)
+        public void UpdateDataList(int day, bool achecked, bool KaisuChecked)
         {
-            this.current_day = day;
+            this._currentDay = day;
 
             this.AkashiListView.Rows.Clear();
 
-            JObject Data = DynamicDataReader.Instance.GetData(DataType.AkashiData);
+            JObject Data = ExternalDataReader.Instance.GetData(DataType.AkashiData);
 
             KCDatabase db = KCDatabase.Instance;
 
@@ -126,7 +115,7 @@ namespace ElectronicObserver.Window.Dialog
             }
 
 
-            if (!Checked)
+            if (!achecked)
                 allCount = remainCount;
 
 
@@ -424,59 +413,59 @@ namespace ElectronicObserver.Window.Dialog
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day0.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(0, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(0, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day1_Click(object sender, EventArgs e)
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day1.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(1, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(1, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day2_Click(object sender, EventArgs e)
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day2.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(2, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(2, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day3_Click(object sender, EventArgs e)
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day3.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(3, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(3, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day4_Click(object sender, EventArgs e)
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day4.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(4, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(4, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day5_Click(object sender, EventArgs e)
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day5.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(5, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(5, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Btn_Day6_Click(object sender, EventArgs e)
         {
             this.Btn_BackColor_Reset();
             this.Btn_Day6.BackColor = SystemColors.ActiveCaption;
-            this.Update_DataList(6, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(6, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Material_Check_Click(object sender, EventArgs e)
         {
-            this.Update_DataList(this.current_day, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(this._currentDay, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void Can_KaisuCheck_Click(object sender, EventArgs e)
         {
-            this.Update_DataList(this.current_day, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
+            this.UpdateDataList(this._currentDay, this.CanMaterial_CheckBox.Checked, this.Can_KaisuCheck.Checked);
         }
 
         private void EqListView_CellContentClick(object sender, DataGridViewCellEventArgs e)

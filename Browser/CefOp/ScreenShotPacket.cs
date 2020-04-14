@@ -21,21 +21,21 @@ namespace Browser.CefOp
             this.TaskSource = new TaskCompletionSource<ScreenShotPacket>();
         }
 
-        public void Complete(string dataurl)
+        public void Complete(string dataUrl)
         {
-            this.DataUrl = dataurl;
+            this.DataUrl = dataUrl;
             this.TaskSource.SetResult(this);
         }
 
         public Bitmap GetImage() => ConvertToImage(this.DataUrl);
 
 
-        public static Bitmap ConvertToImage(string dataurl)
+        public static Bitmap ConvertToImage(string dataUrl)
         {
-            if (dataurl == null || !dataurl.StartsWith("data:image/png"))
+            if (dataUrl == null || !dataUrl.StartsWith("data:image/png"))
                 return null;
 
-            var s = dataurl.Substring(dataurl.IndexOf(',') + 1);
+            var s = dataUrl.Substring(dataUrl.IndexOf(',') + 1);
             var bytes = Convert.FromBase64String(s);
 
             Bitmap bitmap;

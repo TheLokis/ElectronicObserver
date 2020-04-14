@@ -634,7 +634,7 @@ namespace ElectronicObserver.Data
 
 
         /// <summary>
-        /// 艦種名
+        /// 艦種名 번역됨
         /// </summary>
         public string ShipTypeName
         {

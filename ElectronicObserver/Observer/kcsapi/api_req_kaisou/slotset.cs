@@ -15,7 +15,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_kaisou
 
         public override void OnRequestReceived(Dictionary<string, string> data)
         {
-            Utility.DynamicDataReader.Instance.Get_Fit(data);
+            Utility.ExternalDataReader.Instance.GetFit(data);
 
             base.OnRequestReceived(data);
         }

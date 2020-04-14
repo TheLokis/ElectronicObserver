@@ -131,7 +131,7 @@ namespace ElectronicObserver.Window
 
                 case "api_req_mission/start":
                     if (Utility.Configuration.Config.Control.ShowExpeditionAlertDialog)
-                        CheckExpedition(int.Parse(data["api_mission_id"]), int.Parse(data["api_deck_id"]));
+                        CheckExpeditionFleet(int.Parse(data["api_mission_id"]), int.Parse(data["api_deck_id"]));
                     break;
 
                 case "api_get_member/sortie_conditions":
@@ -497,14 +497,14 @@ namespace ElectronicObserver.Window
             }
         }
 
-        class Expedition_Condition
+        class ExpeditionCondition
         {
             public int[] types;
             public int req_count;
             public int fleet_count;
         }
 
-        public void Show_FitInfo(string ShipName, string EquipmentName, int[] data, float marry_modify, bool married)
+        public void ShowFitInfo(string ShipName, string EquipmentName, int[] data, float marry_modify, bool married)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("[피트 정보]\r\n");
@@ -556,7 +556,7 @@ namespace ElectronicObserver.Window
             this.TextInformation.Text = sb.ToString();
         }
 
-        public void Show_FitInfo(int Shipid, int Equipmentid)
+        public void ShowFitInfo(int Shipid, int Equipmentid)
         {
             KCDatabase db = KCDatabase.Instance;
 
@@ -569,7 +569,7 @@ namespace ElectronicObserver.Window
             this.TextInformation.Text = sb.ToString();
         }
 
-        private void CheckExpedition(int missionID, int fleetID)
+        private void CheckExpeditionFleet(int missionID, int fleetID)
         {
             var fleet = KCDatabase.Instance.Fleet[fleetID];
             var result = MissionClearCondition.Check(missionID, fleet);
@@ -584,234 +584,219 @@ namespace ElectronicObserver.Window
         }
 
         // 작업 체크포인트 - 원정체크
-        public void Check_Expedition(int fleetID, int MissionId)
+        public void CheckExpeditionCondition(int fleetID, int MissionId)
         {
             KCDatabase db = KCDatabase.Instance;
             MissionData mis = db.Mission[MissionId];
             var Data = FormMain.Instance.Translator.GetExpeditionData(MissionId.ToString());
 
+            FleetData fleet = db.Fleet[fleetID];
+            var members = db.Fleet[fleetID].MembersInstance.Where(s => s != null);
+
+            double expeditionBonus = Calculator.GetExpeditionBonus(fleet);
+            double fuelunit = members.Sum(s => Math.Truncate(s.FuelMax * mis.Fuel * (s.IsMarried ? 0.85 : 1.00)));
+            double ammounit = members.Sum(s => Math.Truncate(s.AmmoMax * mis.Ammo * (s.IsMarried ? 0.85 : 1.00)));
+
+            string reqFlagShipName = "";
+            int drums = 0;
+            int drumkanmusu = 0;
+            int fleetLevel = Convert.ToInt32(Data["FleetLevel"]);
+            int flagShipLevel = Convert.ToInt32(Data["FlagShipLevel"]);
+            int reqDrumNeed = 0;
+            int reqDrumKanmusuNeed = 0;
+            int drumBonus = 0;
+            int reqFleetPower = 0;
+            int reqFleetAA = 0;
+            int reqFleetASW = 0;
+            int reqFleetLOS = 0;
+            int reqFleetMembers = 0;
+            int reqFlagShipType = 0;
+            string shipTypes = "";
+            int[] reqTypes = { };
+            List<ExpeditionCondition> expeditionConds = new List<ExpeditionCondition>();
+
+            if (Data["FleetTypes"] != null)
             {
-                FleetData fleet = db.Fleet[fleetID];
-                var members = db.Fleet[fleetID].MembersInstance.Where(s => s != null);
+                shipTypes = Data["FleetTypes"].ToString();
+                string[] conds_types = shipTypes.Split('|');
 
-                double expeditionBonus = Calculator.GetExpeditionBonus(fleet); // 원정보너스
-                int f_FP = members.Sum(s => s.FirepowerTotal); // 화력
-                int f_AA = members.Sum(s => s.AATotal); // 대공
-                int f_ASW = members.Sum(s => s.ASWTotal); // 대잠
-                int f_LOS = members.Sum(s => s.LOSTotal); // 색적
-                int f_lv = members.Sum(s => s.Level); // 함대총합레벨
-                double fuelunit = members.Sum(s => Math.Truncate(s.FuelMax * mis.Fuel * (s.IsMarried ? 0.85 : 1.00))); // 원정시 소모연료
-                double ammounit = members.Sum(s => Math.Truncate(s.AmmoMax * mis.Ammo * (s.IsMarried ? 0.85 : 1.00))); // 원정시 소모탄약
-
-                string Req_FlagShip_Name = "";
-                int drums = 0;
-                int drumkanmusu = 0;
-                int FleetLevel = Convert.ToInt32(Data["FleetLevel"]);
-                int FlagShipLevel = Convert.ToInt32(Data["FlagShipLevel"]);
-                int Req_DrunNeed = 0;
-                int Req_DrunKanmusuNeed = 0;
-                int DrumBonus = 0;
-                int Req_FleetPower = 0;
-                int Req_FleetAA = 0;
-                int Req_FleetASW = 0;
-                int Req_FleetLOS = 0;
-                int Req_Fleet_Members = 0;
-                int Req_FlagShip_Type = 0;
-                string Fleet_Types_String = "";
-                int[] Req_Types = { };
-                List<Expedition_Condition> Ex_Conds = new List<Expedition_Condition>();
-
-                if (Data["FleetTypes"] != null)
+                for (int i = 0; i < conds_types.Length; i++)
                 {
-                    Fleet_Types_String = Data["FleetTypes"].ToString();
-                    string[] conds_types = Fleet_Types_String.Split('|');
+                    ExpeditionCondition expeditionCond = new ExpeditionCondition();
 
-                    for (int i = 0; i < conds_types.Length; i++)
-                    {
-                        Expedition_Condition expedition_Condition = new Expedition_Condition();
+                    string[] conditionData = conds_types[i].Split(',');
+                    int requireCount = int.Parse(conditionData[1]);
+                    int[] canReplaceType = conditionData[0].Split(':').Select(Int32.Parse).ToArray();
 
-                        string[] Condition_Data = conds_types[i].Split(',');
-                        int Require_Count = int.Parse(Condition_Data[1]);
-                        int[] Can_Replacable_Types = Condition_Data[0].Split(':').Select(Int32.Parse).ToArray();
-
-                        expedition_Condition.req_count = Require_Count;
-                        expedition_Condition.types = Can_Replacable_Types;
-
-                        Ex_Conds.Add(expedition_Condition);
-                    }
+                    expeditionCond.req_count = requireCount;
+                    expeditionCond.types = canReplaceType;
+                    expeditionConds.Add(expeditionCond);
                 }
-
-                if (Data["FlagShipTypeName"] != null)
-                    Req_FlagShip_Name = Data["FlagShipTypeName"].ToString();
-
-                if (Data["FleetMembers"] != null)
-                    Req_Fleet_Members = int.Parse(Data["FleetMembers"].ToString());
-
-                if (Data["FlagShipType"] != null)
-                    Req_FlagShip_Type = int.Parse(Data["FlagShipType"].ToString());
-
-                if (Data["DrunNeed"] != null)
-                    if (string.IsNullOrEmpty(Data["DrunNeed"].ToString()) == false)
-                        Req_DrunNeed = int.Parse(Data["DrunNeed"].ToString()) ;
-
-                if (Data["DrumBonus"] != null)
-                    if (string.IsNullOrEmpty(Data["DrumBonus"].ToString()) == false)
-                        DrumBonus = int.Parse(Data["DrumBonus"].ToString());
-
-                if (Data["DrunKanmusu"] != null)
-                    if (string.IsNullOrEmpty(Data["DrunKanmusu"].ToString()) == false)
-                        Req_DrunKanmusuNeed = int.Parse(Data["DrunKanmusu"].ToString());
-
-                if (Data["FleetPower"] != null)
-                    Req_FleetPower = int.Parse(Data["FleetPower"].ToString());
-
-                if (Data["FleetAA"] != null)
-                    Req_FleetAA = int.Parse(Data["FleetAA"].ToString());
-
-                if (Data["FleetASW"] != null)
-                    Req_FleetASW = int.Parse(Data["FleetASW"].ToString());
-
-                if (Data["FleetLOS"] != null)
-                    Req_FleetLOS = int.Parse(Data["FleetLOS"].ToString());
-
-                int FuelAmount = Convert.ToInt32(Data["Fuel"]);
-                int AmmoAmount = Convert.ToInt32(Data["Ammo"]);
-                int SteelAmount = Convert.ToInt32(Data["Steel"]);
-                int BauxAmount = Convert.ToInt32(Data["Baux"]);
-
-                StringBuilder sb = new StringBuilder();
-                sb.Append("[원정정보]\r\n");
-                sb.Append("[" + mis.Name + "]\r\n");
-                sb.Append("예상획득자원\r\n" + (int)((FuelAmount * (1 + expeditionBonus)) - fuelunit) + "/" + (int)((AmmoAmount * (1 + expeditionBonus)) - ammounit) + "/" + (int)(SteelAmount * (1 + expeditionBonus)) + "/" + (int)(BauxAmount * (1 + expeditionBonus)));
-                sb.Append("\r\n보급소모 - 연료 : " + fuelunit + " 탄약 : " + ammounit);
-                List<int> Ship_Conditions = new List<int>();
-
-
-                int f_flagshiplevel = 0;
-
-                foreach (ShipData ship in members.Where(s => s != null)) // 각함선체크
-                {
-                    bool isDrumEquipped = false;
-                    Ship_Conditions.Add(ship.Condition);
-
-                    foreach (var eq in ship.AllSlotInstance.Where(eq => eq != null))
-                    {
-                        if (eq.MasterEquipment.EquipmentID == 75)
-                        {
-                            isDrumEquipped = true;
-                            drums++;
-                        }
-
-                        if (isDrumEquipped) drumkanmusu++;
-                    }
-
-                    foreach (Expedition_Condition ExCond in Ex_Conds)
-                    {
-                        if (ExCond.types.Contains((int)ship.MasterShip.ShipType)) // 함종에따른구별
-                            ExCond.fleet_count++;
-                    }
-                }
-
-
-                foreach (Expedition_Condition ExCond in Ex_Conds)
-                {
-                    if (ExCond.fleet_count < ExCond.req_count)
-                    {
-                        sb.Append("\r\n");
-                        foreach (int type in ExCond.types)
-                        {
-                            string ShipTypeName = KCDatabase.Instance.ShipTypes[type].Name;
-                            sb.Append(ShipTypeName + "/");
-                        }
-
-                        sb.Remove((sb.Length - 1), 1);
-
-                        sb.Append(" " + (ExCond.req_count - ExCond.fleet_count) + " 필요");
-                    }
-                }
-
-                ShipData flagship = db.Ships[fleet.Members[0]];
-                if (Req_FlagShip_Type != 0)
-                {
-                    if (Req_FlagShip_Type != (int)flagship.MasterShip.ShipType)
-                        sb.Append("\r\n기함 : " + db.ShipTypes[Req_FlagShip_Type].Name + " 지정 필요");
-                }
-
-                if (FleetLevel > f_lv)
-                    sb.Append("\r\n함대레벨부족 : 추가 " + (FleetLevel - f_lv) + " 필요");
-
-                if (FlagShipLevel > flagship.Level)
-                    sb.Append("\r\n기함레벨부족 : 추가 " + (FlagShipLevel - f_flagshiplevel) + " 필요");
-
-                if (Req_Fleet_Members > members.Count())
-                    sb.Append("\r\n함대인원부족 : 추가 " + (Req_Fleet_Members - members.Count()) + " 명 필요");
-
-                if (Req_DrunNeed > drums)
-                {
-                    sb.Append("\r\n드럼통 " + (Req_DrunNeed - drums) + "개 필요");
-                    if (DrumBonus > drums)
-                        sb.Append("(" + (DrumBonus - drums) + "개 추가시 대성공보너스)");
-                }
-
-                if (Req_DrunKanmusuNeed > drumkanmusu)
-                    sb.Append("\r\n드럼통장착함선 " + (Req_DrunKanmusuNeed - drumkanmusu) + "명 필요");
-
-                if (Req_FleetAA > f_AA)
-                    sb.Append("\r\n함대대공부족 : 추가 " + (Req_FleetAA - f_AA) + " 필요");
-
-                if (Req_FleetASW > f_ASW)
-                    sb.Append("\r\n함대대잠부족 : 추가 " + (Req_FleetASW - f_ASW) + " 필요");
-
-                if (Req_FleetLOS > f_LOS)
-                    sb.Append("\r\n함대색적부족 : 추가 " + (Req_FleetLOS - f_LOS) + " 필요");
-
-                if (Req_FleetPower > f_FP)
-                    sb.Append("\r\n함대화력부족 : 추가 " + (Req_FleetPower - f_FP) + " 필요");
-
-                int Great_Count = 12;
-                int Kira_Count = 0;
-                for (int i = 0; i < Ship_Conditions.Count; i++)
-                {
-                    int temp_Count = (int)Math.Ceiling((Ship_Conditions[i] - 49) / 3.0);
-                    if (Ship_Conditions[i] > 49)
-                        Kira_Count++;
-
-                    if (temp_Count < Great_Count)
-                        Great_Count = temp_Count;
-                }
-
-                if (DrumBonus == 0)
-                {
-                    if (Great_Count >= 1)
-                    {
-                        float Great_Percent = ((float)members.Count() / (float)6) * 100;
-                        sb.Append("\r\n" + Great_Count + "회 대성공 가능. 확률 : " + Great_Percent + "%");
-                    }
-                }
-                else
-                {
-                    float Great_Percent = 0;
-                    if (DrumBonus <= drums && Great_Count == 0)
-                    {
-                        Great_Percent = 0.4f;
-                        Great_Percent += (float)Kira_Count * 0.15f;
-                        if (Great_Percent >= 1) Great_Percent = 1;
-                        Great_Percent *= 100;
-
-                        sb.Append("\r\n대성공 확률 : " + Great_Percent + "%");
-                    }
-                    else if (Great_Count >= 1)
-                    {
-                        Great_Percent = ((float)members.Count() / (float)6) * 100;
-                        sb.Append("\r\n" + Great_Count + "회 대성공 가능. 확률 : " + Great_Percent + "%");
-                    }
-                }
-
-
-                this.TextInformation.Text = sb.ToString();
             }
-            
 
+            reqFlagShipName = Data["FlagShipTypeName"]?.ToString();
+
+            if (Data["FleetMembers"] != null)
+                reqFleetMembers = int.Parse(Data["FleetMembers"].ToString());
+
+            if (Data["FlagShipType"] != null)
+                reqFlagShipType = int.Parse(Data["FlagShipType"].ToString());
+
+            if (Data["DrunNeed"] != null)
+                if (string.IsNullOrEmpty(Data["DrunNeed"].ToString()) == false)
+                    reqDrumNeed = int.Parse(Data["DrunNeed"].ToString());
+
+            if (Data["DrumBonus"] != null)
+                if (string.IsNullOrEmpty(Data["DrumBonus"].ToString()) == false)
+                    drumBonus = int.Parse(Data["DrumBonus"].ToString());
+
+            if (Data["DrunKanmusu"] != null)
+                if (string.IsNullOrEmpty(Data["DrunKanmusu"].ToString()) == false)
+                    reqDrumKanmusuNeed = int.Parse(Data["DrunKanmusu"].ToString());
+
+            if (Data["FleetPower"] != null)
+                reqFleetPower = int.Parse(Data["FleetPower"].ToString());
+
+            if (Data["FleetAA"] != null)
+                reqFleetAA = int.Parse(Data["FleetAA"].ToString());
+
+            if (Data["FleetASW"] != null)
+                reqFleetASW = int.Parse(Data["FleetASW"].ToString());
+
+            if (Data["FleetLOS"] != null)
+                reqFleetLOS = int.Parse(Data["FleetLOS"].ToString());
+
+            int FuelAmount = Convert.ToInt32(Data["Fuel"]);
+            int AmmoAmount = Convert.ToInt32(Data["Ammo"]);
+            int SteelAmount = Convert.ToInt32(Data["Steel"]);
+            int BauxAmount = Convert.ToInt32(Data["Baux"]);
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[원정정보]\r\n");
+            sb.Append("[" + mis.Name + "]\r\n");
+            sb.Append("예상획득자원\r\n" + (int)((FuelAmount * (1 + expeditionBonus)) - fuelunit) + "/" + (int)((AmmoAmount * (1 + expeditionBonus)) - ammounit) + "/" + (int)(SteelAmount * (1 + expeditionBonus)) + "/" + (int)(BauxAmount * (1 + expeditionBonus)));
+            sb.Append("\r\n보급소모 - 연료 : " + fuelunit + " 탄약 : " + ammounit);
+            List<int> Ship_Conditions = new List<int>();
+
+            int f_flagshiplevel = 0;
+            foreach (ShipData ship in members.Where(s => s != null)) // 각함선체크
+            {
+                bool isDrumEquipped = false;
+                Ship_Conditions.Add(ship.Condition);
+
+                foreach (var eq in ship.AllSlotInstance.Where(eq => eq != null))
+                {
+                    if (eq.MasterEquipment.EquipmentID == 75)
+                    {
+                        isDrumEquipped = true;
+                        drums++;
+                    }
+
+                    if (isDrumEquipped) drumkanmusu++;
+                }
+
+                foreach (ExpeditionCondition ExCond in expeditionConds)
+                {
+                    if (ExCond.types.Contains((int)ship.MasterShip.ShipType)) // 함종에따른구별
+                        ExCond.fleet_count++;
+                }
+            }
+
+            foreach (ExpeditionCondition ExCond in expeditionConds)
+            {
+                if (ExCond.fleet_count < ExCond.req_count)
+                {
+                    sb.Append("\r\n");
+                    foreach (int type in ExCond.types)
+                    {
+                        string ShipTypeName = KCDatabase.Instance.ShipTypes[type].Name;
+                        sb.Append(ShipTypeName + "/");
+                    }
+
+                    sb.Remove((sb.Length - 1), 1);
+
+                    sb.Append(" " + (ExCond.req_count - ExCond.fleet_count) + " 필요");
+                }
+            }
+
+            ShipData flagship = db.Ships[fleet.Members[0]];
+            if (reqFlagShipType != 0)
+            {
+                if (reqFlagShipType != (int)flagship.MasterShip.ShipType)
+                    sb.Append("\r\n기함 : " + db.ShipTypes[reqFlagShipType].Name + " 지정 필요");
+            }
+
+            if (fleetLevel > members.Sum(s => s.Level))
+                sb.Append("\r\n함대레벨부족 : 추가 " + (fleetLevel - members.Sum(s => s.Level)) + " 필요");
+
+            if (flagShipLevel > flagship.Level)
+                sb.Append("\r\n기함레벨부족 : 추가 " + (flagShipLevel - f_flagshiplevel) + " 필요");
+
+            if (reqFleetMembers > members.Count())
+                sb.Append("\r\n함대인원부족 : 추가 " + (reqFleetMembers - members.Count()) + " 명 필요");
+
+            if (reqDrumNeed > drums)
+            {
+                sb.Append("\r\n드럼통 " + (reqDrumNeed - drums) + "개 필요");
+                if (drumBonus > drums)
+                    sb.Append("(" + (drumBonus - drums) + "개 추가시 대성공보너스)");
+            }
+
+            if (reqDrumKanmusuNeed > drumkanmusu)
+                sb.Append("\r\n드럼통장착함선 " + (reqDrumKanmusuNeed - drumkanmusu) + "명 필요");
+
+            if (reqFleetAA > members.Sum(s => s.AATotal))
+                sb.Append("\r\n함대대공부족 : 추가 " + (reqFleetAA - members.Sum(s => s.AATotal)) + " 필요");
+
+            if (reqFleetASW > members.Sum(s => s.ASWTotal))
+                sb.Append("\r\n함대대잠부족 : 추가 " + (reqFleetASW - members.Sum(s => s.ASWTotal)) + " 필요");
+
+            if (reqFleetLOS > members.Sum(s => s.LOSTotal))
+                sb.Append("\r\n함대색적부족 : 추가 " + (reqFleetLOS - members.Sum(s => s.LOSTotal)) + " 필요");
+
+            if (reqFleetPower > members.Sum(s => s.FirepowerTotal))
+                sb.Append("\r\n함대화력부족 : 추가 " + (reqFleetPower - members.Sum(s => s.FirepowerTotal)) + " 필요");
+
+            int Great_Count = 12;
+            int Kira_Count = 0;
+            for (int i = 0; i < Ship_Conditions.Count; i++)
+            {
+                int temp_Count = (int)Math.Ceiling((Ship_Conditions[i] - 49) / 3.0);
+                if (Ship_Conditions[i] > 49)
+                    Kira_Count++;
+
+                if (temp_Count < Great_Count)
+                    Great_Count = temp_Count;
+            }
+
+            if (drumBonus == 0)
+            {
+                if (Great_Count >= 1)
+                {
+                    float Great_Percent = ((float)members.Count() / (float)6) * 100;
+                    sb.Append("\r\n" + Great_Count + "회 대성공 가능. 확률 : " + Great_Percent + "%");
+                }
+            }
+            else
+            {
+                float Great_Percent = 0;
+                if (drumBonus <= drums && Great_Count == 0)
+                {
+                    Great_Percent = 0.4f;
+                    Great_Percent += (float)Kira_Count * 0.15f;
+                    if (Great_Percent >= 1) Great_Percent = 1;
+                    Great_Percent *= 100;
+
+                    sb.Append("\r\n대성공 확률 : " + Great_Percent + "%");
+                }
+                else if (Great_Count >= 1)
+                {
+                    Great_Percent = ((float)members.Count() / (float)6) * 100;
+                    sb.Append("\r\n" + Great_Count + "회 대성공 가능. 확률 : " + Great_Percent + "%");
+                }
+            }
+
+            this.TextInformation.Text = sb.ToString();
         }
 
         private void RecordMaterials()

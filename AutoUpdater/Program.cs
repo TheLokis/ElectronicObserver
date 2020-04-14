@@ -10,7 +10,7 @@ namespace AutoUpdater
     {
         static void Main(string[] args)
         {
-            Console.Write("오토업데이터");
+            Console.WriteLine("자동 업데이트 프로그램을 실행합니다..");
         }
     }
 }
