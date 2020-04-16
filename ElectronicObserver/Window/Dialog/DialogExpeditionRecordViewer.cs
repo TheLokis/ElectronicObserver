@@ -17,7 +17,7 @@ namespace ElectronicObserver.Window.Dialog
     public partial class DialogExpeditionRecordViewer : Form
     {
 
-        private ShipDropRecord _record;
+        private ExpeditionRecord _record;
 
         private class SearchArgument
         {
@@ -31,18 +31,17 @@ namespace ElectronicObserver.Window.Dialog
             public DataGridViewRow  BaseRow     { get; set; }
         }
 
-
         public DialogExpeditionRecordViewer()
         {
             this.InitializeComponent();
 
-            this._record = RecordManager.Instance.ShipDrop;
+            this._record = RecordManager.Instance.Expedition;
         }
 
         private void DialogExpeditionRecordViewer_Load(object sender, EventArgs e)
         {
-            this.DateBegin.Value = this.DateBegin.MinDate = this.DateEnd.MinDate = this._record.Record.First().Date.Date;
-            this.DateEnd.Value = this.DateBegin.MaxDate = this.DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
+            this.DateBegin.Value    = this.DateBegin.MinDate = this.DateEnd.MinDate = this._record.Record.First().Date.Date;
+            this.DateEnd.Value      = this.DateBegin.MaxDate = this.DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
 
             var dtbase = new DataTable();
             dtbase.Columns.AddRange(new DataColumn[] {
@@ -53,7 +52,7 @@ namespace ElectronicObserver.Window.Dialog
             {
                 DataTable dt = dtbase.Clone();
                 foreach (var i in this._record.Record
-                    .Select(r => r.MapAreaID)
+                    .Select(r => r.Date)
                     .Distinct()
                     .OrderBy(i => i))
                     dt.Rows.Add(i, i.ToString());
@@ -78,12 +77,8 @@ namespace ElectronicObserver.Window.Dialog
             ResourceManager.DestroyIcon(this.Icon);
         }
 
-
-
-
         private void ButtonRun_Click(object sender, EventArgs e)
         {
-
             if (this.Searcher.IsBusy)
             {
                 if (MessageBox.Show("검색을 취소하시겠습니까?", "검색중입니다.", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
@@ -137,18 +132,13 @@ namespace ElectronicObserver.Window.Dialog
 
         private void Searcher_DoWork(object sender, DoWorkEventArgs e)
         {
-
             SearchArgument args = (SearchArgument)e.Argument;
 
             var records = RecordManager.Instance.ShipDrop.Record;
             var rows = new LinkedList<DataGridViewRow>();
 
-
-
             e.Result = rows.ToArray();
         }
-
-
 
         private void Searcher_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -172,7 +162,6 @@ namespace ElectronicObserver.Window.Dialog
             }
 
         }
-
 
         private void RecordView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
@@ -238,13 +227,10 @@ namespace ElectronicObserver.Window.Dialog
             }
         }
 
-
         private void RecordView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             SearchArgument args = (SearchArgument)this.RecordView.Tag;
-      
         }
-
 
         private void RecordView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -257,7 +243,6 @@ namespace ElectronicObserver.Window.Dialog
             var args = this.RecordView.Tag as SearchArgument;
             if (args == null)
                 return;
-
         }
     }
 }

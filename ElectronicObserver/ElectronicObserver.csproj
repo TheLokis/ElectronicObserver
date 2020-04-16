@@ -289,6 +289,7 @@
     <Compile Include="Observer\kcsapi\api_req_sortie\ld_airbattle.cs" />
     <Compile Include="Observer\kcsapi\api_req_sortie\night_to_day.cs" />
     <Compile Include="Observer\kcsapi\api_start2\getData.cs" />
+    <Compile Include="Resource\Record\ExpeditionRecord.cs" />
     <Compile Include="Resource\Record\ResourceRecord.cs" />
     <Compile Include="Resource\KCResourceHelper.cs" />
     <Compile Include="Utility\Data\RecordHash.cs" />
@@ -646,6 +647,12 @@
     <Compile Include="Window\FormCompass.Designer.cs">
       <DependentUpon>FormCompass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\FormCombinedFleet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\FormCombinedFleet.Designer.cs">
+      <DependentUpon>FormCombinedFleet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\FormJson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -870,6 +877,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\FormCompass.resx">
       <DependentUpon>FormCompass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\FormCombinedFleet.resx">
+      <DependentUpon>FormCombinedFleet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\FormJson.resx">
       <DependentUpon>FormJson.cs</DependentUpon>

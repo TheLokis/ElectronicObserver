@@ -124,10 +124,10 @@ namespace ElectronicObserver.Utility
             KCDatabase db = KCDatabase.Instance;
             if (db.Equipments[eqId].MasterEquipment.IsLargeGun)
             {
-                bool married = db.Ships[shipId].Level >= 100;
-                int masterShipId = db.Ships[shipId].MasterShip.ID;
-                int masterEquipId = db.Equipments[eqId].MasterEquipment.ID;
-                if (this.CheckWeightData(masterShipId))
+                bool married        = db.Ships[shipId].Level >= 100;
+                int masterShipId    = db.Ships[shipId].MasterShip.ID;
+                int masterEquipId   = db.Equipments[eqId].MasterEquipment.ID;
+                if (this.CheckWeightData(masterShipId) == true)
                 {
                     masterShipId = this.GetData(DataType.FitData)[masterShipId.ToString()].ToObject<int>();
                 }
@@ -138,9 +138,10 @@ namespace ElectronicObserver.Utility
                     Window.FormMain.Instance.fInformation.ShowFitInfo(masterShipId, masterEquipId);
                     return;
                 }
-                JObject classData = (JObject)WeightData["weightClass"];
-                JObject accuracyData = (JObject)WeightData["accuracy"];
-                string weightType = "unknown";
+
+                var classData       = (JObject)WeightData["weightClass"];
+                var accuracyData    = (JObject)WeightData["accuracy"];
+                string weightType   = "unknown";
                 foreach (var weightClass in classData)
                 {
                     int[] weights = weightClass.Value.ToObject<int[]>();
@@ -150,6 +151,7 @@ namespace ElectronicObserver.Utility
                         break;
                     }
                 }
+
                 if (weightType.Equals("unknown"))
                 {
                     Window.FormMain.Instance.fInformation.ShowFitInfo(masterShipId, masterEquipId);

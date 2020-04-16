@@ -36,36 +36,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ItemName = new System.Windows.Forms.ComboBox();
             this.ShipName = new System.Windows.Forms.ComboBox();
-            this.EquipmentName = new System.Windows.Forms.ComboBox();
             this.DateBegin = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.DateEnd = new System.Windows.Forms.DateTimePicker();
-            this.RankS = new System.Windows.Forms.CheckBox();
-            this.RankA = new System.Windows.Forms.CheckBox();
-            this.RankB = new System.Windows.Forms.CheckBox();
-            this.RankX = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.MapDifficulty = new System.Windows.Forms.ComboBox();
             this.ButtonRun = new System.Windows.Forms.Button();
             this.RecordView = new System.Windows.Forms.DataGridView();
             this.RecordView_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_Map = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_Rank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_RankS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_RankA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_RankB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsBossOnly = new System.Windows.Forms.CheckBox();
-            this.MapAreaID = new System.Windows.Forms.ComboBox();
-            this.MapInfoID = new System.Windows.Forms.ComboBox();
-            this.MapCellID = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.MergeRows = new System.Windows.Forms.CheckBox();
             this.LabelShipName = new ElectronicObserver.Window.Control.ImageLabel();
             this.LabelItemName = new ElectronicObserver.Window.Control.ImageLabel();
-            this.LabelEquipmentName = new ElectronicObserver.Window.Control.ImageLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.ToolTipInfo = new System.Windows.Forms.ToolTip(this.components);
@@ -98,18 +82,6 @@
             this.ShipName.Size = new System.Drawing.Size(121, 23);
             this.ShipName.TabIndex = 1;
             this.ToolTipInfo.SetToolTip(this.ShipName, "검색 대상의 이름을 입력합니다. \r\n(드롭)은 함선이 드롭됬을때만 출력됩니다. ");
-            // 
-            // EquipmentName
-            // 
-            this.EquipmentName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.EquipmentName.Enabled = false;
-            this.EquipmentName.FormattingEnabled = true;
-            this.EquipmentName.Location = new System.Drawing.Point(75, 68);
-            this.EquipmentName.Name = "EquipmentName";
-            this.EquipmentName.Size = new System.Drawing.Size(121, 23);
-            this.EquipmentName.TabIndex = 5;
-            this.ToolTipInfo.SetToolTip(this.EquipmentName, "검색 대상의 이름을 입력합니다.\r\n(드롭)은 장비가 드롭됬을때만 출력됩니다. ");
-            this.EquipmentName.Visible = false;
             // 
             // DateBegin
             // 
@@ -149,58 +121,6 @@
             this.DateEnd.TabIndex = 9;
             this.ToolTipInfo.SetToolTip(this.DateEnd, "검색할 날짜의 종료지점을 지정하세요.");
             // 
-            // RankS
-            // 
-            this.RankS.AutoSize = true;
-            this.RankS.Checked = true;
-            this.RankS.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RankS.Location = new System.Drawing.Point(225, 70);
-            this.RankS.Name = "RankS";
-            this.RankS.Size = new System.Drawing.Size(34, 19);
-            this.RankS.TabIndex = 10;
-            this.RankS.Text = "S";
-            this.ToolTipInfo.SetToolTip(this.RankS, "S승리");
-            this.RankS.UseVisualStyleBackColor = true;
-            // 
-            // RankA
-            // 
-            this.RankA.AutoSize = true;
-            this.RankA.Checked = true;
-            this.RankA.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RankA.Location = new System.Drawing.Point(265, 70);
-            this.RankA.Name = "RankA";
-            this.RankA.Size = new System.Drawing.Size(34, 19);
-            this.RankA.TabIndex = 11;
-            this.RankA.Text = "A";
-            this.ToolTipInfo.SetToolTip(this.RankA, "A승리");
-            this.RankA.UseVisualStyleBackColor = true;
-            // 
-            // RankB
-            // 
-            this.RankB.AutoSize = true;
-            this.RankB.Checked = true;
-            this.RankB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RankB.Location = new System.Drawing.Point(305, 70);
-            this.RankB.Name = "RankB";
-            this.RankB.Size = new System.Drawing.Size(34, 19);
-            this.RankB.TabIndex = 12;
-            this.RankB.Text = "B";
-            this.ToolTipInfo.SetToolTip(this.RankB, "B승리");
-            this.RankB.UseVisualStyleBackColor = true;
-            // 
-            // RankX
-            // 
-            this.RankX.AutoSize = true;
-            this.RankX.Checked = true;
-            this.RankX.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RankX.Location = new System.Drawing.Point(345, 70);
-            this.RankX.Name = "RankX";
-            this.RankX.Size = new System.Drawing.Size(34, 19);
-            this.RankX.TabIndex = 13;
-            this.RankX.Text = "X";
-            this.ToolTipInfo.SetToolTip(this.RankX, "패배");
-            this.RankX.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -209,16 +129,6 @@
             this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 14;
             this.label1.Text = "해역 노드";
-            // 
-            // MapDifficulty
-            // 
-            this.MapDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MapDifficulty.FormattingEnabled = true;
-            this.MapDifficulty.Location = new System.Drawing.Point(444, 10);
-            this.MapDifficulty.Name = "MapDifficulty";
-            this.MapDifficulty.Size = new System.Drawing.Size(69, 23);
-            this.MapDifficulty.TabIndex = 15;
-            this.ToolTipInfo.SetToolTip(this.MapDifficulty, "난이도를 지정합니다.\r\n* 은 모든 난이도를 검색합니다.");
             // 
             // ButtonRun
             // 
@@ -241,12 +151,7 @@
             this.RecordView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RecordView_Header,
             this.RecordView_Name,
-            this.RecordView_Date,
-            this.RecordView_Map,
-            this.RecordView_Rank,
-            this.RecordView_RankS,
-            this.RecordView_RankA,
-            this.RecordView_RankB});
+            this.RecordView_Date});
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -293,89 +198,6 @@
             this.RecordView_Date.ReadOnly = true;
             this.RecordView_Date.Width = 150;
             // 
-            // RecordView_Map
-            // 
-            this.RecordView_Map.HeaderText = "해역";
-            this.RecordView_Map.Name = "RecordView_Map";
-            this.RecordView_Map.ReadOnly = true;
-            this.RecordView_Map.Width = 120;
-            // 
-            // RecordView_Rank
-            // 
-            this.RecordView_Rank.HeaderText = "랭크";
-            this.RecordView_Rank.Name = "RecordView_Rank";
-            this.RecordView_Rank.ReadOnly = true;
-            this.RecordView_Rank.Width = 40;
-            // 
-            // RecordView_RankS
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.RecordView_RankS.DefaultCellStyle = dataGridViewCellStyle7;
-            this.RecordView_RankS.HeaderText = "S승리";
-            this.RecordView_RankS.Name = "RecordView_RankS";
-            this.RecordView_RankS.ReadOnly = true;
-            // 
-            // RecordView_RankA
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.RecordView_RankA.DefaultCellStyle = dataGridViewCellStyle8;
-            this.RecordView_RankA.HeaderText = "A승리";
-            this.RecordView_RankA.Name = "RecordView_RankA";
-            this.RecordView_RankA.ReadOnly = true;
-            // 
-            // RecordView_RankB
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.RecordView_RankB.DefaultCellStyle = dataGridViewCellStyle9;
-            this.RecordView_RankB.HeaderText = "B승리";
-            this.RecordView_RankB.Name = "RecordView_RankB";
-            this.RecordView_RankB.ReadOnly = true;
-            // 
-            // IsBossOnly
-            // 
-            this.IsBossOnly.AutoSize = true;
-            this.IsBossOnly.Checked = true;
-            this.IsBossOnly.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.IsBossOnly.Location = new System.Drawing.Point(519, 12);
-            this.IsBossOnly.Name = "IsBossOnly";
-            this.IsBossOnly.Size = new System.Drawing.Size(53, 19);
-            this.IsBossOnly.TabIndex = 16;
-            this.IsBossOnly.Text = "Boss";
-            this.IsBossOnly.ThreeState = true;
-            this.IsBossOnly.UseVisualStyleBackColor = true;
-            // 
-            // MapAreaID
-            // 
-            this.MapAreaID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MapAreaID.FormattingEnabled = true;
-            this.MapAreaID.Location = new System.Drawing.Point(388, 39);
-            this.MapAreaID.Name = "MapAreaID";
-            this.MapAreaID.Size = new System.Drawing.Size(50, 23);
-            this.MapAreaID.TabIndex = 17;
-            this.ToolTipInfo.SetToolTip(this.MapAreaID, "해역 ID를 지정하세요. \r\n* 은 모든 해역을 검색합니다.\r\n");
-            this.MapAreaID.SelectedIndexChanged += new System.EventHandler(this.MapAreaID_SelectedIndexChanged);
-            // 
-            // MapInfoID
-            // 
-            this.MapInfoID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MapInfoID.FormattingEnabled = true;
-            this.MapInfoID.Location = new System.Drawing.Point(444, 39);
-            this.MapInfoID.Name = "MapInfoID";
-            this.MapInfoID.Size = new System.Drawing.Size(50, 23);
-            this.MapInfoID.TabIndex = 18;
-            this.ToolTipInfo.SetToolTip(this.MapInfoID, "해역 ID를 지정하세요. \r\n* 은 모든 해역을 검색합니다.\r\n");
-            this.MapInfoID.SelectedIndexChanged += new System.EventHandler(this.MapAreaID_SelectedIndexChanged);
-            // 
-            // MapCellID
-            // 
-            this.MapCellID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MapCellID.FormattingEnabled = true;
-            this.MapCellID.Location = new System.Drawing.Point(500, 39);
-            this.MapCellID.Name = "MapCellID";
-            this.MapCellID.Size = new System.Drawing.Size(50, 23);
-            this.MapCellID.TabIndex = 19;
-            this.ToolTipInfo.SetToolTip(this.MapCellID, "노드ID를 지정하세요. \r\n* 은 모든 노드를 검색합니다.\r\n");
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -388,27 +210,16 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.MergeRows);
-            this.splitContainer1.Panel1.Controls.Add(this.MapCellID);
             this.splitContainer1.Panel1.Controls.Add(this.LabelShipName);
-            this.splitContainer1.Panel1.Controls.Add(this.MapInfoID);
             this.splitContainer1.Panel1.Controls.Add(this.LabelItemName);
-            this.splitContainer1.Panel1.Controls.Add(this.MapAreaID);
-            this.splitContainer1.Panel1.Controls.Add(this.LabelEquipmentName);
-            this.splitContainer1.Panel1.Controls.Add(this.IsBossOnly);
             this.splitContainer1.Panel1.Controls.Add(this.ItemName);
             this.splitContainer1.Panel1.Controls.Add(this.ButtonRun);
             this.splitContainer1.Panel1.Controls.Add(this.ShipName);
-            this.splitContainer1.Panel1.Controls.Add(this.MapDifficulty);
-            this.splitContainer1.Panel1.Controls.Add(this.EquipmentName);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.DateBegin);
-            this.splitContainer1.Panel1.Controls.Add(this.RankX);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.RankB);
             this.splitContainer1.Panel1.Controls.Add(this.DateEnd);
-            this.splitContainer1.Panel1.Controls.Add(this.RankA);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.RankS);
             // 
             // splitContainer1.Panel2
             // 
@@ -450,19 +261,6 @@
             this.LabelItemName.TabIndex = 2;
             this.LabelItemName.Text = "아이템";
             this.LabelItemName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // LabelEquipmentName
-            // 
-            this.LabelEquipmentName.AutoSize = false;
-            this.LabelEquipmentName.BackColor = System.Drawing.Color.Transparent;
-            this.LabelEquipmentName.Enabled = false;
-            this.LabelEquipmentName.Location = new System.Drawing.Point(12, 70);
-            this.LabelEquipmentName.Name = "LabelEquipmentName";
-            this.LabelEquipmentName.Size = new System.Drawing.Size(57, 16);
-            this.LabelEquipmentName.TabIndex = 4;
-            this.LabelEquipmentName.Text = "장비";
-            this.LabelEquipmentName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LabelEquipmentName.Visible = false;
             // 
             // statusStrip1
             // 
@@ -515,33 +313,21 @@
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
 		}
 
 		#endregion
 
-		private System.Windows.Forms.CheckBox IsBossOnly;
 		private System.Windows.Forms.Button ButtonRun;
-		private System.Windows.Forms.ComboBox MapDifficulty;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.CheckBox RankX;
-		private System.Windows.Forms.CheckBox RankB;
-		private System.Windows.Forms.CheckBox RankA;
-		private System.Windows.Forms.CheckBox RankS;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.DateTimePicker DateEnd;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.DateTimePicker DateBegin;
-		private System.Windows.Forms.ComboBox EquipmentName;
 		private System.Windows.Forms.ComboBox ShipName;
 		private System.Windows.Forms.ComboBox ItemName;
-		private Control.ImageLabel LabelEquipmentName;
 		private Control.ImageLabel LabelItemName;
 		private Control.ImageLabel LabelShipName;
 		private System.Windows.Forms.DataGridView RecordView;
-		private System.Windows.Forms.ComboBox MapCellID;
-		private System.Windows.Forms.ComboBox MapInfoID;
-		private System.Windows.Forms.ComboBox MapAreaID;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.CheckBox MergeRows;
@@ -551,10 +337,5 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Header;
 		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Name;
 		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Date;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Map;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Rank;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_RankS;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_RankA;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_RankB;
 	}
 }

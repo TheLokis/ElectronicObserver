@@ -52,29 +52,24 @@ namespace ElectronicObserver.Utility
 
 			public LogData(DateTime time, int priority, string message)
 			{
-                this.Time = time;
-                this.Priority = priority;
-                this.Message = message;
+				this.Time = time;
+				this.Priority = priority;
+				this.Message = message;
 			}
 
 
 			public override string ToString() => $"[{DateTimeHelper.TimeToCSVString(this.Time)}][{this.Priority}] : {this.Message}";
-
-
 		}
 
-
-
-		private List<LogData> log;
-		private bool toDebugConsole;
-		private int lastSavedCount;
-
+		private List<LogData>	_log			{ get; set; }
+		private bool			_toDebugConsole { get; set; }
+		private int				_lastSavedCount { get; set; }
 
 		private Logger()
 		{
-            this.log = new List<LogData>();
-            this.toDebugConsole = true;
-            this.lastSavedCount = 0;
+            this._log = new List<LogData>();
+            this._toDebugConsole = true;
+            this._lastSavedCount = 0;
 		}
 
 
@@ -84,11 +79,10 @@ namespace ElectronicObserver.Utility
 			{
 				lock (Logger.Instance)
 				{
-					return Logger.Instance.log.AsReadOnly();
+					return Logger.Instance._log.AsReadOnly();
 				}
 			}
 		}
-
 
 		/// <summary>
 		/// ログを追加します。
@@ -97,12 +91,11 @@ namespace ElectronicObserver.Utility
 		/// <param name="message">ログ内容。</param>
 		public static void Add(int priority, string message)
 		{
-
 			LogData data = new LogData(DateTime.Now, priority, message);
 
 			lock (Logger.Instance)
 			{
-				Logger.Instance.log.Add(data);
+				Logger.Instance._log.Add(data);
 			}
 
 			if (Configuration.Config.Log.SaveLogFlag && Configuration.Config.Log.SaveLogImmediately)
@@ -110,8 +103,7 @@ namespace ElectronicObserver.Utility
 
 			if (Configuration.Config.Log.LogLevel <= priority)
 			{
-
-				if (Logger.Instance.toDebugConsole)
+				if (Logger.Instance._toDebugConsole)
 				{
 					System.Diagnostics.Debug.WriteLine(data.ToString());
 				}
@@ -126,7 +118,6 @@ namespace ElectronicObserver.Utility
 				{
 					System.Diagnostics.Debug.WriteLine(ex.Message);
 				}
-
 			}
 		}
 
@@ -137,15 +128,12 @@ namespace ElectronicObserver.Utility
 		{
 			lock (Logger.Instance)
 			{
-				Logger.instance.log.Clear();
-				Logger.instance.lastSavedCount = 0;
+				Logger.instance._log.Clear();
+				Logger.instance._lastSavedCount = 0;
 			}
 		}
 
-
-
 		public static readonly string DefaultPath = @"eolog.log";
-
 
 		public static void Save()
 		{
@@ -158,12 +146,10 @@ namespace ElectronicObserver.Utility
 		/// <param name="path">保存先のファイル。</param>
 		public static void Save(string path)
 		{
-
 			try
 			{
 				lock (Logger.Instance)
 				{
-
 					var log = Logger.instance;
 
 					using (StreamWriter sw = new StreamWriter(path, true, Utility.Configuration.Config.Log.FileEncoding))
@@ -171,12 +157,12 @@ namespace ElectronicObserver.Utility
 
 						int priority = Configuration.Config.Log.LogLevel;
 
-						foreach (var l in log.log.Skip(log.lastSavedCount).Where(l => l.Priority >= priority))
+						foreach (var l in log._log.Skip(log._lastSavedCount).Where(l => l.Priority >= priority))
 						{
 							sw.WriteLine(l.ToString());
 						}
 
-						log.lastSavedCount = log.log.Count;
+						log._lastSavedCount = log._log.Count;
 					}
 				}
 			}

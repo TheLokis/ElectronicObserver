@@ -1,4 +1,5 @@
 ﻿using ElectronicObserver.Data;
+using ElectronicObserver.Observer;
 using ElectronicObserver.Utility.Mathematics;
 using ElectronicObserver.Utility.Storage;
 using System;
@@ -69,9 +70,9 @@ namespace ElectronicObserver.Resource.Record
             public int Baux;
 
 			/// <summary>
-			/// 대성공여부
+			/// 성공 여부 -> 0 : 실패 / 1 : 성공 / 2 : 대성공
 			/// </summary>
-			public bool IsGreat;
+			public string Result;
 
 			public ExpeditionRecordElement()
 			{
@@ -85,7 +86,7 @@ namespace ElectronicObserver.Resource.Record
                 this.LoadLine(line);
 			}
 
-			public ExpeditionRecordElement(int missionID, int flagShipID, int fuel, int ammo, int steel, int baux, bool isGreat)
+			public ExpeditionRecordElement(int missionID, int flagShipID, int fuel, int ammo, int steel, int baux, int result)
 			{
 				this.MissionID = missionID;
 				this.ShipID = flagShipID;
@@ -102,7 +103,7 @@ namespace ElectronicObserver.Resource.Record
 				this.Ammo = ammo;
 				this.Steel = steel;
 				this.Baux = baux;
-				this.IsGreat = isGreat;
+				this.Result = Constants.GetExpeditionResult(result);
 
                 this.Date = DateTime.Now;
 			}
@@ -122,7 +123,7 @@ namespace ElectronicObserver.Resource.Record
 				this.Ammo = int.Parse(elem[6]);
 				this.Steel = int.Parse(elem[7]);
 				this.Baux = int.Parse(elem[8]);
-				this.IsGreat = Boolean.Parse(elem[9]);
+				this.Result = elem[9];
             }
 
             public override string SaveLine()
@@ -138,7 +139,7 @@ namespace ElectronicObserver.Resource.Record
 					this.Ammo,
 					this.Steel,
 					this.Baux,
-					this.IsGreat
+					this.Result
 				);
             }
         }
@@ -154,21 +155,15 @@ namespace ElectronicObserver.Resource.Record
             this.Record = new List<ExpeditionRecordElement>();
 		}
 
-		public override void RegisterEvents()
-		{
-			// nop
-		}
-
-
 		public ExpeditionRecordElement this[int i]
 		{
 			get { return this.Record[i]; }
 			set { this.Record[i] = value; }
 		}
 
-		public void Add(int missionID, int flagShipID, int fuel, int ammo, int steel, int baux, bool isGreat)
+		public void Add(int missionID, int flagShipID, int fuel, int ammo, int steel, int baux, int result)
 		{
-            this.Record.Add(new ExpeditionRecordElement(missionID, flagShipID, fuel, ammo, steel, baux, isGreat));
+            this.Record.Add(new ExpeditionRecordElement(missionID, flagShipID, fuel, ammo, steel, baux, result));
 		}
 
 
@@ -213,7 +208,12 @@ namespace ElectronicObserver.Resource.Record
             this._lastSavedCount = 0;
         }
 
-        public override string RecordHeader => "원정번호,날짜,기함명,기함종,레벨,연료,탄약,강재,보키,대성공";
+		public override void RegisterEvents()
+		{
+			// nop
+		}
+
+		public override string RecordHeader => "원정번호,날짜,기함명,기함종,레벨,연료,탄약,강재,보키,대성공";
 
 		public override string FileName => "ExpeditionRecord.csv";
 	}

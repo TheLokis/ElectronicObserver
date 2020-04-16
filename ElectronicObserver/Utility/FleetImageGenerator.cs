@@ -21,14 +21,13 @@ namespace ElectronicObserver.Utility
 	{
 
 		/// <summary> 幅・高さともに int.MaxValue の Size </summary>
-		protected static readonly Size MaxValueSize = new Size(int.MaxValue, int.MaxValue);
+		protected static readonly Size MaxValueSize		= new Size(int.MaxValue, int.MaxValue);
 
-        protected static readonly Size ShipBannerSize = new Size(160, 40);
-        protected static readonly Size ShipCardSize = new Size(218, 300);
-        protected static readonly Size ShipCutinSize = new Size(665, 121);
-        protected static readonly Size ShipNameSize = new Size(436, 63);
-        protected static readonly Size ShipSupplySize = new Size(474, 47);
-
+        protected static readonly Size ShipBannerSize	= new Size(160, 40);
+        protected static readonly Size ShipCardSize		= new Size(218, 300);
+        protected static readonly Size ShipCutinSize	= new Size(665, 121);
+        protected static readonly Size ShipNameSize		= new Size(436, 63);
+        protected static readonly Size ShipSupplySize	= new Size(474, 47);
 
         // 各種画像リソースのサイズ
         protected static readonly Size EquipmentCardSize = new Size(260, 260);
@@ -54,20 +53,20 @@ namespace ElectronicObserver.Utility
 			var formatMiddleCenter = GetStringFormat(ContentAlignment.MiddleCenter);
 			var formatMiddleRight = GetStringFormat(ContentAlignment.MiddleRight);
 
-			Color backgroundColor = Color.FromArgb(0xff, 0xff, 0xff);
-			Color mainTextColor = Color.FromArgb(0x0f, 0x0f, 0x0f);
-			Color subTextColor = Color.FromArgb(0x00, 0x88, 0x88);
-			Color shadowColor = Color.FromArgb(0x88, 0x88, 0x88);
-			Color disabledColor = Color.FromArgb(0xaa, 0xaa, 0xaa);
-			Color aircraftLevelLowColor = Color.FromArgb(0x00, 0xff, 0xff);
-			Color aircraftLevelHighColor = Color.FromArgb(0xff, 0x88, 0x00);
+			Color backgroundColor	= Color.FromArgb(0xff, 0xff, 0xff);
+			Color mainTextColor		= Color.FromArgb(0x0f, 0x0f, 0x0f);
+			Color subTextColor		= Color.FromArgb(0x00, 0x88, 0x88);
+			Color shadowColor		= Color.FromArgb(0x88, 0x88, 0x88);
+			Color disabledColor		= Color.FromArgb(0xaa, 0xaa, 0xaa);
+			Color aircraftLevelLowColor		= Color.FromArgb(0x00, 0xff, 0xff);
+			Color aircraftLevelHighColor	= Color.FromArgb(0xff, 0x88, 0x00);
 
-			var mainTextBrush = new SolidBrush(mainTextColor);
-			var subTextBrush = new SolidBrush(subTextColor);
-			var shadowBrush = new SolidBrush(shadowColor);
-			var disabledBrush = new SolidBrush(disabledColor);
-			var aircraftLevelLowBrush = new SolidBrush(aircraftLevelLowColor);
-			var aircraftLevelHighBrush = new SolidBrush(aircraftLevelHighColor);
+			var mainTextBrush	= new SolidBrush(mainTextColor);
+			var subTextBrush	= new SolidBrush(subTextColor);
+			var shadowBrush		= new SolidBrush(shadowColor);
+			var disabledBrush	= new SolidBrush(disabledColor);
+			var aircraftLevelLowBrush	= new SolidBrush(aircraftLevelLowColor);
+			var aircraftLevelHighBrush	= new SolidBrush(aircraftLevelHighColor);
 
 			var linePen = new Pen(subTextColor);
 
@@ -275,8 +274,6 @@ namespace ElectronicObserver.Utility
 							(shipPaneUnitSize.Height + shipPaneUnitMargin.Vertical) * (shipIndex / args.HorizontalShipCount) + shipPaneUnitMargin.Top);
 						Point shipPointer = shipPointerOrigin;
 
-
-
 						g.DrawString(string.Format("#{0}:", shipIndex + 1), args.MediumDigitFont, subTextBrush, new Rectangle(shipPointer + GetAlignmentOffset(ContentAlignment.MiddleLeft, shipIndexSize, shipNameAreaSize), shipIndexSize), formatMiddleLeft);
 						shipPointer.X += shipIndexSize.Width;
 
@@ -442,17 +439,12 @@ namespace ElectronicObserver.Utility
 			return bitmap;
 		}
 
-
-
-
 		/// <summary>
 		/// カットイン式の編成画像を出力します。
 		/// </summary>
 		public static Bitmap GenerateCutinBitmap(FleetImageArgument args)
 		{
-
 			int maxShipCount = Math.Max(args.FleetIDs.Select(id => KCDatabase.Instance.Fleet[id].Members.Count(i => i > 0)).DefaultIfEmpty(0).Max(), 6);
-
 
 			var formatMiddleLeft = GetStringFormat(ContentAlignment.MiddleLeft);
 			var formatMiddleCenter = GetStringFormat(ContentAlignment.MiddleCenter);

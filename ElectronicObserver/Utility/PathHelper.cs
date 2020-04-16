@@ -11,8 +11,6 @@ namespace ElectronicObserver.Utility
 
 	public static class PathHelper
 	{
-
-
 		/// <summary>
 		/// OpenFileDialog を、指定されたパスで初期化します。
 		/// </summary>
@@ -27,23 +25,18 @@ namespace ElectronicObserver.Utility
 			{
 				dialog.InitialDirectory = parent;
 				dialog.FileName = Path.GetFileName(path);
-
 			}
 			else if (Directory.Exists(path))
 			{
 				dialog.InitialDirectory = path;
 				dialog.FileName = "";
-
 			}
 			else if (Directory.Exists(parent))
 			{
 				dialog.InitialDirectory = parent;
 				dialog.FileName = "";
-
 			}
-
 		}
-
 
 		/// <summary>
 		/// OpenFileDialog からパスを取得します。

@@ -52,6 +52,7 @@ namespace ElectronicObserver.Window
 		public List<DockContent> SubForms { get; private set; }
 
 		public FormFleet[] fFleet;
+		public FormCombinedFleet fCombinedFleet;
 		public FormDock fDock;
 		public FormArsenal fArsenal;
 		public FormHeadquarters fHeadquarters;
@@ -224,6 +225,8 @@ namespace ElectronicObserver.Window
             this.SubForms.Add(this.fBaseAirCorps = new FormBaseAirCorps(this));
             this.SubForms.Add(this.fJson = new FormJson(this));
 
+			this.SubForms.Add(this.fCombinedFleet = new FormCombinedFleet(this));
+
             this.ConfigurationChanged();     //設定から初期化
 
             this.LoadLayout(Configuration.Config.Life.LayoutFilePath);
@@ -232,10 +235,8 @@ namespace ElectronicObserver.Window
 			// デバッグ: 開始時にAPIリストを読み込む
 			if (Configuration.Config.Debug.LoadAPIListOnLoad)
 			{
-
 				try
 				{
-
 					await Task.Factory.StartNew(() => this.LoadAPIList(Configuration.Config.Debug.APIListPath));
 
                     this.Activate();     // 上記ロードに時間がかかるとウィンドウが表示されなくなることがあるので
@@ -336,11 +337,6 @@ namespace ElectronicObserver.Window
                 this._volumeUpdateState = -1;
 		}
 
-
-
-
-
-
 		private void StripMenu_Debug_LoadAPIFromFile_Click(object sender, EventArgs e)
 		{
 
@@ -391,7 +387,6 @@ namespace ElectronicObserver.Window
 						TimeSpan ts = border - now;
                         this.StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
                         this.StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
-
 					}
 					break;
 
@@ -404,7 +399,6 @@ namespace ElectronicObserver.Window
 						TimeSpan ts = border - now;
                         this.StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
                         this.StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss") + "\r\n" + SoftwareInformation.GetMaintenanceTime();
-
 					}
 					break;
 			}
@@ -466,9 +460,7 @@ namespace ElectronicObserver.Window
 
             this.UpdatePlayTime();
 
-
 			SystemEvents.OnSystemShuttingDown();
-
 
             this.SaveLayout(Configuration.Config.Life.LayoutFilePath);
 
@@ -492,19 +484,16 @@ namespace ElectronicObserver.Window
 
 		private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
 		{
-
 			NotifierManager.Instance.ApplyToConfiguration();
 			Utility.Configuration.Instance.Save();
 			RecordManager.Instance.SavePartial();
 			KCDatabase.Instance.Save();
 			APIObserver.Instance.Stop();
 
-
 			Utility.Logger.Add(2, "종료가 완료되었습니다.");
 
 			if (Utility.Configuration.Config.Log.SaveLogFlag)
 				Utility.Logger.Save();
-
 		}
 
 
@@ -718,39 +707,30 @@ namespace ElectronicObserver.Window
 
 		private void CreateParentDirectories(string path)
 		{
-
 			var parents = Path.GetDirectoryName(path);
 
 			if (!String.IsNullOrEmpty(parents))
 			{
 				Directory.CreateDirectory(parents);
 			}
-
 		}
-
-
 
 		void Logger_LogAdded(Utility.Logger.LogData data)
 		{
-
             this.StripStatus_Information.Text = data.Message.Replace("\r", " ").Replace("\n", " ");
-
 		}
 
 
 		private void StripMenu_Help_Version_Click(object sender, EventArgs e)
 		{
-
 			using (var dialog = new DialogVersion())
 			{
 				dialog.ShowDialog(this);
 			}
-
 		}
 
 		private void StripMenu_File_Configuration_Click(object sender, EventArgs e)
 		{
-
             this.UpdatePlayTime();
 
 			using (var dialog = new DialogConfiguration(Utility.Configuration.Config))
@@ -773,14 +753,11 @@ namespace ElectronicObserver.Window
 
 		private void StripMenu_File_SaveData_Save_Click(object sender, EventArgs e)
 		{
-
 			RecordManager.Instance.SaveAll();
-
 		}
 
 		private void StripMenu_File_SaveData_Load_Click(object sender, EventArgs e)
 		{
-
 			if (MessageBox.Show("저장하지 않은 기록이 소실될 수 있습니다.\r\n로드하시겠습니까?", "확인",
 					MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
@@ -788,14 +765,12 @@ namespace ElectronicObserver.Window
 
 				RecordManager.Instance.Load();
 			}
-
 		}
 
 
 
 		private async void StripMenu_Debug_LoadInitialAPI_Click(object sender, EventArgs e)
 		{
-
 			using (OpenFileDialog ofd = new OpenFileDialog())
 			{
 
@@ -821,18 +796,14 @@ namespace ElectronicObserver.Window
 							MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 					}
-
 				}
-
 			}
-
 		}
 
 
 
 		private void LoadAPIList(string path)
 		{
-
 			string parent = Path.GetDirectoryName(path);
 
 			using (StreamReader sr = new StreamReader(path))
@@ -846,7 +817,6 @@ namespace ElectronicObserver.Window
 						int slashindex = line.IndexOf('/');
 						if (slashindex != -1)
 						{
-
 							switch (line.Substring(0, slashindex).ToLower())
 							{
 								case "q":
@@ -859,7 +829,6 @@ namespace ElectronicObserver.Window
 									line = line.Substring(Math.Min(slashindex + 1, line.Length));
 									break;
 							}
-
 						}
 					}
 
@@ -899,9 +868,7 @@ namespace ElectronicObserver.Window
 						}
 					}
 				}
-
 			}
-
 		}
 
 
@@ -910,13 +877,11 @@ namespace ElectronicObserver.Window
 
 		private void StripMenu_Debug_LoadRecordFromOld_Click(object sender, EventArgs e)
 		{
-
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
 				MessageBox.Show("먼저 일반 api_start2 를 로드합니다.", "불편을 끼쳐드려 죄송합니다.", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
-
 
 			using (OpenFileDialog ofd = new OpenFileDialog())
 			{
@@ -962,13 +927,11 @@ namespace ElectronicObserver.Window
 
 		private void StripMenu_Debug_LoadDataFromOld_Click(object sender, EventArgs e)
 		{
-
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
                 MessageBox.Show("먼저 일반 api_start2 를 로드합니다.", "불편을 끼쳐드려 죄송합니다.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
 
 			using (OpenFileDialog ofd = new OpenFileDialog())
 			{
@@ -1013,13 +976,11 @@ namespace ElectronicObserver.Window
 					}
 				}
 			}
-
 		}
 
 
 		private void StripMenu_Tool_AlbumMasterShip_Click(object sender, EventArgs e)
 		{
-
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
 				MessageBox.Show("함선 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1031,12 +992,10 @@ namespace ElectronicObserver.Window
                 this.FormMain_RefreshTopMost();
 				dialogAlbumMasterShip.Show(this);
 			}
-
 		}
 
 		private void StripMenu_Tool_AlbumMasterEquipment_Click(object sender, EventArgs e)
 		{
-
 			if (KCDatabase.Instance.MasterEquipments.Count == 0)
 			{
                 MessageBox.Show("장비 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1048,13 +1007,10 @@ namespace ElectronicObserver.Window
                 this.FormMain_RefreshTopMost();
 				dialogAlbumMasterEquipment.Show(this);
 			}
-
 		}
 
         private void StripMenu_Tool_MasterExpeditionClick(object sender, EventArgs e)
         {
-
-
             if (KCDatabase.Instance.Mission.Count == 0)
             {
                 MessageBox.Show("원정 데이터가 로드되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1068,10 +1024,8 @@ namespace ElectronicObserver.Window
             }
         }
 
-
         private async void StripMenu_Debug_DeleteOldAPI_Click(object sender, EventArgs e)
 		{
-
 			if (MessageBox.Show("이전 API 데이터를 삭제합니다.\r\n실행하시겠습니까?", "확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 				== System.Windows.Forms.DialogResult.Yes)
 			{
@@ -1089,16 +1043,11 @@ namespace ElectronicObserver.Window
 
 					MessageBox.Show("삭제에 실패했습니다.\r\n" + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
-
-
 			}
-
 		}
 
 		private int DeleteOldAPI()
 		{
-
-
 			//適当極まりない
 			int count = 0;
 
@@ -1139,17 +1088,14 @@ namespace ElectronicObserver.Window
 
 		private void StripMenu_Tool_EquipmentList_Click(object sender, EventArgs e)
 		{
-
 			var dialogEquipmentList = new DialogEquipmentList();
             this.FormMain_RefreshTopMost();
 			dialogEquipmentList.Show(this);
-
 		}
 
 
 		private async void StripMenu_Debug_RenameShipResource_Click(object sender, EventArgs e)
 		{
-
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
 				MessageBox.Show("함선 데이터가 로드 되지 않았습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1175,8 +1121,6 @@ namespace ElectronicObserver.Window
 
 				if (path == null) return;
 
-
-
 				try
 				{
 
@@ -1193,62 +1137,46 @@ namespace ElectronicObserver.Window
 					MessageBox.Show("함선 파일 이름 바꾸기에 실패했습니다.\r\n" + ex.Message, "애러", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				}
-
-
-
 			}
-
 		}
 
 
 		private int RenameShipResource(string path)
 		{
-
 			int count = 0;
 
 			foreach (var p in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
 			{
-
 				string name = Path.GetFileName(p);
 
 				foreach (var ship in KCDatabase.Instance.MasterShips.Values)
 				{
-
 					if (name.Contains(ship.ResourceName))
 					{
-
 						name = name.Replace(ship.ResourceName, string.Format("{0}({1})", ship.NameWithClass, ship.ShipID)).Replace(' ', '_');
 
 						try
 						{
-
 							File.Move(p, Path.Combine(Path.GetDirectoryName(p), name));
 							count++;
 							break;
-
 						}
 						catch (IOException)
 						{
 							//ファイルが既に存在する：＊にぎりつぶす＊
 						}
-
 					}
-
 				}
-
 			}
 
 			foreach (var p in Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories))
 			{
-
 				string name = Path.GetFileName(p);      //GetDirectoryName だと親フォルダへのパスになってしまうため
 
 				foreach (var ship in KCDatabase.Instance.MasterShips.Values)
 				{
-
 					if (name.Contains(ship.ResourceName))
 					{
-
 						name = name.Replace(ship.ResourceName, string.Format("{0}({1})", ship.NameWithClass, ship.ShipID)).Replace(' ', '_');
 
 						try
@@ -1264,19 +1192,14 @@ namespace ElectronicObserver.Window
 							//フォルダが既に存在する：＊にぎりつぶす＊
 						}
 					}
-
 				}
-
 			}
-
-
 			return count;
 		}
 
 
 		private void StripMenu_Help_Help_Click(object sender, EventArgs e)
 		{
-
 			if (MessageBox.Show("외부 브라우저에서 온라인 메뉴얼을 엽니다.\r\n계속 하시겠습니까?", "도움말",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 				== System.Windows.Forms.DialogResult.Yes)
@@ -1284,34 +1207,25 @@ namespace ElectronicObserver.Window
 
 				System.Diagnostics.Process.Start("https://github.com/TheLokis/ElectronicObserver/wiki");
 			}
-
 		}
-
 
 		private void SeparatorWhitecap_Click(object sender, EventArgs e)
 		{
 			new DialogWhitecap().Show(this);
 		}
 
-
-
 		private void StripMenu_File_Layout_Load_Click(object sender, EventArgs e)
-		{
-
+        {
             this.LoadLayout(Utility.Configuration.Config.Life.LayoutFilePath);
-
 		}
 
 		private void StripMenu_File_Layout_Save_Click(object sender, EventArgs e)
 		{
-
             this.SaveLayout(Utility.Configuration.Config.Life.LayoutFilePath);
-
 		}
 
 		private void StripMenu_File_Layout_Open_Click(object sender, EventArgs e)
 		{
-
 			using (var dialog = new OpenFileDialog())
 			{
 
@@ -1328,47 +1242,36 @@ namespace ElectronicObserver.Window
                     this.LoadLayout(Utility.Configuration.Config.Life.LayoutFilePath);
 
 				}
-
 			}
-
 		}
 
 		private void StripMenu_File_Layout_Change_Click(object sender, EventArgs e)
 		{
-
 			using (var dialog = new SaveFileDialog())
 			{
-
 				dialog.Filter = "Layout Archive|*.zip|File|*";
 				dialog.Title = "레이아웃 파일 저장";
-
 
 				PathHelper.InitSaveFileDialog(Utility.Configuration.Config.Life.LayoutFilePath, dialog);
 
 				if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 				{
-
 					Utility.Configuration.Config.Life.LayoutFilePath = PathHelper.GetPathFromSaveFileDialog(dialog);
                     this.SaveLayout(Utility.Configuration.Config.Life.LayoutFilePath);
-
 				}
 			}
-
 		}
 
 
 		private void StripMenu_Tool_ResourceChart_Click(object sender, EventArgs e)
 		{
-
 			var dialogResourceChart = new DialogResourceChart();
             this.FormMain_RefreshTopMost();
 			dialogResourceChart.Show(this);
-
 		}
 
 		private void StripMenu_Tool_DropRecord_Click(object sender, EventArgs e)
 		{
-
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
 				MessageBox.Show("칸코레를 한번 실행하고 열어주세요.", "마스터 데이터가 없습니다.", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1382,7 +1285,6 @@ namespace ElectronicObserver.Window
 			}
 
 			new Dialog.DialogDropRecordViewer().Show(this);
-
 		}
 
 
@@ -1421,19 +1323,33 @@ namespace ElectronicObserver.Window
 			}
 
 			new Dialog.DialogConstructionRecordViewer().Show(this);
-
 		}
 
-		private void StripMenu_Tool_AntiAirDefense_Click(object sender, EventArgs e)
+        private void StripMenu_Tool_ExpeditionRecord_Click(object sender, EventArgs e)
+        {
+            if (KCDatabase.Instance.Mission.Count == 0)
+            {
+				// Error Message Point #1
+                return;
+            }
+
+            if (RecordManager.Instance.Expedition.Record.Count == 0)
+            {
+                MessageBox.Show("원정 기록이 없습니다.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            new Dialog.DialogExpeditionRecordViewer().Show(this);
+        }
+
+
+        private void StripMenu_Tool_AntiAirDefense_Click(object sender, EventArgs e)
 		{
-
 			new Dialog.DialogAntiAirDefense().Show(this);
-
 		}
 
 		private void StripMenu_Tool_FleetImageGenerator_Click(object sender, EventArgs e)
 		{
-
 			new Dialog.DialogFleetImageGenerator(1).Show(this);
 		}
 
@@ -1449,18 +1365,14 @@ namespace ElectronicObserver.Window
 
         private void StripMenu_File_Layout_LockLayout_Click(object sender, EventArgs e)
 		{
-
 			Utility.Configuration.Config.Life.LockLayout = this.StripMenu_File_Layout_LockLayout.Checked;
             this.ConfigurationChanged();
-
 		}
 
 		private void StripMenu_File_Layout_TopMost_Click(object sender, EventArgs e)
 		{
-
 			Utility.Configuration.Config.Life.TopMost = this.StripMenu_File_Layout_TopMost.Checked;
             this.ConfigurationChanged();
-
 		}
 
 
@@ -1477,14 +1389,11 @@ namespace ElectronicObserver.Window
 			new Dialog.DialogExpChecker().Show(this);
 		}
 
-
-
 		private void CallPumpkinHead(string apiname, dynamic data)
 		{
 			new DialogHalloween().Show(this);
 			APIObserver.Instance.APIList["api_port/port"].ResponseReceived -= this.CallPumpkinHead;
 		}
-
 
 		private void StripMenu_WindowCapture_AttachAll_Click(object sender, EventArgs e)
 		{
@@ -1495,8 +1404,6 @@ namespace ElectronicObserver.Window
 		{
             this.fWindowCapture.DetachAll();
 		}
-
-
 
 		private void UpdatePlayTime()
 		{
@@ -1562,7 +1469,6 @@ namespace ElectronicObserver.Window
         {
             System.Diagnostics.Process.Start("http://kancolle-calc.net/deckbuilder.html");
         }
-
 
         #region フォーム表示
 

@@ -1,4 +1,5 @@
 ﻿using ElectronicObserver.Data;
+using ElectronicObserver.Resource.Record;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,21 +29,22 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 		{
 
 			var fleet = KCDatabase.Instance.Fleet[this._fleetID];
+			int[] materials = new int[4];
 
 			Utility.Logger.Add(2, string.Format("#{0}「{1}」가 원정「{2}: {3}」에서 귀환했습니다.",
 				fleet.FleetID, fleet.Name, fleet.ExpeditionDestination, 
 				Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.DataType.ExpeditionTitle, fleet.ExpeditionDestination)));
 
+
 			// 獲得資源表示
 			if (Utility.Configuration.Config.Log.ShowSpoiler)
 			{
-
 				var sb = new LinkedList<string>();
 
 				//materials
-				if (!(data.api_get_material is double))
-				{       //(強制帰還などで)ないときに -1 になる
-					int[] materials = (int[])data.api_get_material;
+				if (data.api_get_material is double == false)
+				{       // 원정실패시 -1로 리턴
+					materials = (int[])data.api_get_material;
 					for (int i = 0; i < 4; i++)
 					{
 						if (materials[i] > 0)
@@ -50,7 +52,6 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 							sb.AddLast(Constants.GetMaterialName(i + 1) + "x" + materials[i]);
 						}
 					}
-
 				}
 
 				//items
@@ -130,10 +131,19 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 						Utility.Logger.Add(2, string.Format("{0} 가 레벨 {1} 이 되었습니다.", ship.Name, ship.Level + increment));
 					}
 				}
+
 			}
 
+            RecordManager.Instance.Expedition.Add(
+                fleet.ExpeditionDestination,
+                fleet[0],
+                materials[0],
+                materials[1],
+                materials[2],
+                materials[3],
+                (int)data.api_clear_result);
 
-			base.OnResponseReceived((object)data);
+            base.OnResponseReceived((object)data);
 		}
 
 		public override string APIName => "api_req_mission/result";

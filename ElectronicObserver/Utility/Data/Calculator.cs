@@ -29,12 +29,10 @@ namespace ElectronicObserver.Utility.Data
             return min + (max - min) * lv / 99;
         }
 
-
-
         /// <summary>
         /// 各装備カテゴリにおける制空値の熟練度ボーナス
         /// </summary>
-        private static readonly Dictionary<EquipmentTypes, int[]> AircraftLevelBonus = new Dictionary<EquipmentTypes, int[]>() {
+        private static readonly Dictionary<EquipmentTypes, int[]> _aircraftLevelBonus = new Dictionary<EquipmentTypes, int[]>() {
             { EquipmentTypes.CarrierBasedFighter,    new int[] { 0, 0, 2, 5, 9, 14, 14, 22, 22 } },
             { EquipmentTypes.CarrierBasedBomber,     new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
             { EquipmentTypes.CarrierBasedTorpedo,    new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
@@ -50,14 +48,14 @@ namespace ElectronicObserver.Utility.Data
         /// <summary>
         /// 艦載機熟練度の内部値テーブル(仮)
         /// </summary>
-        private static readonly List<int> AircraftExpTable = new List<int>() {
+        private static readonly List<int> _aircraftExpTable = new List<int>() {
             0, 10, 25, 40, 55, 70, 85, 100, 120
         };
 
         /// <summary>
         /// 各装備カテゴリにおける制空値の改修ボーナス
         /// </summary>
-        private static readonly Dictionary<EquipmentTypes, double> LevelBonus = new Dictionary<EquipmentTypes, double>() {
+        private static readonly Dictionary<EquipmentTypes, double> _levelBonus = new Dictionary<EquipmentTypes, double>() {
             { EquipmentTypes.CarrierBasedFighter,   0.2 },
             { EquipmentTypes.CarrierBasedBomber,    0.25 },
             { EquipmentTypes.SeaplaneFighter,       0.2 },
@@ -78,7 +76,6 @@ namespace ElectronicObserver.Utility.Data
         /// <returns></returns>
         public static int GetAirSuperiority(int equipmentID, int count, int aircraftLevel = 0, int level = 0, int baseAirCorpsActionKind = -1, bool isAircraftExpMaximum = false)
         {
-
             if (count <= 0)
                 return 0;
 
@@ -92,12 +89,12 @@ namespace ElectronicObserver.Utility.Data
             // 通常の艦隊の場合、偵察機等の制空値は計算しない
             if (baseAirCorpsActionKind == -1)
             {
-                if (!AircraftLevelBonus.ContainsKey(category))
+                if (!_aircraftLevelBonus.ContainsKey(category))
                     return 0;
             }
 
 
-            double levelBonus = LevelBonus.ContainsKey(category) ? LevelBonus[category] : 0;    // 改修レベル補正
+            double levelBonus = _levelBonus.ContainsKey(category) ? _levelBonus[category] : 0;    // 改修レベル補正
             double interceptorBonus = 0;    // 局地戦闘機の迎撃補正
             if (category == EquipmentTypes.Interceptor)
             {
@@ -111,18 +108,18 @@ namespace ElectronicObserver.Utility.Data
             if (isAircraftExpMaximum)
             {
                 if (aircraftLevel < 7)
-                    aircraftExp = AircraftExpTable[aircraftLevel + 1] - 1;
+                    aircraftExp = _aircraftExpTable[aircraftLevel + 1] - 1;
                 else
-                    aircraftExp = AircraftExpTable.Last();
+                    aircraftExp = _aircraftExpTable.Last();
             }
             else
             {
-                aircraftExp = AircraftExpTable[aircraftLevel];
+                aircraftExp = _aircraftExpTable[aircraftLevel];
             }
 
             return (int)((eq.AA + levelBonus * level + interceptorBonus) * Math.Sqrt(count)
                 + Math.Sqrt(aircraftExp / 10.0)
-                + (AircraftLevelBonus.ContainsKey(category) ? AircraftLevelBonus[category][aircraftLevel] : 0));
+                + (_aircraftLevelBonus.ContainsKey(category) ? _aircraftLevelBonus[category][aircraftLevel] : 0));
         }
 
 
@@ -368,7 +365,6 @@ namespace ElectronicObserver.Utility.Data
         /// <param name="branchWeight">分岐点係数。2-5では1</param>
         public static double GetSearchingAbility_New33(FleetData fleet, int branchWeight)
         {
-
             double ret = 0;
 
             foreach (var ship in fleet.MembersWithoutEscaped)
@@ -450,7 +446,6 @@ namespace ElectronicObserver.Utility.Data
             return ret;
         }
 
-
         /// <summary>
         /// 艦隊の触接開始率を求めます。
         /// </summary>
@@ -494,7 +489,6 @@ namespace ElectronicObserver.Utility.Data
         /// <returns>機体の命中をキー, 触接選択率を値とした Dictionary 。</returns>
         public static Dictionary<int, double> GetContactSelectionProbability(FleetData fleet)
         {
-
             var probs = new Dictionary<int, double>();
 
             foreach (var ship in fleet.MembersWithoutEscaped)
@@ -541,16 +535,13 @@ namespace ElectronicObserver.Utility.Data
         /// <returns>減少TP。</returns>
         public static int GetTPDamage(FleetData fleet)
         {
-
             int tp = 0;
 
             foreach (var ship in fleet.MembersWithoutEscaped.Where(s => s != null && s.HPRate > 0.25))
             {
-
                 // 装備ボーナス
                 foreach (var eq in ship.AllSlotInstanceMaster.Where(q => q != null))
                 {
-
                     switch (eq.CategoryType)
                     {
 
@@ -579,7 +570,6 @@ namespace ElectronicObserver.Utility.Data
                 // 艦種ボーナス
                 switch (ship.MasterShip.ShipType)
                 {
-
                     case ShipTypes.Destroyer:
                         tp += 5;
                         break;

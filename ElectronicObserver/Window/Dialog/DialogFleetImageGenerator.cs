@@ -52,14 +52,11 @@ namespace ElectronicObserver.Window.Dialog
 		public DialogFleetImageGenerator(int fleetID)
 			: this()
 		{
-
 			if (KCDatabase.Instance.Fleet.CombinedFlag > 0 && fleetID <= 2)
                 this.CurrentArgument.FleetIDs = new int[] { 1, 2 };
 			else
                 this.CurrentArgument.FleetIDs = new int[] { fleetID };
 		}
-
-
 
 		private void DialogFleetImageGenerator_Load(object sender, EventArgs e)
 		{

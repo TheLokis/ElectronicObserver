@@ -50,7 +50,6 @@ namespace ElectronicObserver.Resource.Record
 
 		private RecordManager()
 		{
-
             this.MasterPath		= @"Record";
             this.EnemyFleet		= new EnemyFleetRecord();
             this.ShipParameter	= new ShipParameterRecord();
@@ -63,7 +62,6 @@ namespace ElectronicObserver.Resource.Record
 			foreach (var r in this.Records)
 				r.RegisterEvents();
 
-
 			if (Directory.Exists(this.MasterPath) == false)
 			{
 				Directory.CreateDirectory(this.MasterPath);
@@ -75,7 +73,6 @@ namespace ElectronicObserver.Resource.Record
 
 		public bool Load(bool logging = true)
 		{
-
 			bool succeeded = true;
 
 			ResourceManager.CopyDocumentFromArchive("Record/" + this.ShipParameter.FileName, this.MasterPath + "\\" + this.ShipParameter.FileName);
