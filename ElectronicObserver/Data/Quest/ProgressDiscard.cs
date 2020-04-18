@@ -60,41 +60,41 @@ namespace ElectronicObserver.Data.Quest
 
 			if (this.Categories == null)
 			{
-                foreach (var i in equipments)
-                {
+				foreach (var i in equipments)
                     this.Increment();
-                }
-
 				return;
 			}
 
-			foreach (var i in equipments)
-			{
-				var eq = KCDatabase.Instance.Equipments[i];
-
-                switch (this.CategoryIndex)
+                foreach (var i in equipments)
                 {
-                    case -1:
-                        if (this.Categories.Contains(eq.EquipmentID))
-                            this.Increment();
-                        break;
-                    case 1:
-                        if (this.Categories.Contains(eq.MasterEquipment.CardType))
-                            this.Increment();
-                        break;
-                    case 2:
-                        if (this.Categories.Contains((int)eq.MasterEquipment.CategoryType))
-                            this.Increment();
-                        break;
-                    case 3:
-                        if (this.Categories.Contains(eq.MasterEquipment.IconType))
-                            this.Increment();
-                        break;
+                    var eq = KCDatabase.Instance.Equipments[i];
+                    if (eq == null)
+                    {
+                        this.Increment();
+                        return;
+                    }
+
+                    switch (this.CategoryIndex)
+                    {
+                        case -1:
+                            if (this.Categories.Contains(eq.EquipmentID))
+                                this.Increment();
+                            break;
+                        case 1:
+                            if (this.Categories.Contains(eq.MasterEquipment.CardType))
+                                this.Increment();
+                            break;
+                        case 2:
+                            if (this.Categories.Contains((int)eq.MasterEquipment.CategoryType))
+                                this.Increment();
+                            break;
+                        case 3:
+                            if (this.Categories.Contains(eq.MasterEquipment.IconType))
+                                this.Increment();
+                            break;
+                    }
                 }
-            }
 		}
-
-
 
 		public override string GetClearCondition()
 		{
