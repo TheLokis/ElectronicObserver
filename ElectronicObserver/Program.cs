@@ -18,6 +18,8 @@ namespace ElectronicObserver
 		{
 			bool allowMultiInstance = args.Contains("-m") || args.Contains("--multi-instance");
 
+			allowMultiInstance = true;
+
 			using (var mutex = new Mutex(false, Application.ExecutablePath.Replace('\\', '/'), out var created))
 			{
 

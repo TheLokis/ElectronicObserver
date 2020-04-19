@@ -36,7 +36,9 @@
             // 
             this.TableMember.AutoSize = true;
             this.TableMember.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.TableMember.ColumnCount = 6;
+            this.TableMember.ColumnCount = 8;
+            this.TableMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TableMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableMember.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -50,6 +52,7 @@
             this.TableMember.Size = new System.Drawing.Size(0, 21);
             this.TableMember.TabIndex = 1;
             this.TableMember.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.TableMember_CellPaint);
+            this.TableMember.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
             // 
             // TableFleet
             // 
@@ -68,7 +71,7 @@
             this.TableFleet.RowCount = 1;
             this.TableFleet.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.TableFleet.Size = new System.Drawing.Size(0, 21);
-            this.TableFleet.TabIndex = 2;
+            this.TableFleet.TabIndex = 5;
             // 
             // ContextMenuFleet
             // 
@@ -83,60 +86,52 @@
             this.ContextMenuFleet_OutputFleetImage,
             this.ContextMenuFleet_CopyToFleetAnalysis});
             this.ContextMenuFleet.Name = "ContextMenuFleet";
-            this.ContextMenuFleet.Size = new System.Drawing.Size(235, 164);
+            this.ContextMenuFleet.Size = new System.Drawing.Size(249, 164);
             this.ContextMenuFleet.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuFleet_Opening);
             // 
             // ContextMenuFleet_CopyFleet
             // 
             this.ContextMenuFleet_CopyFleet.Name = "ContextMenuFleet_CopyFleet";
-            this.ContextMenuFleet_CopyFleet.Size = new System.Drawing.Size(234, 22);
-            this.ContextMenuFleet_CopyFleet.Text = "편성을 텍스트로 복사(&C)";
-            this.ContextMenuFleet_CopyFleet.Click += new System.EventHandler(this.ContextMenuFleet_CopyFleet_Click);
+            this.ContextMenuFleet_CopyFleet.Size = new System.Drawing.Size(248, 22);
             // 
             // ContextMenuFleet_CopyFleetDeckBuilder
             // 
             this.ContextMenuFleet_CopyFleetDeckBuilder.Name = "ContextMenuFleet_CopyFleetDeckBuilder";
-            this.ContextMenuFleet_CopyFleetDeckBuilder.Size = new System.Drawing.Size(234, 22);
-            this.ContextMenuFleet_CopyFleetDeckBuilder.Text = "편성복사(덱 빌더용)(&D)";
-            this.ContextMenuFleet_CopyFleetDeckBuilder.Click += new System.EventHandler(this.ContextMenuFleet_CopyFleetDeckBuilder_Click);
+            this.ContextMenuFleet_CopyFleetDeckBuilder.Size = new System.Drawing.Size(248, 22);
             // 
             // ContextMenuFleet_CopyKanmusuList
             // 
             this.ContextMenuFleet_CopyKanmusuList.Name = "ContextMenuFleet_CopyKanmusuList";
-            this.ContextMenuFleet_CopyKanmusuList.Size = new System.Drawing.Size(234, 22);
-            this.ContextMenuFleet_CopyKanmusuList.Text = "함대 분석용 코드 복사(&R)";
-            this.ContextMenuFleet_CopyKanmusuList.Click += new System.EventHandler(this.ContextMenuFleet_CopyKanmusuList_Click);
+            this.ContextMenuFleet_CopyKanmusuList.Size = new System.Drawing.Size(248, 22);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(231, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(245, 6);
             // 
             // ContextMenuFleet_AntiAirDetails
             // 
             this.ContextMenuFleet_AntiAirDetails.Name = "ContextMenuFleet_AntiAirDetails";
-            this.ContextMenuFleet_AntiAirDetails.Size = new System.Drawing.Size(234, 22);
-            this.ContextMenuFleet_AntiAirDetails.Text = "대공포화 상세보기(&A)";
-            this.ContextMenuFleet_AntiAirDetails.Click += new System.EventHandler(this.ContextMenuFleet_AntiAirDetails_Click);
+            this.ContextMenuFleet_AntiAirDetails.Size = new System.Drawing.Size(248, 22);
             // 
             // ContextMenuFleet_Capture
             // 
             this.ContextMenuFleet_Capture.Name = "ContextMenuFleet_Capture";
-            this.ContextMenuFleet_Capture.Size = new System.Drawing.Size(234, 22);
+            this.ContextMenuFleet_Capture.Size = new System.Drawing.Size(248, 22);
             this.ContextMenuFleet_Capture.Text = "화면 캡쳐(&S)";
             this.ContextMenuFleet_Capture.Click += new System.EventHandler(this.ContextMenuFleet_Capture_Click);
             // 
             // ContextMenuFleet_OutputFleetImage
             // 
             this.ContextMenuFleet_OutputFleetImage.Name = "ContextMenuFleet_OutputFleetImage";
-            this.ContextMenuFleet_OutputFleetImage.Size = new System.Drawing.Size(234, 22);
+            this.ContextMenuFleet_OutputFleetImage.Size = new System.Drawing.Size(248, 22);
             this.ContextMenuFleet_OutputFleetImage.Text = "편성 이미지 출력(&I)";
             this.ContextMenuFleet_OutputFleetImage.Click += new System.EventHandler(this.ContextMenuFleet_OutputFleetImage_Click);
             // 
-            // ContextMenuFleet_CopyToFleetAnalysiss
+            // ContextMenuFleet_CopyToFleetAnalysis
             // 
             this.ContextMenuFleet_CopyToFleetAnalysis.Name = "ContextMenuFleet_CopyToFleetAnalysis";
-            this.ContextMenuFleet_CopyToFleetAnalysis.Size = new System.Drawing.Size(227, 22);
+            this.ContextMenuFleet_CopyToFleetAnalysis.Size = new System.Drawing.Size(248, 22);
             this.ContextMenuFleet_CopyToFleetAnalysis.Text = "함대 분석 페이지용 코드 복사(&F)";
             this.ContextMenuFleet_CopyToFleetAnalysis.Click += new System.EventHandler(this.ContextMenuFleet_CopyToFleetAnalysis_Click);
             // 
@@ -147,13 +142,13 @@
             this.ToolTipInfo.ReshowDelay = 100;
             this.ToolTipInfo.ShowAlways = true;
             // 
-            // FormFleet
+            // FormCombinedFleet
             // 
             this.AutoHidePortion = 150D;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(300, 200);
+            this.ClientSize = new System.Drawing.Size(557, 200);
             this.Controls.Add(this.TableFleet);
             this.Controls.Add(this.TableMember);
             this.DoubleBuffered = true;
@@ -161,7 +156,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.HideOnClose = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "FormFleet";
+            this.Name = "FormCombinedFleet";
             this.Text = "*not loaded*";
             this.Load += new System.EventHandler(this.FormCombinedFleet_Load);
             this.ContextMenuFleet.ResumeLayout(false);

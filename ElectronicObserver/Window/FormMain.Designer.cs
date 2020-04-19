@@ -93,6 +93,7 @@
             this.StripMenu_Tool_FleetImageGenerator = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu_Tool_BaseAirCorpsSimulation = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu_Tool_ExpChecker = new System.Windows.Forms.ToolStripMenuItem();
+            this.StripMenu_Tool_ExpeditionCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItem_SiteList = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenuItem_poidb = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,7 +121,7 @@
             this.StripStatus_Clock = new System.Windows.Forms.ToolStripStatusLabel();
             this.UIUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.MainDockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.StripMenu_Tool_ExpeditionCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.StripMenu_CombinedFleet = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu.SuspendLayout();
             this.StripStatus.SuspendLayout();
             this.SuspendLayout();
@@ -258,7 +259,7 @@
             // 
             this.StripMenu_File_Notification_MuteAll.CheckOnClick = true;
             this.StripMenu_File_Notification_MuteAll.Name = "StripMenu_File_Notification_MuteAll";
-            this.StripMenu_File_Notification_MuteAll.Size = new System.Drawing.Size(185, 22);
+            this.StripMenu_File_Notification_MuteAll.Size = new System.Drawing.Size(173, 22);
             this.StripMenu_File_Notification_MuteAll.Text = "모든 알림 무시(&M)";
             this.StripMenu_File_Notification_MuteAll.Click += new System.EventHandler(this.StripMenu_File_Notification_MuteAll_Click);
             // 
@@ -318,7 +319,8 @@
             this.StripMenu_View_Fleet_1,
             this.StripMenu_View_Fleet_2,
             this.StripMenu_View_Fleet_3,
-            this.StripMenu_View_Fleet_4});
+            this.StripMenu_View_Fleet_4,
+            this.StripMenu_CombinedFleet});
             this.StripMenu_View_Fleet.Name = "StripMenu_View_Fleet";
             this.StripMenu_View_Fleet.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Fleet.Text = "함대(&F)";
@@ -326,28 +328,28 @@
             // StripMenu_View_Fleet_1
             // 
             this.StripMenu_View_Fleet_1.Name = "StripMenu_View_Fleet_1";
-            this.StripMenu_View_Fleet_1.Size = new System.Drawing.Size(88, 22);
+            this.StripMenu_View_Fleet_1.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Fleet_1.Text = "#&1";
             this.StripMenu_View_Fleet_1.Click += new System.EventHandler(this.StripMenu_View_Fleet_1_Click);
             // 
             // StripMenu_View_Fleet_2
             // 
             this.StripMenu_View_Fleet_2.Name = "StripMenu_View_Fleet_2";
-            this.StripMenu_View_Fleet_2.Size = new System.Drawing.Size(88, 22);
+            this.StripMenu_View_Fleet_2.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Fleet_2.Text = "#&2";
             this.StripMenu_View_Fleet_2.Click += new System.EventHandler(this.StripMenu_View_Fleet_2_Click);
             // 
             // StripMenu_View_Fleet_3
             // 
             this.StripMenu_View_Fleet_3.Name = "StripMenu_View_Fleet_3";
-            this.StripMenu_View_Fleet_3.Size = new System.Drawing.Size(88, 22);
+            this.StripMenu_View_Fleet_3.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Fleet_3.Text = "#&3";
             this.StripMenu_View_Fleet_3.Click += new System.EventHandler(this.StripMenu_View_Fleet_3_Click);
             // 
             // StripMenu_View_Fleet_4
             // 
             this.StripMenu_View_Fleet_4.Name = "StripMenu_View_Fleet_4";
-            this.StripMenu_View_Fleet_4.Size = new System.Drawing.Size(88, 22);
+            this.StripMenu_View_Fleet_4.Size = new System.Drawing.Size(180, 22);
             this.StripMenu_View_Fleet_4.Text = "#&4";
             this.StripMenu_View_Fleet_4.Click += new System.EventHandler(this.StripMenu_View_Fleet_4_Click);
             // 
@@ -625,6 +627,13 @@
             this.StripMenu_Tool_ExpChecker.Text = "경험치 계산기(&X)";
             this.StripMenu_Tool_ExpChecker.Click += new System.EventHandler(this.StripMenu_Tool_ExpChecker_Click);
             // 
+            // StripMenu_Tool_ExpeditionCheck
+            // 
+            this.StripMenu_Tool_ExpeditionCheck.Name = "StripMenu_Tool_ExpeditionCheck";
+            this.StripMenu_Tool_ExpeditionCheck.Size = new System.Drawing.Size(180, 22);
+            this.StripMenu_Tool_ExpeditionCheck.Text = "원정조건확인(&M)";
+            this.StripMenu_Tool_ExpeditionCheck.Click += new System.EventHandler(this.StripMenu_Tool_ExpeditionCheck_Click);
+            // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
@@ -839,12 +848,12 @@
             this.MainDockPanel.Size = new System.Drawing.Size(640, 434);
             this.MainDockPanel.TabIndex = 0;
             // 
-            // StripMenu_Tool_ExpeditionCheck
+            // StripMenu_CombinedFleet
             // 
-            this.StripMenu_Tool_ExpeditionCheck.Name = "StripMenu_Tool_ExpeditionCheck";
-            this.StripMenu_Tool_ExpeditionCheck.Size = new System.Drawing.Size(180, 22);
-            this.StripMenu_Tool_ExpeditionCheck.Text = "원정조건확인(&M)";
-            this.StripMenu_Tool_ExpeditionCheck.Click += new System.EventHandler(this.StripMenu_Tool_ExpeditionCheck_Click);
+            this.StripMenu_CombinedFleet.Name = "StripMenu_CombinedFleet";
+            this.StripMenu_CombinedFleet.Size = new System.Drawing.Size(180, 22);
+            this.StripMenu_CombinedFleet.Text = "연합함대";
+            this.StripMenu_CombinedFleet.Click += this.StripMenu_CombinedFleet_Click;
             // 
             // FormMain
             // 
@@ -965,5 +974,6 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_AkashiList;
         private System.Windows.Forms.ToolStripMenuItem StripMenuItem_enwikia;
         private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_ExpeditionCheck;
+        private System.Windows.Forms.ToolStripMenuItem StripMenu_CombinedFleet;
     }
 }

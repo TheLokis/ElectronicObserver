@@ -25,10 +25,16 @@ namespace ElectronicObserver.Window
         private bool _isRemodeling = false;
 
         private class TableFleetControl : IDisposable
-        { // 함대 상태 정보(FormCombinedFleet으로 이관)
+        {
+            public Label Name;
             public FleetState State;
             public ToolTip ToolTipInfo;
             public FormCombinedFleet Parent;
+            public ImageLabel AirSuperiority;
+            public ImageLabel SearchingAbility;
+            public ImageLabel AntiAirPower;
+
+            public int BranchWeight { get; private set; } = 1;
 
             public TableFleetControl(FormCombinedFleet parent)
             {
@@ -44,6 +50,40 @@ namespace ElectronicObserver.Window
                     AutoSize = true
                 };
 
+                this.AirSuperiority = new ImageLabel
+                {
+                    Anchor = AnchorStyles.Left,
+                    ForeColor = parent.MainFontColor,
+                    ImageList = ResourceManager.Instance.Equipments,
+                    ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter,
+                    Padding = new Padding(2, 2, 2, 2),
+                    Margin = new Padding(2, 0, 2, 0),
+                    AutoSize = true
+                };
+
+                this.SearchingAbility = new ImageLabel
+                {
+                    Anchor = AnchorStyles.Left,
+                    ForeColor = parent.MainFontColor,
+                    ImageList = ResourceManager.Instance.Equipments,
+                    ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedRecon,
+                    Padding = new Padding(2, 2, 2, 2),
+                    Margin = new Padding(2, 0, 2, 0),
+                    AutoSize = true
+                };
+               // this.SearchingAbility.Click += (sender, e) => this.SearchingAbility_Click(sender, e, parent.FleetID);
+
+                this.AntiAirPower = new ImageLabel
+                {
+                    Anchor = AnchorStyles.Left,
+                    ForeColor = parent.MainFontColor,
+                    ImageList = ResourceManager.Instance.Equipments,
+                    ImageIndex = (int)ResourceManager.EquipmentContent.HighAngleGun,
+                    Padding = new Padding(2, 2, 2, 2),
+                    Margin = new Padding(2, 0, 2, 0),
+                    AutoSize = true
+                };
+
                 this.ConfigurationChanged(parent);
 
                 this.ToolTipInfo = parent.ToolTipInfo;
@@ -51,17 +91,141 @@ namespace ElectronicObserver.Window
                 #endregion
             }
 
-            public TableFleetControl(FormCombinedFleet parent, TableLayoutPanel table)
+            public TableFleetControl(FormCombinedFleet parent, TableLayoutPanel table, int row)
                 : this(parent)
             {
                 this.Parent = parent;
-                this.AddToTable(table);
+                this.AddToTable(table, row);
             }
 
-            public void AddToTable(TableLayoutPanel table)
+            public void Update()
+            {
+                KCDatabase db = KCDatabase.Instance;
+
+                if (db.Fleet[1] == null) return;
+
+                FleetData fleet1 = db.Fleet[1];
+                FleetData fleet2 = db.Fleet[2];
+                {
+                    var members1 = db.Fleet[1].MembersInstance.Where(s => s != null);
+                    var members2 = db.Fleet[2].MembersInstance.Where(s => s != null);
+
+                    int levelSum = members1.Sum(s => s.Level) + members2.Sum(s => s.Level);
+
+                    int fueltotal   = members1.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1))
+                                    + members2.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int ammototal   = members1.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1))
+                                    + members2.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int fuelunit = members1.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int ammounit = members1.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
+
+                    int speed = members1.Select(s => s.Speed).DefaultIfEmpty(20).Min();
+
+                    int tp = Calculator.GetTPDamage(fleet1) + Calculator.GetTPDamage(fleet2);
+
+                    // 各艦ごとの ドラム缶 or 大発系 を搭載している個数
+                    var transport = members1.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.TransportContainer));
+                    var landing = members1.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
+
+
+                    this.ToolTipInfo.SetToolTip(this.Name, string.Format(
+                        "Lv합계: {0} / 평균: {1:0.00}\r\n" +
+                        "{2}함대\r\n" +
+                        "총 화력 {3} / 대공 {4} / 대잠 {5} / 색적 {6}\r\n" +
+                        "드럼통: {7}개 ({8}척)\r\n" +
+                        "수송량(TP): S {9} / A {10}\r\n" +
+                        "소비자원: 연료 {11} / 탄약 {12}\r\n" +
+                        "(1전투당 연료 {13} / 탄약 {14})",
+                        levelSum,
+                        (double)levelSum / Math.Max(fleet.Members.Count(id => id != -1), 1),
+                        Constants.GetSpeed(speed),
+                        members1.Sum(s => s.FirepowerTotal),
+                        members1.Sum(s => s.AATotal),
+                        members1.Sum(s => s.ASWTotal),
+                        members1.Sum(s => s.LOSTotal),
+                        transport.Sum(),
+                        transport.Count(i => i > 0),
+                        landing.Sum(),
+                        landing.Count(i => i > 0),
+                        tp,
+                        (int)(tp * 0.7),
+                        fueltotal,
+                        ammototal,
+                        fuelunit,
+                        ammounit
+                        ));
+
+                }
+
+                this.State.UpdateFleetState(fleet1, this.ToolTipInfo);
+
+                //制空戦力計算	
+                {
+                    int airSuperiority = fleet.GetAirSuperiority();
+                    bool includeLevel = Utility.Configuration.Config.FormFleet.AirSuperiorityMethod == 1;
+                    this.AirSuperiority.Text = fleet.GetAirSuperiorityString();
+                    this.ToolTipInfo.SetToolTip(this.AirSuperiority,
+                        string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n({4}: {5})\r\n",
+                        (int)(airSuperiority / 3.0),
+                        (int)(airSuperiority / 1.5),
+                        Math.Max((int)(airSuperiority * 1.5 - 1), 0),
+                        Math.Max((int)(airSuperiority * 3.0 - 1), 0),
+                        includeLevel ? "숙련도없음" : "숙련도있음",
+                        includeLevel ? Calculator.GetAirSuperiorityIgnoreLevel(fleet) : Calculator.GetAirSuperiority(fleet)));
+                }
+
+
+                //索敵能力計算
+                this.SearchingAbility.Text = fleet.GetSearchingAbilityString(this.BranchWeight);
+                {
+                    StringBuilder sb = new StringBuilder();
+                    double probStart = fleet.GetContactProbability();
+                    var probSelect = fleet.GetContactSelectionProbability();
+
+                    sb.AppendFormat("신판정식(33) 분기점계수: {0}\r\n　(클릭으로전환)\r\n\r\n촉접률: \r\n　확보 {1:p1} / 우세 {2:p1}\r\n",
+                        this.BranchWeight,
+                        probStart,
+                        probStart * 0.6);
+
+                    if (probSelect.Count > 0)
+                    {
+                        sb.AppendLine("촉접선택율: ");
+
+                        foreach (var p in probSelect.OrderBy(p => p.Key))
+                        {
+                            sb.AppendFormat("　명중{0} : {1:p1}\r\n", p.Key, p.Value);
+                        }
+                    }
+
+                    this.ToolTipInfo.SetToolTip(this.SearchingAbility, sb.ToString());
+                }
+
+                // 対空能力計算
+                {
+                    var sb = new StringBuilder();
+                    double lineahead = Calculator.GetAdjustedFleetAAValue(fleet, 1);
+
+                    this.AntiAirPower.Text = lineahead.ToString("0.0");
+
+                    sb.AppendFormat("함대방공\r\n단종진: {0:0.0} / 복종진: {1:0.0} / 윤형진: {2:0.0}\r\n",
+                        lineahead,
+                        Calculator.GetAdjustedFleetAAValue(fleet, 2),
+                        Calculator.GetAdjustedFleetAAValue(fleet, 3));
+
+                    this.ToolTipInfo.SetToolTip(this.AntiAirPower, sb.ToString());
+                }
+            }
+
+            public void AddToTable(TableLayoutPanel table, int row)
             {
                 table.SuspendLayout();
-                table.Controls.Add(this.State, 1, 0);
+                if (row == 0)
+                {
+                    table.Controls.Add(this.State, 1, 0);
+                    table.Controls.Add(this.AirSuperiority, 2, 0);
+                    table.Controls.Add(this.SearchingAbility, 3, 0);
+                    table.Controls.Add(this.AntiAirPower, 4, 0);
+                }
                 table.ResumeLayout();
             }
 
@@ -72,7 +236,7 @@ namespace ElectronicObserver.Window
 
             public void ConfigurationChanged(FormCombinedFleet parent)
             {
-                this.State.Font     = parent.MainFont;
+                this.State.Font = parent.MainFont;
                 this.State.RefreshFleetState();
 
                 ControlHelper.SetTableRowStyles(parent.TableFleet, ControlHelper.GetDefaultRowStyle());
@@ -87,19 +251,17 @@ namespace ElectronicObserver.Window
         private class TableMemberControl : IDisposable
         {
             public ImageLabel Name;
-            public ShipStatusLevel Level;
             public ShipStatusHP HP;
             public ImageLabel Condition;
             public ShipStatusResource ShipResource;
-            public ShipStatusEquipment Equipments;
             public int SelectedItem = 0;
+            public int Fleet = 0;
 
-            private ToolTip     _toolTipInfo;
-            private FormCombinedFleet   _parent;
+            private ToolTip _toolTipInfo;
+            private FormCombinedFleet _parent;
 
             public TableMemberControl(FormCombinedFleet parent)
             {
-
                 #region Initialize
 
                 this.Name = new ImageLabel();
@@ -117,23 +279,6 @@ namespace ElectronicObserver.Window
                 this.Name.Cursor = Cursors.Help;
                 this.Name.MouseDown += this.Name_MouseDown;
                 this.Name.ResumeLayout();
-
-                this.Level = new ShipStatusLevel();
-                this.Level.SuspendLayout();
-                this.Level.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-                this.Level.Value = 0;
-                this.Level.MaximumValue = ExpTable.ShipMaximumLevel;
-                this.Level.ValueNext = 0;
-                this.Level.MainFontColor = parent.MainFontColor;
-                this.Level.SubFontColor = parent.SubFontColor;
-                //Level.TextNext = "n.";
-                this.Level.Padding = new Padding(0, 0, 0, 0);
-                this.Level.Margin = new Padding(2, 0, 2, 1);
-                this.Level.AutoSize = true;
-                this.Level.Visible = false;
-                this.Level.Cursor = Cursors.Help;
-                this.Level.MouseDown += this.Level_MouseDown;
-                this.Level.ResumeLayout();
 
                 this.HP = new ShipStatusHP();
                 this.HP.SuspendUpdate();
@@ -180,17 +325,6 @@ namespace ElectronicObserver.Window
                 this.ShipResource.Visible = false;
                 this.ShipResource.ResumeLayout();
 
-                this.Equipments = new ShipStatusEquipment();
-                this.Equipments.SuspendUpdate();
-                this.Equipments.Anchor = AnchorStyles.Left;
-                this.Equipments.Padding = new Padding(0, 1, 0, 1);
-                this.Equipments.Margin = new Padding(2, 0, 2, 1);
-                this.Equipments.Size = new Size(40, 20);
-                this.Equipments.AutoSize = true;
-                this.Equipments.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                this.Equipments.Visible = false;
-                this.Equipments.ResumeUpdate();
-
                 this.ConfigurationChanged(parent);
 
                 this._toolTipInfo = parent.ToolTipInfo;
@@ -199,24 +333,22 @@ namespace ElectronicObserver.Window
 
             }
 
-            public TableMemberControl(FormCombinedFleet parent, TableLayoutPanel table, int row)
+            public TableMemberControl(FormCombinedFleet parent, TableLayoutPanel table, int row, int column)
                 : this(parent)
             {
-                this.AddToTable(table, row);
+                this.Fleet = row;
 
-                this.Equipments.Name = string.Format("{0}_{1}", parent.FleetID, row + 1);
+                this.AddToTable(table, row, column);
             }
 
-            public void AddToTable(TableLayoutPanel table, int row)
+            public void AddToTable(TableLayoutPanel table, int row, int column)
             {
                 table.SuspendLayout();
 
-                table.Controls.Add(this.Name, 0, row);
-                table.Controls.Add(this.Level, 1, row);
-                table.Controls.Add(this.HP, 2, row);
-                table.Controls.Add(this.Condition, 3, row);
-                table.Controls.Add(this.ShipResource, 4, row);
-                table.Controls.Add(this.Equipments, 5, row);
+                table.Controls.Add(this.Name, 0 + (column * 4), row);
+                table.Controls.Add(this.HP, 1 + (column * 4), row);
+                table.Controls.Add(this.Condition, 2 + (column * 4), row);
+                table.Controls.Add(this.ShipResource, 3 + (column * 4), row);
 
                 table.ResumeLayout();
             }
@@ -229,7 +361,7 @@ namespace ElectronicObserver.Window
                 if (ship != null)
                 {
                     bool isEscaped = KCDatabase.Instance.Fleet[ship.Fleet].EscapedShipList.Contains(shipMasterID);
-                    
+
                     this.Name.Text = ship.MasterShip.NameWithClass;
                     this.Name.Tag = ship.ShipID;
                     this._toolTipInfo.SetToolTip(this.Name,
@@ -262,35 +394,6 @@ namespace ElectronicObserver.Window
                             this.Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
                             this.Name.BackColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
                         }
-                    }
-
-                    this.Level.Value = ship.Level;
-                    this.Level.ValueNext = ship.ExpNext;
-                    this.Level.Tag = ship.MasterID;
-
-                    {
-                        StringBuilder tip = new StringBuilder();
-                        tip.AppendFormat("Total: {0} exp.\r\n", ship.ExpTotal);
-
-                        if (!Utility.Configuration.Config.FormFleet.ShowNextExp)
-                            tip.AppendFormat("다음 레벨까지: {0} exp.\r\n", ship.ExpNext);
-
-                        if (ship.MasterShip.RemodelAfterShipID != 0 && ship.Level < ship.MasterShip.RemodelAfterLevel)
-                        {
-                            tip.AppendFormat("개장까지: Lv. {0} / {1} exp.\r\n", ship.MasterShip.RemodelAfterLevel - ship.Level, ship.ExpNextRemodel);
-                        }
-                        else if (ship.Level <= 99)
-                        {
-                            tip.AppendFormat("Lv99까지: {0} exp.\r\n", Math.Max(ExpTable.GetExpToLevelShip(ship.ExpTotal, 99), 0));
-                        }
-                        else
-                        {
-                            tip.AppendFormat("Lv{0}까지: {1} exp.\r\n", ExpTable.ShipMaximumLevel, Math.Max(ExpTable.GetExpToLevelShip(ship.ExpTotal, ExpTable.ShipMaximumLevel), 0));
-                        }
-
-                        tip.AppendLine("(우클릭으로 경험치계산기에)");
-
-                        this._toolTipInfo.SetToolTip(this.Level, tip.ToString());
                     }
 
 
@@ -371,11 +474,6 @@ namespace ElectronicObserver.Window
                     }
 
                     this.ShipResource.SetResources(ship.Fuel, ship.FuelMax, ship.Ammo, ship.AmmoMax);
-
-
-                    this.Equipments.SetSlotList(ship);
-                    this._toolTipInfo.SetToolTip(this.Equipments, this.GetEquipmentString(ship));
-
                 }
                 else
                 {
@@ -383,11 +481,9 @@ namespace ElectronicObserver.Window
                 }
 
                 this.Name.Visible =
-                this.Level.Visible =
                 this.HP.Visible =
                 this.Condition.Visible =
-                this.ShipResource.Visible =
-                this.Equipments.Visible = shipMasterID != -1;
+                this.ShipResource.Visible = shipMasterID != -1;
             }
 
             void Name_MouseDown(object sender, MouseEventArgs e)
@@ -397,17 +493,6 @@ namespace ElectronicObserver.Window
                     if ((e.Button & MouseButtons.Right) != 0)
                     {
                         new DialogAlbumMasterShip(id).Show(this._parent);
-                    }
-                }
-            }
-
-            private void Level_MouseDown(object sender, MouseEventArgs e)
-            {
-                if (this.Level.Tag is int id && id != -1)
-                {
-                    if ((e.Button & MouseButtons.Right) != 0)
-                    {
-                        new DialogExpChecker(id).Show(this._parent);
                     }
                 }
             }
@@ -576,23 +661,18 @@ namespace ElectronicObserver.Window
             public void ConfigurationChanged(FormCombinedFleet parent)
             {
                 this.Name.Font = parent.MainFont;
-                this.Level.MainFont = parent.MainFont;
-                this.Level.SubFont = parent.SubFont;
                 this.HP.MainFont = parent.MainFont;
                 this.HP.SubFont = parent.SubFont;
                 this.Condition.Font = parent.MainFont;
                 this.SetConditionDesign((this.Condition.Tag as int?) ?? 49);
-                this.Equipments.Font = parent.SubFont;
             }
 
             public void Dispose()
             {
                 this.Name.Dispose();
-                this.Level.Dispose();
                 this.HP.Dispose();
                 this.Condition.Dispose();
                 this.ShipResource.Dispose();
-                this.Equipments.Dispose();
             }
         }
 
@@ -602,7 +682,7 @@ namespace ElectronicObserver.Window
         public Color SubFontColor { get; set; }
 
         private TableFleetControl[] _controlFleet = new TableFleetControl[2];
-        private TableMemberControl[][] _controlMember { get; set; } 
+        private TableMemberControl[][] _controlMember = new TableMemberControl[2][];
 
         private int _anchorageRepairBound;
 
@@ -627,18 +707,19 @@ namespace ElectronicObserver.Window
             this.TableFleet.Visible = false;
             this.TableFleet.SuspendLayout();
             this.TableFleet.BorderStyle = BorderStyle.FixedSingle;
-            this._controlFleet[0] = new TableFleetControl(this, this.TableFleet);
-            this._controlFleet[1] = new TableFleetControl(this, this.TableFleet);
+            this.TableFleet.RowCount = 1;
+            this._controlFleet[0] = new TableFleetControl(this, this.TableFleet, 0);
+            this._controlFleet[1] = new TableFleetControl(this, this.TableFleet, 1);
             this.TableFleet.ResumeLayout();
-
-
             this.TableMember.SuspendLayout();
+            this._controlMember = new TableMemberControl[2][];
+
             for (int i = 0; i < this._controlFleet.Length; i++)
             {
                 this._controlMember[i] = new TableMemberControl[7];
-                for (int j = 0; j < this._controlMember.Length; j++)
+                for (int j = 0; j < this._controlMember[i].Length; j++)
                 {
-                    this._controlMember[i][j] = new TableMemberControl(this, this.TableMember, j);
+                    this._controlMember[i][j] = new TableMemberControl(this, this.TableMember, j, i);
                 }
             }
 
@@ -706,32 +787,34 @@ namespace ElectronicObserver.Window
             KCDatabase db = KCDatabase.Instance;
 
             if (db.Ships.Count == 0) return;
+            this.TableFleet.Visible = true;
 
-            for (int j = 1; j < 2; j++)
+            this.TableFleet.SuspendLayout();
+
+            for (int j = 0; j < 2; j++)
             {
-                FleetData fleet = db.Fleet.Fleets[j];
+                FleetData fleet = db.Fleet.Fleets[j + 1];
 
                 if (fleet == null) return;
 
-                this.TableFleet.SuspendLayout();
-                this.TableFleet.Visible = true;
-                this.TableFleet.ResumeLayout();
-
                 this._anchorageRepairBound = fleet.CanAnchorageRepair ? 2 + fleet.MembersInstance[0].SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility) : 0;
-
                 this.TableMember.SuspendLayout();
                 this.TableMember.RowCount = fleet.Members.Count(id => id > 0);
-                for (int i = 0; i < this._controlMember.Length; i++)
-                {
-                    this._controlMember[fleet.FleetID - 1][i].Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
-                }
-                this.TableMember.ResumeLayout();
 
+                for (int i = 0; i < this._controlMember[j].Length; i++)
+                {
+                    Console.WriteLine("확인 : " + i + ":" + j);
+                    this._controlMember[j][i].Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
+                }
+
+                this.TableMember.ResumeLayout();
 
                 if (this.Icon != null) ResourceManager.DestroyIcon(this.Icon);
                 this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[this._controlFleet[fleet.FleetID - 1].State.GetIconIndex()]);
                 if (this.Parent != null) this.Parent.Refresh();       //アイコンを更新するため
             }
+
+            this.TableFleet.ResumeLayout();
         }
 
         void UpdateTimerTick()
@@ -741,18 +824,19 @@ namespace ElectronicObserver.Window
                 FleetData fleet = KCDatabase.Instance.Fleet.Fleets[j];
 
                 this.TableFleet.SuspendLayout();
-                {
-                    if (fleet != null)
-                        this._controlFleet[fleet.FleetID - 1].Refresh();
-                }
-
                 this.TableFleet.ResumeLayout();
-
                 this.TableMember.SuspendLayout();
-                for (int i = 0; i < this._controlMember[fleet.FleetID - 1].Length; i++)
+
+                if (fleet != null)
                 {
-                    this._controlMember[fleet.FleetID - 1][i].HP.Refresh();
+                    this._controlFleet[fleet.FleetID - 1].Refresh();
+
+                    for (int i = 0; i < this._controlMember[fleet.FleetID - 1].Length; i++)
+                    {
+                        this._controlMember[fleet.FleetID - 1][i].HP.Refresh();
+                    }
                 }
+
                 this.TableMember.ResumeLayout();
             }
         }
@@ -780,14 +864,6 @@ namespace ElectronicObserver.Window
             sb.Append("]");
 
             Clipboard.SetData(DataFormats.StringFormat, sb.ToString());
-        }
-
-        private void ContextMenuFleet_AntiAirDetails_Click(object sender, EventArgs e)
-        {
-            var dialog = new DialogAntiAirDefense();
-
-            dialog.SetFleetID(this.FleetID);
-            dialog.Show(this);
         }
 
         private void ContextMenuFleet_Capture_Click(object sender, EventArgs e)
@@ -820,87 +896,86 @@ namespace ElectronicObserver.Window
             this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
 
             this.AutoScroll = c.FormFleet.IsScrollable;
-
-            var fleet = KCDatabase.Instance.Fleet[this.FleetID];
-
-            this.TableFleet.SuspendLayout();
-            if (this._controlFleet != null && fleet != null)
+            for (int i = 0; i < this._controlFleet.Length; i++)
             {
-                this._controlFleet.ConfigurationChanged(this);
-                this._controlFleet.Update(fleet);
-            }
-            this.TableFleet.ResumeLayout();
+                var fleet = KCDatabase.Instance.Fleet[i + 1];
 
-            this.TableMember.SuspendLayout();
-            if (this._controlMember != null)
-            {
-                bool showAircraft = c.FormFleet.ShowAircraft;
-                bool fixShipNameWidth = c.FormFleet.FixShipNameWidth;
-                bool shortHPBar = c.FormFleet.ShortenHPBar;
-                bool colorMorphing = c.UI.BarColorMorphing;
-                Color[] colorScheme = c.UI.BarColorScheme.Select(col => col.ColorData).ToArray();
-                bool showNext = c.FormFleet.ShowNextExp;
-                bool showConditionIcon = c.FormFleet.ShowConditionIcon;
-                var levelVisibility = c.FormFleet.EquipmentLevelVisibility;
-                bool showAircraftLevelByNumber = c.FormFleet.ShowAircraftLevelByNumber;
-                int fixedShipNameWidth = c.FormFleet.FixedShipNameWidth;
-                bool isLayoutFixed = c.UI.IsLayoutFixed;
-                // bool IsDarkSkinUse = c.UI.IsDarkSkinUse;
-
-                for (int i = 0; i < this._controlMember.Length; i++)
+                this.TableFleet.SuspendLayout();
+                if (this._controlFleet != null && fleet != null)
                 {
-                    var member = this._controlMember[i];
-
-                    member.Equipments.ShowAircraft = showAircraft;
-                    if (fixShipNameWidth)
-                    {
-                        member.Name.AutoSize = false;
-                        member.Name.Size = new Size(fixedShipNameWidth, 20);
-                    }
-                    else
-                    {
-                        member.Name.AutoSize = true;
-                    }
-
-                    member.HP.SuspendUpdate();
-                    member.HP.Text = shortHPBar ? "" : "HP:";
-                    member.HP.HPBar.ColorMorphing = colorMorphing;
-                    member.HP.HPBar.SetBarColorScheme(colorScheme);
-                    member.HP.MaximumSize = isLayoutFixed ? new Size(int.MaxValue, (int)ControlHelper.GetDefaultRowStyle().Height - member.HP.Margin.Vertical) : Size.Empty;
-                    member.HP.ResumeUpdate();
-                    member.Level.TextNext = showNext ? "next:" : null;
-                    member.Condition.ImageAlign = showConditionIcon ? ContentAlignment.MiddleLeft : ContentAlignment.MiddleCenter;
-                    member.Equipments.LevelVisibility = levelVisibility;
-                    member.Equipments.ShowAircraftLevelByNumber = showAircraftLevelByNumber;
-                    member.Equipments.MaximumSize = isLayoutFixed ? new Size(int.MaxValue, (int)ControlHelper.GetDefaultRowStyle().Height - member.Equipments.Margin.Vertical) : Size.Empty;
-                    member.ShipResource.BarFuel.ColorMorphing =
-                    member.ShipResource.BarAmmo.ColorMorphing = colorMorphing;
-                    member.ShipResource.BarFuel.SetBarColorScheme(colorScheme);
-                    member.ShipResource.BarAmmo.SetBarColorScheme(colorScheme);
-
-                    member.ConfigurationChanged(this);
-                    if (fleet != null)
-                        member.Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
+                    this._controlFleet[i].ConfigurationChanged(this);
+                    this._controlFleet[0].Update();
                 }
+
+                this.TableFleet.ResumeLayout();
+                this.TableMember.SuspendLayout();
+                if (this._controlMember != null)
+                {
+                    bool showAircraft = c.FormFleet.ShowAircraft;
+                    bool fixShipNameWidth = c.FormFleet.FixShipNameWidth;
+                    bool shortHPBar = c.FormFleet.ShortenHPBar;
+                    bool colorMorphing = c.UI.BarColorMorphing;
+                    Color[] colorScheme = c.UI.BarColorScheme.Select(col => col.ColorData).ToArray();
+                    bool showNext = c.FormFleet.ShowNextExp;
+                    bool showConditionIcon = c.FormFleet.ShowConditionIcon;
+                    var levelVisibility = c.FormFleet.EquipmentLevelVisibility;
+                    bool showAircraftLevelByNumber = c.FormFleet.ShowAircraftLevelByNumber;
+                    int fixedShipNameWidth = c.FormFleet.FixedShipNameWidth;
+                    bool isLayoutFixed = c.UI.IsLayoutFixed;
+                    // bool IsDarkSkinUse = c.UI.IsDarkSkinUse;
+                    if (this._controlMember[i] != null)
+                    {
+                        for (int j = 0; j < this._controlMember[i].Length; j++)
+                        {
+                            var member = this._controlMember[i][j];
+
+                            if (fixShipNameWidth)
+                            {
+                                member.Name.AutoSize = false;
+                                member.Name.Size = new Size(fixedShipNameWidth, 20);
+                            }
+                            else
+                            {
+                                Console.WriteLine(member.Name);
+                                member.Name.AutoSize = true;
+                            }
+
+                            member.HP.SuspendUpdate();
+                            member.HP.Text = shortHPBar ? "" : "HP:";
+                            member.HP.HPBar.ColorMorphing = colorMorphing;
+                            member.HP.HPBar.SetBarColorScheme(colorScheme);
+                            member.HP.MaximumSize = isLayoutFixed ? new Size(int.MaxValue, (int)ControlHelper.GetDefaultRowStyle().Height - member.HP.Margin.Vertical) : Size.Empty;
+                            member.HP.ResumeUpdate();
+                            member.Condition.ImageAlign = showConditionIcon ? ContentAlignment.MiddleLeft : ContentAlignment.MiddleCenter;
+                            member.ShipResource.BarFuel.ColorMorphing =
+                            member.ShipResource.BarAmmo.ColorMorphing = colorMorphing;
+                            member.ShipResource.BarFuel.SetBarColorScheme(colorScheme);
+                            member.ShipResource.BarAmmo.SetBarColorScheme(colorScheme);
+
+                            member.ConfigurationChanged(this);
+                            if (fleet != null)
+                                member.Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
+                        }
+                    }
+                }
+
+                ControlHelper.SetTableRowStyles(this.TableMember, ControlHelper.GetDefaultRowStyle());
+                this.TableMember.ResumeLayout();
+
+                this.TableMember.Location = new Point(this.TableMember.Location.X, this.TableFleet.Bottom /*+ Math.Max( TableFleet.Margin.Bottom, TableMember.Margin.Top )*/ );
+
+                this.TableMember.PerformLayout();        //fixme:サイズ変更に親パネルが追随しない
             }
+        }
 
-            ControlHelper.SetTableRowStyles(this.TableMember, ControlHelper.GetDefaultRowStyle());
-            this.TableMember.ResumeLayout();
-
-            this.TableMember.Location = new Point(this.TableMember.Location.X, this.TableFleet.Bottom /*+ Math.Max( TableFleet.Margin.Bottom, TableMember.Margin.Top )*/ );
-
-            this.TableMember.PerformLayout();        //fixme:サイズ変更に親パネルが追随しない
-
+        protected override string GetPersistString()
+        {
+            return "CombinedFleet";
         }
 
         private void TableMember_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {
             e.Graphics.DrawLine(Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
-        }
-
-        protected override string GetPersistString()
-        {
-            return "Fleet #" + this.FleetID.ToString();
         }
 
         /// <summary>
@@ -912,9 +987,14 @@ namespace ElectronicObserver.Window
             /*
             ControlFleet.Dispose();
             */
-            for (int i = 0; i < this._controlMember.Length; i++)
-                this._controlMember[i].Dispose();
-                
+                for (int i = 0; i < this._controlMember.Length; i++)
+                {
+                    for (int j = 0; j < this._controlMember[i].Length; j++)
+                    {
+                        this._controlMember[i][j].Dispose();
+                    }
+                }
+
 
             // --- auto generated ---
             if (disposing && (this.components != null))

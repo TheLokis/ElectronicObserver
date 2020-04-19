@@ -198,8 +198,6 @@ namespace ElectronicObserver.Window
 
 
             this.MainDockPanel.Extender.FloatWindowFactory = new CustomFloatWindowFactory();
-
-
             this.SubForms = new List<DockContent>();
 
             //form init
@@ -224,7 +222,6 @@ namespace ElectronicObserver.Window
             this.SubForms.Add(this.fWindowCapture = new FormWindowCapture(this));
             this.SubForms.Add(this.fBaseAirCorps = new FormBaseAirCorps(this));
             this.SubForms.Add(this.fJson = new FormJson(this));
-
 			this.SubForms.Add(this.fCombinedFleet = new FormCombinedFleet(this));
 
             this.ConfigurationChanged();     //設定から初期化
@@ -539,6 +536,8 @@ namespace ElectronicObserver.Window
 					return this.fBaseAirCorps;
 				case "Json":
 					return this.fJson;
+				case "CombinedFleet":
+					return this.fCombinedFleet;
 				default:
 					if (persistString.StartsWith("ShipGroup"))
 					{
@@ -1506,7 +1505,12 @@ namespace ElectronicObserver.Window
             this.ShowForm(this.fFleet[3]);
 		}
 
-		private void StripMenu_View_Dock_Click(object sender, EventArgs e)
+        private void StripMenu_CombinedFleet_Click(object sender, EventArgs e)
+        {
+            this.ShowForm(this.fCombinedFleet);
+        }
+
+        private void StripMenu_View_Dock_Click(object sender, EventArgs e)
 		{
             this.ShowForm(this.fDock);
 		}
