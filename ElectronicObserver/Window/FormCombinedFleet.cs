@@ -98,6 +98,26 @@ namespace ElectronicObserver.Window
                 this.AddToTable(table, row);
             }
 
+            public string GetAirSuperiorityString()
+            {
+                switch (Utility.Configuration.Config.FormFleet.AirSuperiorityMethod)
+                {
+                    case 0:
+                    default:
+                        return (Calculator.GetAirSuperiorityIgnoreLevel(KCDatabase.Instance.Fleet[1]) + Calculator.GetAirSuperiorityIgnoreLevel(KCDatabase.Instance.Fleet[2])).ToString();
+                    case 1:
+                        {
+                            int min = Calculator.GetAirSuperiority(KCDatabase.Instance.Fleet[1], false) + Calculator.GetAirSuperiority(KCDatabase.Instance.Fleet[2], false);
+                            int max = Calculator.GetAirSuperiority(KCDatabase.Instance.Fleet[1], true) + Calculator.GetAirSuperiority(KCDatabase.Instance.Fleet[2], true);
+
+                            if (Utility.Configuration.Config.FormFleet.ShowAirSuperiorityRange && min < max)
+                                return string.Format("{0} ～ {1}", min, max);
+                            else
+                                return min.ToString();
+                        }
+                }
+            }
+
             public void Update()
             {
                 KCDatabase db = KCDatabase.Instance;
@@ -106,26 +126,22 @@ namespace ElectronicObserver.Window
 
                 FleetData fleet1 = db.Fleet[1];
                 FleetData fleet2 = db.Fleet[2];
+
                 {
-                    var members1 = db.Fleet[1].MembersInstance.Where(s => s != null);
-                    var members2 = db.Fleet[2].MembersInstance.Where(s => s != null);
+                    var members = db.Fleet[1].MembersInstance.Where(s => s != null).Union(db.Fleet[2].MembersInstance.Where(s => s != null));
 
-                    int levelSum = members1.Sum(s => s.Level) + members2.Sum(s => s.Level);
+                    int levelSum = members.Sum(s => s.Level);
 
-                    int fueltotal   = members1.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1))
-                                    + members2.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1));
-                    int ammototal   = members1.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1))
-                                    + members2.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1));
-                    int fuelunit = members1.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
-                    int ammounit = members1.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
-
-                    int speed = members1.Select(s => s.Speed).DefaultIfEmpty(20).Min();
+                    int fueltotal   = members.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int ammototal   = members.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int fuelunit    = members.Sum(s => Math.Max((int)Math.Floor(s.FuelMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int ammounit    = members.Sum(s => Math.Max((int)Math.Floor(s.AmmoMax * 0.2 * (s.IsMarried ? 0.85 : 1.00)), 1));
+                    int speed       = members.Select(s => s.Speed).DefaultIfEmpty(20).Min();
 
                     int tp = Calculator.GetTPDamage(fleet1) + Calculator.GetTPDamage(fleet2);
 
-                    // 各艦ごとの ドラム缶 or 大発系 を搭載している個数
-                    var transport = members1.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.TransportContainer));
-                    var landing = members1.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
+                    var transport   = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.TransportContainer));
+                    var landing     = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
 
 
                     this.ToolTipInfo.SetToolTip(this.Name, string.Format(
@@ -137,12 +153,12 @@ namespace ElectronicObserver.Window
                         "소비자원: 연료 {11} / 탄약 {12}\r\n" +
                         "(1전투당 연료 {13} / 탄약 {14})",
                         levelSum,
-                        (double)levelSum / Math.Max(fleet.Members.Count(id => id != -1), 1),
+                        (double)levelSum / Math.Max(fleet1.Members.Count(id => id != -1) + fleet2.Members.Count(id => id != -1), 1),
                         Constants.GetSpeed(speed),
-                        members1.Sum(s => s.FirepowerTotal),
-                        members1.Sum(s => s.AATotal),
-                        members1.Sum(s => s.ASWTotal),
-                        members1.Sum(s => s.LOSTotal),
+                        members.Sum(s => s.FirepowerTotal),
+                        members.Sum(s => s.AATotal),
+                        members.Sum(s => s.ASWTotal),
+                        members.Sum(s => s.LOSTotal),
                         transport.Sum(),
                         transport.Count(i => i > 0),
                         landing.Sum(),
@@ -161,9 +177,9 @@ namespace ElectronicObserver.Window
 
                 //制空戦力計算	
                 {
-                    int airSuperiority = fleet.GetAirSuperiority();
+                    int airSuperiority = fleet1.GetAirSuperiority() + fleet2.GetAirSuperiority();
                     bool includeLevel = Utility.Configuration.Config.FormFleet.AirSuperiorityMethod == 1;
-                    this.AirSuperiority.Text = fleet.GetAirSuperiorityString();
+                    this.AirSuperiority.Text = this.GetAirSuperiorityString();
                     this.ToolTipInfo.SetToolTip(this.AirSuperiority,
                         string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n({4}: {5})\r\n",
                         (int)(airSuperiority / 3.0),
@@ -171,16 +187,18 @@ namespace ElectronicObserver.Window
                         Math.Max((int)(airSuperiority * 1.5 - 1), 0),
                         Math.Max((int)(airSuperiority * 3.0 - 1), 0),
                         includeLevel ? "숙련도없음" : "숙련도있음",
-                        includeLevel ? Calculator.GetAirSuperiorityIgnoreLevel(fleet) : Calculator.GetAirSuperiority(fleet)));
+                        includeLevel ? Calculator.GetAirSuperiorityIgnoreLevel(fleet1) + Calculator.GetAirSuperiorityIgnoreLevel(fleet2) : 
+                                        Calculator.GetAirSuperiority(fleet1) + Calculator.GetAirSuperiority(fleet2)));
                 }
 
 
                 //索敵能力計算
-                this.SearchingAbility.Text = fleet.GetSearchingAbilityString(this.BranchWeight);
+                this.SearchingAbility.Text = String.Format(this.BranchWeight > 1 ? "(" + this.BranchWeight + ") {0:f2}" : "{0:f2}",
+                                            Math.Floor((fleet1.GetSearchingAbility(this.BranchWeight) + fleet2.GetSearchingAbility(this.BranchWeight)) * 100) / 100);
                 {
                     StringBuilder sb = new StringBuilder();
-                    double probStart = fleet.GetContactProbability();
-                    var probSelect = fleet.GetContactSelectionProbability();
+                    double probStart = fleet1.GetContactProbability();
+                    var probSelect = fleet1.GetContactSelectionProbability();
 
                     sb.AppendFormat("신판정식(33) 분기점계수: {0}\r\n　(클릭으로전환)\r\n\r\n촉접률: \r\n　확보 {1:p1} / 우세 {2:p1}\r\n",
                         this.BranchWeight,
@@ -203,14 +221,14 @@ namespace ElectronicObserver.Window
                 // 対空能力計算
                 {
                     var sb = new StringBuilder();
-                    double lineahead = Calculator.GetAdjustedFleetAAValue(fleet, 1);
+                    double lineahead = Calculator.GetAdjustedFleetAAValue(fleet1, 1) + Calculator.GetAdjustedFleetAAValue(fleet2, 1);
 
                     this.AntiAirPower.Text = lineahead.ToString("0.0");
 
                     sb.AppendFormat("함대방공\r\n단종진: {0:0.0} / 복종진: {1:0.0} / 윤형진: {2:0.0}\r\n",
                         lineahead,
-                        Calculator.GetAdjustedFleetAAValue(fleet, 2),
-                        Calculator.GetAdjustedFleetAAValue(fleet, 3));
+                        Calculator.GetAdjustedFleetAAValue(fleet1, 2),
+                        Calculator.GetAdjustedFleetAAValue(fleet1, 3));
 
                     this.ToolTipInfo.SetToolTip(this.AntiAirPower, sb.ToString());
                 }

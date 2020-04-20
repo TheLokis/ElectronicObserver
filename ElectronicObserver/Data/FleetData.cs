@@ -389,11 +389,16 @@ namespace ElectronicObserver.Data
 			return Calculator.GetSearchingAbility_New33(this, 1);
 		}
 
-		/// <summary>
-		/// 新判定式(33)索敵能力を表す文字列を取得します。
-		/// </summary>
-		/// <param name="branchWeight">分岐点係数。1 / 4 / 3</param>
-		public string GetSearchingAbilityString(int branchWeight = 1)
+        public double GetSearchingAbility(int branchWeight = 1)
+        {
+            return Calculator.GetSearchingAbility_New33(this, branchWeight);
+        }
+
+        /// <summary>
+        /// 新判定式(33)索敵能力を表す文字列を取得します。
+        /// </summary>
+        /// <param name="branchWeight">分岐点係数。1 / 4 / 3</param>
+        public string GetSearchingAbilityString(int branchWeight = 1)
 		{
 			return String.Format(branchWeight > 1 ? "(" + branchWeight + ") {0:f2}" : "{0:f2}",
 				Math.Floor(Calculator.GetSearchingAbility_New33(this, branchWeight) * 100) / 100);
