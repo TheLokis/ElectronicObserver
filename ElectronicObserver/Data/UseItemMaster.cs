@@ -32,7 +32,7 @@ namespace ElectronicObserver.Data
 		public int Category => (int)this.RawData.api_category;
 
 		/// <summary>
-		/// アイテム名
+		/// アイテム名 번역됨
 		/// </summary>
 		public string Name
         {

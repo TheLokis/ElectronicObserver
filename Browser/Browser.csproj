@@ -105,10 +105,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CefOp\CustomRequestHandler.cs" />
+    <Compile Include="CefOp\CustomResourceRequestHandler.cs" />
     <Compile Include="CefOp\DragHandler.cs" />
     <Compile Include="CefOp\KeyboardHandler.cs" />
     <Compile Include="CefOp\MenuHandler.cs" />
-    <Compile Include="CefOp\RequestHandler.cs" />
     <Compile Include="CefOp\ResponseFilterPixiSetting.cs" />
     <Compile Include="CefOp\ScreenShotPacket.cs" />
     <Compile Include="FormBrowser.cs">

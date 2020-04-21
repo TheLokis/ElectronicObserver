@@ -43,6 +43,19 @@ namespace ElectronicObserver.Window
                 this.Parent = parent;
                 #region Initialize
 
+                this.Name = new Label
+                {
+                    Text = "[연합함대]",
+                    Anchor = AnchorStyles.Left,
+                    ForeColor = parent.MainFontColor,
+                    UseMnemonic = false,
+                    Padding = new Padding(0, 1, 0, 1),
+                    Margin = new Padding(2, 0, 2, 0),
+                    AutoSize = true,
+                    //Name.Visible = false;
+                    Cursor = Cursors.Help
+                };
+
                 this.State = new FleetState
                 {
                     Anchor = AnchorStyles.Left,
@@ -95,7 +108,7 @@ namespace ElectronicObserver.Window
                     Margin = new Padding(2, 0, 2, 0),
                     AutoSize = true
                 };
-               // this.SearchingAbility.Click += (sender, e) => this.SearchingAbility_Click(sender, e, parent.FleetID);
+                this.SearchingAbility.Click += (sender, e) => this.SearchingAbility_Click(sender, e);
 
                 this.AntiAirPower = new ImageLabel
                 {
@@ -113,6 +126,15 @@ namespace ElectronicObserver.Window
                 this.ToolTipInfo = parent.ToolTipInfo;
 
                 #endregion
+            }
+
+            private void SearchingAbility_Click(object sender, EventArgs e)
+            {
+                this.BranchWeight--;
+                if (this.BranchWeight <= 0)
+                    this.BranchWeight = 4;
+
+                this.Update();
             }
 
             public TableFleetControl(FormCombinedFleet parent, TableLayoutPanel table, int row)
@@ -167,7 +189,6 @@ namespace ElectronicObserver.Window
                     var transport   = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.TransportContainer));
                     var landing     = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
 
-
                     this.ToolTipInfo.SetToolTip(this.Name, string.Format(
                         "Lv합계: {0} / 평균: {1:0.00}\r\n" +
                         "{2}함대\r\n" +
@@ -176,7 +197,7 @@ namespace ElectronicObserver.Window
                         "수송량(TP): S {9} / A {10}\r\n" +
                         "소비자원: 연료 {11} / 탄약 {12}\r\n" +
                         "(1전투당 연료 {13} / 탄약 {14})",
-                        levelSum,
+                        levelSum, 
                         (double)levelSum / Math.Max(fleet1.Members.Count(id => id != -1) + fleet2.Members.Count(id => id != -1), 1),
                         Constants.GetSpeed(speed),
                         members.Sum(s => s.FirepowerTotal),
@@ -185,8 +206,6 @@ namespace ElectronicObserver.Window
                         members.Sum(s => s.LOSTotal),
                         transport.Sum(),
                         transport.Count(i => i > 0),
-                        landing.Sum(),
-                        landing.Count(i => i > 0),
                         tp,
                         (int)(tp * 0.7),
                         fueltotal,
@@ -194,7 +213,6 @@ namespace ElectronicObserver.Window
                         fuelunit,
                         ammounit
                         ));
-
                 }
 
                 this.State.UpdateFleetState(fleet1, this.ToolTipInfo);
@@ -268,6 +286,7 @@ namespace ElectronicObserver.Window
                 table.SuspendLayout();
                 if (row == 0)
                 {
+                    table.Controls.Add(this.Name, 0, 0);
                     table.Controls.Add(this.State, 1, 0);
                     table.Controls.Add(this.TotalAirSuperiority, 2, 0);
                     table.Controls.Add(this.Fleet1AirSuperiority, 3, 0);
@@ -288,12 +307,25 @@ namespace ElectronicObserver.Window
                 this.State.Font = parent.MainFont;
                 this.State.RefreshFleetState();
 
+                this.Name.Font = parent.MainFont;
+                this.TotalAirSuperiority.Font = parent.MainFont;
+                this.Fleet1AirSuperiority.Font = parent.MainFont;
+                this.Fleet2AirSuperiority.Font = parent.MainFont;
+                this.SearchingAbility.Font = parent.MainFont;
+                this.AntiAirPower.Font = parent.MainFont;
+
                 ControlHelper.SetTableRowStyles(parent.TableFleet, ControlHelper.GetDefaultRowStyle());
             }
 
             public void Dispose()
             {
+                this.Name.Dispose();
                 this.State.Dispose();
+                this.TotalAirSuperiority.Dispose();
+                this.Fleet1AirSuperiority.Dispose();
+                this.Fleet2AirSuperiority.Dispose();
+                this.SearchingAbility.Dispose();
+                this.AntiAirPower.Dispose();
             }
         }
 
@@ -516,10 +548,6 @@ namespace ElectronicObserver.Window
                     {
                         TimeSpan ts = new TimeSpan(0, (int)Math.Ceiling((49 - ship.Condition) / 3.0) * 3, 0);
                         this._toolTipInfo.SetToolTip(this.Condition, string.Format("완전회복까지 약 {0:D2}:{1:D2}", (int)ts.TotalMinutes, (int)ts.Seconds));
-                    }
-                    else
-                    {
-                        this._toolTipInfo.SetToolTip(this.Condition, string.Format("앞으로 {0} 회 대성공가능", (int)Math.Ceiling((ship.Condition - 49) / 3.0)));
                     }
 
                     this.ShipResource.SetResources(ship.Fuel, ship.FuelMax, ship.Ammo, ship.AmmoMax);
@@ -840,11 +868,15 @@ namespace ElectronicObserver.Window
 
             this.TableFleet.SuspendLayout();
 
+            this.TableFleet.Update();
+
             for (int j = 0; j < 2; j++)
             {
                 FleetData fleet = db.Fleet.Fleets[j + 1];
 
                 if (fleet == null) return;
+
+                this._controlFleet[j].Update();
 
                 this._anchorageRepairBound = fleet.CanAnchorageRepair ? 2 + fleet.MembersInstance[0].SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility) : 0;
                 this.TableMember.SuspendLayout();
@@ -852,7 +884,6 @@ namespace ElectronicObserver.Window
 
                 for (int i = 0; i < this._controlMember[j].Length; i++)
                 {
-                    Console.WriteLine("확인 : " + i + ":" + j);
                     this._controlMember[j][i].Update(i < fleet.Members.Count ? fleet.Members[i] : -1);
                 }
 
@@ -888,11 +919,6 @@ namespace ElectronicObserver.Window
 
                 this.TableMember.ResumeLayout();
             }
-        }
-
-        private void ContextMenuFleet_Opening(object sender, CancelEventArgs e)
-        {
-            this.ContextMenuFleet_Capture.Visible = Utility.Configuration.Config.Debug.EnableDebugMenu;
         }
 
         /// <summary>

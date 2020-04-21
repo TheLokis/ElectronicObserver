@@ -110,9 +110,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 
 
 			// レベルアップ表示
-			{
 				int[] exps = new int[6];
-				var src = (int[])data.api_get_ship_exp;
+                int[] items = { -1, -1 };
+                int[] itemscount = { -1, -1 };
+
+                var src = (int[])data.api_get_ship_exp;
 				Array.Copy(src, exps, src.Length);
 
 				var lvup = new List<int[]>();
@@ -121,18 +123,40 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 					lvup.Add((int[])elem);
 				}
 
-				for (int i = 0; i < lvup.Count; i++)
-				{
-					if (lvup[i].Length >= 2 && lvup[i][1] > 0 && lvup[i][0] + exps[i] >= lvup[i][1])
-					{
-						var ship = fleet.MembersInstance[i];
-						int increment = Math.Max(lvup[i].Length - 2, 1);
+                for (int i = 0; i < 2; i++)
+                {
+                    int kind = (int)data.api_useitem_flag[i];
 
-						Utility.Logger.Add(2, string.Format("{0} 가 레벨 {1} 이 되었습니다.", ship.Name, ship.Level + increment));
-					}
-				}
+                if (kind > 0)
+                {
+                    items[i] = (int)data["api_get_item" + (i + 1)].api_useitem_id;
+                    itemscount[i] = (int)data["api_get_item" + (i + 1)].api_useitem_count;
+                    switch (kind)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+							items[i] = (int)data.api_useitem_flag[i];
+							break;
+						case 4:
+						case 5:
+                            items[i] = (int)data["api_get_item" + (i + 1)].api_useitem_id;
+							break;
+                    }
+                }
+            }
 
-			}
+                for (int i = 0; i < lvup.Count; i++)
+                {
+                    if (lvup[i].Length >= 2 && lvup[i][1] > 0 && lvup[i][0] + exps[i] >= lvup[i][1])
+                    {
+                        var ship = fleet.MembersInstance[i];
+                        int increment = Math.Max(lvup[i].Length - 2, 1);
+
+                        Utility.Logger.Add(2, string.Format("{0} 가 레벨 {1} 이 되었습니다.", ship.Name, ship.Level + increment));
+                    }
+                }
+
 
             RecordManager.Instance.Expedition.Add(
                 fleet.ExpeditionDestination,
@@ -141,7 +165,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
                 materials[1],
                 materials[2],
                 materials[3],
-                (int)data.api_clear_result);
+                (int)data.api_clear_result,
+				items[0],
+				items[1],
+				itemscount[0],
+				itemscount[1]);
 
             base.OnResponseReceived((object)data);
 		}

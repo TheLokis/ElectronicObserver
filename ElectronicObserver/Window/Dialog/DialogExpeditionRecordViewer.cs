@@ -16,19 +16,22 @@ namespace ElectronicObserver.Window.Dialog
 {
     public partial class DialogExpeditionRecordViewer : Form
     {
-
         private ExpeditionRecord _record;
+
+        private const string _mapAny = "*";
+        private const string _resultAny = "(전부)";
 
         private class SearchArgument
         {
-            public int      MissionID       { get; set; }
-            public int      FlagShipLevel   { get; set; }
-            public string   FlagShipType    { get; set; }
-            public string   FlagShipName    { get; set; }
-            public DateTime DateBegin       { get; set; }
-            public DateTime DateEnd         { get; set; }
-            public CheckState       IsGreatOnly { get; set; }
-            public DataGridViewRow  BaseRow     { get; set; }
+            public int MissionID { get; set; }
+            public int FlagShipLevel { get; set; }
+            public string FlagShipType { get; set; }
+            public string FlagShipName { get; set; }
+            public DateTime DateBegin { get; set; }
+            public DateTime DateEnd { get; set; }
+            public string Result { get; set; }
+            public DataGridViewRow BaseRow { get; set; }
+            public bool MergeRows { get; set; }
         }
 
         public DialogExpeditionRecordViewer()
@@ -40,36 +43,81 @@ namespace ElectronicObserver.Window.Dialog
 
         private void DialogExpeditionRecordViewer_Load(object sender, EventArgs e)
         {
-            this.DateBegin.Value    = this.DateBegin.MinDate = this.DateEnd.MinDate = this._record.Record.First().Date.Date;
-            this.DateEnd.Value      = this.DateBegin.MaxDate = this.DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
+            try
+            {
+                this.DateBegin.Value = this.DateBegin.MinDate = this.DateEnd.MinDate = this._record.Record.First().Date.Date;
+                this.DateEnd.Value = this.DateBegin.MaxDate = this.DateEnd.MaxDate = DateTime.Now.AddDays(1).Date;
 
-            var dtbase = new DataTable();
-            dtbase.Columns.AddRange(new DataColumn[] {
+                var includedExpeditionIds = this._record.Record
+                    .Select(r => r.MissionID)
+                    .Distinct();
+
+                var includedExpeditionDatas = includedExpeditionIds
+                    .Select(id => KCDatabase.Instance.Mission.Values.FirstOrDefault(ex => ex.MissionID == id))
+                    .Where(s => s != null);
+
+                var dtbase = new DataTable();
+                dtbase.Columns.AddRange(new DataColumn[] {
                 new DataColumn( "Value", typeof( int ) ),
                 new DataColumn( "Display", typeof( string ) ),
             });
 
-            {
-                DataTable dt = dtbase.Clone();
-                foreach (var i in this._record.Record
-                    .Select(r => r.Date)
-                    .Distinct()
-                    .OrderBy(i => i))
-                    dt.Rows.Add(i, i.ToString());
-                dt.AcceptChanges();
-            }
+                {
+                    DataTable dt = dtbase.Clone();
+                    dt.Rows.Add(-1, _mapAny);
+                    foreach (var i in this._record.Record
+                        .Select(r => r.MissionID)
+                        .Distinct()
+                        .OrderBy(i => i))
+                        dt.Rows.Add(i, i.ToString());
 
-            foreach (DataGridViewColumn column in this.RecordView.Columns)
-                column.Width = 20;
-            /*
-            this.LabelShipName.ImageList = ResourceManager.Instance.Icons;
-            this.LabelShipName.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
-            this.LabelItemName.ImageList = ResourceManager.Instance.Icons;
-            this.LabelItemName.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
-            this.LabelEquipmentName.ImageList = ResourceManager.Instance.Equipments;
-            this.LabelEquipmentName.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
-            */
-            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.ItemPresentBox]);
+                    this.ExpeditionID.DisplayMember = "Display";
+                    this.ExpeditionID.ValueMember = "Value";
+                    this.ExpeditionID.DataSource = dt;
+                    this.ExpeditionID.SelectedIndex = 0;
+
+                    dt.AcceptChanges();
+                }
+
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.AddRange(new DataColumn[] {
+                    new DataColumn( "Value", typeof( string ) ),
+                    new DataColumn( "Display", typeof( string ) ),
+                     });
+                    dt.Rows.Add(_resultAny, _resultAny);
+                    foreach (var i in this._record.Record
+                        .GroupBy(r => r.Result, (key, r) => r.First())
+                        .OrderBy(r => r.Result))
+                    {
+                        dt.Rows.Add(i.Result, i.Result.ToString());
+                    }
+
+                    this.ComboBoxResultList.DisplayMember = "Display";
+                    this.ComboBoxResultList.ValueMember = "Value";
+                    this.ComboBoxResultList.DataSource = dt;
+                    this.ComboBoxResultList.SelectedIndex = 0;
+
+                    dt.AcceptChanges();
+                }
+
+
+                foreach (DataGridViewColumn column in this.RecordView.Columns)
+                    column.Width = 20;
+                /*
+                this.LabelShipName.ImageList = ResourceManager.Instance.Icons;
+                this.LabelShipName.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
+                this.LabelItemName.ImageList = ResourceManager.Instance.Icons;
+                this.LabelItemName.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
+                this.LabelEquipmentName.ImageList = ResourceManager.Instance.Equipments;
+                this.LabelEquipmentName.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
+                */
+                this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.ItemPresentBox]);
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine(x.Message + ":" + x.StackTrace);
+            }
         }
 
         private void DialogExpeditionRecordViewer_FormClosed(object sender, FormClosedEventArgs e)
@@ -96,20 +144,30 @@ namespace ElectronicObserver.Window.Dialog
 
             var args = new SearchArgument
             {
-
+                MissionID = (int)this.ExpeditionID.SelectedValue,
+                Result = this.ComboBoxResultList.SelectedValue.ToString(),
+                DateBegin = this.DateBegin.Value,
+                DateEnd = this.DateEnd.Value,
+                MergeRows = this.MergeRows.Checked,
+                BaseRow = row
             };
 
             this.RecordView.Tag = args;
 
+            this.RecordView_Item1.Visible =
+            this.RecordView_Item1Count.Visible =
+            this.RecordView_Item2.Visible =
+            this.RecordView_Item2Count.Visible = false;
 
             // column initialize
             if (this.MergeRows.Checked)
             {
-                this.RecordView_Name.DisplayIndex = 0;
+                this.RecordView_Name.DisplayIndex = 2;
                 this.RecordView_Header.HeaderText = "회수";
                 this.RecordView_Header.Width = 100;
                 this.RecordView_Header.DisplayIndex = 1;
-                this.RecordView_Date.Visible = false;
+                this.RecordView_DateTime.Visible =
+                this.RecordView_Result.Visible = false;
 
             }
             else
@@ -117,11 +175,11 @@ namespace ElectronicObserver.Window.Dialog
                 this.RecordView_Header.HeaderText = "";
                 this.RecordView_Header.Width = 50;
                 this.RecordView_Header.DisplayIndex = 0;
-                this.RecordView_Date.Width = 150;
-                this.RecordView_Date.Visible = true;
+                this.RecordView_DateTime.Width = 150;
+                this.RecordView_DateTime.Visible =
+                this.RecordView_Result.Visible = true;
             }
             this.RecordView.ColumnHeadersVisible = true;
-
 
             this.StatusInfo.Text = "검색중입니다...";
             this.StatusInfo.Tag = DateTime.Now;
@@ -134,8 +192,144 @@ namespace ElectronicObserver.Window.Dialog
         {
             SearchArgument args = (SearchArgument)e.Argument;
 
-            var records = RecordManager.Instance.ShipDrop.Record;
+            var records = RecordManager.Instance.Expedition.Record;
             var rows = new LinkedList<DataGridViewRow>();
+
+            int i = 0;
+            var materials = new Dictionary<int, Dictionary<string, int>>();
+            var items = new Dictionary<int, Dictionary<int,int>>();
+            try
+            {
+                foreach (var r in records)
+                {
+                    #region Filtering
+
+                    var ex = KCDatabase.Instance.Mission[r.MissionID];
+
+                    if (ex == null) continue;
+
+                    if (r.MissionID != args.MissionID && args.MissionID != -1) continue;
+
+                    if (r.Result.Equals(args.Result) == false && args.Result.Equals(_resultAny) == false) continue;
+
+                    if (r.Date < args.DateBegin || args.DateEnd < r.Date)
+                        continue;
+
+                    #endregion
+                    if (args.MergeRows == false)
+                    {
+                        var row = (DataGridViewRow)args.BaseRow.Clone();
+
+                        row.SetValues(
+                            i + 1,
+                            r.MissionID,
+                            ex.Name,
+                            r.Fuel,
+                            r.Ammo,
+                            r.Steel,
+                            r.Baux,
+                            null,
+                            null,
+                            null,
+                            null,
+                            r.Result,
+                            r.Date
+                            );
+
+                        rows.AddLast(row);
+                    }
+                    else
+                    {
+                        int key = r.MissionID;
+                        if (materials.ContainsKey(key) == false)
+                        {
+                            materials.Add(key, new Dictionary<string, int>
+                        {
+                            {"Fuel", r.Fuel },
+                            {"Ammo", r.Ammo },
+                            {"Steel", r.Steel },
+                            {"Baux", r.Baux },
+                            {"Count", 1 },
+                        });
+                        }
+                        else
+                        {
+                            var material = materials[key];
+                            material["Fuel"] += r.Fuel;
+                            material["Ammo"] += r.Ammo;
+                            material["Steel"] += r.Steel;
+                            material["Baux"] += r.Baux;
+                            material["Count"]++;
+                        }
+                        /*
+                        if (items.ContainsKey(r.MissionID) == false)
+                        {
+                            items.Add(r.MissionID, new Dictionary<int, int>());
+                        }
+
+                        if (r.Item1Id != -1)
+                        {
+                            if (items[r.MissionID].ContainsKey(r.Item1Id) == false)
+                            {
+                                items[r.MissionID].Add(r.Item1Id, r.Item1Count);
+                            }
+                            else
+                            {
+                                items[r.MissionID][r.Item1Id] += r.Item1Count;
+                            }
+                        }
+
+                        if (r.Item2Id != -1)
+                        {
+                            if (items[r.MissionID].ContainsKey(r.Item2Id) == false)
+                            {
+                                items[r.MissionID].Add(r.Item2Id, r.Item2Count);
+                            }
+                            else
+                            {
+                                items[r.MissionID][r.Item2Id] += r.Item2Count;
+                            }
+                        }
+                        */
+                    }
+
+                    i++;
+                }
+
+            } catch (Exception X)
+            {
+                Console.WriteLine(X.Message + ":" + X.StackTrace);
+            }
+            // foreach end
+
+            if (args.MergeRows)
+            {
+                foreach (var c in materials)
+                {
+                    var row = (DataGridViewRow)args.BaseRow.Clone();
+
+                    var mission = KCDatabase.Instance.Mission.Values.FirstOrDefault(x => x.MissionID == c.Key);
+
+                    row.SetValues(
+                        c.Value["Count"],
+                        c.Key,
+                        mission.Name,
+                        c.Value["Fuel"],
+                        c.Value["Ammo"],
+                        c.Value["Steel"],
+                        c.Value["Baux"]
+                        );
+
+                    row.Cells[0].Tag = c.Value["Count"];
+                    row.Cells[1].Tag = c.Value;
+
+                    rows.AddLast(row);
+
+                    if (this.Searcher.CancellationPending)
+                        break;
+                }
+
+            }
 
             e.Result = rows.ToArray();
         }

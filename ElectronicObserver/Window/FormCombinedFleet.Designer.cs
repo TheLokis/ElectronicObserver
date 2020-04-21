@@ -20,12 +20,7 @@
             this.TableMember = new System.Windows.Forms.TableLayoutPanel();
             this.TableFleet = new System.Windows.Forms.TableLayoutPanel();
             this.ContextMenuFleet = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ContextMenuFleet_CopyFleet = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextMenuFleet_CopyFleetDeckBuilder = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextMenuFleet_CopyKanmusuList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ContextMenuFleet_AntiAirDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.ContextMenuFleet_Capture = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenuFleet_OutputFleetImage = new System.Windows.Forms.ToolStripMenuItem();
             this.ContextMenuFleet_CopyToFleetAnalysis = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolTipInfo = new System.Windows.Forms.ToolTip(this.components);
@@ -52,13 +47,15 @@
             this.TableMember.Size = new System.Drawing.Size(0, 21);
             this.TableMember.TabIndex = 1;
             this.TableMember.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.TableMember_CellPaint);
-            this.TableMember.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
+            this.TableMember.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
             // 
             // TableFleet
             // 
             this.TableFleet.AutoSize = true;
             this.TableFleet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.TableFleet.ColumnCount = 6;
+            this.TableFleet.ColumnCount = 8;
+            this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableFleet.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -71,55 +68,22 @@
             this.TableFleet.RowCount = 1;
             this.TableFleet.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.TableFleet.Size = new System.Drawing.Size(0, 21);
-            this.TableFleet.TabIndex = 5;
+            this.TableFleet.TabIndex = 7;
             // 
             // ContextMenuFleet
             // 
             this.ContextMenuFleet.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ContextMenuFleet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ContextMenuFleet_CopyFleet,
-            this.ContextMenuFleet_CopyFleetDeckBuilder,
-            this.ContextMenuFleet_CopyKanmusuList,
             this.toolStripSeparator1,
-            this.ContextMenuFleet_AntiAirDetails,
-            this.ContextMenuFleet_Capture,
             this.ContextMenuFleet_OutputFleetImage,
             this.ContextMenuFleet_CopyToFleetAnalysis});
             this.ContextMenuFleet.Name = "ContextMenuFleet";
             this.ContextMenuFleet.Size = new System.Drawing.Size(249, 164);
-            this.ContextMenuFleet.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuFleet_Opening);
-            // 
-            // ContextMenuFleet_CopyFleet
-            // 
-            this.ContextMenuFleet_CopyFleet.Name = "ContextMenuFleet_CopyFleet";
-            this.ContextMenuFleet_CopyFleet.Size = new System.Drawing.Size(248, 22);
-            // 
-            // ContextMenuFleet_CopyFleetDeckBuilder
-            // 
-            this.ContextMenuFleet_CopyFleetDeckBuilder.Name = "ContextMenuFleet_CopyFleetDeckBuilder";
-            this.ContextMenuFleet_CopyFleetDeckBuilder.Size = new System.Drawing.Size(248, 22);
-            // 
-            // ContextMenuFleet_CopyKanmusuList
-            // 
-            this.ContextMenuFleet_CopyKanmusuList.Name = "ContextMenuFleet_CopyKanmusuList";
-            this.ContextMenuFleet_CopyKanmusuList.Size = new System.Drawing.Size(248, 22);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(245, 6);
-            // 
-            // ContextMenuFleet_AntiAirDetails
-            // 
-            this.ContextMenuFleet_AntiAirDetails.Name = "ContextMenuFleet_AntiAirDetails";
-            this.ContextMenuFleet_AntiAirDetails.Size = new System.Drawing.Size(248, 22);
-            // 
-            // ContextMenuFleet_Capture
-            // 
-            this.ContextMenuFleet_Capture.Name = "ContextMenuFleet_Capture";
-            this.ContextMenuFleet_Capture.Size = new System.Drawing.Size(248, 22);
-            this.ContextMenuFleet_Capture.Text = "화면 캡쳐(&S)";
-            this.ContextMenuFleet_Capture.Click += new System.EventHandler(this.ContextMenuFleet_Capture_Click);
             // 
             // ContextMenuFleet_OutputFleetImage
             // 
@@ -171,12 +135,7 @@
 		private System.Windows.Forms.TableLayoutPanel TableFleet;
 		private System.Windows.Forms.ToolTip ToolTipInfo;
 		private System.Windows.Forms.ContextMenuStrip ContextMenuFleet;
-		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyFleet;
-		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_Capture;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyFleetDeckBuilder;
-		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyKanmusuList;
-		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_AntiAirDetails;
 		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_OutputFleetImage;
         private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyToFleetAnalysis;
     }
