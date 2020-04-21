@@ -30,7 +30,9 @@ namespace ElectronicObserver.Window
             public FleetState State;
             public ToolTip ToolTipInfo;
             public FormCombinedFleet Parent;
-            public ImageLabel AirSuperiority;
+            public ImageLabel TotalAirSuperiority;
+            public ImageLabel Fleet1AirSuperiority;
+            public ImageLabel Fleet2AirSuperiority;
             public ImageLabel SearchingAbility;
             public ImageLabel AntiAirPower;
 
@@ -50,7 +52,29 @@ namespace ElectronicObserver.Window
                     AutoSize = true
                 };
 
-                this.AirSuperiority = new ImageLabel
+                this.TotalAirSuperiority = new ImageLabel
+                {
+                    Anchor = AnchorStyles.Left,
+                    ForeColor = parent.MainFontColor,
+                    ImageList = ResourceManager.Instance.Equipments,
+                    ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter,
+                    Padding = new Padding(2, 2, 2, 2),
+                    Margin = new Padding(2, 0, 2, 0),
+                    AutoSize = true
+                };
+
+                this.Fleet1AirSuperiority = new ImageLabel
+                {
+                    Anchor = AnchorStyles.Left,
+                    ForeColor = parent.MainFontColor,
+                    ImageList = ResourceManager.Instance.Equipments,
+                    ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter,
+                    Padding = new Padding(2, 2, 2, 2),
+                    Margin = new Padding(2, 0, 2, 0),
+                    AutoSize = true
+                };
+
+                this.Fleet2AirSuperiority = new ImageLabel
                 {
                     Anchor = AnchorStyles.Left,
                     ForeColor = parent.MainFontColor,
@@ -179,8 +203,10 @@ namespace ElectronicObserver.Window
                 {
                     int airSuperiority = fleet1.GetAirSuperiority() + fleet2.GetAirSuperiority();
                     bool includeLevel = Utility.Configuration.Config.FormFleet.AirSuperiorityMethod == 1;
-                    this.AirSuperiority.Text = this.GetAirSuperiorityString();
-                    this.ToolTipInfo.SetToolTip(this.AirSuperiority,
+                    this.TotalAirSuperiority.Text   = this.GetAirSuperiorityString();
+                    this.Fleet1AirSuperiority.Text  = fleet1.GetAirSuperiorityString();
+                    this.Fleet2AirSuperiority.Text  = fleet2.GetAirSuperiorityString();
+                    this.ToolTipInfo.SetToolTip(this.TotalAirSuperiority,
                         string.Format("확보: {0}\r\n우세: {1}\r\n균등: {2}\r\n열세: {3}\r\n({4}: {5})\r\n",
                         (int)(airSuperiority / 3.0),
                         (int)(airSuperiority / 1.5),
@@ -197,8 +223,8 @@ namespace ElectronicObserver.Window
                                             Math.Floor((fleet1.GetSearchingAbility(this.BranchWeight) + fleet2.GetSearchingAbility(this.BranchWeight)) * 100) / 100);
                 {
                     StringBuilder sb = new StringBuilder();
-                    double probStart = fleet1.GetContactProbability();
-                    var probSelect = fleet1.GetContactSelectionProbability();
+                    double probStart    = fleet1.GetContactProbability() + fleet2.GetContactProbability();
+                    var probSelect      = fleet1.GetContactSelectionProbability().Union(fleet2.GetContactSelectionProbability());
 
                     sb.AppendFormat("신판정식(33) 분기점계수: {0}\r\n　(클릭으로전환)\r\n\r\n촉접률: \r\n　확보 {1:p1} / 우세 {2:p1}\r\n",
                         this.BranchWeight,
@@ -221,14 +247,17 @@ namespace ElectronicObserver.Window
                 // 対空能力計算
                 {
                     var sb = new StringBuilder();
-                    double lineahead = Calculator.GetAdjustedFleetAAValue(fleet1, 1) + Calculator.GetAdjustedFleetAAValue(fleet2, 1);
+                    double lineahead    = (Calculator.GetAdjustedFleetAAValue(fleet1, 1) * Calculator.GetAirDefenseCombinedFleetCoefficient(1)) 
+                                        + (Calculator.GetAdjustedFleetAAValue(fleet2, 1) * Calculator.GetAirDefenseCombinedFleetCoefficient(2));
 
                     this.AntiAirPower.Text = lineahead.ToString("0.0");
 
                     sb.AppendFormat("함대방공\r\n단종진: {0:0.0} / 복종진: {1:0.0} / 윤형진: {2:0.0}\r\n",
                         lineahead,
-                        Calculator.GetAdjustedFleetAAValue(fleet1, 2),
-                        Calculator.GetAdjustedFleetAAValue(fleet1, 3));
+                        (Calculator.GetAdjustedFleetAAValue(fleet1, 2) * Calculator.GetAirDefenseCombinedFleetCoefficient(1) + 
+                        Calculator.GetAdjustedFleetAAValue(fleet2, 2) * Calculator.GetAirDefenseCombinedFleetCoefficient(2)),
+                        Calculator.GetAdjustedFleetAAValue(fleet1, 3) * Calculator.GetAirDefenseCombinedFleetCoefficient(1) +
+                        Calculator.GetAdjustedFleetAAValue(fleet2, 3) * Calculator.GetAirDefenseCombinedFleetCoefficient(2));
 
                     this.ToolTipInfo.SetToolTip(this.AntiAirPower, sb.ToString());
                 }
@@ -240,9 +269,11 @@ namespace ElectronicObserver.Window
                 if (row == 0)
                 {
                     table.Controls.Add(this.State, 1, 0);
-                    table.Controls.Add(this.AirSuperiority, 2, 0);
-                    table.Controls.Add(this.SearchingAbility, 3, 0);
-                    table.Controls.Add(this.AntiAirPower, 4, 0);
+                    table.Controls.Add(this.TotalAirSuperiority, 2, 0);
+                    table.Controls.Add(this.Fleet1AirSuperiority, 3, 0);
+                    table.Controls.Add(this.Fleet2AirSuperiority, 4, 0);
+                    table.Controls.Add(this.SearchingAbility, 5, 0);
+                    table.Controls.Add(this.AntiAirPower, 6, 0);
                 }
                 table.ResumeLayout();
             }

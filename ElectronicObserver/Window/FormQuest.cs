@@ -51,7 +51,7 @@ namespace ElectronicObserver.Window
             {
                 Alignment = DataGridViewContentAlignment.MiddleCenter,
             };
-            this.CSCategories = new DataGridViewCellStyle[9];
+            this.CSCategories = new DataGridViewCellStyle[10];
 			for (int i = 0; i < this.CSCategories.Length; i++)
 			{
                 this.CSCategories[i] = new DataGridViewCellStyle(this.CSDefaultCenter);
@@ -83,8 +83,11 @@ namespace ElectronicObserver.Window
 					case 8:     //出撃(2)
 						c = Color.FromArgb(0xFF, 0xCC, 0xCC);
 						break;
-					case 9:     //その他
-					default:
+                    case 9:     //出撃(3)
+                        c = Color.FromArgb(0xFF, 0xCC, 0xCC);
+                        break;
+                    case 10:     //その他
+                    default:
 						c = this.CSDefaultCenter.BackColor;
 						break;
 				}
@@ -283,11 +286,11 @@ namespace ElectronicObserver.Window
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(this.QuestView);
 				row.Height = 21;
-				row.Cells[this.QuestView_State.Index].Value = (q.State == 3) ? ((bool?)null) : (q.State == 2);
-				row.Cells[this.QuestView_Type.Index].Value = q.Type;
-				row.Cells[this.QuestView_Category.Index].Value = q.Category;
-				row.Cells[this.QuestView_Category.Index].Style = this.CSCategories[Math.Min(q.Category - 1, 8 - 1)]; //아마도이거
-				row.Cells[this.QuestView_Name.Index].Value = q.QuestID;
+				row.Cells[this.QuestView_State.Index].Value		= (q.State == 3) ? ((bool?)null) : (q.State == 2);
+                row.Cells[this.QuestView_Type.Index].Value		= q.LabelType >= 100 ? q.LabelType : q.Type;
+                row.Cells[this.QuestView_Category.Index].Value	= q.Category;
+				row.Cells[this.QuestView_Category.Index].Style	= this.CSCategories[Math.Min(q.Category - 1, 8 - 1)]; //아마도이거
+				row.Cells[this.QuestView_Name.Index].Value		= q.QuestID;
 				{
 					var progress = KCDatabase.Instance.QuestProgress[q.QuestID];
 					row.Cells[this.QuestView_Name.Index].ToolTipText = $"{q.QuestID} : {q.Name}\r\n{q.Description}\r\n{progress?.GetClearCondition() ?? ""}";

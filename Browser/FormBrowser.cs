@@ -90,9 +90,9 @@ namespace Browser
 		/// </summary>
 		private bool IsKanColleLoaded { get; set; }
 
-		private VolumeManager _volumeManager;
+        private VolumeManager _volumeManager = null;
 
-		private string _lastScreenShotPath;
+        private string _lastScreenShotPath;
 
 
 		private NumericUpDown ToolMenu_Other_Volume_VolumeControl
@@ -116,8 +116,6 @@ namespace Browser
 
             this.ServerUri = serverUri;
             this.StyleSheetApplied = false;
-            this._volumeManager = new VolumeManager((uint)Process.GetCurrentProcess().Id);
-
 
 			// 音量設定用コントロールの追加
 			{
@@ -234,7 +232,7 @@ namespace Browser
             CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
             Cef.Initialize(settings, false, (IBrowserProcessHandler)null);
 
-            var requestHandler = new RequestHandler(pixiSettingEnabled: this.Configuration.PreserveDrawingBuffer);
+            var requestHandler = new CustomRequestHandler(pixiSettingEnabled: this.Configuration.PreserveDrawingBuffer);
             requestHandler.RenderProcessTerminated += (mes) => this.AddLog(3, mes);
 
             this.Browser = new ChromiumWebBrowser(@"about:blank")
@@ -556,7 +554,7 @@ namespace Browser
 		}
 
         private string navigateCache = null;
-        private void Browser_IsBrowserInitializedChanged(object sender, IsBrowserInitializedChangedEventArgs e)
+        private void Browser_IsBrowserInitializedChanged(object sender, EventArgs e)
         {
             if (this.IsBrowserInitialized && this.navigateCache != null)
             {
@@ -910,8 +908,13 @@ namespace Browser
             this.SetVolumeState();
 		}
 
+        private void TryGetVolumeManager()
+        {
+            this._volumeManager = VolumeManager.CreateInstanceByProcessName("CefSharp.BrowserSubprocess");
+        }
 
-		private void SetVolumeState()
+
+        private void SetVolumeState()
 		{
 
 			bool mute;
@@ -919,12 +922,18 @@ namespace Browser
 
 			try
 			{
-				mute = this._volumeManager.IsMute;
+                if (this._volumeManager == null)
+                {
+                    this.TryGetVolumeManager();
+                }
+
+                mute = this._volumeManager.IsMute;
 				volume = this._volumeManager.Volume * 100;
 
 			}
 			catch (Exception)
 			{
+				this._volumeManager = null;
 				// 音量データ取得不能時
 				mute = false;
 				volume = 100;
@@ -1026,7 +1035,12 @@ namespace Browser
 
 		private void ToolMenu_Other_Mute_Click(object sender, EventArgs e)
 		{
-			try
+            if (_volumeManager == null)
+            {
+                this.TryGetVolumeManager();
+            }
+
+            try
 			{
                 this._volumeManager.ToggleMute();
 
@@ -1041,11 +1055,15 @@ namespace Browser
 
 		void ToolMenu_Other_Volume_ValueChanged(object sender, EventArgs e)
 		{
-
 			var control = this.ToolMenu_Other_Volume_VolumeControl;
 
-			try
-			{
+            if (_volumeManager == null)
+            {
+                this.TryGetVolumeManager();
+            }
+
+            try
+            {
 				if ((bool)control.Tag)
                     this._volumeManager.Volume = (float)(control.Value / 100);
 				control.BackColor = SystemColors.Window;

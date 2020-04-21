@@ -45,7 +45,7 @@ namespace ElectronicObserver.Utility
         //private static string _hubsite = "http://172.30.1.20:8080/Translations/";
 
         private static readonly ExternalDataReader _instance = new ExternalDataReader();
-        public static ExternalDataReader Instance = _instance;
+        public static ExternalDataReader Instance => _instance;
 
         internal ExternalDataReader()
         {
@@ -170,7 +170,7 @@ namespace ElectronicObserver.Utility
                             File.Move($"Translation\\{currentFileName}_temp", $"Translation\\{currentFileName}");
                         }
 
-                        Logger.Add(2, $"{this.DataTypeToName(i.DataType)}이 업데이트 되었습니다.");
+                        Logger.Add(2, $"{i.DataType.DataTypeToName()}이 업데이트 되었습니다.");
                     }
 
                     i.Data = JObject.Parse(File.ReadAllText($"Translation\\{currentFileName}"));
@@ -180,53 +180,6 @@ namespace ElectronicObserver.Utility
                     Logger.Add(2, "번역 파일 업데이트에 실패했습니다. 파일 : " + i.DataType + ":" + e.GetBaseException());
                 }
             });
-        }
-
-        public string DataTypeToName(DataType type)
-        {
-            switch (type)
-            {
-                case DataType.AkashiData:
-                    return "개수공창 목록";
-                case DataType.Equipment:
-                    return "장비 번역";
-                case DataType.EquipmentType:
-                    return "장비 종류 번역";
-                case DataType.ShipName:
-                    return "함선 이름 번역";
-                case DataType.ShipSuffix:
-                    return "함선 개장명 번역";
-                case DataType.ShipType:
-                    return "함선종류 번역";
-                case DataType.OperationMap:
-                    return "해역 이름 번역";
-                case DataType.OperationSortie:
-                    return "적 함대 번역";
-                case DataType.QuestDetail:
-                    return "퀘스트 정보 번역";
-                case DataType.QuestTitle:
-                    return "퀘스트 이름 번역";
-                case DataType.ExpeditionDetail:
-                    return "원정 상세 번역";
-                case DataType.ExpeditionTitle:
-                    return "원정 이름 번역";
-                case DataType.ExpeditionData:
-                    return "원정 데이터 목록";
-                case DataType.Items:
-                    return "아이템 이름 번역";
-                case DataType.FitData:
-                    return "피트 정보 목록";
-                case DataType.NodeData:
-                    return "해역 노드 목록";
-                case DataType.None:
-                default:
-                    return "???";
-            }
-        }
-
-        public void ForeachExternalData(System.Action<ExternalDataInfo> action)
-        {
-            this._externalDatas.ForEach(action);
         }
     }
 }

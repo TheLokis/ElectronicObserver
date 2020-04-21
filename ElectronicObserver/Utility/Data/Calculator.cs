@@ -217,7 +217,6 @@ namespace ElectronicObserver.Utility.Data
 
             int air = 0;
             double reconBonus = 1.0;
-            int highAltitudeFigherCount = 0;
 
             foreach (var sq in aircorps.Squadrons.Values)
             {
@@ -237,16 +236,16 @@ namespace ElectronicObserver.Utility.Data
                         reconBonus = Math.Max(reconBonus, GetAirSuperiorityAirDefenseReconBonus(sq.EquipmentID));
                         break;
                 }
-                if (sq.EquipmentInstanceMaster.IsHightAltitudeFighter)
-                {
-                    highAltitudeFigherCount++;
-                }
             }
 
             double highAltitudeBonus = 1.0;
             if (isHighAltitude)
             {
-                highAltitudeBonus = Math.Min(0.5 + 0.3 * highAltitudeFigherCount, 1.2);
+                int highAltitudeFigherCount = KCDatabase.Instance.BaseAirCorps.Values
+                                .Where(corps => corps.MapAreaID == aircorps.MapAreaID && corps.ActionKind == aircorps.ActionKind)
+                                .SelectMany(corps => corps.Squadrons.Values)
+                                .Count(sq => sq?.State == 1 && sq.EquipmentInstanceMaster.IsHightAltitudeFighter);
+
             }
 
             return (int)(air * reconBonus * highAltitudeBonus);
@@ -642,9 +641,13 @@ namespace ElectronicObserver.Utility.Data
             double tokuBonus;
 
             if (tokuCount <= 2)
+            {
                 tokuBonus = 0.02 * tokuCount;
+            }
             else if (tokuCount == 3)
+            {
                 tokuBonus = 0.05 + 0.002 * Math.Min(Math.Max(daihatsuCount - 1, 0), 2);
+            }
             else
             {
                 if (daihatsuCount <= 2)

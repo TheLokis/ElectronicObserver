@@ -80,6 +80,14 @@ namespace ElectronicObserver.Data
                 progress.Progresses.RemoveAll(p => p.QuestType == 5);
                 this.Quests.RemoveAll(p => p.Type == 5);
             }
+            for (int i = 1; i <= 12; i++)
+            {
+                if (DateTimeHelper.IsCrossedYear(progress.LastUpdateTime, i, 1, 5, 0, 0))
+                {
+                    progress.Progresses.RemoveAll(p => p.QuestType == 100 + i);
+                    Quests.RemoveAll(p => p.LabelType == 100 + i);
+                }
+            }
 
 
             this.Count = (int)this.RawData.api_count;

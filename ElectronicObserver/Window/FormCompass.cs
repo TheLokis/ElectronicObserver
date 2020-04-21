@@ -318,6 +318,11 @@ namespace ElectronicObserver.Window
 				{
 					int air = Calculator.GetAirSuperiority(fleet.FleetMember);
                     this.AirSuperiority.Text = air.ToString();
+
+                    if (fleet.FleetMember.Select(id => KCDatabase.Instance.MasterShips[id])
+                        .Any(ship => ship != null && (ship.DefaultSlot == null || RecordManager.Instance.ShipParameter[ship.ShipID]?.Aircraft == null)))
+                        this.AirSuperiority.Text += "?";
+
                     this.ToolTipInfo.SetToolTip(this.AirSuperiority, GetAirSuperiorityString(air));
                     this.AirSuperiority.Visible = true;
 				}
@@ -1108,6 +1113,11 @@ namespace ElectronicObserver.Window
                 this.TextAirSuperiority.Text = isPractice ?
 					air.ToString() + " ～ " + Calculator.GetAirSuperiorityAtMaxLevel(enemies, slots).ToString() :
 					air.ToString();
+
+                if (enemies.Select(id => KCDatabase.Instance.MasterShips[id])
+                    .Any(ship => ship != null && RecordManager.Instance.ShipParameter[ship.ShipID]?.Aircraft == null))
+                    this.TextAirSuperiority.Text += "?";
+
                 this.ToolTipInfo.SetToolTip(this.TextAirSuperiority, GetAirSuperiorityString(isPractice ? 0 : air));
                 this.TextAirSuperiority.Visible = true;
 			}

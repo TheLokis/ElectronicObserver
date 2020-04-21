@@ -309,6 +309,7 @@ namespace ElectronicObserver.Window
             this.Font = c.UI.MainFont;
             //StripMenu.Font = Font;
             this.StripStatus.Font = this.Font;
+
             this.MainDockPanel.Skin.AutoHideStripSkin.TextFont = this.Font;
             this.MainDockPanel.Skin.DockPaneStripSkin.TextFont = this.Font;
 

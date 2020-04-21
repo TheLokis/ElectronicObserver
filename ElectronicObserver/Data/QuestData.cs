@@ -31,11 +31,17 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int Type => (int)this.RawData.api_type;
 
-		/// <summary>
-		/// 遂行状態
-		/// 1=未受領, 2=遂行中, 3=達成
-		/// </summary>
-		public int State
+        /// <summary>
+        /// 周期アイコン種別
+        /// 1=単発, 2=デイリー, 3=ウィークリー, 6=マンスリー, 7=他(輸送5と空母3,クォータリー), 100+x=イヤーリー(x月-)
+        /// </summary>
+        public int LabelType => (int)this.RawData.api_label_type;
+
+        /// <summary>
+        /// 遂行状態
+        /// 1=未受領, 2=遂行中, 3=達成
+        /// </summary>
+        public int State
 		{
 			get { return (int)this.RawData.api_state; }
 			set { this.RawData.api_state = value; }

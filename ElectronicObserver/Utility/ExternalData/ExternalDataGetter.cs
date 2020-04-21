@@ -102,16 +102,17 @@ namespace ElectronicObserver.Utility
             var obj = this.GetData(DataType.ExpeditionData)["Expedition"] as JArray;
             if (obj == null) return null;
 
-            for (int i = 0; i < obj.Count; i++)
+            JToken value = null;
+
+            obj.Foreach(data =>
             {
-                var data = obj[i];
                 if (data["ID"].ToString().Equals(id) == true)
                 {
-                    return data;
+                    value = data;
                 }
-            }
+            });
 
-            return null;
+            return value;
         }
 
         public void GetFit(Dictionary<string, string> data)

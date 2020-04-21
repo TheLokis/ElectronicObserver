@@ -121,7 +121,6 @@ namespace ElectronicObserver.Resource.Record
 
 			bool succeeded = true;
 
-
 			foreach (var r in this.Records)
 			{
 				if (!r.NeedToSave)
@@ -150,7 +149,6 @@ namespace ElectronicObserver.Resource.Record
 
 		void TimerSave(string apiname, dynamic data)
 		{
-
 			bool iscleared;
 
 			switch (Utility.Configuration.Config.Control.RecordAutoSaving)
@@ -170,14 +168,12 @@ namespace ElectronicObserver.Resource.Record
 					break;
 			}
 
-
 			if (iscleared)
 			{
                 this._prevTime = DateTime.Now;
 
 				if (this.Records.Any(r => r.NeedToSave))
 				{
-
 					if (this.SavePartial(false))
 					{
 						Utility.Logger.Add(1, "기록 자동 저장하였습니다.");

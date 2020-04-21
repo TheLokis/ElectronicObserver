@@ -1287,15 +1287,30 @@ namespace ElectronicObserver.Data
                     break;
 
                 case NightAttackKind.CutinTorpedoRadar:
-                    if (this.ShipID == 543 && this.AllSlotInstanceMaster.Any(eq => eq?.EquipmentID == 267))     // 長波改二 + 12.7cm連装砲D型改二
-                        basepower *= 1.625;
-                    else
-                        basepower *= 1.3;
-                    break;
+                    {
+                        double baseModifier = 1.3;
+                        int typeDmod2 = this.AllSlotInstanceMaster.Count(eq => eq?.EquipmentID == 267);  // 12.7cm連装砲D型改二
+                        int typeDmod3 = this.AllSlotInstanceMaster.Count(eq => eq?.EquipmentID == 366);  // 12.7cm連装砲D型改三
+                        var modifierTable = new double[] { 1, 1.25, 1.4 };
+
+                        baseModifier *= modifierTable[Math.Min(typeDmod2 + typeDmod3, modifierTable.Length - 1)] * (1 + typeDmod3 * 0.05);
+
+                        basepower *= baseModifier;
+                        break;
+                    }
 
                 case NightAttackKind.CutinTorpedoPicket:
-                    basepower *= 1.25;
-                    break;
+                    {
+                        double baseModifier = 1.25;     // TODO: 処理の共通化
+                        int typeDmod2 = this.AllSlotInstanceMaster.Count(eq => eq?.EquipmentID == 267);  // 12.7cm連装砲D型改二
+                        int typeDmod3 = this.AllSlotInstanceMaster.Count(eq => eq?.EquipmentID == 366);  // 12.7cm連装砲D型改三
+                        var modifierTable = new double[] { 1, 1.25, 1.4 };
+
+                        baseModifier *= modifierTable[Math.Min(typeDmod2 + typeDmod3, modifierTable.Length - 1)] * (1 + typeDmod3 * 0.05);
+
+                        basepower *= baseModifier;
+                        break;
+                    }
             }
 
             basepower += this.GetLightCruiserDamageBonus() + this.GetItalianDamageBonus();

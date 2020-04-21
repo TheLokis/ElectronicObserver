@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -22,74 +23,136 @@ namespace BrowserLib
 		}
 
 
-		/// <summary>
-		/// 音量操作のためのデータを取得します。
-		/// </summary>
-		/// <param name="processID">対象のプロセスID。</param>
-		/// <returns>データ。取得に失敗した場合は null。</returns>
-		private static ISimpleAudioVolume GetVolumeObject(uint processID)
-		{
+        /// <summary>
+        /// 音量操作のためのデータを取得します。
+        /// </summary>
+        /// <param name="processID">対象のプロセスID。</param>
+        /// <returns>データ。取得に失敗した場合は null。</returns>
+        private static ISimpleAudioVolume GetVolumeObject(Predicate<uint> checkProcessID)
+        {
+            ISimpleAudioVolume ret = null;
 
-			ISimpleAudioVolume ret = null;
+            // スピーカーデバイスの取得
+            IMMDeviceEnumerator deviceEnumerator = (IMMDeviceEnumerator)(new MMDeviceEnumerator());
+            IMMDevice speakers;
+            deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia, out speakers);
 
-			// スピーカーデバイスの取得
-			IMMDeviceEnumerator deviceEnumerator = (IMMDeviceEnumerator)(new MMDeviceEnumerator());
-			IMMDevice speakers;
-			deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia, out speakers);
+            // 列挙のためにセッションマネージャをアクティベート
+            Guid IID_IAudioSessionManager2 = typeof(IAudioSessionManager2).GUID;
+            object o;
+            speakers.Activate(ref IID_IAudioSessionManager2, 0, IntPtr.Zero, out o);
+            IAudioSessionManager2 mgr = (IAudioSessionManager2)o;
 
-			// 列挙のためにセッションマネージャをアクティベート
-			Guid IID_IAudioSessionManager2 = typeof(IAudioSessionManager2).GUID;
-			object o;
-			speakers.Activate(ref IID_IAudioSessionManager2, 0, IntPtr.Zero, out o);
-			IAudioSessionManager2 mgr = (IAudioSessionManager2)o;
+            // セッションの列挙
+            IAudioSessionEnumerator sessionEnumerator;
+            mgr.GetSessionEnumerator(out sessionEnumerator);
+            int count;
+            sessionEnumerator.GetCount(out count);
 
-			// セッションの列挙
-			IAudioSessionEnumerator sessionEnumerator;
-			mgr.GetSessionEnumerator(out sessionEnumerator);
-			int count;
-			sessionEnumerator.GetCount(out count);
+            for (int i = 0; i < count; i++)
+            {
+                IAudioSessionControl ctl;
+                IAudioSessionControl2 ctl2;
 
-			for (int i = 0; i < count; i++)
-			{
-				IAudioSessionControl ctl;
-				IAudioSessionControl2 ctl2;
+                sessionEnumerator.GetSession(i, out ctl);
 
-				sessionEnumerator.GetSession(i, out ctl);
+                ctl2 = ctl as IAudioSessionControl2;
 
-				ctl2 = ctl as IAudioSessionControl2;
+                uint pid = uint.MaxValue;
 
-				uint pid = uint.MaxValue;
+                if (ctl2 != null)
+                {
+                    ctl2.GetProcessId(out pid);
+                }
 
-				if (ctl2 != null)
-				{
-					ctl2.GetProcessId(out pid);
-				}
-
-				if (pid == processID)
-				{
-					ret = ctl2 as ISimpleAudioVolume;
-					break;
-				}
-
-
-				if (ctl != null)
-					Marshal.ReleaseComObject(ctl);
-
-				if (ctl2 != null)
-					Marshal.ReleaseComObject(ctl2);
-			}
-
-			Marshal.ReleaseComObject(sessionEnumerator);
-			Marshal.ReleaseComObject(mgr);
-			Marshal.ReleaseComObject(speakers);
-			Marshal.ReleaseComObject(deviceEnumerator);
+                if (checkProcessID(pid))
+                {
+                    ret = ctl2 as ISimpleAudioVolume;
+                    break;
+                }
 
 
-			return ret;
-		}
+                if (ctl != null)
+                    Marshal.ReleaseComObject(ctl);
+
+                if (ctl2 != null)
+                    Marshal.ReleaseComObject(ctl2);
+            }
+
+            Marshal.ReleaseComObject(sessionEnumerator);
+            Marshal.ReleaseComObject(mgr);
+            Marshal.ReleaseComObject(speakers);
+            Marshal.ReleaseComObject(deviceEnumerator);
 
 
-		private const string ErrorMessageNotFound = "지정한 프로세스 개체는 존재하지 않습니다.";
+            return ret;
+        }
+
+        /// <summary>
+        /// 音量操作のためのデータを取得します。
+        /// </summary>
+        /// <param name="processID">対象のプロセスID。</param>
+        /// <returns>データ。取得に失敗した場合は null。</returns>
+        private static ISimpleAudioVolume GetVolumeObject(uint processID) => GetVolumeObject(pid => processID == pid);
+
+
+        /// <summary>
+        /// 音量操作のためのデータを取得します。
+        /// </summary>
+        /// <param name="processName">対象のプロセス名。</param>
+        /// <returns>データ。取得に失敗した場合は null。</returns>
+        private static ISimpleAudioVolume GetVolumeObject(string processName, out uint processID)
+        {
+            var currentProcess = Process.GetCurrentProcess();
+            var processes = Process.GetProcessesByName(processName).Where(p => GetParentProcess(p)?.Id == currentProcess.Id).ToArray();
+
+            uint succeededId = 0;
+            var volume = GetVolumeObject(pid =>
+            {
+                if (processes.Any(p => p.Id == pid))
+                {
+                    succeededId = pid;
+                    return true;
+                }
+                return false;
+            });
+            processID = succeededId;
+            return volume;
+        }
+
+
+        public static VolumeManager CreateInstanceByProcessName(string processName)
+        {
+            var volume = GetVolumeObject(processName, out uint processID);
+            if (volume != null)
+            {
+                Marshal.ReleaseComObject(volume);
+                return new VolumeManager(processID);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static Process GetParentProcess(Process process)
+        {
+            var pbi = new PROCESS_BASIC_INFORMATION();
+            int status = NtQueryInformationProcess(process.Handle, 0, out pbi, Marshal.SizeOf(pbi), out int returnLength);
+            if (status != 0)
+                throw new System.ComponentModel.Win32Exception(status);
+
+            try
+            {
+                return Process.GetProcessById((int)pbi.InheritedFromUniqueProcessId.ToUInt32());
+            }
+            catch (ArgumentException)
+            {
+                return null;        // process not found
+            }
+        }
+
+        private const string ErrorMessageNotFound = "지정한 프로세스 개체는 존재하지 않습니다.";
 
 		/// <summary>
 		/// 音量を取得します。
@@ -364,8 +427,20 @@ namespace BrowserLib
 			int SetDuckingPreference(bool optOut);
 		}
 
-		#endregion
+        private struct PROCESS_BASIC_INFORMATION
+        {
+            public IntPtr ExitStatus;       // originally NtStatus
+            public IntPtr PebBaseAddress;
+            public UIntPtr AffinityMask;
+            public int BasePriority;
+            public UIntPtr UniqueProcessId;
+            public UIntPtr InheritedFromUniqueProcessId;
+        }
 
-	}
+        [DllImport("NTDLL.DLL", SetLastError = true)]
+        static extern int NtQueryInformationProcess(IntPtr hProcess, /*PROCESSINFOCLASS*/ int pic, out PROCESS_BASIC_INFORMATION pbi, int cb, out int pSize);
+
+        #endregion
+    }
 
 }

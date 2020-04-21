@@ -449,6 +449,14 @@ namespace ElectronicObserver.Data
                 case 89: return "Gotland급";
                 case 90: return "닛신급";
                 case 91: return "Fletcher급";
+                case 92: return "L.d.S.D.d.Abruzzi급";
+                case 93: return "Colorado급";
+                case 94: return "미쿠라급";
+                case 95: return "Northampton급";
+                case 96: return "Perth급";
+                case 97: return "육군특종선(R1)";
+                case 98: return "De Ruyter급";
+                case 99: return "Atlanta급";
                 default: return "불명";
 			}
 		}
@@ -1157,7 +1165,31 @@ namespace ElectronicObserver.Data
 					return "단발";
 				case 5:     //その他(輸送5/空母3)
 					return "기타";
-				default:
+                case 101:
+                    return "1";
+                case 102:
+                    return "2";
+                case 103:
+                    return "3";
+                case 104:
+                    return "4";
+                case 105:
+                    return "5";
+                case 106:
+                    return "6";
+                case 107:
+                    return "7";
+                case 108:
+                    return "8";
+                case 109:
+                    return "9";
+                case 110:
+                    return "10";
+                case 111:
+                    return "11";
+                case 112:
+                    return "12";
+                default:
 					return "불명";
 			}
 

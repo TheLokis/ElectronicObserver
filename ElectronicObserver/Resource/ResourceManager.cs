@@ -233,7 +233,6 @@ namespace ElectronicObserver.Resource
 				ColorDepth = ColorDepth.Depth32Bit,
 				ImageSize = new Size(16, 16)
 			};
-
 		}
 
 
@@ -495,7 +494,6 @@ namespace ElectronicObserver.Resource
 			}
 			catch (Exception)
 			{
-
 				Utility.Logger.Add(3, string.Format("이미지 파일 {0} 의 로드에 실패했습니다.", path));
 				imglist.Images.Add(name, CreateBlankImage());
 				return;
@@ -514,10 +512,8 @@ namespace ElectronicObserver.Resource
 				return null;
 			}
 
-
 			try
 			{
-
 				/*//ストリームから直接読み込むと不思議なチカラによってかき消される
 				return new Icon( entry.Open() );
 				/*/
@@ -531,8 +527,6 @@ namespace ElectronicObserver.Resource
 				{
 					return new Icon(ms);
 				}
-				//*/
-
 			}
 			catch (Exception)
 			{
