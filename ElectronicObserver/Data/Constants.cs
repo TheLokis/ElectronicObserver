@@ -846,6 +846,8 @@ namespace ElectronicObserver.Data
                     return "흉열(무츠)";
                 case DayAttackKind.SpecialColorado:
                     return "콜로라도터치";
+                case DayAttackKind.SpecialKongo:
+                    return "콩고터치";
                 case DayAttackKind.ZuiunMultiAngle:
                     return "즈이운입체공격";
                 case DayAttackKind.SeaAirMultiAngle:
@@ -909,6 +911,8 @@ namespace ElectronicObserver.Data
                     return "흉열(무츠)";
                 case NightAttackKind.SpecialColorado:
                     return "콜로라도터치";
+                case NightAttackKind.SpecialKongo:
+                    return "콩고터치";
                 case NightAttackKind.Shelling:
                     return "포격";
 				case NightAttackKind.AirAttack:

@@ -10,21 +10,19 @@ namespace Browser.CefOp
 {
     public class CustomResourceRequestHandler : ResourceRequestHandler
     {
-
-        bool pixiSettingEnabled;
+        private bool _pixiSettingEnabled { get; set; }
 
         public CustomResourceRequestHandler(bool pixiSettingEnabled) : base()
         {
-            this.pixiSettingEnabled = pixiSettingEnabled;
+            this._pixiSettingEnabled = pixiSettingEnabled;
         }
-
 
         /// <summary>
         /// レスポンスの置換制御を行います。
         /// </summary>
         protected override IResponseFilter GetResourceResponseFilter(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
-            if (pixiSettingEnabled && request.Url.Contains(@"/kcs2/index.php"))
+            if (_pixiSettingEnabled && request.Url.Contains(@"/kcs2/index.php"))
                 return new ResponseFilterPixiSetting();
 
             return base.GetResourceResponseFilter(chromiumWebBrowser, browser, frame, request, response);

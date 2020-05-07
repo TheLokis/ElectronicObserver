@@ -475,14 +475,13 @@ namespace ElectronicObserver.Data.Quest
                             }));
                             break;
                         case 436:   //|436|年(3月)|練習航海及び警備任務を実施せよ！|「練習航海」「長距離練習航海」「警備任務」「対潜警戒任務」「強行偵察任務」成功各1|
-                            this.Progresses.Add(new ProgressMultiExpedition(q, new[]{
+                            Progresses.Add(new ProgressMultiExpedition(q, new[]{
                                 new ProgressExpedition(q, 1, new[]{ 1 }),
                                 new ProgressExpedition(q, 1, new[]{ 2 }),
                                 new ProgressExpedition(q, 1, new[]{ 3 }),
                                 new ProgressExpedition(q, 1, new[]{ 4 }),
                                 new ProgressExpedition(q, 1, new[]{ 10 }),
                             })); break;
-
                         case 503:   //|503|艦隊大整備！|入渠5
                             this.Progresses.Add(new ProgressDocking(q, 5));
                             break;

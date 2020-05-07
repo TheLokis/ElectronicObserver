@@ -72,7 +72,12 @@ namespace ElectronicObserver.Utility
                         if (jpString.Contains(suffix.Key.ToString()) == true)
                         {
                             translate = jpString.Remove(jpString.Length - suffix.Key.ToString().Length);
-                            return this.GetTranslation(translate, translationList, ref translate, DataType.ShipName, suffix.Value.ToString());
+                            int sl = suffix.Key.ToString().Length;
+
+                            if (suffix.Key.ToString().Equals(jpString.Substring(jpString.Length - sl)) == true)
+                            {
+                                return this.GetTranslation(translate, translationList, ref translate, DataType.ShipName, suffix.Value.ToString());
+                            }
                         }
                     }
                 }

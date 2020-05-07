@@ -140,11 +140,21 @@ namespace ElectronicObserver.Data.Battle
 		/// </summary>
 		public string EnemyAdmiralRank { get; internal set; }
 
+        /// <summary>
+        /// 特殊攻撃発動回数
+        /// </summary>
+        public Dictionary<int, int> SpecialAttackCount { get; private set; }
+
+        /// <summary>
+        /// 記録する特殊攻撃
+        /// </summary>
+        private readonly int[] _tracedSpecialAttack = new int[] { 100, 101, 102, 103, 104 };
 
 
-		public BattleManager()
+        public BattleManager()
 		{
             this.DroppedItemCount = new Dictionary<int, int>();
+			this.SpecialAttackCount = new Dictionary<int, int>();
 		}
 
 
@@ -318,6 +328,7 @@ namespace ElectronicObserver.Data.Battle
                     this.BattleMode = BattleModes.Undefined;
                     this.DroppedShipCount = this.DroppedEquipmentCount = 0;
                     this.DroppedItemCount.Clear();
+					this.SpecialAttackCount.Clear();
 					break;
 
 				case "api_get_member/slot_item":
@@ -467,7 +478,29 @@ namespace ElectronicObserver.Data.Battle
 				RecordManager.Instance.ShipDrop.Add(shipID, itemID, eqID, this.Compass.MapAreaID, this.Compass.MapInfoID, this.Compass.Destination, this.Compass.MapInfo.EventDifficulty, this.Compass.EventID == 5, enemyFleetData.FleetID, this.Result.Rank, KCDatabase.Instance.Admiral.Level);
 			}
 
+            void IncrementSpecialAttack(BattleData bd)
+            {
+                if (bd == null)
+                    return;
 
+                foreach (var phase in bd.GetPhases())
+                {
+                    foreach (var detail in phase.BattleDetails)
+                    {
+                        int kind = detail.AttackType;
+
+                        if (detail.AttackerIndex.IsFriend && this._tracedSpecialAttack.Contains(kind))
+                        {
+                            if (this.SpecialAttackCount.ContainsKey(kind))
+								this.SpecialAttackCount[kind]++;
+                            else
+								this.SpecialAttackCount.Add(kind, 1);
+                        }
+                    }
+                }
+            }
+            IncrementSpecialAttack(this.FirstBattle);
+            IncrementSpecialAttack(this.SecondBattle);
 
             this.WriteBattleLog();
 
@@ -505,7 +538,6 @@ namespace ElectronicObserver.Data.Battle
 		/// <param name="enemyrate">敵の損害率を出力します。</param>
 		public int PredictWinRank(out double friendrate, out double enemyrate)
 		{
-
 			int friendbefore = 0;
 			int friendafter = 0;
 			int friendcount = 0;
@@ -523,8 +555,6 @@ namespace ElectronicObserver.Data.Battle
 			var friendescort = activeBattle.Initial.FriendFleetEscort?.MembersWithoutEscaped;
 
 			var resultHPs = activeBattle.ResultHPs;
-
-
 
 			for (int i = 0; i < firstInitial.FriendInitialHPs.Length; i++)
 			{
@@ -611,7 +641,6 @@ namespace ElectronicObserver.Data.Battle
 
 		}
 
-
 		/// <summary>
 		/// 勝利ランクを計算します。連合艦隊は情報が少ないので正確ではありません。
 		/// </summary>
@@ -638,7 +667,6 @@ namespace ElectronicObserver.Data.Battle
 			// 轟沈艦なし
 			if (sunkFriend == 0)
 			{
-
 				// 敵艦全撃沈
 				if (sunkEnemy == countEnemy)
 				{
@@ -777,7 +805,5 @@ namespace ElectronicObserver.Data.Battle
 				Utility.ErrorReporter.SendErrorReport(ex, "전투 로그 출력을 실패했습니다.");
 			}
 		}
-
 	}
-
 }

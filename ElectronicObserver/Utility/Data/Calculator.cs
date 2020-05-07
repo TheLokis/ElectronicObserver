@@ -245,6 +245,7 @@ namespace ElectronicObserver.Utility.Data
                                 .Where(corps => corps.MapAreaID == aircorps.MapAreaID && corps.ActionKind == aircorps.ActionKind)
                                 .SelectMany(corps => corps.Squadrons.Values)
                                 .Count(sq => sq?.State == 1 && sq.EquipmentInstanceMaster.IsHightAltitudeFighter);
+                highAltitudeBonus = Math.Min(0.5 + 0.3 * highAltitudeFigherCount, 1.2);
 
             }
 
@@ -445,6 +446,7 @@ namespace ElectronicObserver.Utility.Data
             return ret;
         }
 
+
         /// <summary>
         /// 艦隊の触接開始率を求めます。
         /// </summary>
@@ -488,6 +490,7 @@ namespace ElectronicObserver.Utility.Data
         /// <returns>機体の命中をキー, 触接選択率を値とした Dictionary 。</returns>
         public static Dictionary<int, double> GetContactSelectionProbability(FleetData fleet)
         {
+
             var probs = new Dictionary<int, double>();
 
             foreach (var ship in fleet.MembersWithoutEscaped)
@@ -508,7 +511,7 @@ namespace ElectronicObserver.Utility.Data
                         case EquipmentTypes.FlyingBoat:
                         case EquipmentTypes.JetTorpedo:
                         case EquipmentTypes.JetRecon:
-                            if (!probs.ContainsKey(eq.Accuracy))
+                            if (probs.ContainsKey(eq.Accuracy) == false)
                                 probs.Add(eq.Accuracy, 1.0);
 
                             probs[eq.Accuracy] *= 1.0 - (0.07 * eq.LOS);
@@ -534,13 +537,16 @@ namespace ElectronicObserver.Utility.Data
         /// <returns>減少TP。</returns>
         public static int GetTPDamage(FleetData fleet)
         {
+
             int tp = 0;
 
             foreach (var ship in fleet.MembersWithoutEscaped.Where(s => s != null && s.HPRate > 0.25))
             {
+
                 // 装備ボーナス
                 foreach (var eq in ship.AllSlotInstanceMaster.Where(q => q != null))
                 {
+
                     switch (eq.CategoryType)
                     {
 
@@ -722,7 +728,7 @@ namespace ElectronicObserver.Utility.Data
 
                     case EquipmentTypes.CarrierBasedBomber:
                         bomberCount++;
-                        if (eq.Name.Contains("六三四空"))
+                        if (eq.Name.Contains("634공"))
                             suisei634Count++;
                         break;
 
@@ -733,7 +739,7 @@ namespace ElectronicObserver.Utility.Data
                     case EquipmentTypes.SeaplaneRecon:
                     case EquipmentTypes.SeaplaneBomber:
                         reconCount++;
-                        if (eq.Name.Contains("瑞雲"))
+                        if (eq.Name.Contains("즈이운"))
                             zuiunCount++;
                         break;
 
@@ -1264,6 +1270,7 @@ namespace ElectronicObserver.Utility.Data
                             highangle_atlanta_gfcs++;
                             break;
                     }
+
                 }
                 else if (eq.CategoryType == EquipmentTypes.AADirector)
                 {
@@ -2348,7 +2355,7 @@ namespace ElectronicObserver.Utility.Data
     /// <summary>
     /// 昼戦攻撃種別を表します。
     /// </summary>
-    public enum DayAttackKind
+	public enum DayAttackKind
     {
         /// <summary> 不明 </summary>
         Unknown = -1,
@@ -2387,8 +2394,11 @@ namespace ElectronicObserver.Utility.Data
         /// <summary> 長門、いい？ いくわよ！ 主砲一斉射ッ！ </summary>
         SpecialMutsu = 102,
 
+        /// <summary> Colorado Touch </summary>
         SpecialColorado = 103,
 
+        /// <summary> 僚艦夜戦突撃 </summary>
+        SpecialKongo = 104,
 
         /// <summary> 瑞雲立体攻撃 </summary>
         ZuiunMultiAngle = 200,
@@ -2435,7 +2445,7 @@ namespace ElectronicObserver.Utility.Data
     /// <summary>
     /// 夜戦攻撃種別を表します。
     /// </summary>
-    public enum NightAttackKind
+   	public enum NightAttackKind
     {
         /// <summary> 不明 </summary>
         Unknown = -1,
@@ -2477,7 +2487,11 @@ namespace ElectronicObserver.Utility.Data
         /// <summary> 長門、いい？ いくわよ！ 主砲一斉射ッ！ </summary>
         SpecialMutsu = 102,
 
+        /// <summary> Colorado Touch </summary>
         SpecialColorado = 103,
+
+        /// <summary> 僚艦夜戦突撃 </summary>
+        SpecialKongo = 104,
 
 
         /// <summary> 砲撃 </summary>

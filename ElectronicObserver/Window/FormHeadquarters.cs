@@ -496,7 +496,9 @@ namespace ElectronicObserver.Window
                     this.ToolTipInfo.SetToolTip(this.DisplayUseItem,
 						$"쌀: {db.UseItems[85]?.Count ?? 0}\r\n매실: {db.UseItems[86]?.Count ?? 0}\r\n김: {db.UseItems[87]?.Count ?? 0}\r\n차: {db.UseItems[88]?.Count ?? 0}\r\n{tail}");
 					break;
-                case "꽁치":
+
+				// '19 autumn event special mode
+				case "꽁치":
                 case "정어리":
                     this.DisplayUseItem.Text = (item?.Count ?? 0).ToString();
                     this.ToolTipInfo.SetToolTip(this.DisplayUseItem,

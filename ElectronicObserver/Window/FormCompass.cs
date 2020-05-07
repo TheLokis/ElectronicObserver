@@ -3,7 +3,6 @@ using ElectronicObserver.Data.Battle;
 using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
 using ElectronicObserver.Resource.Record;
-using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Data;
 using ElectronicObserver.Window.Control;
 using ElectronicObserver.Window.Dialog;
@@ -618,31 +617,31 @@ namespace ElectronicObserver.Window
 
 			APIObserver o = APIObserver.Instance;
 
-			o["api_port/port"].ResponseReceived += this.Updated;
-			o["api_req_map/start"].ResponseReceived += this.Updated;
-			o["api_req_map/next"].ResponseReceived += this.Updated;
-			o["api_req_member/get_practice_enemyinfo"].ResponseReceived += this.Updated;
+            o["api_port/port"].ResponseReceived += Updated;
+            o["api_req_map/start"].ResponseReceived += Updated;
+            o["api_req_map/next"].ResponseReceived += Updated;
+            o["api_req_member/get_practice_enemyinfo"].ResponseReceived += Updated;
 
-			o["api_req_sortie/battle"].ResponseReceived += this.BattleStarted;
-			o["api_req_battle_midnight/sp_midnight"].ResponseReceived += this.BattleStarted;
-			o["api_req_sortie/night_to_day"].ResponseReceived += this.BattleStarted;
-			o["api_req_sortie/airbattle"].ResponseReceived += this.BattleStarted;
-			o["api_req_sortie/ld_airbattle"].ResponseReceived += this.BattleStarted;
-            o["api_req_sortie/ld_shooting"].ResponseReceived += this.BattleStarted;
-            o["api_req_combined_battle/battle"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/sp_midnight"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/airbattle"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/battle_water"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/ld_airbattle"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/ec_battle"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/each_battle"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/each_battle_water"].ResponseReceived += this.BattleStarted;
-			o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += this.BattleStarted;
-            o["api_req_combined_battle/ld_shooting"].ResponseReceived += this.BattleStarted;
-            o["api_req_practice/battle"].ResponseReceived += this.BattleStarted;
+            o["api_req_sortie/battle"].ResponseReceived += BattleStarted;
+            o["api_req_battle_midnight/sp_midnight"].ResponseReceived += BattleStarted;
+            o["api_req_sortie/night_to_day"].ResponseReceived += BattleStarted;
+            o["api_req_sortie/airbattle"].ResponseReceived += BattleStarted;
+            o["api_req_sortie/ld_airbattle"].ResponseReceived += BattleStarted;
+            o["api_req_sortie/ld_shooting"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/battle"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/sp_midnight"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/airbattle"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/battle_water"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/ld_airbattle"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/ec_battle"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/each_battle"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/each_battle_water"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += BattleStarted;
+            o["api_req_combined_battle/ld_shooting"].ResponseReceived += BattleStarted;
+            o["api_req_practice/battle"].ResponseReceived += BattleStarted;
 
 
-			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
+            Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 		}
 
 
@@ -687,7 +686,6 @@ namespace ElectronicObserver.Window
                 this.TextDestination.ImageIndex = -1;
                 this.ToolTipInfo.SetToolTip(this.TextDestination, null);
                 this.TextEventKind.Text = data.api_cmt;
-
                 this.TextEventKind.ForeColor = getColorFromEventKind(0);
                 this.TextEventKind.ImageAlign = ContentAlignment.MiddleCenter;
                 this.TextEventKind.ImageIndex = -1;
@@ -717,15 +715,11 @@ namespace ElectronicObserver.Window
 					compass.MapInfo.EventDifficulty > 0 ? " [" + Constants.GetDifficulty(compass.MapInfo.EventDifficulty) + "]" : "");
 				{
 					var mapinfo = compass.MapInfo;
+                    var sb = new StringBuilder();
 
-					if (mapinfo.IsCleared)
-					{
-                        this.ToolTipInfo.SetToolTip(this.TextMapArea, null);
-
-					}
                     if (mapinfo.RequiredDefeatedCount != -1 && mapinfo.CurrentDefeatedCount < mapinfo.RequiredDefeatedCount)
                     {
-                        this.ToolTipInfo.SetToolTip(this.TextMapArea, string.Format("격파: {0} / {1} 회",
+						sb.AppendFormat("격파: {0} / {1} 회",
                             mapinfo.CurrentGaugeIndex > 0 ? $"#{mapinfo.CurrentGaugeIndex} " : "",
                             mapinfo.CurrentDefeatedCount, mapinfo.RequiredDefeatedCount));
 
@@ -740,11 +734,15 @@ namespace ElectronicObserver.Window
                             mapinfo.GaugeType == 3 ? "TP" : "HP", current, max));
 
                     }
-					else
-					{
-                        this.ToolTipInfo.SetToolTip(this.TextMapArea, null);
-					}
-				}
+
+                    foreach (var pair in KCDatabase.Instance.Battle.SpecialAttackCount)
+                    {
+                        sb.AppendLine($"{Constants.GetDayAttackKind((DayAttackKind)pair.Key)} : 発動済み");
+                    }
+
+                    ToolTipInfo.SetToolTip(TextMapArea, sb.Length > 0 ? sb.ToString() : null);
+                }
+
 
                 this.TextDestination.Text = string.Format("다음노드 : {0}{1}", compass.Destination_Name, (compass.IsEndPoint ? " (마지막)" : ""));
 				if (compass.LaunchedRecon != 0)
@@ -875,6 +873,7 @@ namespace ElectronicObserver.Window
 									eventkind = "조용한 바다다.";
 									break;
 							}
+
                             if (compass.RouteChoices != null)
                             {
                                 this.TextEventDetail.Text = string.Join(" / ", compass.RouteChoices);
@@ -948,7 +947,11 @@ namespace ElectronicObserver.Window
                             this.TextEventDetail.Text = "";
 							break;
 
-						default:
+                        case 10:    // 泊地
+                            TextEventDetail.Text = compass.CanEmergencyAnchorageRepair ? "수리가능" : "";
+                            break;
+
+                        default:
                             this.TextEventDetail.Text = "";
 							break;
 

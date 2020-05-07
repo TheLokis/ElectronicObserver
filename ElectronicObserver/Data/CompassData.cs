@@ -325,12 +325,15 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int MapHPMax => this.RawData.api_eventmap() ? (int)this.RawData.api_eventmap.api_max_maphp : 0;
 
+        /// <summary>
+        /// 緊急泊地修理が可能か
+        /// </summary>
+        public bool CanEmergencyAnchorageRepair => RawData.api_anchorage_flag() && (int)RawData.api_anchorage_flag != 0;
 
-
-		/// <summary>
-		/// 対応する海域情報
-		/// </summary>
-		public MapInfoData MapInfo => KCDatabase.Instance.MapInfo[this.MapAreaID * 10 + this.MapInfoID];
+        /// <summary>
+        /// 対応する海域情報
+        /// </summary>
+        public MapInfoData MapInfo => KCDatabase.Instance.MapInfo[this.MapAreaID * 10 + this.MapInfoID];
 	}
 
 
