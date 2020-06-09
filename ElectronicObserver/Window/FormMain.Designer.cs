@@ -123,6 +123,7 @@
             this.StripStatus_Clock = new System.Windows.Forms.ToolStripStatusLabel();
             this.UIUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.MainDockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.StripMenu_View_FleetPreset = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu.SuspendLayout();
             this.StripStatus.SuspendLayout();
             this.SuspendLayout();
@@ -294,6 +295,7 @@
             this.StripMenu_View_Fleet,
             this.StripMenu_View_FleetOverview,
             this.StripMenu_View_ShipGroup,
+            this.StripMenu_View_FleetPreset,
             this.toolStripSeparator1,
             this.StripMenu_View_Dock,
             this.StripMenu_View_Arsenal,
@@ -863,6 +865,13 @@
             this.MainDockPanel.ShowDocumentIcon = true;
             this.MainDockPanel.Size = new System.Drawing.Size(640, 434);
             this.MainDockPanel.TabIndex = 0;
+            //
+            // StripMenu_View_FleetPreset
+            // 
+            this.StripMenu_View_FleetPreset.Name = "StripMenu_View_FleetPreset";
+            this.StripMenu_View_FleetPreset.Size = new System.Drawing.Size(182, 22);
+            this.StripMenu_View_FleetPreset.Text = "편성프리셋(&P)";
+            this.StripMenu_View_FleetPreset.Click += new System.EventHandler(this.StripMenu_View_FleetPreset_Click);
             // 
             // FormMain
             // 
@@ -985,5 +994,6 @@
         private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_ExpeditionCheck;
         private System.Windows.Forms.ToolStripMenuItem StripMenu_CombinedFleet;
         private System.Windows.Forms.ToolStripMenuItem StripMenu_Tool_ResourceChart;
-    }
+        private System.Windows.Forms.ToolStripMenuItem StripMenu_View_FleetPreset;
+}
 }

@@ -351,13 +351,18 @@ namespace ElectronicObserver.Data
             this.EquipmentID == 227;         // 二式爆雷
 
 		/// <summary> 爆雷投射機かどうか(爆雷は含まない) </summary>
-		public bool IsDepthChargeProjector => this.CategoryType == EquipmentTypes.DepthCharge && !this.IsDepthCharge;
+		public bool IsDepthChargeProjector =>
+			this.EquipmentID == 44 ||        // 九四式爆雷投射機
+			this.EquipmentID == 45;          // 三式爆雷投射機
 
 
-        public bool IsHightAltitudeFighter =>
-    this.EquipmentID == 350 ||   // Me163B
-    this.EquipmentID == 351 ||   // 試製 秋水
-    this.EquipmentID == 352;     // 秋水
+		public bool IsHightAltitudeFighter =>
+			this.EquipmentID == 350 ||   // Me163B
+			this.EquipmentID == 351 ||   // 試製 秋水
+			this.EquipmentID == 352;     // 秋水
+
+        public bool IsAARocketLauncher =>
+			this.EquipmentID == 274;
 
         /// <summary> 夜間作戦航空要員かどうか </summary>
         public bool IsNightAviationPersonnel =>

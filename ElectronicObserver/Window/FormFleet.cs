@@ -496,7 +496,8 @@ namespace ElectronicObserver.Window
                 if (ship != null)
                 {
                     bool isEscaped = KCDatabase.Instance.Fleet[this._parent.FleetID].EscapedShipList.Contains(shipMasterID);
-                    
+                    var equipments = ship.AllSlotInstance.Where(eq => eq != null);
+
                     if (this._cachedShip != null)
                     {
                         if (this.isChanged(ship) && Utility.Configuration.Config.FormFleet.FocusModifiedFleet)
@@ -513,7 +514,7 @@ namespace ElectronicObserver.Window
                     this.Name.Tag = ship.ShipID;
                     this._toolTipInfo.SetToolTip(this.Name,
                         string.Format(
-                            "{0} {1}\r\n화력: {2}/{3}\r\n뇌장: {4}/{5}\r\n대공: {6}/{7}\r\n장갑: {8}/{9}\r\n대잠: {10}/{11}\r\n회피: {12}/{13}\r\n색적: {14}/{15}\r\n운: {16}\r\n사정: {17} / 속력: {18}\r\n(우클릭으로 도감에)\n",
+                            "{0} {1}\r\n화력: {2}/{3}\r\n뇌장: {4}/{5}\r\n대공: {6}/{7}\r\n장갑: {8}/{9}\r\n대잠: {10}/{11}\r\n회피: {12}/{13}\r\n색적: {14}/{15}\r\n운: {16}\r\n명중: {17:+#;-#;+0}\r\n폭장: {18:+#;-#;+0}\r\n사정: {19} / 속력: {20}\r\n(우클릭으로 도감에)\n",
                             ship.MasterShip.ShipTypeName, ship.NameWithLevel,
                             ship.FirepowerBase, ship.FirepowerTotal,
                             ship.TorpedoBase, ship.TorpedoTotal,
@@ -523,6 +524,8 @@ namespace ElectronicObserver.Window
                             ship.EvasionBase, ship.EvasionTotal,
                             ship.LOSBase, ship.LOSTotal,
                             ship.LuckTotal,
+                            equipments.Any() ? equipments.Sum(eq => eq.MasterEquipment.Accuracy) : 0,
+                            equipments.Any() ? equipments.Sum(eq => eq.MasterEquipment.Bomber) : 0,
                             Constants.GetRange(ship.Range),
                             Constants.GetSpeed(ship.Speed)
                             ));
@@ -639,7 +642,7 @@ namespace ElectronicObserver.Window
 
                     this.Condition.Text = ship.Condition.ToString();
                     this.Condition.Tag = ship.Condition;
-                    this.SetConditionDesign(ship.Condition);
+                    SetConditionDesign(this.Condition, ship.Condition);
 
                     if (ship.Condition < 49)
                     {
@@ -778,6 +781,10 @@ namespace ElectronicObserver.Window
                         Calculator.GetProportionalAirDefense(adjustedaa)
                         );
 
+
+                    double rocket = Calculator.GetAARocketBarrageProbability(ship);
+                    if (rocket > 0)
+                        sb.AppendLine($"대공분진사격: {rocket:p1}");
                 }
 
                 {
@@ -819,44 +826,6 @@ namespace ElectronicObserver.Window
                 return sb.ToString();
             }
 
-            private void SetConditionDesign(int cond)
-            {
-
-                if (this.Condition.ImageAlign == ContentAlignment.MiddleCenter)
-                {
-                    // icon invisible
-                    this.Condition.ImageIndex = -1;
-
-                    if (cond < 20)
-                        this.Condition.BackColor = Color.LightCoral;
-                    else if (cond < 30)
-                        this.Condition.BackColor = Color.LightSalmon;
-                    else if (cond < 40)
-                        this.Condition.BackColor = Color.Moccasin;
-                    else if (cond < 50)
-                        this.Condition.BackColor = Color.Transparent;
-                    else
-                        this.Condition.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
-
-                }
-                else
-                {
-                    this.Condition.BackColor = Color.Transparent;
-
-                    if (cond < 20)
-                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionVeryTired;
-                    else if (cond < 30)
-                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionTired;
-                    else if (cond < 40)
-                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionLittleTired;
-                    else if (cond < 50)
-                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionNormal;
-                    else
-                        this.Condition.ImageIndex = (int)ResourceManager.IconContent.ConditionSparkle;
-
-                }
-            }
-
             public void ConfigurationChanged(FormFleet parent)
             {
                 this.Name.Font = parent.MainFont;
@@ -865,7 +834,8 @@ namespace ElectronicObserver.Window
                 this.HP.MainFont = parent.MainFont;
                 this.HP.SubFont = parent.SubFont;
                 this.Condition.Font = parent.MainFont;
-                this.SetConditionDesign((this.Condition.Tag as int?) ?? 49);
+                SetConditionDesign(this.Condition, (this.Condition.Tag as int?) ?? 49);
+
                 this.Equipments.Font = parent.SubFont;
             }
 
@@ -877,6 +847,36 @@ namespace ElectronicObserver.Window
                 this.Condition.Dispose();
                 this.ShipResource.Dispose();
                 this.Equipments.Dispose();
+            }
+
+
+        }
+        public static void SetConditionDesign(ImageLabel label, int cond)
+        {
+
+            if (label.ImageAlign == ContentAlignment.MiddleCenter)
+            {
+                // icon invisible
+                label.ImageIndex = -1;
+
+                label.BackColor =
+                    cond < 20 ? Color.LightCoral :
+                    cond < 30 ? Color.LightSalmon :
+                    cond < 40 ? Color.Moccasin :
+                    cond < 50 ? Color.Transparent :
+                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
+            }
+            else
+            {
+                label.BackColor = Color.Transparent;
+
+                label.ImageIndex =
+                    cond < 20 ? (int)ResourceManager.IconContent.ConditionVeryTired :
+                    cond < 30 ? (int)ResourceManager.IconContent.ConditionTired :
+                    cond < 40 ? (int)ResourceManager.IconContent.ConditionLittleTired :
+                    cond < 50 ? (int)ResourceManager.IconContent.ConditionNormal :
+                    (int)ResourceManager.IconContent.ConditionSparkle;
+
             }
         }
 
@@ -953,6 +953,7 @@ namespace ElectronicObserver.Window
             o["api_req_kaisou/remodeling"].RequestReceived += this.Updated;
             o["api_req_map/start"].RequestReceived += this.Updated;
             o["api_req_hensei/combined"].RequestReceived += this.Updated;
+            o["api_req_kaisou/open_exslot"].RequestReceived += this.Updated;
 
             o["api_port/port"].ResponseReceived += this.Updated;
             o["api_get_member/ship2"].ResponseReceived += this.Updated;
@@ -972,7 +973,7 @@ namespace ElectronicObserver.Window
             o["api_get_member/require_info"].ResponseReceived += this.Updated;
             o["api_req_kaisou/slot_deprive"].ResponseReceived += this.Updated;
             o["api_req_kaisou/marriage"].ResponseReceived += this.Updated;
-
+            o["api_req_map/anchorage_repair"].ResponseReceived += this.Updated;
 
             //追加するときは FormFleetOverview にも同様に追加してください
 

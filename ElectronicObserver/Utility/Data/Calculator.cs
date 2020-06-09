@@ -363,8 +363,9 @@ namespace ElectronicObserver.Utility.Data
         /// </summary>
         /// <param name="fleet">対象の艦隊。</param>
         /// <param name="branchWeight">分岐点係数。2-5では1</param>
-        public static double GetSearchingAbility_New33(FleetData fleet, int branchWeight)
+		public static double GetSearchingAbility_New33(FleetData fleet, int branchWeight)
         {
+
             double ret = 0;
 
             foreach (var ship in fleet.MembersWithoutEscaped)
@@ -375,13 +376,32 @@ namespace ElectronicObserver.Utility.Data
                     continue;
                 }
 
-                ret += Math.Sqrt(ship.LOSBase);
+                // 装備シナジーがあるので合計値から引いていく
+                int losBase = ship.LOSTotal;
 
                 double equipmentBonus = 0;
                 foreach (var eq in ship.AllSlotInstance.Where(eq => eq != null))
                 {
-
                     var category = eq.MasterEquipment.CategoryType;
+
+                    losBase -= eq.MasterEquipment.LOS;
+                    if (eq.EquipmentID == 315)                      // SG レーダー(初期型) だけ装備シナジー補正が乗らないので :(
+                    {
+                        switch (ship.MasterShip.ShipClass)
+                        {
+                            case 65:        // Iowa級
+                            case 69:        // Lexington級
+                            case 83:        // Casablanca級
+                            case 84:        // Essex級
+                            case 87:        // John C.Butler級
+                            case 91:        // Fletcher級
+                            case 93:        // Colorado級
+                            case 95:        // Northampton級
+                            case 99:        // Atlanta級
+                                losBase -= 4;
+                                break;
+                        }
+                    }
 
                     double equipmentRate;
                     switch (category)
@@ -437,7 +457,7 @@ namespace ElectronicObserver.Utility.Data
                     equipmentBonus += equipmentRate * (eq.MasterEquipment.LOS + levelRate * Math.Sqrt(eq.Level));
                 }
 
-                ret += equipmentBonus * branchWeight;
+                ret += Math.Sqrt(losBase) + equipmentBonus * branchWeight;
             }
 
             // 司令部Lv補正
@@ -1824,8 +1844,39 @@ namespace ElectronicObserver.Utility.Data
             return (int)Math.Floor(enemyAircraftCount * proportionalAirDefense) + fixedAirDefense + 1 + (AACutinFixedBonus.ContainsKey(aaCutinKind) ? AACutinFixedBonus[aaCutinKind] : 0);
         }
 
+        /// <summary>
+		/// 対空噴進弾幕の発動確率を求めます。
+		/// </summary>
+		/// <param name="ship">対象の艦船。</param>
+		public static double GetAARocketBarrageProbability(ShipData ship)
+        {
+            if (ship == null)
+                return 0;
 
+            switch (ship.MasterShip.ShipType)
+            {
+                case ShipTypes.AviationBattleship:
+                case ShipTypes.LightAircraftCarrier:
+                case ShipTypes.AircraftCarrier:
+                case ShipTypes.ArmoredAircraftCarrier:
+                case ShipTypes.SeaplaneTender:
+                case ShipTypes.AviationCruiser:
+                    {
+                        int rocketLauncherCount = ship.AllSlotInstanceMaster.Count(eq => eq?.IsAARocketLauncher ?? false);
+                        if (rocketLauncherCount == 0)
+                            return 0;
 
+                        double rocket = (0.9 * ship.LuckTotal + GetAdjustedAAValue(ship)) / 281.0 + ((rocketLauncherCount - 1) * 0.15);
+                        if (ship.MasterShip.ShipClass == 2) // 伊勢型
+                            rocket += 0.25;
+
+                        return rocket;
+                    }
+
+                default:
+                    return 0;
+            }
+        }
 
         /// <summary>
         /// HP を 1 回復するために必要な入渠時間を求めます。

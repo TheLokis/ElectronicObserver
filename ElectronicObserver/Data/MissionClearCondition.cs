@@ -76,9 +76,41 @@ namespace ElectronicObserver.Data
                         .CheckLevelSum(185)
                         .CheckShipCount(5)
                         .CheckEscortFleetDD3()
-                        .CheckAA(162)
+                        .CheckAA(59)
                         .CheckASW(280)
                         .CheckLOS(60);
+                case 103:   // 南西方面連絡線哨戒
+                    return result
+                        .CheckFlagshipLevel(40)
+                        .CheckLevelSum(200)
+                        .CheckShipCount(5)
+                        .CheckEscortFleet()
+                        .CheckFirepower(300)
+                        .CheckAA(200)
+                        .CheckASW(200)
+                        .CheckLOS(120);
+                case 104:   // 小笠原沖哨戒線(unchecked)
+                    return result
+                        .CheckFlagshipLevel(50)
+                        .CheckLevelSum(260)
+                        .CheckShipCount(5)
+                        .CheckEscortFleet()     // 適当
+                        .CheckFirepower(280)
+                        .CheckAA(274)
+                        .CheckASW(240)
+                        .CheckLOS(150)
+                        .SuppressWarnings();
+                case 105:   // 小笠原沖戦闘哨戒(unchecked)
+                    return result
+                        .CheckFlagshipLevel(55)
+                        .CheckLevelSum(357)
+                        .CheckShipCount(6)
+                        .CheckEscortFleetDD3()  // 適当
+                        .CheckFirepower(330)
+                        .CheckAA(314)
+                        .CheckASW(270)
+                        .CheckLOS(180)
+                        .SuppressWarnings();
 
                 case 9:     // タンカー護衛任務
                     return result
@@ -105,7 +137,7 @@ namespace ElectronicObserver.Data
                         .CheckFlagshipLevel(5)
                         .CheckShipCount(6)
                         .CheckShipCountByType(ShipTypes.LightCruiser, 1)
-                        .CheckSmallShipCount(4);
+                        .CheckShipCountByType(ShipTypes.Destroyer, 4);
                 case 14:    // 包囲陸戦隊撤収作戦
                     return result
                         .CheckFlagshipLevel(6)
@@ -137,12 +169,50 @@ namespace ElectronicObserver.Data
                         .CheckLOS(140);
                 case 111:   // 敵泊地強襲反撃作戦
                     return result
-                        .CheckFlagshipLevel(50)
+                        .CheckFlagshipLevel(45)
+                        .CheckLevelSum(220)
                         .CheckShipCount(6)
                         .CheckShipCountByType(ShipTypes.HeavyCruiser, 1)
                         .CheckShipCountByType(ShipTypes.LightCruiser, 1)
                         .CheckShipCountByType(ShipTypes.Destroyer, 3)
-                        .CheckFirepower(360);
+                        .CheckFirepower(360)
+                        .CheckAA(160)
+                        .CheckASW(160)
+                        .CheckLOS(140);
+                case 112:   // 南西諸島離島哨戒作戦
+                    return result
+                        .CheckFlagshipLevel(50)
+                        .CheckLevelSum(250)
+                        .CheckShipCountByType(ShipTypes.SeaplaneTender, 1)
+                        .CheckShipCountByType(ShipTypes.LightCruiser, 1)
+                        .CheckSmallShipCount(4)
+                        .CheckFirepower(400)
+                        .CheckAA(220)
+                        .CheckASW(220)
+                        .CheckLOS(190);
+                case 113:   // 南西諸島離島防衛作戦
+                    return result
+                        .CheckFlagshipLevel(55)
+                        .CheckLevelSum(300)
+                        .CheckShipCountByType(ShipTypes.HeavyCruiser, 2)
+                        .CheckShipCountByType(ShipTypes.LightCruiser, 1)
+                        .CheckShipCountByType(ShipTypes.Destroyer, 2)
+                        .CheckSubmarineCount(1)
+                        .CheckFirepower(500)
+                        .CheckASW(280);
+                case 114:   // 南西諸島捜索撃滅戦(unchecked)
+                    return result
+                        .CheckFlagshipLevel(60)
+                        .CheckLevelSum(346)
+                        .CheckShipCount(6)
+                        .CheckShipCountByType(ShipTypes.SeaplaneTender, 1)
+                        .CheckShipCountByType(ShipTypes.LightCruiser, 1)
+                        .CheckShipCountByType(ShipTypes.Destroyer, 2)
+                        .CheckFirepower(510)
+                        .CheckAA(400)
+                        .CheckASW(285)
+                        .CheckLOS(385)
+                        .SuppressWarnings();
 
                 case 17:    // 敵地偵察作戦
                     return result
@@ -195,7 +265,7 @@ namespace ElectronicObserver.Data
                         .CheckLevelSum(200)
                         .CheckShipCount(6)
                         .CheckFlagshipType(ShipTypes.LightCruiser)
-                        .CheckShipCountByType(ShipTypes.Destroyer, 4);
+                        .CheckSmallShipCount(4);
 
                 case 25:    // 通商破壊作戦
                     return result
@@ -234,6 +304,26 @@ namespace ElectronicObserver.Data
                         .CheckFlagshipLevel(5)
                         .CheckFlagshipType(ShipTypes.TrainingCruiser)
                         .CheckShipCountByType(ShipTypes.Destroyer, 2);
+                case 131:   // 西方海域偵察作戦
+                    return result
+                        .CheckFlagshipLevel(50)
+                        .CheckLevelSum(200)
+                        .CheckShipCount(5)
+                        .CheckFlagshipType(ShipTypes.SeaplaneTender)
+                        .CheckShipCountByType(ShipTypes.Destroyer, 3)
+                        .CheckAA(240)
+                        .CheckASW(240)
+                        .CheckLOS(300);
+                case 132:   // 西方潜水艦作戦
+                    return result
+                        .CheckFlagshipLevel(55)
+                        .CheckLevelSum(270)
+                        .CheckShipCount(5)
+                        .CheckFlagshipType(ShipTypes.SubmarineTender)
+                        .CheckSubmarineCount(3)
+                        .CheckFirepower(60)
+                        .CheckAA(80)
+                        .CheckASW(50);
 
                 case 33:    // 前衛支援任務
                     return result
@@ -285,6 +375,75 @@ namespace ElectronicObserver.Data
                         .CheckFlagshipType(ShipTypes.LightCruiser)
                         .CheckShipCountByType(ShipTypes.SeaplaneTender, 2)
                         .CheckShipCountByType(ShipTypes.Destroyer, 2);
+                case 141:    // ラバウル方面艦隊進出(unchecked)
+                    return result
+                        .CheckFlagshipLevel(55)
+                        .CheckLevelSum(299)
+                        .CheckShipCount(6)
+                        .CheckFlagshipType(ShipTypes.HeavyCruiser)
+                        .CheckShipCountByType(ShipTypes.LightCruiser, 1)
+                        .CheckShipCountByType(ShipTypes.Destroyer, 3)
+                        .CheckFirepower(450)
+                        .CheckAA(350)
+                        .CheckASW(330)
+                        .CheckLOS(250)
+                        .SuppressWarnings();
+
+                case 41:    // ブルネイ泊地沖哨戒
+                    return result
+                        .CheckFlagshipLevel(30)
+                        .CheckLevelSum(100)
+                        .CheckSmallShipCount(3)
+                        .CheckFirepower(60)
+                        .CheckAA(80)
+                        .CheckASW(210);
+                case 42:    // ミ船団護衛(一号船団)
+                    return result
+                        .CheckFlagshipLevel(45)
+                        .CheckLevelSum(200)
+                        .CheckShipCount(4)
+                        .CheckEscortFleet();
+                case 43:    // ミ船団護衛(二号船団)
+                    return result
+                        .CheckFlagshipLevel(55)
+                        .CheckLevelSum(300)
+                        .CheckShipCount(6)
+                        .OrCondition(
+                            r => r
+                                .CheckFlagshipEscortAircraftCarrier()
+                                .CheckSmallShipCount(2),
+                            r => r
+                                .CheckFlagshipType(ShipTypes.LightAircraftCarrier)
+                                .CheckShipCountByType(ShipTypes.LightCruiser, 1)
+                                .CheckShipCountByType(ShipTypes.Destroyer, 4)
+                        )
+                        .CheckFirepower(500)
+                        .CheckAA(280)
+                        .CheckASW(280)
+                        .CheckLOS(179);
+                case 44:    // 航空装備輸送任務
+                    return result
+                        .CheckFlagshipLevel(35)
+                        .CheckLevelSum(210)
+                        .CheckShipCount(6)
+                        .CheckAircraftCarrierCount(1)
+                        .CheckShipCountByType(ShipTypes.SeaplaneTender, 1)
+                        .CheckShipCountByType(ShipTypes.LightCruiser, 1)
+                        .CheckSmallShipCount(2)
+                        .CheckEquippedShipCount(EquipmentTypes.TransportContainer, 3)
+                        .CheckEquipmentCount(EquipmentTypes.TransportContainer, 6)
+                        .CheckAA(200)
+                        .CheckASW(200)
+                        .CheckLOS(150);
+                case 45:    // ボーキサイト船団護衛
+                    return result
+                        .CheckFlagshipLevel(50)
+                        .CheckLevelSum(240)
+                        .CheckFlagshipType(ShipTypes.LightAircraftCarrier)
+                        .CheckSmallShipCount(4)
+                        .CheckAA(240)
+                        .CheckASW(300)
+                        .CheckLOS(180);
 
                 default:
                     {
@@ -303,7 +462,6 @@ namespace ElectronicObserver.Data
             }
         }
 
-
         /// <summary>
         /// 遠征可否判定の結果を保持します。
         /// </summary>
@@ -315,12 +473,12 @@ namespace ElectronicObserver.Data
             /// </summary>
             public bool IsSuceeded { get; private set; }
 
-            private List<string> failureReason;
+            private List<string> _failureReason;
 
             /// <summary>
             /// 遠征が失敗した理由 / 未対応遠征の場合のメッセージ
             /// </summary>
-            public ReadOnlyCollection<string> FailureReason => this.failureReason.AsReadOnly();
+            public ReadOnlyCollection<string> FailureReason => this._failureReason.AsReadOnly();
 
             // nullable!
             private FleetData _targetFleet;
@@ -331,7 +489,7 @@ namespace ElectronicObserver.Data
             {
                 this._targetFleet = targetFleet;
                 this.IsSuceeded = true;
-                this.failureReason = new List<string>();
+                this._failureReason = new List<string>();
             }
 
 
@@ -340,7 +498,7 @@ namespace ElectronicObserver.Data
                 if (!condition)
                 {
                     this.IsSuceeded = false;
-                    this.failureReason.Add(failedMessage());
+                    this._failureReason.Add(failedMessage());
                 }
             }
 
@@ -348,9 +506,28 @@ namespace ElectronicObserver.Data
 
             public MissionClearConditionResult AddMessage(string message)
             {
-                this.failureReason.Add(message);
+                this._failureReason.Add(message);
                 return this;
             }
+            public MissionClearConditionResult SuppressWarnings()
+            {
+                this._failureReason.Add("(미확정)");
+                this.IsSuceeded = true;
+                return this;
+            }
+            public MissionClearConditionResult OrCondition(params Action<MissionClearConditionResult>[] conditions)
+            {
+                var conds = new MissionClearConditionResult[conditions.Length];
+                for (int i = 0; i < conditions.Length; i++)
+                {
+                    conds[i] = new MissionClearConditionResult(this._targetFleet);
+                    conditions[i](conds[i]);
+                }
+
+                this.Assert(conds.Any(c => c.IsSuceeded), () => "(" + string.Join(") or (", conds.Select(c => string.Join(", ", c.FailureReason))) + ")");
+                return this;
+            }
+
             public MissionClearConditionResult Fail(string reason)
             {
                 this.Assert(false, () => reason);
@@ -448,6 +625,14 @@ namespace ElectronicObserver.Data
                 this.Assert(
                    this.members.FirstOrDefault()?.MasterShip?.ShipType == shipType,
                     () => $"기함:{KCDatabase.Instance.ShipTypes[(int)shipType].Name}");
+                return this;
+            }
+
+            public MissionClearConditionResult CheckFlagshipEscortAircraftCarrier()
+            {
+                Assert(
+                   members.FirstOrDefault()?.MasterShip.IsEscortAircraftCarrier ?? false,
+                    () => "旗艦:護衛空母");
                 return this;
             }
 

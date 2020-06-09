@@ -651,12 +651,16 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public bool IsAircraftCarrier => this.ShipType == ShipTypes.LightAircraftCarrier || this.ShipType == ShipTypes.AircraftCarrier || this.ShipType == ShipTypes.ArmoredAircraftCarrier;
 
+        /// <summary>
+        /// 護衛空母か
+        /// </summary>
+        public bool IsEscortAircraftCarrier => ShipType == ShipTypes.LightAircraftCarrier && ASW.Minimum > 0;
 
-		/// <summary>
-		/// 自身のパラメータレコードを取得します。
-		/// </summary>
-		/// <returns></returns>
-		private ShipParameterRecord.ShipParameterElement GetParameterElement()
+        /// <summary>
+        /// 自身のパラメータレコードを取得します。
+        /// </summary>
+        /// <returns></returns>
+        private ShipParameterRecord.ShipParameterElement GetParameterElement()
 		{
 			return RecordManager.Instance.ShipParameter[this.ShipID];
 		}

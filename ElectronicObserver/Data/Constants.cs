@@ -495,7 +495,9 @@ namespace ElectronicObserver.Data
 					return "선단호위성공";
 				case 9:
 					return "상륙지점";
-				default:
+                case 10:
+                    return "정박지";
+                default:
 					return "불명";
 			}
 		}

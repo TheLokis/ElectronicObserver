@@ -567,18 +567,21 @@ namespace ElectronicObserver.Data
 		{
 			get
 			{
-				// 流石に資源チェックまではしない
-				var flagship = KCDatabase.Instance.Ships[this._members[0]];
+                // 流石に資源チェックまではしない
+                return CanAnchorageRepairWithMember(MembersInstance);
+            }
+        }
 
-				return this.IsFlagshipRepairShip &&
-					flagship.HPRate > 0.5 &&
-					flagship.RepairingDockID == -1 &&
-                    this.ExpeditionState == 0 &&
-                    this.MembersInstance.Take(2 + flagship.SlotInstance.Count(eq => eq != null && eq.MasterEquipment.CategoryType == EquipmentTypes.RepairFacility))
-					.Any(ship => ship != null && 0.5 < ship.HPRate && ship.HPRate < 1.0 && ship.RepairingDockID == -1);
-			}
-		}
-
+        public static bool CanAnchorageRepairWithMember(IEnumerable<ShipData> membersInstance)
+        {
+            var flagship = membersInstance.FirstOrDefault();
+            return flagship?.MasterShip?.ShipType == ShipTypes.RepairShip &&
+                flagship.HPRate > 0.5 &&
+                flagship.RepairingDockID == -1 &&
+                membersInstance.All(s => s == null || (KCDatabase.Instance.Fleet[s.Fleet]?.ExpeditionState ?? 0) == 0) &&
+                membersInstance.Take(2 + flagship.SlotInstance.Count(eq => eq?.MasterEquipment?.CategoryType == EquipmentTypes.RepairFacility))
+                    .Any(ship => ship?.RepairingDockID == -1 && 0.5 < ship.HPRate && ship.HPRate < 1.0);
+        }
 
 		/// <summary>
 		/// 疲労が回復すると予測される日時 (疲労していない場合は null)

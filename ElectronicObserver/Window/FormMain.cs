@@ -67,10 +67,11 @@ namespace ElectronicObserver.Window
 		public FormWindowCapture fWindowCapture;
 		public FormBaseAirCorps fBaseAirCorps;
 		public FormJson fJson;
+		public FormFleetPreset fFleetPreset;
 
-        #endregion
+		#endregion
 
-        public static FormMain Instance;
+		public static FormMain Instance;
 
         public ExternalDataReader Translator { get; private set; }
 
@@ -174,6 +175,7 @@ namespace ElectronicObserver.Window
             this.StripMenu_WindowCapture.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormWindowCapture];
             this.StripMenu_View_BaseAirCorps.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
             this.StripMenu_View_Json.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormJson];
+            this.StripMenu_View_FleetPreset.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetPreset];
 
             this.StripMenu_Tool_EquipmentList.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormEquipmentList];
             this.StripMenu_Tool_DropRecord.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormDropRecord];
@@ -224,6 +226,7 @@ namespace ElectronicObserver.Window
             this.SubForms.Add(this.fBaseAirCorps = new FormBaseAirCorps(this));
             this.SubForms.Add(this.fJson = new FormJson(this));
 			this.SubForms.Add(this.fCombinedFleet = new FormCombinedFleet(this));
+            this.SubForms.Add(this.fFleetPreset = new FormFleetPreset(this));
 
             this.ConfigurationChanged();     //設定から初期化
 
@@ -540,7 +543,9 @@ namespace ElectronicObserver.Window
 					return this.fJson;
 				case "CombinedFleet":
 					return this.fCombinedFleet;
-				default:
+                case "FleetPreset":
+                    return fFleetPreset;
+                default:
 					if (persistString.StartsWith("ShipGroup"))
 					{
                         this.fShipGroup.ConfigureFromPersistString(persistString);
@@ -1465,6 +1470,10 @@ namespace ElectronicObserver.Window
         private void StripMenu_Tool_DeckB_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://kancolle-calc.net/deckbuilder.html");
+        }
+        private void StripMenu_View_FleetPreset_Click(object sender, EventArgs e)
+        {
+            this.ShowForm(this.fFleetPreset);
         }
 
         #region フォーム表示

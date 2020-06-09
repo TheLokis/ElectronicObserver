@@ -275,7 +275,26 @@ namespace ElectronicObserver.Window.Dialog
 					remainCount[id]
 					);
 
-				rows.Add(row);
+                {
+                    StringBuilder sb = new StringBuilder();
+                    var eq = masterEquipments[id];
+
+                    sb.AppendFormat("{0} {1}\r\n", eq.CategoryTypeInstance.Name, eq.Name, eq.EquipmentID);
+                    if (eq.Firepower != 0) sb.AppendFormat("화력 {0:+0;-0}\r\n", eq.Firepower);
+                    if (eq.Torpedo != 0) sb.AppendFormat("뇌장 {0:+0;-0}\r\n", eq.Torpedo);
+                    if (eq.AA != 0) sb.AppendFormat("대공 {0:+0;-0}\r\n", eq.AA);
+                    if (eq.Armor != 0) sb.AppendFormat("장갑 {0:+0;-0}\r\n", eq.Armor);
+                    if (eq.ASW != 0) sb.AppendFormat("대잠 {0:+0;-0}\r\n", eq.ASW);
+                    if (eq.Evasion != 0) sb.AppendFormat("{0} {1:+0;-0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "요격" : "회피", eq.Evasion);
+                    if (eq.LOS != 0) sb.AppendFormat("색적 {0:+0;-0}\r\n", eq.LOS);
+                    if (eq.Accuracy != 0) sb.AppendFormat("{0} {1:+0;-0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "대폭" : "명중", eq.Accuracy);
+                    if (eq.Bomber != 0) sb.AppendFormat("폭장 {0:+0;-0}\r\n", eq.Bomber);
+                    sb.AppendLine("(우클릭으로 도감에)");
+
+					row.Cells[2].ToolTipText = sb.ToString();
+                }
+
+                rows.Add(row);
 			}
 
 			for (int i = 0; i < rows.Count; i++)
@@ -294,8 +313,23 @@ namespace ElectronicObserver.Window.Dialog
 
 		}
 
+        private void EquipmentView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (0 <= e.RowIndex && e.RowIndex < this.EquipmentView.RowCount)
+            {
+                int equipmentID = (int)this.EquipmentView.Rows[e.RowIndex].Cells[0].Value;
 
-		private class DetailCounter : IIdentifiable
+                if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
+                {
+                    this.Cursor = Cursors.AppStarting;
+                    new DialogAlbumMasterEquipment(equipmentID).Show(this.Owner);
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+
+
+        private class DetailCounter : IIdentifiable
 		{
 
 			public int level;

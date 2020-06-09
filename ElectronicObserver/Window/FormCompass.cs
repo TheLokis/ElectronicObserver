@@ -948,7 +948,7 @@ namespace ElectronicObserver.Window
 							break;
 
                         case 10:    // 泊地
-                            TextEventDetail.Text = compass.CanEmergencyAnchorageRepair ? "수리가능" : "";
+                            this.TextEventDetail.Text = compass.CanEmergencyAnchorageRepair ? "수리가능" : "";
                             break;
 
                         default:

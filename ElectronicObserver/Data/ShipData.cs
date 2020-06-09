@@ -687,7 +687,7 @@ namespace ElectronicObserver.Data
                         break;
 
                     case EquipmentTypes.DepthCharge:
-                        if (slot.MasterEquipment.IsDepthChargeProjector)
+                        if (slot.MasterEquipment.IsDepthCharge == false)
                             basepower += Math.Sqrt(slot.Level) * 0.75;
                         break;
 
@@ -1153,7 +1153,7 @@ namespace ElectronicObserver.Data
                     case EquipmentTypes.DepthCharge:
                         if (slot.IsDepthCharge)
                             depthChargeCount++;
-                        else
+                        else if (slot.IsDepthChargeProjector == true)
                             depthChargeProjectorCount++;
                         break;
                     case EquipmentTypes.SonarLarge:
@@ -1213,7 +1213,7 @@ namespace ElectronicObserver.Data
                         .Sum(p => p.master.Firepower + p.master.Torpedo + p.master.Bomber +
                             3 * p.count +
                             0.45 * (p.master.Firepower + p.master.Torpedo + p.master.Bomber + p.master.ASW) * Math.Sqrt(p.count) + Math.Sqrt(p.eq.Level)) +
-                    airs.Where(p => p.master.IsSwordfish || p.master.EquipmentID == 154 || p.master.EquipmentID == 320)   // 零戦62型(爆戦/岩井隊)
+                    airs.Where(p => p.master.IsSwordfish || p.master.EquipmentID == 154 || p.master.EquipmentID == 320)   // 零戦62型(爆戦/岩井隊)、彗星一二型(三一号光電管爆弾搭載機)
                         .Sum(p => p.master.Firepower + p.master.Torpedo + p.master.Bomber +
                             0.3 * (p.master.Firepower + p.master.Torpedo + p.master.Bomber + p.master.ASW) * Math.Sqrt(p.count) + Math.Sqrt(p.eq.Level));
 

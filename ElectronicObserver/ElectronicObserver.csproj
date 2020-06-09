@@ -196,6 +196,8 @@
     <Compile Include="Data\EquipmentType.cs" />
     <Compile Include="Data\EquipmentTypes.cs" />
     <Compile Include="Data\FleetManager.cs" />
+    <Compile Include="Data\FleetPresetData.cs" />
+    <Compile Include="Data\FleetPresetManager.cs" />
     <Compile Include="Data\IDDictionary.cs" />
     <Compile Include="Data\IIdentifiable.cs" />
     <Compile Include="Data\KCDatabase.cs" />
@@ -253,6 +255,7 @@
     <Compile Include="Observer\kcsapi\api_get_member\base_air_corps.cs" />
     <Compile Include="Observer\kcsapi\api_get_member\material.cs" />
     <Compile Include="Observer\kcsapi\api_get_member\payitem.cs" />
+    <Compile Include="Observer\kcsapi\api_get_member\preset_deck.cs" />
     <Compile Include="Observer\kcsapi\api_get_member\record.cs" />
     <Compile Include="Observer\kcsapi\api_get_member\require_info.cs" />
     <Compile Include="Observer\kcsapi\api_get_member\ship_deck.cs" />
@@ -270,6 +273,8 @@
     <Compile Include="Observer\kcsapi\api_req_combined_battle\Id_shooting.cs" />
     <Compile Include="Observer\kcsapi\api_req_combined_battle\ld_airbattle.cs" />
     <Compile Include="Observer\kcsapi\api_req_hensei\combined.cs" />
+    <Compile Include="Observer\kcsapi\api_req_hensei\preset_delete.cs" />
+    <Compile Include="Observer\kcsapi\api_req_hensei\preset_register.cs" />
     <Compile Include="Observer\kcsapi\api_req_hensei\preset_select.cs" />
     <Compile Include="Observer\kcsapi\api_req_kaisou\marriage.cs" />
     <Compile Include="Observer\kcsapi\api_req_kaisou\open_exslot.cs" />
@@ -277,6 +282,7 @@
     <Compile Include="Observer\kcsapi\api_req_kaisou\slot_deprive.cs" />
     <Compile Include="Observer\kcsapi\api_req_kaisou\slot_exchange_index.cs" />
     <Compile Include="Observer\kcsapi\api_req_kousyou\remodel_slotlist.cs" />
+    <Compile Include="Observer\kcsapi\api_req_map\anchorage_repair.cs" />
     <Compile Include="Observer\kcsapi\api_req_map\select_eventmap_rank.cs" />
     <Compile Include="Observer\kcsapi\api_req_member\itemuse.cs" />
     <Compile Include="Observer\kcsapi\api_req_member\updatecomment.cs" />
@@ -653,6 +659,12 @@
     <Compile Include="Window\FormCombinedFleet.Designer.cs">
       <DependentUpon>FormCombinedFleet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Window\FormFleetPreset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\FormFleetPreset.Designer.cs">
+      <DependentUpon>FormFleetPreset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\FormJson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -880,6 +892,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\FormCombinedFleet.resx">
       <DependentUpon>FormCombinedFleet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\FormFleetPreset.resx">
+      <DependentUpon>FormFleetPreset.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\FormJson.resx">
       <DependentUpon>FormJson.cs</DependentUpon>

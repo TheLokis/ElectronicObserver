@@ -299,15 +299,17 @@ namespace ElectronicObserver.Window.Dialog
             this.ToolTipInfo.SetToolTip(this.ResourceName, string.Format("리소스파일 이름: {0}\r\n그래픽 ver. {1}\r\n음성 ver. {2}\r\n모항 음성 ver. {3}\r\n({4})",
 				ship.ResourceName, ship.ResourceGraphicVersion, ship.ResourceVoiceVersion, ship.ResourcePortVoiceVersion, Constants.GetVoiceFlag(ship.VoiceFlag)));
 
-
-            this.ShipType.Text = ship.IsLandBase ? 
-				"육상기지" : FormMain.Instance.Translator.GetTranslation(db.ShipTypes[(int)ship.ShipType].Name, Utility.DataType.ShipType);
             {
+                string shipClassName = Constants.GetShipClass(ship.ShipClass);
+				bool isShipClassUnknown = shipClassName == "불명";
+
+                this.ShipType.Text = (ship.IsAbyssalShip ? "심해" : isShipClassUnknown ? "" : shipClassName) + (ship.IsLandBase ? "육상기지" : ship.ShipTypeName);
+
                 var tip = new StringBuilder();
                 if (ship.IsAbyssalShip)
                     tip.AppendLine($"함급ID: {ship.ShipClass}");
-                else if (Constants.GetShipClass(ship.ShipClass) == "불명")
-                    tip.AppendLine($"함급불명: {ship.ShipClass}");
+				else if (isShipClassUnknown)
+					tip.AppendLine($"함급불명: {ship.ShipClass}");
                 else
                     tip.AppendLine($"{Constants.GetShipClass(ship.ShipClass)}: {ship.ShipClass}");
                 tip.AppendLine();
@@ -536,10 +538,10 @@ namespace ElectronicObserver.Window.Dialog
 							if (eq.AA != 0) sb.AppendFormat("대공 {0:+0;-0}\r\n", eq.AA);
 							if (eq.Armor != 0) sb.AppendFormat("장갑 {0:+0;-0}\r\n", eq.Armor);
 							if (eq.ASW != 0) sb.AppendFormat("대잠 {0:+0;-0}\r\n", eq.ASW);
-							if (eq.Evasion != 0) sb.AppendFormat("회피 {0:+0;-0}\r\n", eq.Evasion);
-							if (eq.LOS != 0) sb.AppendFormat("색적 {0:+0;-0}\r\n", eq.LOS);
-							if (eq.Accuracy != 0) sb.AppendFormat("명중 {0:+0;-0}\r\n", eq.Accuracy);
-							if (eq.Bomber != 0) sb.AppendFormat("폭장 {0:+0;-0}\r\n", eq.Bomber);
+                            if (eq.Evasion != 0) sb.AppendFormat("{0} {1:+0;-0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "요격" : "회피", eq.Evasion);
+                            if (eq.LOS != 0) sb.AppendFormat("색적 {0:+0;-0}\r\n", eq.LOS);
+                            if (eq.Accuracy != 0) sb.AppendFormat("{0} {1:+0;-0}\r\n", eq.CategoryType == EquipmentTypes.Interceptor ? "대폭" : "명중", eq.Accuracy);
+                            if (eq.Bomber != 0) sb.AppendFormat("폭장 {0:+0;-0}\r\n", eq.Bomber);
 							sb.AppendLine("(우클릭으로 도감에)");
 
                             this.ToolTipInfo.SetToolTip(this.Equipments[i], sb.ToString());
@@ -1639,10 +1641,10 @@ namespace ElectronicObserver.Window.Dialog
 			{
 
                 // google <艦船名> 艦これ
-                System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=%22" + Uri.EscapeDataString(ship.NameWithClass) + "%22+%E8%89%A6%E3%81%93%E3%82%8C");
+                System.Diagnostics.Process.Start(@"https://www.google.co.jp/search?q=%22" + Uri.EscapeDataString(ship.NameWithClass.Replace("+", "＋")) + "%22+%E8%89%A6%E3%81%93%E3%82%8C");
 
             }
-			catch (Exception ex)
+            catch (Exception ex)
 			{
 				Utility.ErrorReporter.SendErrorReport(ex, "함선명의 구글 검색에 실패했습니다.");
 			}

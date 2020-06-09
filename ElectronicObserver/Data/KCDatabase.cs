@@ -157,7 +157,13 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public IDDictionary<RelocationData> RelocatedEquipments { get; private set; }
 
-		private KCDatabase()
+        /// <summary>
+        /// 艦隊編成プリセットデータ
+        /// </summary>
+        public FleetPresetManager FleetPreset { get; private set; }
+
+
+        private KCDatabase()
 		{
 
             this.MasterShips = new IDDictionary<ShipDataMaster>();
@@ -184,12 +190,12 @@ namespace ElectronicObserver.Data
             this.ShipGroup = new ShipGroupManager();
             this.BaseAirCorps = new IDDictionary<BaseAirCorpsData>();
             this.RelocatedEquipments = new IDDictionary<RelocationData>();
+			this.FleetPreset = new FleetPresetManager();
 		}
 
 
 		public void Load()
 		{
-
 			{
 				var temp = (ShipGroupManager)this.ShipGroup.Load();
 				if (temp != null)

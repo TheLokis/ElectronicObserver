@@ -79,6 +79,7 @@
             this.EquipmentView.Size = new System.Drawing.Size(320, 456);
             this.EquipmentView.TabIndex = 0;
             this.EquipmentView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.EquipmentView_CellFormatting);
+            this.EquipmentView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.EquipmentView_CellMouseClick);
             this.EquipmentView.SelectionChanged += new System.EventHandler(this.EquipmentView_SelectionChanged);
             this.EquipmentView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.EquipmentView_SortCompare);
             this.EquipmentView.Sorted += new System.EventHandler(this.EquipmentView_Sorted);
