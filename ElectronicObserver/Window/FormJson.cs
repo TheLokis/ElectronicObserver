@@ -1,4 +1,5 @@
-﻿using ElectronicObserver.Observer;
+﻿using DynaJson;
+using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
 using System;
 using System.Collections.Generic;
@@ -183,7 +184,7 @@ namespace ElectronicObserver.Window
 								throw new ArgumentException("JSON 의 시작 문자를 찾을 수 없습니다.");
 							data = data.Substring(head);
 
-							LoadResponse(match.Groups[2].Value.Replace('@', '/'), Codeplex.Data.DynamicJson.Parse(data));
+							LoadResponse(match.Groups[2].Value.Replace('@', '/'), JsonObject.Parse(data));
 
 						}
 
@@ -205,7 +206,7 @@ namespace ElectronicObserver.Window
 		{
 			dynamic json = root.Tag;
 
-			if (json == null || !(json is Codeplex.Data.DynamicJson))
+			if (json == null || !(json is JsonObject))
 			{
 				return;
 
@@ -418,8 +419,8 @@ namespace ElectronicObserver.Window
 			// root is array, children > 0, root[0](=child) is object or array
 			if (
 				root.GetNodeCount(false) > 0 &&
-				json != null && json is Codeplex.Data.DynamicJson && json.IsArray &&
-				root.FirstNode.Tag != null && root.FirstNode.Tag is Codeplex.Data.DynamicJson && (((dynamic)root.FirstNode.Tag).IsArray || ((dynamic)root.FirstNode.Tag).IsObject))
+				json != null && json is JsonObject && json.IsArray &&
+				root.FirstNode.Tag != null && root.FirstNode.Tag is JsonObject && (((dynamic)root.FirstNode.Tag).IsArray || ((dynamic)root.FirstNode.Tag).IsObject))
 			{
                 this.TreeContextMenu_OutputCSV.Enabled = true;
 
@@ -470,7 +471,7 @@ namespace ElectronicObserver.Window
 		private StringBuilder BuildCSVHeader(StringBuilder sb, string currentPath, dynamic data)
 		{
 
-			if (data is Codeplex.Data.DynamicJson)
+			if (data is JsonObject)
 			{
 
 				if (data.IsObject)
@@ -502,7 +503,7 @@ namespace ElectronicObserver.Window
 		private StringBuilder BuildCSVContent(StringBuilder sb, dynamic data)
 		{
 
-			if (data is Codeplex.Data.DynamicJson)
+			if (data is JsonObject)
 			{
 
 				if (data.IsObject)
@@ -550,7 +551,7 @@ namespace ElectronicObserver.Window
 
 		private StringBuilder BuildDocumentContent(StringBuilder sb, dynamic data, int indentLevel)
 		{
-			if (data is Codeplex.Data.DynamicJson)
+			if (data is JsonObject)
 			{
 				if (data.IsObject)
 				{
@@ -575,7 +576,7 @@ namespace ElectronicObserver.Window
 
 					foreach (dynamic elem in data)
 					{
-						if (elem is Codeplex.Data.DynamicJson && (elem.IsObject || elem.IsArray))
+						if (elem is JsonObject && (elem.IsObject || elem.IsArray))
 						{
 							BuildDocumentContent(sb, elem, indentLevel);
 

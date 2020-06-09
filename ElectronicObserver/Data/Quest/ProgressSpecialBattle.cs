@@ -135,7 +135,10 @@ namespace ElectronicObserver.Data.Quest
                         memberstype.Count(t => t == ShipTypes.LightCruiser) == 1 &&
                         memberstype.Count(t => t == ShipTypes.Destroyer) == 4;
                     break;
+                // |280|月|兵站線確保！海上警備を強化実施せよ！|1-2・1-3・1-4・2-1ボスS勝利各1|要(軽母or軽巡or雷巡or練巡)1/(駆逐or海防)3
+                // |284|季|南西諸島方面「海上警備行動」発令！|1-4・2-1・2-2・2-3ボスS勝利各1|要(軽母or軽巡or雷巡or練巡)1/(駆逐or海防)3
                 case 280:
+                case 284:
                     isAccepted =
                         memberstype.Any(t => t == ShipTypes.LightAircraftCarrier || t == ShipTypes.LightCruiser || t == ShipTypes.TorpedoCruiser || t == ShipTypes.TrainingCruiser) &&
                         memberstype.Count(t => t == ShipTypes.Destroyer || t == ShipTypes.Escort) >= 3;

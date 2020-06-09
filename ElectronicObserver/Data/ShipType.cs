@@ -1,4 +1,4 @@
-﻿using Codeplex.Data;
+﻿using DynaJson;
 using ElectronicObserver.Window;
 using System;
 using System.Collections.Generic;
@@ -78,7 +78,7 @@ namespace ElectronicObserver.Data
 
 			// api_equip_type の置換処理
 			// checkme: 無駄が多い気がするのでもっといい案があったら是非
-			data = DynamicJson.Parse(Regex.Replace(data.ToString(), @"""(?<id>\d+?)""", @"""api_id_${id}"""));
+			data = JsonObject.Parse(Regex.Replace(data.ToString(), @"""(?<id>\d+?)""", @"""api_id_${id}"""));
 
 			base.LoadFromResponse(apiname, (object)data);
 

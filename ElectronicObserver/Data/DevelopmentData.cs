@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DynaJson;
 
 namespace ElectronicObserver.Data
 {
@@ -87,7 +88,7 @@ namespace ElectronicObserver.Data
             void AddToDatabase(dynamic equipmentData)
             {
                 var eq = new EquipmentData();
-                eq.LoadFromResponse(apiname, Codeplex.Data.DynamicJson.Parse(equipmentData.ToString()));
+                eq.LoadFromResponse(apiname, JsonObject.Parse(equipmentData.ToString()));
                 KCDatabase.Instance.Equipments.Add(eq);
             }
 

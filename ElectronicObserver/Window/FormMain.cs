@@ -1,5 +1,4 @@
-﻿using Codeplex.Data;
-using ElectronicObserver.Data;
+﻿using ElectronicObserver.Data;
 using ElectronicObserver.Notifier;
 using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
@@ -23,6 +22,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using DynaJson;
 
 namespace ElectronicObserver.Window
 {
@@ -895,7 +895,7 @@ namespace ElectronicObserver.Window
 						using (StreamReader sr = new StreamReader(ofd.FileName))
 						{
 
-							dynamic json = DynamicJson.Parse(sr.ReadToEnd().Remove(0, 7));
+							dynamic json = JsonObject.Parse(sr.ReadToEnd().Remove(0, 7));
 
 							foreach (dynamic elem in json.api_data.api_mst_ship)
 							{
@@ -946,7 +946,7 @@ namespace ElectronicObserver.Window
 						using (StreamReader sr = new StreamReader(ofd.FileName))
 						{
 
-							dynamic json = DynamicJson.Parse(sr.ReadToEnd().Remove(0, 7));
+							dynamic json = JsonObject.Parse(sr.ReadToEnd().Remove(0, 7));
 
 							foreach (dynamic elem in json.api_data.api_mst_ship)
 							{

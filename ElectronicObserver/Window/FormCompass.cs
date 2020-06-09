@@ -721,7 +721,7 @@ namespace ElectronicObserver.Window
                     {
 						sb.AppendFormat("격파: {0} / {1} 회",
                             mapinfo.CurrentGaugeIndex > 0 ? $"#{mapinfo.CurrentGaugeIndex} " : "",
-                            mapinfo.CurrentDefeatedCount, mapinfo.RequiredDefeatedCount));
+                            mapinfo.CurrentDefeatedCount, mapinfo.RequiredDefeatedCount);
 
                     }
 					else if (mapinfo.MapHPMax > 0)

@@ -1,5 +1,4 @@
-﻿using Codeplex.Data;
-using ElectronicObserver.Data;
+﻿using ElectronicObserver.Data;
 using ElectronicObserver.Observer;
 using ElectronicObserver.Resource.Record;
 using ElectronicObserver.Utility.Mathematics;
