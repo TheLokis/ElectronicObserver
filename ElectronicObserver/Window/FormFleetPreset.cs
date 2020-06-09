@@ -95,7 +95,7 @@ namespace ElectronicObserver.Window
 				int lowestCondition = preset.MembersInstance.Select(s => s?.Condition ?? 49).DefaultIfEmpty(49).Min();
 				FormFleet.SetConditionDesign(Name, lowestCondition);
 
-				_tooltip.SetToolTip(Name, $"最低cond: {lowestCondition}");
+				_tooltip.SetToolTip(Name, $"최하피로도: {lowestCondition}");
 
 				for (int i = 0; i < Ships.Length; i++)
 				{

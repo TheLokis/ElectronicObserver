@@ -737,7 +737,7 @@ namespace ElectronicObserver.Window
 
                     foreach (var pair in KCDatabase.Instance.Battle.SpecialAttackCount)
                     {
-                        sb.AppendLine($"{Constants.GetDayAttackKind((DayAttackKind)pair.Key)} : 発動済み");
+                        sb.AppendLine($"{Constants.GetDayAttackKind((DayAttackKind)pair.Key)} : 발동!");
                     }
 
                     ToolTipInfo.SetToolTip(TextMapArea, sb.Length > 0 ? sb.ToString() : null);
