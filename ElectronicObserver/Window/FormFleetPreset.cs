@@ -138,12 +138,13 @@ namespace ElectronicObserver.Window
 
 			}
 
-			public void ConfigurationChanged(FormFleetPreset parent)
+
+            public void ConfigurationChanged(FormFleetPreset parent)
 			{
 				var config = Utility.Configuration.Config;
-				var font = config.UI.MainFont;
+				var font = Utility.Configuration.Config.UI.MainFont;
 
-				Name.Font = font;
+                Name.Font = font;
 				Name.ImageAlign = config.FormFleet.ShowConditionIcon ? ContentAlignment.MiddleRight : ContentAlignment.MiddleCenter;
 
 				foreach (var ship in Ships)
@@ -199,7 +200,10 @@ namespace ElectronicObserver.Window
 			Font = Utility.Configuration.Config.UI.MainFont;
 			bool fixShipNameWidth = config.FormFleet.FixShipNameWidth;
 
-			TablePresets.SuspendLayout();
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+
+            TablePresets.SuspendLayout();
 			foreach (var item in TableControls)
 				item.ConfigurationChanged(this);
 
