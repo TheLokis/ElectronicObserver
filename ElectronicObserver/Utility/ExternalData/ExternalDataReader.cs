@@ -74,7 +74,7 @@ namespace ElectronicObserver.Utility
                         data.Version = "1.0A";
                         data.Data = null;
 
-                        Logger.Add(2, "번역 파일 적용에 실패했습니다." + (DataType)i);
+                        Logger.Add(2, "번역 파일 적용에 실패했습니다." + (DataType)i + " / 에러 : " + e);
                     }
                 }
 

@@ -11,7 +11,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_hensei
 	{
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
-			KCDatabase.Instance.FleetPreset.LoadFromRequest(APIName, data);
+			KCDatabase.Instance.FleetPreset.LoadFromRequest(this.APIName, data);
 
 			base.OnRequestReceived(data);
 		}

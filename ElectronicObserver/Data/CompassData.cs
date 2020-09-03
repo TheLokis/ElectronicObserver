@@ -328,7 +328,7 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 緊急泊地修理が可能か
         /// </summary>
-        public bool CanEmergencyAnchorageRepair => RawData.api_anchorage_flag() && (int)RawData.api_anchorage_flag != 0;
+        public bool CanEmergencyAnchorageRepair => this.RawData.api_anchorage_flag() && (int)this.RawData.api_anchorage_flag != 0;
 
         /// <summary>
         /// 対応する海域情報

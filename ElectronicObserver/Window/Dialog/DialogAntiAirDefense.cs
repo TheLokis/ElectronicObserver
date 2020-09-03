@@ -78,8 +78,8 @@ namespace ElectronicObserver.Window.Dialog
 				return;
 			}
 
-            if (FleetID.SelectedIndex == -1)
-                FleetID.SelectedIndex = 0;
+            if (this.FleetID.SelectedIndex == -1)
+                this.FleetID.SelectedIndex = 0;
             this.Formation.SelectedIndex = 0;
 
             this.UpdateAACutinKind(this.ShowAll.Checked);

@@ -22,7 +22,7 @@ namespace Browser.CefOp
         /// </summary>
         protected override IResponseFilter GetResourceResponseFilter(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
-            if (_pixiSettingEnabled && request.Url.Contains(@"/kcs2/index.php"))
+            if (this._pixiSettingEnabled && request.Url.Contains(@"/kcs2/index.php"))
                 return new ResponseFilterPixiSetting();
 
             return base.GetResourceResponseFilter(chromiumWebBrowser, browser, frame, request, response);

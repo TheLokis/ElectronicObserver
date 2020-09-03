@@ -48,7 +48,7 @@ namespace ElectronicObserver.Utility
 				using (StreamWriter sw = new StreamWriter(path, false, new System.Text.UTF8Encoding(false)))
 				{
 
-					sw.WriteLine("오류 보고서 [ver. {0}] : {1}", SoftwareInformation.VersionEnglish, DateTimeHelper.TimeToCSVString(DateTime.Now));
+					sw.WriteLine("오류 보고서 [ver. {0}] : {1}", SoftwareInformation.VersionKorean, DateTimeHelper.TimeToCSVString(DateTime.Now));
 					sw.WriteLine("에러 : {0}", ex.GetType().Name);
 					sw.WriteLine(ex.Message);
 					sw.WriteLine("추가 정보 : {0}", message);
@@ -98,7 +98,7 @@ namespace ElectronicObserver.Utility
                 using (StreamWriter sw = new StreamWriter(path, false, new System.Text.UTF8Encoding(false)))
                 {
 
-                    sw.WriteLine("오류 보고서 [ver. {0}] : {1}", SoftwareInformation.VersionEnglish, DateTimeHelper.TimeToCSVString(DateTime.Now));
+                    sw.WriteLine("오류 보고서 [ver. {0}] : {1}", SoftwareInformation.VersionKorean, DateTimeHelper.TimeToCSVString(DateTime.Now));
                     sw.WriteLine("에러 : {0}", ex.GetType().Name);
                     sw.WriteLine(ex.Message);
                     sw.WriteLine("추가 정보 : {0}", message);

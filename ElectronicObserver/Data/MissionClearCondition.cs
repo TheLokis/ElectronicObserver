@@ -630,8 +630,8 @@ namespace ElectronicObserver.Data
 
             public MissionClearConditionResult CheckFlagshipEscortAircraftCarrier()
             {
-                Assert(
-                   members.FirstOrDefault()?.MasterShip.IsEscortAircraftCarrier ?? false,
+                this.Assert(
+                   this.members.FirstOrDefault()?.MasterShip.IsEscortAircraftCarrier ?? false,
                     () => "旗艦:護衛空母");
                 return this;
             }

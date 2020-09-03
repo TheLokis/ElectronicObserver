@@ -617,28 +617,28 @@ namespace ElectronicObserver.Window
 
 			APIObserver o = APIObserver.Instance;
 
-            o["api_port/port"].ResponseReceived += Updated;
-            o["api_req_map/start"].ResponseReceived += Updated;
-            o["api_req_map/next"].ResponseReceived += Updated;
-            o["api_req_member/get_practice_enemyinfo"].ResponseReceived += Updated;
+            o["api_port/port"].ResponseReceived += this.Updated;
+            o["api_req_map/start"].ResponseReceived += this.Updated;
+            o["api_req_map/next"].ResponseReceived += this.Updated;
+            o["api_req_member/get_practice_enemyinfo"].ResponseReceived += this.Updated;
 
-            o["api_req_sortie/battle"].ResponseReceived += BattleStarted;
-            o["api_req_battle_midnight/sp_midnight"].ResponseReceived += BattleStarted;
-            o["api_req_sortie/night_to_day"].ResponseReceived += BattleStarted;
-            o["api_req_sortie/airbattle"].ResponseReceived += BattleStarted;
-            o["api_req_sortie/ld_airbattle"].ResponseReceived += BattleStarted;
-            o["api_req_sortie/ld_shooting"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/battle"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/sp_midnight"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/airbattle"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/battle_water"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/ld_airbattle"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/ec_battle"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/each_battle"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/each_battle_water"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += BattleStarted;
-            o["api_req_combined_battle/ld_shooting"].ResponseReceived += BattleStarted;
-            o["api_req_practice/battle"].ResponseReceived += BattleStarted;
+            o["api_req_sortie/battle"].ResponseReceived += this.BattleStarted;
+            o["api_req_battle_midnight/sp_midnight"].ResponseReceived += this.BattleStarted;
+            o["api_req_sortie/night_to_day"].ResponseReceived += this.BattleStarted;
+            o["api_req_sortie/airbattle"].ResponseReceived += this.BattleStarted;
+            o["api_req_sortie/ld_airbattle"].ResponseReceived += this.BattleStarted;
+            o["api_req_sortie/ld_shooting"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/battle"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/sp_midnight"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/airbattle"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/battle_water"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/ld_airbattle"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/ec_battle"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/each_battle"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/each_battle_water"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/ec_night_to_day"].ResponseReceived += this.BattleStarted;
+            o["api_req_combined_battle/ld_shooting"].ResponseReceived += this.BattleStarted;
+            o["api_req_practice/battle"].ResponseReceived += this.BattleStarted;
 
 
             Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
@@ -740,7 +740,7 @@ namespace ElectronicObserver.Window
                         sb.AppendLine($"{Constants.GetDayAttackKind((DayAttackKind)pair.Key)} : 발동!");
                     }
 
-                    ToolTipInfo.SetToolTip(TextMapArea, sb.Length > 0 ? sb.ToString() : null);
+                    this.ToolTipInfo.SetToolTip(this.TextMapArea, sb.Length > 0 ? sb.ToString() : null);
                 }
 
 

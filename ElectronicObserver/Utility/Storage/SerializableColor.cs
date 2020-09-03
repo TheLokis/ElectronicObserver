@@ -97,6 +97,6 @@ namespace ElectronicObserver.Utility.Storage
 				((uint)(color.B) << 0);
 		}
 
-		public bool Equals(SerializableColor other) => SerializedColor == other?.SerializedColor;
+		public bool Equals(SerializableColor other) => this.SerializedColor == other?.SerializedColor;
 	}
 }

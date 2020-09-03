@@ -13,36 +13,18 @@ namespace ElectronicObserver.Utility
         /// <summary>
         /// ソフトウェア名(日本語)
         /// </summary>
-        public static string SoftwareNameJapanese => "七四式電子観測儀";
-
         public static string SoftwareNameKorean => "74식 전자관측의";
-
-        /// <summary>
-        /// ソフトウェア名(英語)
-        /// </summary>
-        public static string SoftwareNameEnglish => "ElectronicObserver";
-
-
-        /// <summary>
-        /// バージョン(日本語, ソフトウェア名を含みます)
-        /// </summary>
-		public static string VersionJapanese => "試製" + SoftwareNameJapanese + "四六型";
-
 
         /// <summary>
         /// バージョン(英語)
         /// </summary>
-		public static string VersionEnglish => "4.6.1 KRTL_R27";
-
-        public static string VersionKorean => "4.6.1 KRTL_R27";
+		public static string VersionKorean => "4.6.1 KRTL_R27";
 
         /// <summary>
         /// 更新日時
         /// </summary>
         public static DateTime UpdateTime       => DateTimeHelper.CSVStringToTime("2020/09/03 23:00:00");
         public static DateTime MaintenanceTime  = DateTime.Now;
-
-
 
         private static System.Net.WebClient _client;
         private static readonly Uri _uri = new Uri("https://thelokis.github.io/EOTranslation/Translations/softwareversion.txt");

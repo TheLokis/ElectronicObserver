@@ -475,7 +475,7 @@ namespace ElectronicObserver.Data.Quest
                             }));
                             break;
                         case 436:   //|436|年(3月)|練習航海及び警備任務を実施せよ！|「練習航海」「長距離練習航海」「警備任務」「対潜警戒任務」「強行偵察任務」成功各1|
-                            Progresses.Add(new ProgressMultiExpedition(q, new[]{
+                            this.Progresses.Add(new ProgressMultiExpedition(q, new[]{
                                 new ProgressExpedition(q, 1, new[]{ 1 }),
                                 new ProgressExpedition(q, 1, new[]{ 2 }),
                                 new ProgressExpedition(q, 1, new[]{ 3 }),

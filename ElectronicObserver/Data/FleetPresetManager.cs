@@ -18,7 +18,7 @@ namespace ElectronicObserver.Data
 
 		public FleetPresetManager()
 		{
-			Presets = new IDDictionary<FleetPresetData>();
+            this.Presets = new IDDictionary<FleetPresetData>();
 		}
 
 
@@ -27,7 +27,7 @@ namespace ElectronicObserver.Data
 			switch (apiname)
 			{
 				case "api_req_hensei/preset_delete":
-					Presets.Remove(int.Parse(data["api_preset_no"]));
+                    this.Presets.Remove(int.Parse(data["api_preset_no"]));
 					PresetChanged();
 					break;
 			}
@@ -39,15 +39,15 @@ namespace ElectronicObserver.Data
 			{
 				case "api_get_member/preset_deck":
 					{
-						MaximumCount = (int)data.api_max_num;
+                        this.MaximumCount = (int)data.api_max_num;
 
-						Presets.Clear();
+                        this.Presets.Clear();
 
 						foreach (KeyValuePair<string, dynamic> elem in data.api_deck)
 						{
 							var preset = new FleetPresetData();
 							preset.LoadFromResponse(apiname, elem.Value);
-							Presets.Add(preset);
+                            this.Presets.Add(preset);
 						}
 						PresetChanged();
 					}
@@ -56,15 +56,15 @@ namespace ElectronicObserver.Data
 				case "api_req_hensei/preset_register":
 					{
 						int id = (int)data.api_preset_no;
-						if (Presets.ContainsKey(id))
+						if (this.Presets.ContainsKey(id))
 						{
-							Presets[id].LoadFromResponse(apiname, data);
+                            this.Presets[id].LoadFromResponse(apiname, data);
 						}
 						else
 						{
 							var preset = new FleetPresetData();
 							preset.LoadFromResponse(apiname, data);
-							Presets.Add(preset);
+                            this.Presets.Add(preset);
 						}
 						PresetChanged();
 					}
@@ -75,7 +75,7 @@ namespace ElectronicObserver.Data
 		}
 
 
-		public FleetPresetData this[int index] => Presets[index];
+		public FleetPresetData this[int index] => this.Presets[index];
 
 	}
 }

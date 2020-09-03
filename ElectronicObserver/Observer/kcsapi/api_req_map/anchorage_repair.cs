@@ -20,11 +20,11 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_map
 
 				var ship = db.Ships[id];
 				if (ship != null)
-					ship.LoadFromResponse(APIName, elem);
+					ship.LoadFromResponse(this.APIName, elem);
 				else
 				{
 					ship = new ShipData();
-					ship.LoadFromResponse(APIName, elem);
+					ship.LoadFromResponse(this.APIName, elem);
 					db.Ships.Add(ship);
 				}
 			}

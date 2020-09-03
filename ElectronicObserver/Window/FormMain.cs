@@ -312,6 +312,7 @@ namespace ElectronicObserver.Window
             //StripMenu.Font = Font;
             this.StripStatus.Font = this.Font;
 
+
             this.MainDockPanel.Skin.AutoHideStripSkin.TextFont = this.Font;
             this.MainDockPanel.Skin.DockPaneStripSkin.TextFont = this.Font;
 
@@ -326,10 +327,10 @@ namespace ElectronicObserver.Window
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
 			}
 
-            this.StripMenu_File_Layout_LockLayout.Checked = c.Life.LockLayout;
-            this.MainDockPanel.CanCloseFloatWindowInLock = c.Life.CanCloseFloatWindowInLock;
-            this.MainDockPanel.CanSizableFloatWindowInLock = c.Life.CanSizableFloatWindowInLock;
-            this.StripMenu_File_Layout_TopMost.Checked = c.Life.TopMost;
+            this.StripMenu_File_Layout_LockLayout.Checked	= c.Life.LockLayout;
+            this.MainDockPanel.CanCloseFloatWindowInLock	= c.Life.CanCloseFloatWindowInLock;
+            this.MainDockPanel.CanSizableFloatWindowInLock	= c.Life.CanSizableFloatWindowInLock;
+            this.StripMenu_File_Layout_TopMost.Checked		= c.Life.TopMost;
 
             this.StripMenu_File_Notification_MuteAll.Checked = Notifier.NotifierManager.Instance.GetNotifiers().All(n => n.IsSilenced);
 
@@ -539,7 +540,7 @@ namespace ElectronicObserver.Window
 				case "CombinedFleet":
 					return this.fCombinedFleet;
                 case "FleetPreset":
-                    return fFleetPreset;
+                    return this.fFleetPreset;
                 default:
 					if (persistString.StartsWith("ShipGroup"))
 					{

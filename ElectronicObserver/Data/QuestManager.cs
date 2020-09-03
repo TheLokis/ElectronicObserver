@@ -84,7 +84,7 @@ namespace ElectronicObserver.Data
                 if (DateTimeHelper.IsCrossedYear(progress.LastUpdateTime, i, 1, 5, 0, 0))
                 {
                     progress.Progresses.RemoveAll(p => p.QuestType == 100 + i);
-                    Quests.RemoveAll(p => p.LabelType == 100 + i);
+                    this.Quests.RemoveAll(p => p.LabelType == 100 + i);
                 }
             }
 

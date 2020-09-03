@@ -48,27 +48,27 @@ namespace ElectronicObserver.Window
 					};
 				}
 
-				Name = CreateDefaultLabel();
-				Name.ImageAlign = ContentAlignment.MiddleRight;
+                this.Name = CreateDefaultLabel();
+                this.Name.ImageAlign = ContentAlignment.MiddleRight;
 
-				// TODO: 本体側がもし 7 隻編成に対応したら変更してください
-				Ships = new ImageLabel[6];
-				for (int i = 0; i < Ships.Length; i++)
+                // TODO: 本体側がもし 7 隻編成に対応したら変更してください
+                this.Ships = new ImageLabel[6];
+				for (int i = 0; i < this.Ships.Length; i++)
 				{
-					Ships[i] = CreateDefaultLabel();
+                    this.Ships[i] = CreateDefaultLabel();
 
 				}
 
-				_tooltip = parent.ToolTipInfo;
+                this._tooltip = parent.ToolTipInfo;
 			}
 
 
 			public void AddToTable(TableLayoutPanel table, int row)
 			{
-				table.Controls.Add(Name, 0, row);
-				for (int i = 0; i < Ships.Length; i++)
+				table.Controls.Add(this.Name, 0, row);
+				for (int i = 0; i < this.Ships.Length; i++)
 				{
-					table.Controls.Add(Ships[i], 1 + i, row);
+					table.Controls.Add(this.Ships[i], 1 + i, row);
 				}
 			}
 
@@ -78,35 +78,35 @@ namespace ElectronicObserver.Window
 
 				if (preset == null)
 				{
-					Name.Text = "----";
-					_tooltip.SetToolTip(Name, null);
+                    this.Name.Text = "----";
+                    this._tooltip.SetToolTip(this.Name, null);
 
-					foreach (var ship in Ships)
+					foreach (var ship in this.Ships)
 					{
 						ship.Text = string.Empty;
-						_tooltip.SetToolTip(ship, null);
+                        this._tooltip.SetToolTip(ship, null);
 					}
 					return;
 				}
 
 
-				Name.Text = preset.Name;
+                this.Name.Text = preset.Name;
 
                 int lowestCondition = preset.MembersInstance.Where(s => s != null).Select(s => s.Condition).DefaultIfEmpty(49).Min();
-                FormFleet.SetConditionDesign(Name, lowestCondition);
+                FormFleet.SetConditionDesign(this.Name, lowestCondition);
 
-				_tooltip.SetToolTip(Name, $"최하피로도: {lowestCondition}");
+                this._tooltip.SetToolTip(this.Name, $"최하피로도: {lowestCondition}");
 
-				for (int i = 0; i < Ships.Length; i++)
+				for (int i = 0; i < this.Ships.Length; i++)
 				{
 					var ship = i >= preset.Members.Count ? null : preset.MembersInstance.ElementAt(i);
-					var label = Ships[i];
+					var label = this.Ships[i];
 
-					Ships[i].Text = ship?.Name ?? "-";
+                    this.Ships[i].Text = ship?.Name ?? "-";
 
 					if (ship == null)
 					{
-						_tooltip.SetToolTip(Ships[i], null);
+                        this._tooltip.SetToolTip(this.Ships[i], null);
 					}
 					else
 					{
@@ -132,7 +132,7 @@ namespace ElectronicObserver.Window
 							}
 						}
 
-						_tooltip.SetToolTip(Ships[i], sb.ToString());
+                        this._tooltip.SetToolTip(this.Ships[i], sb.ToString());
 					}
 				}
 
@@ -144,10 +144,10 @@ namespace ElectronicObserver.Window
 				var config = Utility.Configuration.Config;
 				var font = Utility.Configuration.Config.UI.MainFont;
 
-                Name.Font = font;
-				Name.ImageAlign = config.FormFleet.ShowConditionIcon ? ContentAlignment.MiddleRight : ContentAlignment.MiddleCenter;
+                this.Name.Font = font;
+                this.Name.ImageAlign = config.FormFleet.ShowConditionIcon ? ContentAlignment.MiddleRight : ContentAlignment.MiddleCenter;
 
-				foreach (var ship in Ships)
+				foreach (var ship in this.Ships)
 				{
 					ship.Font = font;
 
@@ -165,8 +165,8 @@ namespace ElectronicObserver.Window
 
 			public void Dispose()
 			{
-				Name.Dispose();
-				foreach (var ship in Ships)
+                this.Name.Dispose();
+				foreach (var ship in this.Ships)
 					ship.Dispose();
 			}
 		}
@@ -178,41 +178,41 @@ namespace ElectronicObserver.Window
 
 		public FormFleetPreset(FormMain parent)
 		{
-			InitializeComponent();
+            this.InitializeComponent();
 
-			// some initialization
-			TableControls = new List<TablePresetControl>();
-			ConfigurationChanged();
+            // some initialization
+            this.TableControls = new List<TablePresetControl>();
+            this.ConfigurationChanged();
 
-			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetPreset]);
+            this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetPreset]);
 		}
 
 		private void FormFleetPreset_Load(object sender, EventArgs e)
 		{
-			KCDatabase.Instance.FleetPreset.PresetChanged += Updated;
+			KCDatabase.Instance.FleetPreset.PresetChanged += this.Updated;
 
-			Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
+			Utility.Configuration.Instance.ConfigurationChanged += this.ConfigurationChanged;
 		}
 
 		private void ConfigurationChanged()
 		{
 			var config = Utility.Configuration.Config;
-			Font = Utility.Configuration.Config.UI.MainFont;
+            this.Font = Utility.Configuration.Config.UI.MainFont;
 			bool fixShipNameWidth = config.FormFleet.FixShipNameWidth;
 
             this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
             this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
-            TablePresets.SuspendLayout();
-			foreach (var item in TableControls)
+            this.TablePresets.SuspendLayout();
+			foreach (var item in this.TableControls)
 				item.ConfigurationChanged(this);
 
-			for (int i = 1; i < TablePresets.ColumnCount; i++)
-				ControlHelper.SetTableColumnStyle(TablePresets, i, fixShipNameWidth ?
+			for (int i = 1; i < this.TablePresets.ColumnCount; i++)
+				ControlHelper.SetTableColumnStyle(this.TablePresets, i, fixShipNameWidth ?
 					new ColumnStyle(SizeType.Absolute, config.FormFleet.FixedShipNameWidth + 4) :
 					new ColumnStyle(SizeType.AutoSize));
-			ControlHelper.SetTableRowStyles(TablePresets, ControlHelper.GetDefaultRowStyle());
-			TablePresets.ResumeLayout();
+			ControlHelper.SetTableRowStyles(this.TablePresets, ControlHelper.GetDefaultRowStyle());
+            this.TablePresets.ResumeLayout();
 		}
 
 		private void Updated()
@@ -221,29 +221,29 @@ namespace ElectronicObserver.Window
 			if (presets == null || presets.MaximumCount <= 0)
 				return;
 
-			TablePresets.Enabled = false;
-			TablePresets.SuspendLayout();
+            this.TablePresets.Enabled = false;
+            this.TablePresets.SuspendLayout();
 
-			if (TableControls.Count < presets.MaximumCount)
+			if (this.TableControls.Count < presets.MaximumCount)
 			{
-				for (int i = TableControls.Count; i < presets.MaximumCount; i++)
+				for (int i = this.TableControls.Count; i < presets.MaximumCount; i++)
 				{
 					var control = new TablePresetControl(this);
 					control.ConfigurationChanged(this);
-					TableControls.Add(control);
-					control.AddToTable(TablePresets, i);
+                    this.TableControls.Add(control);
+					control.AddToTable(this.TablePresets, i);
 				}
 
-				ControlHelper.SetTableRowStyles(TablePresets, ControlHelper.GetDefaultRowStyle());
+				ControlHelper.SetTableRowStyles(this.TablePresets, ControlHelper.GetDefaultRowStyle());
 			}
 
-			for (int i = 0; i < TableControls.Count; i++)
+			for (int i = 0; i < this.TableControls.Count; i++)
 			{
-				TableControls[i].Update(i + 1);
+                this.TableControls[i].Update(i + 1);
 			}
 
-			TablePresets.ResumeLayout();
-			TablePresets.Enabled = true;
+            this.TablePresets.ResumeLayout();
+            this.TablePresets.Enabled = true;
 		}
 
 
@@ -260,8 +260,8 @@ namespace ElectronicObserver.Window
 
 		private void FormFleetPreset_Click(object sender, EventArgs e)
 		{
-			Utility.Logger.Add(1, Font.Name);
-			ConfigurationChanged();
+			Utility.Logger.Add(1, this.Font.Name);
+            this.ConfigurationChanged();
 		}
 	}
 }

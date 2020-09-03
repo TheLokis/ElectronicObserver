@@ -1518,7 +1518,7 @@ namespace ElectronicObserver.Utility
 			[DataMember]
 			public string Version
 			{
-				get { return SoftwareInformation.VersionEnglish; }
+				get { return SoftwareInformation.VersionKorean; }
 				set { } //readonly
 			}
 
@@ -1790,7 +1790,7 @@ namespace ElectronicObserver.Utility
                 this.Update312_RemoveObsoleteRegistry();
 
             if (dt <= DateTimeHelper.CSVStringToTime("2020/06/07 23:00:00"))
-                Update460_AddSallyAreaColorScheme();
+                this.Update460_AddSallyAreaColorScheme();
 
             Config.VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
 		}

@@ -568,7 +568,7 @@ namespace ElectronicObserver.Data
 			get
 			{
                 // 流石に資源チェックまではしない
-                return CanAnchorageRepairWithMember(MembersInstance);
+                return CanAnchorageRepairWithMember(this.MembersInstance);
             }
         }
 

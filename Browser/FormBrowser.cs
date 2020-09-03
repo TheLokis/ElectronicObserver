@@ -1035,7 +1035,7 @@ namespace Browser
 
 		private void ToolMenu_Other_Mute_Click(object sender, EventArgs e)
 		{
-            if (_volumeManager == null)
+            if (this._volumeManager == null)
             {
                 this.TryGetVolumeManager();
             }
@@ -1057,7 +1057,7 @@ namespace Browser
 		{
 			var control = this.ToolMenu_Other_Volume_VolumeControl;
 
-            if (_volumeManager == null)
+            if (this._volumeManager == null)
             {
                 this.TryGetVolumeManager();
             }
