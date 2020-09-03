@@ -285,10 +285,8 @@ namespace ElectronicObserver.Window
             this.TopMost = !this.TopMost;
 		}
 
-
 		private void ConfigurationChanged()
 		{
-
 			var c = Utility.Configuration.Config;
 
             this.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
@@ -363,11 +361,8 @@ namespace ElectronicObserver.Window
 			//*/
 		}
 
-
-
 		private void UIUpdateTimer_Tick(object sender, EventArgs e)
 		{
-
 			SystemEvents.OnUpdateTimerTick();
 
 			// 東京標準時
