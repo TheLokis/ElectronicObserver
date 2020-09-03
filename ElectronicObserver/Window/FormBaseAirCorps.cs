@@ -399,8 +399,8 @@ namespace ElectronicObserver.Window
 
             this.TableMember.ResumeLayout();
 
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
 
             if (KCDatabase.Instance.BaseAirCorps.Any())
                 this.Updated(null, null);

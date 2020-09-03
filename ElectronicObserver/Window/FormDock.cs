@@ -141,7 +141,7 @@ namespace ElectronicObserver.Window
 
 					if (Utility.Configuration.Config.FormDock.BlinkAtCompletion && (time - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierRepair.AccelInterval)
 					{
-                        this.RepairTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
+                        this.RepairTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 					}
 				}
 			}
@@ -252,8 +252,8 @@ namespace ElectronicObserver.Window
 		{
 
             this.Font = Utility.Configuration.Config.UI.MainFont;
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
 
             if (this.ControlDock != null)
 			{

@@ -121,22 +121,22 @@ namespace ElectronicObserver.Window
             this.HQLevel.MainFont = Utility.Configuration.Config.UI.MainFont;
             this.HQLevel.SubFont = Utility.Configuration.Config.UI.SubFont;
 
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.HQLevel.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.HQLevel.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.HQLevel.MainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.HQLevel.SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
 
             // 点滅しない設定にしたときに消灯状態で固定されるのを防ぐ
             if (!Utility.Configuration.Config.FormHeadquarters.BlinkAtMaximum)
 			{
                 if (this.ShipCount.Tag as bool? ?? false)
                 {
-                    this.ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight);
                 }
 
                 if (this.EquipmentCount.Tag as bool? ?? false)
                 {
-                    this.EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight);
                 }
             }
 
@@ -217,7 +217,7 @@ namespace ElectronicObserver.Window
 
 
 			// 資源上限超過時の色
-			Color overcolor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.OrangeHighlight);
+			Color overcolor = Utility.ThemeManager.GetColor(Utility.ThemeColors.OrangeHighlight);
 
 
 
@@ -304,7 +304,7 @@ namespace ElectronicObserver.Window
                 this.ShipCount.Text = string.Format("{0}/{1}", this.RealShipCount, db.Admiral.MaxShipCount);
 				if (this.RealShipCount > db.Admiral.MaxShipCount - 5)
 				{
-                    this.ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.ShipCount.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight);
                 }
 				else
 				{
@@ -315,7 +315,7 @@ namespace ElectronicObserver.Window
                 this.EquipmentCount.Text = string.Format("{0}/{1}", this.RealEquipmentCount, db.Admiral.MaxEquipmentCount);
 				if (this.RealEquipmentCount > db.Admiral.MaxEquipmentCount + 3 - 20)
 				{
-                    this.EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
+                    this.EquipmentCount.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight);
                 }
 				else
 				{
@@ -436,12 +436,12 @@ namespace ElectronicObserver.Window
 			{
                 if (this.ShipCount.Tag as bool? ?? false)
                 {
-                    this.ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
+                    this.ShipCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight) : Color.Transparent;
                 }
 
                 if (this.EquipmentCount.Tag as bool? ?? false)
                 {
-                    this.EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight) : Color.Transparent;
+                    this.EquipmentCount.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight) : Color.Transparent;
                 }
             }
 		}

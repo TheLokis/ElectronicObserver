@@ -151,14 +151,14 @@ namespace ElectronicObserver.Window
 
 					if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && (time - DateTime.Now).TotalMilliseconds <= Utility.Configuration.Config.NotifierConstruction.AccelInterval)
 					{
-                        this.CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
+                        this.CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 					}
 
 				}
 				else if (Utility.Configuration.Config.FormArsenal.BlinkAtCompletion && !string.IsNullOrWhiteSpace(this.CompletionTime.Text))
 				{
                     //完成しているので
-                    this.CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight) : Color.Transparent;
+                    this.CompletionTime.BackColor = DateTime.Now.Second % 2 == 0 ? Utility.ThemeManager.GetColor(Utility.ThemeColors.GreenHighlight) : Color.Transparent;
 				}
 			}
 
@@ -303,8 +303,8 @@ namespace ElectronicObserver.Window
 
             this.Font = Utility.Configuration.Config.UI.MainFont;
             this.MenuMain_ShowShipName.Checked = Utility.Configuration.Config.FormArsenal.ShowShipName;
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
             if (this.ControlArsenal != null)
 			{
                 this.TableArsenal.SuspendLayout();

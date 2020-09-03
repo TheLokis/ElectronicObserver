@@ -308,8 +308,8 @@ namespace ElectronicObserver.Window
             this.UpdatesTree.Checked = c.FormJson.UpdatesTree;
             this.AutoUpdateFilter.Text = c.FormJson.AutoUpdateFilter;
 
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
 
             this.JsonTreeView.Nodes.Clear();
 

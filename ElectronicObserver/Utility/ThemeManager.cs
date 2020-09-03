@@ -45,9 +45,9 @@ namespace ElectronicObserver.Utility
             colors.Add(Tuple.Create(Theme.Dark, ThemeColors.WiilMainColor), Color.DarkSlateBlue);
         }
 
-        public static Color GetColor(Theme th, ThemeColors tr)
+        public static Color GetColor(ThemeColors tr)
         {
-            return colors[Tuple.Create(th, tr)];
+            return colors[Tuple.Create(Configuration.Config.UI.Theme, tr)];
         }
     }
 

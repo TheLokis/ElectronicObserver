@@ -200,8 +200,8 @@ namespace ElectronicObserver.Window
 			Font = Utility.Configuration.Config.UI.MainFont;
 			bool fixShipNameWidth = config.FormFleet.FixShipNameWidth;
 
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
             TablePresets.SuspendLayout();
 			foreach (var item in TableControls)

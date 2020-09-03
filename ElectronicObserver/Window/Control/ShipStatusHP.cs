@@ -377,12 +377,12 @@ namespace ElectronicObserver.Window.Control
             this._maximumDigit = 999;
 
             this._mainFont = new Font("Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-            this._mainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this._mainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
             this._subFont = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
-            this._subFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this._subFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
 
-            this._repairFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RepairColor);
+            this._repairFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.RepairColor);
             this._text = "HP:";
 
             this._HPBar.UsePrevValue = true;

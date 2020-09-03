@@ -466,13 +466,13 @@ namespace ElectronicObserver.Window
                             (colorscheme?.Count ?? 0) > 0 &&
                             ship.SallyArea >= 0)
                         {
-                            this.Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.ExtraFontColor);
+                            this.Name.ForeColor = ThemeManager.GetColor(Utility.ThemeColors.ExtraFontColor);
                             this.Name.BackColor = colorscheme[Math.Min(ship.SallyArea, colorscheme.Count - 1)];
                         }
                         else
                         {
-                            this.Name.ForeColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-                            this.Name.BackColor = ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                            this.Name.ForeColor = ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+                            this.Name.BackColor = ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
                         }
                     }
 
@@ -502,7 +502,7 @@ namespace ElectronicObserver.Window
                     }
                     else
                     {
-                        this.HP.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                        this.HP.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
                     }
                     {
                         StringBuilder sb = new StringBuilder();
@@ -713,7 +713,7 @@ namespace ElectronicObserver.Window
                     else if (cond < 50)
                         this.Condition.BackColor = Color.Transparent;
                     else
-                        this.Condition.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.GreenHighlight);
+                        this.Condition.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.GreenHighlight);
 
                 }
                 else
@@ -770,8 +770,8 @@ namespace ElectronicObserver.Window
 
             this.ConfigurationChanged();
 
-            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
 
             this._anchorageRepairBound = 0;
 
@@ -964,10 +964,10 @@ namespace ElectronicObserver.Window
 
             this.MainFont = this.Font = c.UI.MainFont;
             this.SubFont = c.UI.SubFont;
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
 
             this.AutoScroll = c.FormFleet.IsScrollable;
             for (int i = 0; i < this._controlFleet.Length; i++)

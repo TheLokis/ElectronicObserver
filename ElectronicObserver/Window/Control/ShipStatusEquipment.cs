@@ -469,10 +469,10 @@ namespace ElectronicObserver.Window.Control
 
 			base.Font = new Font("Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel);
 
-            this._aircraftColorDisabled = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this._aircraftColorDisabled = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
             this._aircraftColorLost = Color.FromArgb(0xFF, 0x00, 0xFF);
-            this._aircraftColorDamaged = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.RedHighlight);
-            this._aircraftColorFull = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this._aircraftColorDamaged = Utility.ThemeManager.GetColor(Utility.ThemeColors.RedHighlight);
+            this._aircraftColorFull = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
             this._equipmentLevelColor = Color.FromArgb(0x00, 0x66, 0x66);
             this._aircraftLevelColorLow = Color.FromArgb(0x66, 0x99, 0xEE);

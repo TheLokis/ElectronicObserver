@@ -289,12 +289,12 @@ namespace ElectronicObserver.Window
 		{
 			var c = Utility.Configuration.Config;
 
-            this.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.StripMenu.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.StripMenu.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.StripStatus.BackColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.StripStatus.ForeColor = Utility.ThemeManager.GetColor(c.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.StripMenu.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.StripMenu.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.StripStatus.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.StripStatus.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
             this.StripMenu_Debug.Enabled = this.StripMenu_Debug.Visible =
             this.StripMenu_View_Json.Enabled = this.StripMenu_View_Json.Visible =

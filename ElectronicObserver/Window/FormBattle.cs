@@ -22,7 +22,7 @@ namespace ElectronicObserver.Window
 
 	public partial class FormBattle : DockContent
 	{
-        private Color WinRankColor_Win = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+        private Color WinRankColor_Win = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
         private readonly Color WinRankColor_Lose = Color.Red;
 
 		private readonly Size DefaultBarSize = new Size(80, 20);
@@ -56,9 +56,9 @@ namespace ElectronicObserver.Window
                 this.HPBars[i].Margin = new Padding(2, 0, 2, 0);
                 this.HPBars[i].Anchor = AnchorStyles.Left | AnchorStyles.Right;
                 this.HPBars[i].MainFont = this.MainFont;
-                this.HPBars[i].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                this.HPBars[i].ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                 this.HPBars[i].SubFont = this.SubFont;
-                this.HPBars[i].SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+                this.HPBars[i].SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
                 this.HPBars[i].UsePrevValue = true;
                 this.HPBars[i].ShowDifference = true;
                 this.HPBars[i].MaximumDigit = 9999;
@@ -386,23 +386,23 @@ namespace ElectronicObserver.Window
 			if (bm.Compass != null && bm.Compass.EventID == 5)
                 this.FleetEnemy.ForeColor = Color.Red;
 			else
-                this.FleetEnemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                this.FleetEnemy.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
             if (bm.IsEnemyCombined && bm.StartsFromDayBattle)
             {
                 bool willMain = bm.WillNightBattleWithMainFleet();
                 this.FleetEnemy.BackColor = willMain ? 
-                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.WiilMainColor) : 
-                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                    Utility.ThemeManager.GetColor(Utility.ThemeColors.WiilMainColor) : 
+                    Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
 
                 this.FleetEnemyEscort.BackColor = willMain ?
-                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor) :
-                    Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.WiilMainColor); 
+                    Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor) :
+                    Utility.ThemeManager.GetColor(Utility.ThemeColors.WiilMainColor); 
             }
             else
             {
                 this.FleetEnemy.BackColor =
-                this.FleetEnemyEscort.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                this.FleetEnemyEscort.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
             }
         }
 
@@ -558,7 +558,7 @@ namespace ElectronicObserver.Window
 		void ClearAircraftLabel(ImageLabel label)
 		{
 			label.Text = "-";
-			label.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+			label.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
             label.ImageAlign = ContentAlignment.MiddleCenter;
 			label.ImageIndex = -1;
             this.ToolTipInfo.SetToolTip(label, null);
@@ -604,7 +604,7 @@ namespace ElectronicObserver.Window
 				if (phasesEnabled.Any(p => p.GetAircraftTotal(stage, isFriend) > 0 && p.GetAircraftLost(stage, isFriend) == p.GetAircraftTotal(stage, isFriend)))
 					label.ForeColor = Color.Red;
 				else
-					label.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+					label.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
                 label.ImageAlign = ContentAlignment.MiddleCenter;
                 label.ImageIndex = -1;
@@ -739,8 +739,8 @@ namespace ElectronicObserver.Window
                 this.HPBars[index].Value = resultHP;
                 this.HPBars[index].PrevValue = initialHP;
                 this.HPBars[index].MaximumValue = maxHP;
-                this.HPBars[index].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-                this.HPBars[index].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                this.HPBars[index].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+                this.HPBars[index].ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                 this.HPBars[index].Visible = true;
 			}
 
@@ -796,7 +796,7 @@ namespace ElectronicObserver.Window
 						));
 
 					if (isEscaped) bar.BackColor = Color.Silver;
-					else bar.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+					else bar.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
                 }
 				else
 				{
@@ -871,7 +871,7 @@ namespace ElectronicObserver.Window
 							));
 
 						if (isEscaped) bar.BackColor = Color.Silver;
-						else bar.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+						else bar.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
                     }
 					else
 					{
@@ -1022,12 +1022,12 @@ namespace ElectronicObserver.Window
 			if (!isBaseAirRaid)
 			{
 				foreach (int i in bd.MVPShipIndexes)
-                    this.HPBars[BattleIndex.Get(BattleSides.FriendMain, i)].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                    this.HPBars[BattleIndex.Get(BattleSides.FriendMain, i)].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MVPHighlight);
 
                 if (isFriendCombined)
 				{
 					foreach (int i in bd.MVPShipCombinedIndexes)
-                        this.HPBars[BattleIndex.Get(BattleSides.FriendEscort, i)].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                        this.HPBars[BattleIndex.Get(BattleSides.FriendEscort, i)].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MVPHighlight);
                 }
 			}
 
@@ -1110,7 +1110,7 @@ namespace ElectronicObserver.Window
 					ShipData ship = fleet.MembersInstance[index];
 
                     this.AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
-                    this.AirStage1Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage1Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                     this.AirStage1Friend.ImageAlign = ContentAlignment.MiddleLeft;
                     this.AirStage1Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
                     this.ToolTipInfo.SetToolTip(this.AirStage1Friend, "탐조등조사: " + ship.NameWithLevel);
@@ -1127,7 +1127,7 @@ namespace ElectronicObserver.Window
 				if (index != -1)
 				{
                     this.AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
-                    this.AirStage1Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage1Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                     this.AirStage1Enemy.ImageAlign = ContentAlignment.MiddleLeft;
                     this.AirStage1Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
                     this.ToolTipInfo.SetToolTip(this.AirStage1Enemy, "탐조등조사: " + pd.SearchlightEnemyInstance.NameWithClass);
@@ -1171,7 +1171,7 @@ namespace ElectronicObserver.Window
 				if (index != -1)
 				{
                     this.AirStage2Friend.Text = "#" + (index + 1);
-                    this.AirStage2Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage2Friend.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                     this.AirStage2Friend.ImageAlign = ContentAlignment.MiddleLeft;
                     this.AirStage2Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
                     this.ToolTipInfo.SetToolTip(this.AirStage2Friend, "조명탄사용: " + pd.FlareFriendInstance.NameWithLevel);
@@ -1189,7 +1189,7 @@ namespace ElectronicObserver.Window
 				if (index != -1)
 				{
                     this.AirStage2Enemy.Text = "#" + (index + 1);
-                    this.AirStage2Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                    this.AirStage2Enemy.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                     this.AirStage2Enemy.ImageAlign = ContentAlignment.MiddleLeft;
                     this.AirStage2Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Flare;
                     this.ToolTipInfo.SetToolTip(this.AirStage2Enemy, "조명탄사용: " + pd.FlareEnemyInstance.NameWithClass);
@@ -1237,10 +1237,10 @@ namespace ElectronicObserver.Window
                     this.HPBars[i].BackColor = Color.Silver;
 
 				else if (br.MVPIndex == i + 1)
-                    this.HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                    this.HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MVPHighlight);
 
                 else
-                    this.HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                    this.HPBars[i].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
             }
 
 			if (escort != null)
@@ -1251,10 +1251,10 @@ namespace ElectronicObserver.Window
                         this.HPBars[i + 6].BackColor = Color.Silver;
 
 					else if (br.MVPIndexCombined == i + 1)
-                        this.HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MVPHighlight);
+                        this.HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MVPHighlight);
 
                     else
-                        this.HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+                        this.HPBars[i + 6].BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
                 }
 			}
 
@@ -1310,8 +1310,8 @@ namespace ElectronicObserver.Window
             this.MainFont = this.TableTop.Font = this.TableBottom.Font = this.Font = config.UI.MainFont;
             this.SubFont = config.UI.SubFont;
 
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
 
             this.BaseLayoutPanel.AutoScroll = config.FormBattle.IsScrollable;
 

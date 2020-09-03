@@ -66,10 +66,10 @@ namespace ElectronicObserver.Window
 
             this.Font = this.TextInformation.Font = Utility.Configuration.Config.UI.MainFont;
             this.TextInformation.LanguageOption = RichTextBoxLanguageOptions.UIFonts;
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.TextInformation.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.TextInformation.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.TextInformation.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.TextInformation.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
 
         }
 

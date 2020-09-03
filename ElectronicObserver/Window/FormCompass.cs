@@ -290,7 +290,7 @@ namespace ElectronicObserver.Window
 					{
                         // nothing
                         this.ShipNames[i].Text = "-";
-                        this.ShipNames[i].ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BlackFontColor);
+                        this.ShipNames[i].ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BlackFontColor);
                         this.ShipNames[i].Tag = -1;
                         this.ShipNames[i].Cursor = Cursors.Default;
                         this.ToolTipInfo.SetToolTip(this.ShipNames[i], null);
@@ -561,8 +561,8 @@ namespace ElectronicObserver.Window
 
 
 
-            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
 
 
             ControlHelper.SetDoubleBuffered(this.BasePanel);
@@ -655,7 +655,7 @@ namespace ElectronicObserver.Window
 					case 0:
 					case 1:
 					default:    //昼夜戦・その他
-                        return Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+                        return Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
                     case 2:
 					case 3:     //夜戦・夜昼戦
 						return Color.Navy;
@@ -1257,10 +1257,10 @@ namespace ElectronicObserver.Window
                 this.TableEnemyCandidate.ResumeLayout();
 			}
 
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.SubFontColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.MainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
         }
 
 

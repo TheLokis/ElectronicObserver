@@ -41,9 +41,9 @@ namespace ElectronicObserver.Window
 			};
 
             this.CSDefaultLeft.BackColor =
-            this.CSDefaultLeft.SelectionBackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.CSDefaultLeft.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.CSDefaultLeft.SelectionForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.CSDefaultLeft.SelectionBackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.CSDefaultLeft.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.CSDefaultLeft.SelectionForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
             this.CSDefaultLeft.WrapMode = DataGridViewTriState.False;
 
 
@@ -162,10 +162,10 @@ namespace ElectronicObserver.Window
 			var c = Utility.Configuration.Config;
 
             this.QuestView.Font = this.Font = c.UI.MainFont;
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.QuestView.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
-            this.QuestView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.QuestView.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
+            this.QuestView.BackgroundColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
 
             this.MenuMain_ShowRunningOnly.Checked = c.FormQuest.ShowRunningOnly;
             this.MenuMain_ShowOnce.Checked = c.FormQuest.ShowOnce;

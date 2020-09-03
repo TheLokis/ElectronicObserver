@@ -134,8 +134,8 @@ namespace ElectronicObserver.Window
 		{
             this.Font = Utility.Configuration.Config.UI.MainFont;
             this.Configuration.Theme = (uint)Utility.Configuration.Config.UI.Theme;
-            this.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
             this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.ConfigurationChanged(this.Configuration));
             this.Browser.AsyncRemoteRun(() => this.Browser.Proxy.ConfigurationChanged(this.Configuration));
         }

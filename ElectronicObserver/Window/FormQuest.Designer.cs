@@ -176,8 +176,8 @@
 			this.MenuProgress_Reset});
 			this.MenuProgress.Name = "MenuProgress";
 			this.MenuProgress.Size = new System.Drawing.Size(149, 76);
-            this.MenuProgress.BackColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.BackgroundColor);
-            this.MenuProgress.ForeColor = Utility.ThemeManager.GetColor(Utility.Configuration.Config.UI.Theme, Utility.ThemeColors.MainFontColor);
+            this.MenuProgress.BackColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BackgroundColor);
+            this.MenuProgress.ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
             // 
             // MenuProgress_Increment
             // 
