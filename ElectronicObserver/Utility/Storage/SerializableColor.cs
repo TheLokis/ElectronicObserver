@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElectronicObserver.Utility.Storage
 {
@@ -15,7 +11,7 @@ namespace ElectronicObserver.Utility.Storage
 	/// </summary>
 	[DataContract(Name = "SerializableColor")]
 	[DebuggerDisplay("{ColorData}")]
-	public class SerializableColor
+	public class SerializableColor : IEquatable<SerializableColor>
 	{
 
 		[IgnoreDataMember]
@@ -99,7 +95,8 @@ namespace ElectronicObserver.Utility.Storage
 				((uint)(color.R) << 16) |
 				((uint)(color.G) << 8) |
 				((uint)(color.B) << 0);
-
 		}
+
+		public bool Equals(SerializableColor other) => SerializedColor == other?.SerializedColor;
 	}
 }

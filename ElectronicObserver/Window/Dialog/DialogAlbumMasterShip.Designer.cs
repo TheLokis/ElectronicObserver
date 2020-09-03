@@ -42,6 +42,8 @@
             this.StripMenu_Edit_CopyShipData = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.StripMenu_Edit_GoogleShipName = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.StripMenu_Edit_CopySpecialEquipmentTable = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu_View = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu_View_ShowAppearingArea = new System.Windows.Forms.ToolStripMenuItem();
             this.StripMenu_View_ShowShipGraphicViewer = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,8 +169,9 @@
             this.LevelTimer = new System.Windows.Forms.Timer(this.components);
             this.SaveCSVDialog = new System.Windows.Forms.SaveFileDialog();
             this.ImageLoader = new System.ComponentModel.BackgroundWorker();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.StripMenu_Edit_CopySpecialEquipmentTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageLabel1 = new ElectronicObserver.Window.Control.ImageLabel();
+            this.StripMenu_File_MergeDefaultRecord = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -205,7 +208,9 @@
             // 
             this.StripMenu_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StripMenu_File_OutputCSVUser,
-            this.StripMenu_File_OutputCSVData});
+            this.StripMenu_File_OutputCSVData,
+            this.toolStripSeparator5,
+            this.StripMenu_File_MergeDefaultRecord});
             this.StripMenu_File.Name = "StripMenu_File";
             this.StripMenu_File.Size = new System.Drawing.Size(57, 20);
             this.StripMenu_File.Text = "파일(&F)";
@@ -213,14 +218,14 @@
             // StripMenu_File_OutputCSVUser
             // 
             this.StripMenu_File_OutputCSVUser.Name = "StripMenu_File_OutputCSVUser";
-            this.StripMenu_File_OutputCSVUser.Size = new System.Drawing.Size(203, 22);
+            this.StripMenu_File_OutputCSVUser.Size = new System.Drawing.Size(250, 22);
             this.StripMenu_File_OutputCSVUser.Text = "CSV출력(보기용)(&U)...";
             this.StripMenu_File_OutputCSVUser.Click += new System.EventHandler(this.StripMenu_File_OutputCSVUser_Click);
             // 
             // StripMenu_File_OutputCSVData
             // 
             this.StripMenu_File_OutputCSVData.Name = "StripMenu_File_OutputCSVData";
-            this.StripMenu_File_OutputCSVData.Size = new System.Drawing.Size(203, 22);
+            this.StripMenu_File_OutputCSVData.Size = new System.Drawing.Size(250, 22);
             this.StripMenu_File_OutputCSVData.Text = "CSV출력(데이터용)(&D)...";
             this.StripMenu_File_OutputCSVData.Click += new System.EventHandler(this.StripMenu_File_OutputCSVData_Click);
             // 
@@ -281,6 +286,18 @@
             this.StripMenu_Edit_GoogleShipName.Text = "함선명으로 구글 검색(&G)";
             this.StripMenu_Edit_GoogleShipName.Click += new System.EventHandler(this.StripMenu_Edit_GoogleShipName_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(245, 6);
+            // 
+            // StripMenu_Edit_CopySpecialEquipmentTable
+            // 
+            this.StripMenu_Edit_CopySpecialEquipmentTable.Name = "StripMenu_Edit_CopySpecialEquipmentTable";
+            this.StripMenu_Edit_CopySpecialEquipmentTable.Size = new System.Drawing.Size(248, 22);
+            this.StripMenu_Edit_CopySpecialEquipmentTable.Text = "특수장비테이블을 복사(&S)";
+            this.StripMenu_Edit_CopySpecialEquipmentTable.Click += new System.EventHandler(this.StripMenu_Edit_CopySpecialEquipmentTable_Click);
+            // 
             // StripMenu_View
             // 
             this.StripMenu_View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -330,7 +347,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextSearch.Location = new System.Drawing.Point(3, 3);
             this.TextSearch.Name = "TextSearch";
-            this.TextSearch.Size = new System.Drawing.Size(244, 23);
+            this.TextSearch.Size = new System.Drawing.Size(244, 21);
             this.TextSearch.TabIndex = 0;
             this.TextSearch.TextChanged += new System.EventHandler(this.TextSearch_TextChanged);
             this.TextSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextSearch_KeyDown);
@@ -352,7 +369,7 @@
             this.ShipView_Name});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
@@ -366,7 +383,7 @@
             this.ShipView.RowHeadersVisible = false;
             this.ShipView.RowTemplate.Height = 21;
             this.ShipView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ShipView.Size = new System.Drawing.Size(250, 427);
+            this.ShipView.Size = new System.Drawing.Size(250, 436);
             this.ShipView.TabIndex = 1;
             this.ShipView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShipView_CellContentClick);
             this.ShipView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ShipView_CellMouseClick);
@@ -429,7 +446,7 @@
             this.ResourceName.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ResourceName.Location = new System.Drawing.Point(200, 6);
             this.ResourceName.Name = "ResourceName";
-            this.ResourceName.Size = new System.Drawing.Size(113, 16);
+            this.ResourceName.Size = new System.Drawing.Size(106, 16);
             this.ResourceName.TabIndex = 24;
             this.ResourceName.Text = "abcdefghijkl ver. 99";
             this.ResourceName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ResourceName_MouseClick);
@@ -453,7 +470,7 @@
             this.TableBattle.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableBattle.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableBattle.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableBattle.Size = new System.Drawing.Size(134, 66);
+            this.TableBattle.Size = new System.Drawing.Size(132, 66);
             this.TableBattle.TabIndex = 20;
             // 
             // TitleDayAttack
@@ -492,7 +509,7 @@
             this.DayAttack.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DayAttack.Location = new System.Drawing.Point(77, 25);
             this.DayAttack.Name = "DayAttack";
-            this.DayAttack.Size = new System.Drawing.Size(54, 16);
+            this.DayAttack.Size = new System.Drawing.Size(52, 16);
             this.DayAttack.TabIndex = 18;
             this.DayAttack.Text = "주포/주포";
             // 
@@ -530,7 +547,7 @@
             this.imageLabel2.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel2.Location = new System.Drawing.Point(100, 6);
             this.imageLabel2.Name = "imageLabel2";
-            this.imageLabel2.Size = new System.Drawing.Size(54, 16);
+            this.imageLabel2.Size = new System.Drawing.Size(52, 16);
             this.imageLabel2.TabIndex = 22;
             this.imageLabel2.Text = "도감번호:";
             // 
@@ -558,7 +575,7 @@
             this.TableShipName.Controls.Add(this.ShipName);
             this.TableShipName.Location = new System.Drawing.Point(3, 25);
             this.TableShipName.Name = "TableShipName";
-            this.TableShipName.Size = new System.Drawing.Size(189, 22);
+            this.TableShipName.Size = new System.Drawing.Size(184, 22);
             this.TableShipName.TabIndex = 19;
             // 
             // ShipType
@@ -575,7 +592,7 @@
             this.ShipName.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ShipName.Location = new System.Drawing.Point(101, 3);
             this.ShipName.Name = "ShipName";
-            this.ShipName.Size = new System.Drawing.Size(85, 16);
+            this.ShipName.Size = new System.Drawing.Size(80, 16);
             this.ShipName.TabIndex = 8;
             this.ShipName.Text = "Bismarck zwei";
             this.ShipName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ShipName_MouseClick);
@@ -642,7 +659,7 @@
             this.RemodelAfterLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.RemodelAfterLevel.Location = new System.Drawing.Point(46, 69);
             this.RemodelAfterLevel.Name = "RemodelAfterLevel";
-            this.RemodelAfterLevel.Size = new System.Drawing.Size(54, 16);
+            this.RemodelAfterLevel.Size = new System.Drawing.Size(52, 16);
             this.RemodelAfterLevel.TabIndex = 19;
             this.RemodelAfterLevel.Text = "Lv. 80";
             // 
@@ -654,7 +671,7 @@
             this.RemodelAfterShipName.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RemodelAfterShipName.Location = new System.Drawing.Point(46, 47);
             this.RemodelAfterShipName.Name = "RemodelAfterShipName";
-            this.RemodelAfterShipName.Size = new System.Drawing.Size(81, 16);
+            this.RemodelAfterShipName.Size = new System.Drawing.Size(76, 16);
             this.RemodelAfterShipName.TabIndex = 19;
             this.RemodelAfterShipName.Text = "Bismarck drei";
             this.RemodelAfterShipName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RemodelAfterShipName_MouseClick);
@@ -678,7 +695,7 @@
             this.RemodelBeforeLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.RemodelBeforeLevel.Location = new System.Drawing.Point(46, 25);
             this.RemodelBeforeLevel.Name = "RemodelBeforeLevel";
-            this.RemodelBeforeLevel.Size = new System.Drawing.Size(54, 16);
+            this.RemodelBeforeLevel.Size = new System.Drawing.Size(52, 16);
             this.RemodelBeforeLevel.TabIndex = 18;
             this.RemodelBeforeLevel.Text = "Lv. 50";
             // 
@@ -708,7 +725,7 @@
             this.RemodelBeforeShipName.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RemodelBeforeShipName.Location = new System.Drawing.Point(46, 3);
             this.RemodelBeforeShipName.Name = "RemodelBeforeShipName";
-            this.RemodelBeforeShipName.Size = new System.Drawing.Size(55, 16);
+            this.RemodelBeforeShipName.Size = new System.Drawing.Size(52, 16);
             this.RemodelBeforeShipName.TabIndex = 18;
             this.RemodelBeforeShipName.Text = "Bismarck";
             this.RemodelBeforeShipName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RemodelBeforeShipName_MouseClick);
@@ -889,7 +906,7 @@
             this.BuildingTime.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BuildingTime.Location = new System.Drawing.Point(381, 180);
             this.BuildingTime.Name = "BuildingTime";
-            this.BuildingTime.Size = new System.Drawing.Size(53, 16);
+            this.BuildingTime.Size = new System.Drawing.Size(49, 16);
             this.BuildingTime.TabIndex = 14;
             this.BuildingTime.Text = "06:00:00";
             this.BuildingTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -898,7 +915,7 @@
             // 
             this.TitleBuildingTime.Location = new System.Drawing.Point(300, 180);
             this.TitleBuildingTime.Name = "TitleBuildingTime";
-            this.TitleBuildingTime.Size = new System.Drawing.Size(72, 16);
+            this.TitleBuildingTime.Size = new System.Drawing.Size(71, 16);
             this.TitleBuildingTime.TabIndex = 13;
             this.TitleBuildingTime.Text = "건조 시간";
             this.TitleBuildingTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1178,7 +1195,7 @@
             this.imageLabel45.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel45.Location = new System.Drawing.Point(9, 6);
             this.imageLabel45.Name = "imageLabel45";
-            this.imageLabel45.Size = new System.Drawing.Size(44, 16);
+            this.imageLabel45.Size = new System.Drawing.Size(40, 16);
             this.imageLabel45.TabIndex = 6;
             this.imageLabel45.Text = "함선ID:";
             // 
@@ -1192,6 +1209,7 @@
             this.TableParameterMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.TableParameterMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableParameterMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.TableParameterMain.Controls.Add(this.imageLabel1, 5, 9);
             this.TableParameterMain.Controls.Add(this.LOSSeparater, 4, 8);
             this.TableParameterMain.Controls.Add(this.FirepowerMax, 3, 2);
             this.TableParameterMain.Controls.Add(this.EvasionSeparater, 4, 7);
@@ -1259,9 +1277,9 @@
             this.LOSSeparater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.LOSSeparater.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LOSSeparater.ImageSize = new System.Drawing.Size(0, 0);
-            this.LOSSeparater.Location = new System.Drawing.Point(185, 186);
+            this.LOSSeparater.Location = new System.Drawing.Point(183, 184);
             this.LOSSeparater.Name = "LOSSeparater";
-            this.LOSSeparater.Size = new System.Drawing.Size(6, 15);
+            this.LOSSeparater.Size = new System.Drawing.Size(4, 15);
             this.LOSSeparater.TabIndex = 15;
             this.LOSSeparater.Text = "/";
             this.LOSSeparater.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1270,7 +1288,7 @@
             // 
             this.FirepowerMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.FirepowerMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FirepowerMax.Location = new System.Drawing.Point(157, 54);
+            this.FirepowerMax.Location = new System.Drawing.Point(155, 52);
             this.FirepowerMax.Name = "FirepowerMax";
             this.FirepowerMax.Size = new System.Drawing.Size(22, 16);
             this.FirepowerMax.TabIndex = 14;
@@ -1282,9 +1300,9 @@
             this.EvasionSeparater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.EvasionSeparater.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.EvasionSeparater.ImageSize = new System.Drawing.Size(0, 0);
-            this.EvasionSeparater.Location = new System.Drawing.Point(185, 164);
+            this.EvasionSeparater.Location = new System.Drawing.Point(183, 162);
             this.EvasionSeparater.Name = "EvasionSeparater";
-            this.EvasionSeparater.Size = new System.Drawing.Size(6, 15);
+            this.EvasionSeparater.Size = new System.Drawing.Size(4, 15);
             this.EvasionSeparater.TabIndex = 14;
             this.EvasionSeparater.Text = "/";
             this.EvasionSeparater.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1293,7 +1311,7 @@
             // 
             this.LOSLevel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LOSLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LOSLevel.Location = new System.Drawing.Point(229, 186);
+            this.LOSLevel.Location = new System.Drawing.Point(229, 184);
             this.LOSLevel.Name = "LOSLevel";
             this.LOSLevel.Size = new System.Drawing.Size(22, 16);
             this.LOSLevel.TabIndex = 23;
@@ -1305,9 +1323,9 @@
             this.imageLabel42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel42.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel42.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel42.Location = new System.Drawing.Point(113, 208);
+            this.imageLabel42.Location = new System.Drawing.Point(113, 207);
             this.imageLabel42.Name = "imageLabel42";
-            this.imageLabel42.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel42.Size = new System.Drawing.Size(4, 15);
             this.imageLabel42.TabIndex = 13;
             this.imageLabel42.Text = "/";
             this.imageLabel42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1315,7 +1333,7 @@
             // TitleLuck
             // 
             this.TitleLuck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLuck.Location = new System.Drawing.Point(3, 208);
+            this.TitleLuck.Location = new System.Drawing.Point(3, 207);
             this.TitleLuck.Name = "TitleLuck";
             this.TitleLuck.Size = new System.Drawing.Size(44, 16);
             this.TitleLuck.TabIndex = 13;
@@ -1327,9 +1345,9 @@
             this.imageLabel41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel41.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel41.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel41.Location = new System.Drawing.Point(113, 186);
+            this.imageLabel41.Location = new System.Drawing.Point(113, 184);
             this.imageLabel41.Name = "imageLabel41";
-            this.imageLabel41.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel41.Size = new System.Drawing.Size(4, 15);
             this.imageLabel41.TabIndex = 12;
             this.imageLabel41.Text = "/";
             this.imageLabel41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1338,7 +1356,7 @@
             // 
             this.EvasionLevel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.EvasionLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.EvasionLevel.Location = new System.Drawing.Point(229, 164);
+            this.EvasionLevel.Location = new System.Drawing.Point(229, 162);
             this.EvasionLevel.Name = "EvasionLevel";
             this.EvasionLevel.Size = new System.Drawing.Size(22, 16);
             this.EvasionLevel.TabIndex = 22;
@@ -1350,9 +1368,9 @@
             this.imageLabel40.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel40.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel40.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel40.Location = new System.Drawing.Point(113, 164);
+            this.imageLabel40.Location = new System.Drawing.Point(113, 162);
             this.imageLabel40.Name = "imageLabel40";
-            this.imageLabel40.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel40.Size = new System.Drawing.Size(4, 15);
             this.imageLabel40.TabIndex = 11;
             this.imageLabel40.Text = "/";
             this.imageLabel40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1361,7 +1379,7 @@
             // 
             this.LuckMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LuckMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LuckMin.Location = new System.Drawing.Point(85, 208);
+            this.LuckMin.Location = new System.Drawing.Point(85, 207);
             this.LuckMin.Name = "LuckMin";
             this.LuckMin.Size = new System.Drawing.Size(22, 16);
             this.LuckMin.TabIndex = 13;
@@ -1373,9 +1391,9 @@
             this.imageLabel39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel39.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel39.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel39.Location = new System.Drawing.Point(113, 142);
+            this.imageLabel39.Location = new System.Drawing.Point(113, 140);
             this.imageLabel39.Name = "imageLabel39";
-            this.imageLabel39.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel39.Size = new System.Drawing.Size(4, 15);
             this.imageLabel39.TabIndex = 10;
             this.imageLabel39.Text = "/";
             this.imageLabel39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1384,7 +1402,7 @@
             // 
             this.LuckMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LuckMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LuckMax.Location = new System.Drawing.Point(157, 208);
+            this.LuckMax.Location = new System.Drawing.Point(155, 207);
             this.LuckMax.Name = "LuckMax";
             this.LuckMax.Size = new System.Drawing.Size(22, 16);
             this.LuckMax.TabIndex = 21;
@@ -1396,9 +1414,9 @@
             this.imageLabel38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel38.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel38.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel38.Location = new System.Drawing.Point(113, 120);
+            this.imageLabel38.Location = new System.Drawing.Point(113, 118);
             this.imageLabel38.Name = "imageLabel38";
-            this.imageLabel38.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel38.Size = new System.Drawing.Size(4, 15);
             this.imageLabel38.TabIndex = 9;
             this.imageLabel38.Text = "/";
             this.imageLabel38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1406,14 +1424,14 @@
             // ParameterLevel
             // 
             this.ParameterLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.ParameterLevel.Location = new System.Drawing.Point(197, 3);
+            this.ParameterLevel.Location = new System.Drawing.Point(193, 3);
             this.ParameterLevel.Maximum = new decimal(new int[] {
             150,
             0,
             0,
             0});
             this.ParameterLevel.Name = "ParameterLevel";
-            this.ParameterLevel.Size = new System.Drawing.Size(54, 23);
+            this.ParameterLevel.Size = new System.Drawing.Size(58, 21);
             this.ParameterLevel.TabIndex = 6;
             this.ParameterLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ToolTipInfo.SetToolTip(this.ParameterLevel, "레벨을 지정하면 예측값이 표시됩니다.");
@@ -1429,9 +1447,9 @@
             this.imageLabel37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel37.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel37.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel37.Location = new System.Drawing.Point(113, 98);
+            this.imageLabel37.Location = new System.Drawing.Point(113, 96);
             this.imageLabel37.Name = "imageLabel37";
-            this.imageLabel37.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel37.Size = new System.Drawing.Size(4, 15);
             this.imageLabel37.TabIndex = 8;
             this.imageLabel37.Text = "/";
             this.imageLabel37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1440,7 +1458,7 @@
             // 
             this.LOSMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LOSMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LOSMax.Location = new System.Drawing.Point(157, 186);
+            this.LOSMax.Location = new System.Drawing.Point(155, 184);
             this.LOSMax.Name = "LOSMax";
             this.LOSMax.Size = new System.Drawing.Size(22, 16);
             this.LOSMax.TabIndex = 20;
@@ -1452,9 +1470,9 @@
             this.imageLabel36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel36.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel36.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel36.Location = new System.Drawing.Point(113, 76);
+            this.imageLabel36.Location = new System.Drawing.Point(113, 74);
             this.imageLabel36.Name = "imageLabel36";
-            this.imageLabel36.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel36.Size = new System.Drawing.Size(4, 15);
             this.imageLabel36.TabIndex = 7;
             this.imageLabel36.Text = "/";
             this.imageLabel36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1463,7 +1481,7 @@
             // 
             this.LOSMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LOSMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LOSMin.Location = new System.Drawing.Point(85, 186);
+            this.LOSMin.Location = new System.Drawing.Point(85, 184);
             this.LOSMin.Name = "LOSMin";
             this.LOSMin.Size = new System.Drawing.Size(22, 16);
             this.LOSMin.TabIndex = 12;
@@ -1475,9 +1493,9 @@
             this.imageLabel35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel35.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel35.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel35.Location = new System.Drawing.Point(113, 54);
+            this.imageLabel35.Location = new System.Drawing.Point(113, 52);
             this.imageLabel35.Name = "imageLabel35";
-            this.imageLabel35.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel35.Size = new System.Drawing.Size(4, 15);
             this.imageLabel35.TabIndex = 6;
             this.imageLabel35.Text = "/";
             this.imageLabel35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1486,7 +1504,7 @@
             // 
             this.EvasionMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.EvasionMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.EvasionMax.Location = new System.Drawing.Point(157, 164);
+            this.EvasionMax.Location = new System.Drawing.Point(155, 162);
             this.EvasionMax.Name = "EvasionMax";
             this.EvasionMax.Size = new System.Drawing.Size(22, 16);
             this.EvasionMax.TabIndex = 19;
@@ -1498,7 +1516,7 @@
             this.TitleParameterMax.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleParameterMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TitleParameterMax.Location = new System.Drawing.Point(128, 10);
+            this.TitleParameterMax.Location = new System.Drawing.Point(126, 8);
             this.TitleParameterMax.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.TitleParameterMax.Name = "TitleParameterMax";
             this.TitleParameterMax.Size = new System.Drawing.Size(48, 16);
@@ -1510,7 +1528,7 @@
             // 
             this.ASWMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ASWMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ASWMax.Location = new System.Drawing.Point(157, 142);
+            this.ASWMax.Location = new System.Drawing.Point(155, 140);
             this.ASWMax.Name = "ASWMax";
             this.ASWMax.Size = new System.Drawing.Size(22, 16);
             this.ASWMax.TabIndex = 18;
@@ -1521,7 +1539,7 @@
             // 
             this.ASWMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ASWMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ASWMin.Location = new System.Drawing.Point(85, 142);
+            this.ASWMin.Location = new System.Drawing.Point(85, 140);
             this.ASWMin.Name = "ASWMin";
             this.ASWMin.Size = new System.Drawing.Size(22, 16);
             this.ASWMin.TabIndex = 10;
@@ -1532,7 +1550,7 @@
             // 
             this.ArmorMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ArmorMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ArmorMax.Location = new System.Drawing.Point(157, 120);
+            this.ArmorMax.Location = new System.Drawing.Point(155, 118);
             this.ArmorMax.Name = "ArmorMax";
             this.ArmorMax.Size = new System.Drawing.Size(22, 16);
             this.ArmorMax.TabIndex = 17;
@@ -1544,7 +1562,7 @@
             this.TitleParameterMin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleParameterMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TitleParameterMin.Location = new System.Drawing.Point(56, 10);
+            this.TitleParameterMin.Location = new System.Drawing.Point(56, 8);
             this.TitleParameterMin.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.TitleParameterMin.Name = "TitleParameterMin";
             this.TitleParameterMin.Size = new System.Drawing.Size(48, 16);
@@ -1556,7 +1574,7 @@
             // 
             this.AAMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.AAMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.AAMax.Location = new System.Drawing.Point(157, 98);
+            this.AAMax.Location = new System.Drawing.Point(155, 96);
             this.AAMax.Name = "AAMax";
             this.AAMax.Size = new System.Drawing.Size(22, 16);
             this.AAMax.TabIndex = 16;
@@ -1566,7 +1584,7 @@
             // TitleLOS
             // 
             this.TitleLOS.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleLOS.Location = new System.Drawing.Point(3, 186);
+            this.TitleLOS.Location = new System.Drawing.Point(3, 184);
             this.TitleLOS.Name = "TitleLOS";
             this.TitleLOS.Size = new System.Drawing.Size(44, 16);
             this.TitleLOS.TabIndex = 12;
@@ -1577,7 +1595,7 @@
             // 
             this.TorpedoMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.TorpedoMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TorpedoMax.Location = new System.Drawing.Point(157, 76);
+            this.TorpedoMax.Location = new System.Drawing.Point(155, 74);
             this.TorpedoMax.Name = "TorpedoMax";
             this.TorpedoMax.Size = new System.Drawing.Size(22, 16);
             this.TorpedoMax.TabIndex = 15;
@@ -1588,7 +1606,7 @@
             // 
             this.ArmorMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ArmorMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ArmorMin.Location = new System.Drawing.Point(85, 120);
+            this.ArmorMin.Location = new System.Drawing.Point(85, 118);
             this.ArmorMin.Name = "ArmorMin";
             this.ArmorMin.Size = new System.Drawing.Size(22, 16);
             this.ArmorMin.TabIndex = 9;
@@ -1598,7 +1616,7 @@
             // TitleHP
             // 
             this.TitleHP.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleHP.Location = new System.Drawing.Point(3, 32);
+            this.TitleHP.Location = new System.Drawing.Point(3, 30);
             this.TitleHP.Name = "TitleHP";
             this.TitleHP.Size = new System.Drawing.Size(44, 16);
             this.TitleHP.TabIndex = 0;
@@ -1609,7 +1627,7 @@
             // 
             this.AAMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.AAMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.AAMin.Location = new System.Drawing.Point(85, 98);
+            this.AAMin.Location = new System.Drawing.Point(85, 96);
             this.AAMin.Name = "AAMin";
             this.AAMin.Size = new System.Drawing.Size(22, 16);
             this.AAMin.TabIndex = 8;
@@ -1620,7 +1638,7 @@
             // 
             this.HPMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.HPMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.HPMin.Location = new System.Drawing.Point(85, 32);
+            this.HPMin.Location = new System.Drawing.Point(85, 30);
             this.HPMin.Name = "HPMin";
             this.HPMin.Size = new System.Drawing.Size(22, 16);
             this.HPMin.TabIndex = 1;
@@ -1631,7 +1649,7 @@
             // 
             this.TorpedoMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.TorpedoMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TorpedoMin.Location = new System.Drawing.Point(85, 76);
+            this.TorpedoMin.Location = new System.Drawing.Point(85, 74);
             this.TorpedoMin.Name = "TorpedoMin";
             this.TorpedoMin.Size = new System.Drawing.Size(22, 16);
             this.TorpedoMin.TabIndex = 7;
@@ -1643,9 +1661,9 @@
             this.imageLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.imageLabel3.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.imageLabel3.ImageSize = new System.Drawing.Size(0, 0);
-            this.imageLabel3.Location = new System.Drawing.Point(113, 32);
+            this.imageLabel3.Location = new System.Drawing.Point(113, 30);
             this.imageLabel3.Name = "imageLabel3";
-            this.imageLabel3.Size = new System.Drawing.Size(6, 15);
+            this.imageLabel3.Size = new System.Drawing.Size(4, 15);
             this.imageLabel3.TabIndex = 2;
             this.imageLabel3.Text = "/";
             this.imageLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1654,7 +1672,7 @@
             // 
             this.FirepowerMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.FirepowerMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FirepowerMin.Location = new System.Drawing.Point(85, 54);
+            this.FirepowerMin.Location = new System.Drawing.Point(85, 52);
             this.FirepowerMin.Name = "FirepowerMin";
             this.FirepowerMin.Size = new System.Drawing.Size(22, 16);
             this.FirepowerMin.TabIndex = 6;
@@ -1665,7 +1683,7 @@
             // 
             this.HPMax.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.HPMax.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.HPMax.Location = new System.Drawing.Point(157, 32);
+            this.HPMax.Location = new System.Drawing.Point(155, 30);
             this.HPMax.Name = "HPMax";
             this.HPMax.Size = new System.Drawing.Size(22, 16);
             this.HPMax.TabIndex = 3;
@@ -1675,7 +1693,7 @@
             // TitleFirepower
             // 
             this.TitleFirepower.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleFirepower.Location = new System.Drawing.Point(3, 54);
+            this.TitleFirepower.Location = new System.Drawing.Point(3, 52);
             this.TitleFirepower.Name = "TitleFirepower";
             this.TitleFirepower.Size = new System.Drawing.Size(44, 16);
             this.TitleFirepower.TabIndex = 6;
@@ -1685,7 +1703,7 @@
             // TitleTorpedo
             // 
             this.TitleTorpedo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleTorpedo.Location = new System.Drawing.Point(3, 76);
+            this.TitleTorpedo.Location = new System.Drawing.Point(3, 74);
             this.TitleTorpedo.Name = "TitleTorpedo";
             this.TitleTorpedo.Size = new System.Drawing.Size(44, 16);
             this.TitleTorpedo.TabIndex = 7;
@@ -1695,7 +1713,7 @@
             // TitleAA
             // 
             this.TitleAA.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleAA.Location = new System.Drawing.Point(3, 98);
+            this.TitleAA.Location = new System.Drawing.Point(3, 96);
             this.TitleAA.Name = "TitleAA";
             this.TitleAA.Size = new System.Drawing.Size(44, 16);
             this.TitleAA.TabIndex = 8;
@@ -1705,7 +1723,7 @@
             // TitleArmor
             // 
             this.TitleArmor.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleArmor.Location = new System.Drawing.Point(3, 120);
+            this.TitleArmor.Location = new System.Drawing.Point(3, 118);
             this.TitleArmor.Name = "TitleArmor";
             this.TitleArmor.Size = new System.Drawing.Size(44, 16);
             this.TitleArmor.TabIndex = 9;
@@ -1715,7 +1733,7 @@
             // TitleASW
             // 
             this.TitleASW.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleASW.Location = new System.Drawing.Point(3, 142);
+            this.TitleASW.Location = new System.Drawing.Point(3, 140);
             this.TitleASW.Name = "TitleASW";
             this.TitleASW.Size = new System.Drawing.Size(44, 16);
             this.TitleASW.TabIndex = 10;
@@ -1725,7 +1743,7 @@
             // TitleEvasion
             // 
             this.TitleEvasion.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.TitleEvasion.Location = new System.Drawing.Point(3, 164);
+            this.TitleEvasion.Location = new System.Drawing.Point(3, 162);
             this.TitleEvasion.Name = "TitleEvasion";
             this.TitleEvasion.Size = new System.Drawing.Size(44, 16);
             this.TitleEvasion.TabIndex = 11;
@@ -1737,9 +1755,9 @@
             this.ASWSeparater.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ASWSeparater.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ASWSeparater.ImageSize = new System.Drawing.Size(0, 0);
-            this.ASWSeparater.Location = new System.Drawing.Point(185, 142);
+            this.ASWSeparater.Location = new System.Drawing.Point(183, 140);
             this.ASWSeparater.Name = "ASWSeparater";
-            this.ASWSeparater.Size = new System.Drawing.Size(6, 15);
+            this.ASWSeparater.Size = new System.Drawing.Size(4, 15);
             this.ASWSeparater.TabIndex = 4;
             this.ASWSeparater.Text = "/";
             this.ASWSeparater.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1748,7 +1766,7 @@
             // 
             this.ASWLevel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ASWLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ASWLevel.Location = new System.Drawing.Point(229, 142);
+            this.ASWLevel.Location = new System.Drawing.Point(229, 140);
             this.ASWLevel.Name = "ASWLevel";
             this.ASWLevel.Size = new System.Drawing.Size(22, 16);
             this.ASWLevel.TabIndex = 5;
@@ -1759,7 +1777,7 @@
             // 
             this.EvasionMin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.EvasionMin.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.EvasionMin.Location = new System.Drawing.Point(85, 164);
+            this.EvasionMin.Location = new System.Drawing.Point(85, 162);
             this.EvasionMin.Name = "EvasionMin";
             this.EvasionMin.Size = new System.Drawing.Size(22, 16);
             this.EvasionMin.TabIndex = 11;
@@ -1800,18 +1818,29 @@
             // 
             this.ImageLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ImageLoader_DoWork);
             this.ImageLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ImageLoader_RunWorkerCompleted);
-            // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(247, 6);
+            // imageLabel1
             // 
-            // StripMenu_Edit_CopySpecialEquipmentTable
+            this.imageLabel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.imageLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.imageLabel1.Location = new System.Drawing.Point(229, 207);
+            this.imageLabel1.Name = "imageLabel1";
+            this.imageLabel1.Size = new System.Drawing.Size(22, 16);
+            this.imageLabel1.TabIndex = 25;
+            this.imageLabel1.Text = "123";
+            this.imageLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            this.StripMenu_Edit_CopySpecialEquipmentTable.Name = "StripMenu_Edit_CopySpecialEquipmentTable";
-            this.StripMenu_Edit_CopySpecialEquipmentTable.Size = new System.Drawing.Size(250, 22);
-            this.StripMenu_Edit_CopySpecialEquipmentTable.Text = "특수장비테이블을 복사(&S)";
-            this.StripMenu_Edit_CopySpecialEquipmentTable.Click += new System.EventHandler(this.StripMenu_Edit_CopySpecialEquipmentTable_Click);
+            // StripMenu_File_MergeDefaultRecord
             // 
+            this.StripMenu_File_MergeDefaultRecord.Name = "StripMenu_File_MergeDefaultRecord";
+            this.StripMenu_File_MergeDefaultRecord.Size = new System.Drawing.Size(250, 22);
+            this.StripMenu_File_MergeDefaultRecord.Text = "기록 업데이트(&M)";
+            this.StripMenu_File_MergeDefaultRecord.Click += new System.EventHandler(this.StripMenu_File_MergeDefaultRecord_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(247, 6);
             // 
             // DialogAlbumMasterShip
             // 
@@ -1820,7 +1849,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(816, 518);
             this.Name = "DialogAlbumMasterShip";
@@ -2001,5 +2030,8 @@
         private System.Windows.Forms.ToolStripMenuItem StripMenu_Edit_GoogleShipName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem StripMenu_Edit_CopySpecialEquipmentTable;
+        private Control.ImageLabel imageLabel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem StripMenu_File_MergeDefaultRecord;
     }
 }

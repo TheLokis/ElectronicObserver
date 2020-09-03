@@ -92,6 +92,17 @@ namespace ElectronicObserver.Data
             (int)this.RawData.api_weda[1],
             (int)this.RawData.api_wedb[0],
             (int)this.RawData.api_wedb[1]);
+
+        /// <summary>
+        /// Corolado Touch の演出用座標
+        /// </summary>
+        public Point CoroladoCutinLocation => new Point((int)RawData.api_pa[0], (int)RawData.api_pa[1]);
+
+        /// <summary>
+        /// 僚艦夜戦突撃 の演出用座標
+        /// </summary>
+        public Point KongoCutinLocation => new Point((int)RawData.api_pab[0], (int)RawData.api_pab[1]);
+
         public int ID => this.ShipID;
     }
 }

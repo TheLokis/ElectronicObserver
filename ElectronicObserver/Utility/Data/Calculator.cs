@@ -60,6 +60,7 @@ namespace ElectronicObserver.Utility.Data
             { EquipmentTypes.CarrierBasedBomber,    0.25 },
             { EquipmentTypes.SeaplaneFighter,       0.2 },
             { EquipmentTypes.Interceptor,           0.2 },
+            { EquipmentTypes.LandBasedAttacker,     0.5 },
         };
 
 
@@ -95,6 +96,12 @@ namespace ElectronicObserver.Utility.Data
 
 
             double levelBonus = _levelBonus.ContainsKey(category) ? _levelBonus[category] : 0;    // 改修レベル補正
+
+            if (category == EquipmentTypes.LandBasedAttacker)
+                levelBonus *= Math.Sqrt(level);
+            else
+                levelBonus *= level;
+
             double interceptorBonus = 0;    // 局地戦闘機の迎撃補正
             if (category == EquipmentTypes.Interceptor)
             {
@@ -117,7 +124,7 @@ namespace ElectronicObserver.Utility.Data
                 aircraftExp = _aircraftExpTable[aircraftLevel];
             }
 
-            return (int)((eq.AA + levelBonus * level + interceptorBonus) * Math.Sqrt(count)
+            return (int)((eq.AA + levelBonus + interceptorBonus) * Math.Sqrt(count)
                 + Math.Sqrt(aircraftExp / 10.0)
                 + (_aircraftLevelBonus.ContainsKey(category) ? _aircraftLevelBonus[category][aircraftLevel] : 0));
         }
@@ -1340,21 +1347,35 @@ namespace ElectronicObserver.Utility.Data
 
             // 固有カットイン
 
-            if (KCDatabase.Instance.MasterShips[shipID]?.ShipClass == 54)
+            switch (KCDatabase.Instance.MasterShips[shipID]?.ShipClass)
             {
-                // 秋月型
-                if (highangle >= 2 && radar >= 1)
-                {
-                    return 1;
-                }
-                if (highangle >= 1 && radar >= 1)
-                {
-                    return 2;
-                }
-                if (highangle >= 2)
-                {
-                    return 3;
-                }
+                case 54:    // 秋月型
+                    if (highangle >= 2 && radar >= 1)
+                    {
+                        return 1;
+                    }
+                    if (highangle >= 1 && radar >= 1)
+                    {
+                        return 2;
+                    }
+                    if (highangle >= 2)
+                    {
+                        return 3;
+                    }
+                    break;
+
+                case 91:    // Fletcher級
+                    if (highangle_america_gfcs >= 2)
+                        return 34;
+                    if (highangle_america_gfcs >= 1 && highangle_america >= 1)
+                        return 35;
+                    if (highangle_america >= 2)
+                    {
+                        if (radar_gfcs >= 1)
+                            return 36;
+                        return 37;
+                    }
+                    break;
             }
 
 
@@ -1382,6 +1403,7 @@ namespace ElectronicObserver.Utility.Data
                     break;
 
                 case 470:   // 霞改二乙
+                case 622:   // 夕張改二
                     if (highangle >= 1 && aagun_total >= 1)
                     {
                         if (aaradar >= 1)
@@ -1467,6 +1489,7 @@ namespace ElectronicObserver.Utility.Data
                 case 149:   // 金剛改二
                 case 591:   // 金剛改二丙
                 case 150:   // 比叡改二
+                case 592:   // 比叡改二丙
                 case 151:   // 榛名改二
                 case 152:   // 霧島改二
                 case 519:   // Jervis
@@ -1477,6 +1500,8 @@ namespace ElectronicObserver.Utility.Data
                 case 364:   // Warspite改
                 case 515:   // Ark Royal
                 case 393:   // Ark Royal改
+                case 520:   // Janus
+                case 893:   // Janus改
                     if (aarocket_english >= 2)
                         return 32;
                     if (aagun_pompom >= 1 && (maingunl_fcr >= 1 || aarocket_english >= 1))
@@ -1484,26 +1509,11 @@ namespace ElectronicObserver.Utility.Data
                     break;
 
                 case 579:   // Gotland改
+                case 630:   // Gotland andra
                     if (highangle >= 3)
                         return 30;
                     if (highangle >= 1 && aagun_medium >= 1)
                         return 33;
-                    break;
-
-                case 562:   // Johnston
-                case 689:   // Johnston改
-                case 596:   // Fletcher
-                case 692:   // Fletcher改
-                    if (highangle_america_gfcs >= 2)
-                        return 34;
-                    if (highangle_america_gfcs >= 1 && highangle_america >= 1)
-                        return 35;
-                    if (highangle_america >= 2)
-                    {
-                        if (radar_gfcs >= 1)
-                            return 36;
-                        return 37;
-                    }
                     break;
 
                 case 597:   // Atlanta

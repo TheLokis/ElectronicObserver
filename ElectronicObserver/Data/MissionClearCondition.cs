@@ -426,7 +426,7 @@ namespace ElectronicObserver.Data
                         .CheckFlagshipLevel(35)
                         .CheckLevelSum(210)
                         .CheckShipCount(6)
-                        .CheckAircraftCarrierCount(1)
+                        .CheckAircraftCarrierCount(1, includesSeaplaneTender: false)
                         .CheckShipCountByType(ShipTypes.SeaplaneTender, 1)
                         .CheckShipCountByType(ShipTypes.LightCruiser, 1)
                         .CheckSmallShipCount(2)
@@ -575,8 +575,8 @@ namespace ElectronicObserver.Data
             public MissionClearConditionResult CheckSmallShipCount(int leastCount) =>
                 this.CheckShipCount(s => s.MasterShip.ShipType == ShipTypes.Destroyer || s.MasterShip.ShipType == ShipTypes.Escort, leastCount, "(구축+해방)");
 
-            public MissionClearConditionResult CheckAircraftCarrierCount(int leastCount) =>
-                this.CheckShipCount(s => s.MasterShip.IsAircraftCarrier || s.MasterShip.ShipType == ShipTypes.SeaplaneTender, leastCount, "항모계");
+            public MissionClearConditionResult CheckAircraftCarrierCount(int leastCount, bool includesSeaplaneTender = true) =>
+                this.CheckShipCount(s => s.MasterShip.IsAircraftCarrier || (includesSeaplaneTender && s.MasterShip.ShipType == ShipTypes.SeaplaneTender), leastCount, "항모계");
 
             public MissionClearConditionResult CheckSubmarineCount(int leastCount) =>
                this.CheckShipCount(s => s.MasterShip.IsSubmarine, leastCount, "잠수함계");

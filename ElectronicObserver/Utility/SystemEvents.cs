@@ -26,7 +26,7 @@ namespace ElectronicObserver.Utility
 
 		internal static void OnUpdateTimerTick()
 		{
-			if (UpdateTimerEnabled)
+			if (UpdateTimerEnabled == true)
 				UpdateTimerTick();
 		}
 		internal static void OnSystemShuttingDown() { SystemShuttingDown(); }

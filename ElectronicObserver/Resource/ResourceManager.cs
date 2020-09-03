@@ -65,7 +65,8 @@ namespace ElectronicObserver.Resource
             ItemCatapult,
             ItemPresentBox,
             ItemActionReport,
-            FormArsenal,
+			ItemAviationMaterial,
+			FormArsenal,
             FormBattle,
             FormCompass,
             FormDock,
@@ -299,8 +300,9 @@ namespace ElectronicObserver.Resource
 				LoadImageFromArchive(this.Icons, archive, mstpath + @"Item/Catapult.png", "Item_Catapult");
 				LoadImageFromArchive(this.Icons, archive, mstpath + @"Item/PresentBox.png", "Item_PresentBox");
                 LoadImageFromArchive(this.Icons, archive, mstpath + @"Item/ActionReport.png", "Item_ActionReport");
+				LoadImageFromArchive(this.Icons, archive, mstpath + @"Item/AviationMaterial.png", "Item_AviationMaterial");
 
-                LoadImageFromArchive(this.Icons, archive, mstpath + @"Form/Arsenal.png", "Form_Arsenal");
+				LoadImageFromArchive(this.Icons, archive, mstpath + @"Form/Arsenal.png", "Form_Arsenal");
                 LoadImageFromArchive(this.Icons, archive, mstpath + @"Form/Battle.png", "Form_Battle");
 				LoadImageFromArchive(this.Icons, archive, mstpath + @"Form/Compass.png", "Form_Compass");
 				LoadImageFromArchive(this.Icons, archive, mstpath + @"Form/Dock.png", "Form_Dock");

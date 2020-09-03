@@ -49,7 +49,8 @@ namespace ElectronicObserver.Window.Dialog
             this.TitleEvasion.ImageList =
             this.TitleLOS.ImageList =
             this.TitleLuck.ImageList =
-            this.TitleSpeed.ImageList =
+			this.imageLabel1.ImageList =
+			this.TitleSpeed.ImageList =
             this.TitleRange.ImageList =
             this.Rarity.ImageList =
             this.Fuel.ImageList =
@@ -81,35 +82,36 @@ namespace ElectronicObserver.Window.Dialog
             this.Equipment5.ImageList =
 				ResourceManager.Instance.Equipments;
 
-            this.TitleHP.ImageIndex = (int)ResourceManager.IconContent.ParameterHP;
-            this.TitleFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
-            this.TitleTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
-            this.TitleAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
-            this.TitleArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
-            this.TitleASW.ImageIndex = (int)ResourceManager.IconContent.ParameterASW;
-            this.TitleEvasion.ImageIndex = (int)ResourceManager.IconContent.ParameterEvasion;
-            this.TitleLOS.ImageIndex = (int)ResourceManager.IconContent.ParameterLOS;
-            this.TitleLuck.ImageIndex = (int)ResourceManager.IconContent.ParameterLuck;
-            this.TitleSpeed.ImageIndex = (int)ResourceManager.IconContent.ParameterSpeed;
-            this.TitleRange.ImageIndex = (int)ResourceManager.IconContent.ParameterRange;
-            this.Fuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-            this.Ammo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-            this.TitleBuildingTime.ImageIndex = (int)ResourceManager.IconContent.FormArsenal;
-            this.MaterialFuel.ImageIndex = (int)ResourceManager.IconContent.ResourceFuel;
-            this.MaterialAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-            this.MaterialSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-            this.MaterialBauxite.ImageIndex = (int)ResourceManager.IconContent.ResourceBauxite;
-            this.PowerUpFirepower.ImageIndex = (int)ResourceManager.IconContent.ParameterFirepower;
-            this.PowerUpTorpedo.ImageIndex = (int)ResourceManager.IconContent.ParameterTorpedo;
-            this.PowerUpAA.ImageIndex = (int)ResourceManager.IconContent.ParameterAA;
-            this.PowerUpArmor.ImageIndex = (int)ResourceManager.IconContent.ParameterArmor;
-            this.RemodelBeforeAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-            this.RemodelBeforeSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
-            this.RemodelAfterAmmo.ImageIndex = (int)ResourceManager.IconContent.ResourceAmmo;
-            this.RemodelAfterSteel.ImageIndex = (int)ResourceManager.IconContent.ResourceSteel;
+            this.TitleHP.ImageIndex				= (int)ResourceManager.IconContent.ParameterHP;
+            this.TitleFirepower.ImageIndex		= (int)ResourceManager.IconContent.ParameterFirepower;
+            this.TitleTorpedo.ImageIndex		= (int)ResourceManager.IconContent.ParameterTorpedo;
+            this.TitleAA.ImageIndex				= (int)ResourceManager.IconContent.ParameterAA;
+            this.TitleArmor.ImageIndex			= (int)ResourceManager.IconContent.ParameterArmor;
+            this.TitleASW.ImageIndex			= (int)ResourceManager.IconContent.ParameterASW;
+            this.TitleEvasion.ImageIndex		= (int)ResourceManager.IconContent.ParameterEvasion;
+            this.TitleLOS.ImageIndex			= (int)ResourceManager.IconContent.ParameterLOS;
+            this.TitleLuck.ImageIndex			= (int)ResourceManager.IconContent.ParameterLuck;
+			this.imageLabel1.ImageIndex			= (int)ResourceManager.IconContent.ParameterAccuracy;
+			this.TitleSpeed.ImageIndex			= (int)ResourceManager.IconContent.ParameterSpeed;
+            this.TitleRange.ImageIndex			= (int)ResourceManager.IconContent.ParameterRange;
+            this.Fuel.ImageIndex				= (int)ResourceManager.IconContent.ResourceFuel;
+            this.Ammo.ImageIndex				= (int)ResourceManager.IconContent.ResourceAmmo;
+            this.TitleBuildingTime.ImageIndex	= (int)ResourceManager.IconContent.FormArsenal;
+            this.MaterialFuel.ImageIndex		= (int)ResourceManager.IconContent.ResourceFuel;
+            this.MaterialAmmo.ImageIndex		= (int)ResourceManager.IconContent.ResourceAmmo;
+            this.MaterialSteel.ImageIndex		= (int)ResourceManager.IconContent.ResourceSteel;
+            this.MaterialBauxite.ImageIndex		= (int)ResourceManager.IconContent.ResourceBauxite;
+            this.PowerUpFirepower.ImageIndex	= (int)ResourceManager.IconContent.ParameterFirepower;
+            this.PowerUpTorpedo.ImageIndex		= (int)ResourceManager.IconContent.ParameterTorpedo;
+            this.PowerUpAA.ImageIndex			= (int)ResourceManager.IconContent.ParameterAA;
+            this.PowerUpArmor.ImageIndex		= (int)ResourceManager.IconContent.ParameterArmor;
+            this.RemodelBeforeAmmo.ImageIndex	= (int)ResourceManager.IconContent.ResourceAmmo;
+            this.RemodelBeforeSteel.ImageIndex	= (int)ResourceManager.IconContent.ResourceSteel;
+            this.RemodelAfterAmmo.ImageIndex	= (int)ResourceManager.IconContent.ResourceAmmo;
+            this.RemodelAfterSteel.ImageIndex	= (int)ResourceManager.IconContent.ResourceSteel;
             this.TitleAirSuperiority.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter;
-            this.TitleDayAttack.ImageIndex = (int)ResourceManager.EquipmentContent.Seaplane;
-            this.TitleNightAttack.ImageIndex = (int)ResourceManager.EquipmentContent.Torpedo;
+            this.TitleDayAttack.ImageIndex		= (int)ResourceManager.EquipmentContent.Seaplane;
+            this.TitleNightAttack.ImageIndex	= (int)ResourceManager.EquipmentContent.Torpedo;
 
             this.ParameterLevel.Value = this.ParameterLevel.Maximum = ExpTable.ShipMaximumLevel;
 
@@ -328,9 +330,8 @@ namespace ElectronicObserver.Window.Dialog
             //main parameter
             this.TableParameterMain.SuspendLayout();
 
-			if (!ship.IsAbyssalShip)
+			if (ship.IsAbyssalShip == false)
 			{
-
                 this.TitleParameterMin.Text = "초기값";
                 this.TitleParameterMax.Text = "최대값";
 
@@ -367,32 +368,35 @@ namespace ElectronicObserver.Window.Dialog
 			else
 			{
 
-				int hp = ship.HPMin;
-				int firepower = ship.FirepowerMax;
-				int torpedo = ship.TorpedoMax;
-				int aa = ship.AAMax;
-				int armor = ship.ArmorMax;
-				int asw = ship.ASW != null && ship.ASW.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.ASW.Maximum : 0;
-				int evasion = ship.Evasion != null && ship.Evasion.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.Evasion.Maximum : 0;
-				int los = ship.LOS != null && ship.LOS.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.LOS.Maximum : 0;
-				int luck = ship.LuckMax;
+				int hp			= ship.HPMin;
+				int firepower	= ship.FirepowerMax;
+				int torpedo		= ship.TorpedoMax;
+				int aa			= ship.AAMax;
+				int armor		= ship.ArmorMax;
+                int asw			= ship.ASW?.IsDetermined ?? false ? ship.ASW.Maximum : 0;
+                int evasion		= ship.Evasion?.IsDetermined ?? false ? ship.Evasion.Maximum : 0;
+                int los			= ship.LOS?.IsDetermined ?? false ? ship.LOS.Maximum : 0;
+                int luck		= ship.LuckMax;
+				int accuracy	= 0;
 
 				if (ship.DefaultSlot != null)
 				{
 					int count = ship.DefaultSlot.Count;
 					for (int i = 0; i < count; i++)
 					{
-						EquipmentDataMaster eq = KCDatabase.Instance.MasterEquipments[ship.DefaultSlot[i]];
-						if (eq == null) continue;
+                        var eq = KCDatabase.Instance.MasterEquipments[ship.DefaultSlot[i]];
+                        if (eq == null)
+                            continue;
 
-						firepower += eq.Firepower;
-						torpedo += eq.Torpedo;
-						aa += eq.AA;
-						armor += eq.Armor;
-						asw += eq.ASW;
-						evasion += eq.Evasion;
-						los += eq.LOS;
-						luck += eq.Luck;
+                        firepower	+= eq.Firepower;
+						torpedo		+= eq.Torpedo;
+						aa			+= eq.AA;
+						armor		+= eq.Armor;
+						asw			+= eq.ASW;
+						evasion		+= eq.Evasion;
+						los			+= eq.LOS;
+						luck		+= eq.Luck;
+						accuracy	+= eq.Accuracy;
 					}
 				}
 
@@ -416,19 +420,46 @@ namespace ElectronicObserver.Window.Dialog
                 this.ArmorMin.Text = ship.ArmorMax.ToString();
                 this.ArmorMax.Text = armor.ToString();
 
-                this.ASWMin.Text = ship.ASW != null && ship.ASW.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.ASW.Maximum.ToString() : "???";
-                this.ASWMax.Text = asw.ToString();
+				if (ship.ASW?.IsDetermined ?? false)
+                {
+                    this.ASWMin.Text = ship.ASW.Maximum.ToString();
+                    this.ASWMax.Text = asw.ToString();
+                }
+                else
+                {
+                    this.ASWMin.Text = "???";
+                    this.ASWMax.Text = asw.ToString("+0;-0");
+                }
 
-                this.EvasionMin.Text = ship.Evasion != null && ship.Evasion.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.Evasion.Maximum.ToString() : "???";
-                this.EvasionMax.Text = evasion.ToString();
+                if (ship.Evasion?.IsDetermined ?? false)
+                {
+                    this.EvasionMin.Text = ship.Evasion.Maximum.ToString();
+                    this.EvasionMax.Text = evasion.ToString();
+                }
+                else
+                {
+                    this.EvasionMin.Text = "???";
+                    this.EvasionMax.Text = evasion.ToString("+0;-0");
+                }
 
-                this.LOSMin.Text = ship.LOS != null && ship.LOS.Maximum != ShipParameterRecord.Parameter.MaximumDefault ? ship.LOS.Maximum.ToString() : "???";
-                this.LOSMax.Text = los.ToString();
+                if (ship.LOS?.IsDetermined ?? false)
+                {
+                    this.LOSMin.Text = ship.LOS.Maximum.ToString();
+                    this.LOSMax.Text = los.ToString();
+                }
+                else
+                {
+                    this.LOSMin.Text = "???";
+                    this.LOSMax.Text = los.ToString("+0;-0");
+                }
 
                 this.LuckMin.Text = ship.LuckMax > 0 ? ship.LuckMax.ToString() : "???";
                 this.LuckMax.Text = luck > 0 ? luck.ToString() : "???";
 
-			}
+                this.imageLabel1.Text = accuracy.ToString("+0;-0");
+                this.imageLabel1.Visible = true;
+
+            }
             this.UpdateLevelParameter(ship.ShipID);
 
             this.TableParameterMain.ResumeLayout();
@@ -886,6 +917,7 @@ namespace ElectronicObserver.Window.Dialog
 				ship.NeedCatapult > 0 ? (int)ResourceManager.IconContent.ItemCatapult :
 				ship.NeedActionReport > 0 ? (int)ResourceManager.IconContent.ItemActionReport :
 				ship.NeedBlueprint > 0 ? (int)ResourceManager.IconContent.ItemBlueprint :
+				ship.NeedAviationMaterial > 0 ? (int)ResourceManager.IconContent.ItemAviationMaterial :
 				-1;
 		}
 
@@ -898,8 +930,10 @@ namespace ElectronicObserver.Window.Dialog
 				sb.AppendLine("시제갑판캐터펄트: " + ship.NeedCatapult);
 			if (ship.NeedActionReport > 0)
 				sb.AppendLine("전투상보: " + ship.NeedActionReport);
+            if (ship.NeedAviationMaterial > 0)
+                sb.AppendLine("신형항공병장자재: " + ship.NeedAviationMaterial);
 
-			return sb.ToString();
+            return sb.ToString();
 		}
 
 
@@ -915,7 +949,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,결혼내구,최대내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
+						sw.WriteLine("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,항공자재,개장단계,초기내구,결혼내구,최대내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠,최대대잠,초기회피,최대회피,초기색적,최대색적,운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개조화력,개조뇌장,개조대공,개조장갑,드롭대사,도감대사,소비연료,소비탄약,대사,リソース名,이미지버전,음성버전,모항음성버전");
 
                         foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
@@ -938,6 +972,7 @@ namespace ElectronicObserver.Window.Dialog
 								ship.NeedBlueprint > 0 ? ship.NeedBlueprint + "장" : "-",
 								ship.NeedCatapult > 0 ? ship.NeedCatapult + "개" : "-",
 								ship.NeedActionReport > 0 ? ship.NeedActionReport + "장" : "-",
+								ship.NeedAviationMaterial > 0 ? ship.NeedAviationMaterial + "개" : "-",
 								ship.RemodelTier,
 								ship.HPMin,
 								ship.HPMaxMarried,
@@ -1021,7 +1056,7 @@ namespace ElectronicObserver.Window.Dialog
 					using (StreamWriter sw = new StreamWriter(this.SaveCSVDialog.FileName, false, Utility.Configuration.Config.Log.FileEncoding))
 					{
 
-						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,개장단계,초기내구,최대내구,결혼내구,개장내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠최소,초기대잠최대,최대대잠,대잠{0}최소,대잠{0}최대,초기회피최소,초기회피최대,최대회피,회피{0}최소,회피{0}최대,초기색적최소,초기색적최대,최대색적,색적{0}최소,색적{0}최대,초기운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개수화력,개수뇌장,개수대공,개수장갑,드롭대사,도감대사,소모연료,소모탄약,음성,리소스이름,이미지버전,음성버전,모항음성버전", ExpTable.ShipMaximumLevel));
+						sw.WriteLine(string.Format("함선ID,도감번호,함급,함종,이름,음독,정렬순서,개장전,개장후,개장Lv,개장탄약,개장강재,개장설계도,캐터펄트,전투상보,항공자재,개장단계,초기내구,최대내구,결혼내구,개장내구,초기화력,최대화력,초기뇌장,최대뇌장,초기대공,최대대공,초기장갑,최대장갑,초기대잠최소,초기대잠최대,최대대잠,대잠{0}최소,대잠{0}최대,초기회피최소,초기회피최대,최대회피,회피{0}최소,회피{0}최대,초기색적최소,초기색적최대,최대색적,색적{0}최소,색적{0}최대,초기운,최대운,속력,사정,레어도,슬롯수,탑재수1,탑재수2,탑재수3,탑재수4,탑재수5,초기장비1,초기장비2,초기장비3,초기장비4,초기장비5,건조시간,해체연료,해체탄약,해체강재,해체보키,개수화력,개수뇌장,개수대공,개수장갑,드롭대사,도감대사,소모연료,소모탄약,음성,리소스이름,이미지버전,음성버전,모항음성버전", ExpTable.ShipMaximumLevel));
 
 						foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
@@ -1042,6 +1077,7 @@ namespace ElectronicObserver.Window.Dialog
 								ship.NeedBlueprint,
 								ship.NeedCatapult,
 								ship.NeedActionReport,
+								ship.NeedAviationMaterial,
 								ship.RemodelTier,
 								ship.HPMin,
 								ship.HPMax,
@@ -1452,8 +1488,10 @@ namespace ElectronicObserver.Window.Dialog
 						append.Add("캐터펄트 필요");
 					if (before.NeedActionReport > 0)
 						append.Add("전투상보 필요");
+                    if (ship.NeedAviationMaterial > 0)
+                        append.Add("신형항공병장자재 필요");
 
-					sb.AppendFormat("개장전: {0} Lv. {1} ({2})\r\n",
+                    sb.AppendFormat("개장전: {0} Lv. {1} ({2})\r\n",
 						before.NameWithClass, before.RemodelAfterLevel, string.Join(", ", append));
 				}
 				else
@@ -1473,8 +1511,10 @@ namespace ElectronicObserver.Window.Dialog
 						append.Add("캐터펄트 필요");
 					if (ship.NeedActionReport > 0)
 						append.Add("전투상보 필요");
+                    if (ship.NeedAviationMaterial > 0)
+                        append.Add("신형항공병장자재 필요");
 
-					sb.AppendFormat("개장후: {0} Lv. {1} ({2})\r\n",
+                    sb.AppendFormat("개장후: {0} Lv. {1} ({2})\r\n",
 						ship.RemodelAfterShip.NameWithClass, ship.RemodelAfterLevel, string.Join(", ", append));
 				}
 				else
@@ -1656,6 +1696,11 @@ namespace ElectronicObserver.Window.Dialog
         }
 
         private void BasePanelShipGirl_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void StripMenu_File_MergeDefaultRecord_Click(object sender, EventArgs e)
         {
 
         }

@@ -200,14 +200,14 @@ namespace ElectronicObserver.Data
 		/// <summary> 魚雷系かどうか </summary>
 		public bool IsTorpedo => this.CategoryType == EquipmentTypes.Torpedo || this.CategoryType == EquipmentTypes.SubmarineTorpedo;
 
-		/// <summary> 後期型魚雷かどうか </summary>
-		public bool IsLateModelTorpedo =>
+        /// <summary> 後期型魚雷かどうか </summary>
+        public bool IsLateModelTorpedo =>
             this.EquipmentID == 213 ||   // 後期型艦首魚雷(6門)
-            this.EquipmentID == 214;     // 熟練聴音員+後期型艦首魚雷(6門)
+            this.EquipmentID == 214 ||   // 熟練聴音員+後期型艦首魚雷(6門)
+            this.EquipmentID == 383;     // 後期型53cm艦首魚雷(8門)
 
-
-		/// <summary> 高角砲かどうか </summary>
-		public bool IsHighAngleGun => this.IconType == 16;
+        /// <summary> 高角砲かどうか </summary>
+        public bool IsHighAngleGun => this.IconType == 16;
 
 		/// <summary> 高角砲+高射装置かどうか </summary>
 		public bool IsHighAngleGunWithAADirector => this.IsHighAngleGun && this.AA >= 8;

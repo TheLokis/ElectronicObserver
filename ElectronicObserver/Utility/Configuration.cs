@@ -751,7 +751,7 @@ namespace ElectronicObserver.Utility
                 public List<SerializableColor> SallyAreaColorScheme { get; set; }
 
                 [IgnoreDataMember]
-                private readonly List<SerializableColor> DefaultSallyAreaColorScheme = new List<SerializableColor>()
+                internal readonly List<SerializableColor> DefaultSallyAreaColorScheme = new List<SerializableColor>()
                 {
                     SerializableColor.UIntToColor(0xfff0f0f0),
                     SerializableColor.UIntToColor(0xffffdddd),
@@ -761,6 +761,13 @@ namespace ElectronicObserver.Utility
                     SerializableColor.UIntToColor(0xffccffff),
                     SerializableColor.UIntToColor(0xffffccff),
                     SerializableColor.UIntToColor(0xffffffff),
+                    SerializableColor.UIntToColor(0xffffead5),
+                    SerializableColor.UIntToColor(0xffe7c8c8),
+                    SerializableColor.UIntToColor(0xffe7e7b8),
+                    SerializableColor.UIntToColor(0xffc8e7c8),
+                    SerializableColor.UIntToColor(0xffb8e7e7),
+                    SerializableColor.UIntToColor(0xffc8c8e7),
+                    SerializableColor.UIntToColor(0xffe7b8e7),
                 };
 
                 public ConfigFormFleet()
@@ -1782,6 +1789,9 @@ namespace ElectronicObserver.Utility
             if (dt <= DateTimeHelper.CSVStringToTime("2018/08/17 23:00:00"))
                 this.Update312_RemoveObsoleteRegistry();
 
+            if (dt <= DateTimeHelper.CSVStringToTime("2020/06/07 23:00:00"))
+                Update460_AddSallyAreaColorScheme();
+
             Config.VersionUpdateTime = DateTimeHelper.TimeToCSVString(SoftwareInformation.UpdateTime);
 		}
 
@@ -2022,7 +2032,13 @@ namespace ElectronicObserver.Utility
 			}
 
 		}
-	}
-
-
+        private void Update460_AddSallyAreaColorScheme()
+        {
+            if (Config.FormFleet.SallyAreaColorScheme.SequenceEqual(Config.FormFleet.DefaultSallyAreaColorScheme.Take(8)))
+            {
+                Config.FormFleet.SallyAreaColorScheme = Config.FormFleet.DefaultSallyAreaColorScheme.ToList();
+                Utility.Logger.Add(1, "<= ver. 4.6.0 신규기능: 출격해역 색상 추가 작업이 완료되었습니다.");
+            }
+        }
+    }
 }

@@ -514,7 +514,8 @@ namespace ElectronicObserver.Window
                     this.Name.Tag = ship.ShipID;
                     this._toolTipInfo.SetToolTip(this.Name,
                         string.Format(
-                            "{0} {1}\r\n화력: {2}/{3}\r\n뇌장: {4}/{5}\r\n대공: {6}/{7}\r\n장갑: {8}/{9}\r\n대잠: {10}/{11}\r\n회피: {12}/{13}\r\n색적: {14}/{15}\r\n운: {16}\r\n명중: {17:+#;-#;+0}\r\n폭장: {18:+#;-#;+0}\r\n사정: {19} / 속력: {20}\r\n(우클릭으로 도감에)\n",
+                            "{0}{1} {2}\r\n화력: {3}/{4}\r\n뇌장: {5}/{6}\r\n대공: {7}/{8}\r\n장갑: {9}/{10}\r\n대잠: {11}/{12}\r\n회피: {13}/{14}\r\n색적: {15}/{16}\r\n운: {17}\r\n명중: {18:+#;-#;+0}\r\n폭장: {19:+#;-#;+0}\r\n사정: {20} / 속력: {21}\r\n(우클릭으로 도감에)\n",
+                            ship.SallyArea > 0 ? $"[{ship.SallyArea}] " : "",
                             ship.MasterShip.ShipTypeName, ship.NameWithLevel,
                             ship.FirepowerBase, ship.FirepowerTotal,
                             ship.TorpedoBase, ship.TorpedoTotal,

@@ -114,13 +114,17 @@ namespace ElectronicObserver.Data
         /// </summary>
         public int NeedActionReport { get; internal set; }
 
+        /// <summary>
+        /// 改装に新型航空兵装資材が必要かどうか
+        /// </summary>
+        public int NeedAviationMaterial { get; internal set; }
 
-		#region Parameters
+        #region Parameters
 
-		/// <summary>
-		/// 耐久初期値
-		/// </summary>
-		public int HPMin
+        /// <summary>
+        /// 耐久初期値
+        /// </summary>
+        public int HPMin
 		{
 			get
 			{

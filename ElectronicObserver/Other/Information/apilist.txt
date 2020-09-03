@@ -71,6 +71,8 @@ api_start2/getData	：艦娘・装備固有データその他
 		api_battle_d	：
 		api_weda		：ケッコンカッコカリの顔枠の左上座標
 		api_wedb		：〃幅[0]と高さ[1]
+		api_pa			：Colorado カットインのエフェクト座標　非対応なら [0, 0]
+		api_pab			：僚艦夜戦突撃演出用の座標　非対応なら [0, 0]
 	
 	api_mst_slotitem_equiptype		：装備カテゴリ
 		api_id			：カテゴリID(装備のtype[2]に対応)
@@ -366,6 +368,7 @@ api_start2/getData	：艦娘・装備固有データその他
 				29=英戦闘機
 				30=陸上対潜哨戒機
 				31=陸上偵察機
+				32=瑞雲
 
 		api_taik		：耐久(0)
 		api_souk		：装甲
@@ -387,9 +390,8 @@ api_start2/getData	：艦娘・装備固有データその他
 		api_leng		：射程
 		api_cost		：航空機のコスト　航空機でない装備には存在しない
 		api_distance	：航空機の航続距離　航空機でない装備には存在しない
-		api_rare		：レアリティ
+		api_rare		：レアリティ　0=コモン, 1=レア, 2=ホロ, 3=Sホロ, 4=SSホロ, 5=SSホロ', 6=SSホロ+, 7=SS++
 		api_broken		：廃棄資材
-		api_info		：図鑑情報
 		api_usebull		：
 		api_version		：グラフィックバージョン? 2以上のもののみ存在
 
@@ -501,6 +503,7 @@ api_start2/getData	：艦娘・装備固有データその他
 		api_drawing_count		：改装設計図　所要枚数
 		api_catapult_count		：試製甲板カタパルト　所要個数
 		api_report_count		：戦闘詳報　所要枚数
+		api_aviation_mat_count	：新型航空兵装資材　所要個数
 		api_sortno				：? (概ね図鑑IDだが、霞(改/二/乙), 利根(改/二), 筑摩(改/二)などで異なる)
 
 	api_mst_bgm			：母港BGMデータ？
@@ -722,22 +725,17 @@ Request.api_req_kousyou/createitem	：装備開発
 	api_item2			：投入弾薬
 	api_item3			：投入鋼材
 	api_item4			：投入ボーキサイト
+	api_multiple_flag	：0=通常開発 1=三連開発
 
-api_req_kousyou/createitem	：装備開発(成功)
-	api_create_flag		：開発成功(1)
-	api_shizai_flag		：開発資材消費フラグ
-	api_slot_item		：開発装備データ
-		api_id			：装備固有ID
-		api_slotitem_id	：装備ID
-	api_material		：各種資源量
-	api_type3			：装備カテゴリ(api_mst_slotitem.api_type[2] 参照)
-	api_unsetslot		：同カテゴリのアイテムリスト？
-
-api_req_kousyou/createitem	：装備開発(失敗)
-	api_create_flag		：開発失敗(0)
-	api_shizai_flag		：開発資材消費フラグ
-	api_fdata			：成功するはずだったアイテムID？文字列型, コンマ区切りで複数の値を持つ
-	api_material		：各種資源量
+api_req_kousyou/createitem	：装備開発
+	api_create_flag		：開発成否　0=失敗 1=成功　1つでも成功すれば 1
+	api_material		：各種資源量　[8]
+	api_get_items		：開発装備データ　[試行回数]
+		api_id			：装備固有ID　-1=失敗
+		api_slotitem_id	：装備ID　-1=失敗
+	api_unset_items		：更新されたカテゴリのアイテムリスト　[更新されたカテゴリ数]　失敗した場合は null
+		api_type3		：装備カテゴリID
+		api_slot_list	：装備固有IDリスト
 
 
 Request.api_req_kousyou/destroyship	：艦船解体
@@ -866,17 +864,15 @@ api_get_member/record	：戦績表示
 
 Request.api_get_member/questlist	：任務
 	api_tab_id		：開いたタブの種別　0=全て, 1=デイリー, 2=ウィークリー, 3=マンスリー, 4=単発, 5=他, 9=遂行中
-	api_page_no		：開いたページ　1から始まる
 
 api_get_member/questlist	：任務
 	api_count				：任務数
 	api_completed_kind		：大淀のボイスフラグ 0=通常, 1=任務達成時
-	api_page_count			：ページ数
-	api_disp_page			：現在表示しているページ
-	api_list				：任務一覧　存在しないエリアはオブジェクトではなく-1になる; 任務完遂時, ページ遷移時はnull
+	api_list				：任務一覧　存在しないエリアはオブジェクトではなく-1になる; 任務完遂等、0件の時は null
 		api_no				：任務ID
-		api_category		：任務カテゴリ　1=編成, 2=出撃, 3=演習, 4=遠征, 5=補給/入渠, 6=工廠, 7=改装, 8=出撃(2), 9=その他?
-		api_type			：任務出現タイプ　1=デイリー, 2=ウィークリー, 3=マンスリー, 4=単発, 5=他(輸送5と空母3,クォータリー)
+		api_category		：任務カテゴリ　1=編成, 2=出撃, 3=演習, 4=遠征, 5=補給/入渠, 6=工廠, 7=改装, 8=出撃(2), 9=出撃(3)
+		api_type			：任務出現タイプ　1=デイリー, 2=ウィークリー, 3=マンスリー, 4=単発, 5=他(輸送5と空母3,クォータリー/イヤーリー)
+		api_label_type		：周期アイコン種別　1=単発, 2=デイリー, 3=ウィークリー, 6=マンスリー, 7=他(輸送5と空母3,クォータリー), 102=イヤーリー(2月), 103=イヤーリー(3月)
 		api_state			：状態　1=未受領, 2=遂行中, 3=達成
 		api_title			：タイトル
 		api_detail			：説明 "<br>"で改行
@@ -887,7 +883,7 @@ api_get_member/questlist	：任務
 			api_mst_id		：ID?
 			api_count		：個数
 		api_voice_id		：達成時に再生されるボイスのID　再生されるもののみ存在　URLは sound/kc9999/<api_voice_id>.mp3　任務ID + 1000?
-		api_get_material	：獲得資材
+		api_get_material	：達成時の獲得資源 [4]
 		api_bonus_flag		：1=通常, 2=艦娘
 		api_progress_flag	：進捗　0=空白(達成含む), 1=50%以上達成, 2=80%以上達成
 		api_invalid_flag	：機種転換不能フラグ　0=可能, 1=不可能(装備がロックされている)
@@ -1047,6 +1043,21 @@ api_get_member/picture_book	：艦船図鑑　図鑑登録済みのもののみ�
 			89=Gotland級
 			90=日進型
 			91=Fletcher級
+			92=L.d.S.D.d.Abruzzi級
+			93=Colorado級
+			94=御蔵型
+			95=Northampton級
+			96=Perth級
+			97=陸軍特種船(R1)
+			98=De Ruyter級
+			99=Atlanta級
+			100=迅鯨型
+			101=松型
+			102=South Dakota級？
+			103=巡潜丙型
+			104=丁型海防艦？
+			105=Yorktown級？
+			106=St. Louis級？
 		api_cnum			：艦番
 		api_taik			：耐久
 		api_souk			：装甲
@@ -1083,14 +1094,17 @@ api_get_member/picture_book	：装備図鑑　図鑑登録済みのもののみ�
 
 
 Request.api_req_kaisou/powerup	：近代化改修
-	api_id_items		：素材の艦船ID？
+	api_id_items		：素材の艦船IDリスト　,区切り
 	api_id				：対象艦船ID
+	api_slot_dest_flag	：装備を廃棄するか　0=しない　1=する
 
 api_req_kaisou/powerup			：近代化改修
-	api_powerup_flag	：改修成功/失敗
+	api_powerup_flag	：改修成功フラグ　0=失敗　1=成功
 	api_ship			：改修艦のデータ　port.api_shipに準じる
-	api_deck			：艦隊のデータ　port.api_deck_portに準じる
-
+	api_deck			：艦隊のデータ[保有艦隊数?]　port.api_deck_portに準じる
+	api_unset_list		：未装備の装備リスト[]　外した装備があるときのみ存在　更新されたカテゴリのみ
+		api_type3No			：装備カテゴリID
+		api_slot_list		：未装備の装備IDリスト[]
 
 Request.api_req_mission/result		：遠征帰投
 	api_deck_id				：対象の艦隊ID
@@ -1177,7 +1191,7 @@ Request.api_req_hensei/preset_register		：編成登録
 	api_preset_no	：登録先
 
 api_req_hensei/preset_register		：編成登録
-	api_data			：編成データ　preset_deck 参照
+	api_data			：編成データ　更新したもの単体(preset_deck での 1 にあたる)
 
 Request.api_req_hensei/preset_select		：編成展開
 	api_deck_id		：展開する艦隊ID
@@ -1501,6 +1515,7 @@ api_req_map/start		：出撃　同じメンバはnextのほうが情報が新し
 							 9=航空偵察
 							10=長距離空襲戦
 							13=レーダー射撃
+							14=泊地
 		api_passed		：1=通行済み　初期地点は常に0
 	api_rashin_flg		：
 	api_rashin_id		：
@@ -1546,7 +1561,7 @@ api_req_map/next		：進撃
 							 7=航空戦or航空偵察
 							 8=船団護衛成功
 							 9=揚陸地点
-							10=長距離空襲戦
+							10=泊地
 	api_event_kind		：イベント種別　
 							0=非戦闘セル, 1=通常戦闘, 2=夜戦, 3=夜昼戦, 4=航空戦, 5=敵連合艦隊戦, 6=長距離空襲戦, 7=夜昼戦(対連合艦隊), 8=レーダー射撃
 							api_event_id=1|6(気のせいだった)時は　
@@ -1645,8 +1660,8 @@ api_req_map/next		：進撃
 			3=「空襲により基地航空隊に地上撃破の損害が発生しました！」
 			4=「空襲による基地の損害はありません。」
 		api_m1		：('16秋イベ) 1=スタート地点解放ギミック発動　それ以外の場合は存在しない
-	api_m1		：('17夏イベ) 1=ルート解放など　通常は存在しない
-
+	api_m1			：イベント海域ギミック開放フラグ　1=ルート解放など　進捗によって 2 の場合もある　通常は存在しない
+	api_anchorage_flag	：泊地セルでのみ存在　0=修理不可 1=修理可能
 
 
 Request.api_req_sortie/battle	：通常艦隊　昼戦
@@ -1811,6 +1826,9 @@ api_req_sortie/battle	：通常艦隊　昼戦
 							7=空母カットイン
 							100=Nelson Touch
 							101=一斉射かッ…胸が熱いな！
+							102=長門、いい？ いくわよ！ 主砲一斉射ッ！
+							200=瑞雲立体攻撃
+							201=海空立体攻撃
 		api_df_list		：防御艦のインデックス　[][攻撃回数]　0基点
 		api_si_list		：表示装備ID [][装備数]　数値と文字列が混在しているため注意
 		api_cl_list		：クリティカルフラグ　[][攻撃回数]　0=ミス, 1=命中, 2=クリティカル
@@ -1864,6 +1882,7 @@ api_req_battle_midnight/battle		：通常艦隊　夜戦
 								8=駆逐カットイン(魚雷/見張員/電探)
 								100=Nelson Touch
 								101=一斉射かッ…胸が熱いな！
+								102=長門、いい？ いくわよ！ 主砲一斉射ッ！
 		api_damage			：与ダメージ　[][攻撃回数]　単発カットイン攻撃では [ダメージ, -1, -1] になる
 
 
@@ -2233,7 +2252,8 @@ api_req_sortie/battleresult	：通常艦隊　戦闘結果
 	api_escape				：退避艦　api_escape_flag=0の時 null
 		api_escape_idx		：退避艦のインデックス　[対象艦数]　1基点　実際は[0]が対象となる
 	api_next_map_ids		：次に出撃可能になった海域ID[]　海域解放時のみ存在　通常海域は数値、イベント海域は文字列なので注意
-	api_m1					：('16秋イベ)ギミック解除フラグ?　1=解除　それ以外の場合存在しない
+	api_m1					：('16秋イベ)ギミック解除フラグ　1=解除(段階によって 1 以外の場合もある)　それ以外の場合存在しない
+	api_m2					：('19夏イベ)ギミック解除フラグ　1=解除(〃) それ以外の場合存在しない
 
 
 api_req_sortie/goback_port		：単艦退避受諾
@@ -3278,7 +3298,7 @@ Request.api_req_member/itemuse		：アイテム使用
 	api_force_flag			：0=資源上限確認ダイアログを表示 1=非表示
 								上限突破する場合、これが 0 なら response で api_caution_flag が 1 になる(まだ使われない)。それで確認ダイアログを出し、yes ならば api_force_flag=1 で再送する(ここで実際に消費される)
 
-api_req_member/itemuse				：アイテム使用
+api_req_member/itemuse				：アイテム使用　api_data:null になることもある（司令部要員）ので注意
 	api_caution_flag	：確認ダイアログ(資源上限により無駄が出ますが本当に使いますか？)表示フラグ？　0=非表示 1=表示?
 	api_flag			：1=アイテム 2=資源 3=両方
 	api_getitem			：入手アイテム[]　アイテムがない場合は [null] になる
@@ -3369,6 +3389,19 @@ Request.api_req_member/set_oss_condition		：艦船フィルタ変更　母港�
 
 api_req_member/set_oss_condition		：艦船フィルタ変更
 	(情報なし)
+
+Request.api_req_member/set_friendly_request		：友軍艦隊要請
+	api_request_flag	：拒否=0, 要請=1
+	api_request_type	：通常=0, 強力=1
+
+Request.api_req_member/set_friendly_request		：友軍艦隊要請
+	(情報なし)
+
+
+api_req_map/anchorage_repair	：緊急泊地修理
+	api_used_ship			：発動させた艦娘のID (固有IDではない; 450=秋津洲改 など)
+	api_repair_ships		：修理される艦娘の固有ID []
+	api_ship_data			：艦船データ　[出撃艦隊の艦船数]　api_port/port.api_ship に準じる　
 
 
 
@@ -3483,3 +3516,4 @@ api_req_air_corps/set_action
 
 出撃後、発進準備完了したとき
 api_req_map/start_air_base
+
