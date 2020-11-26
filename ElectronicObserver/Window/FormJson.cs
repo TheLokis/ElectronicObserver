@@ -476,11 +476,11 @@ namespace ElectronicObserver.Window
 
 				if (data.IsObject)
 				{
-					foreach (string p in data.GetDynamicMemberNames())
-					{
-						BuildCSVHeader(sb, currentPath + "." + p, data[p]);
-					}
-					return sb;
+                    foreach (KeyValuePair<string, dynamic> p in data)
+                    {
+                        BuildCSVHeader(sb, currentPath + "." + p.Key, p.Value);
+                    }
+                    return sb;
 
 				}
 				else if (data.IsArray)

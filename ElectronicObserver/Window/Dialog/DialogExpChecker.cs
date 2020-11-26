@@ -255,12 +255,16 @@ namespace ElectronicObserver.Window.Dialog
 			{
 				if (selectedShip.SlotSize >= 4)
 				{
-					ASWEquipmentPairs.Add(openingASWborder - 51, "[4식소나x3, 시제15cm9연장대잠분진포]");
+                    ASWEquipmentPairs.Add(openingASWborder - 67, "[HF/DF + Type144/147 ASDIC, 対潜短魚雷(試作初期型), RUR-4A Weapon Alpha改, 시제15cm9연장대잠분진포]");
+                    ASWEquipmentPairs.Add(openingASWborder - 51, "[4식소나x3, 시제15cm9연장대잠분진포]");
 					ASWEquipmentPairs.Add(openingASWborder - 48, "[4식소나x4]");
 					ASWEquipmentPairs.Add(openingASWborder - 44, "[4식소나x3, 3식폭뢰투사기]");
 				}
 				if (selectedShip.SlotSize >= 3)
 				{
+                    ASWEquipmentPairs.Add(openingASWborder - 52, "[HF/DF + Type144/147 ASDIC, 対潜短魚雷(試作初期型), RUR-4A Weapon Alpha改]");
+                    ASWEquipmentPairs.Add(openingASWborder - 47, "[HF/DF + Type144/147 ASDIC, RUR-4A Weapon Alpha改, 試製15cm9連装対潜噴進砲]");
+
                     ASWEquipmentPairs.Add(openingASWborder - 42, "[4식소나, HF/DF + Type144/147 ASDIC, 시제15cm9연장대잠분진포]");
                     ASWEquipmentPairs.Add(openingASWborder - 40, "[4식소나, Type144/147 ASDIC, 시제15cm9연장대잠분진포]");
                     ASWEquipmentPairs.Add(openingASWborder - 39, "[4식소나x2, 시제15cm9연장대잠분진포]");
@@ -271,6 +275,12 @@ namespace ElectronicObserver.Window.Dialog
                 }
 				if (selectedShip.SlotSize >= 2)
 				{
+                    ASWEquipmentPairs.Add(openingASWborder - 35, "[HF/DF + Type144/147 ASDIC, 対潜短魚雷(試作初期型)]");
+                    if (ASWEquipmentPairs.ContainsKey(openingASWborder - 32))
+                        ASWEquipmentPairs[openingASWborder - 32] += ", [HF/DF + Type144/147 ASDIC, RUR-4A Weapon Alpha改]";
+                    else
+                        ASWEquipmentPairs.Add(openingASWborder - 32, "[HF/DF + Type144/147 ASDIC, RUR-4A Weapon Alpha改]");
+
                     if (ASWEquipmentPairs.ContainsKey(openingASWborder - 30))
                         ASWEquipmentPairs[openingASWborder - 30] += ", [HF/DF + Type144/147 ASDIC, 시제15cm9연장대잠분진포]";
                     else
@@ -345,7 +355,9 @@ namespace ElectronicObserver.Window.Dialog
                     ASWEquipmentPairs.Add(openingASWborder - 20, "[4식소나, 3식폭뢰투사기]");
 					ASWEquipmentPairs.Add(openingASWborder - 18, "[3식소나, 3식폭뢰투사기]");
 				}
-				ASWEquipmentPairs.Add(openingASWborder - 12, "[4식소나]");
+
+                ASWEquipmentPairs.Add(openingASWborder - 15, "[HF/DF + Type144/147 ASDIC]");
+                ASWEquipmentPairs.Add(openingASWborder - 12, "[4식소나]");
 			}
 
 

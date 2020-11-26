@@ -417,6 +417,15 @@ namespace ElectronicObserver.Data.Quest
                                 new ProgressSpecialBattle(q, 1, "x", new[] { 16 }, true),
                             }));
                             break;
+                        case 914:   //|914|３|重巡戦隊、西へ！|4-1・4-2・4-3・4-4ボスA勝利各1|要重巡3/駆逐1
+                            this.Progresses.Add(new ProgressMultiBattle(q, new[] {
+                                new ProgressSpecialBattle(q, 1, "A", new[] { 41 }, true),
+                                new ProgressSpecialBattle(q, 1, "A", new[] { 42 }, true),
+                                new ProgressSpecialBattle(q, 1, "A", new[] { 43 }, true),
+                                new ProgressSpecialBattle(q, 1, "A", new[] { 44 }, true),
+                            }));
+                            break;
+
                         case 303:   //|303|「演習」で練度向上！|演習3
                             this.Progresses.Add(new ProgressPractice(q, 3, false));
                             break;
@@ -482,6 +491,36 @@ namespace ElectronicObserver.Data.Quest
                                 new ProgressExpedition(q, 1, new[]{ 4 }),
                                 new ProgressExpedition(q, 1, new[]{ 10 }),
                             })); break;
+                        case 437:   //|437|年(5月)|小笠原沖哨戒線の強化を実施せよ！|「対潜警戒任務」「小笠原沖哨戒線遠征」「小笠原沖戦闘哨戒」「南西方面航空偵察作戦」成功各1?|
+                            this.Progresses.Add(new ProgressMultiExpedition(q, new[]{
+                                new ProgressExpedition(q, 1, new[]{ 4 }),
+                                new ProgressExpedition(q, 1, new[]{ 104 }),
+                                new ProgressExpedition(q, 1, new[]{ 105 }),
+                                new ProgressExpedition(q, 1, new[]{ 110 }),
+                            })); break;
+                        case 438:   //|438|年(8月)|南西諸島方面の海上護衛を強化せよ！|「対潜警戒任務」「兵站強化任務」「タンカー護衛任務」「南西諸島捜索撃滅戦」成功各1|
+                            this.Progresses.Add(new ProgressMultiExpedition(q, new[]{
+                                new ProgressExpedition(q, 1, new[]{ 4 }),
+                                new ProgressExpedition(q, 1, new[]{ 100 }),
+                                new ProgressExpedition(q, 1, new[]{ 9 }),
+                                new ProgressExpedition(q, 1, new[]{ 114 }),
+                            })); break;
+                        case 439:   //|439|年(9月)|兵站強化遠征任務【基本作戦】|「海上護衛任務」「兵站強化任務」「ボーキサイト輸送任務」「南西方面航空偵察作戦」成功各1
+                            this.Progresses.Add(new ProgressMultiExpedition(q, new[]{
+                                new ProgressExpedition(q, 1, new[]{ 5 }),
+                                new ProgressExpedition(q, 1, new[]{ 100 }),
+                                new ProgressExpedition(q, 1, new[]{ 11 }),
+                                new ProgressExpedition(q, 1, new[]{ 110 }),
+                            })); break;
+                        case 440:   //|440|９|兵站強化遠征任務【拡張作戦】|「ブルネイ泊地沖哨戒」「海上護衛任務」「水上機前線輸送」「強行鼠輸送作戦」「南西海域戦闘哨戒」成功各1
+                            this.Progresses.Add(new ProgressMultiExpedition(q, new[]{
+                                new ProgressExpedition(q, 1, new[]{ 41 }),
+                                new ProgressExpedition(q, 1, new[]{ 5 }),
+                                new ProgressExpedition(q, 1, new[]{ 40 }),
+                                new ProgressExpedition(q, 1, new[]{ 142 }),
+                                new ProgressExpedition(q, 1, new[]{ 46 }),
+                            })); break;
+
                         case 503:   //|503|艦隊大整備！|入渠5
                             this.Progresses.Add(new ProgressDocking(q, 5));
                             break;
