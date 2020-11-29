@@ -119,6 +119,12 @@ namespace ElectronicObserver.Data
         /// </summary>
         public int NeedAviationMaterial { get; internal set; }
 
+        /// <summary>
+        /// 改装に必要な 新型兵装資材 の個数
+        /// </summary>
+        public int NeedArmamentMaterial { get; internal set; }
+
+
         #region Parameters
 
         /// <summary>

@@ -496,7 +496,7 @@ namespace ElectronicObserver.Window
 		{
 			if (this.Browser.Proxy == null)
 			{
-				Utility.Logger.Add(3, "브라우저가 예기치 않게 종료되었습니다.");
+				Utility.ErrorReporter.SendErrorReport(e, "브라우저가 예기치 않게 종료되었습니다.");
 			}
 			else
 			{

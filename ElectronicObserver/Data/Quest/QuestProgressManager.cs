@@ -426,6 +426,14 @@ namespace ElectronicObserver.Data.Quest
                             }));
                             break;
 
+                        case 928:   //|928|９|歴戦「第十方面艦隊」、全力出撃！|4-2・7-2(第二)・7-3(第二)ボスS勝利各2|要(羽黒/足柄/妙高/高雄/神風)2
+                            Progresses.Add(new ProgressMultiBattle(q, new[] {
+                                new ProgressSpecialBattle(q, 2, "S", new[] { 42 }, true),
+                                new ProgressSpecialBattle(q, 2, "S", new[] { 72 }, true, 2),
+                                new ProgressSpecialBattle(q, 2, "S", new[] { 73 }, true, 2),
+                            }));
+                            break;
+
                         case 303:   //|303|「演習」で練度向上！|演習3
                             this.Progresses.Add(new ProgressPractice(q, 3, false));
                             break;
@@ -627,6 +635,25 @@ namespace ElectronicObserver.Data.Quest
                                 new ProgressDiscard(q, 3, true, new[]{ 7 }),
                                 new ProgressDiscard(q, 3, true, new[]{ 8 }),
                                 new ProgressDiscard(q, 3, true, new[]{ 10 }),
+                            }));
+                            break;
+
+                        case 657:   //|657|年(9月)|新型兵装開発整備の強化|(小口径主砲x6, 中口径主砲x5, 魚雷x4)廃棄, 鋼材4000保有|
+                            Progresses.Add(new ProgressMultiDiscard(q, new[]{
+                                new ProgressDiscard(q, 6, true, new[]{ 1 }),
+                                new ProgressDiscard(q, 5, true, new[]{ 2 }),
+                                new ProgressDiscard(q, 4, true, new[]{ 5 }),
+                            }));
+                            break;
+
+
+                        case 655:   //|655|11|工廠フル稼働！新兵装を開発せよ！|(小口径主砲x5, 中口径主砲x5, 大口径主砲x5, 水上偵察機x5, 艦上攻撃機x5)廃棄, (燃料x1500, 鋼材x1500, ボーキx1500)保有
+                            Progresses.Add(new ProgressMultiDiscard(q, new[]{
+                                new ProgressDiscard(q, 5, true, new[]{ 1 }),
+                                new ProgressDiscard(q, 5, true, new[]{ 2 }),
+                                new ProgressDiscard(q, 5, true, new[]{ 3 }),
+                                new ProgressDiscard(q, 5, true, new[]{ 8 }),
+                                new ProgressDiscard(q, 5, true, new[]{ 10 }),
                             }));
                             break;
 
