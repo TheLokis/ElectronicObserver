@@ -409,7 +409,6 @@ namespace ElectronicObserver.Window
 
 		void Updated(string apiname, dynamic data)
 		{
-
 			var keys = KCDatabase.Instance.BaseAirCorps.Keys;
 
 			if (Utility.Configuration.Config.FormBaseAirCorps.ShowEventMapOnly)
@@ -423,7 +422,6 @@ namespace ElectronicObserver.Window
 				if (eventAreaCorps.Any())
 					keys = eventAreaCorps;
 			}
-
 
             this.TableMember.SuspendLayout();
             this.TableMember.RowCount = keys.Count();
@@ -477,7 +475,6 @@ namespace ElectronicObserver.Window
 
 		private void ContextMenuBaseAirCorps_CopyOrganization_Click(object sender, EventArgs e)
 		{
-
 			var sb = new StringBuilder();
 			int areaid = this.ContextMenuBaseAirCorps_CopyOrganization.Tag as int? ?? -1;
 
@@ -487,7 +484,6 @@ namespace ElectronicObserver.Window
 
 			foreach (var corps in baseaircorps)
 			{
-
 				string areaName = KCDatabase.Instance.MapArea.ContainsKey(corps.MapAreaID) ? KCDatabase.Instance.MapArea[corps.MapAreaID].Name : "バミューダ海域";
 
 				sb.AppendFormat("{0}\t[{1}] 제공치{2}/행동반경{3}\r\n",
@@ -538,7 +534,6 @@ namespace ElectronicObserver.Window
 
 		private void ContextMenuBaseAirCorps_DisplayRelocatedEquipments_Click(object sender, EventArgs e)
 		{
-
 			string message = string.Join("\r\n", KCDatabase.Instance.RelocatedEquipments.Values
 				.Where(eq => eq.EquipmentInstance != null)
 				.Select(eq => string.Format("{0} ({1}～)", eq.EquipmentInstance.NameWithLevel, DateTimeHelper.TimeToCSVString(eq.RelocatedTime))));
@@ -559,9 +554,5 @@ namespace ElectronicObserver.Window
 		{
 			return "BaseAirCorps";
 		}
-
-
-
-
 	}
 }

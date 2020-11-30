@@ -30,8 +30,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -299,6 +299,7 @@
     <Compile Include="Resource\Record\ResourceRecord.cs" />
     <Compile Include="Resource\KCResourceHelper.cs" />
     <Compile Include="Utility\Data\RecordHash.cs" />
+    <Compile Include="Utility\ExternalData\EOVersionChecker.cs" />
     <Compile Include="Utility\ExternalData\ExternalDataGetter.cs" />
     <Compile Include="Utility\ExternalData\ExternalDataReader.cs" />
     <Compile Include="Utility\FleetImageGenerator.cs" />
