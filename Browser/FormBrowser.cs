@@ -245,8 +245,6 @@ namespace Browser
 				DragHandler = new DragHandler(),
 			};
 
-            this.Browser.AddressChanged += this.Browser_AddressChanged;
-
             this.Browser.LoadingStateChanged += this.Browser_LoadingStateChanged;
             this.Browser.IsBrowserInitializedChanged += this.Browser_IsBrowserInitializedChanged;
 
@@ -257,51 +255,6 @@ namespace Browser
                 this.AddLog(3, "해당 버전에서 이전버전의 브라우저 관련 쓸모없는 파일들을 삭제하였습니다.");
             }
 		}
-
-        private void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
-        {
-            
-            if (e.Address.Equals("http://games.dmm.com/detail/kancolle/"))
-            {
-                Uri uri;
-                string SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
-                if (Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
-                {
-                    this.Browser.Load(uri.ToString());
-                }
-            }
-
-            if (e.Address.Contains("foreign") && e.Address.Contains("dmm.com"))
-            {
-                Uri uri;
-                string SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
-                if (Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
-                {
-                    this.Browser.Load(uri.ToString());
-                }
-            }
-
-            if (e.Address.Contains("foreign") && e.Address.Contains("dmm.com"))
-            {
-                Uri uri;
-                string SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
-                if (Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
-                {
-                    this.Browser.Load(uri.ToString());
-                }
-            }
-
-            if (e.Address.Contains("error/area") && e.Address.Contains("dmm.com"))
-            {
-                Uri uri;
-                string SauceCookie = "javascript:void(eval(\"document.cookie = 'cklg=ja;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=osapi.dmm.com;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=203.104.209.7;path=/';document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2021 09:00:09 GMT;domain=www.dmm.com;path=/netgame/';\"));location.href=\"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/\";";
-                if (Uri.TryCreate(SauceCookie, UriKind.Absolute, out uri))
-                {
-                    this.Browser.Load(uri.ToString());
-                }
-            }
-            
-        }
 
         void Exit()
 		{

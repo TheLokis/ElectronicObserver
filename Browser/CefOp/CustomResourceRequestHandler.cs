@@ -39,9 +39,6 @@ namespace Browser.CefOp
                 return CefReturnValue.Cancel;
             }
 
-            request.Url = request.Url.Replace("203.104.209.7/gadget_html5", "luckyjervis.com/gadget_html5");
-            request.Url = request.Url.Replace("203.104.209.7/html", "luckyjervis.com/html");
-
             return base.OnBeforeResourceLoad(chromiumWebBrowser, browser, frame, request, callback);
         }
 
