@@ -9,20 +9,34 @@ namespace AutoUpdater
 {
     class Program
     {
-        static FileDownloader _downloader = new FileDownloader();
+        static FileManager _manager = new FileManager();
         static private Mutex _thisMutex;
 
         static void Main(string[] args)
         {
-            _thisMutex = new Mutex(true, "Apk Installer", out bool isNewInstance);
+            if (args.Length != 0)
+            {
+                for (int i = 0; i < args.Length; i++)
+                {
+                    if (args[i].Contains("ManifestCreateMode") == true)
+                    {
+                        _manager.OnCreateVersionManifest();
+                    }
+                }
+
+                return;
+            }
+
+            _thisMutex = new Mutex(true, "ElectronicObserverFileDownloader", out bool isNewInstance);
             if (isNewInstance == true)
             {
                 Console.WriteLine("자동 업데이트 프로그램을 실행합니다..");
 
-                _downloader.VersionCheck();
+                _manager.VersionCheck();
 
                 Console.Read();
             }
+            
         }
     }
 }

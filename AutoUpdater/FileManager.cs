@@ -4,16 +4,16 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 
-public class FileDownloader
+public class FileManager
 {
     private string _hubsite = "https://thelokis.github.io/EOTranslation/";
+    private JSONNode _versionManifest = null;
 
     public void VersionCheck()
     {
         ServicePointManager.Expect100Continue = true;
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-        JSONNode versionManifest = null;
         WebRequest rq = HttpWebRequest.Create(this._hubsite + "Translation/EOVersion.json");
         using (WebResponse resp = rq.GetResponse())
         {
@@ -26,15 +26,20 @@ public class FileDownloader
                     versionInfoText += reader.ReadLine();
                 }
 
-                versionManifest = JSON.Parse(versionInfoText);
+                this._versionManifest = JSON.Parse(versionInfoText);
             }
         }
 
-        if (string.IsNullOrEmpty(versionManifest["Version"].ToString()) == false)
-        {
-            string targetFileName = $"ElectronicObserver_KRTL_R{versionManifest["Version"].Value}.zip";
+        this.EODownload();
+    }
 
-            Console.WriteLine($"74식 전자관측의 버전 {versionManifest["Version"].Value} 을 다운받습니다..");
+    public void EODownload()
+    {
+        if (string.IsNullOrEmpty(this._versionManifest["Version"].ToString()) == false)
+        {
+            string targetFileName = $"ElectronicObserver_KRTL_R{this._versionManifest["Version"].Value}.zip";
+
+            Console.WriteLine($"74식 전자관측의 버전 {this._versionManifest["Version"].Value} 을 다운받습니다..");
 
             bool fileDownloaded = false;
 
@@ -79,5 +84,27 @@ public class FileDownloader
                 Console.ReadKey();
             }
         }
+    }
+
+    public void OnCreateVersionManifest()
+    {
+        string root = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        DirectoryInfo info = new DirectoryInfo(root);
+
+        var files = info.GetFiles();
+        Console.WriteLine(files.Length);
+        JSONNode DateData = JSON.Parse("{ \"CreateDate\" : \"" + DateTime.Now + "\" }");
+        JSONArray fileDataArray = new JSONArray();
+
+        foreach (var file in files)
+        {
+            fileDataArray.Add(file.Name);
+        }
+
+        DateData.Add("FileList", fileDataArray);
+
+        var jsonData = JSON.Parse(DateData.ToString());
+
+        File.WriteAllText("EOVersion.json", jsonData.ToString());
     }
 }
