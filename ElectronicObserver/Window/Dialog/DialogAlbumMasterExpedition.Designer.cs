@@ -156,9 +156,9 @@
             this.ExpeditionView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ExpeditionView.Size = new System.Drawing.Size(250, 480);
             this.ExpeditionView.TabIndex = 1;
-            this.ExpeditionView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.EquipmentView_CellMouseClick);
+            this.ExpeditionView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ExpeditionView_CellMouseClick);
             this.ExpeditionView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.EquipmentView_SortCompare);
-            this.ExpeditionView.Sorted += new System.EventHandler(this.EquipmentView_Sorted);
+            this.ExpeditionView.Sorted += new System.EventHandler(this.ExpeditionView_Sorted);
             // 
             // EquipmentView_ID
             // 

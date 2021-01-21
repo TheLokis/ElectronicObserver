@@ -38,14 +38,12 @@ namespace ElectronicObserver.Window.Dialog
             // 원정 리스트 만들기
             foreach (var ex in KCDatabase.Instance.Mission.Values)
             {
-
                 if (ex.Name == "없음") continue;
 
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(this.ExpeditionView);
-                row.SetValues(ex.MissionID, ex.Name);
+                row.SetValues(Constants.GetVisualMissionId(ex.MissionID), ex.Name);
                 rows.Add(row);
-
             }
 
             this.ExpeditionView.Rows.AddRange(rows.ToArray());
@@ -65,7 +63,6 @@ namespace ElectronicObserver.Window.Dialog
 
             this.UpdateAlbumPage(equipmentID);
 
-
             if (KCDatabase.Instance.MasterEquipments.ContainsKey(equipmentID))
             {
                 var row = this.ExpeditionView.Rows.OfType<DataGridViewRow>().First(r => (int)r.Cells[this.EquipmentView_ID.Index].Value == equipmentID);
@@ -74,59 +71,39 @@ namespace ElectronicObserver.Window.Dialog
             }
         }
 
-
-
         private void DialogAlbumMasterEquipment_Load(object sender, EventArgs e)
         {
-
             this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormAlbumEquipment]);
-
         }
-
-
-
 
         private void EquipmentView_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
 
+        }
+
+        private void ExpeditionView_Sorted(object sender, EventArgs e)
+        {
 
         }
 
-        private void EquipmentView_Sorted(object sender, EventArgs e)
+        private void ExpeditionView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
-
-        }
-
-
-        private void EquipmentView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-
-
-        }
-
-
-
-        private void EquipmentView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
             if (e.RowIndex >= 0)
             {
-                int Expeditionid = (int)this.ExpeditionView.Rows[e.RowIndex].Cells[0].Value;
+                int expeditionid = Constants.GetRealMissionId(this.ExpeditionView.Rows[e.RowIndex].Cells[0].Value.ToString());
 
                 if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
                 {
                     this.Cursor = Cursors.AppStarting;
-                    new DialogAlbumMasterExpedition(Expeditionid).Show(this.Owner);
+                    new DialogAlbumMasterExpedition(expeditionid).Show(this.Owner);
                     this.Cursor = Cursors.Default;
 
                 }
                 else if ((e.Button & System.Windows.Forms.MouseButtons.Left) != 0)
                 {
-                    this.UpdateAlbumPage(Expeditionid);
+                    this.UpdateAlbumPage(expeditionid);
                 }
             }
-
         }
 
 
@@ -365,8 +342,6 @@ namespace ElectronicObserver.Window.Dialog
 				}*/
             }
         }
-
-
 
         private void TableParameterMain_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {

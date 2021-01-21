@@ -235,6 +235,7 @@ namespace ElectronicObserver.Data
 					case EquipmentTypes.JetFighter:
 					case EquipmentTypes.JetBomber:
 					case EquipmentTypes.JetTorpedo:
+					case EquipmentTypes.HeavyBomber:
 
 					case EquipmentTypes.CarrierBasedRecon:
 					case EquipmentTypes.SeaplaneRecon:
@@ -265,6 +266,7 @@ namespace ElectronicObserver.Data
 					case EquipmentTypes.SeaplaneFighter:
 					case EquipmentTypes.LandBasedAttacker:
 					case EquipmentTypes.Interceptor:
+					case EquipmentTypes.HeavyBomber:
 					case EquipmentTypes.JetFighter:
 					case EquipmentTypes.JetBomber:
 					case EquipmentTypes.JetTorpedo:
@@ -310,6 +312,7 @@ namespace ElectronicObserver.Data
 					case EquipmentTypes.ASPatrol:
 					case EquipmentTypes.FlyingBoat:
 					case EquipmentTypes.LandBasedAttacker:
+					case EquipmentTypes.HeavyBomber:
 					case EquipmentTypes.JetBomber:
 					case EquipmentTypes.JetTorpedo:
 						return this.ASW > 0;

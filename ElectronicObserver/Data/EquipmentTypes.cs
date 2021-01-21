@@ -157,8 +157,11 @@ namespace ElectronicObserver.Data
 		/// <summary>潜水艦装備</summary>
 		SubmarineEquipment = 51,
 
-		/// <summary>噴式戦闘機</summary>
-		JetFighter = 56,
+        /// <summary>大型陸上機</summary>
+        HeavyBomber = 53,
+
+        /// <summary>噴式戦闘機</summary>
+        JetFighter = 56,
 
 		/// <summary>噴式戦闘爆撃機</summary>
 		JetBomber = 57,

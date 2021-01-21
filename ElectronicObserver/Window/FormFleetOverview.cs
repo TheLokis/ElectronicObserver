@@ -269,7 +269,7 @@ namespace ElectronicObserver.Window
 				var landing = members.Select(s => s.AllSlotInstanceMaster.Count(eq => eq?.CategoryType == EquipmentTypes.LandingCraft || eq?.CategoryType == EquipmentTypes.SpecialAmphibiousTank));
 
 
-                this.ToolTipInfo.SetToolTip(this.CombinedTag, string.Format("드럼탑재: {0}개\r\n대발탑재: {1}개\r\n수송량(TP): S {2} / A {3}\r\n\r\n제공합계: {4}\r\n색적합계: {5:f2}\r\n신식(33):\r\n　분기점계수1: {6:f2}\r\n　분기점계수3: {7:f2}\r\n　분기점계수4: {8:f2}",
+                this.ToolTipInfo.SetToolTip(this.CombinedTag, string.Format("드럼탑재: {0}개\r\n대발탑재: {1}개\r\n수송량(TP): S {2} / A {3}\r\n\r\n제공합계: {4}\r\n색적합계: {5:f2}\r\n신식(33):\r\n 분기점계수1: {6:f2}\r\n 분기점계수2: {7:f2}\r\n 분기점계수3: {8:f2}\r\n　분기점계수4: {9:f2}",
 					transport.Sum(),
 					landing.Sum(),
 					tp,
@@ -277,6 +277,7 @@ namespace ElectronicObserver.Window
 					Calculator.GetAirSuperiority(fleet1) + Calculator.GetAirSuperiority(fleet2),
 					Math.Floor(fleet1.GetSearchingAbility() * 100) / 100 + Math.Floor(fleet2.GetSearchingAbility() * 100) / 100,
 					Math.Floor(Calculator.GetSearchingAbility_New33(fleet1, 1) * 100) / 100 + Math.Floor(Calculator.GetSearchingAbility_New33(fleet2, 1) * 100) / 100,
+					Math.Floor(Calculator.GetSearchingAbility_New33(fleet1, 2) * 100) / 100 + Math.Floor(Calculator.GetSearchingAbility_New33(fleet2, 2) * 100) / 100,
 					Math.Floor(Calculator.GetSearchingAbility_New33(fleet1, 3) * 100) / 100 + Math.Floor(Calculator.GetSearchingAbility_New33(fleet2, 3) * 100) / 100,
 					Math.Floor(Calculator.GetSearchingAbility_New33(fleet1, 4) * 100) / 100 + Math.Floor(Calculator.GetSearchingAbility_New33(fleet2, 4) * 100) / 100
 					));

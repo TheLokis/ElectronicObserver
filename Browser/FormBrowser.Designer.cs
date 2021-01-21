@@ -568,6 +568,7 @@
             this.Controls.Add(this.ToolMenu);
             this.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.KeyPreview = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormBrowser";
             this.ShowInTaskbar = false;
             this.Text = "74식 전자관측의 브라우저";

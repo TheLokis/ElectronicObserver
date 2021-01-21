@@ -506,6 +506,8 @@ namespace ElectronicObserver.Window
 
         public void ShowFitInfo(string ShipName, string EquipmentName, int[] data, float marry_modify, bool married)
         {
+            Utility.Logger.Add(2, "ShowFitInfo");
+
             StringBuilder sb = new StringBuilder();
             sb.Append("[피트 정보]\r\n");
             sb.Append(string.Format("{0}\r\n", ShipName));

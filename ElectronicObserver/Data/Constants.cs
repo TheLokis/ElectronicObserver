@@ -1091,17 +1091,58 @@ namespace ElectronicObserver.Data
 			}
 		}
 
-		#endregion
+        #endregion
 
 
-		#region その他
-
+        #region その他
 		/// <summary>
-		/// 資源の名前を取得します。
+		/// 원정의 실제 번호가 아닌, 표기 번호를 가져오는데 사용합니다.
 		/// </summary>
-		/// <param name="materialID">資源のID。</param>
-		/// <returns>資源の名前。</returns>
-		public static string GetMaterialName(int materialID)
+        public static Dictionary<int, string> VisualMissionId = new Dictionary<int, string>
+        {
+            { 100, "A1" },
+            { 101, "A2" },
+            { 102, "A3" },
+            { 103, "A4" },
+            { 104, "A5" },
+            { 105, "A6" },
+            { 110, "B1" },
+            { 111, "B2" },
+            { 112, "B3" },
+            { 113, "B4" },
+            { 114, "B5" },
+            { 131, "D1" },
+            { 132, "D2" },
+            { 141, "E1" },
+            { 142, "E2" },
+        };
+
+		public static string GetVisualMissionId(int expeditionId)
+        {
+			if (Constants.VisualMissionId.ContainsKey(expeditionId) == true)
+            {
+				return Constants.VisualMissionId[expeditionId];
+            }
+
+			return expeditionId.ToString("D3");
+        }
+
+		public static int GetRealMissionId(string expeditionId)
+        {
+			if (Constants.VisualMissionId.ContainsValue(expeditionId) == true)
+            {
+				return Constants.VisualMissionId.First(i => i.Value.Equals(expeditionId)).Key;
+            }
+
+			return int.Parse(expeditionId);
+        }
+
+        /// <summary>
+        /// 資源の名前を取得します。
+        /// </summary>
+        /// <param name="materialID">資源のID。</param>
+        /// <returns>資源の名前。</returns>
+        public static string GetMaterialName(int materialID)
 		{
 
 			switch (materialID)

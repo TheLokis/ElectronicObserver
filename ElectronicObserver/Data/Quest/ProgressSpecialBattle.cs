@@ -173,7 +173,8 @@ namespace ElectronicObserver.Data.Quest
                 case 875:
                     isAccepted =
                         members.Any(s => s?.ShipID == 543) &&
-                        members.Any(s => {
+                        members.Any(s => 
+                        {
                         switch (s?.MasterShip?.NameReading)
                         {
                                 case "たかなみ":
@@ -273,6 +274,38 @@ namespace ElectronicObserver.Data.Quest
                                 return false;
                         }
                     }) >= 2 && CheckGaugeIndex72(bm.Compass) && CheckGaugeIndex73(bm.Compass);
+                    break;
+                case 840:   //|840|週|【節分任務】令和三年節分作戦|2-(1~3)ボスA勝利各1|要(軽母or軽巡or雷巡or練巡)旗艦/(駆逐or海防)3, 期間限定(2021/01/13～????/??/??)
+                    isAccepted =
+                        new[] {
+                            ShipTypes.LightAircraftCarrier,
+                            ShipTypes.LightCruiser,
+                            ShipTypes.TorpedoCruiser,
+                            ShipTypes.TrainingCruiser }
+                        .Contains(memberstype.FirstOrDefault()) &&
+                        memberstype.Count(t => t == ShipTypes.Destroyer || t == ShipTypes.Escort) >= 3;
+                    break;
+
+                case 841:   //|841|週|【節分任務】令和三年西方海域節分作戦|4-(1~3)ボスS勝利各1|要(水母2or航巡2or重巡2)旗艦, 期間限定(2021/01/13～????/??/??)
+                    isAccepted =
+                        new[] {
+                            ShipTypes.SeaplaneTender,
+                            ShipTypes.HeavyCruiser,
+                            ShipTypes.AviationCruiser
+                        }.Contains(memberstype.FirstOrDefault()) &&
+                        memberstype.Count(t => t == memberstype.FirstOrDefault()) >= 2;
+                    break;
+                case 843:   //|843|週|【節分拡張任務】令和三年節分作戦、全力出撃！|5-2・5-5・6-4ボスS勝利各1|要(戦艦系or空母系)旗艦/駆逐2, 期間限定(2021/01/13～????/??/??)
+                    isAccepted =
+                        new[] {
+                            ShipTypes.Battlecruiser,
+                            ShipTypes.Battleship,
+                            ShipTypes.AviationBattleship,
+                            ShipTypes.LightAircraftCarrier,
+                            ShipTypes.AircraftCarrier,
+                            ShipTypes.ArmoredAircraftCarrier,
+                        }.Contains(memberstype.FirstOrDefault()) &&
+                        memberstype.Count(t => t == ShipTypes.Destroyer) >= 2;
                     break;
             }
 

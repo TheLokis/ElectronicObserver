@@ -121,11 +121,10 @@ namespace ElectronicObserver.Window
 
             private void Expeditions_SelectedValueChanged(object sender, EventArgs e)
             {
-                
                 for(int i = 0; i < this.Parent._controlMember.Count() ;i++)
-                    this.Parent._controlMember[i].SelectedItem = Convert.ToInt32(this.Expeditions.SelectedItem);
+                    this.Parent._controlMember[i].SelectedItem = Constants.GetRealMissionId(this.Expeditions.SelectedItem.ToString());
 
-                FormMain.Instance.fInformation.CheckExpeditionCondition(this.Parent.FleetID, Convert.ToInt32(this.Expeditions.SelectedItem));
+                FormMain.Instance.fInformation.CheckExpeditionCondition(this.Parent.FleetID, Constants.GetRealMissionId(this.Expeditions.SelectedItem.ToString()));
             }
             
             public TableFleetControl(FormFleet parent, TableLayoutPanel table)
@@ -165,7 +164,7 @@ namespace ElectronicObserver.Window
                 this.Expeditions.Items.Clear();
                 foreach (var ex in KCDatabase.Instance.Mission.Values)
                 {
-                    this.Expeditions.Items.Add(ex.ID);
+                    this.Expeditions.Items.Add(Constants.GetVisualMissionId(ex.ID));
                 }
 
                 this.Name.Text = fleet.Name;

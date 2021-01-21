@@ -122,6 +122,7 @@ namespace ElectronicObserver.Observer
                 new kcsapi.api_req_combined_battle.ld_shooting(),
                 new kcsapi.api_req_map.anchorage_repair(),
                 new kcsapi.api_get_member.preset_deck(),
+                new kcsapi.api_req_kaisou.slotset(),
 
                 new kcsapi.api_req_quest.clearitemget(),
                 new kcsapi.api_req_nyukyo.start(),
