@@ -733,6 +733,28 @@ namespace ElectronicObserver.Resource
 			return Instance.Equipments.Images[imageID];
 		}
 
+		public static Image GetItemImage(int itemID)
+        {
+			if (itemID < 0) return Instance.Icons.Images[(int)IconContent.Nothing];
+
+			switch (itemID)
+            {
+				case 1: // 수복재
+					return Instance.Icons.Images[(int)IconContent.ItemInstantRepair];
+				case 2: // 건조재
+					return Instance.Icons.Images[(int)IconContent.ItemInstantConstruction];
+				case 3: // 개발자재
+					return Instance.Icons.Images[(int)IconContent.ItemDevelopmentMaterial];
+				case 4: // 개수자재
+					return Instance.Icons.Images[(int)IconContent.ItemModdingMaterial];
+				case 10: // 가구상자 소
+					return Instance.Icons.Images[(int)IconContent.ItemPresentBox];
+				case 11: // 가구상자 중
+					return Instance.Icons.Images[(int)IconContent.ItemPresentBox];
+				case 12: // 가구상자 대
+					return Instance.Icons.Images[(int)IconContent.ItemPresentBox];
+			}
+        }
 
 
 		/// <summary>

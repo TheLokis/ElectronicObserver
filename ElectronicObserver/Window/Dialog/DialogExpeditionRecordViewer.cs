@@ -154,30 +154,30 @@ namespace ElectronicObserver.Window.Dialog
 
             this.RecordView.Tag = args;
 
-            this.RecordView_Item1.Visible =
-            this.RecordView_Item1Count.Visible =
-            this.RecordView_Item2.Visible =
-            this.RecordView_Item2Count.Visible = false;
+            this.RecordView_Item1Icon.Visible   =
+            this.RecordView_Item1Count.Visible  =
+            this.RecordView_Item2Icon.Visible   =
+            this.RecordView_Item2Count.Visible  = true;
 
             // column initialize
             if (this.MergeRows.Checked)
             {
-                this.RecordView_Name.DisplayIndex = 2;
-                this.RecordView_Header.HeaderText = "회수";
-                this.RecordView_Header.Width = 100;
+                this.RecordView_Name.DisplayIndex   = 2;
+                this.RecordView_Header.HeaderText   = "회수";
+                this.RecordView_Header.Width        = 100;
                 this.RecordView_Header.DisplayIndex = 1;
-                this.RecordView_DateTime.Visible =
-                this.RecordView_Result.Visible = false;
+                this.RecordView_DateTime.Visible    =
+                this.RecordView_Result.Visible      = false;
 
             }
             else
             {
-                this.RecordView_Header.HeaderText = "";
-                this.RecordView_Header.Width = 50;
+                this.RecordView_Header.HeaderText   = "";
+                this.RecordView_Header.Width        = 50;
                 this.RecordView_Header.DisplayIndex = 0;
-                this.RecordView_DateTime.Width = 150;
-                this.RecordView_DateTime.Visible =
-                this.RecordView_Result.Visible = true;
+                this.RecordView_DateTime.Width      = 150;
+                this.RecordView_DateTime.Visible    =
+                this.RecordView_Result.Visible      = true;
             }
             this.RecordView.ColumnHeadersVisible = true;
 
@@ -197,7 +197,7 @@ namespace ElectronicObserver.Window.Dialog
 
             int i = 0;
             var materials = new Dictionary<int, Dictionary<string, int>>();
-            var items = new Dictionary<int, Dictionary<int,int>>();
+            var items = new Dictionary<int, int>();
             try
             {
                 foreach (var r in records)
@@ -222,16 +222,16 @@ namespace ElectronicObserver.Window.Dialog
 
                         row.SetValues(
                             i + 1,
-                            r.MissionID,
+                            Constants.GetVisualMissionId(r.MissionID),
                             ex.Name,
                             r.Fuel,
                             r.Ammo,
                             r.Steel,
                             r.Baux,
-                            null,
-                            null,
-                            null,
-                            null,
+                            ResourceManager.GetItemImage(r.Item1Id),
+                            r.Item1Count == -1 ? r.Item1Count.ToString() : "-",
+                            ResourceManager.GetItemImage(r.Item2Id),
+                            r.Item2Count == -1 ? r.Item2Count.ToString() : "-",
                             r.Result,
                             r.Date
                             );
@@ -254,51 +254,44 @@ namespace ElectronicObserver.Window.Dialog
                         }
                         else
                         {
-                            var material = materials[key];
-                            material["Fuel"] += r.Fuel;
-                            material["Ammo"] += r.Ammo;
-                            material["Steel"] += r.Steel;
-                            material["Baux"] += r.Baux;
-                            material["Count"]++;
-                        }
-                        /*
-                        if (items.ContainsKey(r.MissionID) == false)
-                        {
-                            items.Add(r.MissionID, new Dictionary<int, int>());
+                            materials[key]["Fuel"] += r.Fuel;
+                            materials[key]["Ammo"] += r.Ammo;
+                            materials[key]["Steel"] += r.Steel;
+                            materials[key]["Baux"] += r.Baux;
+                            materials[key]["Count"]++;
                         }
 
                         if (r.Item1Id != -1)
                         {
-                            if (items[r.MissionID].ContainsKey(r.Item1Id) == false)
+                            if (items.ContainsKey(r.Item1Id) == false)
                             {
-                                items[r.MissionID].Add(r.Item1Id, r.Item1Count);
+                                items.Add(r.Item1Id, r.Item1Count);
                             }
                             else
                             {
-                                items[r.MissionID][r.Item1Id] += r.Item1Count;
+                                items[r.Item1Id] += r.Item1Count;
                             }
                         }
 
                         if (r.Item2Id != -1)
                         {
-                            if (items[r.MissionID].ContainsKey(r.Item2Id) == false)
+                            if (items.ContainsKey(r.Item2Id) == false)
                             {
-                                items[r.MissionID].Add(r.Item2Id, r.Item2Count);
+                                items.Add(r.Item2Id, r.Item2Count);
                             }
                             else
                             {
-                                items[r.MissionID][r.Item2Id] += r.Item2Count;
+                                items[r.Item2Id] += r.Item2Count;
                             }
                         }
-                        */
                     }
 
                     i++;
                 }
 
-            } catch (Exception X)
+            } catch (Exception ex)
             {
-                Console.WriteLine(X.Message + ":" + X.StackTrace);
+                Console.WriteLine(ex.Message + ":" + ex.StackTrace);
             }
             // foreach end
 
@@ -310,15 +303,16 @@ namespace ElectronicObserver.Window.Dialog
 
                     var mission = KCDatabase.Instance.Mission.Values.FirstOrDefault(x => x.MissionID == c.Key);
 
-                    row.SetValues(
+                    row.SetValues
+                    (
                         c.Value["Count"],
-                        c.Key,
+                        Constants.GetVisualMissionId(c.Key),
                         mission.Name,
                         c.Value["Fuel"],
                         c.Value["Ammo"],
                         c.Value["Steel"],
                         c.Value["Baux"]
-                        );
+                    );
 
                     row.Cells[0].Tag = c.Value["Count"];
                     row.Cells[1].Tag = c.Value;
@@ -437,6 +431,11 @@ namespace ElectronicObserver.Window.Dialog
             var args = this.RecordView.Tag as SearchArgument;
             if (args == null)
                 return;
+        }
+
+        private void RecordView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

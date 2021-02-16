@@ -170,7 +170,6 @@ namespace ElectronicObserver.Resource.Record
 
             public override string SaveLine()
             {
-
                 return string.Join(",",
                     this.MissionID,
                     DateTimeHelper.TimeToCSVString(this.Date),
@@ -182,10 +181,10 @@ namespace ElectronicObserver.Resource.Record
                     this.Steel,
                     this.Baux,
                     this.Result,
-                                    this.Item1Id,
-                this.Item1Count,
-                this.Item2Id,
-                this.Item2Count
+					this.Item1Id,
+					this.Item1Count,
+					this.Item2Id,
+					this.Item2Count
                 );
             }
 		}

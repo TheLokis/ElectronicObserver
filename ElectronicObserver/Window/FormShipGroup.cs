@@ -530,7 +530,7 @@ namespace ElectronicObserver.Window
 				foreach (DataGridViewColumn column in this.ShipView.Columns)
 				{
 
-					if (!group.ViewColumns.ContainsKey(column.Name))
+					if (group.ViewColumns.ContainsKey(column.Name) == false)
 					{
 						var newdata = new ShipGroupData.ViewColumnData(column)
 						{
@@ -542,10 +542,8 @@ namespace ElectronicObserver.Window
 				}
 			}
 
-
             this.ApplyViewData(group);
             this.ApplyAutoSort(group);
-
 
 			// 高さ設定(追加直後に実行すると高さが0になることがあるのでここで実行)
 			int rowHeight = 21;

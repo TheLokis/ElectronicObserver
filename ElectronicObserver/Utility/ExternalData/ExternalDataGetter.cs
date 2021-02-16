@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Linq;
-using System.Net;
-using System.Threading;
 using Newtonsoft.Json.Linq;
 using ElectronicObserver.Data;
 
@@ -25,7 +21,7 @@ namespace ElectronicObserver.Utility
 
                 if (id != -1)
                 {
-                    if (this.GetTranslation(id, translationList, ref translated, type) == true)
+                    if (this.GetTranslation(id, translationList, ref translated) == true)
                     {
                         return translated;
                     }
@@ -47,7 +43,7 @@ namespace ElectronicObserver.Utility
             return jpString;
         }
 
-        public bool GetTranslation(int id, JObject translationList, ref string translate, DataType type)
+        public bool GetTranslation(int id, JObject translationList, ref string translate)
         {
             var founded = translationList.TryGetValue(id.ToString(), out JToken value);
             if (founded == false || value == null)
@@ -72,9 +68,7 @@ namespace ElectronicObserver.Utility
                         if (jpString.Contains(suffix.Key.ToString()) == true)
                         {
                             translate = jpString.Remove(jpString.Length - suffix.Key.ToString().Length);
-                            int sl = suffix.Key.ToString().Length;
-
-                            if (suffix.Key.ToString().Equals(jpString.Substring(jpString.Length - sl)) == true)
+                            if (suffix.Key.ToString().Equals(jpString.Substring(jpString.Length - suffix.Key.ToString().Length)) == true)
                             {
                                 return this.GetTranslation(translate, translationList, ref translate, DataType.ShipName, suffix.Value.ToString());
                             }
@@ -108,7 +102,6 @@ namespace ElectronicObserver.Utility
             if (obj == null) return null;
 
             JToken value = null;
-
             obj.Foreach(data =>
             {
                 if (data["ID"].ToString().Equals(id) == true)
@@ -122,8 +115,8 @@ namespace ElectronicObserver.Utility
 
         public void GetFit(Dictionary<string, string> data)
         {
-            int shipId = int.Parse(data["api_id"]);
-            int eqId = int.Parse(data["api_item_id"]);
+            int shipId  = int.Parse(data["api_id"]);
+            int eqId    = int.Parse(data["api_item_id"]);
             if (eqId == -1)
                 return;
             

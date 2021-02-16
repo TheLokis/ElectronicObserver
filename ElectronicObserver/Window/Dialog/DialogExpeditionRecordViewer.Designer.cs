@@ -38,6 +38,8 @@
             this.ButtonRun = new System.Windows.Forms.Button();
             this.RecordView = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ComboBoxResultList = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ExpeditionID = new System.Windows.Forms.ComboBox();
             this.MergeRows = new System.Windows.Forms.CheckBox();
@@ -45,8 +47,6 @@
             this.StatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.ToolTipInfo = new System.Windows.Forms.ToolTip(this.components);
             this.Searcher = new System.ComponentModel.BackgroundWorker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ComboBoxResultList = new System.Windows.Forms.ComboBox();
             this.RecordView_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,9 +54,9 @@
             this.RecordView_Ammo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Steel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Baux = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_Item1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecordView_Item1Icon = new System.Windows.Forms.DataGridViewImageColumn();
             this.RecordView_Item1Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecordView_Item2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecordView_Item2Icon = new System.Windows.Forms.DataGridViewImageColumn();
             this.RecordView_Item2Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecordView_DateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,9 +132,9 @@
             this.RecordView_Ammo,
             this.RecordView_Steel,
             this.RecordView_Baux,
-            this.RecordView_Item1,
+            this.RecordView_Item1Icon,
             this.RecordView_Item1Count,
-            this.RecordView_Item2,
+            this.RecordView_Item2Icon,
             this.RecordView_Item2Count,
             this.RecordView_Result,
             this.RecordView_DateTime});
@@ -155,6 +155,7 @@
             this.RecordView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RecordView.Size = new System.Drawing.Size(624, 315);
             this.RecordView.TabIndex = 1;
+            this.RecordView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RecordView_CellContentClick);
             this.RecordView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RecordView_CellDoubleClick);
             this.RecordView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.RecordView_CellFormatting);
             this.RecordView.SelectionChanged += new System.EventHandler(this.RecordView_SelectionChanged);
@@ -189,6 +190,24 @@
             this.splitContainer1.Size = new System.Drawing.Size(624, 419);
             this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // ComboBoxResultList
+            // 
+            this.ComboBoxResultList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxResultList.FormattingEnabled = true;
+            this.ComboBoxResultList.Location = new System.Drawing.Point(51, 45);
+            this.ComboBoxResultList.Name = "ComboBoxResultList";
+            this.ComboBoxResultList.Size = new System.Drawing.Size(121, 23);
+            this.ComboBoxResultList.TabIndex = 25;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 15);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "결과";
             // 
             // label1
             // 
@@ -249,24 +268,6 @@
             this.Searcher.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Searcher_DoWork);
             this.Searcher.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Searcher_RunWorkerCompleted);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 45);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 15);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "결과";
-            // 
-            // ComboBoxResultList
-            // 
-            this.ComboBoxResultList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxResultList.FormattingEnabled = true;
-            this.ComboBoxResultList.Location = new System.Drawing.Point(51, 45);
-            this.ComboBoxResultList.Name = "ComboBoxResultList";
-            this.ComboBoxResultList.Size = new System.Drawing.Size(121, 23);
-            this.ComboBoxResultList.TabIndex = 25;
-            // 
             // RecordView_Header
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
@@ -322,11 +323,12 @@
             this.RecordView_Baux.ReadOnly = true;
             this.RecordView_Baux.Width = 40;
             // 
-            // RecordView_Item1
+            // RecordView_Item1Icon
             // 
-            this.RecordView_Item1.HeaderText = "아이템1";
-            this.RecordView_Item1.Name = "RecordView_Item1";
-            this.RecordView_Item1.ReadOnly = true;
+            this.RecordView_Item1Icon.HeaderText = "아이템1";
+            this.RecordView_Item1Icon.Name = "RecordView_Item1Icon";
+            this.RecordView_Item1Icon.ReadOnly = true;
+            this.RecordView_Item1Icon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // RecordView_Item1Count
             // 
@@ -334,11 +336,12 @@
             this.RecordView_Item1Count.Name = "RecordView_Item1Count";
             this.RecordView_Item1Count.ReadOnly = true;
             // 
-            // RecordView_Item2
+            // RecordView_Item2Icon
             // 
-            this.RecordView_Item2.HeaderText = "아이템2";
-            this.RecordView_Item2.Name = "RecordView_Item2";
-            this.RecordView_Item2.ReadOnly = true;
+            this.RecordView_Item2Icon.HeaderText = "아이템2";
+            this.RecordView_Item2Icon.Name = "RecordView_Item2Icon";
+            this.RecordView_Item2Icon.ReadOnly = true;
+            this.RecordView_Item2Icon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // RecordView_Item2Count
             // 
@@ -411,9 +414,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Ammo;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Steel;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Baux;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Item1;
+        private System.Windows.Forms.DataGridViewImageColumn RecordView_Item1Icon;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Item1Count;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Item2;
+        private System.Windows.Forms.DataGridViewImageColumn RecordView_Item2Icon;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Item2Count;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_Result;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecordView_DateTime;

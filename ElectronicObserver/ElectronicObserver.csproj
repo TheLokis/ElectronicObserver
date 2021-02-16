@@ -299,6 +299,7 @@
     <Compile Include="Resource\Record\ResourceRecord.cs" />
     <Compile Include="Resource\KCResourceHelper.cs" />
     <Compile Include="Utility\Data\RecordHash.cs" />
+    <Compile Include="Utility\Extension\ContainerExtension.cs" />
     <Compile Include="Utility\ExternalData\ExternalDataGetter.cs" />
     <Compile Include="Utility\ExternalData\ExternalDataReader.cs" />
     <Compile Include="Utility\FleetImageGenerator.cs" />
