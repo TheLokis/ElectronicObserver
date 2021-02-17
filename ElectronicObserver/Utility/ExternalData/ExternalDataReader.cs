@@ -14,10 +14,10 @@ namespace ElectronicObserver.Utility
     {
         public string Version { get; set; }
         public JObject Data { get; set; }
-        public DataType DataType { get; set; }
+        public TranslateType DataType { get; set; }
     }
 
-    public enum DataType
+    public enum TranslateType
     {
         Equipment,
         EquipmentType,
@@ -49,10 +49,10 @@ namespace ElectronicObserver.Utility
 
         internal ExternalDataReader()
         {
-            for (int i = 0; i < (int)DataType.None; i++)
+            for (int i = 0; i < (int)TranslateType.None; i++)
             {
                 var data = new ExternalDataInfo();
-                var dataType = (DataType)i;
+                var dataType = (TranslateType)i;
                 data.DataType = dataType;
 
                 if (File.Exists($"Translation\\{dataType}.json") == true)
@@ -74,7 +74,7 @@ namespace ElectronicObserver.Utility
                         data.Version = "1.0A";
                         data.Data = null;
 
-                        Logger.Add(2, "번역 파일 적용에 실패했습니다." + (DataType)i + " / 에러 : " + e);
+                        Logger.Add(2, "번역 파일 적용에 실패했습니다." + (TranslateType)i + " / 에러 : " + e);
                     }
                 }
 

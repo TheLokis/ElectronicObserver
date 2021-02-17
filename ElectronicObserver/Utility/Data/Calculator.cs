@@ -1130,14 +1130,12 @@ namespace ElectronicObserver.Utility.Data
 
                 if (attacker.IsAircraftCarrier)
                 {
-
                     if (attackerShipID == 432 || attackerShipID == 353 || attackerShipID == 433)        // Graf Zeppelin(改), Saratoga
                         return NightAttackKind.Shelling;
-                    else if (attacker.Name == "リコリス棲姫" || attacker.Name == "深海海月姫")
+                    else if (attacker.Name_JP == "リコリス棲姫" || attacker.Name_JP == "深海海月姫")
                         return NightAttackKind.Shelling;
                     else
                         return NightAttackKind.AirAttack;
-
                 }
                 else if (attacker.IsSubmarine)
                 {

@@ -3,23 +3,18 @@ using ElectronicObserver.Resource.Record;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 {
 
 	public class result : APIBase
 	{
-
 		private int _fleetID;
-
 
 		public override bool IsRequestSupported => true;
 
 		public override void OnRequestReceived(Dictionary<string, string> data)
 		{
-
             this._fleetID = int.Parse(data["api_deck_id"]);
 
 			base.OnRequestReceived(data);
@@ -31,7 +26,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 
             Utility.Logger.Add(2, string.Format("#{0}「{1}」가 원정「{2}: {3}」에서 귀환했습니다.",
                 fleet.FleetID, fleet.Name, fleet.ExpeditionDestination,
-                Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.DataType.ExpeditionTitle, fleet.ExpeditionDestination)));
+                Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.TranslateType.ExpeditionTitle, fleet.ExpeditionDestination)));
 
             int[] materials = { 0, 0, 0, 0 };
             if (data.api_get_material is double == false)
@@ -106,19 +101,8 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
                 Utility.Logger.Add(2, "원정 결과 - " + Constants.GetExpeditionResult((int)data.api_clear_result) + ": " + (sb.Count == 0 ? "획득자원없음" : string.Join(", ", sb)));
             }
 
-            // レベルアップ表示
-            int[] exps = new int[6];
             int[] items = { -1, -1 };
             int[] itemscount = { -1, -1 };
-
-            var src = (int[])data.api_get_ship_exp;
-            Array.Copy(src, exps, src.Length);
-
-            var lvup = new List<int[]>();
-            foreach (var elem in data.api_get_exp_lvup)
-            {
-                lvup.Add((int[])elem);
-            }
 
             for (int i = 0; i < 2; i++)
             {
@@ -144,6 +128,16 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
                 }
             }
 
+            // レベルアップ表示
+            int[] exps = new int[6];
+            var src = (int[])data.api_get_ship_exp;
+            Array.Copy(src, exps, src.Length);
+            var lvup = new List<int[]>();
+            foreach (var elem in data.api_get_exp_lvup)
+            {
+                lvup.Add((int[])elem);
+            }
+
             for (int i = 0; i < lvup.Count; i++)
             {
                 if (lvup[i].Length >= 2 && lvup[i][1] > 0 && lvup[i][0] + exps[i] >= lvup[i][1])
@@ -154,7 +148,6 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
                     Utility.Logger.Add(2, string.Format("{0} 가 레벨 {1} 이 되었습니다.", ship.Name, ship.Level + increment));
                 }
             }
-
 
             RecordManager.Instance.Expedition.Add(
                 fleet.ExpeditionDestination,

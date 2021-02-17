@@ -113,21 +113,21 @@ namespace ElectronicObserver.Resource.Record
 
 			public ExpeditionRecordElement(int missionID, int flagShipID, int fuel, int ammo, int steel, int baux, int result, int item1id, int item1count, int item2id, int item2count)
 			{
-				this.MissionID = missionID;
-				this.ShipID = flagShipID;
+				this.MissionID	= missionID;
+				this.ShipID		= flagShipID;
 
-				if(flagShipID != -1)
+				if (flagShipID != -1)
 				{
-					var ship = KCDatabase.Instance.Ships[flagShipID];
-					this.ShipLevel = ship.Level;
-					this.ShipName = ship.MasterShip.Name;
-					this.ShipType = ship.MasterShip.ShipTypeName;
+					var ship		= KCDatabase.Instance.Ships[flagShipID];
+					this.ShipLevel	= ship.Level;
+					this.ShipName	= ship.MasterShip.Name;
+					this.ShipType	= ship.MasterShip.ShipTypeName;
 				}
 
-				this.Fuel = fuel;
-				this.Ammo = ammo;
-				this.Steel = steel;
-				this.Baux = baux;
+				this.Fuel	= fuel;
+				this.Ammo	= ammo;
+				this.Steel	= steel;
+				this.Baux	= baux;
 
 				if (item1id != -1)
 				{
@@ -152,19 +152,19 @@ namespace ElectronicObserver.Resource.Record
 				string[] elem = CsvHelper.ParseCsvLine(line).ToArray();
                 if (elem.Length < 10) throw new ArgumentException("요소 수가 너무 적습니다.");
 
-				this.MissionID = int.Parse(elem[0]);
-				this.Date = DateTime.Parse(elem[1]);
-				this.ShipName = elem[2];
-				this.ShipType = elem[3];
-				this.ShipLevel = int.Parse(elem[4]);
-				this.Fuel = int.Parse(elem[5]);
-				this.Ammo = int.Parse(elem[6]);
-				this.Steel = int.Parse(elem[7]);
-				this.Baux = int.Parse(elem[8]);
-                this.Result = elem[9];
-                this.Item1Id = int.Parse(elem[10]);
+				this.MissionID	= int.Parse(elem[0]);
+				this.Date		= DateTime.Parse(elem[1]);
+				this.ShipName	= elem[2];
+				this.ShipType	= elem[3];
+				this.ShipLevel	= int.Parse(elem[4]);
+				this.Fuel		= int.Parse(elem[5]);
+				this.Ammo		= int.Parse(elem[6]);
+				this.Steel		= int.Parse(elem[7]);
+				this.Baux		= int.Parse(elem[8]);
+                this.Result		= elem[9];
+                this.Item1Id	= int.Parse(elem[10]);
                 this.Item1Count = int.Parse(elem[11]);
-                this.Item2Id = int.Parse(elem[12]);
+                this.Item2Id	= int.Parse(elem[12]);
                 this.Item2Count = int.Parse(elem[13]);
             }
 

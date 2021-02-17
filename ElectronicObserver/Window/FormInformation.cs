@@ -389,7 +389,7 @@ namespace ElectronicObserver.Window
             int expeditionDestination = KCDatabase.Instance.Fleet[KCDatabase.Instance.Ships[(int)data.api_ship_id[1]].Fleet].ExpeditionDestination;
 
             sb.AppendLine("[원정 귀환]");
-            sb.AppendLine(FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.DataType.ExpeditionTitle, expeditionDestination) + "\r\n");
+            sb.AppendLine(FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.TranslateType.ExpeditionTitle, expeditionDestination) + "\r\n");
             sb.AppendFormat("결과: {0}\r\n", Constants.GetExpeditionResult((int)data.api_clear_result));
             sb.AppendFormat("제독경험치: +{0}\r\n", (int)data.api_get_exp);
             sb.AppendFormat("함선경험치: +{0}\r\n", ((int[])data.api_get_ship_exp).Min());
@@ -401,7 +401,7 @@ namespace ElectronicObserver.Window
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("[전투종료]");
-            sb.AppendFormat("적함대명: {0}\r\n", FormMain.Instance.Translator.GetTranslation(data.api_enemy_info.api_deck_name, Utility.DataType.OperationSortie));
+            sb.AppendFormat("적함대명: {0}\r\n", FormMain.Instance.Translator.GetTranslation(data.api_enemy_info.api_deck_name, Utility.TranslateType.OperationSortie));
             sb.AppendFormat("승패판정: {0}\r\n", data.api_win_rank);
             sb.AppendFormat("제독경험치: +{0}\r\n", (int)data.api_get_exp);
 

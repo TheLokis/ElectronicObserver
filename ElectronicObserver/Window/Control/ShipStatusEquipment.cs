@@ -732,13 +732,11 @@ namespace ElectronicObserver.Window.Control
 				Rectangle imagearea = new Rectangle(origin.X, origin.Y + (this.LayoutParam.SlotUnitSize.Height - this.LayoutParam.ImageSize.Height) / 2, this.LayoutParam.ImageSize.Width, this.LayoutParam.ImageSize.Height);
 				if (image != null)
 				{
-
 					e.Graphics.DrawImage(image, imagearea);
 				}
 
-
-				Color aircraftColor = this.AircraftColorDisabled;
-				bool drawAircraftSlot = this.ShowAircraft;
+				Color aircraftColor		= this.AircraftColorDisabled;
+				bool drawAircraftSlot	= this.ShowAircraft;
 
 				if (slot.AircraftMax == 0)
 				{
@@ -772,11 +770,9 @@ namespace ElectronicObserver.Window.Control
 					aircraftColor = this.AircraftColorFull;
 				}
 
-
 				// 艦載機数描画
 				if (drawAircraftSlot)
 				{
-
 					Rectangle textarea = new Rectangle(origin.X + this.LayoutParam.ImageSize.Width, origin.Y + this.LayoutParam.InfoAreaSize.Height * 3 / 4 - this.LayoutParam.Digit2Size.Height / 2,
                         this.LayoutParam.InfoAreaSize.Width, this.LayoutParam.Digit2Size.Height);
 					//e.Graphics.DrawRectangle( Pens.Cyan, textarea );
@@ -859,7 +855,6 @@ namespace ElectronicObserver.Window.Control
 							var area = new Rectangle(origin.X, origin.Y, this.LayoutParam.Digit2Size.Width / 2, this.LayoutParam.Digit2Size.Height);
 							e.Graphics.FillRectangle(this._overlayBrush, area);
 							TextRenderer.DrawText(e.Graphics, slot.AircraftLevel.ToString(), this.Font, area, this.GetAircraftLevelColor(slot.AircraftLevel), textformatTopLeft);
-
 						}
 						else
 						{
@@ -867,23 +862,16 @@ namespace ElectronicObserver.Window.Control
 							e.Graphics.DrawImage(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.AircraftLevelTop0 + slot.AircraftLevel], new Rectangle(origin, this.LayoutParam.ImageSize));
 						}
 					}
-
-				}
-
-			}
-
-
-		}
-
+                }
+            }
+        }
 
 		public override Size GetPreferredSize(Size proposedSize)
 		{
-
             this.LayoutParam.UpdateParameters(null, proposedSize, this.Font);
 
 			return this.LayoutParam.PreferredSize + this.Padding.Size;
 		}
-
 
 		private static TextFormatFlags GetBaseTextFormat()
 		{
@@ -897,8 +885,6 @@ namespace ElectronicObserver.Window.Control
 			else
 				return this.AircraftLevelColorHigh;
 		}
-
-
 
 		private void ShipStatusEquipment_MouseEnter(object sender, EventArgs e)
 		{
@@ -914,8 +900,6 @@ namespace ElectronicObserver.Window.Control
                 this.PropertyChanged();
 		}
 
-
-
 		/// <summary> 
 		/// 使用中のリソースをすべてクリーンアップします。
 		/// </summary>
@@ -924,7 +908,6 @@ namespace ElectronicObserver.Window.Control
 		{
             this._overlayBrush.Dispose();
             this._invalidSlotBrush.Dispose();
-
 
 			// --- auto generated
 			if (disposing && (this.components != null))

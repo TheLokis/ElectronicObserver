@@ -52,7 +52,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation((string)this.RawData.api_title, Utility.DataType.QuestTitle, this.ID); }
+            get { return FormMain.Instance.Translator.GetTranslation((string)this.RawData.api_title, Utility.TranslateType.QuestTitle, this.ID); }
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace ElectronicObserver.Data
         {
             get
             {
-                return FormMain.Instance.Translator.GetTranslation((string)this.RawData.api_detail, Utility.DataType.QuestDetail, this.ID);
+                return FormMain.Instance.Translator.GetTranslation((string)this.RawData.api_detail, Utility.TranslateType.QuestDetail, this.ID);
             }
         }
 

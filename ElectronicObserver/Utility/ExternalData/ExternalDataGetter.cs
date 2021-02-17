@@ -8,7 +8,7 @@ namespace ElectronicObserver.Utility
 {
     public partial class ExternalDataReader
     {
-        public string GetTranslation(string jpString, DataType type, int id = -1)
+        public string GetTranslation(string jpString, TranslateType type, int id = -1)
         {
             try
             {
@@ -55,14 +55,14 @@ namespace ElectronicObserver.Utility
             return true;
         }
 
-        public bool GetTranslation(string jpString, JObject translationList, ref string translate, DataType type, string shipSuffix = "")
+        public bool GetTranslation(string jpString, JObject translationList, ref string translate, TranslateType type, string shipSuffix = "")
         {
             var founded = translationList.TryGetValue(jpString, out JToken value);
             if (founded == false || value == null)
             {
-                if (type == DataType.ShipName)
+                if (type == TranslateType.ShipName)
                 {
-                    var suffixList = this.GetData(DataType.ShipSuffix);
+                    var suffixList = this.GetData(TranslateType.ShipSuffix);
                     foreach (var suffix in suffixList)
                     {
                         if (jpString.Contains(suffix.Key.ToString()) == true)
@@ -70,7 +70,7 @@ namespace ElectronicObserver.Utility
                             translate = jpString.Remove(jpString.Length - suffix.Key.ToString().Length);
                             if (suffix.Key.ToString().Equals(jpString.Substring(jpString.Length - suffix.Key.ToString().Length)) == true)
                             {
-                                return this.GetTranslation(translate, translationList, ref translate, DataType.ShipName, suffix.Value.ToString());
+                                return this.GetTranslation(translate, translationList, ref translate, TranslateType.ShipName, suffix.Value.ToString());
                             }
                         }
                     }
@@ -86,7 +86,7 @@ namespace ElectronicObserver.Utility
 
         public bool CheckWeightData(int shipId)
         {
-            var fitInfo = this.GetData(DataType.FitData)[shipId.ToString()];
+            var fitInfo = this.GetData(TranslateType.FitData)[shipId.ToString()];
             if (fitInfo == null)
                 return false;
 
@@ -98,7 +98,7 @@ namespace ElectronicObserver.Utility
 
         public JToken GetExpeditionData(string id)
         {
-            var obj = this.GetData(DataType.ExpeditionData)["Expedition"] as JArray;
+            var obj = this.GetData(TranslateType.ExpeditionData)["Expedition"] as JArray;
             if (obj == null) return null;
 
             JToken value = null;
@@ -128,10 +128,10 @@ namespace ElectronicObserver.Utility
                 int masterEquipId   = db.Equipments[eqId].MasterEquipment.ID;
                 if (this.CheckWeightData(masterShipId) == true)
                 {
-                    masterShipId = this.GetData(DataType.FitData)[masterShipId.ToString()].ToObject<int>();
+                    masterShipId = this.GetData(TranslateType.FitData)[masterShipId.ToString()].ToObject<int>();
                 }
 
-                var WeightData = this.GetData(DataType.FitData)[masterShipId.ToString()];
+                var WeightData = this.GetData(TranslateType.FitData)[masterShipId.ToString()];
                 if (WeightData == null)
                 {
                     Window.FormMain.Instance.fInformation.ShowFitInfo(masterShipId, masterEquipId);
@@ -167,7 +167,7 @@ namespace ElectronicObserver.Utility
             }
         }
 
-        public JObject GetData(DataType type)
+        public JObject GetData(TranslateType type)
         {
             return this._externalDatas.Find(i => i.DataType == type).Data;
         }

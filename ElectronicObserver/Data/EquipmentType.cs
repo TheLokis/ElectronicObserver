@@ -23,7 +23,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 名前
 		/// </summary>
-		public string Name { get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.EquipmentType); } }
+		public string Name { get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.TranslateType.EquipmentType); } }
 
     //show_flg
 

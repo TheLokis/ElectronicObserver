@@ -23,26 +23,19 @@ namespace ElectronicObserver.Window
 
 	public partial class FormCompass : DockContent
 	{
-
-
 		private class TableEnemyMemberControl : IDisposable
 		{
-
 			public ImageLabel ShipName;
 			public ShipStatusEquipment Equipments;
 
 			public FormCompass Parent;
 			public ToolTip ToolTipInfo;
 
-
 			public TableEnemyMemberControl(FormCompass parent)
 			{
-
                 #region Initialize
-
                 this.Parent = parent;
                 this.ToolTipInfo = parent.ToolTipInfo;
-
 
                 this.ShipName = new ImageLabel
 				{
@@ -68,9 +61,7 @@ namespace ElectronicObserver.Window
                 this.ConfigurationChanged();
 
 				#endregion
-
 			}
-
 
 			public TableEnemyMemberControl(FormCompass parent, TableLayoutPanel table, int row)
 				: this(parent)
@@ -81,19 +72,15 @@ namespace ElectronicObserver.Window
 
 			public void AddToTable(TableLayoutPanel table, int row)
 			{
-
 				table.Controls.Add(this.ShipName, 0, row);
 				table.Controls.Add(this.Equipments, 1, row);
-
 			}
-
 
 			public void Update(int shipID)
 			{
 				var slot = shipID != -1 ? KCDatabase.Instance.MasterShips[shipID].DefaultSlot : null;
                 this.Update(shipID, slot?.ToArray());
 			}
-
 
 			public void Update(int shipID, int[] slot)
 			{
@@ -112,9 +99,7 @@ namespace ElectronicObserver.Window
 				}
 				else
 				{
-
 					ShipDataMaster ship = KCDatabase.Instance.MasterShips[shipID];
-
 
                     this.ShipName.Text = ship.Name;
                     this.ShipName.ForeColor = ship.GetShipNameColor();
@@ -124,19 +109,16 @@ namespace ElectronicObserver.Window
                     this.Equipments.Visible = true;
                     this.ToolTipInfo.SetToolTip(this.Equipments, GetEquipmentString(shipID, slot));
 				}
-
 			}
 
 			public void UpdateEquipmentToolTip(int shipID, int[] slot, int level, int hp, int firepower, int torpedo, int aa, int armor)
 			{
-
                 this.ToolTipInfo.SetToolTip(this.ShipName, GetShipString(shipID, slot, level, hp, firepower, torpedo, aa, armor));
 			}
 
 
 			void ShipName_MouseClick(object sender, MouseEventArgs e)
 			{
-
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
 				{
 					int shipID = this.ShipName.Tag as int? ?? -1;
@@ -144,7 +126,6 @@ namespace ElectronicObserver.Window
 					if (shipID != -1)
 						new DialogAlbumMasterShip(shipID).Show(this.Parent);
 				}
-
 			}
 
 
@@ -166,14 +147,12 @@ namespace ElectronicObserver.Window
 
 		private class TableEnemyCandidateControl
 		{
-
 			public ImageLabel[] ShipNames;
 			public ImageLabel Formation;
 			public ImageLabel AirSuperiority;
 
 			public FormCompass Parent;
 			public ToolTip ToolTipInfo;
-
 
 			public TableEnemyCandidateControl(FormCompass parent)
 			{
@@ -217,19 +196,17 @@ namespace ElectronicObserver.Window
 			{
 				var label = new ImageLabel
 				{
-					Anchor = AnchorStyles.Left,
-					ForeColor = this.Parent.MainFontColor,
-					ImageAlign = ContentAlignment.MiddleCenter,
-					Padding = new Padding(0, 1, 0, 1),
-					Margin = new Padding(4, 0, 4, 1),
-					AutoEllipsis = true,
-					AutoSize = true
+					Anchor			= AnchorStyles.Left,
+					ForeColor		= this.Parent.MainFontColor,
+					ImageAlign		= ContentAlignment.MiddleCenter,
+					Padding			= new Padding(0, 1, 0, 1),
+					Margin			= new Padding(4, 0, 4, 1),
+					AutoEllipsis	= true,
+					AutoSize		= true
 				};
 
 				return label;
 			}
-
-
 
 			public TableEnemyCandidateControl(FormCompass parent, TableLayoutPanel table, int column)
 				: this(parent)
@@ -248,19 +225,24 @@ namespace ElectronicObserver.Window
 					table.Controls.Add(this.ShipNames[i], column, i);
 				table.Controls.Add(this.Formation, column, 6);
 				table.Controls.Add(this.AirSuperiority, column, 7);
-
 			}
-
 
 			public void ConfigurationChanged()
 			{
 				for (int i = 0; i < this.ShipNames.Length; i++)
-                    this.ShipNames[i].Font = this.Parent.MainFont;
+				{
+					this.ShipNames[i].Font = this.Parent.MainFont;
+				}
+
                 this.Formation.Font = this.AirSuperiority.Font = this.Parent.MainFont;
 
 				var maxSize = new Size(Utility.Configuration.Config.FormCompass.MaxShipNameWidth, int.MaxValue);
+
 				foreach (var label in this.ShipNames)
+				{
 					label.MaximumSize = maxSize;
+				}
+
                 this.Formation.MaximumSize = maxSize;
                 this.AirSuperiority.MaximumSize = maxSize;
 			}
@@ -272,7 +254,7 @@ namespace ElectronicObserver.Window
 				{
 					for (int i = 0; i < 6; i++)
                         this.ShipNames[i].Visible = false;
-                    this.Formation.Visible = false;
+                    this.Formation.Visible		= false;
                     this.AirSuperiority.Visible = false;
                     this.ToolTipInfo.SetToolTip(this.AirSuperiority, null);
 
@@ -289,20 +271,20 @@ namespace ElectronicObserver.Window
 					if (ship == null)
 					{
                         // nothing
-                        this.ShipNames[i].Text = "-";
+                        this.ShipNames[i].Text		= "-";
                         this.ShipNames[i].ForeColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.BlackFontColor);
-                        this.ShipNames[i].Tag = -1;
-                        this.ShipNames[i].Cursor = Cursors.Default;
+                        this.ShipNames[i].Tag		= -1;
+                        this.ShipNames[i].Cursor	= Cursors.Default;
                         this.ToolTipInfo.SetToolTip(this.ShipNames[i], null);
 
 					}
 					else
 					{
 
-                        this.ShipNames[i].Text = ship.Name;
+                        this.ShipNames[i].Text		= ship.Name;
                         this.ShipNames[i].ForeColor = ship.GetShipNameColor();
-                        this.ShipNames[i].Tag = ship.ShipID;
-                        this.ShipNames[i].Cursor = Cursors.Help;
+                        this.ShipNames[i].Tag		= ship.ShipID;
+                        this.ShipNames[i].Cursor	= Cursors.Help;
                         this.ToolTipInfo.SetToolTip(this.ShipNames[i], GetShipString(ship.ShipID, ship.DefaultSlot?.ToArray()));
 					}
 
@@ -325,13 +307,11 @@ namespace ElectronicObserver.Window
                     this.ToolTipInfo.SetToolTip(this.AirSuperiority, GetAirSuperiorityString(air));
                     this.AirSuperiority.Visible = true;
 				}
-
 			}
 
 
 			void TableEnemyCandidateControl_MouseClick(object sender, MouseEventArgs e)
 			{
-
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
 				{
 					int shipID = ((ImageLabel)sender).Tag as int? ?? -1;
@@ -342,8 +322,6 @@ namespace ElectronicObserver.Window
 			}
 
 		}
-
-
 
 		#region ***Control method
 
@@ -379,18 +357,18 @@ namespace ElectronicObserver.Window
 			if (ship == null) return null;
 
 			int firepower_c = firepower;
-			int torpedo_c = torpedo;
-			int aa_c = aa;
-			int armor_c = armor;
-			int asw_c = asw;
-			int evasion_c = evasion;
-			int los_c = los;
-			int luck_c = luck;
-			int range = ship.Range;
+			int torpedo_c	= torpedo;
+			int aa_c		= aa;
+			int armor_c		= armor;
+			int asw_c		= asw;
+			int evasion_c	= evasion;
+			int los_c		= los;
+			int luck_c		= luck;
+			int range		= ship.Range;
 
-			asw = Math.Max(asw, 0);
+			asw		= Math.Max(asw, 0);
 			evasion = Math.Max(evasion, 0);
-			los = Math.Max(los, 0);
+			los		= Math.Max(los, 0);
 
 			if (slot != null)
 			{
@@ -400,15 +378,15 @@ namespace ElectronicObserver.Window
 					EquipmentDataMaster eq = KCDatabase.Instance.MasterEquipments[slot[i]];
 					if (eq == null) continue;
 
-					firepower += eq.Firepower;
-					torpedo += eq.Torpedo;
-					aa += eq.AA;
-					armor += eq.Armor;
-					asw += eq.ASW;
-					evasion += eq.Evasion;
-					los += eq.LOS;
-					luck += eq.Luck;
-					range = Math.Max(range, eq.Range);
+					firepower	+= eq.Firepower;
+					torpedo		+= eq.Torpedo;
+					aa			+= eq.AA;
+					armor		+= eq.Armor;
+					asw			+= eq.ASW;
+					evasion		+= eq.Evasion;
+					los			+= eq.LOS;
+					luck		+= eq.Luck;
+					range		= Math.Max(range, eq.Range);
 				}
 			}
 
@@ -527,20 +505,15 @@ namespace ElectronicObserver.Window
 
 		#endregion
 
-
-
-
 		public Font MainFont { get; set; }
 		public Font SubFont { get; set; }
 		public Color MainFontColor { get; set; }
 		public Color SubFontColor { get; set; }
 
-
 		private TableEnemyMemberControl[] ControlMembers;
 		private TableEnemyCandidateControl[] ControlCandidates;
 
 		private int _candidatesDisplayCount;
-
 
 		/// <summary>
 		/// 次に遭遇する敵艦隊候補
@@ -552,23 +525,16 @@ namespace ElectronicObserver.Window
 		/// </summary>
 		private int _enemyFleetCandidateIndex = 0;
 
-
-
-
 		public FormCompass(FormMain parent)
 		{
             this.InitializeComponent();
 
-
-
             this.MainFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.MainFontColor);
             this.SubFontColor = Utility.ThemeManager.GetColor(Utility.ThemeColors.SubFontColor);
-
 
             ControlHelper.SetDoubleBuffered(this.BasePanel);
 			ControlHelper.SetDoubleBuffered(this.TableEnemyFleet);
 			ControlHelper.SetDoubleBuffered(this.TableEnemyMember);
-
 
             this.TableEnemyMember.SuspendLayout();
             this.ControlMembers = new TableEnemyMemberControl[6];
@@ -586,12 +552,10 @@ namespace ElectronicObserver.Window
 			}
             this.TableEnemyCandidate.ResumeLayout();
 
-
             //BasePanel.SetFlowBreak( TextMapArea, true );
             this.BasePanel.SetFlowBreak(this.TextDestination, true);
             //BasePanel.SetFlowBreak( TextEventKind, true );
             this.BasePanel.SetFlowBreak(this.TextEventDetail, true);
-
 
             this.TextDestination.ImageList = ResourceManager.Instance.Equipments;
             this.TextEventKind.ImageList = ResourceManager.Instance.Equipments;
@@ -599,8 +563,6 @@ namespace ElectronicObserver.Window
             this.TextFormation.ImageList = ResourceManager.Instance.Icons;
             this.TextAirSuperiority.ImageList = ResourceManager.Instance.Equipments;
             this.TextAirSuperiority.ImageIndex = (int)ResourceManager.EquipmentContent.CarrierBasedFighter;
-
-
 
             this.ConfigurationChanged();
 
@@ -611,9 +573,7 @@ namespace ElectronicObserver.Window
 
 		private void FormCompass_Load(object sender, EventArgs e)
 		{
-
             this.BasePanel.Visible = false;
-
 
 			APIObserver o = APIObserver.Instance;
 
@@ -673,13 +633,10 @@ namespace ElectronicObserver.Window
 
 			if (apiname == "api_port/port")
 			{
-
                 this.BasePanel.Visible = false;
-
 			}
 			else if (apiname == "api_req_member/get_practice_enemyinfo")
 			{
-
                 this.TextMapArea.Text = "연습";
                 this.TextDestination.Text = string.Format("{0} {1}", data.api_nickname, Constants.GetAdmiralRank((int)data.api_rank));
                 this.TextDestination.ImageAlign = ContentAlignment.MiddleCenter;
@@ -695,13 +652,10 @@ namespace ElectronicObserver.Window
                 this.TextEventDetail.ImageIndex = -1;
                 this.ToolTipInfo.SetToolTip(this.TextEventDetail, null);
                 this.TextEnemyFleetName.Text = data.api_deckname;
-
 			}
 			else
 			{
-
 				CompassData compass = KCDatabase.Instance.Battle.Compass;
-
 
                 this.BasePanel.SuspendLayout();
                 this.PanelEnemyFleet.Visible = false;
@@ -709,7 +663,6 @@ namespace ElectronicObserver.Window
 
                 this._enemyFleetCandidate = null;
                 this._enemyFleetCandidateIndex = -1;
-
 
                 this.TextMapArea.Text = string.Format("출격해역 : {0}-{1}{2}", compass.MapAreaID, compass.MapInfoID,
 					compass.MapInfo.EventDifficulty > 0 ? " [" + Constants.GetDifficulty(compass.MapInfo.EventDifficulty) + "]" : "");

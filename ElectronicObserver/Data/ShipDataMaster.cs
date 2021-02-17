@@ -38,7 +38,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.ShipName); }
+            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.TranslateType.ShipName); }
         }
 
         public string Name_JP => this.RawData.api_name;
@@ -648,7 +648,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string ShipTypeName
         {
-            get { return FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)this.ShipType].Name, Utility.DataType.ShipType); }
+            get { return FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)this.ShipType].Name, Utility.TranslateType.ShipType); }
         }
 
         /// <summary>

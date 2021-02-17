@@ -23,7 +23,7 @@ namespace ElectronicObserver.Utility
         /// <summary>
         /// 更新日時
         /// </summary>
-        public static DateTime UpdateTime       => DateTimeHelper.CSVStringToTime("2021/2/12 23:00:00");
+        public static DateTime UpdateTime       => DateTimeHelper.CSVStringToTime("2021/2/19 23:00:00");
         public static DateTime MaintenanceTime  = DateTime.Now;
 
         private static System.Net.WebClient _client;
@@ -37,32 +37,32 @@ namespace ElectronicObserver.Utility
             if (Utility.Configuration.Config.Life.CheckUpdateInformation == false)
                 return;
 
-            if (_client == null)
+            if (SoftwareInformation._client == null)
             {
-                _client = new System.Net.WebClient
+                SoftwareInformation._client = new System.Net.WebClient
                 {
                     Encoding = new System.Text.UTF8Encoding(false)
                 };
-                _client.DownloadStringCompleted += DownloadStringCompleted;
+                SoftwareInformation._client.DownloadStringCompleted += DownloadStringCompleted;
             }
 
-            if (_client.IsBusy == false)
-                _client.DownloadStringAsync(_uri);
+            if (SoftwareInformation._client.IsBusy == false)
+                SoftwareInformation._client.DownloadStringAsync(_uri);
         }
 
         public static void CheckMaintenance()
         {
-            if (_maintenanceClient == null)
+            if (SoftwareInformation._maintenanceClient == null)
             {
-                _maintenanceClient = new System.Net.WebClient
+                SoftwareInformation._maintenanceClient = new System.Net.WebClient
                 {
                     Encoding = new System.Text.UTF8Encoding(false)
                 };
-                _maintenanceClient.DownloadStringCompleted += DownloadTimeCompleted;
+                SoftwareInformation._maintenanceClient.DownloadStringCompleted += DownloadTimeCompleted;
             }
 
-            if (_maintenanceClient.IsBusy == false)
-                _maintenanceClient.DownloadStringAsync(_maintenanceUri);
+            if (SoftwareInformation._maintenanceClient.IsBusy == false)
+                SoftwareInformation._maintenanceClient.DownloadStringAsync(_maintenanceUri);
         }
 
         public static string GetMaintenanceTime()
@@ -77,12 +77,10 @@ namespace ElectronicObserver.Utility
 
         private static void DownloadTimeCompleted(object sender, System.Net.DownloadStringCompletedEventArgs e)
         {
-
             if (e.Error != null)
             {
                 Utility.ErrorReporter.SendErrorReport(e.Error, "점검 정보를 가져오는데 실패했습니다.");
                 return;
-
             }
 
             if (e.Result.StartsWith("<!DOCTYPE html>") == true)
@@ -122,9 +120,9 @@ namespace ElectronicObserver.Utility
             {
                 using (var sr = new System.IO.StringReader(e.Result))
                 {
-                    DateTime date = DateTimeHelper.CSVStringToTime(sr.ReadLine());
-                    string version = sr.ReadLine();
-                    string description = sr.ReadToEnd();
+                    DateTime date       = DateTimeHelper.CSVStringToTime(sr.ReadLine());
+                    string version      = sr.ReadLine();
+                    string description  = sr.ReadToEnd();
 
                     if (UpdateTime < date)
                     {

@@ -98,7 +98,7 @@ namespace ElectronicObserver.Window.Dialog
 
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(this.EquipmentView);
-				row.SetValues(eq.EquipmentID, eq.IconType, FormMain.Instance.Translator.GetTranslation(eq.CategoryTypeInstance.Name, Utility.DataType.EquipmentType), eq.Name);
+				row.SetValues(eq.EquipmentID, eq.IconType, FormMain.Instance.Translator.GetTranslation(eq.CategoryTypeInstance.Name, Utility.TranslateType.EquipmentType), eq.Name);
 				rows.Add(row);
 
 			}
@@ -231,7 +231,7 @@ namespace ElectronicObserver.Window.Dialog
 
             this.TableEquipmentName.SuspendLayout();
 
-            this.EquipmentType.Text = FormMain.Instance.Translator.GetTranslation(db.EquipmentTypes[eq.EquipmentType[2]].Name, Utility.DataType.EquipmentType);
+            this.EquipmentType.Text = FormMain.Instance.Translator.GetTranslation(db.EquipmentTypes[eq.EquipmentType[2]].Name, Utility.TranslateType.EquipmentType);
 
             {
 				int eqicon = eq.IconType;
@@ -244,7 +244,7 @@ namespace ElectronicObserver.Window.Dialog
 				foreach (var stype in KCDatabase.Instance.ShipTypes.Values)
 				{
                     if (stype.EquippableCategories.Contains((int)eq.CategoryType))
-                        sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.DataType.ShipType));
+                        sb.AppendLine(FormMain.Instance.Translator.GetTranslation(stype.Name, Utility.TranslateType.ShipType));
                 }
                 this.ToolTipInfo.SetToolTip(this.EquipmentType, this.GetEquippableShips(equipmentID));
             }

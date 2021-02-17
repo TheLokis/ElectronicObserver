@@ -33,7 +33,7 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(string.Empty, Utility.DataType.ExpeditionTitle, (int)this.RawData.api_id); }
+            get { return FormMain.Instance.Translator.GetTranslation(string.Empty, Utility.TranslateType.ExpeditionTitle, (int)this.RawData.api_id); }
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace ElectronicObserver.Data
         /// </summary>
         public string Detail
         {
-            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.ExpeditionDetail); }
+            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.TranslateType.ExpeditionDetail); }
         }
 
         /// <summary>

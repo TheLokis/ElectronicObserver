@@ -395,7 +395,7 @@ namespace ElectronicObserver.Data.ShipGroup
 			{
 				var shiptype = KCDatabase.Instance.ShipTypes[(int)this.RightOperand];
 				if (shiptype != null)
-                    return FormMain.Instance.Translator.GetTranslation(shiptype.Name, Utility.DataType.ShipType);
+                    return FormMain.Instance.Translator.GetTranslation(shiptype.Name, Utility.TranslateType.ShipType);
 				else
 					return $"{(int)this.RightOperand} (미정의)";
 

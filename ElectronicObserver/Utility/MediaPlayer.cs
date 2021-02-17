@@ -15,7 +15,6 @@ namespace ElectronicObserver.Utility
 	/// </summary>
 	public class MediaPlayer
 	{
-
 		private dynamic _wmp;
 
 		public event Action<int> PlayStateChange = delegate { };
@@ -52,7 +51,6 @@ namespace ElectronicObserver.Utility
 		});
 
 		private static readonly Regex SupportedFileName = new Regex(".*\\.(" + string.Join("|", SupportedExtensions) + ")", RegexOptions.Compiled);
-
 
 		public MediaPlayer()
 		{

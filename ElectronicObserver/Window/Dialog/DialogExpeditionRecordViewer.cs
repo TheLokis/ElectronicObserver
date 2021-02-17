@@ -1,15 +1,11 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Resource;
 using ElectronicObserver.Resource.Record;
-using ElectronicObserver.Utility;
-using ElectronicObserver.Utility.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ElectronicObserver.Window.Dialog
@@ -23,15 +19,15 @@ namespace ElectronicObserver.Window.Dialog
 
         private class SearchArgument
         {
-            public int MissionID { get; set; }
-            public int FlagShipLevel { get; set; }
-            public string FlagShipType { get; set; }
-            public string FlagShipName { get; set; }
-            public DateTime DateBegin { get; set; }
-            public DateTime DateEnd { get; set; }
-            public string Result { get; set; }
+            public int MissionID        { get; set; }
+            public int FlagShipLevel    { get; set; }
+            public string FlagShipType  { get; set; }
+            public string FlagShipName  { get; set; }
+            public DateTime DateBegin   { get; set; }
+            public DateTime DateEnd     { get; set; }
+            public string Result        { get; set; }
             public DataGridViewRow BaseRow { get; set; }
-            public bool MergeRows { get; set; }
+            public bool MergeRows       { get; set; }
         }
 
         public DialogExpeditionRecordViewer()
@@ -72,8 +68,8 @@ namespace ElectronicObserver.Window.Dialog
                         dt.Rows.Add(i, i.ToString());
 
                     this.ExpeditionID.DisplayMember = "Display";
-                    this.ExpeditionID.ValueMember = "Value";
-                    this.ExpeditionID.DataSource = dt;
+                    this.ExpeditionID.ValueMember   = "Value";
+                    this.ExpeditionID.DataSource    = dt;
                     this.ExpeditionID.SelectedIndex = 0;
 
                     dt.AcceptChanges();
@@ -93,25 +89,17 @@ namespace ElectronicObserver.Window.Dialog
                         dt.Rows.Add(i.Result, i.Result.ToString());
                     }
 
-                    this.ComboBoxResultList.DisplayMember = "Display";
-                    this.ComboBoxResultList.ValueMember = "Value";
-                    this.ComboBoxResultList.DataSource = dt;
-                    this.ComboBoxResultList.SelectedIndex = 0;
+                    this.ComboBoxResultList.DisplayMember   = "Display";
+                    this.ComboBoxResultList.ValueMember     = "Value";
+                    this.ComboBoxResultList.DataSource      = dt;
+                    this.ComboBoxResultList.SelectedIndex   = 0;
 
                     dt.AcceptChanges();
                 }
 
-
                 foreach (DataGridViewColumn column in this.RecordView.Columns)
                     column.Width = 20;
-                /*
-                this.LabelShipName.ImageList = ResourceManager.Instance.Icons;
-                this.LabelShipName.ImageIndex = (int)ResourceManager.IconContent.HeadQuartersShip;
-                this.LabelItemName.ImageList = ResourceManager.Instance.Icons;
-                this.LabelItemName.ImageIndex = (int)ResourceManager.IconContent.ItemPresentBox;
-                this.LabelEquipmentName.ImageList = ResourceManager.Instance.Equipments;
-                this.LabelEquipmentName.ImageIndex = (int)ResourceManager.EquipmentContent.MainGunL;
-                */
+
                 this.Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.ItemPresentBox]);
             }
             catch (Exception x)
@@ -144,12 +132,12 @@ namespace ElectronicObserver.Window.Dialog
 
             var args = new SearchArgument
             {
-                MissionID = (int)this.ExpeditionID.SelectedValue,
-                Result = this.ComboBoxResultList.SelectedValue.ToString(),
-                DateBegin = this.DateBegin.Value,
-                DateEnd = this.DateEnd.Value,
-                MergeRows = this.MergeRows.Checked,
-                BaseRow = row
+                MissionID   = (int)this.ExpeditionID.SelectedValue,
+                Result      = this.ComboBoxResultList.SelectedValue.ToString(),
+                DateBegin   = this.DateBegin.Value,
+                DateEnd     = this.DateEnd.Value,
+                MergeRows   = this.MergeRows.Checked,
+                BaseRow     = row
             };
 
             this.RecordView.Tag = args;
@@ -195,9 +183,9 @@ namespace ElectronicObserver.Window.Dialog
             var records = RecordManager.Instance.Expedition.Record;
             var rows = new LinkedList<DataGridViewRow>();
 
-            int i = 0;
-            var materials = new Dictionary<int, Dictionary<string, int>>();
-            var items = new Dictionary<int, int>();
+            int index       = 0;
+            var materials   = new Dictionary<int, Dictionary<string, int>>();
+            var items       = new Dictionary<int, int>();
             try
             {
                 foreach (var r in records)
@@ -221,7 +209,7 @@ namespace ElectronicObserver.Window.Dialog
                         var row = (DataGridViewRow)args.BaseRow.Clone();
 
                         row.SetValues(
-                            i + 1,
+                            index + 1,
                             Constants.GetVisualMissionId(r.MissionID),
                             ex.Name,
                             r.Fuel,
@@ -254,10 +242,10 @@ namespace ElectronicObserver.Window.Dialog
                         }
                         else
                         {
-                            materials[key]["Fuel"] += r.Fuel;
-                            materials[key]["Ammo"] += r.Ammo;
+                            materials[key]["Fuel"]  += r.Fuel;
+                            materials[key]["Ammo"]  += r.Ammo;
                             materials[key]["Steel"] += r.Steel;
-                            materials[key]["Baux"] += r.Baux;
+                            materials[key]["Baux"]  += r.Baux;
                             materials[key]["Count"]++;
                         }
 
@@ -286,7 +274,7 @@ namespace ElectronicObserver.Window.Dialog
                         }
                     }
 
-                    i++;
+                    index++;
                 }
 
             } catch (Exception ex)

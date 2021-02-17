@@ -65,7 +65,7 @@ namespace ElectronicObserver.Window.Dialog
 
             this.AkashiListView.Rows.Clear();
 
-            JObject Data = ExternalDataReader.Instance.GetData(DataType.AkashiData);
+            JObject Data = ExternalDataReader.Instance.GetData(TranslateType.AkashiData);
 
             KCDatabase db = KCDatabase.Instance;
 

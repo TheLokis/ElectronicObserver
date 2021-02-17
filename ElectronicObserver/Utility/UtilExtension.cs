@@ -6,82 +6,43 @@ namespace ElectronicObserver.Utility
 {
     public static class UtilExtension
     {
-        public static IDictionary<T, VALUE> Union<T, VALUE>(this IDictionary<T, VALUE> dic, IDictionary<T,VALUE> target)
-        {
-            foreach(var val in target)
-            {
-                if(dic.ContainsKey(val.Key) == true)
-                {
-                    continue;
-                }
-
-                dic.Add(val.Key, val.Value);
-            }
-
-            return dic;
-        }
-
-        public static void ForEach<T, VALUE>(this IDictionary<T, VALUE> dic, Action<T, VALUE> action)
-        {
-            foreach (var i in dic)
-            {
-                action.Invoke(i.Key, i.Value);
-            }
-        }
-
-        public static void Foreach<VALUE>(this VALUE[] array, Action<VALUE> action)
-        {  
-            for(int i = 0; i < array.Length;i++)
-            {
-                action.Invoke(array[i]);
-            }
-        }
-
-        public static void Foreach(this JArray array, Action<JToken> action)
-        {
-            for(int i = 0; i < array.Count;i++)
-            {
-                action.Invoke(array[i]);
-            }
-        }
-
-        public static string DataTypeToName(this DataType type)
+        public static string DataTypeToName(this TranslateType type)
         {
             switch (type)
             {
-                case DataType.AkashiData:
+                case TranslateType.AkashiData:
                     return "개수공창 목록";
-                case DataType.Equipment:
+                case TranslateType.Equipment:
                     return "장비 번역";
-                case DataType.EquipmentType:
+                case TranslateType.EquipmentType:
                     return "장비 종류 번역";
-                case DataType.ShipName:
+                case TranslateType.ShipName:
                     return "함선 이름 번역";
-                case DataType.ShipSuffix:
+                case TranslateType.ShipSuffix:
                     return "함선 개장명 번역";
-                case DataType.ShipType:
+                case TranslateType.ShipType:
                     return "함선종류 번역";
-                case DataType.OperationMap:
+                case TranslateType.OperationMap:
                     return "해역 이름 번역";
-                case DataType.OperationSortie:
+                case TranslateType.OperationSortie:
                     return "적 함대 번역";
-                case DataType.QuestDetail:
+                case TranslateType.QuestDetail:
                     return "퀘스트 정보 번역";
-                case DataType.QuestTitle:
+                case TranslateType.QuestTitle:
                     return "퀘스트 이름 번역";
-                case DataType.ExpeditionDetail:
+                case TranslateType.ExpeditionDetail:
                     return "원정 상세 번역";
-                case DataType.ExpeditionTitle:
+                case TranslateType.ExpeditionTitle:
                     return "원정 이름 번역";
-                case DataType.ExpeditionData:
+                case TranslateType.ExpeditionData:
                     return "원정 데이터 목록";
-                case DataType.Items:
+                case TranslateType.Items:
                     return "아이템 이름 번역";
-                case DataType.FitData:
+                case TranslateType.FitData:
                     return "피트 정보 목록";
-                case DataType.NodeData:
+                case TranslateType.NodeData:
                     return "해역 노드 목록";
-                case DataType.None:
+                case TranslateType.None:
                 default:
                     return "???";
             }

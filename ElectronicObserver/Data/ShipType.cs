@@ -34,7 +34,7 @@ namespace ElectronicObserver.Data
         //public string Name => RawData.api_name;
         public string Name
         {
-            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.DataType.ShipType); }
+            get { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_name, Utility.TranslateType.ShipType); }
         }
 
 

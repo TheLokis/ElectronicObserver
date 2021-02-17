@@ -115,10 +115,8 @@ namespace ElectronicObserver.Window.Dialog
 
             this.ParameterLevel.Value = this.ParameterLevel.Maximum = ExpTable.ShipMaximumLevel;
 
-
             this.TableBattle.Visible = false;
             this.BasePanelShipGirl.Visible = false;
-
 
 			ControlHelper.SetDoubleBuffered(this.TableShipName);
 			ControlHelper.SetDoubleBuffered(this.TableParameterMain);
@@ -131,13 +129,11 @@ namespace ElectronicObserver.Window.Dialog
 
 			ControlHelper.SetDoubleBuffered(this.ShipView);
 
-
             //ShipView Initialize
             this.ShipView.SuspendLayout();
 
             this.ShipView_ShipID.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             this.ShipView_ShipType.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-
 
             this.ShipView.Rows.Clear();
 
@@ -145,19 +141,18 @@ namespace ElectronicObserver.Window.Dialog
 
 			foreach (var ship in KCDatabase.Instance.MasterShips.Values)
 			{
-
-				if (ship.Name == "なし") continue;
+				if (ship.Name_JP == "なし") continue;
 
 				DataGridViewRow row = new DataGridViewRow();
 				row.CreateCells(this.ShipView);
                 row.SetValues(ship.ShipID, FormMain.Instance.Translator.GetTranslation
-					(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.DataType.ShipType), ship.NameWithClass);
+					(KCDatabase.Instance.ShipTypes[(int)ship.ShipType].Name, Utility.TranslateType.ShipType), ship.NameWithClass);
                 //row.SetValues(ship.ShipID, row.SetValues(ship.ShipID, ship.ShipTypeName, ship.NameWithClass));
                 row.Cells[this.ShipView_ShipType.Index].Tag = ship.ShipType;
 				row.Cells[this.ShipView_Name.Index].Tag = ship.IsAbyssalShip ? null : ship.NameReading;
 				rows.Add(row);
-
 			}
+
             this.ShipView.Rows.AddRange(rows.ToArray());
 
             this.ShipView_ShipID.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
@@ -791,7 +786,6 @@ namespace ElectronicObserver.Window.Dialog
                .Concat(db.MasterEquipments.Values.Where(eq => eq.EquippableShipsAtExpansion.Contains(shipID)).Select(eq => eq.Name + " (보강슬롯)")));
         }
 
-
         private void ParameterLevel_ValueChanged(object sender, EventArgs e)
 		{
 			if (this._shipID != -1)
@@ -806,8 +800,6 @@ namespace ElectronicObserver.Window.Dialog
 			if (this._shipID != -1)
                 this.UpdateLevelParameter(this._shipID);
 		}
-
-
 
 		private void TableParameterMain_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
 		{
@@ -844,8 +836,6 @@ namespace ElectronicObserver.Window.Dialog
 				e.Graphics.DrawLine(Pens.Silver, e.CellBounds.X, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
 		}
 
-
-
 		private void RemodelBeforeShipName_MouseClick(object sender, MouseEventArgs e)
 		{
 
@@ -854,7 +844,6 @@ namespace ElectronicObserver.Window.Dialog
 
 			if (ship != null && ship.RemodelBeforeShipID != 0)
 			{
-
 				if ((e.Button & System.Windows.Forms.MouseButtons.Right) != 0)
 					new DialogAlbumMasterShip(ship.RemodelBeforeShipID).Show(this.Owner);
 
@@ -865,7 +854,6 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void RemodelAfterShipName_MouseClick(object sender, MouseEventArgs e)
 		{
-
 			if (this._shipID == -1) return;
 			var ship = KCDatabase.Instance.MasterShips[this._shipID];
 
@@ -884,15 +872,12 @@ namespace ElectronicObserver.Window.Dialog
 
 		private void Equipment_MouseClick(object sender, MouseEventArgs e)
 		{
-
 			if (e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
-
 				for (int i = 0; i < this.Equipments.Length; i++)
 				{
 					if (sender == this.Equipments[i])
 					{
-
 						if (this._shipID != -1)
 						{
 							ShipDataMaster ship = KCDatabase.Instance.MasterShips[this._shipID];
@@ -954,7 +939,7 @@ namespace ElectronicObserver.Window.Dialog
                         foreach (ShipDataMaster ship in KCDatabase.Instance.MasterShips.Values)
 						{
 
-							if (ship.Name == "なし") continue;
+							if (ship.Name_JP == "なし") continue;
 
 							sw.WriteLine(string.Join(",",
 								ship.ShipID,

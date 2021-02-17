@@ -11,12 +11,12 @@ namespace ElectronicObserver.Data
     {
         public static string GetNodeName(int world, int map, int node)
         {
-            if (ExternalDataReader.Instance.GetData(DataType.NodeData)["World " + world + "-" + map] == null)
+            if (ExternalDataReader.Instance.GetData(TranslateType.NodeData)["World " + world + "-" + map] == null)
             {
                 return node.ToString();
             }
 
-            return ExternalDataReader.Instance.GetData(DataType.NodeData)["World " + world + "-" + map].SelectToken(node.ToString())[1].ToString();
+            return ExternalDataReader.Instance.GetData(TranslateType.NodeData)["World " + world + "-" + map].SelectToken(node.ToString())[1].ToString();
         }
 
 
@@ -24,7 +24,7 @@ namespace ElectronicObserver.Data
         {
             List<int> nodeList = new List<int>();
 
-            var targetMap = ExternalDataReader.Instance.GetData(DataType.NodeData)["World " + world + "-" + map];
+            var targetMap = ExternalDataReader.Instance.GetData(TranslateType.NodeData)["World " + world + "-" + map];
             if (targetMap == null)
             {
                 nodeList.Add(node);

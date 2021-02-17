@@ -142,7 +142,7 @@ namespace ElectronicObserver.Data.Battle
         /// </summary>
         public string EnemyFleetName
         { get
-            { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_enemy_info.api_deck_name, Utility.DataType.OperationSortie); }
+            { return FormMain.Instance.Translator.GetTranslation(this.RawData.api_enemy_info.api_deck_name, Utility.TranslateType.OperationSortie); }
         }
     //undone: 複数の battleresult に対応させる
 

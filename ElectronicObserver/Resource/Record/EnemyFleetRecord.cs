@@ -93,7 +93,7 @@ namespace ElectronicObserver.Resource.Record
 			public EnemyFleetElement(string fleetName, int mapAreaID, int mapInfoID, int cellID, int difficulty, int formation, int[] fleetMember, int[] fleetMemberLevel, int expShip)
 				: base()
 			{
-                this.FleetName = FormMain.Instance.Translator.GetTranslation(fleetName, Utility.DataType.OperationSortie);
+                this.FleetName = FormMain.Instance.Translator.GetTranslation(fleetName, Utility.TranslateType.OperationSortie);
                 this.MapAreaID = mapAreaID;
                 this.MapInfoID = mapInfoID;
                 this.CellID = cellID;
@@ -119,7 +119,7 @@ namespace ElectronicObserver.Resource.Record
 					throw new ArgumentException("요소 수가 너무 적습니다.");
 
 				ulong id = Convert.ToUInt64(elem[0], 16);
-                this.FleetName = FormMain.Instance.Translator.GetTranslation(elem[1], Utility.DataType.OperationSortie);
+                this.FleetName = FormMain.Instance.Translator.GetTranslation(elem[1], Utility.TranslateType.OperationSortie);
                 //elem[1];
                 this.MapAreaID = int.Parse(elem[2]);
                 this.MapInfoID = int.Parse(elem[3]);

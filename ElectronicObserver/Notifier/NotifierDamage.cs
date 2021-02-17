@@ -70,13 +70,13 @@ namespace ElectronicObserver.Notifier
             this.Initialize();
 
             this.NotifiesBefore = config.NotifiesBefore;
-            this.NotifiesNow = config.NotifiesNow;
-            this.NotifiesAfter = config.NotifiesAfter;
-            this.LevelBorder = config.LevelBorder;
-            this.ContainsNotLockedShip = config.ContainsNotLockedShip;
-            this.ContainsSafeShip = config.ContainsSafeShip;
-            this.ContainsFlagship = config.ContainsFlagship;
-            this.NotifiesAtEndpoint = config.NotifiesAtEndpoint;
+            this.NotifiesNow	= config.NotifiesNow;
+            this.NotifiesAfter	= config.NotifiesAfter;
+            this.LevelBorder	= config.LevelBorder;
+            this.ContainsNotLockedShip	= config.ContainsNotLockedShip;
+            this.ContainsSafeShip		= config.ContainsSafeShip;
+            this.ContainsFlagship		= config.ContainsFlagship;
+            this.NotifiesAtEndpoint		= config.NotifiesAtEndpoint;
 		}
 
 
@@ -121,9 +121,6 @@ namespace ElectronicObserver.Notifier
             this.DialogData.OnCloseAll();
 		}
 
-
-
-
 		private void BeforeSortie(string apiname, dynamic data)
 		{
 			if (this.NotifiesNow || this.NotifiesBefore)
@@ -141,16 +138,13 @@ namespace ElectronicObserver.Notifier
 			}
 		}
 
-
 		private void InSortie(string apiname, dynamic data)
 		{
 			if (this.NotifiesAfter)
 			{
-
 				string[] array = this.GetDamagedShips(KCDatabase.Instance.Fleet.Fleets.Values
 					.Where(f => f.IsInSortie)
 					.SelectMany(f => f.MembersWithoutEscaped.Skip(!this.ContainsFlagship ? 1 : 0)));
-
 
 				if (array != null && array.Length > 0)
 				{
@@ -158,7 +152,6 @@ namespace ElectronicObserver.Notifier
 				}
 			}
 		}
-
 
 		private void BattleStarted(string apiname, dynamic data)
 		{
@@ -168,7 +161,6 @@ namespace ElectronicObserver.Notifier
 			}
 		}
 
-
 		private void BattleFinished(string apiname, dynamic data)
 		{
 			if (this.NotifiesNow)
@@ -177,15 +169,12 @@ namespace ElectronicObserver.Notifier
 			}
 		}
 
-
 		private void CheckBattle()
 		{
-
 			BattleManager bm = KCDatabase.Instance.Battle;
 
 			if (bm.Compass.IsEndPoint && !this.NotifiesAtEndpoint)
 				return;
-
 
 			var list = new List<string>();
 
@@ -195,12 +184,9 @@ namespace ElectronicObserver.Notifier
 			if (bm.IsCombinedBattle)
 				list.AddRange(this.GetDamagedShips(battle.Initial.FriendFleetEscort, battle.ResultHPs.Skip(6).ToArray()));
 
-
 			if (list.Count > 0)
                 this.Notify(list.ToArray());
-
 		}
-
 
 		// 注: 退避中かどうかまではチェックしない
 		private bool IsShipDamaged(ShipData ship, int hp)
@@ -221,7 +207,6 @@ namespace ElectronicObserver.Notifier
 
 		private string[] GetDamagedShips(FleetData fleet, int[] hps)
 		{
-
 			LinkedList<string> list = new LinkedList<string>();
 
 			for (int i = 0; i < fleet.Members.Count; i++)
@@ -241,7 +226,6 @@ namespace ElectronicObserver.Notifier
 
 		public void Notify(string[] messages)
 		{
-
             this.DialogData.Message = string.Format("{0} 가 대파하였습니다!",
 				string.Join(", ", messages));
 
@@ -253,19 +237,17 @@ namespace ElectronicObserver.Notifier
 		{
 			base.ApplyToConfiguration(config);
 
-
 			if (config is Utility.Configuration.ConfigurationData.ConfigNotifierDamage c)
 			{
-				c.NotifiesBefore = this.NotifiesBefore;
-				c.NotifiesNow = this.NotifiesNow;
-				c.NotifiesAfter = this.NotifiesAfter;
-				c.LevelBorder = this.LevelBorder;
+				c.NotifiesBefore	= this.NotifiesBefore;
+				c.NotifiesNow		= this.NotifiesNow;
+				c.NotifiesAfter		= this.NotifiesAfter;
+				c.LevelBorder		= this.LevelBorder;
 				c.ContainsNotLockedShip = this.ContainsNotLockedShip;
-				c.ContainsSafeShip = this.ContainsSafeShip;
-				c.ContainsFlagship = this.ContainsFlagship;
-				c.NotifiesAtEndpoint = this.NotifiesAtEndpoint;
+				c.ContainsSafeShip		= this.ContainsSafeShip;
+				c.ContainsFlagship		= this.ContainsFlagship;
+				c.NotifiesAtEndpoint	= this.NotifiesAtEndpoint;
 			}
 		}
-
 	}
 }
