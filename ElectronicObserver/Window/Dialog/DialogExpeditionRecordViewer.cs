@@ -156,7 +156,6 @@ namespace ElectronicObserver.Window.Dialog
                 this.RecordView_Header.DisplayIndex = 1;
                 this.RecordView_DateTime.Visible    =
                 this.RecordView_Result.Visible      = false;
-
             }
             else
             {
@@ -185,7 +184,7 @@ namespace ElectronicObserver.Window.Dialog
 
             int index       = 0;
             var materials   = new Dictionary<int, Dictionary<string, int>>();
-            var items       = new Dictionary<int, int>();
+
             try
             {
                 foreach (var r in records)
@@ -193,15 +192,13 @@ namespace ElectronicObserver.Window.Dialog
                     #region Filtering
 
                     var ex = KCDatabase.Instance.Mission[r.MissionID];
-
                     if (ex == null) continue;
 
                     if (r.MissionID != args.MissionID && args.MissionID != -1) continue;
 
                     if (r.Result.Equals(args.Result) == false && args.Result.Equals(_resultAny) == false) continue;
 
-                    if (r.Date < args.DateBegin || args.DateEnd < r.Date)
-                        continue;
+                    if (r.Date < args.DateBegin || args.DateEnd < r.Date) continue;
 
                     #endregion
                     if (args.MergeRows == false)
@@ -217,9 +214,9 @@ namespace ElectronicObserver.Window.Dialog
                             r.Steel,
                             r.Baux,
                             ResourceManager.GetItemImage(r.Item1Id),
-                            r.Item1Count == -1 ? r.Item1Count.ToString() : "-",
+                            r.Item1Count > 0 ? r.Item1Count.ToString() : "",
                             ResourceManager.GetItemImage(r.Item2Id),
-                            r.Item2Count == -1 ? r.Item2Count.ToString() : "-",
+                            r.Item2Count > 0 ? r.Item2Count.ToString() : "",
                             r.Result,
                             r.Date
                             );
@@ -232,13 +229,17 @@ namespace ElectronicObserver.Window.Dialog
                         if (materials.ContainsKey(key) == false)
                         {
                             materials.Add(key, new Dictionary<string, int>
-                        {
-                            {"Fuel", r.Fuel },
-                            {"Ammo", r.Ammo },
-                            {"Steel", r.Steel },
-                            {"Baux", r.Baux },
-                            {"Count", 1 },
-                        });
+                            {
+                                {"Fuel", r.Fuel },
+                                {"Ammo", r.Ammo },
+                                {"Steel", r.Steel },
+                                {"Baux", r.Baux },
+                                {"Count", 1 },
+                                {"Item1Id", r.Item1Id },
+                                {"Item2Id", r.Item2Id },
+                                {"Item1Count", r.Item1Count },
+                                {"Item2Count", r.Item2Count },
+                            });
                         }
                         else
                         {
@@ -247,29 +248,17 @@ namespace ElectronicObserver.Window.Dialog
                             materials[key]["Steel"] += r.Steel;
                             materials[key]["Baux"]  += r.Baux;
                             materials[key]["Count"]++;
-                        }
 
-                        if (r.Item1Id != -1)
-                        {
-                            if (items.ContainsKey(r.Item1Id) == false)
+                            if (r.Item1Id != -1)
                             {
-                                items.Add(r.Item1Id, r.Item1Count);
+                                materials[key]["Item1Id"]       = r.Item1Id;
+                                materials[key]["Item1Count"]    += r.Item1Count;
                             }
-                            else
-                            {
-                                items[r.Item1Id] += r.Item1Count;
-                            }
-                        }
 
-                        if (r.Item2Id != -1)
-                        {
-                            if (items.ContainsKey(r.Item2Id) == false)
+                            if (r.Item2Id != -1)
                             {
-                                items.Add(r.Item2Id, r.Item2Count);
-                            }
-                            else
-                            {
-                                items[r.Item2Id] += r.Item2Count;
+                                materials[key]["Item2Id"]       = r.Item2Id;
+                                materials[key]["Item2Count"]    += r.Item2Count;
                             }
                         }
                     }
@@ -279,7 +268,7 @@ namespace ElectronicObserver.Window.Dialog
 
             } catch (Exception ex)
             {
-                Console.WriteLine(ex.Message + ":" + ex.StackTrace);
+                Utility.ErrorReporter.SendErrorReport(ex, ex.StackTrace);
             }
             // foreach end
 
@@ -299,11 +288,23 @@ namespace ElectronicObserver.Window.Dialog
                         c.Value["Fuel"],
                         c.Value["Ammo"],
                         c.Value["Steel"],
-                        c.Value["Baux"]
+                        c.Value["Baux"],
+                        ResourceManager.GetItemImage(c.Value["Item1Id"]),
+                        c.Value["Item1Count"] > 0 ? c.Value["Item1Count"].ToString() : "",
+                        ResourceManager.GetItemImage(c.Value["Item2Id"]),
+                        c.Value["Item2Count"] > 0 ? c.Value["Item2Count"].ToString() : ""
                     );
 
                     row.Cells[0].Tag = c.Value["Count"];
                     row.Cells[1].Tag = c.Value;
+
+                    row.Cells[7].ToolTipText = c.Value["Item1Id"] != -1 ? 
+                        FormMain.Instance.Translator.GetTranslation(string.Empty, Utility.TranslateType.Items, c.Value["Item1Id"]) : 
+                        string.Empty;
+
+                    row.Cells[9].ToolTipText = c.Value["Item2Id"] != -1 ? 
+                        FormMain.Instance.Translator.GetTranslation(string.Empty, Utility.TranslateType.Items, c.Value["Item2Id"]) : 
+                        string.Empty;
 
                     rows.AddLast(row);
 

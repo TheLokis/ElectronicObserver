@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 public static class ContainerExtension
 {
@@ -17,7 +20,7 @@ public static class ContainerExtension
         return dic;
     }
 
-    public static void ForEach<T, VALUE>(this IDictionary<T, VALUE> dic, Action<T, VALUE> action)
+    public static void ForEach<T, VALUE>(this IDictionary<T, VALUE> dic, System.Action<T, VALUE> action)
     {
         foreach (var i in dic)
         {

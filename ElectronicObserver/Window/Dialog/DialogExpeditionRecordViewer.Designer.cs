@@ -109,7 +109,7 @@
             // ButtonRun
             // 
             this.ButtonRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonRun.Location = new System.Drawing.Point(543, 68);
+            this.ButtonRun.Location = new System.Drawing.Point(703, 68);
             this.ButtonRun.Name = "ButtonRun";
             this.ButtonRun.Size = new System.Drawing.Size(69, 23);
             this.ButtonRun.TabIndex = 21;
@@ -153,7 +153,7 @@
             this.RecordView.RowHeadersVisible = false;
             this.RecordView.RowTemplate.Height = 21;
             this.RecordView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.RecordView.Size = new System.Drawing.Size(624, 315);
+            this.RecordView.Size = new System.Drawing.Size(784, 315);
             this.RecordView.TabIndex = 1;
             this.RecordView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RecordView_CellContentClick);
             this.RecordView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RecordView_CellDoubleClick);
@@ -187,7 +187,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.RecordView);
-            this.splitContainer1.Size = new System.Drawing.Size(624, 419);
+            this.splitContainer1.Size = new System.Drawing.Size(784, 419);
             this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -231,7 +231,7 @@
             // 
             this.MergeRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MergeRows.AutoSize = true;
-            this.MergeRows.Location = new System.Drawing.Point(487, 70);
+            this.MergeRows.Location = new System.Drawing.Point(647, 70);
             this.MergeRows.Name = "MergeRows";
             this.MergeRows.Size = new System.Drawing.Size(50, 19);
             this.MergeRows.TabIndex = 20;
@@ -245,7 +245,7 @@
             this.StatusInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 419);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(624, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -288,6 +288,7 @@
             // 
             this.RecordView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.RecordView_Name.HeaderText = "이름";
+            this.RecordView_Name.MinimumWidth = 100;
             this.RecordView_Name.Name = "RecordView_Name";
             this.RecordView_Name.ReadOnly = true;
             // 
@@ -326,28 +327,36 @@
             // RecordView_Item1Icon
             // 
             this.RecordView_Item1Icon.HeaderText = "아이템1";
+            this.RecordView_Item1Icon.MinimumWidth = 60;
             this.RecordView_Item1Icon.Name = "RecordView_Item1Icon";
             this.RecordView_Item1Icon.ReadOnly = true;
             this.RecordView_Item1Icon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.RecordView_Item1Icon.Width = 60;
             // 
             // RecordView_Item1Count
             // 
             this.RecordView_Item1Count.HeaderText = "획득수";
+            this.RecordView_Item1Count.MinimumWidth = 50;
             this.RecordView_Item1Count.Name = "RecordView_Item1Count";
             this.RecordView_Item1Count.ReadOnly = true;
+            this.RecordView_Item1Count.Width = 50;
             // 
             // RecordView_Item2Icon
             // 
             this.RecordView_Item2Icon.HeaderText = "아이템2";
+            this.RecordView_Item2Icon.MinimumWidth = 60;
             this.RecordView_Item2Icon.Name = "RecordView_Item2Icon";
             this.RecordView_Item2Icon.ReadOnly = true;
             this.RecordView_Item2Icon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.RecordView_Item2Icon.Width = 60;
             // 
             // RecordView_Item2Count
             // 
             this.RecordView_Item2Count.HeaderText = "획득수";
+            this.RecordView_Item2Count.MinimumWidth = 50;
             this.RecordView_Item2Count.Name = "RecordView_Item2Count";
             this.RecordView_Item2Count.ReadOnly = true;
+            this.RecordView_Item2Count.Width = 50;
             // 
             // RecordView_Result
             // 
@@ -368,7 +377,7 @@
             // DialogExpeditionRecordViewer
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(624, 441);
+            this.ClientSize = new System.Drawing.Size(784, 441);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);

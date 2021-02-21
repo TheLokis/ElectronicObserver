@@ -735,8 +735,6 @@ namespace ElectronicObserver.Resource
 
 		public static Image GetItemImage(int itemID)
         {
-			if (itemID < 0) return Instance.Icons.Images[(int)IconContent.Nothing];
-
 			switch (itemID)
             {
 				case 1: // 수복재
@@ -754,7 +752,9 @@ namespace ElectronicObserver.Resource
 				case 12: // 가구상자 대
 					return Instance.Icons.Images[(int)IconContent.ItemPresentBox];
 			}
-        }
+
+			return Instance.Icons.Images[(int)IconContent.ItemPresentBox];
+		}
 
 
 		/// <summary>
