@@ -655,9 +655,9 @@ namespace ElectronicObserver.Window
             for(int parmIndex = 0; parmIndex < (int) ExpeditionCheckParms.OutValues; parmIndex++)
             {
                 var checkType = (ExpeditionCheckParms) parmIndex;
-                if (Data[checkType] != null)
+                if (Data[checkType.ToString()] != null)
                 {
-                    expCheckParms.Add(checkType, int.Parse(Data[checkType].ToString()));
+                    expCheckParms.Add(checkType, int.Parse(Data[checkType.ToString()].ToString()));
                 }
             }
 
